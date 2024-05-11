@@ -1,0 +1,90 @@
+{
+    "name": "@maddimathon/utility-astro",
+    "version": "0.0.1",
+    "author": "Maddi Mathon (https://www.maddimathon.com)",
+    "description": "Components, layouts, and scripts to use with Astro.",
+    "homepage": "https://github.com/maddimathon/utility-astro",
+    "license": "MIT",
+    "config": {
+        "pkgdir": "@releases",
+        "title": "Maddi’s Astro Utilities",
+        "astro": {
+            "srcDir": "./src/docs",
+            "publicDir": "./src/docs/@public",
+            "outDir": "./docs",
+            "build": {
+                "client": "assets/js",
+                "format": "directory"
+            },
+            "server": { "port": 8080, "host": false },
+            "compressHTML": true,
+            "markdown": {
+                "syntaxHighlight": "prism"
+            }
+        }
+    },
+    "bugs": {
+        "url": "https://github.com/maddimathon/utility-astro/issues"
+    },
+    "files": [ "./lib" ],
+    "main": "./lib/index.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/maddimathon/utility-astro.git"
+    },
+    "type": "module",
+    "scripts": {
+
+        "astro:start": "astro dev",
+        "astro:dev": "npm run astro:start -- --host",
+        "astro:build": "astro check --silent && astro build --silent",
+        "astro:preview": "astro preview",
+        
+        "commit": "git commit -a --message=\"[post-${npm_package_version}] $(date +%Y-%m-%d@%H:%M)\"",
+        "release-filename": "echo \"maddimathon-utility-astro@${npm_package_version//\\./-}\"",
+        
+        "setup": "tsx .scripts/boiler-files.ts",
+
+        "compile": "tsx ",
+        "watch": "tsx ",
+
+        "x-prebuild": "run-s setup compile",
+        "build": "run-s --silent astro:build",
+
+        "prepackage": "run-s prepackage:*",
+            "prepackage:notice": "echo \"packaging ${npm_package_name}@${npm_package_version}...\" && sleep 10",
+            "prepackage:build": "npm run build",
+
+        "package": "run-s package:*",
+            "package:zip": "run-s package:zip:*",
+                "package:zip:notice": "echo \"zipping $( npm run --silent release-filename ).zip to ${npm_package_config_pkgdir}\"",
+                "package:zip:new": "thisdir=${PWD##*/} && thisdir=${thisdir:-/} && filename=$( npm run --silent release-filename ) && cd .. && zip -vr \"${thisdir}/${npm_package_config_pkgdir}/${filename}.zip\" \"${thisdir}\" -x@${thisdir}/.zipignore",
+                "package:zip:git": "git add \"${npm_package_config_pkgdir}/$( npm run --silent release-filename ).zip\"",
+            
+            "package:commit": "git commit --allow-empty -m \"[${npm_package_version}] $(date +%Y-%m-%d@%H:%M)\" && git tag -a -f ${npm_package_version} -m \"Just before packaging version ${npm_package_version}\".",
+
+            "package:notice": "echo \"done packaging ${npm_package_name}@${npm_package_version}\"",
+
+        "release": "gh release create ${npm_package_version} \"${npm_package_config_pkgdir}/$( npm run --silent release-filename ).zip#${npm_package_name}@${npm_package_version}\" --generate-notes"
+    },
+    "dependencies": {
+        "@astrojs/check": "^0.6.0",
+        "@tsconfig/node20": "~20.1.4",
+        "@tsconfig/recommended": "~1.0.6",
+        "@types/minimist": "~1.2.5",
+        "@types/node": "~20.12.11",
+        "glob": "~10.3.14",
+        "minimist": "~1.2.8",
+        "typescript": "~5.4.5",
+        "yaml": "~2.4.2"
+    },
+    "peerDependencies": {
+      "astro": "^4.0.0"
+    },
+    "devDependencies": {
+        "@astrojs/prism": "~3.1.0",
+        "astro": "~4.8.2",
+        "npm-run-all": "~4.1.5",
+        "tsx": "~4.9.4"
+    }
+}

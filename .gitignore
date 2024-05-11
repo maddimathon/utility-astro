@@ -2,7 +2,7 @@
 .scripts/.test
 .scripts/tests/.files
 .scripts/tests/.files-copy
-.template-package/
+.template-pkg/
 
 @releases/**/*
 !@releases/**/*.zip

@@ -1,0 +1,25 @@
+.cache/**/*
+.scripts/**/*
+.vscode/**/*
+@releases/**/*
+docs/**/*
+src/**/*
+
+
+# ROOT
+# ==== #
+.prettierignore
+.prettierrc.json
+TODO
+tsconfig.json
+
+
+# JUNK
+# ==== #
+**/._*
+**/._**/*
+**/.DS_Store
+**/.smbdelete*
+**/.smbdelete**/*
+
+**/node_modules/**/*
