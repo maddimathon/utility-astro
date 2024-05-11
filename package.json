@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Maddi Mathon (https://www.maddimathon.com)",
     "description": "Components, layouts, and scripts to use with Astro.",
     "homepage": "https://github.com/maddimathon/utility-astro",
@@ -52,8 +52,8 @@
         "build": "run-s --silent astro:build",
 
         "prepackage": "run-s prepackage:*",
-            "prepackage:notice": "echo \"packaging ${npm_package_name}@${npm_package_version}...\" && sleep 10",
-            "prepackage:build": "npm run build",
+            "prepackage:notice": "mmutil notice package-start && sleep 10",
+            "x-prepackage:build": "npm run build",
 
         "package": "run-s package:*",
             "package:zip": "run-s package:zip:*",
@@ -63,7 +63,7 @@
             
             "package:commit": "git commit --allow-empty -m \"[${npm_package_version}] $(date +%Y-%m-%d@%H:%M)\" && git tag -a -f ${npm_package_version} -m \"Just before packaging version ${npm_package_version}\".",
 
-            "package:notice": "echo \"done packaging ${npm_package_name}@${npm_package_version}\"",
+        "postpackage": "mmutil notice package-end",
 
         "release": "gh release create ${npm_package_version} \"${npm_package_config_pkgdir}/$( npm run --silent release-filename ).zip#${npm_package_name}@${npm_package_version}\" --generate-notes"
     },
