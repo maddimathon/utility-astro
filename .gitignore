@@ -1,0 +1,33 @@
+.cache/
+.scripts/.test
+.scripts/tests/.files
+.scripts/tests/.files-copy
+.template-package/
+
+@releases/**/*
+!@releases/**/*.zip
+
+
+# DIST
+# ==== #
+
+
+# SRC
+# === #
+
+
+# ROOT
+# ==== #
+TODO
+
+
+# JUNK
+# ==== #
+._*
+.DS_Store
+.smbdelete**
+
+tsconfig.old.json
+tsconfig.old.**.json
+
+node_modules/
