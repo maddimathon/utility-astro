@@ -1,0 +1,17 @@
+{
+    "extends": "@maddimathon/build-utilities/tsconfig",
+    "include": [
+        "../../src/ts/**/*",
+        "./src/ts/**/*"
+    ],
+    "exclude": [
+        "./node_modules/**/*"
+    ],
+    "compilerOptions": {
+        "baseUrl": "../../",
+        "declaration": true,
+        "declarationMap": true,
+        "outDir": "../../dist/js/",
+        "sourceMap": true
+    }
+}

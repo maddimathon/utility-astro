@@ -1,0 +1,120 @@
+{
+
+    "Add full project header (css)": {
+        "scope": "css,scss",
+        "prefix": [ "header", "start" ],
+        "body": [
+            "/**",
+            " * NPM Library Template",
+            " * ",
+            " * @package @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @author Maddi Mathon (www.maddimathon.com)",
+            " * @homepage ___CURRENT_URL___",
+            " * ",
+            " * @license MIT",
+            " * ",
+            " * @since ___PKG_VERSION___",
+            " */",
+            "/*!",
+            " * @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @license MIT",
+            " */",
+            "$0",
+        ]
+    },
+
+    "Add full project header (php)": {
+        "scope": "php",
+        "prefix": [ "header" ],
+        "body": [
+            "/**",
+            " * NPM Library Template",
+            " * ",
+            " * @package @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @author Maddi Mathon (www.maddimathon.com)",
+            " * @homepage ___CURRENT_URL___",
+            " * ",
+            " * @license MIT",
+            " * ",
+            " * @since ___PKG_VERSION___",
+            " */",
+            "$0",
+        ]
+    },
+
+    "Add project/file header (js, ts)": {
+        "scope": "javascript,typescript",
+        "prefix": [ "header", "start" ],
+        "body": [
+            "/**",
+            " * @since ___PKG_VERSION___",
+            " * ",
+            " * @packageDocumentation",
+            " */",
+            "/*!",
+            " * @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @license MIT",
+            " */",
+            "$0",
+        ]
+    },
+    "Add project/file TEST header (js, ts)": {
+        "scope": "javascript,typescript",
+        "prefix": [ "header-test", "start-test" ],
+        "body": [
+            "/**",
+            " * @since ___PKG_VERSION___",
+            " * ",
+            " * @packageDocumentation",
+            " */",
+            "/*!",
+            " * @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @license MIT",
+            " */",
+            "",
+            "import type { Test } from '@maddimathon/build-utilities/types';",
+            "import { describe, expect, test } from '@jest/globals';",
+            "$0",
+        ]
+    },
+
+    "Add file header (NPM)": {
+        "scope": "javascript,typescript",
+        "prefix": [ "npm", "scripts", "start" ],
+        "body": [
+            "#!/usr/bin/env ${1:node}",
+            "'use strict';",
+            "/*",
+            " * @package @maddimathon/template-npm-library",
+            " * @author Maddi Mathon (www.maddimathon.com)",
+            " * ",
+            " * @license MIT",
+            " */",
+            "$0",
+        ]
+    },
+
+    "Add file header (php)": {
+        "scope": "php",
+        "prefix": [ "start" ],
+        "body": [
+            "/**",
+            " * @package @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            " * @since ___PKG_VERSION___",
+            " */",
+            "$0",
+        ]
+    },
+    
+    "Add file header (scss)": {
+        "scope": "scss",
+        "prefix": [ "header", "start" ],
+        "body": [
+            "/// ",
+            "/// @package @maddimathon/template-npm-library@___CURRENT_VERSION___",
+            "/// @since ___PKG_VERSION___",
+            "/// ",
+            "$0",
+        ]
+    },
+}

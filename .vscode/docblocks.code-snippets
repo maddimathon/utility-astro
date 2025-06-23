@@ -1,0 +1,17 @@
+{
+
+    "Insert @since to docblock": {
+        "prefix": "@since",
+        "body": "@since ___PKG_VERSION___"
+    },
+
+    "Insert @param args": {
+        "prefix": "@param args",
+        "body": "@param args  Overrides for default options."
+    },
+
+    "Insert @param level": {
+        "prefix": "@param level",
+        "body": "@param level  Depth level for output to the console."
+    },
+}
