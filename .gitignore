@@ -16,13 +16,11 @@
 
 # DIST
 # ==== #
-dist/
 dist/**/*.css.map
 dist/**/*.js.map
 dist/**/*.ts.map
 dist/**/*.test.d.ts
 dist/**/*.test.js
-dist/docs/javascript.TypeDoc.json
 
 
 # DOCS

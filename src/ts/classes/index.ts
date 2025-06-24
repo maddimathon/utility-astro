@@ -1,20 +1,12 @@
 /**
  * Exports only the included classes.
  * 
- * @module classes
- * 
- * @since 0.1.1+tmpl
- * 
- * @example
- * ```ts
- * import { classes } from '@maddimathon/template-npm-library';
- * import { ... } from '@maddimathon/template-npm-library/classes';
- * ```
+ * @since ___PKG_VERSION___
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/template-npm-library@___CURRENT_VERSION___
+ * @maddimathon/utility-astro@___CURRENT_VERSION___
  * @license MIT
  */
 

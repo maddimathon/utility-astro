@@ -2,7 +2,7 @@
 'use strict';
 // @ts-check
 /*
- * @package @maddimathon/template-npm-library
+ * @package @maddimathon/utility-astro
  * @author Maddi Mathon (www.maddimathon.com)
  * 
  * @license MIT
@@ -119,8 +119,8 @@ export class Build extends BuildStage {
                 /(<!--README_INSTALL-->).*?(<!--\/README_INSTALL-->)/gs,
                 '$1\n' + escRegExpReplace( [
                     '```sh',
-                    // 'npm i -D @maddimathon/build-utilities@' + this.pkg.version,
-                    'npm i -D github:maddimathon/build-utilities#' + this.pkg.version,
+                    'npm i -D @maddimathon/utility-astro@' + this.pkg.version,
+                    'npm i -D github:maddimathon/utility-astro#' + this.pkg.version,
                     '```',
                 ].join( '\n' ) ) + '\n$2'
             );
