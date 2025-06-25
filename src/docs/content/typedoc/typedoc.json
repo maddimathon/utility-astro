@@ -1,0 +1,1085 @@
+{
+    "pages": {
+        "28": {
+            "toJSON_fn": "true - FunctionDefinition",
+            "id": "28",
+            "name": "exampleFunction",
+            "kind": "Function",
+            "flags": {
+                "isExperimental": true
+            },
+            "intro": [
+                {
+                    "kind": "text",
+                    "text": "An example function that does almost nothing."
+                }
+            ],
+            "markdown": {
+                "headerType": "unimplemented"
+            },
+            "blockTags": {
+                "@category": [
+                    [
+                        {
+                            "kind": "text",
+                            "text": "Category A"
+                        }
+                    ]
+                ],
+                "@returns": [
+                    [
+                        {
+                            "kind": "text",
+                            "text": "Always says \"hello\"."
+                        }
+                    ]
+                ],
+                "@example": [
+                    [
+                        {
+                            "kind": "code",
+                            "text": "```ts\nconst ex = exampleFunction();\n```"
+                        }
+                    ]
+                ],
+                "@source": [
+                    [
+                        {
+                            "kind": "code",
+                            "text": "\n\n```ts\nexport function exampleFunction(): \"hello\" {\n    return 'hello';\n}\n```\n\n"
+                        }
+                    ]
+                ]
+            },
+            "modifierTags": [
+                "@experimental"
+            ],
+            "sources": [
+                {
+                    "fileName": "functions/exampleFunction.ts",
+                    "line": 26,
+                    "character": 16
+                }
+            ]
+        }
+    },
+    "pagesByKind": {
+        "Function": {
+            "28": {
+                "toJSON_fn": "true - FunctionDefinition",
+                "id": "28",
+                "name": "exampleFunction",
+                "kind": "Function",
+                "flags": {
+                    "isExperimental": true
+                },
+                "intro": [
+                    {
+                        "kind": "text",
+                        "text": "An example function that does almost nothing."
+                    }
+                ],
+                "markdown": {
+                    "headerType": "unimplemented"
+                },
+                "blockTags": {
+                    "@category": [
+                        [
+                            {
+                                "kind": "text",
+                                "text": "Category A"
+                            }
+                        ]
+                    ],
+                    "@returns": [
+                        [
+                            {
+                                "kind": "text",
+                                "text": "Always says \"hello\"."
+                            }
+                        ]
+                    ],
+                    "@example": [
+                        [
+                            {
+                                "kind": "code",
+                                "text": "```ts\nconst ex = exampleFunction();\n```"
+                            }
+                        ]
+                    ],
+                    "@source": [
+                        [
+                            {
+                                "kind": "code",
+                                "text": "\n\n```ts\nexport function exampleFunction(): \"hello\" {\n    return 'hello';\n}\n```\n\n"
+                            }
+                        ]
+                    ]
+                },
+                "modifierTags": [
+                    "@experimental"
+                ],
+                "sources": [
+                    {
+                        "fileName": "functions/exampleFunction.ts",
+                        "line": 26,
+                        "character": 16
+                    }
+                ]
+            }
+        }
+    },
+    "debug": {
+        "newKinds": [
+            "Module",
+            "Class",
+            "Interface",
+            "TypeAlias"
+        ]
+    },
+    "rawPages": {
+        "5": {
+            "id": 5,
+            "name": "components",
+            "variant": "declaration",
+            "kind": 2,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "This files exports types for the astro components for the auto-documentation."
+                    }
+                ],
+                "blockTags": [
+                    {
+                        "tag": "@example",
+                        "content": [
+                            {
+                                "kind": "code",
+                                "text": "```ts\nimport { ... } from '@maddimathon/template-npm-library/components';\n```"
+                            }
+                        ]
+                    },
+                    {
+                        "tag": "@since",
+                        "content": [
+                            {
+                                "kind": "text",
+                                "text": "___PKG_VERSION___"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "sources": [
+                {
+                    "fileName": "../astro/components/docs.d.ts",
+                    "line": 1,
+                    "character": 0
+                }
+            ]
+        },
+        "6": {
+            "id": 6,
+            "name": "layouts",
+            "variant": "declaration",
+            "kind": 2,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "This files exports types for the astro layouts for the auto-documentation."
+                    }
+                ],
+                "blockTags": [
+                    {
+                        "tag": "@example",
+                        "content": [
+                            {
+                                "kind": "code",
+                                "text": "```ts\nimport { ... } from '@maddimathon/template-npm-library/layouts';\n```"
+                            }
+                        ]
+                    },
+                    {
+                        "tag": "@since",
+                        "content": [
+                            {
+                                "kind": "text",
+                                "text": "___PKG_VERSION___"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "id": 30,
+                    "name": "Page",
+                    "variant": "declaration",
+                    "kind": 4,
+                    "flags": {},
+                    "comment": {
+                        "summary": [],
+                        "blockTags": [
+                            {
+                                "tag": "@since",
+                                "content": [
+                                    {
+                                        "kind": "text",
+                                        "text": "___PKG_VERSION___"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "children": [
+                        {
+                            "id": 31,
+                            "name": "Props",
+                            "variant": "declaration",
+                            "kind": 256,
+                            "flags": {},
+                            "comment": {
+                                "summary": [
+                                    {
+                                        "kind": "text",
+                                        "text": "Input props for the NewComponent component."
+                                    }
+                                ]
+                            },
+                            "children": [
+                                {
+                                    "id": 32,
+                                    "name": "class",
+                                    "variant": "declaration",
+                                    "kind": 1024,
+                                    "flags": {
+                                        "isOptional": true
+                                    },
+                                    "comment": {
+                                        "summary": [
+                                            {
+                                                "kind": "text",
+                                                "text": "Value for component's "
+                                            },
+                                            {
+                                                "kind": "code",
+                                                "text": "`class`"
+                                            },
+                                            {
+                                                "kind": "text",
+                                                "text": " attribute."
+                                            }
+                                        ]
+                                    },
+                                    "sources": [
+                                        {
+                                            "fileName": "../astro/layouts/Page.d.ts",
+                                            "line": 21,
+                                            "character": 4
+                                        }
+                                    ],
+                                    "type": {
+                                        "type": "union",
+                                        "types": [
+                                            {
+                                                "type": "intrinsic",
+                                                "name": "string"
+                                            },
+                                            {
+                                                "type": "array",
+                                                "elementType": {
+                                                    "type": "intrinsic",
+                                                    "name": "string"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "id": 33,
+                                    "name": "frontmatter",
+                                    "variant": "declaration",
+                                    "kind": 1024,
+                                    "flags": {
+                                        "isOptional": true,
+                                        "isInherited": true
+                                    },
+                                    "sources": [
+                                        {
+                                            "fileName": "types/props.ts",
+                                            "line": 26,
+                                            "character": 8
+                                        }
+                                    ],
+                                    "type": {
+                                        "type": "reference",
+                                        "target": {
+                                            "packageName": "typescript",
+                                            "packagePath": "lib/lib.es5.d.ts",
+                                            "qualifiedName": "Omit"
+                                        },
+                                        "typeArguments": [
+                                            {
+                                                "type": "reference",
+                                                "target": 31,
+                                                "name": "Props",
+                                                "package": "@maddimathon/utility-astro"
+                                            },
+                                            {
+                                                "type": "literal",
+                                                "value": "frontmatter"
+                                            }
+                                        ],
+                                        "name": "Omit",
+                                        "package": "typescript",
+                                        "externalUrl": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+                                    },
+                                    "inheritedFrom": {
+                                        "type": "reference",
+                                        "target": -1,
+                                        "name": "ComponentProps.frontmatter"
+                                    }
+                                }
+                            ],
+                            "groups": [
+                                {
+                                    "title": "Properties",
+                                    "children": [
+                                        32,
+                                        33
+                                    ]
+                                }
+                            ],
+                            "sources": [
+                                {
+                                    "fileName": "../astro/layouts/Page.d.ts",
+                                    "line": 16,
+                                    "character": 17
+                                }
+                            ],
+                            "extendedTypes": [
+                                {
+                                    "type": "reference",
+                                    "target": 17,
+                                    "typeArguments": [
+                                        {
+                                            "type": "reference",
+                                            "target": 31,
+                                            "name": "Props",
+                                            "package": "@maddimathon/utility-astro"
+                                        }
+                                    ],
+                                    "name": "ComponentProps",
+                                    "package": "@maddimathon/utility-astro"
+                                }
+                            ]
+                        }
+                    ],
+                    "groups": [
+                        {
+                            "title": "Interfaces",
+                            "children": [
+                                31
+                            ]
+                        }
+                    ],
+                    "sources": [
+                        {
+                            "fileName": "../astro/layouts/Page.d.ts",
+                            "line": 1,
+                            "character": 0
+                        }
+                    ]
+                }
+            ],
+            "groups": [
+                {
+                    "title": "Namespaces",
+                    "children": [
+                        30
+                    ]
+                }
+            ],
+            "sources": [
+                {
+                    "fileName": "../astro/layouts/docs.d.ts",
+                    "line": 1,
+                    "character": 0
+                }
+            ]
+        },
+        "7": {
+            "id": 7,
+            "name": "ExampleType",
+            "variant": "declaration",
+            "kind": 2097152,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "An example type for testing TypeDoc and similar systems."
+                    }
+                ],
+                "blockTags": [
+                    {
+                        "tag": "@category",
+                        "content": [
+                            {
+                                "kind": "text",
+                                "text": "Category B"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "sources": [
+                {
+                    "fileName": "types/examples.ts",
+                    "line": 19,
+                    "character": 12
+                }
+            ],
+            "type": {
+                "type": "literal",
+                "value": "hello"
+            }
+        },
+        "8": {
+            "id": 8,
+            "name": "ExampleObjectType",
+            "variant": "declaration",
+            "kind": 256,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "An example type for testing TypeDoc and similar systems."
+                    }
+                ],
+                "blockTags": [
+                    {
+                        "tag": "@category",
+                        "content": [
+                            {
+                                "kind": "text",
+                                "text": "Category B"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "id": 10,
+                    "name": "comment",
+                    "variant": "declaration",
+                    "kind": 1024,
+                    "flags": {},
+                    "sources": [
+                        {
+                            "fileName": "types/examples.ts",
+                            "line": 29,
+                            "character": 4
+                        }
+                    ],
+                    "type": {
+                        "type": "literal",
+                        "value": "this type alias gets converted to an interface by TypeDoc"
+                    }
+                },
+                {
+                    "id": 9,
+                    "name": "one",
+                    "variant": "declaration",
+                    "kind": 1024,
+                    "flags": {},
+                    "sources": [
+                        {
+                            "fileName": "types/examples.ts",
+                            "line": 28,
+                            "character": 4
+                        }
+                    ],
+                    "type": {
+                        "type": "intrinsic",
+                        "name": "string"
+                    }
+                }
+            ],
+            "groups": [
+                {
+                    "title": "Properties",
+                    "children": [
+                        10,
+                        9
+                    ]
+                }
+            ],
+            "sources": [
+                {
+                    "fileName": "types/examples.ts",
+                    "line": 27,
+                    "character": 12
+                }
+            ]
+        },
+        "11": {
+            "id": 11,
+            "name": "ExampleInterface",
+            "variant": "declaration",
+            "kind": 256,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "An example interface for testing TypeDoc and similar systems."
+                    }
+                ],
+                "blockTags": [
+                    {
+                        "tag": "@category",
+                        "content": [
+                            {
+                                "kind": "text",
+                                "text": "Category A"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "id": 12,
+                    "name": "method",
+                    "variant": "declaration",
+                    "kind": 1024,
+                    "flags": {},
+                    "sources": [
+                        {
+                            "fileName": "types/examples.ts",
+                            "line": 38,
+                            "character": 4
+                        }
+                    ],
+                    "type": {
+                        "type": "reflection",
+                        "declaration": {
+                            "id": 13,
+                            "name": "__type",
+                            "variant": "declaration",
+                            "kind": 65536,
+                            "flags": {},
+                            "sources": [
+                                {
+                                    "fileName": "types/examples.ts",
+                                    "line": 38,
+                                    "character": 12
+                                }
+                            ],
+                            "signatures": [
+                                {
+                                    "id": 14,
+                                    "name": "__type",
+                                    "variant": "signature",
+                                    "kind": 4096,
+                                    "flags": {},
+                                    "sources": [
+                                        {
+                                            "fileName": "types/examples.ts",
+                                            "line": 38,
+                                            "character": 12
+                                        }
+                                    ],
+                                    "type": {
+                                        "type": "intrinsic",
+                                        "name": "void"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": 16,
+                    "name": "stringProp",
+                    "variant": "declaration",
+                    "kind": 1024,
+                    "flags": {},
+                    "sources": [
+                        {
+                            "fileName": "types/examples.ts",
+                            "line": 40,
+                            "character": 4
+                        }
+                    ],
+                    "type": {
+                        "type": "intrinsic",
+                        "name": "string"
+                    }
+                },
+                {
+                    "id": 15,
+                    "name": "optionalProp",
+                    "variant": "declaration",
+                    "kind": 1024,
+                    "flags": {
+                        "isOptional": true
+                    },
+                    "sources": [
+                        {
+                            "fileName": "types/examples.ts",
+                            "line": 39,
+                            "character": 4
+                        }
+                    ],
+                    "type": {
+                        "type": "union",
+                        "types": [
+                            {
+                                "type": "literal",
+                                "value": null
+                            },
+                            {
+                                "type": "intrinsic",
+                                "name": "string"
+                            },
+                            {
+                                "type": "intrinsic",
+                                "name": "number"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "groups": [
+                {
+                    "title": "Properties",
+                    "children": [
+                        12,
+                        16,
+                        15
+                    ]
+                }
+            ],
+            "sources": [
+                {
+                    "fileName": "types/examples.ts",
+                    "line": 37,
+                    "character": 17
+                }
+            ]
+        },
+        "17": {
+            "id": 17,
+            "name": "ComponentProps",
+            "variant": "declaration",
+            "kind": 2097152,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "Creates a props object for components."
+                    }
+                ]
+            },
+            "sources": [
+                {
+                    "fileName": "types/props.ts",
+                    "line": 16,
+                    "character": 12
+                }
+            ],
+            "typeParameters": [
+                {
+                    "id": 21,
+                    "name": "T_Props",
+                    "variant": "typeParam",
+                    "kind": 131072,
+                    "flags": {}
+                },
+                {
+                    "id": 22,
+                    "name": "T_HtmlTag",
+                    "variant": "typeParam",
+                    "kind": 131072,
+                    "flags": {},
+                    "type": {
+                        "type": "union",
+                        "types": [
+                            {
+                                "type": "reference",
+                                "target": {
+                                    "packageName": "astro",
+                                    "packagePath": "types.d.ts",
+                                    "qualifiedName": "HTMLTag"
+                                },
+                                "name": "HTMLTag",
+                                "package": "astro"
+                            },
+                            {
+                                "type": "intrinsic",
+                                "name": "never"
+                            }
+                        ]
+                    },
+                    "default": {
+                        "type": "intrinsic",
+                        "name": "never"
+                    }
+                }
+            ],
+            "type": {
+                "type": "intersection",
+                "types": [
+                    {
+                        "type": "conditional",
+                        "checkType": {
+                            "type": "intrinsic",
+                            "name": "never"
+                        },
+                        "extendsType": {
+                            "type": "reference",
+                            "target": 22,
+                            "name": "T_HtmlTag",
+                            "package": "@maddimathon/utility-astro",
+                            "refersToTypeParameter": true
+                        },
+                        "trueType": {
+                            "type": "reflection",
+                            "declaration": {
+                                "id": 18,
+                                "name": "__type",
+                                "variant": "declaration",
+                                "kind": 65536,
+                                "flags": {},
+                                "sources": [
+                                    {
+                                        "fileName": "types/props.ts",
+                                        "line": 22,
+                                        "character": 10
+                                    }
+                                ]
+                            }
+                        },
+                        "falseType": {
+                            "type": "reference",
+                            "target": {
+                                "packageName": "typescript",
+                                "packagePath": "lib/lib.es5.d.ts",
+                                "qualifiedName": "Omit"
+                            },
+                            "typeArguments": [
+                                {
+                                    "type": "reference",
+                                    "target": {
+                                        "packageName": "astro",
+                                        "packagePath": "types.d.ts",
+                                        "qualifiedName": "HTMLAttributes"
+                                    },
+                                    "typeArguments": [
+                                        {
+                                            "type": "reference",
+                                            "target": 22,
+                                            "name": "T_HtmlTag",
+                                            "package": "@maddimathon/utility-astro",
+                                            "refersToTypeParameter": true
+                                        }
+                                    ],
+                                    "name": "HTMLAttributes",
+                                    "package": "astro"
+                                },
+                                {
+                                    "type": "literal",
+                                    "value": "class"
+                                }
+                            ],
+                            "name": "Omit",
+                            "package": "typescript",
+                            "externalUrl": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+                        }
+                    },
+                    {
+                        "type": "reflection",
+                        "declaration": {
+                            "id": 19,
+                            "name": "__type",
+                            "variant": "declaration",
+                            "kind": 65536,
+                            "flags": {},
+                            "children": [
+                                {
+                                    "id": 20,
+                                    "name": "frontmatter",
+                                    "variant": "declaration",
+                                    "kind": 1024,
+                                    "flags": {
+                                        "isOptional": true
+                                    },
+                                    "sources": [
+                                        {
+                                            "fileName": "types/props.ts",
+                                            "line": 26,
+                                            "character": 8
+                                        }
+                                    ],
+                                    "type": {
+                                        "type": "reference",
+                                        "target": {
+                                            "packageName": "typescript",
+                                            "packagePath": "lib/lib.es5.d.ts",
+                                            "qualifiedName": "Omit"
+                                        },
+                                        "typeArguments": [
+                                            {
+                                                "type": "reference",
+                                                "target": 21,
+                                                "name": "T_Props",
+                                                "package": "@maddimathon/utility-astro",
+                                                "refersToTypeParameter": true
+                                            },
+                                            {
+                                                "type": "literal",
+                                                "value": "frontmatter"
+                                            }
+                                        ],
+                                        "name": "Omit",
+                                        "package": "typescript",
+                                        "externalUrl": "https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys"
+                                    }
+                                }
+                            ],
+                            "groups": [
+                                {
+                                    "title": "Properties",
+                                    "children": [
+                                        20
+                                    ]
+                                }
+                            ],
+                            "sources": [
+                                {
+                                    "fileName": "types/props.ts",
+                                    "line": 25,
+                                    "character": 6
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "extendedBy": [
+                {
+                    "type": "reference",
+                    "target": 31,
+                    "name": "Props"
+                }
+            ]
+        },
+        "23": {
+            "id": 23,
+            "name": "ExampleClass",
+            "variant": "declaration",
+            "kind": 128,
+            "flags": {},
+            "comment": {
+                "summary": [
+                    {
+                        "kind": "text",
+                        "text": "An example class that does almost nothing."
+                    }
+                ]
+            },
+            "children": [
+                {
+                    "id": 24,
+                    "name": "constructor",
+                    "variant": "declaration",
+                    "kind": 512,
+                    "flags": {},
+                    "signatures": [
+                        {
+                            "id": 25,
+                            "name": "ExampleClass",
+                            "variant": "signature",
+                            "kind": 16384,
+                            "flags": {},
+                            "type": {
+                                "type": "reference",
+                                "target": 23,
+                                "name": "ExampleClass",
+                                "package": "@maddimathon/utility-astro"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": 26,
+                    "name": "test",
+                    "variant": "declaration",
+                    "kind": 2048,
+                    "flags": {},
+                    "sources": [
+                        {
+                            "fileName": "classes/ExampleClass.ts",
+                            "line": 20,
+                            "character": 4
+                        }
+                    ],
+                    "signatures": [
+                        {
+                            "id": 27,
+                            "name": "test",
+                            "variant": "signature",
+                            "kind": 4096,
+                            "flags": {},
+                            "comment": {
+                                "summary": [
+                                    {
+                                        "kind": "text",
+                                        "text": "Outputs a string."
+                                    }
+                                ],
+                                "blockTags": [
+                                    {
+                                        "tag": "@returns",
+                                        "content": [
+                                            {
+                                                "kind": "text",
+                                                "text": "Always says \"hello\"."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "sources": [
+                                {
+                                    "fileName": "classes/ExampleClass.ts",
+                                    "line": 20,
+                                    "character": 4
+                                }
+                            ],
+                            "type": {
+                                "type": "literal",
+                                "value": "hello"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "groups": [
+                {
+                    "title": "Constructors",
+                    "children": [
+                        24
+                    ]
+                },
+                {
+                    "title": "Methods",
+                    "children": [
+                        26
+                    ]
+                }
+            ],
+            "sources": [
+                {
+                    "fileName": "classes/ExampleClass.ts",
+                    "line": 14,
+                    "character": 13
+                }
+            ]
+        },
+        "28": {
+            "id": 28,
+            "name": "exampleFunction",
+            "variant": "declaration",
+            "kind": 64,
+            "flags": {
+                "isExperimental": true
+            },
+            "sources": [
+                {
+                    "fileName": "functions/exampleFunction.ts",
+                    "line": 26,
+                    "character": 16
+                }
+            ],
+            "signatures": [
+                {
+                    "id": 29,
+                    "name": "exampleFunction",
+                    "variant": "signature",
+                    "kind": 4096,
+                    "flags": {},
+                    "comment": {
+                        "summary": [
+                            {
+                                "kind": "text",
+                                "text": "An example function that does almost nothing."
+                            }
+                        ],
+                        "blockTags": [
+                            {
+                                "tag": "@category",
+                                "content": [
+                                    {
+                                        "kind": "text",
+                                        "text": "Category A"
+                                    }
+                                ]
+                            },
+                            {
+                                "tag": "@returns",
+                                "content": [
+                                    {
+                                        "kind": "text",
+                                        "text": "Always says \"hello\"."
+                                    }
+                                ]
+                            },
+                            {
+                                "tag": "@example",
+                                "content": [
+                                    {
+                                        "kind": "code",
+                                        "text": "```ts\nconst ex = exampleFunction();\n```"
+                                    }
+                                ]
+                            },
+                            {
+                                "tag": "@source",
+                                "content": [
+                                    {
+                                        "kind": "code",
+                                        "text": "\n\n```ts\nexport function exampleFunction(): \"hello\" {\n    return 'hello';\n}\n```\n\n"
+                                    }
+                                ]
+                            }
+                        ],
+                        "modifierTags": [
+                            "@experimental"
+                        ]
+                    },
+                    "sources": [
+                        {
+                            "fileName": "functions/exampleFunction.ts",
+                            "line": 26,
+                            "character": 16
+                        }
+                    ],
+                    "type": {
+                        "type": "literal",
+                        "value": "hello"
+                    }
+                }
+            ]
+        }
+    }
+}

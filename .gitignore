@@ -6,6 +6,8 @@
 # SCRIPTS
 # ======= #
 .scripts/logs/
+.scripts/templates/
+.scripts/classes/**/*.js
 
 
 # RELEASES
@@ -16,9 +18,6 @@
 
 # DIST
 # ==== #
-dist/**/*.css.map
-dist/**/*.js.map
-dist/**/*.ts.map
 dist/**/*.test.d.ts
 dist/**/*.test.js
 
@@ -29,6 +28,7 @@ dist/**/*.test.js
 
 # SRC
 # === #
+src/docs/tmp
 
 
 # ROOT
@@ -45,3 +45,7 @@ TODO
 .smbdelete**
 
 node_modules/
+
+**/*.css.map
+**/*.js.map
+**/*.ts.map

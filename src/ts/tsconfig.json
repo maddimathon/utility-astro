@@ -1,8 +1,10 @@
 {
-    "extends": "@maddimathon/build-utilities/tsconfig",
+    "extends": "../../tsconfig.json",
     "include": [
         "../../src/ts/**/*",
-        "./src/ts/**/*"
+        "./src/ts/**/*",
+        "../../.astro/types.d.ts",
+        "./.astro/types.d.ts"
     ],
     "exclude": [
         "./node_modules/**/*"
@@ -11,7 +13,9 @@
         "baseUrl": "../../",
         "declaration": true,
         "declarationMap": true,
+        "noImplicitAny": true,
         "outDir": "../../dist/js/",
-        "sourceMap": true
+        "sourceMap": true,
+        "verbatimModuleSyntax": true
     }
 }

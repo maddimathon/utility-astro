@@ -6,14 +6,13 @@
  * @import { Config, Stage } from "@maddimathon/build-utilities"
  */
 
-// import * as typeDoc from "typedoc";
-
 import {
     BuildStage,
 } from '@maddimathon/build-utilities';
 
 import { Build } from './classes/Build.js';
 import { Compile } from './classes/Compile.js';
+import { Document } from './classes/Document.js';
 
 const _defaults = {
     build: BuildStage.prototype.ARGS_DEFAULT,
@@ -54,8 +53,30 @@ const config = {
 
         compile: Compile,
 
-        document: false,
-        test: false,
+        document: [
+            Document,
+            {
+
+                entryPoints: [
+                    'src/ts/index.ts',
+                    'src/astro/components/docs.d.ts',
+                    'src/astro/layouts/docs.d.ts',
+                ],
+
+                typeDoc: {
+
+                    categorizeByGroup: false,
+
+                    json: Document.typeDoc.json,
+                    out: undefined,
+
+                    tsconfig: 'tsconfig.json',
+                },
+            }
+        ],
+        // document: false,
+
+        test: true,
     },
 };
 

@@ -11,3 +11,4 @@
  */
 
 export type * from './examples.ts';
+export type * from './props.ts';

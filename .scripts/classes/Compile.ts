@@ -1,6 +1,3 @@
-#!/usr/bin/env node
-'use strict';
-// @ts-check
 /*
  * @package @maddimathon/utility-astro
  * @author Maddi Mathon (www.maddimathon.com)
@@ -8,11 +5,8 @@
  * @license MIT
  */
 
-/**
- * @import { Stage } from "@maddimathon/build-utilities"
- */
-
 import {
+    type Stage,
     CompileStage,
 } from '@maddimathon/build-utilities';
 
@@ -21,24 +15,15 @@ import {
  */
 export class Compile extends CompileStage {
 
-    /**
-     * @type {Stage.SubStage.Compile[]}
-     * 
-     * @override
-     * @readonly
-     */
-    subStages = [
-        'ts',
+    override readonly subStages: Stage.SubStage.Compile[] = [
         'scss',
         // @ts-expect-error
         'astro',
         'files',
     ];
 
-    /**
-     * @protected
-     */
-    async astro() {
+
+    protected async astro() {
         this.console.progress( 'copying astro files to dist...', 1 );
 
         const subDir = 'astro';
@@ -65,11 +50,7 @@ export class Compile extends CompileStage {
         );
     }
 
-    /**
-     * @protected
-     * @override
-     */
-    async scss() {
+    protected override async scss() {
         this.console.progress( 'copying scss files to dist...', 1 );
 
         const subDir = 'scss';

@@ -14,6 +14,14 @@
  * @category Category A
  * 
  * @return  Always says "hello".
+ * 
+ * @example
+ * ```ts
+ * const ex = exampleFunction();
+ * ```
+ * 
+ * @experimental
+ * @source
  */
 export function exampleFunction(): "hello" {
     return 'hello';

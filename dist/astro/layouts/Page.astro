@@ -1,0 +1,31 @@
+---
+/**
+ * 
+ * 
+ * @package boilerplate-astro-project@0.1.0-draft
+ * @since 0.1.0-draft
+ */
+
+/* import - types */
+
+/* import - functions */
+import type { Props } from './Page.d.ts';
+
+/* import - components */
+
+
+/** ## PROPS ==================================== **/
+
+export type { Props };
+
+const {
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/** ## CONSTANTS ==================================== **/
+
+---
+
+<div class:list={classList} {...attributes}><slot /></div>

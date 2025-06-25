@@ -1,15 +1,8 @@
-#!/usr/bin/env node
-'use strict';
-// @ts-check
 /*
  * @package @maddimathon/utility-astro
  * @author Maddi Mathon (www.maddimathon.com)
  * 
  * @license MIT
- */
-
-/**
- * @import { AbstractStage, Stage } from "@maddimathon/build-utilities"
  */
 
 import {
@@ -18,31 +11,16 @@ import {
 } from '@maddimathon/utility-typescript/functions';
 
 import {
+    type Stage,
     BuildStage,
 } from '@maddimathon/build-utilities';
 
 /**
- * @typedef {Stage.Args.Build} Build_Args
- */
-
-/**
- * @typedef {Stage.SubStage.Build | "readme"} Build_SubStage
- */
-
-/**
  * Extension of the built-in one.
- * 
- * @implements {AbstractStage<Build_Args, Build_SubStage>}
  */
 export class Build extends BuildStage {
 
-    /**
-     * @type {Stage.SubStage.Build[]}
-     * 
-     * @override
-     * @readonly
-     */
-    subStages = [
+    override  readonly subStages: Stage.SubStage.Build[] = [
         'compile',
         'replace',
         // @ts-expect-error
@@ -53,10 +31,8 @@ export class Build extends BuildStage {
         'document',
     ];
 
-    /**
-     * @protected
-     */
-    async readme() {
+
+    protected async readme() {
         this.console.progress( 'replacing readme placeholders...', 1 );
 
         const headerRegex = /(<!--README_HEADER-->).*?(<!--\/README_HEADER-->)/gs;
@@ -88,7 +64,7 @@ export class Build extends BuildStage {
 
 
         /** Markdown links to read the changelog. */
-        const changelogLinks = [];
+        const changelogLinks: string[] = [];
 
         if ( this.pkg.repository ) {
 

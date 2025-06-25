@@ -1,0 +1,21 @@
+{
+    "extends": [
+        "@maddimathon/build-utilities/tsconfig",
+        "astro/tsconfigs/strictest"
+    ],
+    "include": [
+        "./astro.config.ts",
+        "./src/**/*"
+    ],
+    "exclude": [
+        "./.scripts/**/*",
+        "./node_modules/**/*"
+    ],
+    "compilerOptions": {
+        "baseUrl": "./",
+        "exactOptionalPropertyTypes": false,
+        "noImplicitAny": false,
+        "strictNullChecks": true,
+        "verbatimModuleSyntax": true
+    }
+}
