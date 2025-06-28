@@ -10,4 +10,5 @@
  * @license MIT
  */
 
-export * from './ExampleClass.js';
+export * from './ElementToggle.js';
+export * from './JsCookie.js';

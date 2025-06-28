@@ -1,0 +1,99 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @license MIT
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/types/index.js';
+import type { Props as SkipLinksProps } from './SkipLinks.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<SkipLinksProps, "ul">;
+
+const {
+    links,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+if (
+    !attributes['aria-description']
+    && !attributes['aria-describedby']
+    && !attributes['aria-label']
+    && !attributes['aria-labelledby']
+) {
+    attributes['aria-label'] = links.length == 1 ? 'shortcut link' : 'shortcut links';
+}
+
+---
+
+{ links.length && (
+
+    <ul
+        {...attributes}
+        class:list={[ 'skip-link-list', '||', classList ]}
+    >
+        { links.map( ( link ) => (
+            <li><a
+                href={link.href}
+                class="skip-link"
+                set:html={link.label}
+            /></li>
+        ) ) }
+    </ul>
+
+) }
+
+<style lang="scss">
+
+    .skip-link {
+        display: block;
+        position: fixed;
+        margin: 0;
+
+        top: -100%;
+        
+  	    width: fit-content;
+
+        z-index: 999999;
+
+        &:focus {
+            top: 0;
+        }
+    }
+
+    .skip-link-list {
+        grid-column: 1 / -1;
+        grid-column: page-start / page-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    
+        li {
+            margin: 0;
+            padding: 0;
+        }
+    }
+</style>

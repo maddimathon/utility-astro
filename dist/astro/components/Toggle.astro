@@ -1,0 +1,105 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @license MIT
+ */
+
+/* import - types */
+import type { Props as ToggleProps } from './Toggle.d.ts';
+import type { GenericElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<ToggleProps, "div">;
+
+const {
+    heading,
+    id,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+const buttonHTML: string = await Astro.slots.render( 'button' ) || 'Toggle me';
+
+const buttonID = `${id}-button`;
+const contentID = `${id}-content`;
+const titleID = `${id}-title`;
+
+---
+
+<div 
+    id={id}
+    class:list={[
+        'toggle-container',
+        '||',
+        classList,
+    ]} {...attributes}
+    data-toggle-container
+>
+    <div id={titleID} class="toggle-title">
+        { heading && <Fragment set:html={`<h${heading}>`} /> }
+            <button
+                id={buttonID}
+                class="toggle-control"
+                aria-disabled="true"
+                data-toggle-control={id}
+                role="button"
+            >
+                <span class="icon | toggle-icon">
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+
+                        fill="none"
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"
+                        
+                        class="icon-plus"
+
+                        role="img"
+                        aria-hidden="true"
+                    >
+                        <path id="a" d="M5 12h14" />
+                        <path id="b" d="M12 5v14" />
+                    </svg>
+                </span>
+                <span class="toggle-control-inner" set:html={buttonHTML.trim()} />
+            </button>
+        { heading && <Fragment set:html={`</h${heading}>`} /> }
+    </div>
+
+    <section 
+        data-toggle-content={id}
+        class="container | toggle-content"
+        id={contentID} 
+        aria-labelledby={titleID}
+    >
+        <div class="container"><slot /></div>
+    </section>
+
+</div>

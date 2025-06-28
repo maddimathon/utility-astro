@@ -8,13 +8,13 @@
  * import { ... } from '@maddimathon/template-npm-library/layouts';
  * ```
  * 
- * @since 0.1.0-draft
+ * @since 0.1.0-alpha.draft
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-draft
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
 
-export * as Page from './Page.d.ts';
+export type * as Page from './Page.d.ts';

@@ -16,9 +16,9 @@ import {
 export class Compile extends CompileStage {
 
     override readonly subStages: Stage.SubStage.Compile[] = [
+        'ts',
         'scss',
-        // @ts-expect-error
-        'astro',
+        'astro' as Stage.SubStage.Compile,
         'files',
     ];
 
@@ -48,6 +48,12 @@ export class Compile extends CompileStage {
                 recursive: true,
             },
         );
+
+        // TODO - remove this when unneeded
+        this.fs.delete( [
+            distDir + '/' + subDir + '/components/NewComponent.astro',
+            distDir + '/' + subDir + '/components/NewComponent.d.ts',
+        ], 2 );
     }
 
     protected override async scss() {

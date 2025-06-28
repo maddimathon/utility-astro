@@ -4,17 +4,19 @@
         "astro/tsconfigs/strictest"
     ],
     "include": [
-        "./astro.config.ts",
         "./src/**/*"
     ],
     "exclude": [
+        "./.astro/**/*",
         "./.scripts/**/*",
         "./node_modules/**/*"
     ],
     "compilerOptions": {
+        "allowImportingTsExtensions": false,
         "baseUrl": "./",
         "exactOptionalPropertyTypes": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
+        "skipLibCheck": false,
         "strictNullChecks": true,
         "verbatimModuleSyntax": true
     }

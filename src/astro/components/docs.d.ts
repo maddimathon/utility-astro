@@ -17,4 +17,4 @@
  * @license MIT
  */
 
-export { };
+export type { };

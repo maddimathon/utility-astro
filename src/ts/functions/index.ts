@@ -10,4 +10,4 @@
  * @license MIT
  */
 
-export * from './exampleFunction.js';
+export * from './escRegExpURL.js';

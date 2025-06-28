@@ -2,9 +2,7 @@
     "extends": "../../tsconfig.json",
     "include": [
         "../../src/ts/**/*",
-        "./src/ts/**/*",
-        "../../.astro/types.d.ts",
-        "./.astro/types.d.ts"
+        "./src/ts/**/*"
     ],
     "exclude": [
         "./node_modules/**/*"
@@ -13,8 +11,10 @@
         "baseUrl": "../../",
         "declaration": true,
         "declarationMap": true,
+        "noEmit": false,
         "noImplicitAny": true,
-        "outDir": "../../dist/js/",
+        "outDir": "../../dist/ts/",
+        "skipLibCheck": true,
         "sourceMap": true,
         "verbatimModuleSyntax": true
     }

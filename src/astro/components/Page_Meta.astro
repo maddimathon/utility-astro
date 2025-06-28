@@ -1,0 +1,69 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@___CURRENT_VERSION___
+ * @license MIT
+ */
+
+/* import - types */
+import type { Props as Page_MetaProps } from './Page_Meta.d.ts';
+import type { GenericProps } from '../../ts/types/index.js';
+
+/* import - functions */
+import { absoluteInternalURL } from '../functions/absoluteInternalURL';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericProps<Page_MetaProps>;
+
+const meta: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+const canonical = 
+    typeof meta.canonical === 'object'
+    ? meta.canonical
+    : absoluteInternalURL(
+        Astro.url,
+        ( meta.canonical ?? Astro.url.pathname ),
+        false
+    );
+
+
+---
+
+<title set:text={meta.title} />
+
+<meta name="robots"    content={`${meta.bots ? "index,follow" : "noindex,nofollow"},${meta.archive ? "archive" : "noarchive"}`} />
+<meta name="googlebot" content={`${meta.bots ? "index,follow" : "noindex,nofollow"},${meta.archive ? "archive" : "noarchive"}`} />
+
+<meta  property="og:title" content={meta.title} />
+<meta name="twitter:title" content={meta.title} />
+
+{ meta.description && (
+<meta         name="description" content={meta.description} />
+<meta  property="og:description" content={meta.description} />
+<meta name="twitter:description" content={meta.description} />
+) }
+
+{ meta.keywords && <meta name="keywords" content={meta.keywords.join(',')} /> }
+
+<link rel="canonical" href={canonical} />
+<meta property="og:url" content={canonical} />
+
+{ meta.themeColor && <meta name="themeColor" content={meta.themeColor} /> }

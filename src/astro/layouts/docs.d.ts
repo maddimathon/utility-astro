@@ -17,4 +17,4 @@
  * @license MIT
  */
 
-export * as Page from './Page.d.ts';
+export type * as Page from './Page.d.ts';

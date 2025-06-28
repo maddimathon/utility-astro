@@ -8,13 +8,13 @@
  * import { ... } from '@maddimathon/template-npm-library/components';
  * ```
  * 
- * @since 0.1.0-draft
+ * @since 0.1.0-alpha.draft
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-draft
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
 
-export { };
+export type { };

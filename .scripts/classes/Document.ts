@@ -23,16 +23,15 @@ export class Document extends DocumentStage {
      * Paths to typedoc outputs.
      */
     static readonly typeDoc = {
-        json: './src/docs/tmp/typedoc.json',
+        json: './src/tmp/typedoc.json',
     };
 
     override readonly subStages: Stage.SubStage.Document[] = [
-        'typeDoc',
-        // @ts-expect-error
-        'collect',
-        // // @ts-expect-error
-        // 'astro',
-        // 'replace',
+        // 'typeDoc',
+        // 'collect' as Stage.SubStage.Document,
+        'scss' as Stage.SubStage.Document,
+        'astro' as Stage.SubStage.Document,
+        'replace',
     ];
 
 
@@ -71,6 +70,16 @@ export class Document extends DocumentStage {
                 JSON.stringify( collection, null, 4 ),
                 { force: true }
             ]
+        );
+    }
+
+    protected async scss() {
+        this.console.progress( 'compiling docs scss...', 1 );
+
+        this.atry(
+            this.compiler.scss,
+            this.params.verbose ? 2 : 1,
+            [ 'src/docs/scss/main.scss', 'src/docs/css/main.css', this.params.verbose ? 2 : 1 ],
         );
     }
 

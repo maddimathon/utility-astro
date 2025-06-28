@@ -74,9 +74,8 @@ const config = {
                 },
             }
         ],
-        // document: false,
 
-        test: true,
+        test: false,
     },
 };
 

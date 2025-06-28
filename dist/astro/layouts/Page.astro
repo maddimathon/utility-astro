@@ -2,30 +2,269 @@
 /**
  * 
  * 
- * @package boilerplate-astro-project@0.1.0-draft
- * @since 0.1.0-draft
+ * @package boilerplate-astro-project@0.1.0-alpha.draft
+ * @since 0.1.0-alpha.draft
  */
 
 /* import - types */
 
 /* import - functions */
-import type { Props } from './Page.d.ts';
+import { DateTime } from 'luxon';
+import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
+import type { Props as PageProps } from './Page.d.ts';
 
 /* import - components */
+import Page_Meta from '../components/Page_Meta.astro';
+import SkipLinks from '../components/SkipLinks.astro';
+import NavMenu from '../components/NavMenu.astro';
+import type { PartialExcept } from '@maddimathon/utility-typescript/types/objects/partial';
+import SettingsMenu from '../components/SettingsMenu.astro';
 
 
 /** ## PROPS ==================================== **/
 
-export type { Props };
+export type Props = PageProps;
 
-const {
-    class: classList = [],
-    ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+const p: Props = Astro.props.frontmatter ?? Astro.props;
+
+/**
+ * The menu params constructed from input props.
+ */
+const menus: {
+    primary?: NavMenuProps;
+    secondary?: NavMenuProps;
+} = {};
+
+if ( p.primaryMenu ) {
+
+    let _menu: PartialExcept<NavMenuProps, "menu">;
+    
+    if ( Array.isArray( p.primaryMenu ) ) {
+        _menu = {
+            menu: p.primaryMenu,
+        }
+    } else {
+        _menu = p.primaryMenu;
+    }
+
+    menus.primary = {
+        'aria-label': 'Primary Menu',
+        id: 'primary-menu',
+        ..._menu,
+    };
+}
+
+if ( p.secondaryMenu ) {
+
+    let _menu: PartialExcept<NavMenuProps, "menu">;
+    
+    if ( Array.isArray( p.secondaryMenu ) ) {
+        _menu = {
+            menu: p.secondaryMenu,
+        }
+    } else {
+        _menu = p.secondaryMenu;
+    }
+
+    menus.secondary = {
+        'aria-label': 'Secondary Menu',
+        id: 'secondary-menu',
+        ..._menu,
+    };
+}
+
+const support: Required<Required<PageProps>['support']> = {
+    settings: true,
+};
 
 
 /** ## CONSTANTS ==================================== **/
 
+// const SiteTitleTag = ( p.content.title && p.content.title.length ) ? 'p' : 'h1';
+
+/**
+ * Rendered slot HTML.
+ */
+const slots = {
+    footer: Astro.slots.has('footer') && await Astro.slots.render('footer'),
+    header: Astro.slots.has('header') && await Astro.slots.render('header'),
+};
+
+/**
+ * Sections/components to include or not.
+ */
+const include = {
+    
+    footer: p.footer && ( 
+        p.footer.copyright
+        || p.footer.designedBy
+        || slots.footer
+    ),
+    
+    header: p.header && ( 
+        p.header.title 
+        || p.header.tagline
+        || slots.header
+    ),
+};
+
+const today = DateTime.now();
+
+const _footerCopyrightYear = p.footer?.copyright?.year ?? today.year;
+
+/**
+ * Some formatted text strings to use below.
+ */
+const formatted = {
+
+    footer: {
+        year: today.year > _footerCopyrightYear
+            ? `${_footerCopyrightYear}–${today.year}` 
+            : _footerCopyrightYear,
+    },
+};
+
 ---
 
-<div class:list={classList} {...attributes}><slot /></div>
+<html
+    { ...p.attrs?.html ?? {} }
+
+    lang={p.lang}
+    dir={p.dir}
+
+    class:list={ [
+        // 'no-js',
+        p.attrs?.html?.class,
+    ] }
+>
+    <!-- 
+        This page includes html generated using
+        @maddimathon/utility-astro@0.1.0-alpha.draft
+
+        Author: Maddi Mathon (www.maddimathon.com)
+        License: MIT
+    -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <meta property="og:locale" content={p.lang} />
+
+        <!-- SLOT: "head-open" -->
+        <slot name="head-open" />
+        <!-- /SLOT: "head-open" -->
+
+        <Page_Meta {...p.meta} />
+
+        <!-- SLOT: "head-close" -->
+        <slot name="head-close" />
+        <!-- /SLOT: "head-close" -->
+    </head>
+
+    <body 
+        { ...p.attrs?.body ?? {} }
+
+        class:list={ [
+            p.attrs?.body?.class,
+        ] }
+    >
+        { p.skipLinks && <SkipLinks links={p.skipLinks} /> }
+
+        { support.settings && <SettingsMenu
+            accessibilityReportEmail={p.accessibilityReportEmail}
+            privacyPolicy={p.privacyPolicy}
+            settings={p.settings}
+        >
+            <slot name="settings-menu-open" slot="settings-menu-open" />
+            <slot name="settings-menu-close" slot="settings-menu-close" />
+        </SettingsMenu> }
+
+        <!-- SLOT: "body-open" -->
+        <slot name="body-open" />
+        <!-- /SLOT: "body-open" -->
+
+        <!-- SLOT: "before-header" -->
+        <slot name="before-header" />
+        <!-- /SLOT: "before-header" -->
+        
+        { p.header && include.header && (
+            <header class="site-header">
+                { p.header.title && <h1 class="site-title" set:text={p.header.title} /> }
+                { p.header.tagline && <p class="site-tagline" set:text={p.header.tagline} /> }
+
+                { slots.header ? (
+                    <!-- SLOT: "header" -->
+                    <slot name="header" />
+                    <!-- /SLOT: "header" -->
+                ) : <!-- SLOT: "header" (empty) / --> }
+            </header>
+        ) }
+
+        { menus.primary && menus.primary.menu.length > 0 && (
+            <!-- SLOT: "before-primary-nav" -->
+            <slot name="before-primary-nav" />
+            <!-- /SLOT: "before-primary-nav" -->
+            <NavMenu {...menus.primary} class:list="nav-primary" />
+            <!-- SLOT: "after-primary-nav" -->
+            <slot name="after-primary-nav" />
+            <!-- /SLOT: "after-primary-nav" -->
+        ) }
+
+        <!-- SLOT: "after-header" -->
+        <slot name="after-header" />
+        <!-- /SLOT: "after-header" -->
+
+        <!-- SLOT (main) -->
+        <slot />
+        <!-- /SLOT (main) -->
+
+        <!-- SLOT: "before-footer" -->
+        <slot name="before-footer" />
+        <!-- /SLOT: "before-footer" -->
+        
+        { p.footer && include.footer && (
+            <footer class="site-footer">
+                { slots.footer ? (
+                    <!-- SLOT: "footer" -->
+                    <slot name="footer" />
+                    <!-- /SLOT: "footer" -->
+                ) : <!-- SLOT: "footer" (empty) / --> }
+
+                { ( p.footer.designedBy || p.footer.copyright ) && (
+                    <p class="disclaimer">
+                        
+                        { p.footer.copyright && (
+                            <span class="copyright"><span class="copyright__copy">&copy;</span> <Fragment set:text={formatted.footer.year} /> {
+                                p.footer.copyright.owner
+                                ? <Fragment set:text={p.footer.copyright.owner} />
+                                : <Fragment set:html={p.footer.copyright.html} />
+                            }</span>
+                        ) }
+
+                        { ( p.footer.designedBy && p.footer.copyright ) && <br class="disclaimer__divider" /> }
+
+                        { p.footer.designedBy && <Fragment set:html={p.footer.designedBy} /> }
+                    </p>
+                ) }
+            </footer>
+        ) }
+
+        <!-- SLOT: "after-footer" -->
+        <slot name="after-footer" />
+        <!-- /SLOT: "after-footer" -->
+
+        <!-- SLOT: "body-close" -->
+        <slot name="body-close" />
+        <!-- /SLOT: "body-close" -->
+
+        <!-- SLOT: "footer-scripts" -->
+        <slot name="footer-scripts" />
+        <!-- /SLOT: "footer-scripts" -->
+    </body>
+</html>
+
+<style lang="scss" is:global>
+    @forward '../scss/toggles.scss';
+</style>
+
+<script src="../scripts/toggles.ts"></script>

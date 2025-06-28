@@ -1,4 +1,5 @@
 .archive/
+.astro/
 .cache/
 .snapshots/
 
@@ -28,7 +29,8 @@ dist/**/*.test.js
 
 # SRC
 # === #
-src/docs/tmp
+src/docs/css
+src/tmp
 
 
 # ROOT

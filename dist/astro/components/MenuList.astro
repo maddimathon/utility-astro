@@ -1,0 +1,62 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @license MIT
+ */
+
+/* import - types */
+import type { Props as MenuListProps } from './MenuList.d.ts';
+import type { GenericElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<MenuListProps, "div">;
+
+const {
+    menu,
+    separator = null,
+    submenu = false,
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+const classes = submenu ? 'submenu' : null;
+
+---
+
+{ menu && (
+    <ul {...attributes} role="menu" class={classes}>
+        { menu.map( ( item, index ) => ( ( item.href || item.child ) && (
+            <li role="none">
+                { typeof item.href === 'string' ? (
+                    <a role="menuitem" href={item.href} set:html={item.label} aria-current={item.current ? 'page' : false} />
+                ) : item.href === false ? (
+                    <a role="menuitem" aria-disabled="true" set:html={item.label} />
+                ) : item.child?.length && (
+                    <span role="menuitem" set:html={item.label} />
+                ) }
+                { item.child?.length && <Astro.self menu={item.child} submenu={true} /> }
+            </li>
+            <Fragment>{ separator && index < menu.length && ( <Fragment set:html={separator} /> ) }</Fragment>
+        ) ) ) }
+    </ul>
+) }

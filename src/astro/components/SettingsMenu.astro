@@ -1,0 +1,481 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@___CURRENT_VERSION___
+ * @license MIT
+ */
+
+/* import - types */
+import type { Props as SettingsMenuProps } from './SettingsMenu.d.ts';
+import type { GenericElementProps } from '../../ts/types/index.js';
+import { absoluteInternalURL } from '../functions/absoluteInternalURL';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<SettingsMenuProps, "div">;
+
+const {
+    accessibilityReportEmail,
+    class: classList = [ 'website-settings-menu' ],
+    id = 'website-settings',
+    privacyPolicy: privacyPolicyURL,
+    settings: inputSettings,
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* FUNCTIONS ===================================== */
+
+function optionHTML(
+    name: string,
+    label: string,
+    value: string,
+    labelClass: string = '',
+): string {
+    
+    const id = `${name}-${value}`;
+    
+    return `<label for="${id}" class="${labelClass}"><input
+        name="${name}"
+        id="${id}"
+        value="${value}"
+        type="radio"
+        data-settings-input
+    />${label}</label>`;
+}
+
+
+/* CONSTANTS ===================================== */
+
+const buttonID = `${id}-button`;
+
+const accessEmailSubject = 'Accessibility Issue — ' + absoluteInternalURL(
+    Astro.url,
+    Astro.url.pathname,
+    false
+).replace( /^https?:\/\/(www\.)?/gi, '' );
+
+const settings: Required<Required<SettingsMenuProps>['settings']> = {
+    brightness: true,
+    contrast: false,
+    motion: false,
+};
+
+---
+
+<div
+    id={id}
+    class:list={classList}
+
+    aria-label="Accessibility & Display Settings"
+
+    {...attributes}
+
+    role="region"
+    data-settings-menu
+    data-settings-path={absoluteInternalURL( Astro.url, '' )}
+    data-toggle-container
+>
+    <slot />
+
+    <button
+        id={buttonID}
+        class="website-settings__toggle"
+        aria-disabled="true"
+        role="button"
+        aria-label="Toggle settings menu"
+        title="Accessibility & Display Settings"
+        data-toggle-control={id}
+    >
+        <span class="icon | settings-icon">
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+
+                fill="none" 
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+
+                class="icon-cog"
+
+                role="img"
+                aria-hidden="true"
+            >
+                <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/>
+                <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                <path d="M12 2v2"/>
+                <path d="M12 22v-2"/>
+                <path d="m17 20.66-1-1.73"/>
+                <path d="M11 10.27 7 3.34"/>
+                <path d="m20.66 17-1.73-1"/>
+                <path d="m3.34 7 1.73 1"/>
+                <path d="M14 12h8"/>
+                <path d="M2 12h2"/>
+                <path d="m20.66 7-1.73 1"/>
+                <path d="m3.34 17 1.73-1"/>
+                <path d="m17 3.34-1 1.73"/>
+                <path d="m11 13.73-4 6.93"/>
+            </svg>
+        </span>
+    </button>
+
+    <form
+        action=""
+        class="website-settings__content"
+        data-toggle-content={id}
+    >
+        <div class="container">
+            <!-- SLOT: "settings-menu-open" -->
+            <slot name="settings-menu-open" />
+            <!-- /SLOT: "settings-menu-open" -->
+
+            { accessibilityReportEmail && <p class="website-settings__report"><a href={`mailto:${accessibilityReportEmail}?subject=${encodeURIComponent( accessEmailSubject )}`}>Report Accessibility Issue</a></p> }
+            
+            { settings.brightness && <fieldset>
+                <div class="container">
+                    <legend>Brightness Mode</legend>
+    
+                    <Fragment set:html={optionHTML( 'brightness-mode', 'Light', 'light' )} />
+                    <Fragment set:html={optionHTML( 'brightness-mode', 'Dark', 'dark' )} />
+                </div>
+            </fieldset> }
+
+            { settings.contrast && <fieldset>
+                <div class="container">
+                    <legend>Contrast Mode</legend>
+
+                    <Fragment set:html={optionHTML( 'contrast-mode', 'Low', 'low' )} />
+                    <Fragment set:html={optionHTML( 'contrast-mode', 'Average', 'average' )} />
+                    <Fragment set:html={optionHTML( 'contrast-mode', 'High', 'high' )} />
+
+                    <p class="forced-colors-mode-only aside">Your browser or computer has ‘forced colours’ mode enabled, so changing the contrast setting will have little impact (if any).</p>
+                </div>
+            </fieldset> }
+
+            { settings.motion && <fieldset>
+                <div class="container">
+                    <legend>Motion/Animation</legend>
+
+                    <Fragment set:html={optionHTML( 'motion', 'Default', 'no-preference' )} />
+                    <Fragment set:html={optionHTML( 'motion', 'Reduce', 'reduce' )} />
+                </div>
+            </fieldset> }
+
+            <input type="reset" data-settings-reset value="Reset Settings" />
+
+            <!-- SLOT: "settings-menu-close" -->
+            <slot name="settings-menu-close" />
+            <!-- /SLOT: "settings-menu-close" -->
+        </div>
+    </form>
+
+    <div data-toggle-control={id} class="website-settings__backdrop" aria-hidden="true"></div>
+</div>
+
+
+<style lang="scss" is:global>
+
+    @each $brightness in ( 'light', 'dark' ) {
+
+        [data-brightness-mode=#{$brightness}] {
+            color-scheme: #{$brightness} !important;
+        }
+
+        html:has( [data-brightness-mode=#{$brightness}] ) {
+            color-scheme: #{$brightness} !important;
+        }
+    }
+
+    @each $contrast in ( 'average', 'low', 'high' ) {
+
+        [data-contrast-mode=#{$contrast}] {
+            color-scheme: #{$contrast} !important;
+        }
+
+        html:has( [data-contrast-mode=#{$contrast}] ) {
+            color-scheme: #{$contrast} !important;
+        }
+    }
+
+    .forced-colors-mode-only {
+        display: none !important;
+    }
+    [data-contrast-mode=forced-colors] .forced-colors-mode-only {
+        display: var(--display, block) !important;
+    }
+
+    @media ( forced-colors: active ), ( prefers-contrast: custom ) {
+        .forced-colors-mode-only {
+            display: var(--display, block) !important;
+        }
+    }
+</style>
+
+<script>
+    import { JsCookie } from '../../ts/classes/JsCookie.js';
+
+    class SettingsMenu {
+
+        readonly #attributeKeys: string[] = [];
+        readonly #bodyElement: HTMLBodyElement;
+
+        /**
+         * For storing the cookies made to deal with each option.
+         */
+        #cookies: { [ key: string ]: JsCookie; } = {};
+
+        /**
+         * For storing the default value (if any) for each option.
+         */
+        #defaults: { [ key: string ]: string|null; } = {};
+
+        readonly #inputs: NodeListOf<HTMLInputElement>|null;
+        readonly #path: string;
+        readonly #resetButton: HTMLButtonElement|null;
+
+        #timeout: NodeJS.Timeout|null = null;
+
+
+        /**
+         * @param menu  The website settings menu wrapper to set up.
+         */
+        public constructor(
+            public readonly menu: HTMLElement,
+        ) {
+            this.#bodyElement = document.querySelector( 'body' ) as HTMLBodyElement;
+
+            this.#resetButton = menu.querySelector( '[data-settings-reset]' );
+
+            this.#path = menu.getAttribute( 'data-settings-path' ) || '/';
+
+            this.#inputs = menu.querySelectorAll( 'input[data-settings-input]' );
+
+            if ( ! this.#resetButton || ! this.#inputs ) {
+                return;
+            }
+
+            this.resetButtonClicked = this.resetButtonClicked.bind( this );
+            this.settingSelected = this.settingSelected.bind( this );
+            this.update_allInputs = this.update_allInputs.bind( this );
+            this._update_allInputs = this._update_allInputs.bind( this );
+
+            /*
+            * Adding change event listener and collecting attribute names.
+            */
+            this.update_allInputs();
+            this.#inputs.forEach( ( input ) => {
+                input.addEventListener( 'change', () => this.settingSelected( input ) );
+            } );
+
+            /*
+            * Add reset button listener.
+            */
+            this.#resetButton.addEventListener( 'click', this.resetButtonClicked );
+        }
+
+
+        private _setup_attr_key( attr: string ): void {
+
+            let defaultValue: string|null = null;
+
+            switch ( attr ) {
+                
+                case 'brightness-mode':
+                    window.matchMedia( `( prefers-color-scheme: light )` ).addEventListener( 'change', this.update_allInputs );
+
+                    [ 'light', 'dark' ].forEach( ( value ) => {
+                        if ( window.matchMedia( `( prefers-color-scheme: ${value} )` ).matches ) {
+                            defaultValue = value;
+                        } 
+                    } );
+                    break;
+                
+                case 'contrast-mode':
+                    window.matchMedia( `( prefers-contrast: more )` ).addEventListener( 'change', this.update_allInputs );
+                    defaultValue = 'average';
+
+                    if ( window.matchMedia( `( prefers-contrast: less )` ).matches ) {
+                        defaultValue = 'low';
+                    } else if ( window.matchMedia( `( prefers-contrast: more )` ).matches ) {
+                        defaultValue = 'high';
+                    }
+
+                    if (
+                        window.matchMedia( `( forced-colors: active )` ).matches
+                        || window.matchMedia( `( prefers-contrast: custom )` ).matches
+                    ) {
+                        defaultValue = null;
+                    }
+                    break;
+                
+                case 'motion':
+                    window.matchMedia( `( prefers-reduced-motion: reduce )` ).addEventListener( 'change', this.update_allInputs );
+                    defaultValue = 'reduce';
+
+                    if ( window.matchMedia( '( prefers-reduced-motion: no-preference )' ).matches ) {
+                        defaultValue = 'no-preference';
+                    } 
+                    break;
+                
+                case 'typeface':
+                    defaultValue = 'body';
+                    break;
+            }
+
+            this.#defaults[ attr ] = defaultValue;
+
+            if ( this.#attributeKeys.includes( attr ) || this.#cookies[ attr ] ) {
+                return;
+            }
+
+            this.#attributeKeys.push( attr );
+
+            this.#cookies[ attr ] = new JsCookie(
+                attr,
+                this.#path,
+                null,
+                null,
+            );
+        }
+
+
+        /**
+         * Triggered by a click lisetener.
+         */
+        public resetButtonClicked() {
+            
+            this.#attributeKeys.forEach( ( attr: string ) => {
+                this.#bodyElement.removeAttribute( attr );
+                this.#cookies[ attr ]?.delete();
+            } );
+
+            this.update_allInputs();
+        }
+        
+
+        /**
+         * A callback for when an input is selected.
+         */
+        public settingSelected( input: HTMLInputElement ): void {
+
+            const attr = input.getAttribute( 'name' );
+            if ( ! attr ) { return; }
+
+            const value = input.getAttribute( 'value' );
+            if ( ! value ) { return; }
+            
+            this.#bodyElement.setAttribute( `data-${attr}`, value );
+            this.#cookies[ attr ]?.set( value );
+        }
+
+        public update_allInputs(): void {
+
+            this.#inputs?.forEach( ( input ) => { input.checked = false; } );
+
+            // fixes issues about reselecting updated values after settings
+            // reset and quick-triggered event listeners
+            this.#timeout && clearTimeout( this.#timeout );
+            this.#timeout = setTimeout( this._update_allInputs, 100 );
+        }
+
+        public _update_allInputs(): void {
+
+            for ( const input of Array.from( this.#inputs ?? [] ) ) {
+
+                const attr = input.getAttribute( 'name' );
+                if ( ! attr ) { continue; }
+
+                this._setup_attr_key( attr );
+
+                const value = input.getAttribute( 'value' );
+                if ( ! value ) { continue; }
+
+                const current: string | null = this.#cookies[ attr ]?.get() ?? this.#defaults[ attr ] ?? null;
+                if ( ! current ) { continue; }
+
+                if ( `${value}` == `${current}` ) {
+                    input.checked = true;
+                    this.#bodyElement.setAttribute( `data-${attr}`, current );
+                } else {
+                    input.checked = false;
+                }
+            }
+        }
+    }
+    
+    const settingsMenus: NodeListOf<HTMLElement> = document.querySelectorAll( '[data-settings-menu]' );
+
+    const scrollBehaviour = window.getComputedStyle( document.documentElement ).scrollBehavior as "smooth" | "auto" || null;
+
+    /*
+     * Setting up each found menu.
+     */
+    settingsMenus.forEach( ( menu: HTMLElement ) => {
+        new SettingsMenu( menu );
+
+        const scrollToMenu = () => menu.scrollIntoView( {
+            behavior: scrollBehaviour ?? 'auto',
+            block: 'start',
+            inline: 'nearest',
+        } );
+        
+        menu.addEventListener( 'toggle-open', scrollToMenu );
+        menu.addEventListener( 'toggle-close', scrollToMenu );
+
+
+        // trap the focus order in the menu
+
+        const menuID: string = menu.id;
+        if ( !menuID ) { return; }
+        
+        const toggleButton: HTMLButtonElement|null = document.querySelector( `button[data-toggle-control=${menuID}]` );
+        if ( !toggleButton ) { return; }
+
+        const resetButton: HTMLButtonElement|null = menu.querySelector( '[data-settings-reset]' );
+        if ( !resetButton ) { return; }
+
+        const toggleBlur = ( event?: HTMLElementEventMap['blur'] ) => {
+            if ( event?.relatedTarget && !menu.contains( event.relatedTarget as HTMLElement ) ) {
+                resetButton.focus();
+            }
+        };
+
+        const resetBlur = ( event?: HTMLElementEventMap['blur'] ) => {
+            if ( event?.relatedTarget && !menu.contains( event.relatedTarget as HTMLElement ) ) {
+                toggleButton.focus();
+            }
+        };
+
+        menu.addEventListener( 'toggle-open', () => {
+            toggleButton.addEventListener( 'blur', toggleBlur );
+            resetButton.addEventListener( 'blur', resetBlur );
+        } );
+
+        menu.addEventListener( 'toggle-close', () => {
+            toggleButton.removeEventListener( 'blur', toggleBlur );
+            resetButton.removeEventListener( 'blur', resetBlur );
+            toggleButton.focus();
+        } );
+    } );
+</script>

@@ -1,0 +1,136 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+// @use 'sass:color';
+// @use 'sass:list';
+// @use 'sass:map';
+// @use 'sass:math';
+// @use 'sass:meta';
+// @use 'sass:selector';
+// @use 'sass:string';
+
+@forward '../../scss/_header';
+
+/** # Blocks - Toggles ==================================== **/
+
+[data-toggle-container] {
+    display: grid;
+    grid-auto-rows: auto;
+
+    justify-content: start;
+    align-items: start;
+
+    margin: 0;
+
+    z-index: 1;
+}
+
+.toggle-title {
+    margin: 0;
+    padding: 0;
+}
+
+.toggle-title {
+    grid-row: 1 / 1;
+    font-weight: 600;
+    z-index: 2;
+}
+
+[data-toggle-control] {
+    margin: 0;
+    padding: 0;
+
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1em;
+
+    cursor: text;
+}
+
+.toggle-icon {
+    display: none;
+}
+
+.toggle-control-inner {
+    grid-column: 1 / -1;
+}
+
+[data-toggle-content] {
+    grid-column: 1 / -1;
+    grid-row: 2 / 2;
+
+    /// BLOCK ///
+
+    > .container {
+        overflow-block: hidden;
+        overflow-inline: auto;
+    }
+}
+
+/** ## Opening & Closing ------------------ **/
+
+[data-toggle-container] {
+    [data-toggle-control] {
+        cursor: pointer;
+    }
+
+    .toggle-icon {
+        display: inline-block;
+
+        vertical-align: sub;
+        padding-bottom: 0.03125em;
+
+        > svg {
+            display: block;
+            position: relative;
+
+            height: 1.125em;
+            width: auto;
+
+            stroke: currentColor;
+            stroke-width: max(0.1875em, 1px);
+            fill: none;
+        }
+    }
+
+    .toggle-control-inner {
+    }
+
+    [data-toggle-content] {
+        display: grid;
+        grid-template-rows: 0fr;
+        overflow: hidden;
+
+        > .container {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+}
+
+[data-toggle-container='closed'] {
+}
+
+[data-toggle-container='open'] {
+    > [data-toggle-content] {
+        grid-template-rows: 1fr;
+
+        > .container {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+[data-toggle-container='closing'] {
+    > [data-toggle-content] {
+        grid-template-rows: 0fr;
+
+        > .container {
+            opacity: 0;
+            visibility: visible;
+        }
+    }
+}

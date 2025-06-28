@@ -23,8 +23,7 @@ export class Build extends BuildStage {
     override  readonly subStages: Stage.SubStage.Build[] = [
         'compile',
         'replace',
-        // @ts-expect-error
-        'readme',
+        'readme' as Stage.SubStage.Build,
         'prettify',
         'minimize',
         'test',
