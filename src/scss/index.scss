@@ -3,10 +3,10 @@
 /// @since ___PKG_VERSION___
 /// 
 
-@forward '_header';
-
-@forward 'utils';
 @forward 'config';
+@forward 'utils';
+
+@forward '_header';
 
 @forward 'functions';
 @forward 'mixins';

@@ -1,9 +1,8 @@
 
-import type currentPkgJson from './package.json';
-
 import { defineConfig } from 'astro/config';
 
 import partialConfig from './.scripts/build.config.js';
+import pkg from './package.json';
 
 import {
     internal as buildUtils,
@@ -23,8 +22,6 @@ const fs = new FileSystem(
         parseParamsCLI( {} ),
     ) as buildUtils.Logger,
 );
-
-const pkg: typeof currentPkgJson = JSON.parse( fs.readFile( 'package.json' ) );
 
 export const homeURL = new URL( pkg.homepage );
 
@@ -60,7 +57,7 @@ export default defineConfig( {
         assets: 'assets/astro',
         client: 'assets/js',
         format: 'file',
-        // inlineStylesheets: 'never',
+        inlineStylesheets: 'always',
     },
 
     server: {

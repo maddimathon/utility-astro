@@ -1,0 +1,16 @@
+/*!
+ * Utility Astro Template — HTML
+ * 
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * 
+ * Author: Maddi Mathon (www.maddimathon.com)
+ * License: MIT
+ */
+
+@use 'utils';
+
+@include utils.max-width(tablet) {
+    test {
+        /* I am inside a max-width( tablet ) mixin from utility-sass */
+    }
+}

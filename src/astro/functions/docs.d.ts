@@ -1,11 +1,11 @@
 /**
- * This files exports types for the astro layouts for the auto-documentation.
+ * This files exports types for the astro functions for the auto-documentation.
  * 
- * @module layouts
+ * @module astro/functions
  * 
  * @example
  * ```ts
- * import { ... } from '@maddimathon/template-npm-library/layouts';
+ * import { ... } from '@maddimathon/template-npm-library/astro/functions';
  * ```
  * 
  * @since ___PKG_VERSION___
@@ -17,5 +17,5 @@
  * @license MIT
  */
 
-export type * from './absoluteInternalURL.ts';
-export type * from './autoTrailingSlash.ts';
+export type * from './absoluteInternalURL.js';
+export type * from './autoTrailingSlash.js';

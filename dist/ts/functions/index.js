@@ -10,4 +10,5 @@
  * @license MIT
  */
 export * from './escRegExpURL.js';
+export * from './trailingSlash.js';
 //# sourceMappingURL=index.js.map

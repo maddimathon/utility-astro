@@ -3,7 +3,5 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'pkg:@maddimathon/utility-sass' with (
-    $selectorType_mode: 'attribute',
-    $selectorType_motion: 'attribute'
-);
+@forward 'config/_utils';
+@forward 'pkg:@maddimathon/utility-sass';

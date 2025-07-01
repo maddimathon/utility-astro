@@ -24,62 +24,21 @@ export class Compile extends CompileStage {
 
 
     protected async astro() {
-        this.console.progress( 'copying astro files to dist...', 1 );
 
         const subDir = 'astro';
 
-        const distDir = this.getDistDir().trim().replace( /\/$/g, '' );
+        const distDir = this.getDistDir( undefined, subDir ).trim().replace( /\/$/g, '' );
 
-        if ( this.fs.exists( distDir ) ) {
-            this.console.verbose( 'deleting existing files...', 2 );
-            this.fs.delete( distDir + '/' + subDir, this.params.verbose ? 3 : 2 );
-        }
-
-        const srcDir = this.getSrcDir().trim().replace( /\/$/g, '' );
-
-        this.fs.copy(
-            subDir,
-            2,
-            distDir,
-            srcDir,
-            {
-                force: true,
-                rename: true,
-                recursive: true,
-            },
-        );
+        await this.runCustomDirCopySubStage( subDir );
 
         // TODO - remove this when unneeded
         this.fs.delete( [
-            distDir + '/' + subDir + '/components/NewComponent.astro',
-            distDir + '/' + subDir + '/components/NewComponent.d.ts',
+            distDir + '/components/NewComponent.astro',
+            distDir + '/components/NewComponent.d.ts',
         ], 2 );
     }
 
     protected override async scss() {
-        this.console.progress( 'copying scss files to dist...', 1 );
-
-        const subDir = 'scss';
-
-        const distDir = this.getDistDir().trim().replace( /\/$/g, '' );
-
-        if ( this.fs.exists( distDir ) ) {
-            this.console.verbose( 'deleting existing files...', 2 );
-            this.fs.delete( distDir + '/' + subDir, this.params.verbose ? 3 : 2 );
-        }
-
-        const srcDir = this.getSrcDir().trim().replace( /\/$/g, '' );
-
-        this.fs.copy(
-            subDir,
-            2,
-            distDir,
-            srcDir,
-            {
-                force: true,
-                rename: true,
-                recursive: true,
-            },
-        );
+        await this.runCustomDirCopySubStage( 'scss' );
     }
 }

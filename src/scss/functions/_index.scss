@@ -3,3 +3,6 @@
 /// @since ___PKG_VERSION___
 /// 
 
+@function utility-astro-test-function() {
+    @return 'test successful';
+}

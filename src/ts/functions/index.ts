@@ -11,3 +11,4 @@
  */
 
 export * from './escRegExpURL.js';
+export * from './trailingSlash.js';

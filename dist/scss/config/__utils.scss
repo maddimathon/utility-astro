@@ -1,0 +1,19 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+/// # CONFIG - Utility Sass
+/// ======================================================================== ///
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $selectorType_mode: 'attribute',
+    $selectorType_motion: 'attribute',
+
+    $breakpoints: (
+        'tablet': 60,
+    )
+    !default,
+    $margin_softener: 0.75 !default,
+    $scale_multiplier: 2 !default
+);

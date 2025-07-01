@@ -1,0 +1,47 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { Props as CodeBlockProps } from './CodeBlock.d.ts';
+import type { GenericElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import { Prism } from '@astrojs/prism';
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<CodeBlockProps, "pre">;
+
+const {
+    children,
+    lang,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+const codeHTML: string = typeof children === 'string' ? children : await Astro.slots.render( 'default' ) || '';
+
+---
+
+{ lang ? (
+    <Prism code={codeHTML} lang={lang} class={ Array.isArray( classList ) ? classList.join(' ') : classList } {...attributes} />
+) : (
+    <pre class:list={classList} {...attributes}><code set:text={codeHTML} /></pre>
+) }

@@ -12,7 +12,9 @@ import {
     trailingSlash as config_trailingSlash,
 } from 'astro:config/client';
 
-import { trailingSlash } from '../../ts/functions/trailingSlash';
+import {
+    trailingSlash,
+} from '../../ts/functions/index.js';
 
 /**
  * Auto-applies or removes a trailing slash for the given path depending on the

@@ -1,7 +1,8 @@
 /// 
-/// Add in any config (!default) variables to this file.
-/// 
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since ___PKG_VERSION___
 /// 
 
+@forward 'config';
+@forward '../utils';
+@forward '../index';

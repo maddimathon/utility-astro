@@ -3,10 +3,10 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '_header';
-
-@forward 'utils';
 @forward 'config';
+@forward 'utils';
+
+@forward '_header';
 
 @forward 'functions';
 @forward 'mixins';

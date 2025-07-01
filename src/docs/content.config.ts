@@ -3,10 +3,6 @@
  * 
  * @packageDocumentation
  */
-/*!
- * @maddimathon/utility-astro@___CURRENT_VERSION___
- * @license MIT
- */
 
 // import { defineCollection } from 'astro:content';
 // import schemas from './contentSchemas.js';

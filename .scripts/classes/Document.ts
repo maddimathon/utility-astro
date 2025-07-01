@@ -74,13 +74,13 @@ export class Document extends DocumentStage {
     }
 
     protected async scss() {
-        this.console.progress( 'compiling docs scss...', 1 );
 
-        this.atry(
-            this.compiler.scss,
-            this.params.verbose ? 2 : 1,
-            [ 'src/docs/scss/main.scss', 'src/docs/css/main.css', this.params.verbose ? 2 : 1 ],
-        );
+        const outDir = (
+            this.getSrcDir( 'docs', 'css' )[ 0 ]
+            ?? this.getSrcDir( undefined, 'docs/css' )
+        ).replace( /\/$/g, '' );
+
+        await this.runCustomScssDirSubStage( 'docs/scss', outDir );
     }
 
     protected async astro() {

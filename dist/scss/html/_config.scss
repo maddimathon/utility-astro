@@ -1,0 +1,10 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward '../config' with (
+    $internalAstro_supressCredit: true,
+
+    $scale_multiplier: 1.25 !default
+);

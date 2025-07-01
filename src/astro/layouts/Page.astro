@@ -7,9 +7,15 @@
  */
 
 /* import - types */
+import type {
+    PartialExcept,
+} from '@maddimathon/utility-typescript/types/objects';
 
 /* import - functions */
 import { DateTime } from 'luxon';
+import {
+    mergeArgs,
+} from '@maddimathon/utility-typescript/functions';
 import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
 import type { Props as PageProps } from './Page.d.ts';
 
@@ -17,7 +23,6 @@ import type { Props as PageProps } from './Page.d.ts';
 import Page_Meta from '../components/Page_Meta.astro';
 import SkipLinks from '../components/SkipLinks.astro';
 import NavMenu from '../components/NavMenu.astro';
-import type { PartialExcept } from '@maddimathon/utility-typescript/types/objects/partial';
 import SettingsMenu from '../components/SettingsMenu.astro';
 
 
@@ -73,9 +78,12 @@ if ( p.secondaryMenu ) {
     };
 }
 
-const support: Required<Required<PageProps>['support']> = {
-    settings: true,
-};
+const support = mergeArgs(
+    {
+        settings: true,
+    } as Required<Required<PageProps>['support']>,
+    p.support,
+);
 
 
 /** ## CONSTANTS ==================================== **/

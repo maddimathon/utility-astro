@@ -7,7 +7,6 @@
         "./src/**/*"
     ],
     "exclude": [
-        "./.astro/**/*",
         "./.scripts/**/*",
         "./node_modules/**/*"
     ],

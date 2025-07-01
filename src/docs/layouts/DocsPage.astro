@@ -4,17 +4,18 @@
  * 
  * @packageDocumentation
  */
-/*!
- * @maddimathon/utility-astro@___CURRENT_VERSION___
- * @license MIT
- */
 
 /* import - types */
 import type { Props as LibPageProps } from '../../astro/layouts/Page.d.ts';
 
 /* import - functions */
-import { arrayUnique, mergeArgs } from '@maddimathon/utility-typescript/functions';
-import { absoluteInternalURL } from '../../astro/functions/absoluteInternalURL.js';
+import {
+    arrayUnique,
+    mergeArgs,
+} from '@maddimathon/utility-typescript/functions';
+import {
+    absoluteInternalURL,
+} from '../../astro/functions/index.js';
 
 /* import - values */
 import '../css/main.css';
@@ -63,10 +64,8 @@ const props: Props & LibPageProps = mergeArgs( {
         ] ).join( ' — ' ),
     },
 
-    skipLinks: [
-        { href: '', label: 'testing' },
-        { href: '', label: 'testing 2' },
-    ],
+    // skipLinks: [
+    // ],
     
 } as Props & LibPageProps, inputs, true );
 
@@ -77,6 +76,9 @@ props.primaryMenu = [
     { label: 'Home', href: '' },
     { label: 'Components', child: [
         { label: 'Toggle', href: 'components/toggle' },
+    ] },
+    { label: 'SCSS', child: [
+        { label: 'HTML', href: 'scss/html' },
     ] },
 ];
 

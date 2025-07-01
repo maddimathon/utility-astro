@@ -2,13 +2,12 @@
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since ___PKG_VERSION___
 /// 
-// @use 'sass:color';
-// @use 'sass:list';
-// @use 'sass:map';
-// @use 'sass:math';
-// @use 'sass:meta';
-// @use 'sass:selector';
-// @use 'sass:string';
 
-@forward '../index';
-// @forward 'toggles';
+@forward 'config';
+@forward 'utils';
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base';
+
+@forward '_header';
+
+@forward '_footer';
