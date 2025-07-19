@@ -1,7 +1,7 @@
-/// 
+///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since ___PKG_VERSION___
-/// 
+///
 // @use 'sass:color';
 // @use 'sass:list';
 // @use 'sass:map';
@@ -10,36 +10,24 @@
 // @use 'sass:selector';
 // @use 'sass:string';
 
-// @forward '../../scss/html/config' with (
-//     $breakpoints: (
-//         'tablet': 20,
-//     ),
-// );
-
 @forward '_header';
 
-@forward '../../scss/html';
+@forward '../../scss/templates/html' with (
+    $breakpoints: (
+        'tablet': 20,
+    )
+    !default
+);
 
+@use '../../scss/templates/html' as utils;
 
-@use '../../scss/html' as utils;
-
-test {
+test.utility-astro.docs {
     /* this is a test of utils.$scale_multiplier */
-    --content: #{utils.$scale_multiplier}; /* expecting: 1.25 */
+    --content: #{utils.$scale_multiplier};
 }
 
-test {
-    /* this is a test of utils.$margin_softener */
-    --content: #{utils.$margin_softener}; /* expecting: 0.75 */
-}
-
-test {
-    /* this is a test of utility-astro-test-function() */
-    --content: #{utils.utility-astro-test-function()};
-}
-
-@include utils.min-width(tablet) { /* expecting: 20 or 60 */
-    test {
+@include utils.min-width(tablet) {
+    test.utility-astro.docs {
         /* I am inside a min-width( tablet ) mixin from utility-sass */
     }
 }

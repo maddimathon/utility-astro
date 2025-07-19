@@ -138,6 +138,7 @@
         "predocument":    "npm run scripts-tsc",
         "prebuild":       "npm run scripts-tsc",
         "prequick-build": "npm run scripts-tsc",
+        "prestart":       "npm run scripts-tsc",
         "prepackage":     "npm run scripts-tsc",
         "predryrun":      "npm run scripts-tsc",
         "prerelease":     "npm run scripts-tsc",
@@ -179,7 +180,7 @@
         "sass": "^1.89.2"
     },
     "devDependencies": {
-        "@maddimathon/build-utilities": "file:../npm-build-utilities",
+        "@maddimathon/build-utilities": "0.2.0-alpha.1",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.6.2",
         "@types/node": "22.15.30",

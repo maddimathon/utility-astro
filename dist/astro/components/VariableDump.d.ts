@@ -1,0 +1,31 @@
+/**
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+/*!
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @license MIT
+ */
+
+import type { Props as CodeBlockProps } from './CodeBlock.d.ts';
+
+import { VariableInspector } from '@maddimathon/utility-typescript/classes';
+
+/**
+ * Input props for the VariableDump component.
+ * 
+ * @since 0.1.0-alpha.draft
+ */
+export interface Props extends Omit<CodeBlockProps, "children" | "lang"> {
+
+    /**
+     * The variable to dump.
+     */
+    var: unknown;
+
+    /**
+     * Optional name to prefix the output.
+     */
+    name?: string;
+}

@@ -6,20 +6,21 @@
 @forward 'config';
 @forward 'utils';
 
+@forward 'pkg:@maddimathon/utility-sass/templates/base';
+
 @forward '_header';
 
-@forward 'functions';
-@forward 'mixins';
+@forward '_footer';
 
 @use 'utils';
 
-test.utility-astro {
+test.utility-astro.templates.html {
     /* this is a test of utils.$scale_multiplier */
     --content: #{utils.$scale_multiplier};
 }
 
 @include utils.min-width(tablet) {
-    test.utility-astro {
+    test.utility-astro.templates.html {
         /* I am inside a min-width( tablet ) mixin from utility-sass */
     }
 }

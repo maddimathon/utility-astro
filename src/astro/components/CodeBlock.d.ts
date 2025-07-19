@@ -15,7 +15,7 @@
  */
 export interface Props {
 
-    children: any;
+    children?: any;
 
     /** 
      * Value for component's `class` attribute.

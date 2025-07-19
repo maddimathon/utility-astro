@@ -1,0 +1,46 @@
+---
+/**
+ * A component 
+ * @since 0.1.0-alpha.draft
+ * 
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/types/index.js';
+import type { Props as VariableDumpProps } from './VariableDump.d.ts';
+
+/* import - functions */
+import { VariableInspector } from '@maddimathon/utility-typescript/classes';
+
+/* import - values */
+
+/* import - components */
+import CodeBlock from './CodeBlock.astro';
+
+/* import - layouts */
+
+
+/* TYPES ===================================== */
+
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<VariableDumpProps, "div">;
+
+const {
+    var: variable,
+    name,
+    ...props
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+
+/* CONSTANTS ===================================== */
+
+const stringified = VariableInspector.stringify( { [ name ?? 'var' ]: variable }, {
+    includePrefix: !!name,
+} );
+
+---
+
+<CodeBlock {...props} lang={undefined}><Fragment set:html={stringified} /></CodeBlock>
