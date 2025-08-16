@@ -2,18 +2,18 @@
  * @since ___PKG_VERSION___
  * 
  * @packageDocumentation
- */
+*/
 
-// import { defineCollection } from 'astro:content';
-// import schemas from './contentSchemas.js';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
 
-// import typeDocJson from './content/typedoc/typedoc.json';
+import * as typedoc from '../ts/typedoc/index.js';
 
-// const docs = defineCollection( {
-//     loader: () => Object.values( typeDocJson.pages ),
-//     schema: schemas.PageUnion,
-// } );
+export const typeDocSchemata = new typedoc.Schemata();
 
-export const collections = {
-    // docs,
-};
+const exports = defineCollection( {
+    loader: glob( { pattern: "**/*.md", base: "./src/docs/content/exports" } ),
+    schema: typeDocSchemata.metadata.page,
+} );
+
+export const collections = { exports };

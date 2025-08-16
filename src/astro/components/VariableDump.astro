@@ -1,13 +1,13 @@
 ---
 /**
- * A component 
+ * A component
  * @since ___PKG_VERSION___
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { GenericElementProps } from '../../ts/00-types/index.js';
 import type { Props as VariableDumpProps } from './VariableDump.d.ts';
 
 /* import - functions */
@@ -20,13 +20,13 @@ import CodeBlock from './CodeBlock.astro';
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
+export type * from './VariableDump.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<VariableDumpProps, "div">;
+export type Props = GenericElementProps<VariableDumpProps, 'div'>;
 
 const {
     var: variable,
@@ -34,13 +34,18 @@ const {
     ...props
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
-
 /* CONSTANTS ===================================== */
 
-const stringified = VariableInspector.stringify( { [ name ?? 'var' ]: variable }, {
-    includePrefix: !!name,
-} );
-
+const stringified = VariableInspector.stringify(
+    { [name ?? 'var']: variable },
+    {
+        includePrefix: !!name,
+    }
+);
 ---
 
-<CodeBlock {...props} lang={undefined}><Fragment set:html={stringified} /></CodeBlock>
+<CodeBlock
+    {...props}
+    lang={undefined}
+    ><Fragment set:html={stringified} /></CodeBlock
+>

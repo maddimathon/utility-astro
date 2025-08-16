@@ -1,12 +1,12 @@
 ---
 /**
  * @since 0.1.0-alpha.draft
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { GenericElementProps } from '../../ts/00-types/index.js';
 import type { Props as SkipLinksProps } from './SkipLinks.d.ts';
 
 /* import - functions */
@@ -17,13 +17,13 @@ import type { Props as SkipLinksProps } from './SkipLinks.d.ts';
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
+export type * from './SkipLinks.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<SkipLinksProps, "ul">;
+export type Props = GenericElementProps<SkipLinksProps, 'ul'>;
 
 const {
     links,
@@ -31,47 +31,47 @@ const {
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
-
 /* CONSTANTS ===================================== */
 
 if (
-    !attributes['aria-description']
-    && !attributes['aria-describedby']
-    && !attributes['aria-label']
-    && !attributes['aria-labelledby']
+    !attributes['aria-description'] &&
+    !attributes['aria-describedby'] &&
+    !attributes['aria-label'] &&
+    !attributes['aria-labelledby']
 ) {
-    attributes['aria-label'] = links.length == 1 ? 'shortcut link' : 'shortcut links';
+    attributes['aria-label'] =
+        links.length == 1 ? 'shortcut link' : 'shortcut links';
 }
-
 ---
 
-{ links.length && (
+{
+    links.length && (
+        <ul
+            {...attributes}
+            class:list={['skip-link-list', '||', classList]}
+        >
+            {links.map((link) => (
+                <li>
+                    <a
+                        href={link.href}
+                        class='skip-link'
+                        set:html={link.label}
+                    />
+                </li>
+            ))}
+        </ul>
+    )
+}
 
-    <ul
-        {...attributes}
-        class:list={[ 'skip-link-list', '||', classList ]}
-    >
-        { links.map( ( link ) => (
-            <li><a
-                href={link.href}
-                class="skip-link"
-                set:html={link.label}
-            /></li>
-        ) ) }
-    </ul>
-
-) }
-
-<style lang="scss">
-
+<style lang='scss'>
     .skip-link {
         display: block;
         position: fixed;
         margin: 0;
 
         top: -100%;
-        
-  	    width: fit-content;
+
+        width: fit-content;
 
         z-index: 999999;
 
@@ -86,7 +86,7 @@ if (
         list-style: none;
         margin: 0;
         padding: 0;
-    
+
         li {
             margin: 0;
             padding: 0;

@@ -15,8 +15,14 @@
         "baseUrl": "./",
         "exactOptionalPropertyTypes": false,
         "noImplicitAny": true,
-        "skipLibCheck": false,
+        "skipLibCheck": true,
         "strictNullChecks": true,
-        "verbatimModuleSyntax": true
+        "verbatimModuleSyntax": true,
+
+        "plugins": [
+            {
+              "name": "@astrojs/ts-plugin"
+            },
+        ]
     }
 }

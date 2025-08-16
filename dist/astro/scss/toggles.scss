@@ -114,6 +114,14 @@
 }
 
 [data-toggle-container='open'] {
+    .toggle-icon {
+        > svg {
+            #b {
+                opacity: 0;
+            }
+        }
+    }
+
     > [data-toggle-content] {
         grid-template-rows: 1fr;
 

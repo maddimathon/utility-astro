@@ -1,13 +1,13 @@
 ---
 /**
  * @since 0.1.0-alpha.draft
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
 import type { Props as ToggleProps } from './Toggle.d.ts';
-import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -17,13 +17,13 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
+export type * from './Toggle.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<ToggleProps, "div">;
+export type Props = GenericElementProps<ToggleProps, 'div'>;
 
 const {
     heading,
@@ -32,70 +32,72 @@ const {
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
-
 /* CONSTANTS ===================================== */
 
-const buttonHTML: string = await Astro.slots.render( 'button' ) || 'Toggle me';
+const buttonHTML: string = (await Astro.slots.render('button')) || 'Toggle me';
 
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
 const titleID = `${id}-title`;
-
 ---
 
-<div 
+<div
     id={id}
-    class:list={[
-        'toggle-container',
-        '||',
-        classList,
-    ]} {...attributes}
+    class:list={['toggle-container', '||', classList]}
+    {...attributes}
     data-toggle-container
 >
-    <div id={titleID} class="toggle-title">
-        { heading && <Fragment set:html={`<h${heading}>`} /> }
-            <button
-                id={buttonID}
-                class="toggle-control"
-                aria-disabled="true"
-                data-toggle-control={id}
-                role="button"
-            >
-                <span class="icon | toggle-icon">
-                    <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        
-                        width="24" 
-                        height="24" 
-                        viewBox="0 0 24 24" 
-
-                        fill="none"
-                        stroke="currentColor" 
-                        stroke-width="2" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round"
-                        
-                        class="icon-plus"
-
-                        role="img"
-                        aria-hidden="true"
-                    >
-                        <path id="a" d="M5 12h14" />
-                        <path id="b" d="M12 5v14" />
-                    </svg>
-                </span>
-                <span class="toggle-control-inner" set:html={buttonHTML.trim()} />
-            </button>
-        { heading && <Fragment set:html={`</h${heading}>`} /> }
+    <div
+        id={titleID}
+        class='toggle-title'
+    >
+        {heading && <Fragment set:html={`<h${heading}>`} />}
+        <button
+            id={buttonID}
+            class='toggle-control'
+            aria-disabled='true'
+            data-toggle-control={id}
+            role='button'
+        >
+            <span class='icon | toggle-icon'>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='icon-plus'
+                    role='img'
+                    aria-hidden='true'
+                >
+                    <path
+                        id='a'
+                        d='M5 12h14'
+                    ></path>
+                    <path
+                        id='b'
+                        d='M12 5v14'
+                    ></path>
+                </svg>
+            </span>
+            <span
+                class='toggle-control-inner'
+                set:html={buttonHTML.trim()}
+            />
+        </button>
+        {heading && <Fragment set:html={`</h${heading}>`} />}
     </div>
 
-    <section 
+    <section
         data-toggle-content={id}
-        class="container | toggle-content"
-        id={contentID} 
+        class='container | toggle-content'
+        id={contentID}
         aria-labelledby={titleID}
     >
-        <div class="container"><slot /></div>
+        <div class='container'><slot /></div>
     </section>
-
 </div>

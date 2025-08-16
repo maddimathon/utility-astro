@@ -48,6 +48,7 @@
             "sass": "./dist/scss/index.scss",
             "types": "./dist/ts/index.d.ts",
 
+            "astro": "./dist/ts/index.js",
             "default": "./dist/ts/index.js"
         },
 
@@ -58,21 +59,48 @@
 
         "./tsconfig":      "./tsconfig.json",
         "./tsconfig.json": "./tsconfig.json",
-
-        "./components/*": [
-            "./dist/astro/components/*.astro",
-            "./dist/astro/components/*"
-        ],
-
-        "./layouts/*": [
-            "./dist/astro/layouts/*.astro",
-            "./dist/astro/layouts/*"
-        ],
+        
+        "./components/*": {
+            "astro": [
+                "./dist/astro/components/*.astro",
+                "./dist/astro/components/*.d.ts"
+            ],
+            "types": [
+                "./dist/astro/components/*.astro",
+                "./dist/astro/components/*.d.ts"
+            ],
+            "default": [
+                "./dist/astro/components/*.astro",
+                "./dist/astro/components/*.d.ts"
+            ]
+        },
+        
+        "./layouts/*": {
+            "astro": [
+                "./dist/astro/layouts/*.astro",
+                "./dist/astro/layouts/*.d.ts"
+            ],
+            "types": [
+                "./dist/astro/layouts/*.astro",
+                "./dist/astro/layouts/*.d.ts"
+            ],
+            "default": [
+                "./dist/astro/layouts/*.astro",
+                "./dist/astro/layouts/*.d.ts"
+            ]
+        },
 
         "./astro/functions": {
+            "astro": "./dist/astro/functions/index.ts",
             "types": "./dist/astro/functions/index.ts",
             "default": "./dist/astro/functions/index.ts"
         },
+
+        "./astro/scripts": [
+            "./dist/astro/scripts/*.ts",
+            "./dist/astro/scripts/*/index.ts",
+            "./dist/astro/scripts/*"
+        ],
 
         "./astro/*": [
             "./dist/astro/*.astro",
@@ -111,6 +139,12 @@
             "types": [
                 "./dist/ts/*.d.ts",
                 "./dist/ts/*/index.d.ts"
+            ],
+
+            "astro": [
+                "./dist/ts/*.js",
+                "./dist/ts/*/index.js",
+                "./dist/ts/*"
             ],
 
             "default": [
@@ -177,9 +211,11 @@
         "@maddimathon/utility-typescript": "2.0.0-beta",
         "astro": "^5.10.1",
         "luxon": "^3.6.1",
-        "sass": "^1.89.2"
+        "sass": "^1.89.2",
+        "zod": "^3.25.67"
     },
     "devDependencies": {
+        "@astrojs/ts-plugin": "1.10.4",
         "@maddimathon/build-utilities": "0.2.0-alpha.1",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.6.2",
@@ -187,9 +223,20 @@
         "jest": "30.0.3",
         "npm-run-all": "4.1.5",
         "tsx": "4.20.3",
-        "typedoc": "0.28.7",
+        "typedoc": "^0.28.7",
+        "typedoc-plugin-markdown": "^4.7.0",
         "typescript": "5.8.3",
         "watch-cli": "0.2.3"
+    },
+
+    "peerDependencies": {
+        "typedoc": "^0.28.7",
+        "typedoc-plugin-markdown": "^4.7.0"
+    },
+    "peerDependenciesMeta": {
+        "typedoc-plugin-markdown": {
+            "optional": true
+        }
     },
 
     "browserslist": [

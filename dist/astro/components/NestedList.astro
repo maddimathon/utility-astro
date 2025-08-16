@@ -1,0 +1,55 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as NestedListProps } from './NestedList.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './NestedList.d.ts';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<NestedListProps, 'ul' | 'ol'>;
+
+const {
+    list,
+    class: classList = [],
+    tag: ListTag = 'ul',
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<ListTag
+    class:list={classList}
+    {...attributes}
+>
+    {
+        list.map((item) => (
+            <li>
+                <Fragment set:html={item.html} />
+                {item.children?.length && (
+                    <Astro.self
+                        list={item.children}
+                        tag={item.childrenTag ?? ListTag}
+                    />
+                )}
+            </li>
+        ))
+    }
+</ListTag>

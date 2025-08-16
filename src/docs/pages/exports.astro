@@ -1,0 +1,71 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+import { getCollection } from 'astro:content';
+import * as YAML from 'yaml';
+
+import { absoluteInternalURL } from '../../astro/functions';
+import { CollectionTree } from '../../ts/typedoc/02-classes/CollectionTree.js';
+
+/* import - values */
+
+/* import - components */
+import NestedList from '../../astro/components/NestedList.astro';
+import ToggleDump from '../components/ToggleDump.astro';
+
+/* import - layouts */
+import DocsPage from '../layouts/DocsPage.astro';
+import type { ArrayItem } from '@maddimathon/utility-typescript/types';
+
+/* TYPES ===================================== */
+
+/* FUNCTIONS ===================================== */
+
+/* CONSTANTS ===================================== */
+
+const rawCollection = await getCollection('exports');
+
+const collectionTree = new CollectionTree(
+    rawCollection.map(
+        (_page) =>
+            ({
+                ..._page,
+                href: absoluteInternalURL(Astro.url, `exports/${_page.id}`),
+            }) as const satisfies ArrayItem<typeof rawCollection> & {
+                href: string;
+            }
+    )
+);
+---
+
+<DocsPage title='Exports'>
+    <ToggleDump title='NestedList — collectionTree.exportList()'>
+        <NestedList list={Object.values(collectionTree.exportList())} />
+    </ToggleDump>
+    <hr />
+    <ToggleDump
+        title='collectionTree.exportMap()'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.exportMap())}
+    />
+    <hr />
+    <ToggleDump
+        title='collectionTree.map'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.map)}
+    />
+    <hr />
+    <ToggleDump
+        title='collectionTree.pages'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.pages)}
+    />
+    <hr />
+</DocsPage>

@@ -1,13 +1,13 @@
 ---
 /**
  * @since ___PKG_VERSION___
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
 import type { Props as CodeBlockProps } from './CodeBlock.d.ts';
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
 
@@ -18,13 +18,13 @@ import { Prism } from '@astrojs/prism';
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
+export type * from './CodeBlock.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<CodeBlockProps, "pre">;
+export type Props = GenericElementProps<CodeBlockProps, 'pre'>;
 
 const {
     children,
@@ -33,15 +33,31 @@ const {
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
-
 /* CONSTANTS ===================================== */
 
-const codeHTML: string = typeof children === 'string' ? children : await Astro.slots.render( 'default' ) || '';
-
+const codeHTML: string =
+    typeof children === 'string'
+        ? children
+        : (await Astro.slots.render('default')) || '';
 ---
 
-{ codeHTML && ( lang ? (
-    <Prism code={codeHTML} lang={lang} class={ Array.isArray( classList ) ? classList.join(' ') : classList } {...attributes} />
-) : (
-    <pre class:list={classList} {...attributes}><code set:text={codeHTML} /></pre>
-) ) }
+{
+    codeHTML &&
+        (lang ? (
+            <Prism
+                code={codeHTML}
+                lang={lang}
+                class={
+                    Array.isArray(classList) ? classList.join(' ') : classList
+                }
+                {...attributes}
+            />
+        ) : (
+            <pre
+                class:list={classList}
+                {...attributes}
+            >
+                <code set:text={codeHTML} />
+            </pre>
+        ))
+}

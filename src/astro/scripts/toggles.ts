@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import { ElementToggle } from '../../ts/classes/ElementToggle.js';
+import { ElementToggle } from '../../ts/02-classes/ElementToggle.js';
 
 window.addEventListener( 'load', () => {
     const containers = document.querySelectorAll( '[data-toggle-container]' ) as NodeListOf<HTMLDivElement>;

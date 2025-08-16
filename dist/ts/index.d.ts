@@ -19,7 +19,8 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
-export type * from './types/index.js';
-export * from './classes/index.js';
-export * from './functions/index.js';
+export * from './00-types/index.js';
+export * from './01-functions/index.js';
+export * from './02-classes/index.js';
+export * as typedoc from './typedoc/index.js';
 //# sourceMappingURL=index.d.ts.map

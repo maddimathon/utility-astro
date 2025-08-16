@@ -1,7 +1,7 @@
-/// 
+///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since ___PKG_VERSION___
-/// 
+///
 // @use 'sass:color';
 // @use 'sass:list';
 // @use 'sass:map';
@@ -12,10 +12,7 @@
 
 @forward '_header';
 
-
-
 /** # Blocks - Toggles ==================================== **/
-
 
 [data-toggle-container] {
     display: grid;
@@ -25,7 +22,7 @@
     align-items: start;
 
     margin: 0;
-  
+
     z-index: 1;
 }
 
@@ -51,7 +48,7 @@
 
     cursor: text;
 }
-  
+
 .toggle-icon {
     display: none;
 }
@@ -64,7 +61,6 @@
     grid-column: 1 / -1;
     grid-row: 2 / 2;
 
-
     /// BLOCK ///
 
     > .container {
@@ -73,11 +69,9 @@
     }
 }
 
-
 /** ## Opening & Closing ------------------ **/
 
 [data-toggle-container] {
-
     [data-toggle-control] {
         cursor: pointer;
     }
@@ -91,12 +85,12 @@
         > svg {
             display: block;
             position: relative;
-            
+
             height: 1.125em;
             width: auto;
 
             stroke: currentColor;
-            stroke-width: max( 0.1875em, 1px );
+            stroke-width: max(0.1875em, 1px);
             fill: none;
         }
     }
@@ -116,10 +110,17 @@
     }
 }
 
-[data-toggle-container=closed] {
+[data-toggle-container='closed'] {
 }
 
-[data-toggle-container=open] {
+[data-toggle-container='open'] {
+    .toggle-icon {
+        > svg {
+            #b {
+                opacity: 0;
+            }
+        }
+    }
 
     > [data-toggle-content] {
         grid-template-rows: 1fr;
@@ -131,8 +132,7 @@
     }
 }
 
-[data-toggle-container=closing] {
-
+[data-toggle-container='closing'] {
     > [data-toggle-content] {
         grid-template-rows: 0fr;
 

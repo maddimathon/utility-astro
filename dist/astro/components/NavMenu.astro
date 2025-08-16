@@ -1,38 +1,36 @@
 ---
 /**
  * @since 0.1.0-alpha.draft
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
 import type { ArrayItem } from '@maddimathon/utility-typescript/types';
-import type { GenericElementProps } from '../../ts/types/index.ts';
+import type { GenericElementProps } from '../../ts/00-types/index.ts';
 import type { MenuItem } from './MenuList.d.ts';
 import type { Props as NavMenuProps } from './NavMenu.d.ts';
 
 /* import - functions */
 import { escRegExp } from '@maddimathon/utility-typescript/functions';
-import { escRegExpURL } from '../../ts/functions/index.js';
+import { escRegExpURL } from '../../ts/01-functions/index.js';
 import { absoluteInternalURL } from '../functions/index.js';
 
 /* import - values */
-import {
-    site as config_site,
-} from 'astro:config/client';
+import { site as config_site } from 'astro:config/client';
 
 /* import - components */
 import MenuList from './MenuList.astro';
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
+export type * from './NavMenu.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<NavMenuProps, "nav">;
+export type Props = GenericElementProps<NavMenuProps, 'nav'>;
 
 const {
     id,
@@ -41,56 +39,57 @@ const {
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
-
 /* FUNCTIONS ===================================== */
 
 /**
  * The strings representing this page (used to check for current status).
  */
 const parseMenuItem_thisPage = {
-
     object: new RegExp(
         `^(${escRegExpURL(
             Astro.url.toString().replace(/\/$/gi, '/')
         )}|${escRegExpURL(
-            config_site + absoluteInternalURL( Astro.url, Astro.url.pathname ).replace(/\/$/gi, '/')
+            config_site +
+                absoluteInternalURL(Astro.url, Astro.url.pathname).replace(
+                    /\/$/gi,
+                    '/'
+                )
         )})\/?$`,
         'gi'
     ),
 
     string: new RegExp(
         `^(${escRegExp(
-            absoluteInternalURL( Astro.url, Astro.url.pathname )
+            absoluteInternalURL(Astro.url, Astro.url.pathname)
         )})\/?$`,
         'gi'
     ),
 };
 
 /**
- * Converts an item input to the nav params to one for the 
+ * Converts an item input to the nav params to one for the
  * @param item Menu item to convert.
  */
-function parseMenuItem( item: ArrayItem<NavMenuProps['menu']> ): MenuItem {
-
+function parseMenuItem(item: ArrayItem<NavMenuProps['menu']>): MenuItem {
     let current: boolean = item.current ?? false;
-    
-    let href: MenuItem['href'];
-    
-    switch ( typeof item.href ) {
 
+    let href: MenuItem['href'];
+
+    switch (typeof item.href) {
         case 'object':
             href = item.href.toString();
 
-            current = current || href.match( parseMenuItem_thisPage.object ) !== null;
+            current =
+                current || href.match(parseMenuItem_thisPage.object) !== null;
             break;
 
         case 'string':
-            href =
-                item.href.match(/^(\.|\/|[a-z]+:\/\/)/)
+            href = item.href.match(/^(\.|\/|[a-z]+:\/\/)/)
                 ? item.href
-                : absoluteInternalURL( Astro.url, item.href );
+                : absoluteInternalURL(Astro.url, item.href);
 
-            current = current || href.match( parseMenuItem_thisPage.string ) !== null;
+            current =
+                current || href.match(parseMenuItem_thisPage.string) !== null;
             break;
 
         default:
@@ -100,8 +99,8 @@ function parseMenuItem( item: ArrayItem<NavMenuProps['menu']> ): MenuItem {
 
     let child: MenuItem['child'];
 
-    if ( item.child?.length ) {
-        child = item.child.map( parseMenuItem );
+    if (item.child?.length) {
+        child = item.child.map(parseMenuItem);
     }
 
     return {
@@ -112,18 +111,16 @@ function parseMenuItem( item: ArrayItem<NavMenuProps['menu']> ): MenuItem {
     };
 }
 
-
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map( parseMenuItem );
-
+const parsedMenu = menu.map(parseMenuItem);
 ---
 
 <nav
     {...attributes}
     id={id}
     class:list={classList}
-    role="navigation"
+    role='navigation'
 >
     <MenuList menu={parsedMenu} />
 </nav>

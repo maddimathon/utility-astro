@@ -17,7 +17,7 @@ import {
     mergeArgs,
 } from '@maddimathon/utility-typescript/functions';
 import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
-import type { Props as PageProps } from './Page.d.ts';
+import type { Props } from './Page.d.ts';
 
 /* import - components */
 import Page_Meta from '../components/Page_Meta.astro';
@@ -28,7 +28,8 @@ import SettingsMenu from '../components/SettingsMenu.astro';
 
 /** ## PROPS ==================================== **/
 
-export type Props = PageProps;
+export type { Props };
+export type * from './Page.d.ts';
 
 const p: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -81,7 +82,7 @@ if ( p.secondaryMenu ) {
 const support = mergeArgs(
     {
         settings: true,
-    } as Required<Required<PageProps>['support']>,
+    } as Required<Required<Props>['support']>,
     p.support,
 );
 

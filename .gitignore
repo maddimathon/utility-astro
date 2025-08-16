@@ -28,6 +28,7 @@ dist/**/*.test.js
 
 # SRC
 # === #
+src/docs/content/exports
 src/docs/css
 src/tmp
 

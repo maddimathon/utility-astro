@@ -10,8 +10,6 @@
 
 import type { Props as CodeBlockProps } from './CodeBlock.d.ts';
 
-import { VariableInspector } from '@maddimathon/utility-typescript/classes';
-
 /**
  * Input props for the VariableDump component.
  * 

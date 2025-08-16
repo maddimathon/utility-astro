@@ -1,7 +1,7 @@
 ---
 /**
  * @since ___PKG_VERSION___
- * 
+ *
  * @packageDocumentation
  */
 
@@ -13,9 +13,8 @@ import {
     arrayUnique,
     mergeArgs,
 } from '@maddimathon/utility-typescript/functions';
-import {
-    absoluteInternalURL,
-} from '../../astro/functions/index.js';
+
+import { absoluteInternalURL } from '../../astro/functions/index.js';
 
 /* import - values */
 import '../css/main.css';
@@ -25,9 +24,7 @@ import '../css/main.css';
 /* import - layouts */
 import LibPage from '../../astro/layouts/Page.astro';
 
-
 /* TYPES ===================================== */
-
 
 /* PROPS ===================================== */
 
@@ -35,79 +32,117 @@ export interface Props extends Partial<LibPageProps> {}
 
 const inputs: Props = Astro.props.frontmatter ?? Astro.props;
 
-const props: Props & LibPageProps = mergeArgs( {
+const props: Props & LibPageProps = mergeArgs(
+    {
+        title: 'Utility Astro',
 
-    title: 'Utility Astro',
-
-    footer: {
-
-        copyright: {
-            html: (
-                '<a href="https://www.maddimathon.com">Maddi Mathon</a>'
-                + ' | '
-                + '<a href="' + absoluteInternalURL( Astro.url, 'license' ) + '">MIT license</a>'
-            ),
-            // owner: 'Maddi Mathon',
-            year: 2025,
+        footer: {
+            copyright: {
+                html:
+                    '<a href="https://www.maddimathon.com">Maddi Mathon</a>' +
+                    ' | ' +
+                    '<a href="' +
+                    absoluteInternalURL(Astro.url, 'license') +
+                    '">MIT license</a>',
+                // owner: 'Maddi Mathon',
+                year: 2025,
+            },
         },
-    },
-    
-    meta: {
 
-        title: arrayUnique( [
-            ...(
-                inputs.title?.length
-                ? ( Array.isArray( inputs.title ) ? inputs.title : [ inputs.title ] )
-                : []
-            ),
-            'Utility Astro',
-        ] ).join( ' — ' ),
-    },
+        meta: {
+            title: arrayUnique([
+                ...(inputs.title?.length
+                    ? Array.isArray(inputs.title)
+                        ? inputs.title
+                        : [inputs.title]
+                    : []),
+                'Utility Astro',
+            ]).join(' — '),
+        },
 
-    // skipLinks: [
-    // ],
-    
-} as Props & LibPageProps, inputs, true );
-
+        // skipLinks: [
+        // ],
+    } as Props & LibPageProps,
+    inputs,
+    true
+);
 
 /* CONSTANTS ===================================== */
 
 props.primaryMenu = [
     { label: 'Home', href: '' },
-    { label: 'Components', child: [
-        { label: 'Toggle', href: 'components/toggle' },
-    ] },
-    { label: 'SCSS', child: [
-        { label: 'HTML', href: 'scss/html' },
-    ] },
+    { label: 'Exports', href: 'exports' },
+    // { label: 'Components', child: [
+    //     { label: 'Toggle', href: 'components/toggle' },
+    // ] },
+    { label: 'SCSS', child: [{ label: 'HTML', href: 'scss/html' }] },
 ];
-
 ---
 
-<LibPage { ...props } accessibilityReportEmail="test@email.ca">
+<LibPage
+    {...props}
+    accessibilityReportEmail='test@email.ca'
+>
+    <slot
+        name='head-open'
+        slot='head-open'
+    />
 
-    <slot name="head-open" slot="head-open" />
+    <meta
+        slot='head-close'
+        name='color-scheme'
+        content='dark light'
+    />
 
-    <meta slot="head-close" name="color-scheme" content="dark light" />
-    
-    <slot name="head-close" slot="head-close" />
-    
-    <slot name="body-open" slot="body-open" />
+    <slot
+        name='head-close'
+        slot='head-close'
+    />
 
-    <p slot="settings-menu-open" class="website-settings__disclaimer">These settings are saved using browser cookies.</p>
-    
-    <slot name="before-header" slot="before-header" />
-    <slot name="header" slot="header" />
-    <slot name="after-header" slot="after-header" />
-    
+    <slot
+        name='body-open'
+        slot='body-open'
+    />
+
+    <p
+        slot='settings-menu-open'
+        class='website-settings__disclaimer'
+    >
+        These settings are saved using browser cookies.
+    </p>
+
+    <slot
+        name='before-header'
+        slot='before-header'
+    />
+    <slot
+        name='header'
+        slot='header'
+    />
+    <slot
+        name='after-header'
+        slot='after-header'
+    />
+
     <slot />
-    
-    <slot name="before-footer" slot="before-footer" />
-    <slot name="footer" slot="footer" />
-    <slot name="after-footer" slot="after-footer" />
-    
-    <slot name="body-close" slot="body-close" />
 
-    <slot name="footer-scripts" />
+    <slot
+        name='before-footer'
+        slot='before-footer'
+    />
+    <slot
+        name='footer'
+        slot='footer'
+    />
+    <slot
+        name='after-footer'
+        slot='after-footer'
+    />
 
+    <slot
+        name='body-close'
+        slot='body-close'
+    />
+
+    <slot name='footer-scripts' />
 </LibPage>

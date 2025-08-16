@@ -1,0 +1,71 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as CodeBlockProps } from '../../astro/components/CodeBlock.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import CodeBlock from '../../astro/components/CodeBlock.astro';
+import Toggle from '../../astro/components/Toggle.astro';
+import { slugify } from '@maddimathon/utility-typescript/functions';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export type Props_Inner = {
+    title: string;
+
+    code?: string;
+
+    heading?: number;
+    lang?: Required<CodeBlockProps>['lang'];
+};
+
+export type Props = GenericElementProps<Props_Inner, 'div'>;
+
+const {
+    lang,
+    code,
+    title,
+
+    heading = 2,
+} = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const html: string = (await Astro.slots.render('default')) || '';
+
+const id = slugify(`toggle-dump-${title}`);
+---
+
+<Toggle
+    id={id}
+    heading={heading}
+>
+    <Fragment
+        slot='button'
+        set:text={title}
+    />
+    {
+        code ? (
+            <CodeBlock
+                lang={lang}
+                children={code.trim()}
+            />
+        ) : (
+            <Fragment set:html={html.trim()} />
+        )
+    }
+</Toggle>

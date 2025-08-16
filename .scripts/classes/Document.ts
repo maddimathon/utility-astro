@@ -22,12 +22,13 @@ export class Document extends DocumentStage {
     /**
      * Paths to typedoc outputs.
      */
-    static readonly typeDoc = {
-        json: './src/tmp/typedoc.json',
+    static readonly typeDoc_paths = {
+        json: './src/docs/content/typedoc.json',
+        md: './src/docs/content/exports',
     };
 
     override readonly subStages: Stage.SubStage.Document[] = [
-        // 'typeDoc',
+        'typeDoc',
         // 'collect' as Stage.SubStage.Document,
         'scss' as Stage.SubStage.Document,
         'astro' as Stage.SubStage.Document,
@@ -37,22 +38,45 @@ export class Document extends DocumentStage {
 
     protected override async typeDoc() {
         this.fs.delete( [
-            Document.typeDoc.json,
+            Document.typeDoc_paths.json,
+            Document.typeDoc_paths.md,
         ], 1 );
 
         await super.typeDoc();
+
+
+        this.console.verbose( 'making replacements in markdown...', 2 );
+        const replacePaths = [
+            Document.typeDoc_paths.json,
+            Document.typeDoc_paths.md + '/**/*',
+        ];
+
+        this.replaceInFiles( replacePaths, 'current', this.params.verbose ? 3 : 2 );
+        this.replaceInFiles( replacePaths, 'package', this.params.verbose ? 3 : 2 );
+
+        this.console.verbose( 'replacing markdown paths...', 2 );
+        this.fs.replaceInFiles( replacePaths, [
+            [ /(?<=\[[^\]]+\]\([^\)]+)\.md\)/gi, '.html)' ],
+        ], this.params.verbose ? 3 : 2 );
+
+
+        this.console.verbose( 'tidying up...', 2 );
+        this.fs.delete( [
+            Document.typeDoc_paths.md + '/.nojekyll',
+            Document.typeDoc_paths.md + '/index.md',
+        ], 1 );
     }
 
     protected async collect() {
         this.console.progress( 'converting typeDoc export to content collection...', 1 );
 
         // returns
-        if ( !this.fs.exists( Document.typeDoc.json ) ) {
+        if ( !this.fs.exists( Document.typeDoc_paths.json ) ) {
             this.console.progress( 'no typeDoc json export was found, exiting...', 2, { bold: true, clr: 'red', } );
             return;
         }
 
-        const jsonFile = this.fs.readFile( Document.typeDoc.json );
+        const jsonFile = this.fs.readFile( Document.typeDoc_paths.json );
 
         const json = JSON.parse( jsonFile ) as TypeDocJson.ProjectReflection;
 
