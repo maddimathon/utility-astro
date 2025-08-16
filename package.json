@@ -209,7 +209,7 @@
         "@astrojs/prism": "^3.3.0",
         "@maddimathon/utility-sass": "file:../utility-sass",
         "@maddimathon/utility-typescript": "2.0.0-beta",
-        "astro": "^5.10.1",
+        "astro": "^5.12.8",
         "luxon": "^3.6.1",
         "sass": "^1.89.2",
         "zod": "^3.25.67"
