@@ -24,5 +24,3 @@ export * from './00-types/index.js';
 
 export * from './01-functions/index.js';
 export * from './02-classes/index.js';
-
-export * as typedoc from './typedoc/index.js';

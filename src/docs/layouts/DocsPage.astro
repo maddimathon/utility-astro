@@ -71,10 +71,22 @@ const props: Props & LibPageProps = mergeArgs(
 
 props.primaryMenu = [
     { label: 'Home', href: '' },
-    { label: 'JS Docs', href: 'api' },
-    // { label: 'Components', child: [
-    //     { label: 'Toggle', href: 'components/toggle' },
-    // ] },
+    {
+        label: 'Astro',
+        child: [
+            {
+                label: 'Components',
+                child: [{ label: 'Toggle', href: 'components/toggle' }],
+            },
+            {
+                label: 'Layouts',
+                href: 'layouts',
+                child: [
+                    { label: 'Content-Only', href: 'layouts/content-only' },
+                ],
+            },
+        ],
+    },
     { label: 'SCSS', child: [{ label: 'HTML', href: 'scss/html' }] },
 ];
 ---

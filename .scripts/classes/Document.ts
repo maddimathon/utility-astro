@@ -5,14 +5,10 @@
  * @license MIT
  */
 
-import type { TypeDocJson } from './lib/Collection.js';
-
 import {
     type Stage,
     DocumentStage,
 } from '@maddimathon/build-utilities';
-
-import { Collection } from './lib/Collection.js';
 
 /**
  * Extension of the built-in one.
@@ -28,8 +24,7 @@ export class Document extends DocumentStage {
     };
 
     override readonly subStages: Stage.SubStage.Document[] = [
-        'typeDoc',
-        // 'collect' as Stage.SubStage.Document,
+        // 'typeDoc',
         'scss' as Stage.SubStage.Document,
         'astro' as Stage.SubStage.Document,
         'replace',
@@ -65,36 +60,6 @@ export class Document extends DocumentStage {
             Document.typeDoc_paths.md + '/.nojekyll',
             Document.typeDoc_paths.md + '/index.md',
         ], 1 );
-    }
-
-    protected async collect() {
-        this.console.progress( 'converting typeDoc export to content collection...', 1 );
-
-        // returns
-        if ( !this.fs.exists( Document.typeDoc_paths.json ) ) {
-            this.console.progress( 'no typeDoc json export was found, exiting...', 2, { bold: true, clr: 'red', } );
-            return;
-        }
-
-        const jsonFile = this.fs.readFile( Document.typeDoc_paths.json );
-
-        const json = JSON.parse( jsonFile ) as TypeDocJson.ProjectReflection;
-
-
-        this.console.verbose( 'creating object...', 2 );
-        const collection = new Collection( json );
-
-
-        this.console.verbose( 'writing content collection...', 2 );
-        this.try(
-            this.fs.write,
-            this.params.verbose ? 2 : 1,
-            [
-                'src/docs/content/typedoc/typedoc.json',
-                JSON.stringify( collection, null, 4 ),
-                { force: true }
-            ]
-        );
     }
 
     protected async scss() {

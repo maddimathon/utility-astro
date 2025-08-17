@@ -58,55 +58,7 @@ const config = {
 
         compile: Compile,
 
-        document: [
-            Document,
-            {
-
-                entryPoints: [
-                    'src/ts/typedoc/docs-test/index.ts',
-                    'src/ts/typedoc/docs-test/module-example.ts',
-                    // 'src/ts/index.ts',
-                    // 'src/astro/components/docs.d.ts',
-                    // 'src/astro/layouts/docs.d.ts',
-                ],
-
-                typeDoc: {
-                    categorizeByGroup: false,
-                    excludeExternals: true,
-
-                    projectDocuments: [],
-
-                    // @ts-expect-error - this is a typedoc-plugin-markdown prop
-                    entryFileName: 'index',
-                    hideBreadcrumbs: true,
-                    hidePageHeader: true,
-                    hidePageTitle: true,
-
-                    sanitizeComments: true,
-                    useCodeBlocks: true,
-                    useHTMLEncodedBrackets: true,
-
-
-                    // json: Document.typeDoc_paths.json,
-                    out: Document.typeDoc_paths.md,
-
-                    plugin: [
-                        'typedoc-plugin-markdown',
-                        './dist/ts/typedoc/plugins/MarkdownExport.example.js',
-                    ],
-
-                    tsconfig: 'tsconfig.json',
-
-                    compilerOptions: {
-                        plugins: [
-                            {
-                                name: '@astrojs/ts-plugin',
-                            },
-                        ],
-                    },
-                },
-            }
-        ],
+        document: Document,
 
         test: false,
     },

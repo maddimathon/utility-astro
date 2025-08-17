@@ -17,7 +17,6 @@ import type { GenericProps } from '../../ts/00-types/index.js';
 
 /* import - components */
 import CodeBlock from './CodeBlock.astro';
-import Toggle from './Toggle.astro';
 
 /* import - layouts */
 
@@ -72,12 +71,28 @@ const {
     // minimum,
 } = mode;
 
----
+const code = {
 
-{ library && (
-    <Toggle id="test-toggle"><p>Boo!</p></Toggle>
-    <Toggle id="test-heading-toggle" heading={2}><p>Boo!</p></Toggle>
-) }
+    html: [
+        '<p id="title" class="title">Title Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        // '<p id="heading-1" class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-2" class="h2">Heading 2 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-3" class="h3">Heading 3 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-4" class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-5" class="h5">Heading 5 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-6" class="h6">Heading 6 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+    ].join('\n'),
+
+    php:[
+        '$say_hi = true;',
+        '',
+        'if ( $say_hi ) {',
+        '    echo \'Hello World!\';',
+        '}',
+    ].join('\n'),
+};
+
+---
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</p>
 <h2 id="suspendisse-potenti-ex">Suspendisse Potenti <a href="#">ex</a></h2>
@@ -164,44 +179,11 @@ const {
 ) }
 
 { library ? (
-
-    <CodeBlock lang="php" children={[
-        '$say_hi = true;',
-        '',
-        'if ( $say_hi ) {',
-        '    echo \'Hello World!\';',
-        '}',
-    ].join('\n')} />
-
-    <CodeBlock children={[
-        '<p id="title" class="title">Title Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        // '<p id="heading-1" class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-2" class="h2">Heading 2 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-3" class="h3">Heading 3 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-4" class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-5" class="h5">Heading 5 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-6" class="h6">Heading 6 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-    ].join('\n')} />
-    
+    <CodeBlock lang="php" children={code.php} />
+    <CodeBlock lang="html" children={code.html} />
 ) : fancy && (
-
-    <pre><code set:text={[
-        '$say_hi = true;',
-        '',
-        'if ( $say_hi ) {',
-        '    echo \'Hello World!\';',
-        '}',
-    ].join('\n')} /></pre>
-
-    <pre><code set:text={[
-        '<p id="title" class="title">Title Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        // '<p id="heading-1" class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-2" class="h2">Heading 2 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-3" class="h3">Heading 3 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-4" class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-5" class="h5">Heading 5 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-6" class="h6">Heading 6 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-    ].join('\n')} /></pre>
+    <pre><code set:text={code.php} /></pre>
+    <pre><code set:text={code.html} /></pre>
 ) }
 
 <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue. Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.</p>
