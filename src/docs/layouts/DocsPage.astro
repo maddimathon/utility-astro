@@ -71,7 +71,7 @@ const props: Props & LibPageProps = mergeArgs(
 
 props.primaryMenu = [
     { label: 'Home', href: '' },
-    { label: 'Exports', href: 'exports' },
+    { label: 'JS Docs', href: 'api' },
     // { label: 'Components', child: [
     //     { label: 'Toggle', href: 'components/toggle' },
     // ] },
@@ -81,7 +81,7 @@ props.primaryMenu = [
 
 <LibPage
     {...props}
-    accessibilityReportEmail='test@email.ca'
+    accessibilityReportEmail={undefined}
 >
     <slot
         name='head-open'

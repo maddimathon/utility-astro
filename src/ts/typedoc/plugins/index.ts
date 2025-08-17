@@ -8,5 +8,4 @@
  * @license MIT
  */
 
-export * from './JsonExport.js';
 export * from './MarkdownExport.js';

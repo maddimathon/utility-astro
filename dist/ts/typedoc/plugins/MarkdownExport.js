@@ -11,6 +11,7 @@
 //     arrayUnique,
 // } from '@maddimathon/utility-typescript/functions';
 import * as YAML from 'yaml';
+import * as z from 'zod';
 import { parseCommentDisplayPart, parseKind, } from '../01-functions/index.js';
 /**
  * Creates custom markdown export to work with the documentation components in
@@ -36,23 +37,6 @@ export class MarkdownExport {
         this.getMarkdownFrontmatterString = this.getMarkdownFrontmatterString.bind(this);
         this.getPageMetadata = this.getPageMetadata.bind(this);
         this.getReflectionMetadata = this.getReflectionMetadata.bind(this);
-        // const propNames = arrayUnique(
-        //     Object.getOwnPropertyNames( MarkdownExport.prototype )
-        //         .concat( Object.getOwnPropertyNames( this.constructor.prototype ) )
-        // ) as ( keyof MarkdownExport<T_ReflectionMetadata,T_PageMetadata> | "constructor" )[];
-        // for ( const _name of propNames ) {
-        //     // continues on match
-        //     switch ( _name ) {
-        //         case 'constructor':
-        //             continue;
-        //     }
-        //     // continues
-        //     if ( typeof this[ _name ] !== 'function' ) {
-        //         continue;
-        //     }
-        //     // @ts-expect-error
-        //     this[ _name ] = this[ _name ].bind( this );
-        // }
     }
     /**
      * Creates a valid YAML string to insert at the beginning of the file.
@@ -70,43 +54,9 @@ export class MarkdownExport {
      * @since 0.1.0-alpha.draft
      */
     getPageMetadata(page) {
-        const flags = {
-            abstract: page.model.flags.isAbstract || undefined,
-            const: page.model.flags.isConst || undefined,
-            external: page.model.flags.isExternal || undefined,
-            inherited: page.model.flags.isInherited || undefined,
-            optional: page.model.flags.isOptional || undefined,
-            private: page.model.flags.isPrivate || undefined,
-            protected: page.model.flags.isProtected || undefined,
-            public: page.model.flags.isPublic || undefined,
-            readonly: page.model.flags.isReadonly || undefined,
-            rest: page.model.flags.isRest || undefined,
-            static: page.model.flags.isStatic || undefined,
-            experimental: undefined,
-        };
-        const modifierTags = Array.from(page.model.comment?.modifierTags ?? []);
-        for (const _tag of modifierTags) {
-            switch (_tag) {
-                case '@experimental':
-                    flags.experimental = true;
-                    break;
-            }
-        }
-        const blockTags = Array.from(page.model.comment?.blockTags ?? []).map(_tag => ({
-            tag: _tag.tag,
-            content: parseCommentDisplayPart(_tag.content),
-            name: _tag.name,
-        }));
         return {
             ...page.frontmatter,
-            ...this.getReflectionMetadata(page.model),
-            fullName: page.model.getFriendlyFullName(),
             customSlug: page.url.toLowerCase().replace(/\.md$/gi, '') || undefined,
-            splitName: page.model.getFullName('❖').split('❖'),
-            flags: Object.values(flags).some((_val) => _val) ? flags : undefined,
-            // comment: page.model.comment,
-            modifierTags: modifierTags.length ? modifierTags : undefined,
-            blockTags: blockTags.length ? blockTags : undefined,
             pageSections: page.pageSections.map(_sec => ({
                 title: _sec.title,
                 headings: _sec.headings.map(_hdg => ({
@@ -117,6 +67,7 @@ export class MarkdownExport {
                     classes: _hdg.classes,
                 })),
             })),
+            reflect: this.getReflectionMetadata(page.model),
         };
     }
     /**
@@ -124,16 +75,50 @@ export class MarkdownExport {
      *
      * @since 0.1.0-alpha.draft
      */
-    getReflectionMetadata(reflect, __isRecursiveCall = false) {
+    getReflectionMetadata(reflect) {
         let parent;
         if (reflect.parent && parseKind(reflect.parent.kind) !== 'Project') {
-            parent = this.getReflectionMetadata(reflect.parent, true);
+            parent = reflect.parent.id;
+        }
+        const flags = {
+            abstract: reflect.flags.isAbstract || undefined,
+            const: reflect.flags.isConst || undefined,
+            external: reflect.flags.isExternal || undefined,
+            inherited: reflect.flags.isInherited || undefined,
+            optional: reflect.flags.isOptional || undefined,
+            private: reflect.flags.isPrivate || undefined,
+            protected: reflect.flags.isProtected || undefined,
+            public: reflect.flags.isPublic || undefined,
+            readonly: reflect.flags.isReadonly || undefined,
+            rest: reflect.flags.isRest || undefined,
+            static: reflect.flags.isStatic || undefined,
+            experimental: undefined,
+        };
+        const blockTags = Array.from(reflect.comment?.blockTags ?? []).map(_tag => ({
+            tag: _tag.tag,
+            content: parseCommentDisplayPart(_tag.content),
+            name: _tag.name,
+        }));
+        const modifierTags = Array.from(reflect.comment?.modifierTags ?? []);
+        for (const _tag of modifierTags) {
+            switch (_tag) {
+                case '@experimental':
+                    flags.experimental = true;
+                    break;
+            }
         }
         return {
             name: reflect.name,
             kind: parseKind(reflect.kind),
             typeDocId: reflect.id,
             parent,
+            fullName: reflect.getFriendlyFullName(),
+            splitName: reflect.getFullName('❖').split('❖'),
+            flags: Object.values(flags).some((_val) => _val) ? flags : undefined,
+            blockTags: blockTags.length ? blockTags : undefined,
+            modifierTags: modifierTags.length ? modifierTags : undefined,
+            data: {},
+            // FIXME - typing issue with generics
         };
     }
 }

@@ -7,5 +7,5 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
-export * from './classes/index.js';
+export * from './Schemata.js';
 //# sourceMappingURL=index.d.ts.map

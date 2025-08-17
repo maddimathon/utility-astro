@@ -1,0 +1,95 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+import { getCollection, render } from 'astro:content';
+import * as YAML from 'yaml';
+
+import { Project } from '../../../ts/typedoc/index.js';
+
+/* import - values */
+
+/* import - components */
+import ToggleDump from '../../components/ToggleDump.astro';
+
+/* import - layouts */
+import DocsPage from '../../layouts/DocsPage.astro';
+import { typedoc } from 'src/ts';
+
+/* TYPES ===================================== */
+
+/* EXPORT PATHS ===================================== */
+
+export async function getStaticPaths() {
+    const posts = await getCollection('api');
+
+    const project = new Project(posts);
+
+    return posts.map((_post) => {
+        // const html = _post.rendered?.html?.replace(
+        //     /(?<= href="[^"]+)\.md"/g,
+        //     '.html"'
+        // );
+
+        return {
+            params: { id: _post.id },
+            props: {
+                ..._post,
+                title: _post.data.reflect.name,
+                project,
+                // html,
+            },
+        };
+    });
+}
+
+/* CONSTANTS ===================================== */
+
+const props = Astro.props;
+
+const { Content } = await render(props);
+
+const title = props.title;
+
+const varDump_props = {
+    id: props.id,
+    title: props.title,
+    filePath: props.filePath,
+    data: props.data,
+    collection: props.collection,
+};
+
+const testPageObj = new typedoc.Project_Page({
+    ...varDump_props.data,
+    reflect: typedoc.Project_Reflection.make(varDump_props.data.reflect, true),
+});
+---
+
+<DocsPage title={title}>
+    <ToggleDump
+        title='props'
+        lang='yaml'
+        code={YAML.stringify(varDump_props)}
+    />
+    <hr />
+
+    <ToggleDump
+        title='testPageObj'
+        lang='yaml'
+        code={YAML.stringify(testPageObj)}
+    />
+    <hr />
+
+    <h1 set:html={title} />
+    <!-- <Fragment set:html={props.html} /> -->
+
+    <!-- <hr /> -->
+
+    <Content />
+</DocsPage>

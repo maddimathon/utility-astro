@@ -24,7 +24,7 @@ export class Document extends DocumentStage {
      */
     static readonly typeDoc_paths = {
         json: './src/docs/content/typedoc.json',
-        md: './src/docs/content/exports',
+        md: './src/docs/content/api',
     };
 
     override readonly subStages: Stage.SubStage.Document[] = [

@@ -8,4 +8,4 @@
  * @license MIT
  */
 
-export * from './classes/index.js';
+export * from './Schemata.js';

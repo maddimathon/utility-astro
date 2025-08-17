@@ -7,10 +7,11 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
-import type { Reflection } from 'typedoc';
+import type * as typedoc from 'typedoc';
 import type { MarkdownApplication } from 'typedoc-plugin-markdown';
 type MarkdownPluginParams = Parameters<Parameters<MarkdownApplication['renderer']['markdownHooks']['on']>[1]>;
 type MarkdownThemeContext = Omit<MarkdownPluginParams[0], "packagesMetaData">;
+import * as z from 'zod';
 import type { Schemata } from '../00-types/index.js';
 /**
  * Creates custom markdown export to work with the documentation components in
@@ -29,14 +30,14 @@ import type { Schemata } from '../00-types/index.js';
  *
  * @since 0.1.0-alpha.draft
  */
-export declare class MarkdownExport<T_ReflectionMetadata extends typeof Schemata.Default.Metadata.REFLECTION, T_PageMetadata extends T_ReflectionMetadata & typeof Schemata.Default.Metadata.REFLECTION> {
+export declare class MarkdownExport<T_Reflection extends Schemata.Reflection.Any, T_Page extends Schemata.Page.Any> {
     protected readonly schemata: {
-        page: T_PageMetadata;
-        reflection: T_ReflectionMetadata;
+        page: z.ZodType<T_Page>;
+        reflection: z.ZodType<T_Reflection>;
     };
     constructor(schemata: {
-        page: T_PageMetadata;
-        reflection: T_ReflectionMetadata;
+        page: z.ZodType<T_Page>;
+        reflection: z.ZodType<T_Reflection>;
     });
     /**
      * Creates a valid YAML string to insert at the beginning of the file.
@@ -49,20 +50,13 @@ export declare class MarkdownExport<T_ReflectionMetadata extends typeof Schemata
      *
      * @since 0.1.0-alpha.draft
      */
-    getPageMetadata(page: MarkdownThemeContext['page']): Schemata.Default.Metadata.Page;
+    getPageMetadata(page: MarkdownThemeContext['page']): Schemata.PageGeneric<T_Reflection>;
     /**
      * Basic data for the given reflection.
      *
      * @since 0.1.0-alpha.draft
      */
-    getReflectionMetadata(reflect: Reflection, __isRecursiveCall?: boolean): Schemata.Default.Metadata.Reflection;
-}
-/**
- * Support utilities for the {@link MarkdownExport} class.
- *
- * @since 0.1.0-alpha.draft
- */
-export declare namespace MarkdownExport {
+    getReflectionMetadata(reflect: typedoc.Reflection): T_Reflection;
 }
 export {};
 //# sourceMappingURL=MarkdownExport.d.ts.map

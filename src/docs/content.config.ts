@@ -9,11 +9,9 @@ import { glob } from 'astro/loaders';
 
 import * as typedoc from '../ts/typedoc/index.js';
 
-export const typeDocSchemata = new typedoc.Schemata();
-
-const exports = defineCollection( {
-    loader: glob( { pattern: "**/*.md", base: "./src/docs/content/exports" } ),
-    schema: typeDocSchemata.metadata.page,
+const api = defineCollection( {
+    loader: glob( { pattern: "**/*.md", base: "./src/docs/content/api" } ),
+    schema: typedoc.Schemata.Page(),
 } );
 
-export const collections = { exports };
+export const collections = { api };

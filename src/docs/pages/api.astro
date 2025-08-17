@@ -1,0 +1,103 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+import { getCollection } from 'astro:content';
+import * as YAML from 'yaml';
+
+// import { absoluteInternalURL } from '../../astro/functions';
+import { Project } from '../../ts/typedoc/index.js';
+
+/* import - values */
+
+/* import - components */
+// import NestedList from '../../astro/components/NestedList.astro';
+import ToggleDump from '../components/ToggleDump.astro';
+
+/* import - layouts */
+import DocsPage from '../layouts/DocsPage.astro';
+// import type { ArrayItem } from '@maddimathon/utility-typescript/types';
+
+/* TYPES ===================================== */
+
+/* FUNCTIONS ===================================== */
+
+/* CONSTANTS ===================================== */
+
+const rawCollection = await getCollection('api');
+
+const project = new Project(rawCollection);
+
+const projectJSON = project.toJSON();
+---
+
+<DocsPage title='Javascript Documentation'>
+    <ToggleDump
+        title='Project.reflections'
+        lang='yaml'
+        code={YAML.stringify(projectJSON.reflections)}
+    />
+    <hr />
+
+    <ToggleDump
+        title='Project.reflectionGroups'
+        lang='yaml'
+        code={YAML.stringify(projectJSON.reflectionGroups)}
+    />
+    <hr />
+    <ToggleDump title='Project.reflectionGroups (details)'>
+        <h3 set:text={'All'} />
+        <ul>
+            <li>count: <Fragment set:text={Object.keys(projectJSON.reflections).length} /></li>
+        </ul>
+        {
+            (
+                Object.keys(
+                    projectJSON.reflectionGroups
+                ) as (keyof typeof projectJSON.reflectionGroups)[]
+            ).map((groupKey) => (
+                <h3 set:text={groupKey} />
+                <ul>
+                    <li>count: <Fragment set:text={projectJSON.reflectionGroups[groupKey].length} /></li>
+                </ul>
+            ))
+        }
+    </ToggleDump>
+    <hr />
+
+    <ToggleDump
+        title='Project.pages'
+        lang='yaml'
+        code={YAML.stringify(projectJSON.pages)}
+    />
+    <hr />
+
+    <!-- <ToggleDump title='NestedList — collectionTree.exportList()'>
+        <NestedList list={Object.values(collectionTree.exportList())} />
+    </ToggleDump>
+    <hr />
+    <ToggleDump
+        title='collectionTree.exportMap()'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.exportMap())}
+    />
+    <hr />
+    <ToggleDump
+        title='collectionTree.map'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.map)}
+    />
+    <hr />
+    <ToggleDump
+        title='collectionTree.pages'
+        lang='yaml'
+        code={YAML.stringify(collectionTree.pages)}
+    />
+    <hr /> -->
+</DocsPage>

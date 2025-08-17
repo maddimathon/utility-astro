@@ -1,0 +1,247 @@
+{
+  "$ref": "#/definitions/api",
+  "definitions": {
+    "api": {
+      "type": "object",
+      "properties": {
+        "customSlug": {
+          "type": "string"
+        },
+        "pageSections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "headings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "link": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "level": {
+                      "type": "number"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "Accessor",
+                        "CallSignature",
+                        "Class",
+                        "Constructor",
+                        "ConstructorSignature",
+                        "Document",
+                        "Enum",
+                        "EnumMember",
+                        "Function",
+                        "GetSignature",
+                        "IndexSignature",
+                        "Interface",
+                        "Method",
+                        "Module",
+                        "Namespace",
+                        "Parameter",
+                        "Project",
+                        "Property",
+                        "Reference",
+                        "SetSignature",
+                        "TypeAlias",
+                        "TypeLiteral",
+                        "TypeParameter",
+                        "Variable"
+                      ]
+                    },
+                    "classes": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "link",
+                    "text"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "title",
+              "headings"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "reflect": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "kind": {
+              "$ref": "#/definitions/api/properties/pageSections/items/properties/headings/items/properties/kind"
+            },
+            "typeDocId": {
+              "type": "number"
+            },
+            "data": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": {}
+                },
+                {
+                  "not": {}
+                }
+              ]
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "splitName": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "blockTags": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tag": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        },
+                        "tag": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": "string"
+                        },
+                        "targetAnchor": {
+                          "type": "string"
+                        },
+                        "tsLinkText": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tag",
+                  "content"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "flags": {
+              "type": "object",
+              "properties": {
+                "abstract": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "const": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "experimental": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "external": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "inherited": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "optional": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "private": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "protected": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "public": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "readonly": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "rest": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "static": {
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "modifierTags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parent": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "name",
+            "kind",
+            "typeDocId",
+            "fullName",
+            "splitName"
+          ],
+          "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pageSections",
+        "reflect"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
