@@ -221,6 +221,9 @@
             },
             "parent": {
               "type": "number"
+            },
+            "sortingIndex": {
+              "type": "string"
             }
           },
           "required": [
@@ -228,7 +231,8 @@
             "kind",
             "typeDocId",
             "fullName",
-            "splitName"
+            "splitName",
+            "sortingIndex"
           ],
           "additionalProperties": false
         },

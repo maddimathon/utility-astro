@@ -31,6 +31,7 @@ export declare namespace Schemata {
         typeDocId: number;
         fullName: string;
         splitName: string[];
+        sortingIndex: string;
         blockTags?: {
             content: {
                 kind: string;
@@ -166,12 +167,14 @@ export declare namespace Schemata {
         }>>;
         modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
         parent: z.ZodOptional<z.ZodNumber>;
+        sortingIndex: z.ZodString;
     }, "strip", z.ZodTypeAny, {
         name: string;
         kind: "Accessor" | "CallSignature" | "Class" | "Constructor" | "ConstructorSignature" | "Document" | "Enum" | "EnumMember" | "Function" | "GetSignature" | "IndexSignature" | "Interface" | "Method" | "Module" | "Namespace" | "Parameter" | "Project" | "Property" | "Reference" | "SetSignature" | "TypeAlias" | "TypeLiteral" | "TypeParameter" | "Variable";
         typeDocId: number;
         fullName: string;
         splitName: string[];
+        sortingIndex: string;
         data?: Record<string, unknown> | undefined;
         blockTags?: {
             tag: string;
@@ -207,6 +210,7 @@ export declare namespace Schemata {
         typeDocId: number;
         fullName: string;
         splitName: string[];
+        sortingIndex: string;
         data?: Record<string, unknown> | undefined;
         blockTags?: {
             tag: string;
@@ -343,12 +347,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Class";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -384,6 +390,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -513,12 +520,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Accessor" | "Constructor" | "Function" | "GetSignature" | "Method" | "SetSignature";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -554,6 +563,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -683,12 +693,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Module";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -724,6 +736,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -853,12 +866,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Namespace";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -894,6 +909,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1023,12 +1039,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Document";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1064,6 +1082,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1193,12 +1212,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Interface" | "TypeAlias" | "TypeLiteral" | "TypeParameter";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1234,6 +1255,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1363,12 +1385,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "CallSignature" | "ConstructorSignature" | "IndexSignature" | "Parameter" | "Project" | "Reference";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1404,6 +1428,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1533,12 +1558,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Enum" | "EnumMember" | "Property" | "Variable";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1574,6 +1601,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1768,12 +1796,14 @@ export declare namespace Schemata {
             }>>;
             modifierTags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
             parent: z.ZodOptional<z.ZodNumber>;
+            sortingIndex: z.ZodString;
         }, "strip", z.ZodTypeAny, {
             name: string;
             kind: "Accessor" | "CallSignature" | "Class" | "Constructor" | "ConstructorSignature" | "Document" | "Enum" | "EnumMember" | "Function" | "GetSignature" | "IndexSignature" | "Interface" | "Method" | "Module" | "Namespace" | "Parameter" | "Project" | "Property" | "Reference" | "SetSignature" | "TypeAlias" | "TypeLiteral" | "TypeParameter" | "Variable";
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1809,6 +1839,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1856,6 +1887,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;
@@ -1904,6 +1936,7 @@ export declare namespace Schemata {
             typeDocId: number;
             fullName: string;
             splitName: string[];
+            sortingIndex: string;
             data?: Record<string, unknown> | undefined;
             blockTags?: {
                 tag: string;

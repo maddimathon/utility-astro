@@ -58,6 +58,7 @@ export var Schemata;
             }).partial().optional(),
             modifierTags: z.array(z.string()).optional(),
             parent: z.number().optional(),
+            sortingIndex: z.string(),
         });
     }
     Schemata.Reflection = Reflection;

@@ -9,13 +9,13 @@
  */
 import type { Objects } from '@maddimathon/utility-typescript/types';
 import type { Project_Reflection } from './Project_Reflection.js';
-import { Schemata } from '../00-types/index.js';
-import type { parseKind } from '../01-functions/index.js';
+import { Schemata, type Astro } from '../00-types/index.js';
+import { type parseKind } from '../01-functions/index.js';
 export declare class Project_Page<T_Reflection extends Project_Page.ReflectionParam<T_Kind>, T_Kind extends parseKind.Return> implements Objects.Classify<Schemata.PageGeneric<T_Reflection>> {
     reflect: T_Reflection;
     pageSections: Schemata.PageGeneric<T_Reflection>['pageSections'];
     customSlug: string | undefined;
-    constructor(page: Schemata.PageGeneric<T_Reflection>);
+    constructor(reflect: T_Reflection, raw: Astro.CollectionItem);
     /**
      * Creates a cleaner output for conversion.
      *

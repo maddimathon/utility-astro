@@ -8,14 +8,15 @@
  * @license MIT
  */
 import { Schemata, } from '../00-types/index.js';
+import {} from '../01-functions/index.js';
 export class Project_Page {
     reflect;
     pageSections;
     customSlug;
-    constructor(page) {
-        this.reflect = page.reflect;
-        this.pageSections = page.pageSections;
-        this.customSlug = page.customSlug;
+    constructor(reflect, raw) {
+        this.reflect = reflect;
+        this.customSlug = raw.data.customSlug;
+        this.pageSections = raw.data.pageSections;
     }
     /**
      * Creates a cleaner output for conversion.

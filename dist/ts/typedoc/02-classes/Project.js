@@ -9,9 +9,10 @@
  */
 // import type { Objects } from '@maddimathon/utility-typescript/types';
 import { arrayUnique } from '@maddimathon/utility-typescript/functions';
-import { Schemata } from '../00-types/index.js';
+import { sortReflections } from '../01-functions/index.js';
 import { Project_Page } from './Project_Page.js';
 import { Project_Reflection } from './Project_Reflection.js';
+import { Project_Tree } from './Project_Tree.js';
 /**
  * A class used to represent all the outputs documented by TypeDoc in a given
  * project.
@@ -25,10 +26,18 @@ export class Project {
      */
     pages = {};
     /**
+     * Raw inputs, indexed by their typeDocId property value.
+     */
+    raw = {};
+    /**
      * All reflections in the project, indexed by their typeDocId property
      * value.
      */
     reflections = {};
+    /**
+     * Hierarchical representation of reflections in the project.
+     */
+    tree;
     /**
      * Project reflections sorted into groups and indexed by their typeDocId
      * property value.
@@ -36,16 +45,18 @@ export class Project {
     reflectionGroups;
     constructor(collection) {
         this.collection = collection;
+        this.collection.sort((a, b) => sortReflections(a.data.reflect, b.data.reflect));
         const reflectionGroups = {
             hasChild: [],
             hasParent: [],
             hasOwnPage: [],
+            childrenByParent: {},
         };
         for (const item of this.collection) {
             const _reflect = item.data.reflect;
             const _typeDocId = _reflect.typeDocId;
             // throws
-            if (_typeDocId in this.reflections) {
+            if (_typeDocId in this.raw || _typeDocId in this.reflections) {
                 throw new TypeError('Duplicate TypeDocIDs found in collection', {
                     cause: {
                         existing: this.reflections[_typeDocId],
@@ -53,25 +64,41 @@ export class Project {
                     },
                 });
             }
+            this.raw[_typeDocId] = item;
             this.reflections[_typeDocId] = Project_Reflection.make(_reflect, !!item.filePath);
             if (this.reflections[_typeDocId].parent) {
+                const _parentID = this.reflections[_typeDocId].parent;
                 reflectionGroups.hasParent.push(_typeDocId);
-                reflectionGroups.hasChild.push(this.reflections[_typeDocId].parent);
+                reflectionGroups.hasChild.push(_parentID);
+                if (!reflectionGroups.childrenByParent[_parentID]) {
+                    reflectionGroups.childrenByParent[_parentID] = [];
+                }
+                reflectionGroups.childrenByParent[_parentID].push(_typeDocId);
             }
             if (this.reflections[_typeDocId].hasOwnPage) {
                 reflectionGroups.hasOwnPage.push(_typeDocId);
-                this.pages[_typeDocId] = new Project_Page({
-                    customSlug: item.data.customSlug,
-                    pageSections: item.data.pageSections,
-                    reflect: this.reflections[_typeDocId],
-                });
             }
         }
         this.reflectionGroups = {
+            all: arrayUnique(Object.values(this.reflections).map(_ref => _ref.typeDocId)),
             hasChild: arrayUnique(reflectionGroups.hasChild),
             hasParent: arrayUnique(reflectionGroups.hasParent),
             hasOwnPage: arrayUnique(reflectionGroups.hasOwnPage),
+            childrenByParent: reflectionGroups.childrenByParent,
         };
+        for (const typeDocID of this.reflectionGroups.hasOwnPage) {
+            const item = this.raw[typeDocID];
+            // continues
+            if (!item) {
+                continue;
+            }
+            this.pages[typeDocID] = new Project_Page(this.reflections[typeDocID], item);
+        }
+        this.tree = new Project_Tree({
+            raw: this.raw,
+            reflections: this.reflections,
+            reflectionGroups: this.reflectionGroups,
+        });
     }
     /**
      * Creates a cleaner output for conversion.

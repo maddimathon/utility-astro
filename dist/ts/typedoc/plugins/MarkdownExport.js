@@ -12,7 +12,7 @@
 // } from '@maddimathon/utility-typescript/functions';
 import * as YAML from 'yaml';
 import * as z from 'zod';
-import { parseCommentDisplayPart, parseKind, } from '../01-functions/index.js';
+import { makeSortingIndex, parseCommentDisplayPart, parseKind, } from '../01-functions/index.js';
 /**
  * Creates custom markdown export to work with the documentation components in
  * this package.
@@ -54,6 +54,7 @@ export class MarkdownExport {
      * @since 0.1.0-alpha.draft
      */
     getPageMetadata(page) {
+        const reflect = this.getReflectionMetadata(page.model);
         return {
             ...page.frontmatter,
             customSlug: page.url.toLowerCase().replace(/\.md$/gi, '') || undefined,
@@ -67,7 +68,7 @@ export class MarkdownExport {
                     classes: _hdg.classes,
                 })),
             })),
-            reflect: this.getReflectionMetadata(page.model),
+            reflect,
         };
     }
     /**
@@ -107,7 +108,7 @@ export class MarkdownExport {
                     break;
             }
         }
-        return {
+        const base = {
             name: reflect.name,
             kind: parseKind(reflect.kind),
             typeDocId: reflect.id,
@@ -117,6 +118,10 @@ export class MarkdownExport {
             flags: Object.values(flags).some((_val) => _val) ? flags : undefined,
             blockTags: blockTags.length ? blockTags : undefined,
             modifierTags: modifierTags.length ? modifierTags : undefined,
+        };
+        return {
+            ...base,
+            sortingIndex: makeSortingIndex(base),
             data: {},
             // FIXME - typing issue with generics
         };

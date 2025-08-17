@@ -10,31 +10,33 @@
 import { Schemata, } from '../00-types/index.js';
 import { isObjectEmpty } from '@maddimathon/build-utilities/internal';
 export class Project_Reflection {
-    reflect;
+    raw;
     hasOwnPage;
     data;
     fullName;
     kind;
     name;
+    sortingIndex;
     splitName;
     typeDocId;
     blockTags;
     flags;
     modifierTags;
     parent;
-    constructor(reflect, hasOwnPage) {
-        this.reflect = reflect;
+    constructor(raw, hasOwnPage) {
+        this.raw = raw;
         this.hasOwnPage = hasOwnPage;
-        this.data = this.reflect.data;
-        this.fullName = this.reflect.fullName;
-        this.kind = this.reflect.kind;
-        this.name = this.reflect.name;
-        this.splitName = this.reflect.splitName;
-        this.typeDocId = this.reflect.typeDocId;
-        this.blockTags = this.reflect.blockTags;
-        this.flags = this.reflect.flags;
-        this.modifierTags = this.reflect.modifierTags;
-        this.parent = this.reflect.parent;
+        this.data = this.raw.data;
+        this.fullName = this.raw.fullName;
+        this.kind = this.raw.kind;
+        this.name = this.raw.name;
+        this.sortingIndex = this.raw.sortingIndex;
+        this.splitName = this.raw.splitName;
+        this.typeDocId = this.raw.typeDocId;
+        this.blockTags = this.raw.blockTags;
+        this.flags = this.raw.flags;
+        this.modifierTags = this.raw.modifierTags;
+        this.parent = this.raw.parent;
     }
     /**
      * Creates a cleaner output for conversion.
@@ -42,10 +44,10 @@ export class Project_Reflection {
      * @since 0.1.0-alpha.draft
      */
     toJSON() {
-        const blockTags = isObjectEmpty(this.blockTags) ? undefined : this.blockTags;
+        // const blockTags = isObjectEmpty( this.blockTags ) ? undefined : this.blockTags;
         const data = isObjectEmpty(this.data) ? undefined : this.data;
         const flags = isObjectEmpty(this.flags) ? undefined : this.flags;
-        const modifierTags = isObjectEmpty(this.modifierTags) ? undefined : this.modifierTags;
+        // const modifierTags = isObjectEmpty( this.modifierTags ) ? undefined : this.modifierTags;
         return {
             typeDocId: this.typeDocId,
             name: this.name,
@@ -55,15 +57,16 @@ export class Project_Reflection {
             parent: this.parent,
             flags,
             hasOwnPage: this.hasOwnPage,
-            blockTags,
+            blockTags: this.blockTags,
+            modifierTags: this.modifierTags,
+            sortingIndex: this.sortingIndex,
             data,
-            modifierTags,
         };
     }
 }
 (function (Project_Reflection) {
-    function make(reflect, hasOwnPage) {
-        const { kind } = reflect;
+    function make(raw, hasOwnPage) {
+        const { kind } = raw;
         switch (kind) {
             case 'Accessor':
             case 'Constructor':
@@ -71,25 +74,25 @@ export class Project_Reflection {
             case 'GetSignature':
             case 'Method':
             case 'SetSignature':
-                return new Project_Reflection.Function(reflect, hasOwnPage);
+                return new Project_Reflection.Function(raw, hasOwnPage);
             case 'Class':
-                return new Project_Reflection.Class(reflect, hasOwnPage);
+                return new Project_Reflection.Class(raw, hasOwnPage);
             case 'Document':
-                return new Project_Reflection.Plain(reflect, hasOwnPage);
+                return new Project_Reflection.Plain(raw, hasOwnPage);
             case 'Module':
-                return new Project_Reflection.Module(reflect, hasOwnPage);
+                return new Project_Reflection.Module(raw, hasOwnPage);
             case 'Namespace':
-                return new Project_Reflection.Namespace(reflect, hasOwnPage);
+                return new Project_Reflection.Namespace(raw, hasOwnPage);
             case 'Interface':
             case 'TypeAlias':
             case 'TypeLiteral':
             case 'TypeParameter':
-                return new Project_Reflection.Type(reflect, hasOwnPage);
+                return new Project_Reflection.Type(raw, hasOwnPage);
             case 'Enum':
             case 'EnumMember':
             case 'Property':
             case 'Variable':
-                return new Project_Reflection.Value(reflect, hasOwnPage);
+                return new Project_Reflection.Value(raw, hasOwnPage);
             case 'CallSignature':
             case 'ConstructorSignature':
             case 'IndexSignature':
@@ -97,7 +100,7 @@ export class Project_Reflection {
             case 'Project':
             case 'Reference':
             default:
-                return new Project_Reflection.Unknown(reflect, hasOwnPage);
+                return new Project_Reflection.Unknown(raw, hasOwnPage);
         }
     }
     Project_Reflection.make = make;

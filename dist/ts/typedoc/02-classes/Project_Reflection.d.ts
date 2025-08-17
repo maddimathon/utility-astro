@@ -11,19 +11,20 @@ import type { Objects } from '@maddimathon/utility-typescript/types';
 import { Schemata } from '../00-types/index.js';
 import type { parseKind } from '../01-functions/index.js';
 export declare abstract class Project_Reflection<T_Kind extends parseKind.Return, T_HasOwnPage extends boolean = boolean> implements Objects.Classify<Schemata.ReflectionGeneric<T_Kind>> {
-    protected reflect: Schemata.ReflectionGeneric<T_Kind>;
+    protected raw: Schemata.ReflectionGeneric<T_Kind>;
     hasOwnPage: T_HasOwnPage;
     data: Schemata.ReflectionGeneric<T_Kind>['data'];
     fullName: string;
     kind: T_Kind;
     name: string;
+    sortingIndex: string;
     splitName: string[];
     typeDocId: number;
     blockTags: Schemata.ReflectionGeneric<T_Kind>['blockTags'];
     flags: Schemata.ReflectionGeneric<T_Kind>['flags'];
     modifierTags: string[] | undefined;
     parent: number | undefined;
-    constructor(reflect: Schemata.ReflectionGeneric<T_Kind>, hasOwnPage: T_HasOwnPage);
+    constructor(raw: Schemata.ReflectionGeneric<T_Kind>, hasOwnPage: T_HasOwnPage);
     /**
      * Creates a cleaner output for conversion.
      *
@@ -34,7 +35,7 @@ export declare abstract class Project_Reflection<T_Kind extends parseKind.Return
     }>;
 }
 export declare namespace Project_Reflection {
-    function make<T_Kind extends parseKind.Return, T_HasOwnPage extends boolean>(reflect: Schemata.ReflectionGeneric<T_Kind>, hasOwnPage: T_HasOwnPage): Project_Reflection<T_Kind, T_HasOwnPage>;
+    function make<T_Kind extends parseKind.Return, T_HasOwnPage extends boolean>(raw: Schemata.ReflectionGeneric<T_Kind>, hasOwnPage: T_HasOwnPage): Project_Reflection<T_Kind, T_HasOwnPage>;
     type Any = Project_Reflection<parseKind.Return>;
     class Class extends Project_Reflection<Schemata.Reflection.Class['kind']> implements Schemata.Reflection.Class {
     }
