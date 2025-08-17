@@ -48,6 +48,8 @@ export namespace Schemata {
         fullName: string;
         splitName: string[];
 
+        sortingIndex: string;
+
         blockTags?: {
 
             content: {
@@ -142,6 +144,8 @@ export namespace Schemata {
             modifierTags: z.array( z.string() ).optional(),
 
             parent: z.number().optional(),
+
+            sortingIndex: z.string(),
 
         } satisfies _ZodChecker<Schemata.ReflectionGeneric<Literals.Reflections.Kind.Any>> );
     };

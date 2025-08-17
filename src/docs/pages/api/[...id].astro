@@ -11,7 +11,11 @@
 import { getCollection, render } from 'astro:content';
 import * as YAML from 'yaml';
 
-import { Project } from '../../../ts/typedoc/index.js';
+import {
+    kindIconHTML,
+    kindIconName,
+    Project,
+} from '../../../ts/typedoc/index.js';
 
 /* import - values */
 
@@ -65,10 +69,10 @@ const varDump_props = {
     collection: props.collection,
 };
 
-const testPageObj = new typedoc.Project_Page({
-    ...varDump_props.data,
-    reflect: typedoc.Project_Reflection.make(varDump_props.data.reflect, true),
-});
+const testPageObj = new typedoc.Project_Page(
+    typedoc.Project_Reflection.make(varDump_props.data.reflect, true),
+    props
+);
 ---
 
 <DocsPage title={title}>
@@ -86,7 +90,9 @@ const testPageObj = new typedoc.Project_Page({
     />
     <hr />
 
-    <h1 set:html={title} />
+    <h1
+        set:html={kindIconHTML(kindIconName(props.data.reflect.kind)) + title}
+    />
     <!-- <Fragment set:html={props.html} /> -->
 
     <!-- <hr /> -->

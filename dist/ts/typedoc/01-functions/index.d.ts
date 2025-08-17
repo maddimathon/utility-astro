@@ -7,6 +7,8 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
+export * from './kindIconHTML.js';
+export * from './kindIconName.js';
 export * from './makeSortingIndex.js';
 export * from './parseCommentDisplayPart.js';
 export * from './parseKind.js';

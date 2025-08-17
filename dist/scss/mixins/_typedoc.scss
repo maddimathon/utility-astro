@@ -1,0 +1,36 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+// @use 'sass:color';
+// @use 'sass:list';
+// @use 'sass:map';
+// @use 'sass:math';
+// @use 'sass:meta';
+// @use 'sass:selector';
+// @use 'sass:string';
+
+@mixin template-typedoc {
+    .reflection-kind-icon {
+        display: inline-block;
+        position: relative;
+        border: black solid 1px;
+
+        margin-block: 0.125rem;
+        margin-inline-end: 0.375rem;
+        padding-block-start: 0.0625rem;
+
+        min-height: 1.125rem;
+        aspect-ratio: 1;
+
+        font-size: 0.875em;
+        font-weight: 500;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+
+        &--page-section {
+            border-radius: 10rem;
+        }
+    }
+}

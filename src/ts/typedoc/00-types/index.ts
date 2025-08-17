@@ -8,4 +8,6 @@
  * @license MIT
  */
 
+export * from './Astro.js';
+export * from './Literals.js';
 export * from './Schemata.js';

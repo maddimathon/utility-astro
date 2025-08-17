@@ -7,7 +7,6 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * @license MIT
  */
-import { escapeHTML } from 'astro/runtime/server/escape.js';
 import { Schemata, } from '../00-types/index.js';
 import { sortReflections, } from '../01-functions/index.js';
 import { Project_Reflection } from './Project_Reflection.js';
@@ -22,17 +21,19 @@ export class Project_Tree {
     topLevelPages;
     static toNestedList(tree, linked) {
         return tree.map((item) => {
-            let html = escapeHTML(item.page.main.reflect.name);
+            const kind = item.page.main.reflect.kind;
+            const title = item.page.main.reflect.name;
             let href = linked ? item.page.customSlug : undefined;
             // returns
             if (item.children?.length) {
                 return {
-                    html,
+                    kind,
+                    title,
                     href,
                     children: Project_Tree.toNestedList(item.children, linked),
                 };
             }
-            return { html, href };
+            return { kind, title, href };
         });
     }
     static sortTree(a, b) {

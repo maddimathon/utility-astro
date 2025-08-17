@@ -74,10 +74,8 @@ export declare namespace Project_Tree {
         children?: Tree;
     }[];
     type NestedListItem = {
-        /**
-         * Escaped HTML content for this item.
-         */
-        html: string;
+        kind: parseKind.Return;
+        title: string;
         /**
          * Slug used to generate the URL to this item.
          */

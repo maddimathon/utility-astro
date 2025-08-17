@@ -14,27 +14,29 @@ import type { Project_Reflection } from './Project_Reflection.js';
 
 import {
     Schemata,
+    type Astro,
 } from '../00-types/index.js';
 
-import type {
-    parseKind,
+import {
+    type parseKind,
 } from '../01-functions/index.js';
+
 
 export class Project_Page<
     T_Reflection extends Project_Page.ReflectionParam<T_Kind>,
     T_Kind extends parseKind.Return,
 > implements Objects.Classify<Schemata.PageGeneric<T_Reflection>> {
 
-    public reflect: T_Reflection;
     public pageSections: Schemata.PageGeneric<T_Reflection>[ 'pageSections' ];
 
     public customSlug: string | undefined;
 
-    public constructor ( page: Schemata.PageGeneric<T_Reflection> ) {
-        this.reflect = page.reflect;
-        this.pageSections = page.pageSections;
-
-        this.customSlug = page.customSlug;
+    public constructor (
+        public reflect: T_Reflection,
+        raw: Astro.CollectionItem,
+    ) {
+        this.customSlug = raw.data.customSlug;
+        this.pageSections = raw.data.pageSections;
     }
 
     /**

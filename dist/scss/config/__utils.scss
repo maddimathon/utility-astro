@@ -7,8 +7,8 @@
 /// ======================================================================== ///
 
 @forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
-    $selectorType_mode: 'attribute',
-    $selectorType_motion: 'attribute',
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default,
 
     $breakpoints: (
         'tablet': 60,

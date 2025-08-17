@@ -9,20 +9,26 @@
 
 /* import - functions */
 import { getCollection } from 'astro:content';
+import { escapeHTML } from 'astro/runtime/server/escape.js';
 import * as YAML from 'yaml';
 
-// import { absoluteInternalURL } from '../../astro/functions';
-import { Project } from '../../ts/typedoc/index.js';
+import { absoluteInternalURL } from '../../astro/functions';
+import { 
+    kindIconName, 
+    kindIconHTML,
+    Project,
+    Project_Tree, 
+    sortReflections,
+} from '../../ts/typedoc/index.js';
 
 /* import - values */
 
 /* import - components */
-// import NestedList from '../../astro/components/NestedList.astro';
+import NestedList, { type NestedListItem } from '../../astro/components/NestedList.astro';
 import ToggleDump from '../components/ToggleDump.astro';
 
 /* import - layouts */
 import DocsPage from '../layouts/DocsPage.astro';
-// import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 
 /* TYPES ===================================== */
 
@@ -35,9 +41,51 @@ const rawCollection = await getCollection('api');
 const project = new Project(rawCollection);
 
 const projectJSON = project.toJSON();
+
+const sortingIndexes = Object.values(project.reflections)
+    .map(_refl=>({
+        sortingIndex: _refl.sortingIndex,
+        typeDocId: _refl.typeDocId,
+    }))
+    .sort( ( a, b ) => sortReflections(
+        project.reflections[a.typeDocId],
+        project.reflections[b.typeDocId],
+    ) );
+
+export function treeListToNested(
+    treeList:Project_Tree.NestedListItem[],
+): NestedListItem[] {
+
+    return treeList.map( (_item): NestedListItem => {
+
+        let html = kindIconHTML(kindIconName(_item.kind)) + escapeHTML(_item.title);
+        
+        if ( _item.href ) {
+            html = `<a href="${ absoluteInternalURL(Astro.url, 'api/' + _item.href) }">${ html }</a>`;
+        }
+
+        // returns
+        if ( _item.children ) {
+
+            return {
+                html,
+                children:treeListToNested(_item.children),
+            };
+        }
+        
+        return {html};
+    } )
+}
+    
+const treeList = treeListToNested(Project_Tree.toNestedList(project.tree.tree,true));
 ---
 
 <DocsPage title='Javascript Documentation'>
+    <ToggleDump title='NestedList — treeList'>
+        <NestedList list={treeList} />
+    </ToggleDump>
+    <hr />
+
     <ToggleDump
         title='Project.reflections'
         lang='yaml'
@@ -61,7 +109,7 @@ const projectJSON = project.toJSON();
                 Object.keys(
                     projectJSON.reflectionGroups
                 ) as (keyof typeof projectJSON.reflectionGroups)[]
-            ).map((groupKey) => (
+            ).map((groupKey) => Array.isArray(projectJSON.reflectionGroups[groupKey]) && (
                 <h3 set:text={groupKey} />
                 <ul>
                     <li>count: <Fragment set:text={projectJSON.reflectionGroups[groupKey].length} /></li>
@@ -75,6 +123,20 @@ const projectJSON = project.toJSON();
         title='Project.pages'
         lang='yaml'
         code={YAML.stringify(projectJSON.pages)}
+    />
+    <hr />
+
+    <ToggleDump
+        title='Project.tree'
+        lang='yaml'
+        code={YAML.stringify(project.tree)}
+    />
+    <hr />
+
+    <ToggleDump
+        title='sortingIndexes'
+        lang='yaml'
+        code={YAML.stringify(sortingIndexes)}
     />
     <hr />
 

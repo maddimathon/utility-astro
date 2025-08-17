@@ -30,6 +30,7 @@ export abstract class Project_Reflection<
     public fullName: string;
     public kind: T_Kind;
     public name: string;
+    public sortingIndex: string;
     public splitName: string[];
     public typeDocId: number;
 
@@ -40,20 +41,21 @@ export abstract class Project_Reflection<
 
 
     public constructor (
-        protected reflect: Schemata.ReflectionGeneric<T_Kind>,
+        protected raw: Schemata.ReflectionGeneric<T_Kind>,
         public hasOwnPage: T_HasOwnPage,
     ) {
-        this.data = this.reflect.data;
-        this.fullName = this.reflect.fullName;
-        this.kind = this.reflect.kind;
-        this.name = this.reflect.name;
-        this.splitName = this.reflect.splitName;
-        this.typeDocId = this.reflect.typeDocId;
+        this.data = this.raw.data;
+        this.fullName = this.raw.fullName;
+        this.kind = this.raw.kind;
+        this.name = this.raw.name;
+        this.sortingIndex = this.raw.sortingIndex;
+        this.splitName = this.raw.splitName;
+        this.typeDocId = this.raw.typeDocId;
 
-        this.blockTags = this.reflect.blockTags;
-        this.flags = this.reflect.flags;
-        this.modifierTags = this.reflect.modifierTags;
-        this.parent = this.reflect.parent;
+        this.blockTags = this.raw.blockTags;
+        this.flags = this.raw.flags;
+        this.modifierTags = this.raw.modifierTags;
+        this.parent = this.raw.parent;
     }
 
 
@@ -86,6 +88,8 @@ export abstract class Project_Reflection<
             blockTags: this.blockTags,
             modifierTags: this.modifierTags,
 
+            sortingIndex: this.sortingIndex,
+
             data,
         };
     }
@@ -97,11 +101,11 @@ export namespace Project_Reflection {
         T_Kind extends parseKind.Return,
         T_HasOwnPage extends boolean,
     >(
-        reflect: Schemata.ReflectionGeneric<T_Kind>,
+        raw: Schemata.ReflectionGeneric<T_Kind>,
         hasOwnPage: T_HasOwnPage,
     ): Project_Reflection<T_Kind, T_HasOwnPage> {
 
-        const { kind } = reflect;
+        const { kind } = raw;
 
         switch ( kind ) {
 
@@ -111,31 +115,31 @@ export namespace Project_Reflection {
             case 'GetSignature':
             case 'Method':
             case 'SetSignature':
-                return new Project_Reflection.Function( reflect as Schemata.Reflection.Function, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Function( raw as Schemata.Reflection.Function, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Class':
-                return new Project_Reflection.Class( reflect as Schemata.Reflection.Class, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Class( raw as Schemata.Reflection.Class, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Document':
-                return new Project_Reflection.Plain( reflect as Schemata.Reflection.Plain, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Plain( raw as Schemata.Reflection.Plain, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Module':
-                return new Project_Reflection.Module( reflect as Schemata.Reflection.Module, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Module( raw as Schemata.Reflection.Module, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Namespace':
-                return new Project_Reflection.Namespace( reflect as Schemata.Reflection.Namespace, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Namespace( raw as Schemata.Reflection.Namespace, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Interface':
             case 'TypeAlias':
             case 'TypeLiteral':
             case 'TypeParameter':
-                return new Project_Reflection.Type( reflect as Schemata.Reflection.Type, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Type( raw as Schemata.Reflection.Type, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'Enum':
             case 'EnumMember':
             case 'Property':
             case 'Variable':
-                return new Project_Reflection.Value( reflect as Schemata.Reflection.Value, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Value( raw as Schemata.Reflection.Value, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
 
             case 'CallSignature':
             case 'ConstructorSignature':
@@ -144,7 +148,7 @@ export namespace Project_Reflection {
             case 'Project':
             case 'Reference':
             default:
-                return new Project_Reflection.Unknown( reflect as Schemata.Reflection.Unknown, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
+                return new Project_Reflection.Unknown( raw as Schemata.Reflection.Unknown, hasOwnPage ) as Project_Reflection<T_Kind, T_HasOwnPage>;
         }
     };
 

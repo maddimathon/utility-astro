@@ -31,6 +31,7 @@ import * as z from 'zod';
 import type { Schemata } from '../00-types/index.js';
 
 import {
+    makeSortingIndex,
     parseCommentDisplayPart,
     parseKind,
 } from '../01-functions/index.js';
@@ -97,6 +98,8 @@ export class MarkdownExport<
         page: MarkdownThemeContext[ 'page' ],
     ): Schemata.PageGeneric<T_Reflection> {
 
+        const reflect = this.getReflectionMetadata( page.model );
+
         return {
             ...page.frontmatter,
 
@@ -113,7 +116,7 @@ export class MarkdownExport<
                 } ) ),
             } ) ),
 
-            reflect: this.getReflectionMetadata( page.model ),
+            reflect,
 
         } satisfies Schemata.PageGeneric<T_Reflection>;
     }
@@ -169,7 +172,7 @@ export class MarkdownExport<
             }
         }
 
-        return {
+        const base = {
 
             name: reflect.name,
             kind: parseKind( reflect.kind ),
@@ -184,6 +187,13 @@ export class MarkdownExport<
 
             blockTags: blockTags.length ? blockTags : undefined,
             modifierTags: modifierTags.length ? modifierTags : undefined,
+
+        } satisfies Omit<Schemata.Reflection.Any, "sortingIndex">;
+
+        return {
+            ...base,
+
+            sortingIndex: makeSortingIndex( base ),
 
             data: {},
 
