@@ -16,6 +16,8 @@ import { DateTime } from 'luxon';
 import {
     mergeArgs,
 } from '@maddimathon/utility-typescript/functions';
+import { FeatureCheck } from '@maddimathon/utility-sass';
+
 import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
 import type { Props } from './Page.d.ts';
 
@@ -133,6 +135,8 @@ const formatted = {
     },
 };
 
+const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
+
 ---
 
 <html
@@ -142,7 +146,7 @@ const formatted = {
     dir={p.dir}
 
     class:list={ [
-        // 'no-js',
+        featureClasses,
         p.attrs?.html?.class,
     ] }
 >
@@ -271,9 +275,26 @@ const formatted = {
         <!-- /SLOT: "footer-scripts" -->
     </body>
 </html>
-
+ 
 <style lang="scss" is:global>
     @forward '../scss/toggles.scss';
 </style>
 
-<script src="../scripts/toggles.ts"></script>
+<!-- <script src="../scripts/toggles.js"></script> -->
+<!-- <script src="../scripts/feature-check.js"></script> -->
+
+<script>
+    import { FeatureCheck } from '@maddimathon/utility-sass';
+
+    // run the checks and update class names
+    new FeatureCheck().check();
+</script>
+
+<script>
+    import { ElementToggle } from '../../ts/02-classes/ElementToggle.js';
+
+    window.addEventListener( 'load', () => {
+        const containers = document.querySelectorAll( '[data-toggle-container]' ) as NodeListOf<HTMLDivElement>;
+        containers.forEach( ( con ) => con.id && new ElementToggle( con.id ) );
+    } );
+</script>

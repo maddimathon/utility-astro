@@ -11,15 +11,16 @@
 @forward 'functions';
 @forward 'mixins';
 
-@use 'utils';
+// TODO: remove testing
+// @use 'utils';
 
-test.utility-astro {
-    /* this is a test of utils.$scale_multiplier */
-    --content: #{utils.$scale_multiplier};
-}
+// test.utility-astro {
+//     /* this is a test of utils.$scale_multiplier */
+//     --content: #{utils.$scale_multiplier};
+// }
 
-@include utils.min-width(tablet) {
-    test.utility-astro {
-        /* I am inside a min-width( tablet ) mixin from utility-sass */
-    }
-}
+// @include utils.min-width(tablet) {
+//     test.utility-astro {
+//         /* I am inside a min-width( tablet ) mixin from utility-sass */
+//     }
+// }

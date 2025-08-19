@@ -12,15 +12,6 @@
 
 @forward '_footer';
 
-@use 'utils';
-
-test.utility-astro.templates.html {
-    /* this is a test of utils.$scale_multiplier */
-    --content: #{utils.$scale_multiplier};
-}
-
-@include utils.min-width(tablet) {
-    test.utility-astro.templates.html {
-        /* I am inside a min-width( tablet ) mixin from utility-sass */
-    }
+.page-title {
+    @extend %title;
 }

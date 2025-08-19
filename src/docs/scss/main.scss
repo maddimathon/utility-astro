@@ -12,24 +12,4 @@
 
 @forward '_header';
 
-@forward '../../scss/templates/html' with (
-    $breakpoints: (
-        'tablet': 20,
-    )
-    !default
-);
-
-@use '../../scss/templates/html' as utils;
-
-@include utils.template-typedoc;
-
-test.utility-astro.docs {
-    /* this is a test of utils.$scale_multiplier */
-    --content: #{utils.$scale_multiplier};
-}
-
-@include utils.min-width(tablet) {
-    test.utility-astro.docs {
-        /* I am inside a min-width( tablet ) mixin from utility-sass */
-    }
-}
+@forward '../../scss/templates/html';

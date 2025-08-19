@@ -1,10 +1,19 @@
-/// 
+///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since ___PKG_VERSION___
-/// 
+///
+
+@use 'sass:string';
 
 @forward '../../config' with (
+    $include_featureCheck: true !default,
+    $include_html: true,
+
     $internalAstro_supressCredit: true,
-    
-    $scale_multiplier: 1.25 !default,
+
+    // $scale_multiplier: 1.25 !default,
+    $selector_root: (
+            string.unquote('html'),
+        )
+        !default
 );
