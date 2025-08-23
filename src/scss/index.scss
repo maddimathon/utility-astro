@@ -4,23 +4,9 @@
 ///
 
 @forward 'config';
-@forward 'utils';
+@forward 'tokens';
 
 @forward '_header';
 
 @forward 'functions';
 @forward 'mixins';
-
-// TODO: remove testing
-// @use 'utils';
-
-// test.utility-astro {
-//     /* this is a test of utils.$scale_multiplier */
-//     --content: #{utils.$scale_multiplier};
-// }
-
-// @include utils.min-width(tablet) {
-//     test.utility-astro {
-//         /* I am inside a min-width( tablet ) mixin from utility-sass */
-//     }
-// }

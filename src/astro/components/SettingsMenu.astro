@@ -257,26 +257,6 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
 </div>
 
 <style lang='scss' is:global>
-    @each $brightness in ('light', 'dark') {
-        [data-brightness-mode='#{$brightness}'] {
-            color-scheme: #{$brightness} !important;
-        }
-
-        html:has([data-brightness-mode='#{$brightness}']) {
-            color-scheme: #{$brightness} !important;
-        }
-    }
-
-    @each $contrast in ('average', 'low', 'high') {
-        [data-contrast-mode='#{$contrast}'] {
-            color-scheme: #{$contrast} !important;
-        }
-
-        html:has([data-contrast-mode='#{$contrast}']) {
-            color-scheme: #{$contrast} !important;
-        }
-    }
-
     .forced-colors-mode-only {
         display: none !important;
     }

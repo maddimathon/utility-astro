@@ -6,14 +6,14 @@
 @use 'sass:string';
 
 @forward '../../config' with (
-    $include_featureCheck: true !default,
-    $include_html: true,
-
     $internalAstro_supressCredit: true,
 
-    // $scale_multiplier: 1.25 !default,
+    $include_html: true !default,
+
+    $include_featureCheck: true !default,
+
     $selector_root: (
-            string.unquote('html'),
-        )
-        !default
+        string.unquote('html'),
+    )
+    !default
 );

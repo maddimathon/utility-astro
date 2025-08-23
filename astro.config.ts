@@ -57,7 +57,7 @@ export default defineConfig( {
         assets: 'assets/astro',
         client: 'assets/js',
         format: 'file',
-        inlineStylesheets: 'always',
+        inlineStylesheets: 'never',
     },
 
     server: {

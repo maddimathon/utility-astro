@@ -31,6 +31,24 @@ const config = {
     title: 'Utility Astro',
     launchYear: '2025',
 
+    compiler: {
+        postCSS: {
+            presetEnv: {
+                features: {
+                    clamp: false,
+
+                    "custom-properties": false,
+
+                    // "logical-overflow": false,
+                    // "logical-overscroll-behavior": false,
+                    // "logical-properties-and-values": false,
+                    // "logical-resize": false,
+                    // "logical-viewport-units": false,
+                },
+            },
+        },
+    },
+
     stages: {
 
         build: [
