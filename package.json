@@ -61,6 +61,22 @@
         "./tsconfig.json": "./tsconfig.json",
         
         "./components/*": {
+
+            "sass": [
+                "./dist/scss/components/*",
+                "./dist/scss/components/*.scss",
+                "./dist/scss/components/_*",
+                "./dist/scss/components/_*.scss",
+                "./dist/scss/components/*/index",
+                "./dist/scss/components/*/index.scss",
+                "./dist/scss/components/*/_index",
+                "./dist/scss/components/*/_index.scss",
+                "./dist/scss/components/_*/index",
+                "./dist/scss/components/_*/index.scss",
+                "./dist/scss/components/_*/_index",
+                "./dist/scss/components/_*/_index.scss"
+            ],
+
             "astro": [
                 "./dist/astro/components/*.astro",
                 "./dist/astro/components/*.d.ts"
@@ -165,20 +181,20 @@
 
         "preview": "astro preview",
 
-        "scripts-tsc": "tsc --project .scripts/classes/tsconfig.json",
+        "x-scripts-tsc": "tsc --project .scripts/classes/tsconfig.json",
 
-        "precompile":     "npm run scripts-tsc",
-        "predoc":         "npm run scripts-tsc",
-        "predocument":    "npm run scripts-tsc",
-        "prebuild":       "npm run scripts-tsc",
-        "prequick-build": "npm run scripts-tsc",
-        "prestart":       "npm run scripts-tsc",
-        "prepackage":     "npm run scripts-tsc",
-        "predryrun":      "npm run scripts-tsc",
-        "prerelease":     "npm run scripts-tsc",
+        "x-precompile":     "npm run scripts-tsc",
+        "x-predoc":         "npm run scripts-tsc",
+        "x-predocument":    "npm run scripts-tsc",
+        "x-prebuild":       "npm run scripts-tsc",
+        "x-prequick-build": "npm run scripts-tsc",
+        "x-prestart":       "npm run scripts-tsc",
+        "x-prepackage":     "npm run scripts-tsc",
+        "x-predryrun":      "npm run scripts-tsc",
+        "x-prerelease":     "npm run scripts-tsc",
         
         
-        "x-prestart": "npm run scripts-tsc && build-utils build -- --without minimize,prettify --without-document astro",
+        "xx-prestart": "npm run scripts-tsc && build-utils build -- --without minimize,prettify --without-document astro",
 
         "start": "run-p watch:* start:*",
             "watch:astro": "watch                                                            -p 'src/astro/**/*'     -c 'build-utils compile --only astro --watchedWatcher \"watch:astro\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",

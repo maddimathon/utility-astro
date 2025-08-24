@@ -1,0 +1,16 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'config';
+
+@if not config.$internal_supressCredit {
+    /*!
+     * This stylesheet includes css generated using 
+     * @maddimathon/utility-astro@___CURRENT_VERSION___
+     * 
+     * Author: Maddi Mathon (www.maddimathon.com)
+     * License: MIT
+     */
+}

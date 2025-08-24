@@ -3,6 +3,11 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '_utility-sass' hide $internal_supressCredit;
+@forward 'config';
+@forward 'tokens';
 
-@forward 'internal';
+@forward '_header';
+
+@forward 'lib';
+
+@forward '_footer';

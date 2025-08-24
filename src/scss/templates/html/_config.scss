@@ -6,9 +6,7 @@
 @use 'sass:string';
 
 @forward '../../config' with (
-    $internalAstro_supressCredit: true,
-
-    $include_html: true !default,
+    $internal_supressCredit: true,
 
     $include_featureCheck: true !default,
 

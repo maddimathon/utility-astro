@@ -6,12 +6,9 @@
 @forward 'config';
 @forward 'tokens';
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base';
+@forward 'pkg:@maddimathon/utility-sass/templates/html' hide
+    $internal_supressCredit;
 
 @forward '_header';
 
 @forward '_footer';
-
-.page-title {
-    @extend %title;
-}

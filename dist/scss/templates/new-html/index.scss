@@ -3,6 +3,11 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '_utility-sass' hide $internal_supressCredit;
+@forward 'config';
+@forward 'tokens';
 
-@forward 'internal';
+@forward '_header';
+
+@forward 'lib';
+
+@forward '_footer';

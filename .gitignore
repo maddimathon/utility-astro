@@ -7,7 +7,6 @@
 # ======= #
 .scripts/logs/
 .scripts/templates/
-.scripts/classes/**/*.js
 
 
 # RELEASES
