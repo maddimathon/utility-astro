@@ -4,5 +4,8 @@
 ///
 
 @forward '../../../config' with (
-    $internal_supressCredit: true
+    $include_featureCheck: true !default,
+    $internal_supressCredit: true,
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
 );

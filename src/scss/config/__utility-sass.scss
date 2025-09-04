@@ -3,7 +3,9 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/templates/html/config' with (
+@forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $include_html: true,
+    $include_normalize: true !default,
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default
 );

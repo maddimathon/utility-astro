@@ -3,4 +3,8 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '_utility-sass';
+@use '../lib' as *;
+
+.page-title {
+    @extend %title;
+}

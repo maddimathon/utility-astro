@@ -3,7 +3,9 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/templates/html/config' with (
+@forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $include_html: true,
+    $include_normalize: true !default,
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default
 );

@@ -224,16 +224,16 @@
     },
     
     "dependencies": {
-        "@astrojs/check": "^0.9.4",
         "@astrojs/prism": "^3.3.0",
         "@maddimathon/utility-sass": "file:../utility-sass",
-        "@maddimathon/utility-typescript": "2.0.0-beta",
+        "@maddimathon/utility-typescript": "file:../utility-typescript",
         "astro": "^5.13.2",
         "luxon": "^3.7.1",
         "sass": "^1.90.0",
         "zod": "^3.24.4"
     },
     "devDependencies": {
+        "@astrojs/check": "^0.9.4",
         "@astrojs/ts-plugin": "1.10.4",
         "@maddimathon/build-utilities": "0.2.0-alpha.3",
         "@types/jest": "30.0.0",
@@ -249,12 +249,16 @@
     },
 
     "peerDependencies": {
-        "astro": "^5.13.2",
-        "sass": "^1.90.0",
+        "@astrojs/prism": "^3.3.0",
+        "@maddimathon/utility-sass": "^0.1.0",
+        "@maddimathon/utility-typescript": "^2.0.0-beta",
+        "astro": "^5.13.4",
+        "sass": "^1.91.0",
         "zod": "^3.24.4"
     },
     "peerDependenciesMeta": {
-        "astro": {
+
+        "@astrojs/prism": {
             "optional": true
         },
 

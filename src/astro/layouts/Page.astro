@@ -8,8 +8,8 @@
 
 /* import - types */
 import type {
-    PartialExcept,
-} from '@maddimathon/utility-typescript/types/objects';
+    Objects,
+} from '@maddimathon/utility-typescript/types';
 
 /* import - functions */
 import { DateTime } from 'luxon';
@@ -45,7 +45,7 @@ const menus: {
 
 if ( p.primaryMenu ) {
 
-    let _menu: PartialExcept<NavMenuProps, "menu">;
+    let _menu: Objects.PartialExcept<NavMenuProps, "menu">;
     
     if ( Array.isArray( p.primaryMenu ) ) {
         _menu = {
@@ -64,7 +64,7 @@ if ( p.primaryMenu ) {
 
 if ( p.secondaryMenu ) {
 
-    let _menu: PartialExcept<NavMenuProps, "menu">;
+    let _menu: Objects.PartialExcept<NavMenuProps, "menu">;
     
     if ( Array.isArray( p.secondaryMenu ) ) {
         _menu = {

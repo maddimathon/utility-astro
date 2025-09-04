@@ -16,7 +16,7 @@ import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
 import type { Props as Page_MetaProps } from '../components/Page_Meta.d.ts';
 import type { Props as SettingsMenuProps } from '../components/SettingsMenu.d.ts';
 import type { Props as SkipLinksProps } from '../components/SkipLinks.d.ts';
-import type { PartialExcept } from '@maddimathon/utility-typescript/types/objects/partial';
+import type { Objects } from '@maddimathon/utility-typescript/types';
 
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
@@ -141,7 +141,7 @@ export type Props = GenericProps<{
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "menu">;
+    primaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -151,7 +151,7 @@ export type Props = GenericProps<{
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "menu">;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
 
     /**
      * Whether to inlcude each settings group.

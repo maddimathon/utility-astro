@@ -3,4 +3,8 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '_utility-sass';
+@use '../lib' as *;
+
+.page-title {
+    @extend %title;
+}

@@ -6,7 +6,7 @@
 @forward 'config';
 @forward 'tokens';
 
-@forward 'pkg:@maddimathon/utility-sass/templates/html' hide
+@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
     $internal_supressCredit;
 
 @forward '_header';
