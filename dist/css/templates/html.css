@@ -1,6 +1,12 @@
 @charset "UTF-8";
 /*!
- * Utility Sass Template — Global
+ * Utility Astro Template — HTML
+ * 
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * License: MIT
+ */
+/*!
+ * Utility Sass Template — Base
  * 
  * @maddimathon/utility-sass@0.1.0-alpha.draft
  * License: MIT
@@ -20,7 +26,7 @@ Use a better box model (opinionated).
     box-sizing: border-box;
 }
 
-html {
+:root {
     /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
     /* font-family:
       system-ui,
@@ -201,29 +207,29 @@ summary {
 }
 
 /*! end of modern-normalize */
-html {
+:root {
     color-scheme: light, dark;
 }
-html:has(> [data-brightness-mode="light"]) {
+:root:has(> [data-brightness-mode="light"]) {
     color-scheme: light;
 }
 
 @media (prefers-color-scheme: light) {
-    html {
+    :root {
         color-scheme: light;
     }
 }
-html:has(> [data-brightness-mode="dark"]) {
+:root:has(> [data-brightness-mode="dark"]) {
     color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
-    html {
+    :root {
         color-scheme: dark;
     }
 }
 
-html {
+:root {
     font-family:
         system-ui,
         -apple-system,
@@ -243,7 +249,7 @@ html {
     font-size: 115%;
 }
 @media (min-width: 50em) {
-    html {
+    :root {
         font-size: 105%;
     }
 }
@@ -261,7 +267,7 @@ pre {
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
 /* #region Tokens - Width */
-html {
+:root {
     --width-content: 36rem;
     --width-sidebar: 17rem;
     --width-callout: 29.25rem;
@@ -270,7 +276,7 @@ html {
 
 /* #endregion Tokens - Width */
 /* #region Tokens - Margin */
-html {
+:root {
     --mrg-firm-100: 0.3125rem;
     --mrg-firm-200: 0.5rem;
     --mrg-firm-300: 0.8125rem;
@@ -279,7 +285,7 @@ html {
     --mrg-firm-800: 4rem;
 }
 
-html {
+:root {
     --mrg-soft-100: 0.1875rem;
     --mrg-soft-200: 0.3125rem;
     --mrg-soft-300: 0.5rem;
@@ -288,7 +294,7 @@ html {
     --mrg-soft-800: 2.5rem;
 }
 
-html {
+:root {
     --mrg-half-100: 0.125rem;
     --mrg-half-200: 0.1875rem;
     --mrg-half-300: 0.3125rem;
@@ -299,7 +305,7 @@ html {
 
 /* #endregion Tokens - Margin */
 /* #region Tokens - Font Size */
-html {
+:root {
     --fs-title: 2.75rem;
     --fs-title: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
     --fs-heading-1: 2.375rem;
@@ -327,7 +333,7 @@ html {
 
 /* #endregion Tokens - Font Size */
 /* #region Tokens - Line Heights */
-html {
+:root {
     --line-height-100: 1.1875;
     --line-height-200: 1.3125;
     --line-height-300: 1.4375;
@@ -338,7 +344,7 @@ html {
 
 /* #endregion Tokens - Line Heights */
 /* #region Tokens - Border Width */
-html {
+:root {
     --border-width-100: 0.0625rem;
     --border-width-200: 0.125rem;
     --border-width-300: 0.1875rem;
@@ -347,7 +353,7 @@ html {
 
 /* #endregion Tokens - Border Width */
 /* #region Tokens - Stroke Relative */
-html {
+:root {
     --stroke-relative-100: 0.03125em;
     --stroke-relative-200: 0.0625em;
     --stroke-relative-400: 0.125em;
@@ -358,7 +364,7 @@ html {
 
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
-html {
+:root {
     --focus-ring-outline-width: 0.125rem;
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-color: AccentColor;
@@ -368,18 +374,8 @@ html {
 /* # ACCESSIBILITY
  * ======================================================================== */
 .no-js :focus,
-.js__no-where-selector :focus {
-    outline: var(--focus-ring-outline-width, 0.125rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
-    outline-offset: var(--focus-ring-outline-offset, 0.125em);
-}
-
-:where(.js__no-focus-visible) :focus {
-    outline: var(--focus-ring-outline-width, 0.125rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
-    outline-offset: var(--focus-ring-outline-offset, 0.125em);
-}
-
+.js__no-where-selector :focus,
+:where(.js__no-focus-visible) :focus,
 :focus-visible {
     outline: var(--focus-ring-outline-width, 0.125rem) dashed
         var(--focus-ring-outline-color, AccentColor);
@@ -420,8 +416,6 @@ body {
 
 hr {
     display: block;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-left: auto;
     margin-right: auto;
     width: -moz-fit-content;
@@ -439,7 +433,7 @@ hr {
 
 /* # TYPOGRAPHY
  * ======================================================================== */
-html {
+:root {
     line-height: var(--line-height-400, 1.6875);
 }
 
@@ -547,8 +541,6 @@ hr + p {
 
 blockquote {
     display: block;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-left: auto;
     margin-right: auto;
     width: -moz-fit-content;
@@ -596,8 +588,6 @@ blockquote > cite::before {
 
 pre {
     display: block;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-left: auto;
     margin-right: auto;
     width: -moz-fit-content;
@@ -626,16 +616,8 @@ pre > code {
 }
 
 /* ## Typography - Headings ==================================== */
-.heading {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
-    margin-bottom: 0;
-    font-weight: 600;
-    font-size: var(--fs-bigger-1, 1.1875rem);
-    text-wrap: balance;
-}
-
 h1,
-.h1 {
+.page-title {
     margin-top: var(--mrg-soft-600, 1.4375rem);
     margin-bottom: 0;
     font-weight: 900;
@@ -644,8 +626,7 @@ h1,
     text-wrap: balance;
 }
 
-h2,
-.h2 {
+h2 {
     margin-top: var(--mrg-soft-800, 2.5rem);
     margin-bottom: 0;
     font-weight: 800;
@@ -654,8 +635,7 @@ h2,
     text-wrap: balance;
 }
 
-h3,
-.h3 {
+h3 {
     margin-top: var(--mrg-soft-800, 2.5rem);
     margin-bottom: 0;
     font-weight: 700;
@@ -664,8 +644,7 @@ h3,
     text-wrap: balance;
 }
 
-h4,
-.h4 {
+h4 {
     margin-top: var(--mrg-soft-600, 1.4375rem);
     margin-bottom: 0;
     font-weight: 700;
@@ -675,8 +654,7 @@ h4,
     text-wrap: balance;
 }
 
-h5,
-.h5 {
+h5 {
     margin-top: var(--mrg-soft-600, 1.4375rem);
     margin-bottom: 0;
     font-weight: 600;
@@ -686,8 +664,7 @@ h5,
     text-wrap: balance;
 }
 
-h6,
-.h6 {
+h6 {
     margin-top: var(--mrg-soft-600, 1.4375rem);
     margin-bottom: 0;
     font-weight: 500;
@@ -794,12 +771,61 @@ li li li li em {
 /* # FORMS
  * ======================================================================== */
 fieldset {
-    margin: 0;
-    padding: 0;
-    border: none;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
+        var(--mrg-firm-300, 0.8125rem);
+    border: 0.0625rem solid AccentColor;
+    border-radius: 0;
+    background-color: Canvas;
+    color: CanvasText;
+}
+.no-js fieldset:focus,
+.js__no-where-selector fieldset:focus {
+    border-color: ActiveText;
+}
+
+:where(.js__no-focus-visible) fieldset:focus {
+    border-color: ActiveText;
+}
+
+fieldset:focus-visible {
+    border-color: ActiveText;
+}
+
+fieldset:focus-within {
+    border-color: ActiveText;
+}
+
+fieldset:active {
+    border-color: AccentColor;
 }
 fieldset legend {
+    display: block;
+}
+fieldset > :first-child {
+    margin-top: 0;
+    margin-top: calc(
+        var(--mrg-soft-400, 0.8125rem) - var(--mrg-soft-200, 0.3125rem)
+    );
+}
+fieldset > legend + * {
+    margin-top: 0;
+}
+
+fieldset legend {
+    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-bottom: 0;
     font-weight: 600;
+    font-size: var(--fs-bigger-1, 1.1875rem);
+    text-wrap: balance;
+    margin: 0;
+    margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-soft-300, 0.5rem);
+    padding-right: var(--mrg-soft-300, 0.5rem);
+    font-style: italic;
 }
 
 textarea,
@@ -1036,14 +1062,12 @@ textarea {
     cursor: text;
 }
 
-a.button,
+/* ## Forms - Buttons ==================================== */
 button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
-a.button-secondary,
-.button-secondary,
 ::file-selector-button {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -1058,21 +1082,17 @@ a.button-secondary,
     color: ButtonText;
     accent-color: ButtonText;
 }
-.no-js a.button:focus,
 .no-js button:focus,
 .no-js [role="button"]:focus,
 .no-js input[type="button"]:focus,
 .no-js input[type="submit"]:focus,
 .no-js input[type="reset"]:focus,
-.no-js .button-secondary:focus,
 .no-js :focus::file-selector-button,
-.js__no-where-selector a.button:focus,
 .js__no-where-selector button:focus,
 .js__no-where-selector [role="button"]:focus,
 .js__no-where-selector input[type="button"]:focus,
 .js__no-where-selector input[type="submit"]:focus,
 .js__no-where-selector input[type="reset"]:focus,
-.js__no-where-selector .button-secondary:focus,
 .js__no-where-selector :focus::file-selector-button {
     background-color: SelectedItem;
     border-color: SelectedItem;
@@ -1080,31 +1100,24 @@ a.button-secondary,
     accent-color: ButtonText;
     opacity: 0.875;
 }
-[data-contrast-mode="high"] .no-js a.button:focus,
 [data-contrast-mode="high"] .no-js button:focus,
 [data-contrast-mode="high"] .no-js [role="button"]:focus,
 [data-contrast-mode="high"] .no-js input[type="button"]:focus,
 [data-contrast-mode="high"] .no-js input[type="submit"]:focus,
 [data-contrast-mode="high"] .no-js input[type="reset"]:focus,
-[data-contrast-mode="high"] .no-js .button-secondary:focus,
 [data-contrast-mode="high"] .no-js :focus::file-selector-button,
-[data-contrast-mode="high"] .js__no-where-selector a.button:focus,
 [data-contrast-mode="high"] .js__no-where-selector button:focus,
 [data-contrast-mode="high"] .js__no-where-selector [role="button"]:focus,
 [data-contrast-mode="high"] .js__no-where-selector input[type="button"]:focus,
 [data-contrast-mode="high"] .js__no-where-selector input[type="submit"]:focus,
 [data-contrast-mode="high"] .js__no-where-selector input[type="reset"]:focus,
-[data-contrast-mode="high"] .js__no-where-selector .button-secondary:focus,
 [data-contrast-mode="high"] .js__no-where-selector :focus::file-selector-button,
-[data-contrast-mode="forced-colors"] .no-js a.button:focus,
 [data-contrast-mode="forced-colors"] .no-js button:focus,
 [data-contrast-mode="forced-colors"] .no-js [role="button"]:focus,
 [data-contrast-mode="forced-colors"] .no-js input[type="button"]:focus,
 [data-contrast-mode="forced-colors"] .no-js input[type="submit"]:focus,
 [data-contrast-mode="forced-colors"] .no-js input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"] .no-js .button-secondary:focus,
 [data-contrast-mode="forced-colors"] .no-js :focus::file-selector-button,
-[data-contrast-mode="forced-colors"] .js__no-where-selector a.button:focus,
 [data-contrast-mode="forced-colors"] .js__no-where-selector button:focus,
 [data-contrast-mode="forced-colors"]
     .js__no-where-selector
@@ -1120,9 +1133,6 @@ a.button-secondary,
     input[type="reset"]:focus,
 [data-contrast-mode="forced-colors"]
     .js__no-where-selector
-    .button-secondary:focus,
-[data-contrast-mode="forced-colors"]
-    .js__no-where-selector
     :focus::file-selector-button {
     opacity: 1;
 }
@@ -1130,33 +1140,27 @@ a.button-secondary,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    .no-js a.button:focus,
     .no-js button:focus,
     .no-js [role="button"]:focus,
     .no-js input[type="button"]:focus,
     .no-js input[type="submit"]:focus,
     .no-js input[type="reset"]:focus,
-    .no-js .button-secondary:focus,
     .no-js :focus::file-selector-button,
-    .js__no-where-selector a.button:focus,
     .js__no-where-selector button:focus,
     .js__no-where-selector [role="button"]:focus,
     .js__no-where-selector input[type="button"]:focus,
     .js__no-where-selector input[type="submit"]:focus,
     .js__no-where-selector input[type="reset"]:focus,
-    .js__no-where-selector .button-secondary:focus,
     .js__no-where-selector :focus::file-selector-button {
         opacity: 1;
     }
 }
 
-:where(.js__no-focus-visible) a.button:focus,
 :where(.js__no-focus-visible) button:focus,
 :where(.js__no-focus-visible) [role="button"]:focus,
 :where(.js__no-focus-visible) input[type="button"]:focus,
 :where(.js__no-focus-visible) input[type="submit"]:focus,
 :where(.js__no-focus-visible) input[type="reset"]:focus,
-:where(.js__no-focus-visible) .button-secondary:focus,
 :where(.js__no-focus-visible) :focus::file-selector-button {
     background-color: SelectedItem;
     border-color: SelectedItem;
@@ -1164,7 +1168,6 @@ a.button-secondary,
     accent-color: ButtonText;
     opacity: 0.875;
 }
-[data-contrast-mode="high"] :where(.js__no-focus-visible) a.button:focus,
 [data-contrast-mode="high"] :where(.js__no-focus-visible) button:focus,
 [data-contrast-mode="high"] :where(.js__no-focus-visible) [role="button"]:focus,
 [data-contrast-mode="high"]
@@ -1178,13 +1181,7 @@ a.button-secondary,
     input[type="reset"]:focus,
 [data-contrast-mode="high"]
     :where(.js__no-focus-visible)
-    .button-secondary:focus,
-[data-contrast-mode="high"]
-    :where(.js__no-focus-visible)
     :focus::file-selector-button,
-[data-contrast-mode="forced-colors"]
-    :where(.js__no-focus-visible)
-    a.button:focus,
 [data-contrast-mode="forced-colors"] :where(.js__no-focus-visible) button:focus,
 [data-contrast-mode="forced-colors"]
     :where(.js__no-focus-visible)
@@ -1200,9 +1197,6 @@ a.button-secondary,
     input[type="reset"]:focus,
 [data-contrast-mode="forced-colors"]
     :where(.js__no-focus-visible)
-    .button-secondary:focus,
-[data-contrast-mode="forced-colors"]
-    :where(.js__no-focus-visible)
     :focus::file-selector-button {
     opacity: 1;
 }
@@ -1210,25 +1204,21 @@ a.button-secondary,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    :where(.js__no-focus-visible) a.button:focus,
     :where(.js__no-focus-visible) button:focus,
     :where(.js__no-focus-visible) [role="button"]:focus,
     :where(.js__no-focus-visible) input[type="button"]:focus,
     :where(.js__no-focus-visible) input[type="submit"]:focus,
     :where(.js__no-focus-visible) input[type="reset"]:focus,
-    :where(.js__no-focus-visible) .button-secondary:focus,
     :where(.js__no-focus-visible) :focus::file-selector-button {
         opacity: 1;
     }
 }
 
-a.button:hover,
 button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
-.button-secondary:hover,
 :hover::file-selector-button {
     background-color: SelectedItem;
     border-color: SelectedItem;
@@ -1236,21 +1226,17 @@ input[type="reset"]:hover,
     accent-color: ButtonText;
     opacity: 0.875;
 }
-[data-contrast-mode="high"] a.button:hover,
 [data-contrast-mode="high"] button:hover,
 [data-contrast-mode="high"] [role="button"]:hover,
 [data-contrast-mode="high"] input[type="button"]:hover,
 [data-contrast-mode="high"] input[type="submit"]:hover,
 [data-contrast-mode="high"] input[type="reset"]:hover,
-[data-contrast-mode="high"] .button-secondary:hover,
 [data-contrast-mode="high"] :hover::file-selector-button,
-[data-contrast-mode="forced-colors"] a.button:hover,
 [data-contrast-mode="forced-colors"] button:hover,
 [data-contrast-mode="forced-colors"] [role="button"]:hover,
 [data-contrast-mode="forced-colors"] input[type="button"]:hover,
 [data-contrast-mode="forced-colors"] input[type="submit"]:hover,
 [data-contrast-mode="forced-colors"] input[type="reset"]:hover,
-[data-contrast-mode="forced-colors"] .button-secondary:hover,
 [data-contrast-mode="forced-colors"] :hover::file-selector-button {
     opacity: 1;
 }
@@ -1258,25 +1244,21 @@ input[type="reset"]:hover,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    a.button:hover,
     button:hover,
     [role="button"]:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     input[type="reset"]:hover,
-    .button-secondary:hover,
     :hover::file-selector-button {
         opacity: 1;
     }
 }
 
-a.button:focus-visible,
 button:focus-visible,
 [role="button"]:focus-visible,
 input[type="button"]:focus-visible,
 input[type="submit"]:focus-visible,
 input[type="reset"]:focus-visible,
-.button-secondary:focus-visible,
 :focus-visible::file-selector-button {
     background-color: SelectedItem;
     border-color: SelectedItem;
@@ -1284,21 +1266,17 @@ input[type="reset"]:focus-visible,
     accent-color: ButtonText;
     opacity: 0.875;
 }
-[data-contrast-mode="high"] a.button:focus-visible,
 [data-contrast-mode="high"] button:focus-visible,
 [data-contrast-mode="high"] [role="button"]:focus-visible,
 [data-contrast-mode="high"] input[type="button"]:focus-visible,
 [data-contrast-mode="high"] input[type="submit"]:focus-visible,
 [data-contrast-mode="high"] input[type="reset"]:focus-visible,
-[data-contrast-mode="high"] .button-secondary:focus-visible,
 [data-contrast-mode="high"] :focus-visible::file-selector-button,
-[data-contrast-mode="forced-colors"] a.button:focus-visible,
 [data-contrast-mode="forced-colors"] button:focus-visible,
 [data-contrast-mode="forced-colors"] [role="button"]:focus-visible,
 [data-contrast-mode="forced-colors"] input[type="button"]:focus-visible,
 [data-contrast-mode="forced-colors"] input[type="submit"]:focus-visible,
 [data-contrast-mode="forced-colors"] input[type="reset"]:focus-visible,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-visible,
 [data-contrast-mode="forced-colors"] :focus-visible::file-selector-button {
     opacity: 1;
 }
@@ -1306,25 +1284,21 @@ input[type="reset"]:focus-visible,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    a.button:focus-visible,
     button:focus-visible,
     [role="button"]:focus-visible,
     input[type="button"]:focus-visible,
     input[type="submit"]:focus-visible,
     input[type="reset"]:focus-visible,
-    .button-secondary:focus-visible,
     :focus-visible::file-selector-button {
         opacity: 1;
     }
 }
 
-a.button:focus-within,
 button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
 input[type="submit"]:focus-within,
 input[type="reset"]:focus-within,
-.button-secondary:focus-within,
 :focus-within::file-selector-button {
     background-color: SelectedItem;
     border-color: SelectedItem;
@@ -1332,21 +1306,17 @@ input[type="reset"]:focus-within,
     accent-color: ButtonText;
     opacity: 0.875;
 }
-[data-contrast-mode="high"] a.button:focus-within,
 [data-contrast-mode="high"] button:focus-within,
 [data-contrast-mode="high"] [role="button"]:focus-within,
 [data-contrast-mode="high"] input[type="button"]:focus-within,
 [data-contrast-mode="high"] input[type="submit"]:focus-within,
 [data-contrast-mode="high"] input[type="reset"]:focus-within,
-[data-contrast-mode="high"] .button-secondary:focus-within,
 [data-contrast-mode="high"] :focus-within::file-selector-button,
-[data-contrast-mode="forced-colors"] a.button:focus-within,
 [data-contrast-mode="forced-colors"] button:focus-within,
 [data-contrast-mode="forced-colors"] [role="button"]:focus-within,
 [data-contrast-mode="forced-colors"] input[type="button"]:focus-within,
 [data-contrast-mode="forced-colors"] input[type="submit"]:focus-within,
 [data-contrast-mode="forced-colors"] input[type="reset"]:focus-within,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-within,
 [data-contrast-mode="forced-colors"] :focus-within::file-selector-button {
     opacity: 1;
 }
@@ -1354,39 +1324,32 @@ input[type="reset"]:focus-within,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    a.button:focus-within,
     button:focus-within,
     [role="button"]:focus-within,
     input[type="button"]:focus-within,
     input[type="submit"]:focus-within,
     input[type="reset"]:focus-within,
-    .button-secondary:focus-within,
     :focus-within::file-selector-button {
         opacity: 1;
     }
 }
 
-a.button:active,
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
 input[type="submit"]:active,
 input[type="reset"]:active,
-.button-secondary:active,
 :active::file-selector-button {
     background-color: ButtonFace;
     border-color: ButtonBorder;
     color: ButtonText;
     accent-color: ActiveText;
 }
-a.button,
 button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
-a.button-secondary,
-.button-secondary,
 ::file-selector-button {
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -1440,11 +1403,46 @@ label > input[type="radio"] {
 
 /* # TABLES
  * ======================================================================== */
+table {
+    position: relative;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.4375rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    background: AccentColor;
+    width: min(var(--width-page, 53rem), 100%);
+}
+
+table {
+    border-spacing: var(--border-width-200, 0.125rem);
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+th,
+td {
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    min-width: 10em;
+    background: Canvas;
+    vertical-align: top;
+    text-align: left;
+}
+th > :first-child,
+td > :first-child {
+    margin-top: 0;
+}
+th > :last-child,
+td > :last-child {
+    margin-bottom: 0;
+}
+
+th {
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    background: AccentColor;
+    color: AccentColorText;
+}
+
 /*! end of @maddimathon/utility-sass/templates/base */
-/*!
- * Utility Astro Template — HTML
- * 
- * @maddimathon/utility-astro@0.1.0-alpha.draft
- * License: MIT
- */
-/*! end of @maddimathon/utility-astro template */
+/*! end of @maddimathon/utility-astro/templates/html */

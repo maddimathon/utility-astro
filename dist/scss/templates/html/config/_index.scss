@@ -6,6 +6,12 @@
 @forward '../../../config' with (
     $include_featureCheck: true !default,
     $internal_supressCredit: true,
+
+    $print_globals: true !default,
+    $print_normalize: true !default,
+    $print_tokens: true !default,
+    $print_utils: false !default,
+
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default
 );

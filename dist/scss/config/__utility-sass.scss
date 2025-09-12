@@ -5,7 +5,12 @@
 
 @forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
     $include_html: true,
-    $include_normalize: true !default,
+
+    $print_globals: false !default,
+    $print_normalize: false !default,
+    $print_tokens: false !default,
+    $print_utils: false !default,
+
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default
 );

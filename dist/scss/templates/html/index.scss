@@ -6,9 +6,9 @@
 @forward 'config';
 @forward 'tokens';
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
-    $internal_supressCredit;
-
 @forward '_header';
+
+@forward 'lib';
+@forward '_content';
 
 @forward '_footer';
