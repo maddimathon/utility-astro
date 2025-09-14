@@ -11,15 +11,17 @@ import type {
     Objects,
 } from '@maddimathon/utility-typescript/types';
 
-/* import - functions */
-import { DateTime } from 'luxon';
-import {
-    mergeArgs,
-} from '@maddimathon/utility-typescript/functions';
-import { FeatureCheck } from '@maddimathon/utility-sass';
-
 import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
 import type { Props } from './Page.d.ts';
+
+/* import - functions */
+import { DateTime } from 'luxon';
+import { mergeArgs } from '@maddimathon/utility-typescript/functions';
+import { FeatureCheck } from '@maddimathon/utility-sass';
+
+import { mapToObject } from '../../ts/01-functions/mapToObject.js';
+import Toggle_Scripts from '../support/Toggle_Scripts.astro';
+import Toggle_Styles from '../support/Toggle_Styles.astro';
 
 /* import - components */
 import Page_Meta from '../components/Page_Meta.astro';
@@ -83,10 +85,16 @@ if ( p.secondaryMenu ) {
 
 const support = mergeArgs(
     {
+        elementToggle: true,
+        featureCheck: true,
         settings: true,
     } as Required<Required<Props>['support']>,
     p.support,
 );
+
+if ( support.settings ) {
+    support.elementToggle = true; // required for settings
+}
 
 
 /** ## CONSTANTS ==================================== **/
@@ -96,10 +104,36 @@ const support = mergeArgs(
 /**
  * Rendered slot HTML.
  */
-const slots = {
-    footer: Astro.slots.has('footer') && await Astro.slots.render('footer'),
-    header: Astro.slots.has('header') && await Astro.slots.render('header'),
-};
+const slots_render = mapToObject(
+    await Promise.all(
+        ( [
+            'afterFooter',
+            'afterHeader',
+            'afterPrimaryNav',
+            'beforeFooter',
+            'beforeHeader',
+            'beforePrimaryNav',
+            'bodyClose',
+            'bodyOpen',
+            'footer',
+            'footerScripts',
+            'headClose',
+            'header',
+            'headOpen',
+        ] as const ).map( async ( _key ) => {
+
+            const _kebab = _key.replace(
+                /([a-z0-9])([A-Z])/g,
+                ( _v, _cap1, _cap2 ) => _cap1 + '-' + _cap2.toLowerCase()
+            );
+
+            return [
+                _key,
+                Astro.slots.has( _kebab ) && await Astro.slots.render( _kebab ) || false
+            ] as const
+        } )
+    )
+);
 
 /**
  * Sections/components to include or not.
@@ -109,13 +143,13 @@ const include = {
     footer: p.footer && ( 
         p.footer.copyright
         || p.footer.designedBy
-        || slots.footer
+        || slots_render.footer
     ),
     
     header: p.header && ( 
         p.header.title 
         || p.header.tagline
-        || slots.header
+        || slots_render.header
     ),
 };
 
@@ -143,7 +177,7 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
     { ...p.attrs?.html ?? {} }
 
     lang={p.lang}
-    dir={p.dir}
+    dir={p.dir ?? 'auto'}
 
     class:list={ [
         featureClasses,
@@ -161,17 +195,21 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <meta property="og:locale" content={p.lang} />
+        { p.lang && <meta property="og:locale" content={p.lang} /> }
 
-        <!-- SLOT: "head-open" -->
-        <slot name="head-open" />
-        <!-- /SLOT: "head-open" -->
+        { slots_render.headOpen ? (
+            <!-- SLOT: "head-open" -->
+            <slot name="head-open" />
+            <!-- /SLOT: "head-open" -->
+        ) : <!-- SLOT: "head-open" (empty) / --> }
 
         <Page_Meta {...p.meta} />
 
-        <!-- SLOT: "head-close" -->
-        <slot name="head-close" />
-        <!-- /SLOT: "head-close" -->
+        { slots_render.headClose ? (
+            <!-- SLOT: "head-close" -->
+            <slot name="head-close" />
+            <!-- /SLOT: "head-close" -->
+        ) : <!-- SLOT: "head-close" (empty) / --> }
     </head>
 
     <body 
@@ -183,6 +221,12 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
     >
         { p.skipLinks && <SkipLinks links={p.skipLinks} /> }
 
+        { slots_render.bodyOpen ? (
+            <!-- SLOT: "body-open" -->
+            <slot name="body-open" />
+            <!-- /SLOT: "body-open" -->
+        ) : <!-- SLOT: "body-open" (empty) / --> }
+
         { support.settings && <SettingsMenu
             accessibilityReportEmail={p.accessibilityReportEmail}
             privacyPolicy={p.privacyPolicy}
@@ -192,20 +236,18 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
             <slot name="settings-menu-close" slot="settings-menu-close" />
         </SettingsMenu> }
 
-        <!-- SLOT: "body-open" -->
-        <slot name="body-open" />
-        <!-- /SLOT: "body-open" -->
-
-        <!-- SLOT: "before-header" -->
-        <slot name="before-header" />
-        <!-- /SLOT: "before-header" -->
+        { slots_render.beforeHeader ? (
+            <!-- SLOT: "before-header" -->
+            <slot name="before-header" />
+            <!-- /SLOT: "before-header" -->
+        ) : <!-- SLOT: "before-header" (empty) / --> }
         
-        { p.header && include.header && (
+        { include.header && (
             <header class="site-header">
-                { p.header.title && <h1 class="site-title" set:text={p.header.title} /> }
-                { p.header.tagline && <p class="site-tagline" set:text={p.header.tagline} /> }
+                { p.header?.title && <h1 class="site-title" set:text={p.header.title} /> }
+                { p.header?.tagline && <p class="site-tagline" set:text={p.header.tagline} /> }
 
-                { slots.header ? (
+                { slots_render.header ? (
                     <!-- SLOT: "header" -->
                     <slot name="header" />
                     <!-- /SLOT: "header" -->
@@ -214,30 +256,40 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
         ) }
 
         { menus.primary && menus.primary.menu.length > 0 && (
-            <!-- SLOT: "before-primary-nav" -->
-            <slot name="before-primary-nav" />
-            <!-- /SLOT: "before-primary-nav" -->
-            <NavMenu {...menus.primary} class:list="nav-primary" />
-            <!-- SLOT: "after-primary-nav" -->
-            <slot name="after-primary-nav" />
-            <!-- /SLOT: "after-primary-nav" -->
+            <Fragment>
+                { slots_render.beforePrimaryNav ? (
+                    <!-- SLOT: "before-primary-nav" -->
+                    <slot name="before-primary-nav" />
+                    <!-- /SLOT: "before-primary-nav" -->
+                ) : <!-- SLOT: "before-primary-nav" (empty) / --> }
+                <NavMenu {...menus.primary} class:list="nav-primary" />
+                { slots_render.afterPrimaryNav ? (
+                    <!-- SLOT: "after-primary-nav" -->
+                    <slot name="after-primary-nav" />
+                    <!-- /SLOT: "after-primary-nav" -->
+                ) : <!-- SLOT: "after-primary-nav" (empty) / --> }
+            </Fragment>
         ) }
 
-        <!-- SLOT: "after-header" -->
-        <slot name="after-header" />
-        <!-- /SLOT: "after-header" -->
+        { slots_render.afterHeader ? (
+            <!-- SLOT: "after-header" -->
+            <slot name="after-header" />
+            <!-- /SLOT: "after-header" -->
+        ) : <!-- SLOT: "after-header" (empty) / --> }
 
         <!-- SLOT (main) -->
         <slot />
         <!-- /SLOT (main) -->
 
-        <!-- SLOT: "before-footer" -->
-        <slot name="before-footer" />
-        <!-- /SLOT: "before-footer" -->
+        { slots_render.beforeFooter ? (
+            <!-- SLOT: "before-footer" -->
+            <slot name="before-footer" />
+            <!-- /SLOT: "before-footer" -->
+        ) : <!-- SLOT: "before-footer" (empty) / --> }
         
         { p.footer && include.footer && (
             <footer class="site-footer">
-                { slots.footer ? (
+                { slots_render.footer ? (
                     <!-- SLOT: "footer" -->
                     <slot name="footer" />
                     <!-- /SLOT: "footer" -->
@@ -262,39 +314,32 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
             </footer>
         ) }
 
-        <!-- SLOT: "after-footer" -->
-        <slot name="after-footer" />
-        <!-- /SLOT: "after-footer" -->
+        { slots_render.afterFooter ? (
+            <!-- SLOT: "after-footer" -->
+            <slot name="after-footer" />
+            <!-- /SLOT: "after-footer" -->
+        ) : <!-- SLOT: "after-footer" (empty) / --> }
 
-        <!-- SLOT: "body-close" -->
-        <slot name="body-close" />
-        <!-- /SLOT: "body-close" -->
+        { slots_render.bodyClose ? (
+            <!-- SLOT: "body-close" -->
+            <slot name="body-close" />
+            <!-- /SLOT: "body-close" -->
+        ) : <!-- SLOT: "body-close" (empty) / --> }
 
-        <!-- SLOT: "footer-scripts" -->
-        <slot name="footer-scripts" />
-        <!-- /SLOT: "footer-scripts" -->
+        { slots_render.footerScripts ? (
+            <!-- SLOT: "footer-scripts" -->
+            <slot name="footer-scripts" />
+            <!-- /SLOT: "footer-scripts" -->
+        ) : <!-- SLOT: "footer-scripts" (empty) / --> }
+        
     </body>
 </html>
- 
-<style lang="scss" is:global>
-    @forward '../scss/toggles.scss';
-</style>
 
-<!-- <script src="../scripts/toggles.js"></script> -->
-<!-- <script src="../scripts/feature-check.js"></script> -->
-
-<script>
+{ support.featureCheck && <script>
     import { FeatureCheck } from '@maddimathon/utility-sass';
 
     // run the checks and update class names
     new FeatureCheck().check();
-</script>
+</script> }
 
-<script>
-    import { ElementToggle } from '../../ts/02-classes/ElementToggle.js';
-
-    window.addEventListener( 'load', () => {
-        const containers = document.querySelectorAll( '[data-toggle-container]' ) as NodeListOf<HTMLDivElement>;
-        containers.forEach( ( con ) => con.id && new ElementToggle( con.id ) );
-    } );
-</script>
+{ support.elementToggle && <Toggle_Styles /><Toggle_Scripts /> }

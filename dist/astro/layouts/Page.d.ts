@@ -44,9 +44,12 @@ export type Props = GenericProps<{
      */
     meta: Page_MetaProps;
 
-} & {
-    [ K in HTML_excludeAttributes ]?: HTMLAttributes<"html">[ K ];
-} & {
+    // } & {
+    dir?: "ltr" | "rtl" | "auto";
+    lang: string;
+    // } & {
+    //     [ K in Exclude<HTML_excludeAttributes, "dir" | "lang"> ]: HTMLAttributes<"html">[ K ];
+    // } & {
 
     /**
      * Email used for focus links to report accessibility issues.
@@ -167,6 +170,16 @@ export type Props = GenericProps<{
      * Varies features to turn on or off.
      */
     support?: {
+
+        /**
+         * @default true
+         */
+        elementToggle?: boolean;
+
+        /**
+         * @default true
+         */
+        featureCheck?: boolean;
 
         /**
          * @default true

@@ -1,12 +1,12 @@
 @charset "UTF-8";
 /*!
- * Utility Astro Template — HTML
+ * Utility Astro Template - HTML
  * 
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * License: MIT
  */
 /*!
- * Utility Sass Template — Base
+ * Utility Sass Template - Base
  * 
  * @maddimathon/utility-sass@0.1.0-alpha.draft
  * License: MIT
@@ -384,6 +384,15 @@ pre {
 
 /* # OBJECTS
  * ======================================================================== */
+:root,
+body {
+    scroll-padding-block-start: clamp(
+        var(--mrg-soft-200, 0.3125rem),
+        2.5vw * 0.625,
+        var(--mrg-soft-800, 2.5rem)
+    );
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -561,11 +570,13 @@ blockquote > cite {
     margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
     text-align: right;
-    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 blockquote > cite::before {
     content: "— ";
     color: currentColor;
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 [data-contrast-mode="high"] blockquote > cite {
     color: color-mix(in srgb, currentColor 87.5%, transparent);

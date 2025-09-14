@@ -1,0 +1,41 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+import Toggle_Styles from '../support/Toggle_Styles.astro';
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props {
+    /**
+     * Whether to include the toggle styles as well.
+     *
+     * @default true
+     */
+    toggle?: boolean;
+}
+
+const { toggle = true }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+{toggle && <Toggle_Styles />}
+
+<style lang='scss' is:global>
+    @forward '../css/settings-menu.css';
+</style>

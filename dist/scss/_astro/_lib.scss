@@ -1,0 +1,10 @@
+///
+/// Used in subdirs to easily reference the lib.
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward '../config';
+@forward '../tokens';
+@forward '../lib';

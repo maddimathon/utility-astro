@@ -1,0 +1,20 @@
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * 
+ * License: MIT
+ */
+/* # TOGGLE BLOCKS ==================================== */
+/* hello */
+.forced-colors-mode-only {
+    display: none !important;
+}
+[data-contrast-mode="forced-colors"] .forced-colors-mode-only {
+    display: var(--display, block) !important;
+}
+
+@media (forced-colors: active), (prefers-contrast: custom) {
+    .forced-colors-mode-only {
+        display: var(--display, block) !important;
+    }
+}

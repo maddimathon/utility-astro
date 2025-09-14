@@ -8,6 +8,9 @@
  * @license MIT
  */
 
+import { Props as ScriptsProps } from '../support/SettingsMenu_Scripts.astro';
+import { Props as StylesProps } from '../support/SettingsMenu_Styles.astro';
+
 /**
  * Input props for the SettingsMenu component.
  * 
@@ -55,4 +58,22 @@ export interface Props {
          */
         motion?: boolean;
     },
+
+    /**
+     * Whether to include the support scripts.
+     * 
+     * Use an object to enable scripts and pass settings.
+     * 
+     * @default true
+     */
+    scripts?: boolean | ScriptsProps;
+
+    /**
+     * Whether to include the support types.
+     * 
+     * Use an object to enable types and pass settings.
+     * 
+     * @default true
+     */
+    styles?: boolean | StylesProps;
 }

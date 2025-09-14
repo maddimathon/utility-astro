@@ -12,6 +12,9 @@ import type { Props as SettingsMenuProps } from './SettingsMenu.d.ts';
 /* import - functions */
 import { absoluteInternalURL } from '../functions/index.js';
 
+import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
+import SettingsMenu_Styles from '../support/SettingsMenu_Styles.astro';
+
 /* import - values */
 
 /* import - components */
@@ -28,10 +31,16 @@ export type Props = GenericElementProps<SettingsMenuProps, 'div'>;
 
 const {
     accessibilityReportEmail,
+
     class: classList = ['website-settings-menu'],
     id = 'website-settings',
+
     privacyPolicy: privacyPolicyURL,
     settings: inputSettings,
+
+    scripts = true,
+    styles = true,
+
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -69,6 +78,8 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     brightness: true,
     contrast: false,
     motion: false,
+
+    ...inputSettings,
 };
 ---
 
@@ -151,24 +162,22 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
             {
                 settings.brightness && (
                     <fieldset>
-                        <div class='container'>
-                            <legend>Brightness Mode</legend>
+                        <legend>Brightness Mode</legend>
 
-                            <Fragment
-                                set:html={optionHTML(
-                                    'brightness-mode',
-                                    'Light',
-                                    'light'
-                                )}
-                            />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'brightness-mode',
-                                    'Dark',
-                                    'dark'
-                                )}
-                            />
-                        </div>
+                        <Fragment
+                            set:html={optionHTML(
+                                'brightness-mode',
+                                'Light',
+                                'light'
+                            )}
+                        />
+                        <Fragment
+                            set:html={optionHTML(
+                                'brightness-mode',
+                                'Dark',
+                                'dark'
+                            )}
+                        />
                     </fieldset>
                 )
             }
@@ -176,37 +185,31 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
             {
                 settings.contrast && (
                     <fieldset>
-                        <div class='container'>
-                            <legend>Contrast Mode</legend>
+                        <legend>Contrast Mode</legend>
 
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'Low',
-                                    'low'
-                                )}
-                            />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'Average',
-                                    'average'
-                                )}
-                            />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'High',
-                                    'high'
-                                )}
-                            />
+                        <Fragment
+                            set:html={optionHTML('contrast-mode', 'Low', 'low')}
+                        />
+                        <Fragment
+                            set:html={optionHTML(
+                                'contrast-mode',
+                                'Average',
+                                'average'
+                            )}
+                        />
+                        <Fragment
+                            set:html={optionHTML(
+                                'contrast-mode',
+                                'High',
+                                'high'
+                            )}
+                        />
 
-                            <p class='forced-colors-mode-only aside'>
-                                Your browser or computer has ‘forced colours’
-                                mode enabled, so changing the contrast setting
-                                will have little impact (if any).
-                            </p>
-                        </div>
+                        <p class='forced-colors-mode-only aside'>
+                            Your browser or computer has ‘forced colours’ mode
+                            enabled, so changing the contrast setting will have
+                            little impact (if any).
+                        </p>
                     </fieldset>
                 )
             }
@@ -214,24 +217,18 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
             {
                 settings.motion && (
                     <fieldset>
-                        <div class='container'>
-                            <legend>Motion/Animation</legend>
+                        <legend>Motion/Animation</legend>
 
-                            <Fragment
-                                set:html={optionHTML(
-                                    'motion',
-                                    'Default',
-                                    'no-preference'
-                                )}
-                            />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'motion',
-                                    'Reduce',
-                                    'reduce'
-                                )}
-                            />
-                        </div>
+                        <Fragment
+                            set:html={optionHTML(
+                                'motion',
+                                'Default',
+                                'no-preference'
+                            )}
+                        />
+                        <Fragment
+                            set:html={optionHTML('motion', 'Reduce', 'reduce')}
+                        />
                     </fieldset>
                 )
             }
@@ -256,307 +253,15 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     </div>
 </div>
 
-<style lang='scss' is:global>
-    .forced-colors-mode-only {
-        display: none !important;
-    }
-    [data-contrast-mode='forced-colors'] .forced-colors-mode-only {
-        display: var(--display, block) !important;
-    }
-
-    @media (forced-colors: active), (prefers-contrast: custom) {
-        .forced-colors-mode-only {
-            display: var(--display, block) !important;
-        }
-    }
-</style>
-
-<script>
-    import { JsCookie } from '../../ts/02-classes/JsCookie.js';
-
-    class SettingsMenu {
-        readonly #attributeKeys: string[] = [];
-        readonly #bodyElement: HTMLBodyElement;
-
-        /**
-         * For storing the cookies made to deal with each option.
-         */
-        #cookies: { [key: string]: JsCookie } = {};
-
-        /**
-         * For storing the default value (if any) for each option.
-         */
-        #defaults: { [key: string]: string | null } = {};
-
-        readonly #inputs: NodeListOf<HTMLInputElement> | null;
-        readonly #path: string;
-        readonly #resetButton: HTMLButtonElement | null;
-
-        #timeout: NodeJS.Timeout | null = null;
-
-        /**
-         * @param menu  The website settings menu wrapper to set up.
-         */
-        public constructor(public readonly menu: HTMLElement) {
-            this.#bodyElement = document.querySelector(
-                'body'
-            ) as HTMLBodyElement;
-
-            this.#resetButton = menu.querySelector('[data-settings-reset]');
-
-            this.#path = menu.getAttribute('data-settings-path') || '/';
-
-            this.#inputs = menu.querySelectorAll('input[data-settings-input]');
-
-            if (!this.#resetButton || !this.#inputs) {
-                return;
-            }
-
-            this.resetButtonClicked = this.resetButtonClicked.bind(this);
-            this.settingSelected = this.settingSelected.bind(this);
-            this.update_allInputs = this.update_allInputs.bind(this);
-            this._update_allInputs = this._update_allInputs.bind(this);
-
-            /*
-             * Adding change event listener and collecting attribute names.
-             */
-            this.update_allInputs();
-            this.#inputs.forEach((input) => {
-                input.addEventListener('change', () =>
-                    this.settingSelected(input)
-                );
-            });
-
-            /*
-             * Add reset button listener.
-             */
-            this.#resetButton.addEventListener(
-                'click',
-                this.resetButtonClicked
-            );
-        }
-
-        private _setup_attr_key(attr: string): void {
-            let defaultValue: string | null = null;
-
-            switch (attr) {
-                case 'brightness-mode':
-                    window
-                        .matchMedia(`( prefers-color-scheme: light )`)
-                        .addEventListener('change', this.update_allInputs);
-
-                    ['light', 'dark'].forEach((value) => {
-                        if (
-                            window.matchMedia(
-                                `( prefers-color-scheme: ${value} )`
-                            ).matches
-                        ) {
-                            defaultValue = value;
-                        }
-                    });
-                    break;
-
-                case 'contrast-mode':
-                    window
-                        .matchMedia(`( prefers-contrast: more )`)
-                        .addEventListener('change', this.update_allInputs);
-                    defaultValue = 'average';
-
-                    if (
-                        window.matchMedia(`( prefers-contrast: less )`).matches
-                    ) {
-                        defaultValue = 'low';
-                    } else if (
-                        window.matchMedia(`( prefers-contrast: more )`).matches
-                    ) {
-                        defaultValue = 'high';
-                    }
-
-                    if (
-                        window.matchMedia(`( forced-colors: active )`)
-                            .matches ||
-                        window.matchMedia(`( prefers-contrast: custom )`)
-                            .matches
-                    ) {
-                        defaultValue = null;
-                    }
-                    break;
-
-                case 'motion':
-                    window
-                        .matchMedia(`( prefers-reduced-motion: reduce )`)
-                        .addEventListener('change', this.update_allInputs);
-                    defaultValue = 'reduce';
-
-                    if (
-                        window.matchMedia(
-                            '( prefers-reduced-motion: no-preference )'
-                        ).matches
-                    ) {
-                        defaultValue = 'no-preference';
-                    }
-                    break;
-
-                case 'typeface':
-                    defaultValue = 'body';
-                    break;
-            }
-
-            this.#defaults[attr] = defaultValue;
-
-            if (this.#attributeKeys.includes(attr) || this.#cookies[attr]) {
-                return;
-            }
-
-            this.#attributeKeys.push(attr);
-
-            this.#cookies[attr] = new JsCookie(attr, this.#path, null, null);
-        }
-
-        /**
-         * Triggered by a click lisetener.
-         */
-        public resetButtonClicked() {
-            this.#attributeKeys.forEach((attr: string) => {
-                this.#bodyElement.removeAttribute(attr);
-                this.#cookies[attr]?.delete();
-            });
-
-            this.update_allInputs();
-        }
-
-        /**
-         * A callback for when an input is selected.
-         */
-        public settingSelected(input: HTMLInputElement): void {
-            const attr = input.getAttribute('name');
-            if (!attr) {
-                return;
-            }
-
-            const value = input.getAttribute('value');
-            if (!value) {
-                return;
-            }
-
-            this.#bodyElement.setAttribute(`data-${attr}`, value);
-            this.#cookies[attr]?.set(value);
-        }
-
-        public update_allInputs(): void {
-            this.#inputs?.forEach((input) => {
-                input.checked = false;
-            });
-
-            // fixes issues about reselecting updated values after settings
-            // reset and quick-triggered event listeners
-            this.#timeout && clearTimeout(this.#timeout);
-            this.#timeout = setTimeout(this._update_allInputs, 100);
-        }
-
-        public _update_allInputs(): void {
-            for (const input of Array.from(this.#inputs ?? [])) {
-                const attr = input.getAttribute('name');
-                if (!attr) {
-                    continue;
-                }
-
-                this._setup_attr_key(attr);
-
-                const value = input.getAttribute('value');
-                if (!value) {
-                    continue;
-                }
-
-                const current: string | null =
-                    this.#cookies[attr]?.get() ?? this.#defaults[attr] ?? null;
-                if (!current) {
-                    continue;
-                }
-
-                if (`${value}` == `${current}`) {
-                    input.checked = true;
-                    this.#bodyElement.setAttribute(`data-${attr}`, current);
-                } else {
-                    input.checked = false;
-                }
-            }
-        }
-    }
-
-    const settingsMenus: NodeListOf<HTMLElement> = document.querySelectorAll(
-        '[data-settings-menu]'
-    );
-
-    const scrollBehaviour =
-        (window.getComputedStyle(document.documentElement).scrollBehavior as
-            | 'smooth'
-            | 'auto') || null;
-
-    /*
-     * Setting up each found menu.
-     */
-    settingsMenus.forEach((menu: HTMLElement) => {
-        new SettingsMenu(menu);
-
-        const scrollToMenu = () =>
-            menu.scrollIntoView({
-                behavior: scrollBehaviour ?? 'auto',
-                block: 'start',
-                inline: 'nearest',
-            });
-
-        menu.addEventListener('toggle-open', scrollToMenu);
-        menu.addEventListener('toggle-close', scrollToMenu);
-
-        // trap the focus order in the menu
-
-        const menuID: string = menu.id;
-        if (!menuID) {
-            return;
-        }
-
-        const toggleButton: HTMLButtonElement | null = document.querySelector(
-            `button[data-toggle-control=${menuID}]`
-        );
-        if (!toggleButton) {
-            return;
-        }
-
-        const resetButton: HTMLButtonElement | null = menu.querySelector(
-            '[data-settings-reset]'
-        );
-        if (!resetButton) {
-            return;
-        }
-
-        const toggleBlur = (event?: HTMLElementEventMap['blur']) => {
-            if (
-                event?.relatedTarget &&
-                !menu.contains(event.relatedTarget as HTMLElement)
-            ) {
-                resetButton.focus();
-            }
-        };
-
-        const resetBlur = (event?: HTMLElementEventMap['blur']) => {
-            if (
-                event?.relatedTarget &&
-                !menu.contains(event.relatedTarget as HTMLElement)
-            ) {
-                toggleButton.focus();
-            }
-        };
-
-        menu.addEventListener('toggle-open', () => {
-            toggleButton.addEventListener('blur', toggleBlur);
-            resetButton.addEventListener('blur', resetBlur);
-        });
-
-        menu.addEventListener('toggle-close', () => {
-            toggleButton.removeEventListener('blur', toggleBlur);
-            resetButton.removeEventListener('blur', resetBlur);
-            toggleButton.focus();
-        });
-    });
-</script>
+{
+    styles && (
+        <SettingsMenu_Styles {...(typeof styles === 'object' ? styles : {})} />
+    )
+}
+{
+    scripts && (
+        <SettingsMenu_Scripts
+            {...(typeof scripts === 'object' ? scripts : {})}
+        />
+    )
+}

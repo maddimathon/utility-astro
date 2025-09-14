@@ -78,6 +78,42 @@
         ]
     },
 
+    "Add file header (Astro)": {
+        "scope": "astro",
+        "prefix": [ "scripts", "start" ],
+        "body": [
+            "---",
+            "/**",
+            " * @since ___PKG_VERSION___",
+            " *",
+            " * @packageDocumentation",
+            " */",
+            "",
+            "/* import - types */",
+            "",
+            "/* import - functions */",
+            "",
+            "/* import - values */",
+            "",
+            "/* import - components */",
+            "",
+            "/* import - layouts */",
+            "",
+            "/* TYPES ===================================== */",
+            "",
+            "/* PROPS ===================================== */",
+            "",
+            "export interface Props {};",
+            "",
+            "const props: Props = Astro.props.frontmatter ?? Astro.props;",
+            "",
+            "/* CONSTANTS ===================================== */",
+            "---",
+            "",
+            "$0",
+        ]
+    },
+
     "Add file header (NPM)": {
         "scope": "javascript,typescript",
         "prefix": [ "npm", "scripts", "start" ],

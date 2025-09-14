@@ -10,6 +10,8 @@
 
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
+ * 
+ * @since ___PKG_VERSION___
  */
 export class ElementToggle {
 

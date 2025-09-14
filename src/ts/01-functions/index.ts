@@ -11,4 +11,5 @@
  */
 
 export * from './escRegExpURL.js';
+export * from './mapToObject.js';
 export * from './trailingSlash.js';

@@ -62,6 +62,14 @@ export class Compile extends CompileStage {
      */
     async scss() {
         await this.runCustomDirCopySubStage( 'scss' );
+
+        await this.runCustomScssDirSubStage(
+            'scss/_astro',
+            'src/astro/css',
+            {
+                postCSS: true,
+            },
+        );
     }
 
     /**

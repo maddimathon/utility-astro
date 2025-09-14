@@ -1,0 +1,20 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../utility-sass' as utils;
+
+///
+/// Supports the SettingsMenu astro component.
+///
+@mixin snippet-support-settings-menu {
+    /* hello */
+    .forced-colors-mode-only {
+        display: none !important;
+
+        @include utils.forced-colors {
+            display: var(--display, block) !important;
+        }
+    }
+}

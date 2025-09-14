@@ -1,0 +1,55 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+import Toggle_Scripts from './Toggle_Scripts.astro';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props {
+    /**
+     * Whether to include the toggle scripts as well.
+     *
+     * @default true
+     */
+    toggle?: boolean;
+}
+
+const { toggle = true }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+{toggle && <Toggle_Scripts />}
+
+<script>
+    import { SettingsMenu } from '../../ts/02-classes/SettingsMenu.js';
+
+    const settingsMenus: NodeListOf<HTMLElement> = document.querySelectorAll(
+        '[data-settings-menu]'
+    );
+
+    const scrollBehaviour =
+        (window.getComputedStyle(document.documentElement).scrollBehavior as
+            | ScrollBehavior
+            | undefined) || undefined;
+
+    /*
+     * Setting up each found menu.
+     */
+    SettingsMenu.init(settingsMenus, scrollBehaviour);
+</script>

@@ -17,7 +17,8 @@ import {
 import { absoluteInternalURL } from '../../astro/functions/index.js';
 
 /* import - values */
-import '../css/main.css';
+import cssUrl from '../css/main.css?url';
+import pkgJson from '../../../package.json';
 
 /* import - components */
 
@@ -28,46 +29,53 @@ import LibPage from '../../astro/layouts/Page.astro';
 
 /* PROPS ===================================== */
 
-export interface Props extends Partial<LibPageProps> {}
+type Partial_LibPage = Partial<LibPageProps> & Pick<LibPageProps, 'title'>;
+
+export interface Props extends Partial_LibPage {}
 
 const inputs: Props = Astro.props.frontmatter ?? Astro.props;
 
-const props: Props & LibPageProps = mergeArgs(
-    {
-        title: 'Utility Astro',
+const _defaultProps: Props & LibPageProps = {
+    title: 'Utility Astro',
 
-        footer: {
-            copyright: {
-                html:
-                    '<a href="https://www.maddimathon.com">Maddi Mathon</a>' +
-                    ' | ' +
-                    '<a href="' +
-                    absoluteInternalURL(Astro.url, 'license') +
-                    '">MIT license</a>',
-                // owner: 'Maddi Mathon',
-                year: 2025,
-            },
+    dir: 'ltr',
+    lang: 'en-CA',
+
+    footer: {
+        copyright: {
+            html:
+                '<a href="https://www.maddimathon.com">Maddi Mathon</a>' +
+                ' | ' +
+                '<a href="' +
+                absoluteInternalURL(Astro.url, 'license') +
+                '">MIT license</a>',
+            // owner: 'Maddi Mathon',
+            year: 2025,
         },
+    },
 
-        meta: {
-            title: arrayUnique([
-                ...(inputs.title?.length
-                    ? Array.isArray(inputs.title)
-                        ? inputs.title
-                        : [inputs.title]
-                    : []),
-                'Utility Astro',
-            ]).join(' — '),
-        },
+    meta: {
+        title: arrayUnique([
+            ...(inputs.title?.length
+                ? Array.isArray(inputs.title)
+                    ? inputs.title
+                    : [inputs.title]
+                : []),
+            'Utility Astro',
+        ]).join(' — '),
+    },
 
-        // skipLinks: [
-        // ],
-    } as Props & LibPageProps,
-    inputs,
-    true
-);
+    settings: {
+        contrast: true,
+        motion: true,
+    },
+};
+
+const props: Props & LibPageProps = mergeArgs(_defaultProps, inputs, true);
 
 /* CONSTANTS ===================================== */
+
+const cssUrl_versioned = cssUrl + '?v=' + pkgJson.version;
 
 props.primaryMenu = [
     { label: 'Home', href: '' },
@@ -95,6 +103,18 @@ props.primaryMenu = [
     {...props}
     accessibilityReportEmail={undefined}
 >
+    <link
+        slot='head-open'
+        rel='preload'
+        href={cssUrl_versioned}
+        as='style'
+    />
+    <link
+        slot='head-open'
+        rel='stylesheet'
+        href={cssUrl_versioned}
+    />
+
     <slot
         name='head-open'
         slot='head-open'

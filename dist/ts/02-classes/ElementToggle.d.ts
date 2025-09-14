@@ -9,6 +9,8 @@
  */
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
+ *
+ * @since 0.1.0-alpha.draft
  */
 export declare class ElementToggle {
     #private;
