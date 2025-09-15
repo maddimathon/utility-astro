@@ -4,7 +4,6 @@
 ///
 
 @forward '../../../config' with (
-    $include_featureCheck: true !default,
     $internal_supressCredit: true,
 
     $print_globals: true !default,

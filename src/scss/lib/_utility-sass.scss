@@ -3,4 +3,7 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward '../config';
+@forward '../tokens';
+
 @forward 'pkg:@maddimathon/utility-sass/templates/base/lib';

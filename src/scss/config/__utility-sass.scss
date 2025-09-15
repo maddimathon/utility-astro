@@ -4,6 +4,7 @@
 ///
 
 @forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $include_featureCheck: true !default,
     $include_html: true,
 
     $print_globals: false !default,

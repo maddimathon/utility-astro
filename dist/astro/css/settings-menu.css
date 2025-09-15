@@ -5,7 +5,13 @@
  * License: MIT
  */
 /* # TOGGLE BLOCKS ==================================== */
-/* hello */
+.website-settings-menu {
+    display: none;
+}
+:where(.js) .website-settings-menu {
+    display: var(--display, block);
+}
+
 .forced-colors-mode-only {
     display: none !important;
 }

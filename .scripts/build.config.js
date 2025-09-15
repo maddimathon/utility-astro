@@ -62,8 +62,16 @@ const config = {
                  */
                 prettify: ( _stage ) => {
 
+                    const _def = _defaults.build.prettify( _stage );
+
                     return {
-                        ..._defaults.build.prettify( _stage ),
+                        ..._def,
+
+                        css: [ [
+                            ..._def.css.flat(),
+                            'src/astro/css/**/*.css',
+                            'src/docs/css/**/*.css',
+                        ] ],
 
                         html: undefined,
                         js: undefined,

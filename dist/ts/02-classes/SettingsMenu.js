@@ -16,7 +16,7 @@ import { JsCookie } from './JsCookie.js';
 export class SettingsMenu {
     menu;
     #attributeKeys = [];
-    #bodyElement;
+    #rootElement;
     /**
      * For storing the cookies made to deal with each option.
      */
@@ -32,12 +32,12 @@ export class SettingsMenu {
     /**
      * @param menu  The website settings menu wrapper to set up.
      */
-    constructor(menu) {
+    constructor(menu, selectors) {
         this.menu = menu;
-        this.#bodyElement = document.querySelector('body');
-        this.#resetButton = menu.querySelector('[data-settings-reset]');
-        this.#path = menu.getAttribute('data-settings-path') || '/';
-        this.#inputs = menu.querySelectorAll('input[data-settings-input]');
+        this.#rootElement = document.querySelector(selectors?.root || ':root');
+        this.#resetButton = menu.querySelector(selectors?.resetButton || '[data-settings-reset]');
+        this.#path = menu.getAttribute(selectors?.pathAttr || 'data-settings-path') || '/';
+        this.#inputs = menu.querySelectorAll(selectors?.inputs || 'input[data-settings-input]');
         if (!this.#resetButton || !this.#inputs) {
             return;
         }
@@ -113,7 +113,7 @@ export class SettingsMenu {
      */
     resetButtonClicked() {
         this.#attributeKeys.forEach((attr) => {
-            this.#bodyElement.removeAttribute(attr);
+            this.#rootElement.removeAttribute(attr);
             this.#cookies[attr]?.delete();
         });
         this.update_allInputs();
@@ -130,7 +130,7 @@ export class SettingsMenu {
         if (!value) {
             return;
         }
-        this.#bodyElement.setAttribute(`data-${attr}`, value);
+        this.#rootElement.setAttribute(`data-${attr}`, value);
         this.#cookies[attr]?.set(value);
     }
     update_allInputs() {
@@ -159,7 +159,7 @@ export class SettingsMenu {
             }
             if (`${value}` == `${current}`) {
                 input.checked = true;
-                this.#bodyElement.setAttribute(`data-${attr}`, current);
+                this.#rootElement.setAttribute(`data-${attr}`, current);
             }
             else {
                 input.checked = false;

@@ -18,7 +18,12 @@ export declare class SettingsMenu {
     /**
      * @param menu  The website settings menu wrapper to set up.
      */
-    constructor(menu: HTMLElement);
+    constructor(menu: HTMLElement, selectors?: {
+        root?: string;
+        resetButton?: string;
+        pathAttr?: string;
+        inputs?: string;
+    });
     private _setup_attr_key;
     /**
      * Triggered by a click lisetener.

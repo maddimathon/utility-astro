@@ -8,4 +8,4 @@
 * @maddimathon/utility-astro@0.1.0-alpha.draft
 * 
 * License: MIT
-*/.forced-colors-mode-only{display:none!important}[data-contrast-mode=forced-colors] .forced-colors-mode-only{display:var(--display, block)!important}@media (forced-colors: active),(prefers-contrast: custom){.forced-colors-mode-only{display:var(--display, block)!important}}
+*/.website-settings-menu{display:none}:where(.js) .website-settings-menu{display:var(--display, block)}.forced-colors-mode-only{display:none!important}[data-contrast-mode=forced-colors] .forced-colors-mode-only{display:var(--display, block)!important}@media (forced-colors: active),(prefers-contrast: custom){.forced-colors-mode-only{display:var(--display, block)!important}}

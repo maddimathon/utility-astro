@@ -65,7 +65,7 @@ export class Compile extends CompileStage {
 
         await this.runCustomScssDirSubStage(
             'scss/_astro',
-            'src/astro/css',
+            this.getSrcDir( undefined, 'astro/css' ),
             {
                 postCSS: true,
             },

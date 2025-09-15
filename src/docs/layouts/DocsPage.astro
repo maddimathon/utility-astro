@@ -29,9 +29,9 @@ import LibPage from '../../astro/layouts/Page.astro';
 
 /* PROPS ===================================== */
 
-type Partial_LibPage = Partial<LibPageProps> & Pick<LibPageProps, 'title'>;
+type Partial_LibProps = Partial<LibPageProps> & Pick<LibPageProps, 'title'>;
 
-export interface Props extends Partial_LibPage {}
+export interface Props extends Partial_LibProps {}
 
 const inputs: Props = Astro.props.frontmatter ?? Astro.props;
 

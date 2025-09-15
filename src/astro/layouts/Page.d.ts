@@ -167,7 +167,7 @@ export type Props = GenericProps<{
     skipLinks?: SkipLinksProps[ 'links' ];
 
     /**
-     * Varies features to turn on or off.
+     * Various features to turn on or off.
      */
     support?: {
 

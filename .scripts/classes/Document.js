@@ -94,7 +94,16 @@ export class Document extends DocumentStage {
             ?? this.getSrcDir( undefined, 'docs/css' )
         ).replace( /\/$/g, '' );
 
-        await this.runCustomScssDirSubStage( 'docs/scss', outDir );
+        await this.runCustomScssDirSubStage( 'docs/scss', outDir, { postCSS: false } );
+
+        await this.atry(
+            this.fs.prettier,
+            2,
+            [ [
+                'src/docs/css/*.css',
+                'src/docs/css/**/*.css',
+            ], 'css' ]
+        );
     }
 
     /**

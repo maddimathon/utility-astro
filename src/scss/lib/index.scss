@@ -5,7 +5,7 @@
 
 @forward '../notice';
 
-@forward 'utility-sass';
+@forward 'pkg:@maddimathon/utility-sass/templates/base/lib';
 
 // @forward '01-functions';
 // @forward '02-mixins';

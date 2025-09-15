@@ -9,7 +9,14 @@
 /// Supports the SettingsMenu astro component.
 ///
 @mixin snippet-support-settings-menu {
-    /* hello */
+    .website-settings-menu {
+        display: none;
+
+        @include utils.js {
+            display: var(--display, block);
+        }
+    }
+
     .forced-colors-mode-only {
         display: none !important;
 
