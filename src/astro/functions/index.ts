@@ -10,3 +10,4 @@
 
 export * from './absoluteInternalURL.js';
 export * from './autoTrailingSlash.js';
+export * from './currentPagePath.js';

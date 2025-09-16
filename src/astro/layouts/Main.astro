@@ -1,0 +1,104 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/index.js';
+import type { Props as MainProps } from './Main.js';
+
+/* import - functions */
+import { mapToObject } from '../../ts/index.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Main.js';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<MainProps, 'main'>;
+
+const { class: classList = [], ...attributes }: Props =
+    Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+
+/**
+ * Rendered slot HTML.
+ */
+const slots_render = mapToObject(
+    await Promise.all(
+        (
+            [
+                'afterSiteContent',
+                'beforeSiteContent',
+                'contentHeader',
+                'default',
+            ] as const
+        ).map(async (_key) => {
+            const _kebab = _key.replace(
+                /([a-z0-9])([A-Z])/g,
+                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase()
+            );
+
+            return [
+                _key,
+                (Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))) ||
+                    false,
+            ] as const;
+        })
+    )
+);
+---
+
+<main
+    role='main'
+    id='main'
+    class:list={['site-content', '||', ...classList]}
+    {...attributes}
+>
+
+    <header class='content-header'>
+        { slots_render.contentHeader ? (
+            <!-- SLOT: "content-header" -->
+            <slot name="content-header" />
+            <!-- /SLOT: "content-header" -->
+        ) : (
+            <h1 class="screen-reader-text">Main Content</h1>
+            <!-- SLOT: "content-header" (empty) / -->
+        ) }
+    </header>
+
+    { slots_render.beforeSiteContent ? (
+        <!-- SLOT: "before-site-content" -->
+        <slot name="before-site-content" />
+        <!-- /SLOT: "before-site-content" -->
+    ) : <!-- SLOT: "before-site-content" (empty) / --> }
+
+    { slots_render.default ? (
+        <!-- SLOT (MAIN) -->
+        <slot />
+        <!-- /SLOT (MAIN) -->
+    ) : (
+        <p class="aside">Content coming soon!</p>
+        <!-- SLOT (MAIN) (empty) / -->
+    ) }
+
+    { slots_render.afterSiteContent ? (
+        <!-- SLOT: "after-site-content" -->
+        <slot name="after-site-content" />
+        <!-- /SLOT: "after-site-content" -->
+    ) : (
+        <p class="screen-reader-text">Sidebar is empty, sorry!</p>
+        <!-- SLOT: "after-site-content" (empty) / -->
+    ) }
+</main>

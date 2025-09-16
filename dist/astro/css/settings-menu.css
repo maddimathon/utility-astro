@@ -7,9 +7,8 @@
 /* # TOGGLE BLOCKS ==================================== */
 .website-settings-menu {
     display: none;
-}
-:where(.js) .website-settings-menu {
-    display: var(--display, block);
+    margin: 0;
+    padding: 0;
 }
 
 .forced-colors-mode-only {
@@ -23,4 +22,393 @@
     .forced-colors-mode-only {
         display: var(--display, block) !important;
     }
+}
+
+.website-settings__content {
+    background: Canvas;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: min(var(--width-content, 36rem), 90vw);
+}
+.website-settings__content > .container {
+    margin: 0;
+    padding: 0;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.website-settings__content fieldset,
+.website-settings__content button,
+.website-settings__content [role="button"],
+.website-settings__content input[type="button"],
+.website-settings__content input[type="submit"] {
+    margin-top: var(--mrg-firm-300, 0.8125rem);
+    margin-bottom: var(--mrg-half-300, 0.3125rem);
+    margin-left: 0;
+    margin-right: 0;
+}
+.website-settings__content input,
+.website-settings__content button,
+.website-settings__content [role="button"] {
+    margin-top: var(--mrg-firm-400, 1.25rem);
+}
+.website-settings__content fieldset {
+    padding-top: var(--mrg-firm-200, 0.5rem);
+    padding-bottom: var(--mrg-firm-200, 0.5rem);
+    padding-left: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        3vw,
+        var(--mrg-firm-300, 0.8125rem)
+    );
+    padding-right: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        3vw,
+        var(--mrg-firm-300, 0.8125rem)
+    );
+    align-self: stretch;
+}
+.website-settings__content fieldset > legend,
+.website-settings__content fieldset > legend:first-child {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: calc(var(--mrg-soft-200, 0.3125rem) * -1);
+    margin-right: calc(var(--mrg-soft-200, 0.3125rem) * -1);
+    padding-left: var(--mrg-soft-200, 0.3125rem);
+    padding-right: var(--mrg-soft-200, 0.3125rem);
+    font-weight: 600;
+    font-size: var(--fs-normal, 1rem);
+}
+.website-settings__content fieldset > .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+    justify-content: start;
+    justify-items: start;
+    align-content: start;
+    align-items: start;
+    grid-gap: var(--mrg-firm-200, 0.5rem)
+        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
+    gap: var(--mrg-firm-200, 0.5rem)
+        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
+    margin: 0;
+    padding: 0;
+}
+.website-settings__content fieldset > .container > label,
+.website-settings__content fieldset > .container > input {
+    margin: 0;
+}
+
+.website-settings__disclaimer {
+    font-style: italic;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+.website-settings__backdrop {
+    display: none;
+}
+
+/* With Javascript ==================================== */
+body:has(.website-settings-menu[data-toggle-container="open"]) {
+    overflow: hidden;
+}
+
+:where(.js) .website-settings-menu {
+    display: var(--display, block);
+    z-index: 999999;
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid ButtonBorder;
+    border-radius: 0;
+    background-color: ButtonFace;
+    color: ButtonText;
+    accent-color: ButtonText;
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    background-color: SelectedItem;
+    border-color: SelectedItem;
+    color: SelectedItemText;
+    accent-color: ButtonText;
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    background-color: SelectedItem;
+    border-color: SelectedItem;
+    color: SelectedItemText;
+    accent-color: ButtonText;
+    opacity: 0.875;
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:hover {
+    background-color: SelectedItem;
+    border-color: SelectedItem;
+    color: SelectedItemText;
+    accent-color: ButtonText;
+    opacity: 0.875;
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+    background-color: SelectedItem;
+    border-color: SelectedItem;
+    color: SelectedItemText;
+    accent-color: ButtonText;
+    opacity: 0.875;
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+    background-color: SelectedItem;
+    border-color: SelectedItem;
+    color: SelectedItemText;
+    accent-color: ButtonText;
+    opacity: 0.875;
+}
+
+[data-contrast-mode="high"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus,
+[data-contrast-mode="high"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus,
+[data-contrast-mode="forced-colors"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus,
+[data-contrast-mode="forced-colors"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    opacity: 1;
+}
+
+[data-contrast-mode="high"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus,
+[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    opacity: 1;
+}
+
+@media (prefers-contrast: more),
+    (forced-colors: active),
+    (prefers-contrast: custom) {
+    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus {
+        opacity: 1;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus {
+        opacity: 1;
+    }
+}
+[data-contrast-mode="high"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible,
+[data-contrast-mode="forced-colors"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible {
+    opacity: 1;
+}
+[data-contrast-mode="high"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within,
+[data-contrast-mode="forced-colors"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within {
+    opacity: 1;
+}
+[data-contrast-mode="high"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover,
+[data-contrast-mode="forced-colors"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover {
+    opacity: 1;
+}
+
+@media (prefers-contrast: more),
+    (forced-colors: active),
+    (prefers-contrast: custom) {
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+        opacity: 1;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+        opacity: 1;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:hover {
+        opacity: 1;
+    }
+}
+:where(.js) .website-settings-menu [data-toggle-control]:active {
+    background-color: ButtonFace;
+    border-color: ButtonBorder;
+    color: ButtonText;
+    accent-color: ActiveText;
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    --display: block;
+    display: block;
+    margin: 0;
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-soft-200, 0.3125rem);
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    -webkit-backdrop-filter: blur(0.375rem);
+    backdrop-filter: blur(0.375rem);
+    background: none;
+    border: none;
+    opacity: 1;
+    z-index: -1;
+    cursor: pointer;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::before,
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::after {
+    content: "";
+    content: ""/"";
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::before {
+    background: Canvas;
+    opacity: 0.625;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::after {
+    background: LinkText;
+    opacity: 0.1875;
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:hover,
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:active {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus-visible {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus-within {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js) .website-settings-menu [data-toggle-content] {
+    padding: 0;
+    border: none;
+}
+:where(.js) .website-settings-menu [data-toggle-content] > .container {
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    padding: var(--mrg-firm-300, 0.8125rem) var(--mrg-firm-300, 0.8125rem);
+}
+:where(.js) .website-settings-menu[data-toggle-container] {
+    justify-content: end;
+    justify-items: end;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    .website-settings__backdrop {
+    display: var(--display, block);
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    [data-toggle-content] {
+    --display: block;
+    display: block;
+    max-height: 80svh;
+    max-height: calc(80svh - 2rem - var(--mrg-firm-600, 2.25rem) * 2);
+    overflow: auto;
 }

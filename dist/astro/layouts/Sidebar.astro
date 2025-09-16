@@ -1,0 +1,43 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as SidebarProps } from './Sidebar.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Sidebar.js';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<SidebarProps, 'aside'>;
+
+const { class: classList = [], ...attributes }: Props =
+    Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<aside
+    role='complementary'
+    id='sidebar'
+    class:list={['site-sidebar', '||', ...classList]}
+    {...attributes}
+>
+    <!-- SLOT: "sidebar" -->
+    <slot />
+    <!-- /SLOT: "sidebar" -->
+</aside>

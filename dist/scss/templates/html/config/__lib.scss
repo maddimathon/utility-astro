@@ -1,0 +1,16 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward '../../../config' with (
+    $internal_supressCredit: true,
+
+    $print_globals: false,
+    $print_normalize: true !default,
+    $print_tokens: true !default,
+    $print_utils: false,
+
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
+);

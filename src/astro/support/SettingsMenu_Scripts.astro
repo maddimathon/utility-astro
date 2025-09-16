@@ -21,20 +21,20 @@ import Toggle_Scripts from './Toggle_Scripts.astro';
 /* PROPS ===================================== */
 
 export interface Props {
-    /**
-     * Whether to include the toggle scripts as well.
-     *
-     * @default true
-     */
-    toggle?: boolean;
+    // /**
+    //  * Whether to include the toggle scripts as well.
+    //  *
+    //  * @default true
+    //  */
+    // toggle?: boolean;
 }
 
-const { toggle = true }: Props = Astro.props;
+// const { toggle = true }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
 
-{toggle && <Toggle_Scripts />}
+<Toggle_Scripts />
 
 <script>
     import { SettingsMenu } from '../../ts/02-classes/SettingsMenu.js';

@@ -1,7 +1,7 @@
 ---
 /**
- * To use this component, your page MUST include the Toggle_Scripts and
- * Toggle_Styles components (or replacements), otherwise this will not work.
+ * To use this component, your page MUST include the Toggle_Scripts components
+ * and sass styles snippet (or replacements), otherwise this will not work.
  *
  * @since 0.1.0-alpha.draft
  *
@@ -29,7 +29,7 @@ export type * from './Toggle.d.ts';
 export type Props = GenericElementProps<ToggleProps, 'div'>;
 
 const {
-    heading,
+    heading = 7,
     id,
     class: classList = [],
     ...attributes
@@ -42,6 +42,18 @@ const buttonHTML: string = (await Astro.slots.render('button')) || 'Toggle me';
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
 const titleID = `${id}-title`;
+
+const headingTag = heading
+    ? heading < 7
+        ? {
+              open: `<h${heading} class="h${heading}">`,
+              clo: `</h${heading}>`,
+          }
+        : {
+              open: `<p class="heading">`,
+              clo: `</p>`,
+          }
+    : null;
 ---
 
 <div
@@ -54,7 +66,7 @@ const titleID = `${id}-title`;
         id={titleID}
         class='toggle-title'
     >
-        {heading && <Fragment set:html={`<h${heading}>`} />}
+        {headingTag && <Fragment set:html={headingTag.open} />}
         <button
             id={buttonID}
             class='toggle-control'
@@ -92,7 +104,7 @@ const titleID = `${id}-title`;
                 set:html={buttonHTML.trim()}
             />
         </button>
-        {heading && <Fragment set:html={`</h${heading}>`} />}
+        {headingTag && <Fragment set:html={headingTag.clo} />}
     </div>
 
     <section

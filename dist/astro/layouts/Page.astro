@@ -12,16 +12,26 @@ import type {
 } from '@maddimathon/utility-typescript/types';
 
 import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
+import type {
+    Props as ContentProps,
+    Props_Full as ContentProps_Full,
+    ContentType
+} from './Content.astro';
 import type { Props } from './Page.d.ts';
 
 /* import - functions */
 import { DateTime } from 'luxon';
-import { mergeArgs } from '@maddimathon/utility-typescript/functions';
+import { mergeArgs, slugify } from '@maddimathon/utility-typescript/functions';
 import { FeatureCheck } from '@maddimathon/utility-sass';
 
+import { currentPagePath } from '../functions/index.js';
 import { mapToObject } from '../../ts/01-functions/mapToObject.js';
 import Toggle_Scripts from '../support/Toggle_Scripts.astro';
-import Toggle_Styles from '../support/Toggle_Styles.astro';
+
+/* import - values */
+
+/* import - layouts */
+import Content from './Content.astro';
 
 /* import - components */
 import Page_Meta from '../components/Page_Meta.astro';
@@ -35,7 +45,38 @@ import SettingsMenu from '../components/SettingsMenu.astro';
 export type { Props };
 export type * from './Page.d.ts';
 
-const p: Props = Astro.props.frontmatter ?? Astro.props;
+const p: Props<ContentType> = Astro.props.frontmatter ?? Astro.props;
+
+
+/* ### Content Props ------------------ */
+
+const _defContent: ContentProps<ContentType> & ContentProps_Full<ContentType> = {
+
+    type: p.layout || 'content-only',
+
+    title: Array.isArray(p.title)
+        ? ( p.title.length ? p.title:[] ) 
+        : ( p.title.length ? [p.title]:[] ),
+
+    subtitle: p.subtitle || null,
+
+    attrs: {
+        main: {},
+        sidebar: {},
+    },
+};
+
+const content = mergeArgs(_defContent, p.content, true);
+
+
+/** ## CONSTANTS ==================================== **/
+
+const pageSlug: string = slugify( currentPagePath( Astro.url ) ) || 'home';
+
+const SiteTitleTag = ( content.title && content.title.length ) ? 'p' : 'h1';
+
+
+/* ### Nav Menus ------------------ */
 
 /**
  * The menu params constructed from input props.
@@ -83,23 +124,20 @@ if ( p.secondaryMenu ) {
     };
 }
 
+
+/* ### Support ------------------ */
+
 const support = mergeArgs(
     {
         elementToggle: true,
         featureCheck: true,
         settings: true,
-    } as Required<Required<Props>['support']>,
+    },
     p.support,
 );
 
-if ( support.settings ) {
-    support.elementToggle = true; // required for settings
-}
 
-
-/** ## CONSTANTS ==================================== **/
-
-// const SiteTitleTag = ( p.content.title && p.content.title.length ) ? 'p' : 'h1';
+/* ### Slots ------------------ */
 
 /**
  * Rendered slot HTML.
@@ -110,9 +148,11 @@ const slots_render = mapToObject(
             'afterFooter',
             'afterHeader',
             'afterPrimaryNav',
+            'afterSecondaryNav',
             'beforeFooter',
             'beforeHeader',
             'beforePrimaryNav',
+            'beforeSecondaryNav',
             'bodyClose',
             'bodyOpen',
             'footer',
@@ -135,6 +175,9 @@ const slots_render = mapToObject(
     )
 );
 
+
+/* ### Include ------------------ */
+
 /**
  * Sections/components to include or not.
  */
@@ -153,6 +196,9 @@ const include = {
     ),
 };
 
+
+/* ### Preformatted ------------------ */
+
 const today = DateTime.now();
 
 const _footerCopyrightYear = p.footer?.copyright?.year ?? today.year;
@@ -169,7 +215,10 @@ const formatted = {
     },
 };
 
-const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
+
+/* ### FeatureCheck ------------------ */
+
+const featureClasses = support.featureCheck ? FeatureCheck.DEFAULT_CLASSLIST() : [];
 
 ---
 
@@ -216,6 +265,8 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
         { ...p.attrs?.body ?? {} }
 
         class:list={ [
+            `page_${pageSlug}`,
+            content.type && `layout_${slugify( content.type )}`,
             p.attrs?.body?.class,
         ] }
     >
@@ -228,9 +279,9 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
         ) : <!-- SLOT: "body-open" (empty) / --> }
 
         { support.settings && <SettingsMenu
+            {...p.settings}
             accessibilityReportEmail={p.accessibilityReportEmail}
             privacyPolicy={p.privacyPolicy}
-            settings={p.settings}
         >
             <slot name="settings-menu-open" slot="settings-menu-open" />
             <slot name="settings-menu-close" slot="settings-menu-close" />
@@ -244,7 +295,7 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
         
         { include.header && (
             <header class="site-header">
-                { p.header?.title && <h1 class="site-title" set:text={p.header.title} /> }
+                { p.header?.title && <SiteTitleTag class="site-title" set:text={p.header.title} /> }
                 { p.header?.tagline && <p class="site-tagline" set:text={p.header.tagline} /> }
 
                 { slots_render.header ? (
@@ -276,10 +327,30 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
             <slot name="after-header" />
             <!-- /SLOT: "after-header" -->
         ) : <!-- SLOT: "after-header" (empty) / --> }
+         
+         <Content {...content}>
+             <slot slot="content-header" name="content-header" />
+             <slot slot="before-site-content" name="before-site-content" />
+             <slot />
+             <slot slot="after-site-content" name="after-site-content" />
+             <slot slot="sidebar" name="sidebar" />
+         </Content>
 
-        <!-- SLOT (main) -->
-        <slot />
-        <!-- /SLOT (main) -->
+         { menus.secondary && menus.secondary.menu.length > 0 && (
+             <Fragment>
+                 { slots_render.beforeSecondaryNav ? (
+                     <!-- SLOT: "before-secondary-nav" -->
+                     <slot name="before-secondary-nav" />
+                     <!-- /SLOT: "before-secondary-nav" -->
+                 ) : <!-- SLOT: "before-secondary-nav" (empty) / --> }
+                 <NavMenu {...menus.secondary} class:list="nav-secondary" />
+                 { slots_render.afterSecondaryNav ? (
+                     <!-- SLOT: "after-secondary-nav" -->
+                     <slot name="after-secondary-nav" />
+                     <!-- /SLOT: "after-secondary-nav" -->
+                 ) : <!-- SLOT: "after-secondary-nav" (empty) / --> }
+             </Fragment>
+         ) }
 
         { slots_render.beforeFooter ? (
             <!-- SLOT: "before-footer" -->
@@ -341,5 +412,5 @@ const featureClasses = FeatureCheck.DEFAULT_CLASSLIST();
     // run the checks and update class names
     new FeatureCheck().check();
 </script> }
-
-{ support.elementToggle && <Toggle_Styles /><Toggle_Scripts /> }
+ 
+{ support.elementToggle && <Toggle_Scripts /> }

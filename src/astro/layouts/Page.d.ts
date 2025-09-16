@@ -8,6 +8,8 @@
  * @license MIT
  */
 
+import type { Objects } from '@maddimathon/utility-typescript/types';
+
 import type { HTMLAttributes } from 'astro/types';
 
 import type { GenericProps } from '../../ts/index.ts';
@@ -16,7 +18,8 @@ import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
 import type { Props as Page_MetaProps } from '../components/Page_Meta.d.ts';
 import type { Props as SettingsMenuProps } from '../components/SettingsMenu.d.ts';
 import type { Props as SkipLinksProps } from '../components/SkipLinks.d.ts';
-import type { Objects } from '@maddimathon/utility-typescript/types';
+
+import type { Props as ContentProps, ContentType, DefaultContentType } from './Content.d.ts';
 
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
@@ -32,7 +35,9 @@ type HTML_excludeAttributes = "dir" | "lang";
  * 
  * @interface
  */
-export type Props = GenericProps<{
+export type Props<
+    T_ContentType extends ContentType = ContentType,
+> = GenericProps<{
 
     /**
      * Page title.
@@ -63,6 +68,11 @@ export type Props = GenericProps<{
         html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes>,
         body?: HTMLAttributes<"body">,
     };
+
+    /**
+     * Configuration for the child Content component.
+     */
+    content?: Omit<ContentProps<T_ContentType>, "type" | "subtitle">;
 
     /**
      * The content to include in the page footer, if any.
@@ -142,6 +152,11 @@ export type Props = GenericProps<{
     };
 
     /**
+     * Content layout type.
+     */
+    layout?: T_ContentType;
+
+    /**
      * Params for the primary (header) menu.
      */
     primaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
@@ -159,12 +174,17 @@ export type Props = GenericProps<{
     /**
      * Whether to inlcude each settings group.
      */
-    settings?: Required<SettingsMenuProps>[ 'settings' ],
+    settings?: Omit<SettingsMenuProps, "accessibilityReportEmail" | "privacyPolicy">,
 
     /**
      * Skip links for this page.
      */
     skipLinks?: SkipLinksProps[ 'links' ];
+
+    /**
+     * Page subtitle.
+     */
+    subtitle?: string | null;
 
     /**
      * Various features to turn on or off.

@@ -4,6 +4,8 @@
         "@releases/**/*": true,
         "dist/**/*": true,
         "docs/**/*": true,
+        "src/astro/css/**/*": true,
+        "src/docs/css/**/*": true,
     },
     "scss.scannerExclude": [
         "**/.git",
@@ -24,5 +26,7 @@
         "dist/**",
         "docs/**",
         "public/**",
+        "src/astro/css/**",
+        "src/docs/css/**",
     ],
 }

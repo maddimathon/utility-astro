@@ -67,13 +67,4 @@ export interface Props {
      * @default true
      */
     scripts?: boolean | ScriptsProps;
-
-    /**
-     * Whether to include the support types.
-     * 
-     * Use an object to enable types and pass settings.
-     * 
-     * @default true
-     */
-    styles?: boolean | StylesProps;
 }

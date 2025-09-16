@@ -8,4 +8,11 @@
 
 @forward '../../../notice';
 
-@forward '_utility-sass' hide $internal_supressCredit;
+@forward '_utility-sass' hide $internal_supressCredit, extend-selector-globals,
+    extend-selector-utils;
+
+@forward '../../../lib' hide extend-selector-globals, extend-selector-utils;
+
+// @forward '01-functions';
+@forward '02-mixins';
+// @forward '03-snippets';

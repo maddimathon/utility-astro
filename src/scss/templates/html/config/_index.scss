@@ -3,14 +3,36 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '../../../config' with (
-    $internal_supressCredit: true,
+@forward '_lib' hide $print_globals, $print_utils, print-globals, print-utils;
 
-    $print_globals: true !default,
-    $print_normalize: true !default,
-    $print_tokens: true !default,
-    $print_utils: false !default,
+@use '_lib' as utils;
 
-    $selectorType_mode: 'attribute' !default,
-    $selectorType_motion: 'attribute' !default
+$astroSupport_settingsMenu: utils.$include_html !default;
+$astroSupport_settingsMenu: utils.config-valid-bool(
+    $astroSupport_settingsMenu,
+    'astroSupport_settingsMenu'
 );
+
+$astroSupport_toggle: utils.$include_html !default;
+$astroSupport_toggle: utils.config-valid-bool(
+    $astroSupport_toggle,
+    'astroSupport_toggle'
+);
+
+$print_globals: true !default;
+$print_globals: utils.config-valid-bool($print_globals, 'print_globals');
+
+@mixin print-globals {
+    @if $print_globals {
+        @content;
+    }
+}
+
+$print_utils: utils.$include_html !default;
+$print_utils: utils.config-valid-bool($print_utils, 'print_utils');
+
+@mixin print-utils {
+    @if $print_utils {
+        @content;
+    }
+}

@@ -3,8 +3,36 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward '../lib';
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
+        $internal_supressCredit,
+    $print_globals, $print_utils, extend-selector-globals,
+    extend-selector-utils, print-globals, print-utils;
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use '../config';
+
 @use '../lib' as *;
 
-.page-title {
-    @extend %title;
+%body {
+    gap: #{var-mrg-soft('400')};
+}
+
+@if config.$astroSupport_toggle {
+    @include snippet-support-toggles;
+}
+
+@if config.$astroSupport_settingsMenu {
+    @include snippet-support-settings-menu;
+}
+
+@include config.print-globals {
+    @include extend-selector-globals;
+}
+
+@include config.print-utils {
+    @include extend-selector-utils;
 }

@@ -11,9 +11,7 @@ import type { Props as SettingsMenuProps } from './SettingsMenu.d.ts';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions/index.js';
-
 import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
-import SettingsMenu_Styles from '../support/SettingsMenu_Styles.astro';
 
 /* import - values */
 
@@ -39,7 +37,6 @@ const {
     settings: inputSettings,
 
     scripts = true,
-    styles = true,
 
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
@@ -98,7 +95,6 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     <button
         id={buttonID}
         class='website-settings__toggle'
-        aria-disabled='true'
         role='button'
         aria-label='Toggle settings menu'
         title='Accessibility & Display Settings'
@@ -164,20 +160,22 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
                     <fieldset>
                         <legend>Brightness Mode</legend>
 
-                        <Fragment
-                            set:html={optionHTML(
-                                'brightness-mode',
-                                'Light',
-                                'light'
-                            )}
-                        />
-                        <Fragment
-                            set:html={optionHTML(
-                                'brightness-mode',
-                                'Dark',
-                                'dark'
-                            )}
-                        />
+                        <div class='container'>
+                            <Fragment
+                                set:html={optionHTML(
+                                    'brightness-mode',
+                                    'Light',
+                                    'light'
+                                )}
+                            />
+                            <Fragment
+                                set:html={optionHTML(
+                                    'brightness-mode',
+                                    'Dark',
+                                    'dark'
+                                )}
+                            />
+                        </div>
                     </fieldset>
                 )
             }
@@ -187,23 +185,29 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
                     <fieldset>
                         <legend>Contrast Mode</legend>
 
-                        <Fragment
-                            set:html={optionHTML('contrast-mode', 'Low', 'low')}
-                        />
-                        <Fragment
-                            set:html={optionHTML(
-                                'contrast-mode',
-                                'Average',
-                                'average'
-                            )}
-                        />
-                        <Fragment
-                            set:html={optionHTML(
-                                'contrast-mode',
-                                'High',
-                                'high'
-                            )}
-                        />
+                        <div class='container'>
+                            <Fragment
+                                set:html={optionHTML(
+                                    'contrast-mode',
+                                    'Low',
+                                    'low'
+                                )}
+                            />
+                            <Fragment
+                                set:html={optionHTML(
+                                    'contrast-mode',
+                                    'Average',
+                                    'average'
+                                )}
+                            />
+                            <Fragment
+                                set:html={optionHTML(
+                                    'contrast-mode',
+                                    'High',
+                                    'high'
+                                )}
+                            />
+                        </div>
 
                         <p class='forced-colors-mode-only aside'>
                             Your browser or computer has ‘forced colours’ mode
@@ -219,16 +223,22 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
                     <fieldset>
                         <legend>Motion/Animation</legend>
 
-                        <Fragment
-                            set:html={optionHTML(
-                                'motion',
-                                'Default',
-                                'no-preference'
-                            )}
-                        />
-                        <Fragment
-                            set:html={optionHTML('motion', 'Reduce', 'reduce')}
-                        />
+                        <div class='container'>
+                            <Fragment
+                                set:html={optionHTML(
+                                    'motion',
+                                    'Default',
+                                    'no-preference'
+                                )}
+                            />
+                            <Fragment
+                                set:html={optionHTML(
+                                    'motion',
+                                    'Reduce',
+                                    'reduce'
+                                )}
+                            />
+                        </div>
                     </fieldset>
                 )
             }
@@ -253,15 +263,4 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     </div>
 </div>
 
-{
-    styles && (
-        <SettingsMenu_Styles {...(typeof styles === 'object' ? styles : {})} />
-    )
-}
-{
-    scripts && (
-        <SettingsMenu_Scripts
-            {...(typeof scripts === 'object' ? scripts : {})}
-        />
-    )
-}
+{scripts && <SettingsMenu_Scripts {...(scripts === true ? {} : scripts)} />}

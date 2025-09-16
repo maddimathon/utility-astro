@@ -3,142 +3,298 @@
 /// @since ___PKG_VERSION___
 ///
 
+@use '../utility-sass' as utils;
+
 ///
 /// Supports the Toggle astro component.
 ///
-@mixin snippet-support-toggles {
-    [data-toggle-container] {
-        display: grid;
-        grid-auto-rows: auto;
+@mixin snippet-support-toggles(
+    $headingSelectors: (
+        '%h1',
+        '%h2',
+        '%h3',
+        '%h4',
+        '%h5',
+        '%h6',
+        '%heading',
+    )
+) {
+    @at-root %_flex-contents-container {
+        --display: flex;
+        display: flex;
+        flex-direction: column;
 
         justify-content: start;
+        align-content: start;
         align-items: start;
 
-        margin: 0;
+        display: contents; /* poor browser support atm */
+    }
 
+    [data-toggle-container] {
+        @extend %_flex-contents-container;
         z-index: 1;
     }
 
     .toggle-title {
-        margin: 0;
-        padding: 0;
+        font-weight: 600;
     }
 
-    .toggle-title {
-        grid-row: 1 / 1;
-        font-weight: 600;
-        z-index: 2;
+    .toggle-title,
+    .toggle-title > :where(#{$headingSelectors}) {
+        margin: 0;
+        padding: 0;
     }
 
     [data-toggle-control] {
         margin: 0;
-        padding: 0;
+        width: auto;
 
-        // background: none;
-        // border: none;
-        font-weight: 600;
-        font-size: 1em;
+        font: inherit;
+        text-align: inherit;
 
-        cursor: text;
+        border: none;
+        background: none;
+        color: inherit;
 
-        .icon {
-            &,
-            svg {
-                display: block;
+        &[aria-disabled] {
+            margin: #{utils.var-mrg-soft('400')} 0 0;
+            padding: 0;
+
+            appearance: none;
+            cursor: text;
+
+            .icon {
+                display: none;
             }
+        }
+
+        @include utils.hover-focus-visible-or-within(
+            $addSelectors: (
+                '&:active',
+            )
+        ) {
+            border: none;
+            background: none;
+            color: inherit;
+            opacity: 1;
         }
     }
 
     .toggle-icon {
-        display: none;
+        display: inline-block;
+
+        vertical-align: sub;
+        padding-bottom: 0.03125em;
+
+        > svg {
+            display: block;
+            position: relative;
+
+            height: 1.125em;
+            width: auto;
+
+            stroke: currentColor;
+            stroke-width: max(0.1875em, 1px);
+            fill: none;
+        }
     }
 
     .toggle-control-inner {
-        grid-column: 1 / -1;
     }
 
     [data-toggle-content] {
-        grid-column: 1 / -1;
-        grid-row: 2 / 2;
+        display: grid;
+
+        justify-content: stretch;
+        justify-items: stretch;
+        align-content: start;
+        align-items: start;
 
         /// BLOCK ///
 
         > .container {
-            overflow-block: hidden;
-            overflow-inline: auto;
+            @extend %_flex-contents-container;
         }
     }
 
-    /** Opening & Closing ------------------ **/
+    /* With Javascript ==================================== */
 
-    [data-toggle-container] {
-        [data-toggle-control] {
-            cursor: pointer;
-        }
-
-        .toggle-icon {
-            display: inline-block;
-
-            vertical-align: sub;
-            padding-bottom: 0.03125em;
-
-            > svg {
-                display: block;
-                position: relative;
-
-                height: 1.125em;
-                width: auto;
-
-                stroke: currentColor;
-                stroke-width: max(0.1875em, 1px);
-                fill: none;
-            }
-        }
-
-        .toggle-control-inner {
-        }
-
-        [data-toggle-content] {
+    @include utils.js {
+        @at-root %_toggle-container-grid-basics {
+            --display: grid;
             display: grid;
-            grid-template-rows: 0fr;
-            overflow: hidden;
+            grid-template-columns: var(--grid-template-columns--toggle);
+            grid-auto-rows: auto;
 
-            > .container {
-                opacity: 0;
-                visibility: hidden;
-            }
+            justify-content: stretch;
+            justify-items: stretch;
+            align-content: start;
+            align-items: start;
+
+            gap: 0 #{utils.var-mrg-firm('200')};
         }
-    }
 
-    [data-toggle-container='closed'] {
-    }
+        [data-toggle-container] {
+            @extend %_toggle-container-grid-basics;
+            --grid-template-columns--toggle: minmax(max-content, auto) 1fr;
 
-    [data-toggle-container='open'] {
-        .toggle-icon {
-            > svg {
-                #b {
-                    opacity: 0;
+            margin: #{utils.var-mrg-firm('400')} 0 #{utils.var-mrg-half('400')};
+
+            z-index: 1;
+        }
+
+        @at-root %toggle-container-subgrid {
+            @extend %_toggle-container-grid-basics;
+            grid-template-columns: subgrid;
+            grid-column: 1 / -1;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .toggle-title,
+        .toggle-title > :where(#{$headingSelectors}) {
+            @extend %toggle-container-subgrid;
+            align-content: center;
+            align-items: center;
+
+            grid-row: 1 / 1;
+        }
+
+        .toggle-title {
+            padding-block-end: #{utils.var-mrg-firm('200')};
+            // font-size: #{utils.var-fs(heading-7)};
+
+            z-index: 2;
+        }
+
+        [data-toggle-control] {
+            @extend %toggle-container-subgrid;
+            align-content: center;
+            align-items: center;
+
+            margin: 0;
+            padding: 0;
+
+            font-weight: 600;
+            appearance: button;
+
+            cursor: pointer;
+
+            .icon {
+                &,
+                svg {
+                    display: block;
+                    grid-column: 1;
                 }
             }
         }
 
-        > [data-toggle-content] {
-            grid-template-rows: 1fr;
+        .toggle-control-inner {
+            grid-column: 2 / -1;
+        }
+
+        [data-toggle-content] {
+            @extend %toggle-container-subgrid;
+
+            grid-column: 1 / -1;
+            grid-row: 2 / 2;
+
+            grid-template-rows: 0fr;
+
+            margin: 0;
+            padding: 0;
+
+            border-block-start: #{utils.var-border-width('200')} solid
+                currentColor;
+            border-block-start-style: solid;
+
+            overflow: hidden;
+
+            /// BLOCK ///
 
             > .container {
-                opacity: 1;
-                visibility: visible;
+                --display: flex;
+                display: flex;
+                grid-column: 2 / -1;
+
+                padding: #{utils.var-mrg-soft('300')}
+                    #{utils.var-mrg-firm('300')};
+                padding-inline-start: #{utils.var-stroke-relative('200')};
+
+                overflow-block: hidden;
+                overflow-inline: auto;
+
+                visibility: hidden;
+                opacity: 0;
+
+                > :first-child {
+                    margin-block-start: 0;
+                }
+                > :last-child {
+                    margin-block-end: 0;
+                }
+            }
+        }
+
+        /** Opening & Closing ------------------ **/
+
+        [data-toggle-container='closed'] {
+        }
+
+        [data-toggle-container='open'] {
+            .toggle-icon {
+                > svg {
+                    #b {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            > [data-toggle-content] {
+                grid-template-rows: 1fr;
+
+                border: #{utils.var-border-width('200')} dashed currentColor;
+                border-block-start-style: solid;
+
+                > .container {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        [data-toggle-container='closing'] {
+            > [data-toggle-content] {
+                grid-template-rows: 0fr;
+
+                > .container {
+                    opacity: 0;
+                    visibility: visible;
+                }
             }
         }
     }
 
-    [data-toggle-container='closing'] {
-        > [data-toggle-content] {
-            grid-template-rows: 0fr;
+    [data-toggle-control] {
+        @include utils.js {
+            &:visited {
+                color: VisitedText;
+            }
+        }
 
-            > .container {
-                opacity: 0;
-                visibility: visible;
+        [data-toggle-container='open'] & {
+            @include utils.js {
+                color: ActiveText;
+            }
+        }
+
+        [data-toggle-container='open'] &,
+        & {
+            @include utils.hover-focus-visible {
+                text-decoration-color: transparent;
+                color: LinkText;
             }
         }
     }

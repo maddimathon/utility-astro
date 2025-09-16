@@ -62,6 +62,7 @@
 
         
         "./components/*": "./dist/astro/components/*.astro",
+        "./css/*": "./dist/astro/css/*.astro",
         "./layouts/*": "./dist/astro/layouts/*.astro",
         "./support/*": "./dist/astro/support/*.astro",
 

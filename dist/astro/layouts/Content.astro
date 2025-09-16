@@ -1,0 +1,140 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import { mergeArgs } from '@maddimathon/utility-typescript/functions';
+import type { GenericProps } from '../../ts/00-types/index.js';
+import type {
+    Props as ContentProps,
+    Props_Full,
+    ContentType,
+    DefaultContentType,
+} from './Content.js';
+
+/* import - functions */
+import { escapeHTML } from 'astro/runtime/server/escape.js';
+
+/* import - values */
+
+/* import - components */
+import Content_ExtraWide from './content/Content_ExtraWide.astro';
+import Content_FullWidth from './content/Content_FullWidth.astro';
+import Content_Only from './content/Content_Only.astro';
+import Content_SidebarLeft from './content/Content_SidebarLeft.astro';
+import Content_SidebarRight from './content/Content_SidebarRight.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type { ContentType, DefaultContentType, Props_Full };
+
+/* PROPS ===================================== */
+
+export type Props<T_Type extends ContentType = DefaultContentType> =
+    GenericProps<ContentProps<T_Type>> & {
+        type?: T_Type | undefined;
+    };
+
+const _defProps: Props_Full<ContentType> & Pick<Required<Props>, 'type'> = {
+    type: 'content-only',
+
+    title: null,
+    subtitle: null,
+
+    attrs: {
+        main: {},
+        sidebar: {},
+    },
+};
+
+const p = mergeArgs(_defProps, Astro.props.frontmatter ?? Astro.props, true);
+
+function titleHTML(_title: string[]): string {
+    return _title.map(escapeHTML).reverse().join(' / ');
+}
+
+/* CONSTANTS ===================================== */
+
+const title = Array.isArray(p.title)
+    ? p.title.length
+        ? p.title
+        : null
+    : p.title?.length
+      ? [p.title]
+      : null;
+
+const contentTypes: {
+    [K in ContentType]: (result: any, props: Props_Full<K>, slots?: any) => any;
+} = {
+    'content-only': Content_Only,
+    'full-width': Content_FullWidth,
+    'extra-wide': Content_ExtraWide,
+    'sidebar-left': Content_SidebarLeft,
+    'sidebar-right': Content_SidebarRight,
+} as const;
+
+const ContentComponent = contentTypes[p.type];
+---
+
+<ContentComponent {...p}>
+    {
+        p.subtitle && title ? (
+            <hgroup
+                role='group'
+                aria-roledescription='Page Header'
+                slot='content-header'
+            >
+                {title && (
+                    <h1
+                        class='page-title'
+                        set:html={titleHTML(title)}
+                    />
+                )}
+                {p.subtitle && (
+                    <p
+                        class='page-subtitle'
+                        set:text={p.subtitle}
+                    />
+                )}
+            </hgroup>
+        ) : (
+            <Fragment slot='content-header'>
+                {title && (
+                    <h1
+                        class='page-title'
+                        set:html={titleHTML(title)}
+                    />
+                )}
+                {p.subtitle && (
+                    <p
+                        class='page-subtitle'
+                        set:text={p.subtitle}
+                    />
+                )}
+            </Fragment>
+        )
+    }
+
+    <slot
+        slot='content-header'
+        name='content-header'
+    />
+    <slot
+        slot='before-site-content'
+        name='before-site-content'
+    />
+    <slot />
+    <slot
+        slot='after-site-content'
+        name='after-site-content'
+    />
+    <slot
+        slot='sidebar'
+        name='sidebar'
+    />
+</ContentComponent>

@@ -5,6 +5,25 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '../config';
+@forward '../config' with (
+    $print_globals: true !default,
+    $print_tokens: true !default,
+    $print_utils: true !default
+);
+
 @forward '../tokens';
+
 @forward '../lib';
+
+@use '../config';
+@use '../lib' as *;
+
+@mixin extend-selectors {
+    @include config.print-globals {
+        @include extend-selector-globals($optional: true);
+    }
+
+    @include config.print-utils {
+        @include extend-selector-utils($optional: true);
+    }
+}

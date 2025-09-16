@@ -24,19 +24,21 @@ import pkgJson from '../../../package.json';
 
 /* import - layouts */
 import LibPage from '../../astro/layouts/Page.astro';
+import type { ContentType } from 'src/astro/layouts/Content';
 
 /* TYPES ===================================== */
 
 /* PROPS ===================================== */
 
-type Partial_LibProps = Partial<LibPageProps> & Pick<LibPageProps, 'title'>;
+type Partial_LibProps = Partial<LibPageProps<ContentType>> &
+    Pick<LibPageProps<ContentType>, 'title'>;
 
 export interface Props extends Partial_LibProps {}
 
 const inputs: Props = Astro.props.frontmatter ?? Astro.props;
 
-const _defaultProps: Props & LibPageProps = {
-    title: 'Utility Astro',
+const _defaultProps = {
+    title: [],
 
     dir: 'ltr',
     lang: 'en-CA',
@@ -55,25 +57,33 @@ const _defaultProps: Props & LibPageProps = {
     },
 
     meta: {
-        title: arrayUnique([
-            ...(inputs.title?.length
-                ? Array.isArray(inputs.title)
-                    ? inputs.title
-                    : [inputs.title]
-                : []),
-            'Utility Astro',
-        ]).join(' — '),
+        title: 'Utility Astro',
     },
 
     settings: {
-        contrast: true,
-        motion: true,
+        settings: {
+            brightness: true,
+            contrast: true,
+            motion: true,
+        },
     },
-};
 
-const props: Props & LibPageProps = mergeArgs(_defaultProps, inputs, true);
+    support: { elementToggle: false },
+} as const satisfies Props & LibPageProps<ContentType>;
+
+const props = mergeArgs<Props & LibPageProps<ContentType>, Props>(
+    _defaultProps,
+    inputs,
+    true
+);
 
 /* CONSTANTS ===================================== */
+
+const title = Array.isArray(props.title) ? props.title : [props.title];
+
+props.meta.title = arrayUnique(title.concat(_defaultProps.meta.title)).join(
+    ' — '
+);
 
 const cssUrl_versioned = cssUrl + '?v=' + pkgJson.version;
 
@@ -90,7 +100,11 @@ props.primaryMenu = [
                 label: 'Layouts',
                 href: 'layouts',
                 child: [
-                    { label: 'Content-Only', href: 'layouts/content-only' },
+                    { label: 'Content Only', href: 'layouts/content-only' },
+                    { label: 'Extra-Wide', href: 'layouts/extra-wide' },
+                    { label: 'Full Width', href: 'layouts/full-width' },
+                    { label: 'Sidebar Left', href: 'layouts/sidebar-left' },
+                    { label: 'Sidebar Right', href: 'layouts/sidebar-right' },
                 ],
             },
         ],
@@ -101,6 +115,8 @@ props.primaryMenu = [
 
 <LibPage
     {...props}
+    layout={props.layout || 'content-only'}
+    title={title}
     accessibilityReportEmail={undefined}
 >
     <link

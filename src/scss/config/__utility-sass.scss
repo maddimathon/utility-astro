@@ -5,7 +5,7 @@
 
 @forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
     $include_featureCheck: true !default,
-    $include_html: true,
+    $include_html: true !default,
 
     $print_globals: false !default,
     $print_normalize: false !default,
@@ -13,5 +13,9 @@
     $print_utils: false !default,
 
     $selectorType_mode: 'attribute' !default,
-    $selectorType_motion: 'attribute' !default
+    $selectorType_motion: 'attribute' !default,
+
+    $selector_root: (
+        'html',
+    )
 );

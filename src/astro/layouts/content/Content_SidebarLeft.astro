@@ -1,0 +1,49 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericProps } from '../../../ts/00-types/index.js';
+import type { Props_Full as ContentProps } from '../Content.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import Main from '../Main.astro';
+import Sidebar from '../Sidebar.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export type Props = GenericProps<ContentProps<'sidebar-left'>>;
+
+const p: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<Main {...p.attrs.main}>
+    <slot
+        slot='content-header'
+        name='content-header'
+    />
+    <slot
+        slot='before-site-content'
+        name='before-site-content'
+    />
+    <slot />
+    <slot
+        slot='after-site-content'
+        name='after-site-content'
+    />
+</Main>
+
+<Sidebar {...p.attrs.sidebar}><slot name='sidebar' /></Sidebar>
