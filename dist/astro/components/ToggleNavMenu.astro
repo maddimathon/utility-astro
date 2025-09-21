@@ -1,8 +1,5 @@
 ---
 /**
- * To use this component, your page MUST include the Toggle_Scripts components
- * and sass styles snippet (or replacements), otherwise this will not work.
- *
  * @since 0.1.0-alpha.draft
  *
  * @packageDocumentation
@@ -10,63 +7,61 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as ToggleProps } from './Toggle.d.ts';
+import type { Props as ToggleNavMenuProps } from './ToggleNavMenu.d.ts';
 
 /* import - functions */
+import { parseMenuItem } from './NavMenu.astro';
 
 /* import - values */
 
 /* import - components */
+import MenuList from './MenuList.astro';
+// import NavMenu from './NavMenu.astro';
+// import Toggle from './Toggle.astro';
 
 /* import - layouts */
 
 /* TYPES ===================================== */
 
-export type * from './Toggle.d.ts';
+export type * from './ToggleNavMenu.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<ToggleProps, 'div'>;
+export type Props = GenericElementProps<ToggleNavMenuProps, 'div'>;
 
 const {
-    heading = 7,
-    id,
+    id: menuID,
+    menu,
     class: classList = [],
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
-const buttonHTML: string = (await Astro.slots.render('button')) || 'Toggle me';
+const parsedMenu = menu.map((_item) => parseMenuItem(Astro.url, _item));
+
+const id = `${menuID}-toggle`;
 
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
 const titleID = `${id}-title`;
-
-const headingTag = heading
-    ? heading < 7
-        ? {
-              open: `<h${heading} class="h${heading}">`,
-              clo: `</h${heading}>`,
-          }
-        : {
-              open: `<p class="heading">`,
-              clo: `</p>`,
-          }
-    : null;
 ---
 
-<div
-    id={id}
-    class:list={classList}
+<!-- <Toggle id={`${props.id}-toggle`}>
+    <Fragment slot='button'>Menu</Fragment>
+    <NavMenu {...props}><slot /></NavMenu>
+</Toggle> -->
+<nav
     {...attributes}
+    id={id}
     data-toggle-container
+    class:list={classList}
+    role='navigation'
 >
     <div
         id={titleID}
         class='toggle-title'
     >
-        {headingTag && <Fragment set:html={headingTag.open} />}
         <button
             id={buttonID}
             class='toggle-control'
@@ -101,10 +96,9 @@ const headingTag = heading
             </span>
             <span
                 class='toggle-control-inner'
-                set:html={buttonHTML.trim()}
+                set:text='Menu'
             />
         </button>
-        {headingTag && <Fragment set:html={headingTag.clo} />}
     </div>
 
     <section
@@ -112,6 +106,6 @@ const headingTag = heading
         id={contentID}
         aria-labelledby={titleID}
     >
-        <div class='container'><slot /></div>
+        <div class='container'><MenuList menu={parsedMenu} /></div>
     </section>
-</div>
+</nav>

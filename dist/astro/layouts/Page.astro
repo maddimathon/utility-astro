@@ -33,10 +33,11 @@ import Toggle_Scripts from '../support/Toggle_Scripts.astro';
 import Content from './Content.astro';
 
 /* import - components */
-import Page_Meta from '../components/Page_Meta.astro';
-import SkipLinks from '../components/SkipLinks.astro';
 import NavMenu from '../components/NavMenu.astro';
+import Page_Meta from '../components/Page_Meta.astro';
 import SettingsMenu from '../components/SettingsMenu.astro';
+import SkipLinks from '../components/SkipLinks.astro';
+import ToggleNavMenu from '../components/ToggleNavMenu.astro';
 
 
 /** ## PROPS ==================================== **/
@@ -316,7 +317,7 @@ const settings = p.settings && {
                     <!-- /SLOT: "before-primary-nav" -->
                 ) : <!-- SLOT: "before-primary-nav" (empty) / --> }
 
-                <NavMenu {...menus.primary} class:list="nav-primary" />
+                <ToggleNavMenu {...menus.primary} class:list="nav-primary" />
 
                 { slots_render.afterPrimaryNav ? (
                     <!-- SLOT: "after-primary-nav" -->

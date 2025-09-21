@@ -436,7 +436,7 @@ html {
 
 html,
 body {
-    scroll-padding-block-start: var(--gap-block-layout, 5vw);
+    scroll-padding-top: var(--gap-block-layout, 5vw);
 }
 
 body {

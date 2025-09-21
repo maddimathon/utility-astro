@@ -20,6 +20,10 @@
     }
 
     @include snippet-support-toggle;
+
+    @if config.$print_astro_content {
+        @include snippet-support-toggle-nav-menu;
+    }
 }
 
 @if config.$print_astro_settingsMenu {

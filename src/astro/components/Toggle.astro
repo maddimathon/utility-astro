@@ -58,7 +58,7 @@ const headingTag = heading
 
 <div
     id={id}
-    class:list={['toggle-container', '||', classList]}
+    class:list={classList}
     {...attributes}
     data-toggle-container
 >
@@ -109,7 +109,6 @@ const headingTag = heading
 
     <section
         data-toggle-content={id}
-        class='container | toggle-content'
         id={contentID}
         aria-labelledby={titleID}
     >

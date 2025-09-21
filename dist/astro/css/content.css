@@ -26,16 +26,16 @@ body > aside {
 }
 
 body,
-.subgrid,
-.body-subgrid,
-header,
-footer,
-main,
-nav {
+body > .subgrid,
+body > .body-subgrid,
+body > header,
+body > footer,
+body > main,
+body > nav {
     --display: grid;
     display: grid;
     position: relative;
-    justify-content: stretch;
+    justify-content: center;
     justify-items: stretch;
     align-content: start;
     align-items: start;
@@ -44,40 +44,36 @@ nav {
     grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
-    --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 0 [page-end] 0;
+    --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
     /* prettier-ignore */
-    grid-template-columns: 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 0 [page-end] 0 [site-end] 0;
+    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
+    margin-left: 0;
+    margin-right: 0;
 }
 :where(
     body > *,
-    .subgrid > *,
-    .body-subgrid > *,
-    header > *,
-    footer > *,
-    main > *,
-    nav > *
+    body > .subgrid > *,
+    body > .body-subgrid > *,
+    body > header > *,
+    body > footer > *,
+    body > main > *,
+    body > nav > *
 ) {
     grid-column: content-start/content-end;
     width: auto;
 }
 
 @media (min-width: 54em) {
-    body > .subgrid,
-    body > .body-subgrid,
-    body > header,
-    body > footer,
-    body > main,
-    body > nav,
     body {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] minmax(auto, 8rem) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, 8rem) [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: 0 [site-start] 1fr 0 [page-start] minmax(auto, 8rem) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, 8rem) [page-end] 0 1fr [site-end] 0;
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, 8rem) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, 8rem) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
 body {
-    margin: 0 var(--gap-inline-layout-half, 4vw);
+    margin: 0;
     padding: 0;
     z-index: 1;
 }
@@ -96,7 +92,6 @@ body > nav {
     grid-template-columns: subgrid;
     margin-left: 0;
     margin-right: 0;
-    padding: 0;
 }
 body .callout-width,
 body pre,
@@ -159,8 +154,7 @@ body > footer {
         grid-column: content-start/content-end;
         width: auto;
     }
-    .layout_sidebar-left > main > :where(*),
-    .layout_sidebar-right > main > :where(*) {
+    :where(.layout_sidebar-left > main > *, .layout_sidebar-right > main > *) {
         grid-column: content-start/content-end;
         width: auto;
     }
@@ -171,7 +165,7 @@ body > footer {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, 16rem) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: 0 [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, 16rem) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0 1fr [site-end] 0;
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, 16rem) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
@@ -180,6 +174,6 @@ body > footer {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, 16rem) [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: 0 [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, 16rem) [sidebar-end] 0 [page-end] 0 1fr [site-end] 0;
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, 16rem) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }

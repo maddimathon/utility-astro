@@ -99,7 +99,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 
 :where(.js) .website-settings-menu {
     --display: block;
-    z-index: 999999;
+    z-index: 999;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     display: block;
@@ -379,13 +379,17 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     justify-content: start;
     align-content: start;
     align-items: start;
-    padding: var(--mrg-firm-300, 0.8125rem) var(--mrg-firm-300, 0.8125rem);
+    padding: 0 var(--mrg-firm-300, 0.8125rem);
 }
 :where(.js) .website-settings-menu[data-toggle-container] {
     --display: grid;
     justify-content: end;
     justify-items: end;
     overscroll-behavior: none;
+}
+:where(.js) .website-settings-menu[data-toggle-container="open"],
+:where(.js) .website-settings-menu[data-toggle-container="closing"] {
+    z-index: 999999;
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
@@ -400,4 +404,11 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     max-height: 80svh;
     max-height: calc(90svh - 2rem - var(--gap-block-layout, 5vw) * 2);
     overflow: auto;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-firm-300, 0.8125rem);
+    padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }

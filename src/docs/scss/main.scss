@@ -7,6 +7,54 @@
 
 @forward '../../scss/templates/astro';
 
-// .nav-primary {
-//     grid-row: 1;
-// }
+@use '../../scss/templates/astro' as *;
+
+@include js-support(whereSelector) {
+    $_navHeight: 3rem;
+    $_scrollPaddingFallback: calc(#{$_navHeight} + #{var-gap-block(layout)});
+
+    &,
+    & body {
+        --height-nav-primary: #{$_navHeight};
+
+        --scroll-padding-top: #{$_scrollPaddingFallback};
+        --scroll-padding-top: calc(
+            var(--height-nav-primary, #{$_navHeight}) + #{var-gap-block(layout)}
+        );
+
+        scroll-padding-top: var(
+            --scroll-padding-top,
+            #{$_scrollPaddingFallback}
+        );
+    }
+
+    body {
+        // margin-top: var(--scroll-padding-top, #{$_scrollPaddingFallback});
+    }
+
+    .nav-primary[data-toggle-container] {
+        position: sticky;
+        top: 0;
+        grid-row: 1;
+
+        margin: 0;
+        padding: 0;
+
+        z-index: 9999;
+
+        > .toggle-title {
+            padding-block: #{var-mrg-soft('200')};
+            min-height: var(--height-nav-primary, #{$_navHeight});
+        }
+
+        > [data-toggle-content] {
+            padding-inline: #{var-gap-block(layout-half)};
+            width: 100%;
+
+            z-index: -1;
+        }
+    }
+    .website-settings-menu {
+        margin-block-start: 0;
+    }
+}

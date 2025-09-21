@@ -59,13 +59,9 @@
             > legend {
                 &,
                 &:first-child {
-                    // grid-column: 1 / -1;
-                    // grid-row: 1;
-
                     margin-block: 0;
                     margin-inline: calc(#{var-mrg-soft('200')} * -1);
 
-                    // padding: 0;
                     padding-inline: #{var-mrg-soft('200')};
 
                     font-weight: 600;
@@ -119,7 +115,7 @@
     @include js {
         .website-settings-menu {
             --display: block;
-            z-index: 999999;
+            z-index: 999;
 
             [data-toggle-control] {
                 @include utils.snippet-button;
@@ -202,7 +198,7 @@
                     align-content: start;
                     align-items: start;
 
-                    padding: #{var-mrg-firm('300')} #{var-mrg-firm('300')};
+                    padding: 0 #{var-mrg-firm('300')};
                 }
             }
 
@@ -212,6 +208,11 @@
                 justify-items: end;
 
                 overscroll-behavior: none;
+            }
+
+            &[data-toggle-container='open'],
+            &[data-toggle-container='closing'] {
+                z-index: 999999;
             }
 
             &[data-toggle-container='open'] {
@@ -228,6 +229,10 @@
                         90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
                     overflow: auto;
+
+                    > .container {
+                        padding-block: #{var-mrg-firm('300')};
+                    }
                 }
             }
         }

@@ -1,0 +1,115 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/selector';
+
+// @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
+
+@use '../01-functions' as *;
+@use '../02-mixins' as *;
+
+@use 'content' as *;
+
+// prettier-ignore
+$_default_grid_page: snippet-support-content--default-grid-page();
+
+///
+/// Supports the ToggleNavMenu astro component.
+///
+@mixin snippet-support-toggle-nav-menu {
+    @include js-support(whereSelector) {
+        %body {
+            > %nav {
+                @at-root #{selector.unify(&, ('[data-toggle-container]'))} {
+                    // prettier-ignore
+                    $_gridCols_toggle: var(--grid-template-columns--page, #{$_default_grid_page});
+                    /* prettier-ignore */
+                    --grid-template-columns--toggle: #{ $_gridCols_toggle};
+                    /* prettier-ignore */
+                    grid-template-columns: var(--grid-template-columns--page, #{$_default_grid_page});
+                    grid-template-columns: subgrid;
+
+                    justify-content: center;
+                    justify-items: center;
+                    align-content: center;
+                    align-items: center;
+
+                    grid-column: 1 / -1;
+
+                    padding: 0;
+
+                    .toggle-title,
+                    [data-toggle-content] {
+                        grid-column: 1 / -1;
+
+                        font-size: #{var-fs(heading-7)};
+                        gap: 0;
+                    }
+
+                    [data-toggle-content] {
+                        padding: 0;
+                        border: none;
+
+                        > .container {
+                            @include snippet-support-content--page-width;
+
+                            padding-inline: #{var-mrg-firm('300')};
+                            background: Canvas;
+                            color: CanvasText;
+                        }
+                    }
+
+                    .toggle-title {
+                        /* prettier-ignore */
+                        grid-template-columns: var(--grid-template-columns--toggle, var(--grid-template-columns--page, #{$_default_grid_page}));
+                        grid-template-columns: subgrid;
+
+                        align-content: stretch;
+                        align-items: center;
+
+                        margin-block-end: calc(#{var-border-width('200')} * -1);
+                        border-block-end: #{var-border-width('200')} solid
+                            currentColor;
+
+                        font-size: #{var-fs(heading-6)};
+                        background: Canvas;
+                        color: CanvasText;
+
+                        [data-toggle-control] {
+                            @include snippet-support-content--page-width;
+
+                            // prettier-ignore
+                            $_gridCols_toggle: [content] 1fr #{var-gap-inline(tab)} [icon] minmax(max-content, auto);
+                            /* prettier-ignore */
+                            --grid-template-columns--toggle: #{ $_gridCols_toggle};
+                            /* prettier-ignore */
+                            grid-template-columns: var(--grid-template-columns--toggle, #{$_gridCols_toggle});
+
+                            justify-content: space-between;
+                            justify-items: start;
+                            align-items: center;
+
+                            gap: 0;
+
+                            width: 100%;
+                        }
+                    }
+                }
+                @at-root #{selector.unify(&, ('[data-toggle-container=open]'))} {
+                    > [data-toggle-content] {
+                        margin-block-end: #{var-mrg-firm('400')};
+
+                        > .container {
+                            padding-block: #{var-mrg-soft('400')};
+                            border: #{var-border-width('200')} dashed
+                                currentColor;
+                            border-block-start: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

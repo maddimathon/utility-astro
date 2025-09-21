@@ -13,17 +13,32 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
+$_width_content: list.nth(width-value(content), 1);
+$_width_sidebar: list.nth(width-value(sidebar), 1);
+
+$_contentCol_default: minmax(auto, $_width_content);
+
+///
+/// @since ___PKG_VERSION___
+///
+@function snippet-support-content--default-grid-page() {
+    // prettier-ignore
+    @return 0 [page-start] 1fr [sidebar-start] 0 [content-start] #{$_contentCol_default} [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+}
+
+$_default_grid_page: snippet-support-content--default-grid-page();
+
 ///
 /// Includes the bascis properties for a page layout grid (but no columns).
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--body-grid {
+@mixin snippet-support-content--base-grid {
     --display: grid;
     display: grid;
     position: relative;
 
-    justify-content: stretch;
+    justify-content: center;
     justify-items: stretch;
     align-content: start;
     align-items: start;
@@ -37,7 +52,7 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--body-grid--content-width {
+@mixin snippet-support-content--content-width {
     grid-column: content-start / content-end;
     // width: 100%;
     width: auto;
@@ -47,7 +62,7 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--body-grid--page-width {
+@mixin snippet-support-content--page-width {
     grid-column: page-start / page-end;
     // width: 100%;
     width: auto;
@@ -57,7 +72,7 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--body-grid--sidebar-width {
+@mixin snippet-support-content--sidebar-width {
     grid-column: sidebar-start / sidebar-end;
     // width: 100%;
     width: auto;
@@ -67,17 +82,38 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--body-grid--site-width {
+@mixin snippet-support-content--site-width {
     grid-column: site-start / site-end;
     // width: 100%;
     width: auto;
     // max-width: #{var-width(site)};
 }
 
-$_width_content: list.nth(width-value(content), 1);
-$_width_sidebar: list.nth(width-value(sidebar), 1);
+///
+/// @since ___PKG_VERSION___
+///
+@mixin _body-grid--layout-content-only(
+    $bodyMargin,
+    $contentCol,
+    $gutterHalfCol,
+    $sidebarHalfCol
+) {
+    @include min-width(sidebar) {
+        // prettier-ignore
+        $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
 
-@mixin _snippet-support-content--layout-sidebar(
+        /* prettier-ignore */
+        --grid-template-columns--page: #{$_default_grid_page};
+
+        /* prettier-ignore */
+        grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin _body-grid--layout-sidebar(
     $side,
     $bodyMargin,
     $contentCol,
@@ -103,7 +139,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
         --grid-template-columns--page: #{$_default_grid_page};
 
         /* prettier-ignore */
-        grid-template-columns: 0 [site-start] 1fr #{$_default_grid_page} 1fr [site-end] 0;
+        grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
     }
 }
 
@@ -115,7 +151,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
 @mixin snippet-support-content {
     $bodyMargin: var-gap-inline(layout-half);
 
-    $contentCol: minmax(auto, $_width_content);
+    $contentCol: $_contentCol_default;
 
     $gutterCol: var-gap-inline(layout);
     $gutterHalfCol: var-gap-inline(layout-half);
@@ -129,16 +165,16 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
         /// for internal use
         ///
         %_site-width {
-            @include snippet-support-content--body-grid--site-width;
+            @include snippet-support-content--site-width;
         }
         %_page-width {
-            @include snippet-support-content--body-grid--page-width;
+            @include snippet-support-content--page-width;
         }
         %_content-width {
-            @include snippet-support-content--body-grid--content-width;
+            @include snippet-support-content--content-width;
         }
         %_sidebar-width {
-            @include snippet-support-content--body-grid--sidebar-width;
+            @include snippet-support-content--sidebar-width;
         }
 
         ///
@@ -146,66 +182,59 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
         /// for external use and nesting
         ///
         %site-width {
-            @include snippet-support-content--body-grid--site-width;
+            @include snippet-support-content--site-width;
         }
         %page-width {
-            @include snippet-support-content--body-grid--page-width;
+            @include snippet-support-content--page-width;
         }
         %content-width {
-            @include snippet-support-content--body-grid--content-width;
+            @include snippet-support-content--content-width;
         }
         %sidebar-width {
-            @include snippet-support-content--body-grid--sidebar-width;
+            @include snippet-support-content--sidebar-width;
         }
 
         ///
         /// BASE BODY GRID
         ///
 
-        // prettier-ignore
-        $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] 0 [page-end] 0;
-
         %_body-grid,
-        %body-subgrid {
-            @include snippet-support-content--body-grid;
+        %_body-subgrid {
+            @include snippet-support-content--base-grid;
 
             /* prettier-ignore */
             --grid-template-columns--page: #{$_default_grid_page};
 
             /* prettier-ignore */
-            grid-template-columns: 0 [site-start] #{$_default_grid_page} [site-end] 0;
+            grid-template-columns: #{$bodyMargin} [site-start] #{$_default_grid_page} [site-end] #{$bodyMargin};
+
+            margin-inline: 0;
+            // padding-inline: #{$bodyMargin};
 
             /// BLOCK ///
 
             @at-root :where(#{selector.nest( &, '> *' )}) {
-                @include snippet-support-content--body-grid--content-width;
+                @include snippet-support-content--content-width;
             }
         }
 
         %_body-grid {
-            @include min-width(sidebar) {
-                // prettier-ignore
-                $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
-
-                /* prettier-ignore */
-                --grid-template-columns--page: #{$_default_grid_page};
-
-                /* prettier-ignore */
-                grid-template-columns: 0 [site-start] 1fr #{$_default_grid_page} 1fr [site-end] 0;
-            }
+            @include _body-grid--layout-content-only(
+                $bodyMargin: $bodyMargin,
+                $contentCol: $contentCol,
+                $gutterHalfCol: $gutterHalfCol,
+                $sidebarHalfCol: $sidebarHalfCol
+            );
         }
 
         %html {
             display: block;
             position: relative;
-            // max-width: 100%;
-            // min-height: 100vh;
-            // min-height: 100dvh;
         }
 
         %body {
             @extend %_body-grid;
-            margin: 0 #{$bodyMargin};
+            margin: 0;
             padding: 0;
             z-index: 1;
 
@@ -216,13 +245,12 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
             }
 
             > %body-subgrid {
-                @extend %_body-grid;
+                @extend %_body-subgrid;
                 grid-column: 1 / -1;
 
                 grid-template-columns: subgrid;
 
                 margin-inline: 0;
-                padding: 0;
             }
 
             %callout-width,
@@ -255,7 +283,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--body-grid--page-width;
+                    @include snippet-support-content--page-width;
                 }
             }
             > header {
@@ -290,7 +318,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--body-grid--page-width;
+                    @include snippet-support-content--page-width;
                 }
             }
         }
@@ -300,7 +328,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--body-grid--site-width;
+                    @include snippet-support-content--site-width;
                 }
             }
         }
@@ -321,20 +349,20 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
 
                     &,
                     & %page-width {
-                        @include snippet-support-content--body-grid--content-width;
+                        @include snippet-support-content--content-width;
                     }
 
                     /// BLOCK ///
 
-                    > :where(*) {
-                        @include snippet-support-content--body-grid--content-width;
+                    @at-root :where(#{selector.nest( &, '> *' )}) {
+                        @include snippet-support-content--content-width;
                     }
                 }
             }
         }
 
         %layout-sidebar-left {
-            @include _snippet-support-content--layout-sidebar(
+            @include _body-grid--layout-sidebar(
                 left,
                 $bodyMargin: $bodyMargin,
                 $contentCol: $contentCol,
@@ -344,7 +372,7 @@ $_width_sidebar: list.nth(width-value(sidebar), 1);
         }
 
         %layout-sidebar-right {
-            @include _snippet-support-content--layout-sidebar(
+            @include _body-grid--layout-sidebar(
                 right,
                 $bodyMargin: $bodyMargin,
                 $contentCol: $contentCol,

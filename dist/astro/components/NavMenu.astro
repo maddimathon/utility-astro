@@ -42,51 +42,59 @@ const {
 /* FUNCTIONS ===================================== */
 
 /**
- * The strings representing this page (used to check for current status).
- */
-const parseMenuItem_thisPage = {
-    object: new RegExp(
-        `^(${escRegExpURL(
-            Astro.url.toString().replace(/\/$/gi, '/')
-        )}|${escRegExpURL(
-            config_site +
-                absoluteInternalURL(Astro.url, Astro.url.pathname).replace(
-                    /\/$/gi,
-                    '/'
-                )
-        )})\/?$`,
-        'gi'
-    ),
-
-    string: new RegExp(
-        `^(${escRegExp(
-            absoluteInternalURL(Astro.url, Astro.url.pathname)
-        )})\/?$`,
-        'gi'
-    ),
-};
-
-/**
  * Converts an item input to the nav params to one for the
  * @param item Menu item to convert.
  */
-function parseMenuItem(item: ArrayItem<NavMenuProps['menu']>): MenuItem {
+export function parseMenuItem(
+    currentURL: URL,
+    item: ArrayItem<NavMenuProps['menu']>
+): MenuItem {
+    /**
+     * The strings representing this page (used to check for current status).
+     */
+    const parseMenuItem_thisPage = {
+        object: new RegExp(
+            `^(${escRegExpURL(
+                currentURL.toString().replace(/\/$/gi, '/')
+            )}|${escRegExpURL(
+                config_site +
+                    absoluteInternalURL(
+                        currentURL,
+                        currentURL.pathname
+                    ).replace(/\/$/gi, '/')
+            )})\/?$`,
+            'gi'
+        ),
+
+        string: new RegExp(
+            `^(${escRegExp(
+                absoluteInternalURL(currentURL, currentURL.pathname)
+            )})\/?$`,
+            'gi'
+        ),
+    };
+
     let current: boolean = item.current ?? false;
 
     let href: MenuItem['href'];
 
     switch (typeof item.href) {
         case 'object':
-            href = item.href.toString();
+            // breaks
+            if (item.href === null) {
+                break;
+            }
+
+            href = item.href?.toString();
 
             current =
-                current || href.match(parseMenuItem_thisPage.object) !== null;
+                current || href?.match(parseMenuItem_thisPage.object) !== null;
             break;
 
         case 'string':
             href = item.href.match(/^(\.|\/|[a-z]+:\/\/)/)
                 ? item.href
-                : absoluteInternalURL(Astro.url, item.href);
+                : absoluteInternalURL(currentURL, item.href);
 
             current =
                 current || href.match(parseMenuItem_thisPage.string) !== null;
@@ -100,7 +108,7 @@ function parseMenuItem(item: ArrayItem<NavMenuProps['menu']>): MenuItem {
     let child: MenuItem['child'];
 
     if (item.child?.length) {
-        child = item.child.map(parseMenuItem);
+        child = item.child.map((_item) => parseMenuItem(currentURL, _item));
     }
 
     return {
@@ -113,7 +121,7 @@ function parseMenuItem(item: ArrayItem<NavMenuProps['menu']>): MenuItem {
 
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map(parseMenuItem);
+const parsedMenu = menu.map((_item) => parseMenuItem(Astro.url, _item));
 ---
 
 <nav

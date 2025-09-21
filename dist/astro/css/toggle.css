@@ -146,8 +146,11 @@
 :where(.js) [data-toggle-container] {
     --display: grid;
     display: grid;
+    --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
+        1fr;
     grid-template-columns: var(--grid-template-columns--toggle);
     grid-auto-rows: auto;
+    grid-auto-flow: column;
     justify-content: stretch;
     justify-items: stretch;
     align-content: start;
@@ -157,7 +160,6 @@
 }
 
 :where(.js) [data-toggle-container] {
-    --grid-template-columns--toggle: minmax(max-content, auto) 1fr;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     z-index: 1;
 }
@@ -231,10 +233,10 @@
 :where(.js) [data-toggle-control] .icon,
 :where(.js) [data-toggle-control] .icon svg {
     display: block;
-    grid-column: 1;
+    grid-column: icon;
 }
 :where(.js) .toggle-control-inner {
-    grid-column: 2/-1;
+    grid-column: content;
 }
 :where(.js) [data-toggle-content] {
     grid-column: 1/-1;
@@ -249,8 +251,8 @@
 :where(.js) [data-toggle-content] > .container {
     --display: flex;
     display: flex;
-    grid-column: 2/-1;
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
+    grid-column: content;
+    padding: 0 var(--mrg-firm-300, 0.8125rem);
     padding-left: var(--stroke-relative-200, 0.0625em);
     overflow-y: hidden;
     overflow-x: auto;
@@ -276,6 +278,8 @@
     [data-toggle-container="open"]
     > [data-toggle-content]
     > .container {
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
     opacity: 1;
     visibility: visible;
 }

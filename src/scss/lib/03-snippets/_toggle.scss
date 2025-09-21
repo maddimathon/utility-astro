@@ -3,7 +3,9 @@
 /// @since ___PKG_VERSION___
 ///
 
-@use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
+@use 'pkg:@maddimathon/utility-sass/selector';
+
+// @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -127,8 +129,13 @@
         @at-root %_toggle-container-grid-basics {
             --display: grid;
             display: grid;
+
+            --grid-template-columns--toggle: [icon] minmax(max-content, auto)
+                [content] 1fr;
             grid-template-columns: var(--grid-template-columns--toggle);
+
             grid-auto-rows: auto;
+            grid-auto-flow: column;
 
             justify-content: stretch;
             justify-items: stretch;
@@ -140,7 +147,6 @@
 
         [data-toggle-container] {
             @extend %_toggle-container-grid-basics;
-            --grid-template-columns--toggle: minmax(max-content, auto) 1fr;
 
             margin: #{var-mrg-firm('400')} 0 #{var-mrg-half('400')};
 
@@ -167,7 +173,6 @@
 
         .toggle-title {
             padding-block-end: #{var-mrg-firm('200')};
-            // font-size: #{var-fs(heading-7)};
 
             z-index: 2;
         }
@@ -189,13 +194,13 @@
                 &,
                 svg {
                     display: block;
-                    grid-column: 1;
+                    grid-column: icon;
                 }
             }
         }
 
         .toggle-control-inner {
-            grid-column: 2 / -1;
+            grid-column: content;
         }
 
         [data-toggle-content] {
@@ -219,9 +224,9 @@
             > .container {
                 --display: flex;
                 display: flex;
-                grid-column: 2 / -1;
+                grid-column: content;
 
-                padding: #{var-mrg-soft('300')} #{var-mrg-firm('300')};
+                padding: 0 #{var-mrg-firm('300')};
                 padding-inline-start: #{var-stroke-relative('200')};
 
                 overflow-block: hidden;
@@ -262,6 +267,7 @@
                 border-block-start-style: solid;
 
                 > .container {
+                    padding-block: #{var-mrg-soft('300')};
                     opacity: 1;
                     visibility: visible;
                 }
