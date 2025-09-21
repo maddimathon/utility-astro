@@ -1,0 +1,16 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../../tokens/config' with (
+    $include_html: false !default,
+
+    $internal_extendSelectors: false,
+    $internal_supressCredit: true,
+
+    $print_globals: true !default,
+    $print_normalize: false !default,
+    $print_tokens: true !default,
+    $print_utils: false !default
+);

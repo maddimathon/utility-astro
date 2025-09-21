@@ -1,0 +1,18 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../../../config' with (
+    $include_html: false !default,
+
+    $internal_supressCredit: true,
+
+    $print_globals: false,
+    $print_normalize: false,
+    $print_tokens: false,
+    $print_utils: false,
+
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
+);

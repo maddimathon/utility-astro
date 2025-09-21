@@ -1,0 +1,14 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use '../lib';
+
+/* # SCREEN READER TEXT ==================================== */
+
+%screen-reader-text {
+    @include lib.snippet-screen-reader-text;
+}
+
+@include lib.extend-selectors;

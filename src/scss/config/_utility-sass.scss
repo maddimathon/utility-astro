@@ -1,0 +1,14 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default,
+
+    $selector_root: (
+        'html',
+    )
+    !default
+);

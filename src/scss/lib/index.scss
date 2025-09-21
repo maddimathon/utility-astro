@@ -5,8 +5,9 @@
 
 @forward '../notice';
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base/lib';
+@forward 'pkg:@maddimathon/utility-sass/templates/base/lib' hide tokens-all,
+    tokens-width, width-value, var-width;
 
-// @forward '01-functions';
-// @forward '02-mixins';
+@forward '01-functions';
+@forward '02-mixins';
 @forward '03-snippets';

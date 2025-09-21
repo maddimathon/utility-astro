@@ -67,16 +67,16 @@ const slots_render = mapToObject(
     {...attributes}
 >
 
-    <header class='content-header'>
-        { slots_render.contentHeader ? (
+    { slots_render.contentHeader ? (
+        <header class='content-header'>
             <!-- SLOT: "content-header" -->
             <slot name="content-header" />
             <!-- /SLOT: "content-header" -->
-        ) : (
-            <h1 class="screen-reader-text">Main Content</h1>
-            <!-- SLOT: "content-header" (empty) / -->
-        ) }
-    </header>
+        </header>
+    ) : (
+        <h1 class="screen-reader-text">Main Content</h1>
+        <!-- SLOT: "content-header" (empty) / -->
+    ) }
 
     { slots_render.beforeSiteContent ? (
         <!-- SLOT: "before-site-content" -->
@@ -102,3 +102,7 @@ const slots_render = mapToObject(
         <!-- SLOT: "after-site-content" (empty) / -->
     ) }
 </main>
+
+<style lang='scss'>
+    @forward '../css/screen-reader-text.css';
+</style>

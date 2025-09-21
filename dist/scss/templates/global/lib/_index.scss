@@ -1,0 +1,19 @@
+///
+/// Here as a shortcut to the full lib that replaces some functions and mixins
+/// (using the local config & tokens).
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward '../config';
+@forward '../tokens';
+
+@forward '../../../notice';
+
+@forward '01-functions';
+@forward '02-mixins';
+@forward '03-snippets';
+
+@forward '../../tokens/lib' hide $internal_extendSelectors,
+    $internal_supressCredit, extend-selector-globals, extend-selector-utils;

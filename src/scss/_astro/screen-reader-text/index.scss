@@ -1,0 +1,14 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../lib';
+
+/* # SCREEN READER TEXT ==================================== */
+
+%screen-reader-text {
+    @include lib.snippet-screen-reader-text;
+}
+
+@include lib.extend-selectors;

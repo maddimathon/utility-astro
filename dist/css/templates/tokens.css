@@ -1,0 +1,153 @@
+/*!
+ * Utility Astro Template - Tokens
+ * 
+ * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * License: MIT
+ */
+/* #region Tokens - Margin */
+html {
+    --mrg-firm-100: 0.3125rem;
+    --mrg-firm-200: 0.5rem;
+    --mrg-firm-300: 0.8125rem;
+    --mrg-firm-400: 1.25rem;
+    --mrg-firm-600: 2.25rem;
+    --mrg-firm-800: 4rem;
+    --mrg-firm-900: 7.125rem;
+}
+
+html {
+    --mrg-soft-100: 0.1875rem;
+    --mrg-soft-200: 0.3125rem;
+    --mrg-soft-300: 0.5rem;
+    --mrg-soft-400: 0.8125rem;
+    --mrg-soft-600: 1.625rem;
+    --mrg-soft-800: 3.125rem;
+    --mrg-soft-900: 5.8125rem;
+}
+
+html {
+    --mrg-half-100: 0.125rem;
+    --mrg-half-200: 0.1875rem;
+    --mrg-half-300: 0.3125rem;
+    --mrg-half-400: 0.4375rem;
+    --mrg-half-600: 0.625rem;
+    --mrg-half-800: 0.875rem;
+    --mrg-half-900: 1.3125rem;
+}
+
+/* #endregion Tokens - Margin */
+/* #region Tokens - Font Size */
+html {
+    --fs-title: 2.75rem;
+    --fs-title: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-heading-1: 2.375rem;
+    --fs-heading-1: clamp(1.8125rem, 3.125svw + 1rem, 2.6875rem);
+    --fs-heading-2: 2.0625rem;
+    --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
+    --fs-heading-3: 1.8125rem;
+    --fs-heading-3: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
+    --fs-heading-4: 1.5625rem;
+    --fs-heading-4: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
+    --fs-heading-5: 1.3125rem;
+    --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
+    --fs-heading-6: 1.1875rem;
+    --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    --fs-heading-7: 1rem;
+    --fs-heading-7: clamp(0.75rem, 1.3125svw + 1rem, 1.125rem);
+    --fs-smaller-2: 0.8125rem;
+    --fs-smaller-1: 0.9375rem;
+    --fs-normal: 1rem;
+    --fs-bigger-1: 1.1875rem;
+    --fs-bigger-2: 1.3125rem;
+    --fs-bigger-3: 1.5625rem;
+    --fs-bigger-4: 1.8125rem;
+    --fs-bigger-5: 2.0625rem;
+    --fs-bigger-6: 2.375rem;
+}
+
+/* #endregion Tokens - Font Size */
+/* #region Tokens - Line Heights */
+html {
+    --line-height-100: 1.1875;
+    --line-height-200: 1.3125;
+    --line-height-300: 1.4375;
+    --line-height-400: 1.6875;
+    --line-height-500: 1.90625;
+    --line-height-600: 2.1875;
+}
+
+/* #endregion Tokens - Line Heights */
+/* #region Tokens - Gap */
+html {
+    --gap-block-layout: 5vw;
+    --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
+    --gap-block-layout-half: 2.5vw;
+    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
+    --gap-inline-indent: 4vw;
+    --gap-inline-indent: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        4svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+    --gap-inline-layout: 8vw;
+    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
+    --gap-inline-layout-half: 4vw;
+    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
+    --gap-inline-tab: 1.5vw;
+    --gap-inline-tab: clamp(
+        var(--mrg-firm-100, 0.3125rem),
+        1.5svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+}
+
+/* #endregion Tokens - Gap */
+/* #region Tokens - Border Width */
+html {
+    --border-width-100: 0.0625rem;
+    --border-width-200: 0.125rem;
+    --border-width-300: 0.1875rem;
+    --border-width-400: 0.25rem;
+}
+
+/* #endregion Tokens - Border Width */
+/* #region Tokens - Stroke Relative */
+html {
+    --stroke-relative-100: 0.03125em;
+    --stroke-relative-200: 0.0625em;
+    --stroke-relative-400: 0.125em;
+    --stroke-relative-600: 0.1875em;
+    --stroke-relative-800: 0.25em;
+    --stroke-relative-900: 0.375em;
+}
+
+/* #endregion Tokens - Stroke Relative */
+/* #region Tokens - Misc. */
+html {
+    --focus-ring-outline-width: 0.1875rem;
+    --focus-ring-outline-offset: 0.125em;
+    --focus-ring-outline-color: AccentColor;
+}
+
+/* #endregion Tokens - Misc. */
+/* #region Tokens - Width */
+html {
+    --width-content: 36rem;
+    --width-sidebar: 16rem;
+    --width-callout: 29.25rem;
+    --width-page: 58rem;
+    --width-page: calc(
+        var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
+            var(--width-sidebar, 16rem)
+    );
+}
+
+/* #endregion Tokens - Width */
+/*!
+ * Utility Sass Template - Base
+ * 
+ * @maddimathon/utility-sass@0.1.0-alpha.draft
+ * License: MIT
+ */
+/*! end of @maddimathon/utility-sass/templates/base */
+/*! end of @maddimathon/utility-astro/templates/tokens */

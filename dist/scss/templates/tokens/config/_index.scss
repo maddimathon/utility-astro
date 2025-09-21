@@ -1,0 +1,24 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward '_lib' hide $internal_supressCredit, $print_globals, $print_normalize,
+    $print_utils, $print_tokens, print-globals, print-utils, print-tokens;
+
+@forward 'include';
+@forward 'support';
+
+@use '_lib' as lib;
+
+$internal_extendSelectors: true !default;
+$internal_extendSelectors: lib.config-valid-bool(
+    $internal_extendSelectors,
+    'internal_extendSelectors'
+);
+
+$internal_supressCredit: false !default;
+$internal_supressCredit: lib.config-valid-bool(
+    $internal_supressCredit,
+    'internal_supressCredit'
+);

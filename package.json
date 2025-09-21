@@ -197,9 +197,9 @@
 
         "start": "run-p watch:* start:*",
             "watch:astro": "watch                                                            -p 'src/astro/**/*'     -c 'build-utils compile  --only astro                               --watchedWatcher \"watch:astro\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:scss":  "watch -p 'node_modules/@maddimathon/utility-sass/dist/scss/**/*' -p 'src/scss/**/*'      -c 'npm run quick-build -- --only-document scss --only-compile scss --watchedWatcher \"watch:scss\"  --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+          "x-watch:scss":  "watch -p 'node_modules/@maddimathon/utility-sass/dist/scss/**/*' -p 'src/scss/**/*'      -c 'npm run quick-build -- --only-document scss --only-compile scss --watchedWatcher \"watch:scss\"  --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
             "watch:ts":    "watch -p 'node_modules/@maddimathon/utility-sass/dist/ts/**/*'   -p 'src/ts/**/*'        -c 'build-utils compile  --only ts                                  --watchedWatcher \"watch:ts\"    --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:docs":  "watch -p 'node_modules/@maddimathon/utility-sass/dist/scss/**/*' -p 'src/docs/scss/**/*' -c 'build-utils document --only scss                                --watchedWatcher \"watch:docs\"  --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+          "x-watch:docs":  "watch -p 'node_modules/@maddimathon/utility-sass/dist/scss/**/*' -p 'src/docs/scss/**/*' -c 'build-utils document --only scss                                --watchedWatcher \"watch:docs\"  --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
             "start:astro": "astro dev",
 
 
@@ -234,7 +234,7 @@
     "devDependencies": {
         "@astrojs/check": "^0.9.4",
         "@astrojs/ts-plugin": "1.10.4",
-        "@maddimathon/build-utilities": "0.2.0-alpha.4",
+        "@maddimathon/build-utilities": "0.3.0-alpha",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.7.1",
         "@types/node": "22.15.30",

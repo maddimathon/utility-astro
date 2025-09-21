@@ -16,7 +16,6 @@ import type {
 } from './Content.js';
 
 /* import - functions */
-import { escapeHTML } from 'astro/runtime/server/escape.js';
 
 /* import - values */
 
@@ -53,20 +52,17 @@ const _defProps: Props_Full<ContentType> & Pick<Required<Props>, 'type'> = {
 };
 
 const p = mergeArgs(_defProps, Astro.props.frontmatter ?? Astro.props, true);
-
-function titleHTML(_title: string[]): string {
-    return _title.map(escapeHTML).reverse().join(' / ');
-}
-
 /* CONSTANTS ===================================== */
 
 const title = Array.isArray(p.title)
     ? p.title.length
         ? p.title
-        : null
+        : []
     : p.title?.length
       ? [p.title]
-      : null;
+      : [];
+
+const titleString = title.reverse().join(' / ');
 
 const contentTypes: {
     [K in ContentType]: (result: any, props: Props_Full<K>, slots?: any) => any;
@@ -83,16 +79,16 @@ const ContentComponent = contentTypes[p.type];
 
 <ContentComponent {...p}>
     {
-        p.subtitle && title ? (
+        titleString && p.subtitle ? (
             <hgroup
+                slot='content-header'
                 role='group'
                 aria-roledescription='Page Header'
-                slot='content-header'
             >
-                {title && (
+                {titleString && (
                     <h1
                         class='page-title'
-                        set:html={titleHTML(title)}
+                        set:text={titleString}
                     />
                 )}
                 {p.subtitle && (
@@ -102,21 +98,20 @@ const ContentComponent = contentTypes[p.type];
                     />
                 )}
             </hgroup>
+        ) : titleString ? (
+            <h1
+                slot='content-header'
+                class='page-title'
+                set:text={titleString}
+            />
         ) : (
-            <Fragment slot='content-header'>
-                {title && (
-                    <h1
-                        class='page-title'
-                        set:html={titleHTML(title)}
-                    />
-                )}
-                {p.subtitle && (
-                    <p
-                        class='page-subtitle'
-                        set:text={p.subtitle}
-                    />
-                )}
-            </Fragment>
+            p.subtitle && (
+                <p
+                    slot='content-header'
+                    class='page-subtitle'
+                    set:text={p.subtitle}
+                />
+            )
         )
     }
 

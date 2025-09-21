@@ -1,0 +1,24 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use '_lib' as utils;
+
+$print_globals: true !default;
+$print_globals: utils.config-valid-bool($print_globals, 'print_globals');
+
+@mixin print-globals {
+    @if $print_globals {
+        @content;
+    }
+}
+
+$print_utils: utils.$include_html !default;
+$print_utils: utils.config-valid-bool($print_utils, 'print_utils');
+
+@mixin print-utils {
+    @if $print_utils {
+        @content;
+    }
+}

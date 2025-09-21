@@ -1,0 +1,31 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../../config';
+
+@use '../../lib' as *;
+
+@if config.$print_astro_toggle or config.$print_astro_settingsMenu {
+    @include config.print-headings {
+        /* # ASTRO COMPONENT SUPPORT
+         * ======================================================================== */
+    }
+}
+
+@if config.$print_astro_toggle {
+    @include config.print-headings {
+        /* ## TOGGLE ==================================== */
+    }
+
+    @include snippet-support-toggle;
+}
+
+@if config.$print_astro_settingsMenu {
+    @include config.print-headings {
+        /* ## SETTINGS MENU ==================================== */
+    }
+
+    @include snippet-support-settings-menu;
+}

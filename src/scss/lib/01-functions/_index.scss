@@ -1,0 +1,10 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base/lib/01-functions' hide
+        width-value,
+    var-width;
+
+@forward '01-01-tokens';

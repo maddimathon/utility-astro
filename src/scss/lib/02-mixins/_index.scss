@@ -1,0 +1,10 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base/lib/02-mixins' hide
+        tokens-all,
+    tokens-width;
+
+@forward '02-01-tokens';

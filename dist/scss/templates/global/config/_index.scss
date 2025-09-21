@@ -1,0 +1,41 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward 'lib' hide $internal_extendSelectors, $internal_supressCredit;
+
+@use '../../tokens/config';
+
+$internal_extendSelectors: true !default;
+$internal_extendSelectors: config.config-valid-bool(
+    $internal_extendSelectors,
+    'internal_extendSelectors'
+);
+
+$internal_supressCredit: false !default;
+$internal_supressCredit: config.config-valid-bool(
+    $internal_supressCredit,
+    'internal_supressCredit'
+);
+
+$print_astro: config.$include_html and config.$print_globals !default;
+$print_astro: config.config-valid-bool($print_astro, 'print_astro');
+
+$print_astro_content: $print_astro !default;
+$print_astro_content: config.config-valid-bool(
+    $print_astro_content,
+    'print_astro_content'
+);
+
+$print_astro_settingsMenu: $print_astro !default;
+$print_astro_settingsMenu: config.config-valid-bool(
+    $print_astro_settingsMenu,
+    'print_astro_settingsMenu'
+);
+
+$print_astro_toggle: $print_astro !default;
+$print_astro_toggle: config.config-valid-bool(
+    $print_astro_toggle,
+    'print_astro_toggle'
+);

@@ -1,0 +1,25 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+// @use '../../config';
+
+@use '../../lib' as *;
+
+/* # GLOBALS - TABLES
+ * ======================================================================== */
+
+%table-wrapper,
+%table {
+    grid-column: page-start / page-end;
+    width: auto;
+}
+
+%layout-sidebar-left,
+%layout-sidebar-right {
+    %table-wrapper,
+    %table {
+        max-width: #{var-width(content)};
+    }
+}

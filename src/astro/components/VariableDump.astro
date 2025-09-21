@@ -41,11 +41,11 @@ const stringified = VariableInspector.stringify(
     {
         includePrefix: !!name,
     }
-);
+).trim();
 ---
 
 <CodeBlock
     {...props}
     lang={undefined}
-    ><Fragment set:html={stringified} /></CodeBlock
->
+    set:html={stringified}
+/>

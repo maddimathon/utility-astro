@@ -1,0 +1,12 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../lib';
+
+/* # TOGGLE BLOCKS ==================================== */
+
+@include lib.snippet-support-content;
+
+@include lib.extend-selectors;

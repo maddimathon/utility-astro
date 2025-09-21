@@ -6,11 +6,12 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { GenericElementProps } from '../../ts/index.js';
 import type { Props as SettingsMenuProps } from './SettingsMenu.d.ts';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions/index.js';
+import { mapToObject } from '../../ts/index.js';
 import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 
 /* import - values */
@@ -78,6 +79,33 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
 
     ...inputSettings,
 };
+
+/**
+ * Rendered slot HTML.
+ */
+const slots_render = mapToObject(
+    await Promise.all(
+        (
+            [
+                'default',
+                'settingsMenuOpen',
+                'settingsMenuClose',
+            ] as const
+        ).map(async (_key) => {
+            const _kebab = _key.replace(
+                /([a-z0-9])([A-Z])/g,
+                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase()
+            );
+
+            return [
+                _key,
+                (Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))) ||
+                    false,
+            ] as const;
+        })
+    )
+);
 ---
 
 <div
@@ -90,7 +118,11 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     data-settings-path={absoluteInternalURL(Astro.url, '')}
     data-toggle-container
 >
-    <slot />
+    { slots_render.default ? (
+        <!-- SLOT: "settings-menu" -->
+        <slot name="settings-menu" />
+        <!-- /SLOT: "settings-menu" -->
+    ) : <!-- SLOT: "settings-menu" (empty) / --> }
 
     <button
         id={buttonID}
@@ -139,9 +171,11 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
         data-toggle-content={id}
     >
         <div class='container'>
-            <!-- SLOT: "settings-menu-open" -->
-            <slot name='settings-menu-open' />
-            <!-- /SLOT: "settings-menu-open" -->
+            { slots_render.settingsMenuOpen ? (
+                <!-- SLOT: "settings-menu-open" -->
+                <slot name="settings-menu-open" />
+                <!-- /SLOT: "settings-menu-open" -->
+            ) : <!-- SLOT: "settings-menu-open" (empty) / --> }
 
             {
                 accessibilityReportEmail && (
@@ -248,10 +282,12 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
                 data-settings-reset
                 value='Reset Settings'
             />
-
-            <!-- SLOT: "settings-menu-close" -->
-            <slot name='settings-menu-close' />
-            <!-- /SLOT: "settings-menu-close" -->
+            
+            { slots_render.settingsMenuClose ? (
+                <!-- SLOT: "settings-menu-close" -->
+                <slot name="settings-menu-close" />
+                <!-- /SLOT: "settings-menu-close" -->
+            ) : <!-- SLOT: "settings-menu-close" (empty) / --> }
         </div>
     </form>
 
@@ -262,5 +298,9 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     >
     </div>
 </div>
+
+<style lang='scss'>
+    @forward '../css/forced-colors-mode-only.css';
+</style>
 
 {scripts && <SettingsMenu_Scripts {...(scripts === true ? {} : scripts)} />}

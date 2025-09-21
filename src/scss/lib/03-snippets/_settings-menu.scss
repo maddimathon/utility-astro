@@ -3,32 +3,30 @@
 /// @since ___PKG_VERSION___
 ///
 
-@use '../utility-sass' as utils;
+@use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
 
 @use '../../config';
+
+@use '../01-functions' as *;
+@use '../02-mixins' as *;
 
 ///
 /// Supports the SettingsMenu astro component.
 ///
 @mixin snippet-support-settings-menu {
     .website-settings-menu {
-        display: none;
+        grid-column: page-start / page-end;
+
+        --display: none;
+        display: var(--display, none);
         margin: 0;
         padding: 0;
-    }
-
-    .forced-colors-mode-only {
-        display: none !important;
-
-        @include utils.forced-colors {
-            display: var(--display, block) !important;
-        }
     }
 
     .website-settings__content {
         background: Canvas;
         width: fit-content;
-        max-width: min(#{utils.var-width(content)}, 90vw);
+        max-width: min(#{var-width(content)}, 90vw);
 
         > .container {
             margin: 0;
@@ -39,22 +37,21 @@
 
         fieldset,
         %button {
-            margin-block: #{utils.var-mrg-firm('300')}
-                #{utils.var-mrg-half('300')};
+            margin-block: #{var-mrg-firm('300')} #{var-mrg-half('300')};
             margin-inline: 0;
         }
 
         input,
         %button {
-            margin-block-start: #{utils.var-mrg-firm('400')};
+            margin-block-start: #{var-mrg-firm('400')};
         }
 
         fieldset {
-            padding-block: #{utils.var-mrg-firm('200')};
+            padding-block: #{var-mrg-firm('200')};
             padding-inline: clamp(
-                #{utils.var-mrg-firm('200')},
+                #{var-mrg-firm('200')},
                 3vw,
-                #{utils.var-mrg-firm('300')}
+                #{var-mrg-firm('300')}
             );
 
             align-self: stretch;
@@ -66,13 +63,13 @@
                     // grid-row: 1;
 
                     margin-block: 0;
-                    margin-inline: calc(#{utils.var-mrg-soft('200')} * -1);
+                    margin-inline: calc(#{var-mrg-soft('200')} * -1);
 
                     // padding: 0;
-                    padding-inline: #{utils.var-mrg-soft('200')};
+                    padding-inline: #{var-mrg-soft('200')};
 
                     font-weight: 600;
-                    font-size: #{utils.var-fs(normal)};
+                    font-size: #{var-fs(normal)};
                 }
             }
 
@@ -88,12 +85,8 @@
                 align-content: start;
                 align-items: start;
 
-                gap: #{utils.var-mrg-firm('200')}
-                    clamp(
-                        #{utils.var-mrg-firm('400')},
-                        5vw,
-                        #{utils.var-mrg-firm('600')}
-                    );
+                gap: #{var-mrg-firm('200')}
+                    clamp(#{var-mrg-firm('400')}, 5vw, #{var-mrg-firm('600')});
 
                 margin: 0;
                 padding: 0;
@@ -108,7 +101,7 @@
 
     .website-settings__disclaimer {
         font-style: italic;
-        font-size: #{utils.var-fs(smaller-1)};
+        font-size: #{var-fs(smaller-1)};
     }
 
     .website-settings__backdrop {
@@ -123,9 +116,9 @@
         }
     }
 
-    @include utils.js {
+    @include js {
         .website-settings-menu {
-            display: var(--display, block);
+            --display: block;
             z-index: 999999;
 
             [data-toggle-control] {
@@ -136,13 +129,15 @@
                     display: block;
 
                     margin: 0;
-                    padding: #{utils.var-mrg-soft('200')}
-                        #{utils.var-mrg-soft('200')};
+                    padding: #{var-mrg-soft('200')} #{var-mrg-soft('200')};
+
+                    justify-self: end;
                 }
 
                 &.website-settings__backdrop {
                     display: none;
                     position: fixed;
+                    justify-self: auto;
 
                     top: 0;
                     left: 0;
@@ -154,7 +149,7 @@
                     width: auto;
                     height: auto;
 
-                    backdrop-filter: blur(0.375rem);
+                    backdrop-filter: blur(1rem);
                     background: none;
                     border: none;
                     opacity: 1;
@@ -185,7 +180,7 @@
                         opacity: 0.1875;
                     }
 
-                    @include utils.hover-focus-visible-or-within(
+                    @include hover-focus-visible-or-within(
                         $addSelectors: (
                             '&:active',
                         )
@@ -207,14 +202,16 @@
                     align-content: start;
                     align-items: start;
 
-                    padding: #{utils.var-mrg-firm('300')}
-                        #{utils.var-mrg-firm('300')};
+                    padding: #{var-mrg-firm('300')} #{var-mrg-firm('300')};
                 }
             }
 
             &[data-toggle-container] {
+                --display: grid;
                 justify-content: end;
                 justify-items: end;
+
+                overscroll-behavior: none;
             }
 
             &[data-toggle-container='open'] {
@@ -228,7 +225,7 @@
 
                     max-height: 80svh;
                     max-height: calc(
-                        80svh - 2rem - #{utils.var-mrg-firm('600')} * 2
+                        90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
                     overflow: auto;
                 }

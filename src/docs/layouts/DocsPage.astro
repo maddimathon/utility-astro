@@ -17,14 +17,15 @@ import {
 import { absoluteInternalURL } from '../../astro/functions/index.js';
 
 /* import - values */
-import cssUrl from '../css/main.css?url';
-import pkgJson from '../../../package.json';
+// import cssUrl from '../css/main.css?url';
+// import pkgJson from '../../../package.json';
 
 /* import - components */
 
 /* import - layouts */
 import LibPage from '../../astro/layouts/Page.astro';
 import type { ContentType } from 'src/astro/layouts/Content';
+import { SITE_TITLE } from '../constants';
 
 /* TYPES ===================================== */
 
@@ -34,8 +35,6 @@ type Partial_LibProps = Partial<LibPageProps<ContentType>> &
     Pick<LibPageProps<ContentType>, 'title'>;
 
 export interface Props extends Partial_LibProps {}
-
-const inputs: Props = Astro.props.frontmatter ?? Astro.props;
 
 const _defaultProps = {
     title: [],
@@ -57,7 +56,7 @@ const _defaultProps = {
     },
 
     meta: {
-        title: 'Utility Astro',
+        title: SITE_TITLE,
     },
 
     settings: {
@@ -67,13 +66,11 @@ const _defaultProps = {
             motion: true,
         },
     },
-
-    support: { elementToggle: false },
 } as const satisfies Props & LibPageProps<ContentType>;
 
 const props = mergeArgs<Props & LibPageProps<ContentType>, Props>(
     _defaultProps,
-    inputs,
+    Astro.props.frontmatter ?? Astro.props,
     true
 );
 
@@ -81,11 +78,13 @@ const props = mergeArgs<Props & LibPageProps<ContentType>, Props>(
 
 const title = Array.isArray(props.title) ? props.title : [props.title];
 
-props.meta.title = arrayUnique(title.concat(_defaultProps.meta.title)).join(
-    ' — '
-);
+if (!props.meta.title) {
+    props.meta.title = arrayUnique(
+        title.concat([_defaultProps.meta.title])
+    ).join(' — ');
+}
 
-const cssUrl_versioned = cssUrl + '?v=' + pkgJson.version;
+// const cssUrl_versioned = cssUrl + '?v=' + pkgJson.version;
 
 props.primaryMenu = [
     { label: 'Home', href: '' },
@@ -119,7 +118,12 @@ props.primaryMenu = [
     title={title}
     accessibilityReportEmail={undefined}
 >
-    <link
+    <slot
+        slot='head-open'
+        name='head-open'
+    />
+
+    <!-- <link
         slot='head-open'
         rel='preload'
         href={cssUrl_versioned}
@@ -129,11 +133,11 @@ props.primaryMenu = [
         slot='head-open'
         rel='stylesheet'
         href={cssUrl_versioned}
-    />
+    /> -->
 
     <slot
-        name='head-open'
-        slot='head-open'
+        slot='head-close'
+        name='head-close'
     />
 
     <meta
@@ -143,15 +147,14 @@ props.primaryMenu = [
     />
 
     <slot
-        name='head-close'
-        slot='head-close'
+        slot='body-open'
+        name='body-open'
     />
 
     <slot
-        name='body-open'
-        slot='body-open'
+        name='settings-menu-open'
+        slot='settings-menu-open'
     />
-
     <p
         slot='settings-menu-open'
         class='website-settings__disclaimer'
@@ -160,37 +163,95 @@ props.primaryMenu = [
     </p>
 
     <slot
-        name='before-header'
+        name='settings-menu'
+        slot='settings-menu'
+    />
+    <slot
+        name='settings-menu-close'
+        slot='settings-menu-close'
+    />
+
+    <slot
         slot='before-header'
+        name='before-header'
     />
+
     <slot
-        name='header'
         slot='header'
+        name='header'
     />
+
     <slot
-        name='after-header'
+        slot='before-primary-nav'
+        name='before-primary-nav'
+    />
+
+    <slot
+        slot='after-primary-nav'
+        name='after-primary-nav'
+    />
+
+    <slot
         slot='after-header'
+        name='after-header'
     />
 
+    <slot
+        slot='content-header'
+        name='content-header'
+    />
+    <slot
+        slot='before-site-content'
+        name='before-site-content'
+    />
     <slot />
+    <slot
+        slot='after-site-content'
+        name='after-site-content'
+    />
 
     <slot
-        name='before-footer'
+        slot='sidebar'
+        name='sidebar'
+    />
+    <p slot='sidebar'>I am a pretend sidebar content.</p>
+
+    <slot
+        slot='before-secondary-nav'
+        name='before-secondary-nav'
+    />
+
+    <slot
+        slot='after-secondary-nav'
+        name='after-secondary-nav'
+    />
+
+    <slot
         slot='before-footer'
+        name='before-footer'
     />
+
     <slot
-        name='footer'
         slot='footer'
+        name='footer'
     />
+
     <slot
-        name='after-footer'
         slot='after-footer'
+        name='after-footer'
     />
 
     <slot
-        name='body-close'
         slot='body-close'
+        name='body-close'
     />
 
-    <slot name='footer-scripts' />
+    <slot
+        slot='footer-scripts'
+        name='footer-scripts'
+    />
 </LibPage>
+
+<style lang='scss' is:global>
+    @forward '../css/main.css';
+</style>

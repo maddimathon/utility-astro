@@ -1,0 +1,24 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '_lib' as utils;
+
+$print_astro_content: utils.$include_html !default;
+$print_astro_content: utils.config-valid-bool(
+    $print_astro_content,
+    'print_astro_content'
+);
+
+$print_astro_settingsMenu: utils.$include_html !default;
+$print_astro_settingsMenu: utils.config-valid-bool(
+    $print_astro_settingsMenu,
+    'print_astro_settingsMenu'
+);
+
+$print_astro_toggle: utils.$include_html !default;
+$print_astro_toggle: utils.config-valid-bool(
+    $print_astro_toggle,
+    'print_astro_toggle'
+);

@@ -38,7 +38,7 @@ const {
 const codeHTML: string =
     typeof children === 'string'
         ? children
-        : (await Astro.slots.render('default')) || '';
+        : (await Astro.slots.render('default')).trim() || '';
 ---
 
 {
@@ -53,11 +53,10 @@ const codeHTML: string =
                 {...attributes}
             />
         ) : (
+            <!-- prettier-ignore -->
             <pre
                 class:list={classList}
                 {...attributes}
-            >
-                <code set:text={codeHTML} />
-            </pre>
+            ><code><Fragment set:text={codeHTML} /></code></pre>
         ))
 }

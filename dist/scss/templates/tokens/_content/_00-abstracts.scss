@@ -1,0 +1,18 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use '../config';
+// @use '../tokens';
+
+@use '../lib' as *;
+
+@include config.print-tokens {
+    @include config.print-headings {
+        /* # TOKENS & PROPERTIES
+         * ======================================================================== */
+    }
+
+    @include tokens-all;
+}

@@ -1,0 +1,9 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../html/config' with (
+    $include_featureCheck: true !default,
+    $print_astro: true !default
+);

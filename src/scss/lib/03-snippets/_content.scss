@@ -1,0 +1,356 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+// @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
+
+@use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/selector';
+
+@use '../../config';
+
+@use '../01-functions' as *;
+@use '../02-mixins' as *;
+
+///
+/// Includes the bascis properties for a page layout grid (but no columns).
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content--body-grid {
+    --display: grid;
+    display: grid;
+    position: relative;
+
+    justify-content: stretch;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+
+    gap: 0;
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content--body-grid--content-width {
+    grid-column: content-start / content-end;
+    // width: 100%;
+    width: auto;
+    // max-width: #{var-width(content)};
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content--body-grid--page-width {
+    grid-column: page-start / page-end;
+    // width: 100%;
+    width: auto;
+    // max-width: #{var-width(page)};
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content--body-grid--sidebar-width {
+    grid-column: sidebar-start / sidebar-end;
+    // width: 100%;
+    width: auto;
+    // max-width: #{var-width(sidebar)};
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content--body-grid--site-width {
+    grid-column: site-start / site-end;
+    // width: 100%;
+    width: auto;
+    // max-width: #{var-width(site)};
+}
+
+$_width_content: list.nth(width-value(content), 1);
+$_width_sidebar: list.nth(width-value(sidebar), 1);
+
+@mixin _snippet-support-content--layout-sidebar(
+    $side,
+    $bodyMargin,
+    $contentCol,
+    $gutterCol,
+    $sidebarCol
+) {
+    $contentCol: [content-start] #{$contentCol} [content-end];
+    $sidebarCol: [sidebar-start] #{$sidebarCol} [sidebar-end];
+
+    $_firstColumn: $contentCol;
+    $_secondColumn: $sidebarCol;
+
+    @if $side == left {
+        $_firstColumn: $sidebarCol;
+        $_secondColumn: $contentCol;
+    }
+
+    @include min-width(sidebar) {
+        // prettier-ignore
+        $_default_grid_page: 0 [page-start] 0 #{$_firstColumn} #{$gutterCol} #{$_secondColumn} 0 [page-end] 0;
+
+        /* prettier-ignore */
+        --grid-template-columns--page: #{$_default_grid_page};
+
+        /* prettier-ignore */
+        grid-template-columns: 0 [site-start] 1fr #{$_default_grid_page} 1fr [site-end] 0;
+    }
+}
+
+///
+/// Supports the Content astro layout.
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-content {
+    $bodyMargin: var-gap-inline(layout-half);
+
+    $contentCol: minmax(auto, $_width_content);
+
+    $gutterCol: var-gap-inline(layout);
+    $gutterHalfCol: var-gap-inline(layout-half);
+
+    $sidebarCol: minmax(auto, $_width_sidebar);
+    $sidebarHalfCol: minmax(auto, calc($_width_sidebar / 2));
+
+    @at-root {
+        ///
+        /// WIDTH UTILITIES
+        /// for internal use
+        ///
+        %_site-width {
+            @include snippet-support-content--body-grid--site-width;
+        }
+        %_page-width {
+            @include snippet-support-content--body-grid--page-width;
+        }
+        %_content-width {
+            @include snippet-support-content--body-grid--content-width;
+        }
+        %_sidebar-width {
+            @include snippet-support-content--body-grid--sidebar-width;
+        }
+
+        ///
+        /// WIDTH UTILITIES
+        /// for external use and nesting
+        ///
+        %site-width {
+            @include snippet-support-content--body-grid--site-width;
+        }
+        %page-width {
+            @include snippet-support-content--body-grid--page-width;
+        }
+        %content-width {
+            @include snippet-support-content--body-grid--content-width;
+        }
+        %sidebar-width {
+            @include snippet-support-content--body-grid--sidebar-width;
+        }
+
+        ///
+        /// BASE BODY GRID
+        ///
+
+        // prettier-ignore
+        $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] 0 [page-end] 0;
+
+        %_body-grid,
+        %body-subgrid {
+            @include snippet-support-content--body-grid;
+
+            /* prettier-ignore */
+            --grid-template-columns--page: #{$_default_grid_page};
+
+            /* prettier-ignore */
+            grid-template-columns: 0 [site-start] #{$_default_grid_page} [site-end] 0;
+
+            /// BLOCK ///
+
+            @at-root :where(#{selector.nest( &, '> *' )}) {
+                @include snippet-support-content--body-grid--content-width;
+            }
+        }
+
+        %_body-grid {
+            @include min-width(sidebar) {
+                // prettier-ignore
+                $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
+
+                /* prettier-ignore */
+                --grid-template-columns--page: #{$_default_grid_page};
+
+                /* prettier-ignore */
+                grid-template-columns: 0 [site-start] 1fr #{$_default_grid_page} 1fr [site-end] 0;
+            }
+        }
+
+        %html {
+            display: block;
+            position: relative;
+            // max-width: 100%;
+            // min-height: 100vh;
+            // min-height: 100dvh;
+        }
+
+        %body {
+            @extend %_body-grid;
+            margin: 0 #{$bodyMargin};
+            padding: 0;
+            z-index: 1;
+
+            /// BLOCK ///
+
+            @at-root :where(#{selector.nest( &, '> *', '+ *' )}) {
+                margin-block: #{var-gap-block(layout)} 0;
+            }
+
+            > %body-subgrid {
+                @extend %_body-grid;
+                grid-column: 1 / -1;
+
+                grid-template-columns: subgrid;
+
+                margin-inline: 0;
+                padding: 0;
+            }
+
+            %callout-width,
+            %blockquote,
+            %form {
+                margin-inline: 0;
+                width: auto;
+                max-width: none;
+                justify-self: start;
+            }
+
+            :where(%button) {
+                width: auto;
+                justify-self: start;
+            }
+
+            %pre {
+                width: min(120ch, 100%);
+
+                > %code {
+                }
+            }
+
+            %table {
+            }
+
+            > header,
+            > footer,
+            > nav {
+                /// BLOCK ///
+
+                @at-root :where(#{selector.nest( &, '> *' )}) {
+                    @include snippet-support-content--body-grid--page-width;
+                }
+            }
+            > header {
+            }
+            > footer {
+                margin-block: #{var-gap-block(layout)};
+            }
+            > nav {
+            }
+
+            > main {
+            }
+
+            > aside {
+                @extend %_sidebar-width;
+            }
+        }
+
+        ///
+        /// LAYOUTS
+        ///
+
+        %layout-content-only {
+        }
+
+        %layout-full-width,
+        %layout-extra-wide {
+        }
+
+        %layout-full-width {
+            > main {
+                /// BLOCK ///
+
+                @at-root :where(#{selector.nest( &, '> *' )}) {
+                    @include snippet-support-content--body-grid--page-width;
+                }
+            }
+        }
+
+        %layout-extra-wide {
+            > main {
+                /// BLOCK ///
+
+                @at-root :where(#{selector.nest( &, '> *' )}) {
+                    @include snippet-support-content--body-grid--site-width;
+                }
+            }
+        }
+
+        %layout-sidebar-left,
+        %layout-sidebar-right {
+            @include min-width(sidebar) {
+                > main {
+                    // prettier-ignore
+                    $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
+
+                    /* prettier-ignore */
+                    --grid-template-columns--page: #{$_default_grid_page};
+
+                    /* prettier-ignore */
+                    grid-template-columns: 0 [site-start] #{$_default_grid_page} [site-end] 0;
+                    grid-template-columns: subgrid;
+
+                    &,
+                    & %page-width {
+                        @include snippet-support-content--body-grid--content-width;
+                    }
+
+                    /// BLOCK ///
+
+                    > :where(*) {
+                        @include snippet-support-content--body-grid--content-width;
+                    }
+                }
+            }
+        }
+
+        %layout-sidebar-left {
+            @include _snippet-support-content--layout-sidebar(
+                left,
+                $bodyMargin: $bodyMargin,
+                $contentCol: $contentCol,
+                $gutterCol: $gutterCol,
+                $sidebarCol: $sidebarCol
+            );
+        }
+
+        %layout-sidebar-right {
+            @include _snippet-support-content--layout-sidebar(
+                right,
+                $bodyMargin: $bodyMargin,
+                $contentCol: $contentCol,
+                $gutterCol: $gutterCol,
+                $sidebarCol: $sidebarCol
+            );
+        }
+    }
+}

@@ -3,5 +3,9 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets';
+
+@forward 'content';
+@forward 'forced-colors-mode-only';
 @forward 'settings-menu';
-@forward 'toggles';
+@forward 'toggle';

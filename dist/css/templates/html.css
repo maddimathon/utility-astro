@@ -5,12 +5,6 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * License: MIT
  */
-/*!
- * Utility Sass Template - Base
- * 
- * @maddimathon/utility-sass@0.1.0-alpha.draft
- * License: MIT
- */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
@@ -264,17 +258,6 @@ pre {
 }
 
 /* #endregion Normalize */
-/* # TOKENS & PROPERTIES
- * ======================================================================== */
-/* #region Tokens - Width */
-html {
-    --width-content: 36rem;
-    --width-sidebar: 17rem;
-    --width-callout: 29.25rem;
-    --width-page: 53rem;
-}
-
-/* #endregion Tokens - Width */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -283,6 +266,7 @@ html {
     --mrg-firm-400: 1.25rem;
     --mrg-firm-600: 2.25rem;
     --mrg-firm-800: 4rem;
+    --mrg-firm-900: 7.125rem;
 }
 
 html {
@@ -290,8 +274,9 @@ html {
     --mrg-soft-200: 0.3125rem;
     --mrg-soft-300: 0.5rem;
     --mrg-soft-400: 0.8125rem;
-    --mrg-soft-600: 1.4375rem;
-    --mrg-soft-800: 2.5rem;
+    --mrg-soft-600: 1.625rem;
+    --mrg-soft-800: 3.125rem;
+    --mrg-soft-900: 5.8125rem;
 }
 
 html {
@@ -299,8 +284,9 @@ html {
     --mrg-half-200: 0.1875rem;
     --mrg-half-300: 0.3125rem;
     --mrg-half-400: 0.4375rem;
-    --mrg-half-600: 0.8125rem;
-    --mrg-half-800: 1.5rem;
+    --mrg-half-600: 0.625rem;
+    --mrg-half-800: 0.875rem;
+    --mrg-half-900: 1.3125rem;
 }
 
 /* #endregion Tokens - Margin */
@@ -345,6 +331,31 @@ html {
 }
 
 /* #endregion Tokens - Line Heights */
+/* #region Tokens - Gap */
+html {
+    --gap-block-layout: 5vw;
+    --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
+    --gap-block-layout-half: 2.5vw;
+    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
+    --gap-inline-indent: 4vw;
+    --gap-inline-indent: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        4svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+    --gap-inline-layout: 8vw;
+    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
+    --gap-inline-layout-half: 4vw;
+    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
+    --gap-inline-tab: 1.5vw;
+    --gap-inline-tab: clamp(
+        var(--mrg-firm-100, 0.3125rem),
+        1.5svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+}
+
+/* #endregion Tokens - Gap */
 /* #region Tokens - Border Width */
 html {
     --border-width-100: 0.0625rem;
@@ -373,10 +384,26 @@ html {
 }
 
 /* #endregion Tokens - Misc. */
-/* # ACCESSIBILITY
- * ======================================================================== */
-.no-js :focus,
-.js__no-where-selector :focus {
+/* #region Tokens - Width */
+html {
+    --width-content: 36rem;
+    --width-sidebar: 16rem;
+    --width-callout: 29.25rem;
+    --width-page: 58rem;
+    --width-page: calc(
+        var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
+            var(--width-sidebar, 16rem)
+    );
+}
+
+/* #endregion Tokens - Width */
+/*!
+ * Utility Sass Template - Base
+ * 
+ * @maddimathon/utility-sass@0.1.0-alpha.draft
+ * License: MIT
+ */
+:focus {
     /* %focus-ring */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
         var(--focus-ring-outline-color, AccentColor);
@@ -407,15 +434,9 @@ html {
     overflow: hidden !important;
 }
 
-/* # OBJECTS
- * ======================================================================== */
 html,
 body {
-    scroll-padding-block-start: clamp(
-        var(--mrg-soft-200, 0.3125rem),
-        2.5vw * 0.625,
-        var(--mrg-soft-800, 2.5rem)
-    );
+    scroll-padding-block-start: var(--gap-block-layout, 5vw);
 }
 
 body {
@@ -423,38 +444,32 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    margin-top: clamp(
-        var(--mrg-soft-200, 0.3125rem),
-        2.5vw * 0.625,
-        var(--mrg-soft-800, 2.5rem)
-    );
-    margin-bottom: clamp(
-        var(--mrg-soft-200, 0.3125rem),
-        2.5vw * 0.625,
-        var(--mrg-soft-800, 2.5rem)
-    );
-    margin-left: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        2.5vw,
-        var(--mrg-firm-800, 4rem)
-    );
-    margin-right: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        2.5vw,
-        var(--mrg-firm-800, 4rem)
-    );
+    gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: var(--gap-block-layout, 5vw);
+    margin-left: var(--gap-inline-layout, 8vw);
+    margin-right: var(--gap-inline-layout, 8vw);
 }
 :where(body > *) {
-    width: min(var(--width-page, 53rem), 100%);
+    width: min(var(--width-page, 58rem), 100%);
 }
 
 hr {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: min(var(--width-callout, 29.25rem), 100%);
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+@media (min-width: 25em) {
+    hr {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: min(var(--width-callout, 29.25rem), 100%);
+    }
+}
+hr {
     width: 100%;
     margin-top: calc(
         var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
@@ -465,13 +480,10 @@ hr {
     border-bottom: currentColor solid 2px;
 }
 
-/* # TYPOGRAPHY
- * ======================================================================== */
 html {
     line-height: var(--line-height-400, 1.6875);
 }
 
-/* ## Typography - Inline ==================================== */
 strong,
 b {
     font-weight: 700;
@@ -509,23 +521,12 @@ a {
 a:visited {
     color: VisitedText;
 }
-.no-js a:focus,
-.js__no-where-selector a:focus {
-    text-decoration-color: transparent;
-    color: ActiveText;
-}
-
-:where(.js__no-focusVisible) a:focus {
+a:focus {
     text-decoration-color: transparent;
     color: ActiveText;
 }
 
 a:hover {
-    text-decoration-color: transparent;
-    color: ActiveText;
-}
-
-a:focus-visible {
     text-decoration-color: transparent;
     color: ActiveText;
 }
@@ -539,21 +540,17 @@ a.no-style {
     color: inherit;
 }
 a[aria-disabled="true"] {
-    opacity: 0.875;
-    cursor: not-allowed;
-}
-[data-contrast-mode="high"] a[aria-disabled="true"],
-[data-contrast-mode="forced-colors"] a[aria-disabled="true"] {
     text-decoration-line: line-through;
     opacity: 1;
+    cursor: not-allowed;
+}
+a[aria-disabled="true"] {
+    opacity: 0.875;
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
+@media (prefers-contrast: less) {
     a[aria-disabled="true"] {
-        text-decoration-line: line-through;
-        opacity: 1;
+        opacity: 0.875;
     }
 }
 
@@ -564,7 +561,6 @@ abbr[title] {
     cursor: help;
 }
 
-/* ## Typography - Block ==================================== */
 p {
     margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
@@ -577,14 +573,16 @@ blockquote {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: min(var(--width-callout, 29.25rem), 100%);
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+blockquote {
     margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: calc(
-        var(--mrg-soft-600, 1.4375rem) - var(--mrg-soft-400, 0.8125rem)
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
 }
 blockquote > p:first-child {
@@ -626,18 +624,23 @@ pre {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: min(var(--width-callout, 29.25rem), 100%);
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+pre {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
     margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: calc(
-        var(--mrg-soft-600, 1.4375rem) - var(--mrg-soft-400, 0.8125rem)
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
-    width: fit-content;
-    max-width: min(80ch, 100%);
-    overflow: visible; /* otherwise the code block's focus ring is hidden (on scroll) */
+    padding: 0;
+    max-width: min(120ch, 100%);
+    overflow: auto;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 pre > code {
@@ -645,16 +648,24 @@ pre > code {
     margin: 0;
     padding: 0;
     border: none;
-    width: -moz-fit-content;
-    width: fit-content;
+    width: auto;
     max-width: 100%;
-    overflow: auto;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:where(:has(> code)) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:where(:has(> code)) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+    overflow: visible;
 }
 
-/* ## Typography - Headings ==================================== */
 .heading,
 heading {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 600;
     font-size: var(--fs-heading-7, 1rem);
@@ -664,7 +675,7 @@ heading {
 h1,
 .h1,
 .page-title {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 900;
     font-size: var(--fs-title, 2.75rem);
@@ -674,7 +685,7 @@ h1,
 
 h2,
 .h2 {
-    margin-top: var(--mrg-soft-800, 2.5rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: 0;
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
@@ -684,7 +695,7 @@ h2,
 
 h3,
 .h3 {
-    margin-top: var(--mrg-soft-800, 2.5rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: 0;
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
@@ -694,7 +705,7 @@ h3,
 
 h4,
 .h4 {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 700;
     font-style: italic;
@@ -705,7 +716,7 @@ h4,
 
 h5,
 .h5 {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 600;
     font-style: italic;
@@ -716,7 +727,7 @@ h5,
 
 h6,
 .h6 {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 500;
     font-style: italic;
@@ -725,18 +736,13 @@ h6,
     text-wrap: balance;
 }
 
-/* # LISTS
- * ======================================================================== */
 ol,
 ul {
     margin: 0;
+    margin-left: 20%;
     padding: 0;
-    padding-left: 20%;
-    padding-left: clamp(
-        var(--mrg-soft-400, 0.8125rem),
-        10%,
-        var(--mrg-soft-800, 2.5rem)
-    );
+    padding-left: 1em;
+    margin-left: var(--gap-inline-tab, 1.5vw);
     line-height: var(--line-height-400, 1.6875);
 }
 ol ol,
@@ -819,8 +825,6 @@ li li li li em {
     font-style: normal;
 }
 
-/* # FORMS
- * ======================================================================== */
 fieldset {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -831,16 +835,7 @@ fieldset {
     background-color: Canvas;
     color: CanvasText;
 }
-.no-js fieldset:focus,
-.js__no-where-selector fieldset:focus {
-    border-color: ActiveText;
-}
-
-:where(.js__no-focusVisible) fieldset:focus {
-    border-color: ActiveText;
-}
-
-fieldset:focus-visible {
+fieldset:focus {
     border-color: ActiveText;
 }
 
@@ -865,7 +860,7 @@ fieldset > legend + * {
 }
 
 fieldset legend {
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 600;
     font-size: var(--fs-heading-7, 1rem);
@@ -894,21 +889,9 @@ input {
     color: FieldText;
     accent-color: FieldText;
 }
-.no-js textarea:focus,
-.no-js select:focus,
-.no-js input:focus,
-.js__no-where-selector textarea:focus,
-.js__no-where-selector select:focus,
-.js__no-where-selector input:focus {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
-}
-
-:where(.js__no-focusVisible) textarea:focus,
-:where(.js__no-focusVisible) select:focus,
-:where(.js__no-focusVisible) input:focus {
+textarea:focus,
+select:focus,
+input:focus {
     background-color: Field;
     border-color: FieldText;
     color: FieldText;
@@ -918,15 +901,6 @@ input {
 textarea:hover,
 select:hover,
 input:hover {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
-}
-
-textarea:focus-visible,
-select:focus-visible,
-input:focus-visible {
     background-color: Field;
     border-color: FieldText;
     color: FieldText;
@@ -1052,25 +1026,13 @@ input[type="radio"] {
     width: auto;
     accent-color: FieldText;
 }
-.no-js input[type="checkbox"]:focus,
-.no-js input[type="radio"]:focus,
-.js__no-where-selector input[type="checkbox"]:focus,
-.js__no-where-selector input[type="radio"]:focus {
-    accent-color: FieldText;
-}
-
-:where(.js__no-focusVisible) input[type="checkbox"]:focus,
-:where(.js__no-focusVisible) input[type="radio"]:focus {
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
     accent-color: FieldText;
 }
 
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
-    accent-color: FieldText;
-}
-
-input[type="checkbox"]:focus-visible,
-input[type="radio"]:focus-visible {
     accent-color: FieldText;
 }
 
@@ -1097,6 +1059,8 @@ input[type="week"] {
     width: auto;
 }
 input[type="file"] {
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
@@ -1113,11 +1077,11 @@ textarea {
     cursor: text;
 }
 
-/* ## Forms - Buttons ==================================== */
 button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
+.button,
 input[type="reset"],
 ::file-selector-button,
 .button-secondary {
@@ -1134,34 +1098,14 @@ input[type="reset"],
     color: ButtonText;
     accent-color: ButtonText;
 }
-.no-js button:focus,
-.no-js [role="button"]:focus,
-.no-js input[type="button"]:focus,
-.no-js input[type="submit"]:focus,
-.no-js input[type="reset"]:focus,
-.no-js :focus::file-selector-button,
-.no-js .button-secondary:focus,
-.js__no-where-selector button:focus,
-.js__no-where-selector [role="button"]:focus,
-.js__no-where-selector input[type="button"]:focus,
-.js__no-where-selector input[type="submit"]:focus,
-.js__no-where-selector input[type="reset"]:focus,
-.js__no-where-selector :focus::file-selector-button,
-.js__no-where-selector .button-secondary:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js__no-focusVisible) button:focus,
-:where(.js__no-focusVisible) [role="button"]:focus,
-:where(.js__no-focusVisible) input[type="button"]:focus,
-:where(.js__no-focusVisible) input[type="submit"]:focus,
-:where(.js__no-focusVisible) input[type="reset"]:focus,
-:where(.js__no-focusVisible) :focus::file-selector-button,
-:where(.js__no-focusVisible) .button-secondary:focus {
+button:focus,
+[role="button"]:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+.button:focus,
+input[type="reset"]:focus,
+:focus::file-selector-button,
+.button-secondary:focus {
     background-color: SelectedItem;
     border-color: SelectedItem;
     color: SelectedItemText;
@@ -1173,23 +1117,10 @@ button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
+.button:hover,
 input[type="reset"]:hover,
 :hover::file-selector-button,
 .button-secondary:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-button:focus-visible,
-[role="button"]:focus-visible,
-input[type="button"]:focus-visible,
-input[type="submit"]:focus-visible,
-input[type="reset"]:focus-visible,
-:focus-visible::file-selector-button,
-.button-secondary:focus-visible {
     background-color: SelectedItem;
     border-color: SelectedItem;
     color: SelectedItemText;
@@ -1201,6 +1132,7 @@ button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
 input[type="submit"]:focus-within,
+.button:focus-within,
 input[type="reset"]:focus-within,
 :focus-within::file-selector-button,
 .button-secondary:focus-within {
@@ -1211,119 +1143,11 @@ input[type="reset"]:focus-within,
     opacity: 0.875;
 }
 
-[data-contrast-mode="high"].no-js button:focus,
-[data-contrast-mode="high"].no-js [role="button"]:focus,
-[data-contrast-mode="high"].no-js input[type="button"]:focus,
-[data-contrast-mode="high"].no-js input[type="submit"]:focus,
-[data-contrast-mode="high"].no-js input[type="reset"]:focus,
-[data-contrast-mode="high"].no-js :focus::file-selector-button,
-[data-contrast-mode="high"].no-js .button-secondary:focus,
-[data-contrast-mode="high"].js__no-where-selector button:focus,
-[data-contrast-mode="high"].js__no-where-selector [role="button"]:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="button"]:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="submit"]:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="reset"]:focus,
-[data-contrast-mode="high"].js__no-where-selector :focus::file-selector-button,
-[data-contrast-mode="high"].js__no-where-selector .button-secondary:focus,
-[data-contrast-mode="forced-colors"].no-js button:focus,
-[data-contrast-mode="forced-colors"].no-js [role="button"]:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="button"]:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"].no-js :focus::file-selector-button,
-[data-contrast-mode="forced-colors"].no-js .button-secondary:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector button:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    [role="button"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="button"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    :focus::file-selector-button,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    .button-secondary:focus {
-    opacity: 1;
-}
-
-[data-contrast-mode="high"]:where(.js__no-focusVisible) button:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible) [role="button"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="button"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="submit"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="reset"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    :focus::file-selector-button,
-[data-contrast-mode="high"]:where(.js__no-focusVisible) .button-secondary:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible) button:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    [role="button"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="button"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    :focus::file-selector-button,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    .button-secondary:focus {
-    opacity: 1;
-}
-
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    .no-js button:focus,
-    .no-js [role="button"]:focus,
-    .no-js input[type="button"]:focus,
-    .no-js input[type="submit"]:focus,
-    .no-js input[type="reset"]:focus,
-    .no-js :focus::file-selector-button,
-    .no-js .button-secondary:focus,
-    .js__no-where-selector button:focus,
-    .js__no-where-selector [role="button"]:focus,
-    .js__no-where-selector input[type="button"]:focus,
-    .js__no-where-selector input[type="submit"]:focus,
-    .js__no-where-selector input[type="reset"]:focus,
-    .js__no-where-selector :focus::file-selector-button,
-    .js__no-where-selector .button-secondary:focus {
-        opacity: 1;
-    }
-    :where(.js__no-focusVisible) button:focus,
-    :where(.js__no-focusVisible) [role="button"]:focus,
-    :where(.js__no-focusVisible) input[type="button"]:focus,
-    :where(.js__no-focusVisible) input[type="submit"]:focus,
-    :where(.js__no-focusVisible) input[type="reset"]:focus,
-    :where(.js__no-focusVisible) :focus::file-selector-button,
-    :where(.js__no-focusVisible) .button-secondary:focus {
-        opacity: 1;
-    }
-}
-[data-contrast-mode="high"] button:focus-visible,
-[data-contrast-mode="high"] [role="button"]:focus-visible,
-[data-contrast-mode="high"] input[type="button"]:focus-visible,
-[data-contrast-mode="high"] input[type="submit"]:focus-visible,
-[data-contrast-mode="high"] input[type="reset"]:focus-visible,
-[data-contrast-mode="high"] :focus-visible::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:focus-visible,
-[data-contrast-mode="forced-colors"] button:focus-visible,
-[data-contrast-mode="forced-colors"] [role="button"]:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="button"]:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="submit"]:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="reset"]:focus-visible,
-[data-contrast-mode="forced-colors"] :focus-visible::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-visible {
-    opacity: 1;
-}
 [data-contrast-mode="high"] button:focus-within,
 [data-contrast-mode="high"] [role="button"]:focus-within,
 [data-contrast-mode="high"] input[type="button"]:focus-within,
 [data-contrast-mode="high"] input[type="submit"]:focus-within,
+[data-contrast-mode="high"] .button:focus-within,
 [data-contrast-mode="high"] input[type="reset"]:focus-within,
 [data-contrast-mode="high"] :focus-within::file-selector-button,
 [data-contrast-mode="high"] .button-secondary:focus-within,
@@ -1331,22 +1155,41 @@ input[type="reset"]:focus-within,
 [data-contrast-mode="forced-colors"] [role="button"]:focus-within,
 [data-contrast-mode="forced-colors"] input[type="button"]:focus-within,
 [data-contrast-mode="forced-colors"] input[type="submit"]:focus-within,
+[data-contrast-mode="forced-colors"] .button:focus-within,
 [data-contrast-mode="forced-colors"] input[type="reset"]:focus-within,
 [data-contrast-mode="forced-colors"] :focus-within::file-selector-button,
 [data-contrast-mode="forced-colors"] .button-secondary:focus-within {
     opacity: 1;
 }
+[data-contrast-mode="high"] button:focus,
+[data-contrast-mode="high"] [role="button"]:focus,
+[data-contrast-mode="high"] input[type="button"]:focus,
+[data-contrast-mode="high"] input[type="submit"]:focus,
+[data-contrast-mode="high"] .button:focus,
+[data-contrast-mode="high"] input[type="reset"]:focus,
+[data-contrast-mode="high"] :focus::file-selector-button,
+[data-contrast-mode="high"] .button-secondary:focus,
 [data-contrast-mode="high"] button:hover,
 [data-contrast-mode="high"] [role="button"]:hover,
 [data-contrast-mode="high"] input[type="button"]:hover,
 [data-contrast-mode="high"] input[type="submit"]:hover,
+[data-contrast-mode="high"] .button:hover,
 [data-contrast-mode="high"] input[type="reset"]:hover,
 [data-contrast-mode="high"] :hover::file-selector-button,
 [data-contrast-mode="high"] .button-secondary:hover,
+[data-contrast-mode="forced-colors"] button:focus,
+[data-contrast-mode="forced-colors"] [role="button"]:focus,
+[data-contrast-mode="forced-colors"] input[type="button"]:focus,
+[data-contrast-mode="forced-colors"] input[type="submit"]:focus,
+[data-contrast-mode="forced-colors"] .button:focus,
+[data-contrast-mode="forced-colors"] input[type="reset"]:focus,
+[data-contrast-mode="forced-colors"] :focus::file-selector-button,
+[data-contrast-mode="forced-colors"] .button-secondary:focus,
 [data-contrast-mode="forced-colors"] button:hover,
 [data-contrast-mode="forced-colors"] [role="button"]:hover,
 [data-contrast-mode="forced-colors"] input[type="button"]:hover,
 [data-contrast-mode="forced-colors"] input[type="submit"]:hover,
+[data-contrast-mode="forced-colors"] .button:hover,
 [data-contrast-mode="forced-colors"] input[type="reset"]:hover,
 [data-contrast-mode="forced-colors"] :hover::file-selector-button,
 [data-contrast-mode="forced-colors"] .button-secondary:hover {
@@ -1356,28 +1199,29 @@ input[type="reset"]:focus-within,
 @media (prefers-contrast: more),
     (forced-colors: active),
     (prefers-contrast: custom) {
-    button:focus-visible,
-    [role="button"]:focus-visible,
-    input[type="button"]:focus-visible,
-    input[type="submit"]:focus-visible,
-    input[type="reset"]:focus-visible,
-    :focus-visible::file-selector-button,
-    .button-secondary:focus-visible {
-        opacity: 1;
-    }
     button:focus-within,
     [role="button"]:focus-within,
     input[type="button"]:focus-within,
     input[type="submit"]:focus-within,
+    .button:focus-within,
     input[type="reset"]:focus-within,
     :focus-within::file-selector-button,
     .button-secondary:focus-within {
         opacity: 1;
     }
+    button:focus,
+    [role="button"]:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    .button:focus,
+    input[type="reset"]:focus,
+    :focus::file-selector-button,
+    .button-secondary:focus,
     button:hover,
     [role="button"]:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
+    .button:hover,
     input[type="reset"]:hover,
     :hover::file-selector-button,
     .button-secondary:hover {
@@ -1388,6 +1232,7 @@ button:active,
 [role="button"]:active,
 input[type="button"]:active,
 input[type="submit"]:active,
+.button:active,
 input[type="reset"]:active,
 :active::file-selector-button,
 .button-secondary:active {
@@ -1400,6 +1245,7 @@ button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
+.button,
 input[type="reset"],
 ::file-selector-button,
 .button-secondary {
@@ -1412,9 +1258,8 @@ input[type="reset"],
 
 ::file-selector-button {
     display: initial;
-    margin: var(--mrg-firm-200, 0.5rem) 0;
+    margin: 0;
     margin-right: var(--mrg-firm-300, 0.8125rem);
-    border: none;
     font-size: var(--fs-normal, 1rem);
 }
 
@@ -1453,16 +1298,14 @@ label > input[type="radio"] {
     margin-bottom: 0;
 }
 
-/* # TABLES
- * ======================================================================== */
 .table-wrapper,
 table {
     position: relative;
     margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: calc(
-        var(--mrg-soft-600, 1.4375rem) - var(--mrg-soft-400, 0.8125rem)
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
     background: AccentColor;
     width: min(var(--width-page, 53rem), 100%);
@@ -1509,747 +1352,48 @@ th {
 }
 
 /*! end of @maddimathon/utility-sass/templates/base */
-body {
-    gap: var(--mrg-soft-400, 0.8125rem);
-}
-
-[data-toggle-content] > .container,
-[data-toggle-container] {
-    --display: flex;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    display: contents; /* poor browser support atm */
-}
-
-[data-toggle-container] {
-    z-index: 1;
-}
-
-.toggle-title {
-    font-weight: 600;
-}
-
-.toggle-title,
-.toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
-    margin: 0;
-    padding: 0;
-}
-
-[data-toggle-control] {
-    margin: 0;
-    width: auto;
-    font: inherit;
-    text-align: inherit;
-    border: none;
-    background: none;
-    color: inherit;
-}
-[data-toggle-control][aria-disabled] {
-    margin: var(--mrg-soft-400, 0.8125rem) 0 0;
-    padding: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    cursor: text;
-}
-[data-toggle-control][aria-disabled] .icon {
-    display: none;
-}
-.no-js [data-toggle-control]:focus,
-.js__no-where-selector [data-toggle-control]:focus {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js__no-focusVisible) [data-toggle-control]:focus {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-[data-toggle-control]:hover,
-[data-toggle-control]:active {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-[data-toggle-control]:focus-visible {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-[data-toggle-control]:focus-within {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-.toggle-icon {
-    display: inline-block;
-    vertical-align: sub;
-    padding-bottom: 0.03125em;
-}
-.toggle-icon > svg {
-    display: block;
-    position: relative;
-    height: 1.125em;
-    width: auto;
-    stroke: currentColor;
-    stroke-width: max(0.1875em, 1px);
-    fill: none;
-}
-
-[data-toggle-content] {
-    display: grid;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-}
-/* With Javascript ==================================== */
-:where(.js) [data-toggle-content],
-:where(.js) [data-toggle-control],
-:where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ),
-:where(.js) [data-toggle-container] {
-    --display: grid;
-    display: grid;
-    grid-template-columns: var(--grid-template-columns--toggle);
-    grid-auto-rows: auto;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
-    gap: 0 var(--mrg-firm-200, 0.5rem);
-}
-
-:where(.js) [data-toggle-container] {
-    --grid-template-columns--toggle: minmax(max-content, auto) 1fr;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    z-index: 1;
-}
-:where(.js) [data-toggle-content],
-:where(.js) [data-toggle-control],
-:where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
-    grid-template-columns: subgrid;
-    grid-column: 1/-1;
-    margin: 0;
-    padding: 0;
-}
-
-:where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
-    align-content: center;
-    align-items: center;
-    grid-row: 1/1;
-}
-:where(.js) .toggle-title {
-    padding-bottom: var(--mrg-firm-200, 0.5rem);
-    z-index: 2;
-}
-:where(.js) [data-toggle-control] {
-    align-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    cursor: pointer;
-}
-:where(.js) [data-toggle-control] .icon,
-:where(.js) [data-toggle-control] .icon svg {
-    display: block;
-    grid-column: 1;
-}
-:where(.js) .toggle-control-inner {
-    grid-column: 2/-1;
-}
-:where(.js) [data-toggle-content] {
-    grid-column: 1/-1;
-    grid-row: 2/2;
-    grid-template-rows: 0fr;
-    margin: 0;
-    padding: 0;
-    border-top: var(--border-width-200, 0.125rem) solid currentColor;
-    border-top-style: solid;
-    overflow: hidden;
-}
-:where(.js) [data-toggle-content] > .container {
-    --display: flex;
-    display: flex;
-    grid-column: 2/-1;
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
-    padding-left: var(--stroke-relative-200, 0.0625em);
-    overflow-y: hidden;
-    overflow-x: auto;
-    visibility: hidden;
-    opacity: 0;
-}
-:where(.js) [data-toggle-content] > .container > :first-child {
-    margin-top: 0;
-}
-:where(.js) [data-toggle-content] > .container > :last-child {
-    margin-bottom: 0;
-}
-:where(.js) {
-    /** Opening & Closing ------------------ **/
-}
-:where(.js) [data-toggle-container="open"] .toggle-icon > svg #b {
-    opacity: 0;
-}
-:where(.js) [data-toggle-container="open"] > [data-toggle-content] {
-    grid-template-rows: 1fr;
-    border: var(--border-width-200, 0.125rem) dashed currentColor;
-    border-top-style: solid;
-}
-:where(.js)
-    [data-toggle-container="open"]
-    > [data-toggle-content]
-    > .container {
-    opacity: 1;
-    visibility: visible;
-}
-:where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
-    grid-template-rows: 0fr;
-}
-:where(.js)
-    [data-toggle-container="closing"]
-    > [data-toggle-content]
-    > .container {
-    opacity: 0;
-    visibility: visible;
-}
-
-:where(.js) [data-toggle-control]:visited {
-    color: VisitedText;
-}
-
-:where(.js) [data-toggle-container="open"] [data-toggle-control] {
-    color: ActiveText;
-}
-
-.no-js [data-toggle-container="open"] [data-toggle-control]:focus,
-.no-js [data-toggle-control]:focus,
-.js__no-where-selector
-    [data-toggle-container="open"]
-    [data-toggle-control]:focus,
-.js__no-where-selector [data-toggle-control]:focus {
-    text-decoration-color: transparent;
-    color: LinkText;
-}
-
-:where(.js__no-focusVisible)
-    [data-toggle-container="open"]
-    [data-toggle-control]:focus,
-:where(.js__no-focusVisible) [data-toggle-control]:focus {
-    text-decoration-color: transparent;
-    color: LinkText;
-}
-
-[data-toggle-container="open"] [data-toggle-control]:hover,
-[data-toggle-control]:hover {
-    text-decoration-color: transparent;
-    color: LinkText;
-}
-
-[data-toggle-container="open"] [data-toggle-control]:focus-visible,
-[data-toggle-control]:focus-visible {
-    text-decoration-color: transparent;
-    color: LinkText;
-}
-
-.website-settings-menu {
-    display: none;
-    margin: 0;
-    padding: 0;
-}
-
-.forced-colors-mode-only {
-    display: none !important;
-}
-[data-contrast-mode="forced-colors"] .forced-colors-mode-only {
-    display: var(--display, block) !important;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    .forced-colors-mode-only {
-        display: var(--display, block) !important;
-    }
-}
-
-.website-settings__content {
-    background: Canvas;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: min(var(--width-content, 36rem), 90vw);
-}
-.website-settings__content > .container {
-    margin: 0;
-    padding: 0;
-    width: -moz-fit-content;
-    width: fit-content;
-}
-.website-settings__content fieldset,
-.website-settings__content button,
-.website-settings__content [role="button"],
-.website-settings__content input[type="button"],
-.website-settings__content input[type="submit"] {
-    margin-top: var(--mrg-firm-300, 0.8125rem);
-    margin-bottom: var(--mrg-half-300, 0.3125rem);
-    margin-left: 0;
-    margin-right: 0;
-}
-.website-settings__content input,
-.website-settings__content button,
-.website-settings__content [role="button"] {
-    margin-top: var(--mrg-firm-400, 1.25rem);
-}
-.website-settings__content fieldset {
-    padding-top: var(--mrg-firm-200, 0.5rem);
-    padding-bottom: var(--mrg-firm-200, 0.5rem);
-    padding-left: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        3vw,
-        var(--mrg-firm-300, 0.8125rem)
-    );
-    padding-right: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        3vw,
-        var(--mrg-firm-300, 0.8125rem)
-    );
-    align-self: stretch;
-}
-.website-settings__content fieldset > legend,
-.website-settings__content fieldset > legend:first-child {
+nav ol,
+nav ul {
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: calc(var(--mrg-soft-200, 0.3125rem) * -1);
-    margin-right: calc(var(--mrg-soft-200, 0.3125rem) * -1);
-    padding-left: var(--mrg-soft-200, 0.3125rem);
-    padding-right: var(--mrg-soft-200, 0.3125rem);
-    font-weight: 600;
-    font-size: var(--fs-normal, 1rem);
 }
-.website-settings__content fieldset > .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
-    grid-auto-rows: auto;
-    grid-auto-flow: column;
-    justify-content: start;
-    justify-items: start;
-    align-content: start;
-    align-items: start;
-    grid-gap: var(--mrg-firm-200, 0.5rem)
-        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
-    gap: var(--mrg-firm-200, 0.5rem)
-        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
-    margin: 0;
-    padding: 0;
-}
-.website-settings__content fieldset > .container > label,
-.website-settings__content fieldset > .container > input {
-    margin: 0;
+nav ol li,
+nav ul li {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-.website-settings__disclaimer {
+body > aside > :first-child {
+    margin-top: 0;
+}
+
+.page-subtitle {
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    font-weight: 500;
     font-style: italic;
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: var(--line-height-300, 1.4375);
+    text-wrap: balance;
+}
+.page-subtitle {
+    opacity: 0.75;
 }
 
-.website-settings__backdrop {
-    display: none;
-}
-
-/* With Javascript ==================================== */
-body:has(.website-settings-menu[data-toggle-container="open"]) {
-    overflow: hidden;
-}
-
-:where(.js) .website-settings-menu {
-    display: var(--display, block);
-    z-index: 999999;
-}
-:where(.js) .website-settings-menu [data-toggle-control] {
-    display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
-    width: -moz-fit-content;
-    width: fit-content;
-    font: inherit;
-    line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonBorder;
-    border-radius: 0;
-    background-color: ButtonFace;
-    color: ButtonText;
-    accent-color: ButtonText;
-}
-.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-.js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-[data-contrast-mode="high"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="high"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-    .js__no-where-selector
-        :where(.js)
-        .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
-    }
-    :where(.js__no-focusVisible)
-        :where(.js)
-        .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
+@media (prefers-contrast: less) {
+    .page-subtitle {
+        opacity: 0.75;
     }
 }
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible {
-    opacity: 1;
+.page-subtitle em,
+.page-subtitle i {
+    font-style: normal;
 }
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within {
-    opacity: 1;
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover {
-    opacity: 1;
-}
-
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 1;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 1;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 1;
-    }
-}
-:where(.js) .website-settings-menu [data-toggle-control]:active {
-    background-color: ButtonFace;
-    border-color: ButtonBorder;
-    color: ButtonText;
-    accent-color: ActiveText;
-}
-:where(.js) .website-settings-menu [data-toggle-control] {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    cursor: pointer;
-}
-:where(.js) .website-settings-menu [data-toggle-control] {
-    --display: block;
-    display: block;
-    margin: 0;
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-soft-200, 0.3125rem);
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
-    -webkit-backdrop-filter: blur(0.375rem);
-    backdrop-filter: blur(0.375rem);
-    background: none;
-    border: none;
-    opacity: 1;
-    z-index: -1;
-    cursor: pointer;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::before,
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::after {
-    content: "";
-    content: ""/"";
-    display: flex;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::before {
-    background: Canvas;
-    opacity: 0.625;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::after {
-    background: LinkText;
-    opacity: 0.1875;
-}
-.no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus,
-.js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:hover,
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:active {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus-visible {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus-within {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js) .website-settings-menu [data-toggle-content] {
-    padding: 0;
-    border: none;
-}
-:where(.js) .website-settings-menu [data-toggle-content] > .container {
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    padding: var(--mrg-firm-300, 0.8125rem) var(--mrg-firm-300, 0.8125rem);
-}
-:where(.js) .website-settings-menu[data-toggle-container] {
-    justify-content: end;
-    justify-items: end;
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    .website-settings__backdrop {
-    display: var(--display, block);
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    [data-toggle-content] {
-    --display: block;
-    display: block;
-    max-height: 80svh;
-    max-height: calc(80svh - 2rem - var(--mrg-firm-600, 2.25rem) * 2);
-    overflow: auto;
+.page-subtitle em em,
+.page-subtitle em i,
+.page-subtitle i em,
+.page-subtitle i i {
+    font-style: italic;
 }
 
 /*! end of @maddimathon/utility-astro/templates/html */

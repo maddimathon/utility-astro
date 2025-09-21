@@ -5,18 +5,15 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '../config' with (
-    $print_globals: true !default,
-    $print_tokens: true !default,
-    $print_utils: true !default
-);
+@forward '../templates/astro/config';
+@forward '../templates/astro/tokens';
 
-@forward '../tokens';
+@forward '../notice';
 
-@forward '../lib';
+@forward '../templates/astro/lib';
 
-@use '../config';
-@use '../lib' as *;
+@use '../templates/astro/config';
+@use '../templates/astro/lib' as *;
 
 @mixin extend-selectors {
     @include config.print-globals {

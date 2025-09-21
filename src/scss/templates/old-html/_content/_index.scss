@@ -1,0 +1,32 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../lib';
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
+        $internal_supressCredit,
+    $print_globals, $print_utils, extend-selector-globals,
+    extend-selector-utils, print-globals, print-utils, tokens-all, tokens-width,
+    width-value;
+
+@forward '01-globals';
+@forward '02-layouts';
+@forward '03-utilities';
+@forward '04-components';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use '../config';
+
+@use '../lib' as *;
+
+@include config.print-globals {
+    @include extend-selector-globals;
+}
+
+@include config.print-utils {
+    @include extend-selector-utils;
+}

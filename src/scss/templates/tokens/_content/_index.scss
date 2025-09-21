@@ -1,0 +1,40 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '_normalize';
+
+// @forward 'pkg:@maddimathon/utility-sass/templates/base/__header.scss';
+
+@forward '00-abstracts';
+
+@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
+        $internal_supressCredit,
+    $print_globals, $print_normalize, $print_utils, $print_tokens,
+    extend-selector-globals, extend-selector-utils, print-globals, print-utils,
+    print-tokens, tokens-all, tokens-width, width-value, var-width;
+
+// @forward '01-accessibility';
+// @forward '02-objects';
+// @forward '03-typography';
+// @forward '04-lists';
+// @forward '05-forms';
+// @forward '06-tables';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use '../config';
+
+@use '../lib' as *;
+
+@if config.$internal_extendSelectors {
+    @include config.print-globals {
+        @include extend-selector-globals;
+    }
+
+    @include config.print-utils {
+        @include extend-selector-utils;
+    }
+}

@@ -28,6 +28,7 @@ import type { Props as ContentProps, ContentType, DefaultContentType } from './C
  */
 type HTML_excludeAttributes = "dir" | "lang";
 
+
 /**
  * Input props for the NewComponent component.
  * 
@@ -88,12 +89,14 @@ export type Props<
          * 
          * An empty object can also be passed to enable the default output.
          */
-        copyright?: {
+        copyright?: false | {
 
             /**
              * Escaped HTML to include after the copyright symbol.
              */
             html: string;
+
+            owner?: undefined;
 
             /**
              * If undefined, this defaults to the current year. If it is greater
@@ -102,10 +105,27 @@ export type Props<
              * *Text to be escaped, NOT html.*
              */
             year?: number;
-
-            owner?: never;
-
         } | {
+
+            html?: undefined;
+
+            /**
+             * Text to follow the copyright symbol and date.
+             * 
+             * *Text to be escaped, NOT html.*
+             */
+            owner: string;
+
+            /**
+             * If undefined, this defaults to the current year. If it is greater
+             * than the current year, this is displayed as a range.
+             * 
+             * *Text to be escaped, NOT html.*
+             */
+            year?: number;
+        } | {
+
+            html?: undefined;
 
             /**
              * Text to follow the copyright symbol and date.
@@ -120,9 +140,7 @@ export type Props<
              * 
              * *Text to be escaped, NOT html.*
              */
-            year?: number;
-
-            html?: never;
+            year: number;
         };
 
         /**
@@ -172,9 +190,12 @@ export type Props<
     secondaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
 
     /**
-     * Whether to inlcude each settings group.
+     * Whether to inlcude the settings menu. Optionally this can be an object of
+     * props to pass to the component.
+     * 
+     * @default true
      */
-    settings?: Omit<SettingsMenuProps, "accessibilityReportEmail" | "privacyPolicy">,
+    settings?: boolean | Omit<SettingsMenuProps, "accessibilityReportEmail" | "privacyPolicy">,
 
     /**
      * Skip links for this page.
@@ -187,23 +208,29 @@ export type Props<
     subtitle?: string | null;
 
     /**
-     * Various features to turn on or off.
+     * Whether to include scripts scripts for these components
      */
-    support?: {
+    scripts?: {
 
         /**
-         * @default true
-         */
-        elementToggle?: boolean;
-
-        /**
+         * Initializes the class from utility-sass.
+         * 
          * @default true
          */
         featureCheck?: boolean;
 
         /**
+         * Includes the SettingsMenu_Scripts component.
+         * 
          * @default true
          */
-        settings?: boolean;
+        settingsMenu?: boolean;
+
+        /**
+         * Includes the Toggle_Scripts component.
+         * 
+         * @default true
+         */
+        toggle?: boolean;
     };
 }>;

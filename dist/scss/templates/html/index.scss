@@ -4,12 +4,12 @@
 ///
 
 @forward 'config';
-
 @forward 'tokens';
 
 @forward '_header';
 
 @forward 'lib';
-@forward '_content';
+
+@forward '../global';
 
 @forward '_footer';

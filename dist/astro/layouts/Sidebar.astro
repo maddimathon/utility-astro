@@ -29,6 +29,8 @@ const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const rendered = Astro.slots.has('default') && Astro.slots.render('default') || null;
 ---
 
 <aside
@@ -37,7 +39,16 @@ const { class: classList = [], ...attributes }: Props =
     class:list={['site-sidebar', '||', ...classList]}
     {...attributes}
 >
-    <!-- SLOT: "sidebar" -->
-    <slot />
-    <!-- /SLOT: "sidebar" -->
+    { rendered ? (
+        <!-- SLOT: "sidebar" -->
+        <slot />
+        <!-- /SLOT: "sidebar" -->
+    ) : (
+        <p class="screen-reader-text">This sidebar is empty.</p>
+        <!-- SLOT: "sidebar" (empty) / -->
+    ) }
 </aside>
+
+<style lang='scss'>
+    @forward '../css/screen-reader-text.css';
+</style>

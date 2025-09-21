@@ -1,0 +1,13 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../config';
+// @use '../tokens';
+
+@use '../lib' as *;
+
+@if config.$print_normalize {
+    @include normalize;
+}

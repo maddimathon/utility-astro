@@ -1,0 +1,54 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../../../tokens/lib/01-functions';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use 'pkg:@maddimathon/utility-sass/list';
+
+// @use '../../../../lib/01-functions' as lib;
+
+@use '../../config';
+
+@function to-extend-selector-content-layout() {
+    $sels: (
+        ('.layout_content-only', 'layout-content-only'),
+        ('.layout_full-width', 'layout-full-width'),
+        ('.layout_extra-wide', 'layout-extra-wide'),
+        ('.layout_sidebar-left', 'layout-sidebar-left'),
+        ('.layout_sidebar-right', 'layout-sidebar-right'),
+        ('.content-header', 'content-header'),
+        ((pre, table), 'callout-width'),
+        ((header, footer, main, nav), 'body-subgrid')
+    );
+
+    @if config.$print_astro_settingsMenu {
+        $sels: list.append(
+            $sels,
+            ('.website-settings-menu', 'page-width'),
+            $separator: comma
+        );
+    }
+
+    @if config.$print_utils {
+        $sels: list.join(
+            $sels,
+            (
+                (('.subgrid', '.body-subgrid'), 'body-subgrid'),
+                // (('.subgrid', '.main-subgrid'), 'main-subgrid'),
+                ('.site-width', 'site-width'),
+                ('.page-width', 'page-width'),
+                ('.content-width', 'content-width'),
+                ('.sidebar-width', 'sidebar-width'),
+                ('.callout-width', 'callout-width')
+            ),
+            $separator: comma
+        );
+    }
+
+    @return $sels;
+}
