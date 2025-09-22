@@ -10,20 +10,3 @@
 @forward '02-layouts';
 @forward '03-utilities';
 @forward '04-components';
-
-/// # EXTENDING SELECTORS
-/// ======================================================================== ///
-
-@use '../config';
-
-@use '../lib' as *;
-
-@if config.$internal_extendSelectors {
-    @include config.print-globals {
-        @include extend-selector-globals;
-    }
-
-    @include config.print-utils {
-        @include extend-selector-utils;
-    }
-}

@@ -44,7 +44,6 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                     [data-toggle-content] {
                         grid-column: 1 / -1;
 
-                        font-size: #{var-fs(heading-7)};
                         gap: 0;
                     }
 
@@ -56,8 +55,8 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                             @include snippet-support-content--page-width;
 
                             padding-inline: #{var-mrg-firm('300')};
-                            background: Canvas;
-                            color: CanvasText;
+                            background: #{var-sys-colour(background)};
+                            color: #{var-sys-colour(text)};
                         }
                     }
 
@@ -74,8 +73,8 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                             currentColor;
 
                         font-size: #{var-fs(heading-6)};
-                        background: Canvas;
-                        color: CanvasText;
+                        background: #{var-sys-colour(background)};
+                        color: #{var-sys-colour(text)};
 
                         [data-toggle-control] {
                             @include snippet-support-content--page-width;

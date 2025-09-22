@@ -3,7 +3,11 @@
 /// @since 0.1.0-alpha.draft
 ///
 
+@use '__pre-lib' as pre;
+
 @forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
+    $internal_supressCredit: pre.$internal_sass_supressCredit,
+
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default,
 

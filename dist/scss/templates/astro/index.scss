@@ -10,6 +10,6 @@
 
 @forward 'lib';
 
-@forward '../html';
+@forward '../html' hide $internal_supressCredit;
 
 @forward '_footer';

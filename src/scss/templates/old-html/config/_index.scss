@@ -1,8 +1,0 @@
-///
-/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
-///
-
-@forward '_lib' hide $print_globals, $print_utils, print-globals, print-utils;
-
-@forward 'include';

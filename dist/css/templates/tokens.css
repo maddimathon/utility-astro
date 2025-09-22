@@ -4,6 +4,96 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * License: MIT
  */
+/* #region Tokens - System Colours */
+:where(html) {
+    --sys-clr-accent-bg: CanvasText;
+    --sys-clr-accent-bg: AccentColor;
+    --sys-clr-accent-text: Canvas;
+    --sys-clr-accent-text: AccentColorText;
+    --sys-clr-active-text: ActiveText;
+    --sys-clr-background: Canvas;
+    --sys-clr-button-bg: ButtonFace;
+    --sys-clr-button-border: ButtonFace;
+    --sys-clr-button-border: ButtonBorder;
+    --sys-clr-button-text: ButtonText;
+    --sys-clr-grey-text: GrayText;
+    --sys-clr-input-bg: Field;
+    --sys-clr-input-text: FieldText;
+    --sys-clr-link-text: LinkText;
+    --sys-clr-link-visited: VisitedText;
+    --sys-clr-mark-bg: CanvasText;
+    --sys-clr-mark-bg: AccentColor;
+    --sys-clr-mark-bg: Mark;
+    --sys-clr-mark-text: Canvas;
+    --sys-clr-mark-text: AccentColorText;
+    --sys-clr-mark-text: MarkText;
+    --sys-clr-selected-bg: SelectedItem;
+    --sys-clr-selected-text: SelectedItemText;
+    --sys-clr-selection-bg: Highlight;
+    --sys-clr-selection-text: HighlightText;
+    --sys-clr-text: CanvasText;
+}
+
+[data-contrast-mode="forced-colors"] {
+    --sys-clr-accent-bg: CanvasText !important;
+    --sys-clr-accent-bg: AccentColor !important;
+    --sys-clr-accent-text: Canvas !important;
+    --sys-clr-accent-text: AccentColorText !important;
+    --sys-clr-active-text: ActiveText !important;
+    --sys-clr-background: Canvas !important;
+    --sys-clr-button-bg: ButtonFace !important;
+    --sys-clr-button-border: ButtonFace !important;
+    --sys-clr-button-border: ButtonBorder !important;
+    --sys-clr-button-text: ButtonText !important;
+    --sys-clr-grey-text: GrayText !important;
+    --sys-clr-input-bg: Field !important;
+    --sys-clr-input-text: FieldText !important;
+    --sys-clr-link-text: LinkText !important;
+    --sys-clr-link-visited: VisitedText !important;
+    --sys-clr-mark-bg: CanvasText !important;
+    --sys-clr-mark-bg: AccentColor !important;
+    --sys-clr-mark-bg: Mark !important;
+    --sys-clr-mark-text: Canvas !important;
+    --sys-clr-mark-text: AccentColorText !important;
+    --sys-clr-mark-text: MarkText !important;
+    --sys-clr-selected-bg: SelectedItem !important;
+    --sys-clr-selected-text: SelectedItemText !important;
+    --sys-clr-selection-bg: Highlight !important;
+    --sys-clr-selection-text: HighlightText !important;
+    --sys-clr-text: CanvasText !important;
+}
+
+@media (forced-colors: active), (prefers-contrast: custom) {
+    html {
+        --sys-clr-accent-bg: CanvasText !important;
+        --sys-clr-accent-bg: AccentColor !important;
+        --sys-clr-accent-text: Canvas !important;
+        --sys-clr-accent-text: AccentColorText !important;
+        --sys-clr-active-text: ActiveText !important;
+        --sys-clr-background: Canvas !important;
+        --sys-clr-button-bg: ButtonFace !important;
+        --sys-clr-button-border: ButtonFace !important;
+        --sys-clr-button-border: ButtonBorder !important;
+        --sys-clr-button-text: ButtonText !important;
+        --sys-clr-grey-text: GrayText !important;
+        --sys-clr-input-bg: Field !important;
+        --sys-clr-input-text: FieldText !important;
+        --sys-clr-link-text: LinkText !important;
+        --sys-clr-link-visited: VisitedText !important;
+        --sys-clr-mark-bg: CanvasText !important;
+        --sys-clr-mark-bg: AccentColor !important;
+        --sys-clr-mark-bg: Mark !important;
+        --sys-clr-mark-text: Canvas !important;
+        --sys-clr-mark-text: AccentColorText !important;
+        --sys-clr-mark-text: MarkText !important;
+        --sys-clr-selected-bg: SelectedItem !important;
+        --sys-clr-selected-text: SelectedItemText !important;
+        --sys-clr-selection-bg: Highlight !important;
+        --sys-clr-selection-text: HighlightText !important;
+        --sys-clr-text: CanvasText !important;
+    }
+}
+/* #endregion Tokens - System Colours */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -126,7 +216,7 @@ html {
 html {
     --focus-ring-outline-width: 0.1875rem;
     --focus-ring-outline-offset: 0.125em;
-    --focus-ring-outline-color: AccentColor;
+    --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }
 
 /* #endregion Tokens - Misc. */
@@ -143,11 +233,4 @@ html {
 }
 
 /* #endregion Tokens - Width */
-/*!
- * Utility Sass Template - Base
- * 
- * @maddimathon/utility-sass@0.1.0-alpha.draft
- * License: MIT
- */
-/*! end of @maddimathon/utility-sass/templates/base */
 /*! end of @maddimathon/utility-astro/templates/tokens */

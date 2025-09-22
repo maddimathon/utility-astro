@@ -15,7 +15,6 @@
 :where(.js) body > nav[data-toggle-container] .toggle-title,
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
     grid-column: 1/-1;
-    font-size: var(--fs-heading-7, 1rem);
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
@@ -31,8 +30,8 @@
     width: auto;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
-    background: Canvas;
-    color: CanvasText;
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
@@ -43,8 +42,8 @@
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
     border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
     font-size: var(--fs-heading-6, 1.1875rem);
-    background: Canvas;
-    color: CanvasText;
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js)
     body

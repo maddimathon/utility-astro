@@ -287,15 +287,9 @@
     }
 
     [data-toggle-control] {
-        @include js {
-            &:visited {
-                color: VisitedText;
-            }
-        }
-
         [data-toggle-container='open'] & {
             @include js {
-                color: ActiveText;
+                color: #{var-sys-colour(active-text)};
             }
         }
 
@@ -303,7 +297,7 @@
         & {
             @include hover-focus-visible {
                 text-decoration-color: transparent;
-                color: LinkText;
+                color: #{var-sys-colour(link-text)};
             }
         }
     }

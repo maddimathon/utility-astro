@@ -24,7 +24,7 @@
     }
 
     .website-settings__content {
-        background: Canvas;
+        background: #{var-sys-colour(background)};
         width: fit-content;
         max-width: min(#{var-width(content)}, 90vw);
 
@@ -167,12 +167,12 @@
                     }
 
                     &::before {
-                        background: Canvas;
+                        background: #{var-sys-colour(background)};
                         opacity: 0.625;
                     }
 
                     &::after {
-                        background: LinkText;
+                        background: #{var-sys-colour(link-text)};
                         opacity: 0.1875;
                     }
 

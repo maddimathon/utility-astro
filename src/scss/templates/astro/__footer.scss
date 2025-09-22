@@ -1,1 +1,10 @@
-/*! end of @maddimathon/utility-astro/templates/astro */
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'config';
+
+@if not config.$internal_supressCredit {
+    /*! end of @maddimathon/utility-astro/templates/astro */
+}

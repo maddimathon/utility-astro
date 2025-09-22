@@ -3,4 +3,4 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '../html/lib' hide $internal_supressCredit;
+$internal_sass_supressCredit: false !default;

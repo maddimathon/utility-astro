@@ -14,3 +14,20 @@
 @forward '_content';
 
 @forward '_footer';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use 'config';
+
+@use 'lib' as *;
+
+@if config.$internal_extendSelectors {
+    @include config.print-globals {
+        @include extend-selector-globals;
+    }
+
+    @include config.print-utils {
+        @include extend-selector-utils;
+    }
+}

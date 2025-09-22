@@ -258,6 +258,96 @@ pre {
 }
 
 /* #endregion Normalize */
+/* #region Tokens - System Colours */
+:where(html) {
+    --sys-clr-accent-bg: CanvasText;
+    --sys-clr-accent-bg: AccentColor;
+    --sys-clr-accent-text: Canvas;
+    --sys-clr-accent-text: AccentColorText;
+    --sys-clr-active-text: ActiveText;
+    --sys-clr-background: Canvas;
+    --sys-clr-button-bg: ButtonFace;
+    --sys-clr-button-border: ButtonFace;
+    --sys-clr-button-border: ButtonBorder;
+    --sys-clr-button-text: ButtonText;
+    --sys-clr-grey-text: GrayText;
+    --sys-clr-input-bg: Field;
+    --sys-clr-input-text: FieldText;
+    --sys-clr-link-text: LinkText;
+    --sys-clr-link-visited: VisitedText;
+    --sys-clr-mark-bg: CanvasText;
+    --sys-clr-mark-bg: AccentColor;
+    --sys-clr-mark-bg: Mark;
+    --sys-clr-mark-text: Canvas;
+    --sys-clr-mark-text: AccentColorText;
+    --sys-clr-mark-text: MarkText;
+    --sys-clr-selected-bg: SelectedItem;
+    --sys-clr-selected-text: SelectedItemText;
+    --sys-clr-selection-bg: Highlight;
+    --sys-clr-selection-text: HighlightText;
+    --sys-clr-text: CanvasText;
+}
+
+[data-contrast-mode="forced-colors"] {
+    --sys-clr-accent-bg: CanvasText !important;
+    --sys-clr-accent-bg: AccentColor !important;
+    --sys-clr-accent-text: Canvas !important;
+    --sys-clr-accent-text: AccentColorText !important;
+    --sys-clr-active-text: ActiveText !important;
+    --sys-clr-background: Canvas !important;
+    --sys-clr-button-bg: ButtonFace !important;
+    --sys-clr-button-border: ButtonFace !important;
+    --sys-clr-button-border: ButtonBorder !important;
+    --sys-clr-button-text: ButtonText !important;
+    --sys-clr-grey-text: GrayText !important;
+    --sys-clr-input-bg: Field !important;
+    --sys-clr-input-text: FieldText !important;
+    --sys-clr-link-text: LinkText !important;
+    --sys-clr-link-visited: VisitedText !important;
+    --sys-clr-mark-bg: CanvasText !important;
+    --sys-clr-mark-bg: AccentColor !important;
+    --sys-clr-mark-bg: Mark !important;
+    --sys-clr-mark-text: Canvas !important;
+    --sys-clr-mark-text: AccentColorText !important;
+    --sys-clr-mark-text: MarkText !important;
+    --sys-clr-selected-bg: SelectedItem !important;
+    --sys-clr-selected-text: SelectedItemText !important;
+    --sys-clr-selection-bg: Highlight !important;
+    --sys-clr-selection-text: HighlightText !important;
+    --sys-clr-text: CanvasText !important;
+}
+
+@media (forced-colors: active), (prefers-contrast: custom) {
+    html {
+        --sys-clr-accent-bg: CanvasText !important;
+        --sys-clr-accent-bg: AccentColor !important;
+        --sys-clr-accent-text: Canvas !important;
+        --sys-clr-accent-text: AccentColorText !important;
+        --sys-clr-active-text: ActiveText !important;
+        --sys-clr-background: Canvas !important;
+        --sys-clr-button-bg: ButtonFace !important;
+        --sys-clr-button-border: ButtonFace !important;
+        --sys-clr-button-border: ButtonBorder !important;
+        --sys-clr-button-text: ButtonText !important;
+        --sys-clr-grey-text: GrayText !important;
+        --sys-clr-input-bg: Field !important;
+        --sys-clr-input-text: FieldText !important;
+        --sys-clr-link-text: LinkText !important;
+        --sys-clr-link-visited: VisitedText !important;
+        --sys-clr-mark-bg: CanvasText !important;
+        --sys-clr-mark-bg: AccentColor !important;
+        --sys-clr-mark-bg: Mark !important;
+        --sys-clr-mark-text: Canvas !important;
+        --sys-clr-mark-text: AccentColorText !important;
+        --sys-clr-mark-text: MarkText !important;
+        --sys-clr-selected-bg: SelectedItem !important;
+        --sys-clr-selected-text: SelectedItemText !important;
+        --sys-clr-selection-bg: Highlight !important;
+        --sys-clr-selection-text: HighlightText !important;
+        --sys-clr-text: CanvasText !important;
+    }
+}
+/* #endregion Tokens - System Colours */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -380,7 +470,7 @@ html {
 html {
     --focus-ring-outline-width: 0.1875rem;
     --focus-ring-outline-offset: 0.125em;
-    --focus-ring-outline-color: AccentColor;
+    --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }
 
 /* #endregion Tokens - Misc. */
@@ -406,21 +496,21 @@ html {
 :focus {
     /* %focus-ring */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :where(.js__no-focusVisible) :focus {
     /* %focus-ring--where */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :focus-visible {
     /* %focus-ring--visible */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
@@ -480,8 +570,20 @@ hr {
     border-bottom: currentColor solid 2px;
 }
 
+::-moz-selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+
+::selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+
 html {
     line-height: var(--line-height-400, 1.6875);
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 
 strong,
@@ -516,23 +618,23 @@ a {
     -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-underline-offset: var(--stroke-relative-600, 0.1875em);
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 a:visited {
-    color: VisitedText;
+    color: var(--sys-clr-link-visited, VisitedText);
 }
 a:focus {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 a:hover {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 a:active {
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 a.no-style {
     text-decoration: none;
@@ -543,15 +645,7 @@ a[aria-disabled="true"] {
     text-decoration-line: line-through;
     opacity: 1;
     cursor: not-allowed;
-}
-a[aria-disabled="true"] {
-    opacity: 0.875;
-}
-
-@media (prefers-contrast: less) {
-    a[aria-disabled="true"] {
-        opacity: 0.875;
-    }
+    color: var(--sys-clr-grey-text, GrayText);
 }
 
 abbr[title] {
@@ -598,8 +692,14 @@ blockquote > cite::before {
     content: "— ";
     color: currentColor;
 }
-blockquote > cite {
+[data-contrast-mode="low"] blockquote > cite {
     color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
 }
 [data-contrast-mode="high"] blockquote > cite {
     color: color-mix(in srgb, currentColor 87.5%, transparent);
@@ -608,15 +708,6 @@ blockquote > cite {
 @media (prefers-contrast: more) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="forced-colors"] blockquote > cite {
-    color: currentColor;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    blockquote > cite {
-        color: currentColor;
     }
 }
 
@@ -830,21 +921,21 @@ fieldset {
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
         var(--mrg-firm-300, 0.8125rem);
-    border: 0.0625rem solid AccentColor;
+    border: 0.0625rem solid var(--sys-clr-accent-bg, CanvasText);
     border-radius: 0;
-    background-color: Canvas;
-    color: CanvasText;
+    background-color: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 fieldset:focus {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 fieldset:focus-within {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 fieldset:active {
-    border-color: AccentColor;
+    border-color: var(--sys-clr-accent-bg, CanvasText);
 }
 fieldset legend {
     display: block;
@@ -883,60 +974,81 @@ input {
     width: 100%;
     font: inherit;
     line-height: var(--line-height-200, 1.3125);
-    border: 0.0625rem solid FieldText;
+    border: 0.0625rem solid var(--sys-clr-input-text, FieldText);
     border-radius: 0;
-    background-color: Field;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 textarea:focus,
 select:focus,
 input:focus {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:hover,
 select:hover,
 input:hover {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:focus-within,
 select:focus-within,
 input:focus-within {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:active,
 select:active,
 input:active {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 textarea::-moz-placeholder,
 select::-moz-placeholder,
 input::-moz-placeholder {
     opacity: 1;
     color: currentColor;
-    color: color-mix(in srgb, currentColor 62.5%, transparent);
 }
 textarea::placeholder,
 select::placeholder,
 input::placeholder {
     opacity: 1;
     color: currentColor;
+}
+[data-contrast-mode="low"] textarea::-moz-placeholder,
+[data-contrast-mode="low"] select::-moz-placeholder,
+[data-contrast-mode="low"] input::-moz-placeholder {
     color: color-mix(in srgb, currentColor 62.5%, transparent);
+}
+[data-contrast-mode="low"] textarea::placeholder,
+[data-contrast-mode="low"] select::placeholder,
+[data-contrast-mode="low"] input::placeholder {
+    color: color-mix(in srgb, currentColor 62.5%, transparent);
+}
+
+@media (prefers-contrast: less) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 62.5%, transparent);
+    }
+    textarea::placeholder,
+    select::placeholder,
+    input::placeholder {
+        color: color-mix(in srgb, currentColor 62.5%, transparent);
+    }
 }
 [data-contrast-mode="high"] textarea::-moz-placeholder,
 [data-contrast-mode="high"] select::-moz-placeholder,
@@ -959,29 +1071,6 @@ input::placeholder {
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="forced-colors"] textarea::-moz-placeholder,
-[data-contrast-mode="forced-colors"] select::-moz-placeholder,
-[data-contrast-mode="forced-colors"] input::-moz-placeholder {
-    color: currentColor;
-}
-[data-contrast-mode="forced-colors"] textarea::placeholder,
-[data-contrast-mode="forced-colors"] select::placeholder,
-[data-contrast-mode="forced-colors"] input::placeholder {
-    color: currentColor;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: currentColor;
-    }
-    textarea::placeholder,
-    select::placeholder,
-    input::placeholder {
-        color: currentColor;
     }
 }
 label + textarea,
@@ -1024,26 +1113,26 @@ input[type="radio"] {
     display: inline-block;
     padding: 0;
     width: auto;
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 input[type="checkbox"]:focus,
 input[type="radio"]:focus {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:focus-within,
 input[type="radio"]:focus-within {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:active,
 input[type="radio"]:active {
-    accent-color: ActiveText;
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 input[type="color"] {
     padding: 0;
@@ -1092,11 +1181,11 @@ input[type="reset"],
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonBorder;
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    background-color: ButtonFace;
-    color: ButtonText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
 }
 button:focus,
 [role="button"]:focus,
@@ -1106,11 +1195,53 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 :focus::file-selector-button,
 .button-secondary:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+button:focus:focus-within,
+[role="button"]:focus:focus-within,
+input[type="button"]:focus:focus-within,
+input[type="submit"]:focus:focus-within,
+.button:focus:focus-within,
+input[type="reset"]:focus:focus-within,
+:focus:focus-within::file-selector-button,
+.button-secondary:focus:focus-within {
     opacity: 0.875;
+}
+button:focus:focus,
+[role="button"]:focus:focus,
+input[type="button"]:focus:focus,
+input[type="submit"]:focus:focus,
+.button:focus:focus,
+input[type="reset"]:focus:focus,
+:focus:focus::file-selector-button,
+.button-secondary:focus:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    button:focus:focus-within,
+    [role="button"]:focus:focus-within,
+    input[type="button"]:focus:focus-within,
+    input[type="submit"]:focus:focus-within,
+    .button:focus:focus-within,
+    input[type="reset"]:focus:focus-within,
+    :focus:focus-within::file-selector-button,
+    .button-secondary:focus:focus-within {
+        opacity: 0.875;
+    }
+    button:focus:focus,
+    [role="button"]:focus:focus,
+    input[type="button"]:focus:focus,
+    input[type="submit"]:focus:focus,
+    .button:focus:focus,
+    input[type="reset"]:focus:focus,
+    :focus:focus::file-selector-button,
+    .button-secondary:focus:focus {
+        opacity: 0.875;
+    }
 }
 
 button:hover,
@@ -1121,11 +1252,53 @@ input[type="submit"]:hover,
 input[type="reset"]:hover,
 :hover::file-selector-button,
 .button-secondary:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+button:hover:focus-within,
+[role="button"]:hover:focus-within,
+input[type="button"]:hover:focus-within,
+input[type="submit"]:hover:focus-within,
+.button:hover:focus-within,
+input[type="reset"]:hover:focus-within,
+:hover:focus-within::file-selector-button,
+.button-secondary:hover:focus-within {
     opacity: 0.875;
+}
+button:hover:hover,
+[role="button"]:hover:hover,
+input[type="button"]:hover:hover,
+input[type="submit"]:hover:hover,
+.button:hover:hover,
+input[type="reset"]:hover:hover,
+:hover:hover::file-selector-button,
+.button-secondary:hover:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    button:hover:focus-within,
+    [role="button"]:hover:focus-within,
+    input[type="button"]:hover:focus-within,
+    input[type="submit"]:hover:focus-within,
+    .button:hover:focus-within,
+    input[type="reset"]:hover:focus-within,
+    :hover:focus-within::file-selector-button,
+    .button-secondary:hover:focus-within {
+        opacity: 0.875;
+    }
+    button:hover:hover,
+    [role="button"]:hover:hover,
+    input[type="button"]:hover:hover,
+    input[type="submit"]:hover:hover,
+    .button:hover:hover,
+    input[type="reset"]:hover:hover,
+    :hover:hover::file-selector-button,
+    .button-secondary:hover:hover {
+        opacity: 0.875;
+    }
 }
 
 button:focus-within,
@@ -1136,98 +1309,71 @@ input[type="submit"]:focus-within,
 input[type="reset"]:focus-within,
 :focus-within::file-selector-button,
 .button-secondary:focus-within {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+button:focus-within:focus-within,
+[role="button"]:focus-within:focus-within,
+input[type="button"]:focus-within:focus-within,
+input[type="submit"]:focus-within:focus-within,
+.button:focus-within:focus-within,
+input[type="reset"]:focus-within:focus-within,
+:focus-within:focus-within::file-selector-button,
+.button-secondary:focus-within:focus-within {
+    opacity: 0.875;
+}
+button:focus-within:focus,
+[role="button"]:focus-within:focus,
+input[type="button"]:focus-within:focus,
+input[type="submit"]:focus-within:focus,
+.button:focus-within:focus,
+input[type="reset"]:focus-within:focus,
+:focus-within:focus::file-selector-button,
+.button-secondary:focus-within:focus,
+button:focus-within:hover,
+[role="button"]:focus-within:hover,
+input[type="button"]:focus-within:hover,
+input[type="submit"]:focus-within:hover,
+.button:focus-within:hover,
+input[type="reset"]:focus-within:hover,
+:focus-within:hover::file-selector-button,
+.button-secondary:focus-within:hover {
     opacity: 0.875;
 }
 
-[data-contrast-mode="high"] button:focus-within,
-[data-contrast-mode="high"] [role="button"]:focus-within,
-[data-contrast-mode="high"] input[type="button"]:focus-within,
-[data-contrast-mode="high"] input[type="submit"]:focus-within,
-[data-contrast-mode="high"] .button:focus-within,
-[data-contrast-mode="high"] input[type="reset"]:focus-within,
-[data-contrast-mode="high"] :focus-within::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:focus-within,
-[data-contrast-mode="forced-colors"] button:focus-within,
-[data-contrast-mode="forced-colors"] [role="button"]:focus-within,
-[data-contrast-mode="forced-colors"] input[type="button"]:focus-within,
-[data-contrast-mode="forced-colors"] input[type="submit"]:focus-within,
-[data-contrast-mode="forced-colors"] .button:focus-within,
-[data-contrast-mode="forced-colors"] input[type="reset"]:focus-within,
-[data-contrast-mode="forced-colors"] :focus-within::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-within {
-    opacity: 1;
-}
-[data-contrast-mode="high"] button:focus,
-[data-contrast-mode="high"] [role="button"]:focus,
-[data-contrast-mode="high"] input[type="button"]:focus,
-[data-contrast-mode="high"] input[type="submit"]:focus,
-[data-contrast-mode="high"] .button:focus,
-[data-contrast-mode="high"] input[type="reset"]:focus,
-[data-contrast-mode="high"] :focus::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:focus,
-[data-contrast-mode="high"] button:hover,
-[data-contrast-mode="high"] [role="button"]:hover,
-[data-contrast-mode="high"] input[type="button"]:hover,
-[data-contrast-mode="high"] input[type="submit"]:hover,
-[data-contrast-mode="high"] .button:hover,
-[data-contrast-mode="high"] input[type="reset"]:hover,
-[data-contrast-mode="high"] :hover::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:hover,
-[data-contrast-mode="forced-colors"] button:focus,
-[data-contrast-mode="forced-colors"] [role="button"]:focus,
-[data-contrast-mode="forced-colors"] input[type="button"]:focus,
-[data-contrast-mode="forced-colors"] input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"] .button:focus,
-[data-contrast-mode="forced-colors"] input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"] :focus::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:focus,
-[data-contrast-mode="forced-colors"] button:hover,
-[data-contrast-mode="forced-colors"] [role="button"]:hover,
-[data-contrast-mode="forced-colors"] input[type="button"]:hover,
-[data-contrast-mode="forced-colors"] input[type="submit"]:hover,
-[data-contrast-mode="forced-colors"] .button:hover,
-[data-contrast-mode="forced-colors"] input[type="reset"]:hover,
-[data-contrast-mode="forced-colors"] :hover::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:hover {
-    opacity: 1;
+@media (prefers-contrast: less) {
+    button:focus-within:focus-within,
+    [role="button"]:focus-within:focus-within,
+    input[type="button"]:focus-within:focus-within,
+    input[type="submit"]:focus-within:focus-within,
+    .button:focus-within:focus-within,
+    input[type="reset"]:focus-within:focus-within,
+    :focus-within:focus-within::file-selector-button,
+    .button-secondary:focus-within:focus-within {
+        opacity: 0.875;
+    }
+    button:focus-within:focus,
+    [role="button"]:focus-within:focus,
+    input[type="button"]:focus-within:focus,
+    input[type="submit"]:focus-within:focus,
+    .button:focus-within:focus,
+    input[type="reset"]:focus-within:focus,
+    :focus-within:focus::file-selector-button,
+    .button-secondary:focus-within:focus,
+    button:focus-within:hover,
+    [role="button"]:focus-within:hover,
+    input[type="button"]:focus-within:hover,
+    input[type="submit"]:focus-within:hover,
+    .button:focus-within:hover,
+    input[type="reset"]:focus-within:hover,
+    :focus-within:hover::file-selector-button,
+    .button-secondary:focus-within:hover {
+        opacity: 0.875;
+    }
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    button:focus-within,
-    [role="button"]:focus-within,
-    input[type="button"]:focus-within,
-    input[type="submit"]:focus-within,
-    .button:focus-within,
-    input[type="reset"]:focus-within,
-    :focus-within::file-selector-button,
-    .button-secondary:focus-within {
-        opacity: 1;
-    }
-    button:focus,
-    [role="button"]:focus,
-    input[type="button"]:focus,
-    input[type="submit"]:focus,
-    .button:focus,
-    input[type="reset"]:focus,
-    :focus::file-selector-button,
-    .button-secondary:focus,
-    button:hover,
-    [role="button"]:hover,
-    input[type="button"]:hover,
-    input[type="submit"]:hover,
-    .button:hover,
-    input[type="reset"]:hover,
-    :hover::file-selector-button,
-    .button-secondary:hover {
-        opacity: 1;
-    }
-}
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
@@ -1236,10 +1382,10 @@ input[type="submit"]:active,
 input[type="reset"]:active,
 :active::file-selector-button,
 .button-secondary:active {
-    background-color: ButtonFace;
-    border-color: ButtonBorder;
-    color: ButtonText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    border-color: var(--sys-clr-button-border, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 button,
 [role="button"],
@@ -1268,7 +1414,7 @@ label {
     margin: var(--mrg-firm-400, 1.25rem) 0 0;
     font-weight: 600;
     line-height: var(--line-height-200, 1.3125);
-    color: CanvasText;
+    color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     display: grid;
@@ -1280,7 +1426,7 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
     text-wrap: balance;
-    color: CanvasText;
+    color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"]))
@@ -1307,7 +1453,7 @@ table {
     margin-bottom: calc(
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
-    background: AccentColor;
+    background: var(--sys-clr-accent-bg, CanvasText);
     width: min(var(--width-page, 53rem), 100%);
 }
 
@@ -1331,7 +1477,7 @@ th,
 td {
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
     min-width: 10em;
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     vertical-align: top;
     text-align: left;
 }
@@ -1347,8 +1493,8 @@ td > :last-child {
 th {
     padding-top: var(--mrg-soft-200, 0.3125rem);
     padding-bottom: var(--mrg-soft-200, 0.3125rem);
-    background: AccentColor;
-    color: AccentColorText;
+    background: var(--sys-clr-accent-bg, CanvasText);
+    color: var(--sys-clr-accent-text, Canvas);
 }
 
 /*! end of @maddimathon/utility-sass/templates/base */

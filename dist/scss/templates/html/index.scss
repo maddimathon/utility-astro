@@ -10,6 +10,6 @@
 
 @forward 'lib';
 
-@forward '../global';
+@forward '../global' hide $internal_supressCredit;
 
 @forward '_footer';

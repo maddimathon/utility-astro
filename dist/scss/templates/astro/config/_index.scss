@@ -3,14 +3,12 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '__pre-lib';
+@forward 'lib' hide $internal_supressCredit;
 
-@forward 'utility-sass' hide $internal_supressCredit;
-
-@use 'utility-sass' as utils;
+@use '../../html/config';
 
 $internal_supressCredit: false !default;
-$internal_supressCredit: utils.config-valid-bool(
+$internal_supressCredit: config.config-valid-bool(
     $internal_supressCredit,
     'internal_supressCredit'
 );

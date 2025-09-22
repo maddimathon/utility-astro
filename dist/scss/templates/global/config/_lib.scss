@@ -7,6 +7,7 @@
     $include_html: false !default,
 
     $internal_extendSelectors: false,
+    $internal_sass_supressCredit: false !default,
     $internal_supressCredit: true,
 
     $print_globals: true !default,

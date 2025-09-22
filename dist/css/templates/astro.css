@@ -5,12 +5,6 @@
  * @maddimathon/utility-astro@0.1.0-alpha.draft
  * License: MIT
  */
-/*!
- * Utility Astro Template - HTML
- * 
- * @maddimathon/utility-astro@0.1.0-alpha.draft
- * License: MIT
- */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
@@ -264,6 +258,96 @@ pre {
 }
 
 /* #endregion Normalize */
+/* #region Tokens - System Colours */
+:where(html) {
+    --sys-clr-accent-bg: CanvasText;
+    --sys-clr-accent-bg: AccentColor;
+    --sys-clr-accent-text: Canvas;
+    --sys-clr-accent-text: AccentColorText;
+    --sys-clr-active-text: ActiveText;
+    --sys-clr-background: Canvas;
+    --sys-clr-button-bg: ButtonFace;
+    --sys-clr-button-border: ButtonFace;
+    --sys-clr-button-border: ButtonBorder;
+    --sys-clr-button-text: ButtonText;
+    --sys-clr-grey-text: GrayText;
+    --sys-clr-input-bg: Field;
+    --sys-clr-input-text: FieldText;
+    --sys-clr-link-text: LinkText;
+    --sys-clr-link-visited: VisitedText;
+    --sys-clr-mark-bg: CanvasText;
+    --sys-clr-mark-bg: AccentColor;
+    --sys-clr-mark-bg: Mark;
+    --sys-clr-mark-text: Canvas;
+    --sys-clr-mark-text: AccentColorText;
+    --sys-clr-mark-text: MarkText;
+    --sys-clr-selected-bg: SelectedItem;
+    --sys-clr-selected-text: SelectedItemText;
+    --sys-clr-selection-bg: Highlight;
+    --sys-clr-selection-text: HighlightText;
+    --sys-clr-text: CanvasText;
+}
+
+[data-contrast-mode="forced-colors"] {
+    --sys-clr-accent-bg: CanvasText !important;
+    --sys-clr-accent-bg: AccentColor !important;
+    --sys-clr-accent-text: Canvas !important;
+    --sys-clr-accent-text: AccentColorText !important;
+    --sys-clr-active-text: ActiveText !important;
+    --sys-clr-background: Canvas !important;
+    --sys-clr-button-bg: ButtonFace !important;
+    --sys-clr-button-border: ButtonFace !important;
+    --sys-clr-button-border: ButtonBorder !important;
+    --sys-clr-button-text: ButtonText !important;
+    --sys-clr-grey-text: GrayText !important;
+    --sys-clr-input-bg: Field !important;
+    --sys-clr-input-text: FieldText !important;
+    --sys-clr-link-text: LinkText !important;
+    --sys-clr-link-visited: VisitedText !important;
+    --sys-clr-mark-bg: CanvasText !important;
+    --sys-clr-mark-bg: AccentColor !important;
+    --sys-clr-mark-bg: Mark !important;
+    --sys-clr-mark-text: Canvas !important;
+    --sys-clr-mark-text: AccentColorText !important;
+    --sys-clr-mark-text: MarkText !important;
+    --sys-clr-selected-bg: SelectedItem !important;
+    --sys-clr-selected-text: SelectedItemText !important;
+    --sys-clr-selection-bg: Highlight !important;
+    --sys-clr-selection-text: HighlightText !important;
+    --sys-clr-text: CanvasText !important;
+}
+
+@media (forced-colors: active), (prefers-contrast: custom) {
+    html {
+        --sys-clr-accent-bg: CanvasText !important;
+        --sys-clr-accent-bg: AccentColor !important;
+        --sys-clr-accent-text: Canvas !important;
+        --sys-clr-accent-text: AccentColorText !important;
+        --sys-clr-active-text: ActiveText !important;
+        --sys-clr-background: Canvas !important;
+        --sys-clr-button-bg: ButtonFace !important;
+        --sys-clr-button-border: ButtonFace !important;
+        --sys-clr-button-border: ButtonBorder !important;
+        --sys-clr-button-text: ButtonText !important;
+        --sys-clr-grey-text: GrayText !important;
+        --sys-clr-input-bg: Field !important;
+        --sys-clr-input-text: FieldText !important;
+        --sys-clr-link-text: LinkText !important;
+        --sys-clr-link-visited: VisitedText !important;
+        --sys-clr-mark-bg: CanvasText !important;
+        --sys-clr-mark-bg: AccentColor !important;
+        --sys-clr-mark-bg: Mark !important;
+        --sys-clr-mark-text: Canvas !important;
+        --sys-clr-mark-text: AccentColorText !important;
+        --sys-clr-mark-text: MarkText !important;
+        --sys-clr-selected-bg: SelectedItem !important;
+        --sys-clr-selected-text: SelectedItemText !important;
+        --sys-clr-selection-bg: Highlight !important;
+        --sys-clr-selection-text: HighlightText !important;
+        --sys-clr-text: CanvasText !important;
+    }
+}
+/* #endregion Tokens - System Colours */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -386,7 +470,7 @@ html {
 html {
     --focus-ring-outline-width: 0.1875rem;
     --focus-ring-outline-offset: 0.125em;
-    --focus-ring-outline-color: AccentColor;
+    --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }
 
 /* #endregion Tokens - Misc. */
@@ -413,21 +497,21 @@ html {
 .js__no-where-selector :focus {
     /* %focus-ring */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :where(.js__no-focusVisible) :focus {
     /* %focus-ring--where */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :focus-visible {
     /* %focus-ring--visible */
     outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, AccentColor);
+        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
@@ -487,8 +571,20 @@ hr {
     border-bottom: currentColor solid 2px;
 }
 
+::-moz-selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+
+::selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+
 html {
     line-height: var(--line-height-400, 1.6875);
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 
 strong,
@@ -523,34 +619,34 @@ a {
     -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-underline-offset: var(--stroke-relative-600, 0.1875em);
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 a:visited {
-    color: VisitedText;
+    color: var(--sys-clr-link-visited, VisitedText);
 }
 .no-js a:focus,
 .js__no-where-selector a:focus {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 :where(.js__no-focusVisible) a:focus {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 a:hover {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 a:focus-visible {
     text-decoration-color: transparent;
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 a:active {
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 a.no-style {
     text-decoration: none;
@@ -561,15 +657,7 @@ a[aria-disabled="true"] {
     text-decoration-line: line-through;
     opacity: 1;
     cursor: not-allowed;
-}
-a[aria-disabled="true"] {
-    opacity: 0.875;
-}
-
-@media (prefers-contrast: less) {
-    a[aria-disabled="true"] {
-        opacity: 0.875;
-    }
+    color: var(--sys-clr-grey-text, GrayText);
 }
 
 abbr[title] {
@@ -616,8 +704,14 @@ blockquote > cite::before {
     content: "— ";
     color: currentColor;
 }
-blockquote > cite {
+[data-contrast-mode="low"] blockquote > cite {
     color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
 }
 [data-contrast-mode="high"] blockquote > cite {
     color: color-mix(in srgb, currentColor 87.5%, transparent);
@@ -626,15 +720,6 @@ blockquote > cite {
 @media (prefers-contrast: more) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="forced-colors"] blockquote > cite {
-    color: currentColor;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    blockquote > cite {
-        color: currentColor;
     }
 }
 
@@ -848,30 +933,30 @@ fieldset {
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
         var(--mrg-firm-300, 0.8125rem);
-    border: 0.0625rem solid AccentColor;
+    border: 0.0625rem solid var(--sys-clr-accent-bg, CanvasText);
     border-radius: 0;
-    background-color: Canvas;
-    color: CanvasText;
+    background-color: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 .no-js fieldset:focus,
 .js__no-where-selector fieldset:focus {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 :where(.js__no-focusVisible) fieldset:focus {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 fieldset:focus-visible {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 fieldset:focus-within {
-    border-color: ActiveText;
+    border-color: var(--sys-clr-active-text, ActiveText);
 }
 
 fieldset:active {
-    border-color: AccentColor;
+    border-color: var(--sys-clr-accent-bg, CanvasText);
 }
 fieldset legend {
     display: block;
@@ -910,11 +995,11 @@ input {
     width: 100%;
     font: inherit;
     line-height: var(--line-height-200, 1.3125);
-    border: 0.0625rem solid FieldText;
+    border: 0.0625rem solid var(--sys-clr-input-text, FieldText);
     border-radius: 0;
-    background-color: Field;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 .no-js textarea:focus,
 .no-js select:focus,
@@ -922,69 +1007,90 @@ input {
 .js__no-where-selector textarea:focus,
 .js__no-where-selector select:focus,
 .js__no-where-selector input:focus {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 :where(.js__no-focusVisible) textarea:focus,
 :where(.js__no-focusVisible) select:focus,
 :where(.js__no-focusVisible) input:focus {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:hover,
 select:hover,
 input:hover {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:focus-visible,
 select:focus-visible,
 input:focus-visible {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:focus-within,
 select:focus-within,
 input:focus-within {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: FieldText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:active,
 select:active,
 input:active {
-    background-color: Field;
-    border-color: FieldText;
-    color: FieldText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-input-bg, Field);
+    border-color: var(--sys-clr-input-text, FieldText);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 textarea::-moz-placeholder,
 select::-moz-placeholder,
 input::-moz-placeholder {
     opacity: 1;
     color: currentColor;
-    color: color-mix(in srgb, currentColor 62.5%, transparent);
 }
 textarea::placeholder,
 select::placeholder,
 input::placeholder {
     opacity: 1;
     color: currentColor;
+}
+[data-contrast-mode="low"] textarea::-moz-placeholder,
+[data-contrast-mode="low"] select::-moz-placeholder,
+[data-contrast-mode="low"] input::-moz-placeholder {
     color: color-mix(in srgb, currentColor 62.5%, transparent);
+}
+[data-contrast-mode="low"] textarea::placeholder,
+[data-contrast-mode="low"] select::placeholder,
+[data-contrast-mode="low"] input::placeholder {
+    color: color-mix(in srgb, currentColor 62.5%, transparent);
+}
+
+@media (prefers-contrast: less) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 62.5%, transparent);
+    }
+    textarea::placeholder,
+    select::placeholder,
+    input::placeholder {
+        color: color-mix(in srgb, currentColor 62.5%, transparent);
+    }
 }
 [data-contrast-mode="high"] textarea::-moz-placeholder,
 [data-contrast-mode="high"] select::-moz-placeholder,
@@ -1007,29 +1113,6 @@ input::placeholder {
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="forced-colors"] textarea::-moz-placeholder,
-[data-contrast-mode="forced-colors"] select::-moz-placeholder,
-[data-contrast-mode="forced-colors"] input::-moz-placeholder {
-    color: currentColor;
-}
-[data-contrast-mode="forced-colors"] textarea::placeholder,
-[data-contrast-mode="forced-colors"] select::placeholder,
-[data-contrast-mode="forced-colors"] input::placeholder {
-    color: currentColor;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: currentColor;
-    }
-    textarea::placeholder,
-    select::placeholder,
-    input::placeholder {
-        color: currentColor;
     }
 }
 label + textarea,
@@ -1072,38 +1155,38 @@ input[type="radio"] {
     display: inline-block;
     padding: 0;
     width: auto;
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 .no-js input[type="checkbox"]:focus,
 .no-js input[type="radio"]:focus,
 .js__no-where-selector input[type="checkbox"]:focus,
 .js__no-where-selector input[type="radio"]:focus {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 :where(.js__no-focusVisible) input[type="checkbox"]:focus,
 :where(.js__no-focusVisible) input[type="radio"]:focus {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:focus-visible,
 input[type="radio"]:focus-visible {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:focus-within,
 input[type="radio"]:focus-within {
-    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:active,
 input[type="radio"]:active {
-    accent-color: ActiveText;
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 input[type="color"] {
     padding: 0;
@@ -1152,11 +1235,11 @@ input[type="reset"],
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonBorder;
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    background-color: ButtonFace;
-    color: ButtonText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
 }
 .no-js button:focus,
 .no-js [role="button"]:focus,
@@ -1174,11 +1257,263 @@ input[type="reset"],
 .js__no-where-selector input[type="reset"]:focus,
 .js__no-where-selector :focus::file-selector-button,
 .js__no-where-selector .button-secondary:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js .no-js button:focus:focus,
+.no-js .no-js [role="button"]:focus:focus,
+.no-js .no-js input[type="button"]:focus:focus,
+.no-js .no-js input[type="submit"]:focus:focus,
+.no-js .no-js .button:focus:focus,
+.no-js .no-js input[type="reset"]:focus:focus,
+.no-js .no-js :focus:focus::file-selector-button,
+.no-js .no-js .button-secondary:focus:focus,
+.no-js .js__no-where-selector button:focus:focus,
+.no-js .js__no-where-selector [role="button"]:focus:focus,
+.no-js .js__no-where-selector input[type="button"]:focus:focus,
+.no-js .js__no-where-selector input[type="submit"]:focus:focus,
+.no-js .js__no-where-selector .button:focus:focus,
+.no-js .js__no-where-selector input[type="reset"]:focus:focus,
+.no-js .js__no-where-selector :focus:focus::file-selector-button,
+.no-js .js__no-where-selector .button-secondary:focus:focus,
+.js__no-where-selector .no-js button:focus:focus,
+.js__no-where-selector .no-js [role="button"]:focus:focus,
+.js__no-where-selector .no-js input[type="button"]:focus:focus,
+.js__no-where-selector .no-js input[type="submit"]:focus:focus,
+.js__no-where-selector .no-js .button:focus:focus,
+.js__no-where-selector .no-js input[type="reset"]:focus:focus,
+.js__no-where-selector .no-js :focus:focus::file-selector-button,
+.js__no-where-selector .no-js .button-secondary:focus:focus,
+.js__no-where-selector .js__no-where-selector button:focus:focus,
+.js__no-where-selector .js__no-where-selector [role="button"]:focus:focus,
+.js__no-where-selector .js__no-where-selector input[type="button"]:focus:focus,
+.js__no-where-selector .js__no-where-selector input[type="submit"]:focus:focus,
+.js__no-where-selector .js__no-where-selector .button:focus:focus,
+.js__no-where-selector .js__no-where-selector input[type="reset"]:focus:focus,
+.js__no-where-selector
+    .js__no-where-selector
+    :focus:focus::file-selector-button,
+.js__no-where-selector .js__no-where-selector .button-secondary:focus:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) .no-js button:focus:focus,
+:where(.js__no-focusVisible) .no-js [role="button"]:focus:focus,
+:where(.js__no-focusVisible) .no-js input[type="button"]:focus:focus,
+:where(.js__no-focusVisible) .no-js input[type="submit"]:focus:focus,
+:where(.js__no-focusVisible) .no-js .button:focus:focus,
+:where(.js__no-focusVisible) .no-js input[type="reset"]:focus:focus,
+:where(.js__no-focusVisible) .no-js :focus:focus::file-selector-button,
+:where(.js__no-focusVisible) .no-js .button-secondary:focus:focus,
+:where(.js__no-focusVisible) .js__no-where-selector button:focus:focus,
+:where(.js__no-focusVisible) .js__no-where-selector [role="button"]:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    input[type="button"]:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    input[type="submit"]:focus:focus,
+:where(.js__no-focusVisible) .js__no-where-selector .button:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    input[type="reset"]:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :focus:focus::file-selector-button,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    .button-secondary:focus:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js .no-js button:focus:focus,
+    .no-js .no-js [role="button"]:focus:focus,
+    .no-js .no-js input[type="button"]:focus:focus,
+    .no-js .no-js input[type="submit"]:focus:focus,
+    .no-js .no-js .button:focus:focus,
+    .no-js .no-js input[type="reset"]:focus:focus,
+    .no-js .no-js :focus:focus::file-selector-button,
+    .no-js .no-js .button-secondary:focus:focus,
+    .no-js .js__no-where-selector button:focus:focus,
+    .no-js .js__no-where-selector [role="button"]:focus:focus,
+    .no-js .js__no-where-selector input[type="button"]:focus:focus,
+    .no-js .js__no-where-selector input[type="submit"]:focus:focus,
+    .no-js .js__no-where-selector .button:focus:focus,
+    .no-js .js__no-where-selector input[type="reset"]:focus:focus,
+    .no-js .js__no-where-selector :focus:focus::file-selector-button,
+    .no-js .js__no-where-selector .button-secondary:focus:focus,
+    .js__no-where-selector .no-js button:focus:focus,
+    .js__no-where-selector .no-js [role="button"]:focus:focus,
+    .js__no-where-selector .no-js input[type="button"]:focus:focus,
+    .js__no-where-selector .no-js input[type="submit"]:focus:focus,
+    .js__no-where-selector .no-js .button:focus:focus,
+    .js__no-where-selector .no-js input[type="reset"]:focus:focus,
+    .js__no-where-selector .no-js :focus:focus::file-selector-button,
+    .js__no-where-selector .no-js .button-secondary:focus:focus,
+    .js__no-where-selector .js__no-where-selector button:focus:focus,
+    .js__no-where-selector .js__no-where-selector [role="button"]:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        input[type="button"]:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        input[type="submit"]:focus:focus,
+    .js__no-where-selector .js__no-where-selector .button:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        input[type="reset"]:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        :focus:focus::file-selector-button,
+    .js__no-where-selector
+        .js__no-where-selector
+        .button-secondary:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) .no-js button:focus:focus,
+    :where(.js__no-focusVisible) .no-js [role="button"]:focus:focus,
+    :where(.js__no-focusVisible) .no-js input[type="button"]:focus:focus,
+    :where(.js__no-focusVisible) .no-js input[type="submit"]:focus:focus,
+    :where(.js__no-focusVisible) .no-js .button:focus:focus,
+    :where(.js__no-focusVisible) .no-js input[type="reset"]:focus:focus,
+    :where(.js__no-focusVisible) .no-js :focus:focus::file-selector-button,
+    :where(.js__no-focusVisible) .no-js .button-secondary:focus:focus,
+    :where(.js__no-focusVisible) .js__no-where-selector button:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        [role="button"]:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        input[type="button"]:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        input[type="submit"]:focus:focus,
+    :where(.js__no-focusVisible) .js__no-where-selector .button:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        input[type="reset"]:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        :focus:focus::file-selector-button,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        .button-secondary:focus:focus {
+        opacity: 0.875;
+    }
+}
+.no-js button:focus:focus-visible,
+.no-js [role="button"]:focus:focus-visible,
+.no-js input[type="button"]:focus:focus-visible,
+.no-js input[type="submit"]:focus:focus-visible,
+.no-js .button:focus:focus-visible,
+.no-js input[type="reset"]:focus:focus-visible,
+.no-js :focus:focus-visible::file-selector-button,
+.no-js .button-secondary:focus:focus-visible,
+.js__no-where-selector button:focus:focus-visible,
+.js__no-where-selector [role="button"]:focus:focus-visible,
+.js__no-where-selector input[type="button"]:focus:focus-visible,
+.js__no-where-selector input[type="submit"]:focus:focus-visible,
+.js__no-where-selector .button:focus:focus-visible,
+.js__no-where-selector input[type="reset"]:focus:focus-visible,
+.js__no-where-selector :focus:focus-visible::file-selector-button,
+.js__no-where-selector .button-secondary:focus:focus-visible {
+    opacity: 0.875;
+}
+.no-js button:focus:focus-within,
+.no-js [role="button"]:focus:focus-within,
+.no-js input[type="button"]:focus:focus-within,
+.no-js input[type="submit"]:focus:focus-within,
+.no-js .button:focus:focus-within,
+.no-js input[type="reset"]:focus:focus-within,
+.no-js :focus:focus-within::file-selector-button,
+.no-js .button-secondary:focus:focus-within,
+.js__no-where-selector button:focus:focus-within,
+.js__no-where-selector [role="button"]:focus:focus-within,
+.js__no-where-selector input[type="button"]:focus:focus-within,
+.js__no-where-selector input[type="submit"]:focus:focus-within,
+.js__no-where-selector .button:focus:focus-within,
+.js__no-where-selector input[type="reset"]:focus:focus-within,
+.js__no-where-selector :focus:focus-within::file-selector-button,
+.js__no-where-selector .button-secondary:focus:focus-within {
+    opacity: 0.875;
+}
+.no-js button:focus:hover,
+.no-js [role="button"]:focus:hover,
+.no-js input[type="button"]:focus:hover,
+.no-js input[type="submit"]:focus:hover,
+.no-js .button:focus:hover,
+.no-js input[type="reset"]:focus:hover,
+.no-js :focus:hover::file-selector-button,
+.no-js .button-secondary:focus:hover,
+.js__no-where-selector button:focus:hover,
+.js__no-where-selector [role="button"]:focus:hover,
+.js__no-where-selector input[type="button"]:focus:hover,
+.js__no-where-selector input[type="submit"]:focus:hover,
+.js__no-where-selector .button:focus:hover,
+.js__no-where-selector input[type="reset"]:focus:hover,
+.js__no-where-selector :focus:hover::file-selector-button,
+.js__no-where-selector .button-secondary:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js button:focus:focus-visible,
+    .no-js [role="button"]:focus:focus-visible,
+    .no-js input[type="button"]:focus:focus-visible,
+    .no-js input[type="submit"]:focus:focus-visible,
+    .no-js .button:focus:focus-visible,
+    .no-js input[type="reset"]:focus:focus-visible,
+    .no-js :focus:focus-visible::file-selector-button,
+    .no-js .button-secondary:focus:focus-visible,
+    .js__no-where-selector button:focus:focus-visible,
+    .js__no-where-selector [role="button"]:focus:focus-visible,
+    .js__no-where-selector input[type="button"]:focus:focus-visible,
+    .js__no-where-selector input[type="submit"]:focus:focus-visible,
+    .js__no-where-selector .button:focus:focus-visible,
+    .js__no-where-selector input[type="reset"]:focus:focus-visible,
+    .js__no-where-selector :focus:focus-visible::file-selector-button,
+    .js__no-where-selector .button-secondary:focus:focus-visible {
+        opacity: 0.875;
+    }
+    .no-js button:focus:focus-within,
+    .no-js [role="button"]:focus:focus-within,
+    .no-js input[type="button"]:focus:focus-within,
+    .no-js input[type="submit"]:focus:focus-within,
+    .no-js .button:focus:focus-within,
+    .no-js input[type="reset"]:focus:focus-within,
+    .no-js :focus:focus-within::file-selector-button,
+    .no-js .button-secondary:focus:focus-within,
+    .js__no-where-selector button:focus:focus-within,
+    .js__no-where-selector [role="button"]:focus:focus-within,
+    .js__no-where-selector input[type="button"]:focus:focus-within,
+    .js__no-where-selector input[type="submit"]:focus:focus-within,
+    .js__no-where-selector .button:focus:focus-within,
+    .js__no-where-selector input[type="reset"]:focus:focus-within,
+    .js__no-where-selector :focus:focus-within::file-selector-button,
+    .js__no-where-selector .button-secondary:focus:focus-within {
+        opacity: 0.875;
+    }
+    .no-js button:focus:hover,
+    .no-js [role="button"]:focus:hover,
+    .no-js input[type="button"]:focus:hover,
+    .no-js input[type="submit"]:focus:hover,
+    .no-js .button:focus:hover,
+    .no-js input[type="reset"]:focus:hover,
+    .no-js :focus:hover::file-selector-button,
+    .no-js .button-secondary:focus:hover,
+    .js__no-where-selector button:focus:hover,
+    .js__no-where-selector [role="button"]:focus:hover,
+    .js__no-where-selector input[type="button"]:focus:hover,
+    .js__no-where-selector input[type="submit"]:focus:hover,
+    .js__no-where-selector .button:focus:hover,
+    .js__no-where-selector input[type="reset"]:focus:hover,
+    .js__no-where-selector :focus:hover::file-selector-button,
+    .js__no-where-selector .button-secondary:focus:hover {
+        opacity: 0.875;
+    }
 }
 
 :where(.js__no-focusVisible) button:focus,
@@ -1189,11 +1524,183 @@ input[type="reset"],
 :where(.js__no-focusVisible) input[type="reset"]:focus,
 :where(.js__no-focusVisible) :focus::file-selector-button,
 :where(.js__no-focusVisible) .button-secondary:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js :where(.js__no-focusVisible) button:focus:focus,
+.no-js :where(.js__no-focusVisible) [role="button"]:focus:focus,
+.no-js :where(.js__no-focusVisible) input[type="button"]:focus:focus,
+.no-js :where(.js__no-focusVisible) input[type="submit"]:focus:focus,
+.no-js :where(.js__no-focusVisible) .button:focus:focus,
+.no-js :where(.js__no-focusVisible) input[type="reset"]:focus:focus,
+.no-js :where(.js__no-focusVisible) :focus:focus::file-selector-button,
+.no-js :where(.js__no-focusVisible) .button-secondary:focus:focus,
+.js__no-where-selector :where(.js__no-focusVisible) button:focus:focus,
+.js__no-where-selector :where(.js__no-focusVisible) [role="button"]:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    input[type="button"]:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    input[type="submit"]:focus:focus,
+.js__no-where-selector :where(.js__no-focusVisible) .button:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    input[type="reset"]:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    :focus:focus::file-selector-button,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    .button-secondary:focus:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) :where(.js__no-focusVisible) button:focus:focus,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    [role="button"]:focus:focus,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    input[type="button"]:focus:focus,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    input[type="submit"]:focus:focus,
+:where(.js__no-focusVisible) :where(.js__no-focusVisible) .button:focus:focus,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    input[type="reset"]:focus:focus,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :focus:focus::file-selector-button,
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    .button-secondary:focus:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js :where(.js__no-focusVisible) button:focus:focus,
+    .no-js :where(.js__no-focusVisible) [role="button"]:focus:focus,
+    .no-js :where(.js__no-focusVisible) input[type="button"]:focus:focus,
+    .no-js :where(.js__no-focusVisible) input[type="submit"]:focus:focus,
+    .no-js :where(.js__no-focusVisible) .button:focus:focus,
+    .no-js :where(.js__no-focusVisible) input[type="reset"]:focus:focus,
+    .no-js :where(.js__no-focusVisible) :focus:focus::file-selector-button,
+    .no-js :where(.js__no-focusVisible) .button-secondary:focus:focus,
+    .js__no-where-selector :where(.js__no-focusVisible) button:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        [role="button"]:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        input[type="button"]:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        input[type="submit"]:focus:focus,
+    .js__no-where-selector :where(.js__no-focusVisible) .button:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        input[type="reset"]:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        :focus:focus::file-selector-button,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        .button-secondary:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        button:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        [role="button"]:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        input[type="button"]:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        input[type="submit"]:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        .button:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        input[type="reset"]:focus:focus,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        :focus:focus::file-selector-button,
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        .button-secondary:focus:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js__no-focusVisible) button:focus:focus-visible,
+:where(.js__no-focusVisible) [role="button"]:focus:focus-visible,
+:where(.js__no-focusVisible) input[type="button"]:focus:focus-visible,
+:where(.js__no-focusVisible) input[type="submit"]:focus:focus-visible,
+:where(.js__no-focusVisible) .button:focus:focus-visible,
+:where(.js__no-focusVisible) input[type="reset"]:focus:focus-visible,
+:where(.js__no-focusVisible) :focus:focus-visible::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:focus:focus-visible {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible) button:focus:focus-within,
+:where(.js__no-focusVisible) [role="button"]:focus:focus-within,
+:where(.js__no-focusVisible) input[type="button"]:focus:focus-within,
+:where(.js__no-focusVisible) input[type="submit"]:focus:focus-within,
+:where(.js__no-focusVisible) .button:focus:focus-within,
+:where(.js__no-focusVisible) input[type="reset"]:focus:focus-within,
+:where(.js__no-focusVisible) :focus:focus-within::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:focus:focus-within {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible) button:focus:hover,
+:where(.js__no-focusVisible) [role="button"]:focus:hover,
+:where(.js__no-focusVisible) input[type="button"]:focus:hover,
+:where(.js__no-focusVisible) input[type="submit"]:focus:hover,
+:where(.js__no-focusVisible) .button:focus:hover,
+:where(.js__no-focusVisible) input[type="reset"]:focus:hover,
+:where(.js__no-focusVisible) :focus:hover::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js__no-focusVisible) button:focus:focus-visible,
+    :where(.js__no-focusVisible) [role="button"]:focus:focus-visible,
+    :where(.js__no-focusVisible) input[type="button"]:focus:focus-visible,
+    :where(.js__no-focusVisible) input[type="submit"]:focus:focus-visible,
+    :where(.js__no-focusVisible) .button:focus:focus-visible,
+    :where(.js__no-focusVisible) input[type="reset"]:focus:focus-visible,
+    :where(.js__no-focusVisible) :focus:focus-visible::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:focus:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:focus:focus-within,
+    :where(.js__no-focusVisible) [role="button"]:focus:focus-within,
+    :where(.js__no-focusVisible) input[type="button"]:focus:focus-within,
+    :where(.js__no-focusVisible) input[type="submit"]:focus:focus-within,
+    :where(.js__no-focusVisible) .button:focus:focus-within,
+    :where(.js__no-focusVisible) input[type="reset"]:focus:focus-within,
+    :where(.js__no-focusVisible) :focus:focus-within::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:focus:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:focus:hover,
+    :where(.js__no-focusVisible) [role="button"]:focus:hover,
+    :where(.js__no-focusVisible) input[type="button"]:focus:hover,
+    :where(.js__no-focusVisible) input[type="submit"]:focus:hover,
+    :where(.js__no-focusVisible) .button:focus:hover,
+    :where(.js__no-focusVisible) input[type="reset"]:focus:hover,
+    :where(.js__no-focusVisible) :focus:hover::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:focus:hover {
+        opacity: 0.875;
+    }
 }
 
 button:hover,
@@ -1204,11 +1711,133 @@ input[type="submit"]:hover,
 input[type="reset"]:hover,
 :hover::file-selector-button,
 .button-secondary:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js button:hover:focus,
+.no-js [role="button"]:hover:focus,
+.no-js input[type="button"]:hover:focus,
+.no-js input[type="submit"]:hover:focus,
+.no-js .button:hover:focus,
+.no-js input[type="reset"]:hover:focus,
+.no-js :hover:focus::file-selector-button,
+.no-js .button-secondary:hover:focus,
+.js__no-where-selector button:hover:focus,
+.js__no-where-selector [role="button"]:hover:focus,
+.js__no-where-selector input[type="button"]:hover:focus,
+.js__no-where-selector input[type="submit"]:hover:focus,
+.js__no-where-selector .button:hover:focus,
+.js__no-where-selector input[type="reset"]:hover:focus,
+.js__no-where-selector :hover:focus::file-selector-button,
+.js__no-where-selector .button-secondary:hover:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) button:hover:focus,
+:where(.js__no-focusVisible) [role="button"]:hover:focus,
+:where(.js__no-focusVisible) input[type="button"]:hover:focus,
+:where(.js__no-focusVisible) input[type="submit"]:hover:focus,
+:where(.js__no-focusVisible) .button:hover:focus,
+:where(.js__no-focusVisible) input[type="reset"]:hover:focus,
+:where(.js__no-focusVisible) :hover:focus::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:hover:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js button:hover:focus,
+    .no-js [role="button"]:hover:focus,
+    .no-js input[type="button"]:hover:focus,
+    .no-js input[type="submit"]:hover:focus,
+    .no-js .button:hover:focus,
+    .no-js input[type="reset"]:hover:focus,
+    .no-js :hover:focus::file-selector-button,
+    .no-js .button-secondary:hover:focus,
+    .js__no-where-selector button:hover:focus,
+    .js__no-where-selector [role="button"]:hover:focus,
+    .js__no-where-selector input[type="button"]:hover:focus,
+    .js__no-where-selector input[type="submit"]:hover:focus,
+    .js__no-where-selector .button:hover:focus,
+    .js__no-where-selector input[type="reset"]:hover:focus,
+    .js__no-where-selector :hover:focus::file-selector-button,
+    .js__no-where-selector .button-secondary:hover:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:hover:focus,
+    :where(.js__no-focusVisible) [role="button"]:hover:focus,
+    :where(.js__no-focusVisible) input[type="button"]:hover:focus,
+    :where(.js__no-focusVisible) input[type="submit"]:hover:focus,
+    :where(.js__no-focusVisible) .button:hover:focus,
+    :where(.js__no-focusVisible) input[type="reset"]:hover:focus,
+    :where(.js__no-focusVisible) :hover:focus::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:hover:focus {
+        opacity: 0.875;
+    }
+}
+button:hover:focus-visible,
+[role="button"]:hover:focus-visible,
+input[type="button"]:hover:focus-visible,
+input[type="submit"]:hover:focus-visible,
+.button:hover:focus-visible,
+input[type="reset"]:hover:focus-visible,
+:hover:focus-visible::file-selector-button,
+.button-secondary:hover:focus-visible {
+    opacity: 0.875;
+}
+button:hover:focus-within,
+[role="button"]:hover:focus-within,
+input[type="button"]:hover:focus-within,
+input[type="submit"]:hover:focus-within,
+.button:hover:focus-within,
+input[type="reset"]:hover:focus-within,
+:hover:focus-within::file-selector-button,
+.button-secondary:hover:focus-within {
+    opacity: 0.875;
+}
+button:hover:hover,
+[role="button"]:hover:hover,
+input[type="button"]:hover:hover,
+input[type="submit"]:hover:hover,
+.button:hover:hover,
+input[type="reset"]:hover:hover,
+:hover:hover::file-selector-button,
+.button-secondary:hover:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    button:hover:focus-visible,
+    [role="button"]:hover:focus-visible,
+    input[type="button"]:hover:focus-visible,
+    input[type="submit"]:hover:focus-visible,
+    .button:hover:focus-visible,
+    input[type="reset"]:hover:focus-visible,
+    :hover:focus-visible::file-selector-button,
+    .button-secondary:hover:focus-visible {
+        opacity: 0.875;
+    }
+    button:hover:focus-within,
+    [role="button"]:hover:focus-within,
+    input[type="button"]:hover:focus-within,
+    input[type="submit"]:hover:focus-within,
+    .button:hover:focus-within,
+    input[type="reset"]:hover:focus-within,
+    :hover:focus-within::file-selector-button,
+    .button-secondary:hover:focus-within {
+        opacity: 0.875;
+    }
+    button:hover:hover,
+    [role="button"]:hover:hover,
+    input[type="button"]:hover:hover,
+    input[type="submit"]:hover:hover,
+    .button:hover:hover,
+    input[type="reset"]:hover:hover,
+    :hover:hover::file-selector-button,
+    .button-secondary:hover:hover {
+        opacity: 0.875;
+    }
 }
 
 button:focus-visible,
@@ -1219,11 +1848,133 @@ input[type="submit"]:focus-visible,
 input[type="reset"]:focus-visible,
 :focus-visible::file-selector-button,
 .button-secondary:focus-visible {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js button:focus-visible:focus,
+.no-js [role="button"]:focus-visible:focus,
+.no-js input[type="button"]:focus-visible:focus,
+.no-js input[type="submit"]:focus-visible:focus,
+.no-js .button:focus-visible:focus,
+.no-js input[type="reset"]:focus-visible:focus,
+.no-js :focus-visible:focus::file-selector-button,
+.no-js .button-secondary:focus-visible:focus,
+.js__no-where-selector button:focus-visible:focus,
+.js__no-where-selector [role="button"]:focus-visible:focus,
+.js__no-where-selector input[type="button"]:focus-visible:focus,
+.js__no-where-selector input[type="submit"]:focus-visible:focus,
+.js__no-where-selector .button:focus-visible:focus,
+.js__no-where-selector input[type="reset"]:focus-visible:focus,
+.js__no-where-selector :focus-visible:focus::file-selector-button,
+.js__no-where-selector .button-secondary:focus-visible:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) button:focus-visible:focus,
+:where(.js__no-focusVisible) [role="button"]:focus-visible:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus-visible:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus-visible:focus,
+:where(.js__no-focusVisible) .button:focus-visible:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus-visible:focus,
+:where(.js__no-focusVisible) :focus-visible:focus::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:focus-visible:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js button:focus-visible:focus,
+    .no-js [role="button"]:focus-visible:focus,
+    .no-js input[type="button"]:focus-visible:focus,
+    .no-js input[type="submit"]:focus-visible:focus,
+    .no-js .button:focus-visible:focus,
+    .no-js input[type="reset"]:focus-visible:focus,
+    .no-js :focus-visible:focus::file-selector-button,
+    .no-js .button-secondary:focus-visible:focus,
+    .js__no-where-selector button:focus-visible:focus,
+    .js__no-where-selector [role="button"]:focus-visible:focus,
+    .js__no-where-selector input[type="button"]:focus-visible:focus,
+    .js__no-where-selector input[type="submit"]:focus-visible:focus,
+    .js__no-where-selector .button:focus-visible:focus,
+    .js__no-where-selector input[type="reset"]:focus-visible:focus,
+    .js__no-where-selector :focus-visible:focus::file-selector-button,
+    .js__no-where-selector .button-secondary:focus-visible:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:focus-visible:focus,
+    :where(.js__no-focusVisible) [role="button"]:focus-visible:focus,
+    :where(.js__no-focusVisible) input[type="button"]:focus-visible:focus,
+    :where(.js__no-focusVisible) input[type="submit"]:focus-visible:focus,
+    :where(.js__no-focusVisible) .button:focus-visible:focus,
+    :where(.js__no-focusVisible) input[type="reset"]:focus-visible:focus,
+    :where(.js__no-focusVisible) :focus-visible:focus::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:focus-visible:focus {
+        opacity: 0.875;
+    }
+}
+button:focus-visible:focus-visible,
+[role="button"]:focus-visible:focus-visible,
+input[type="button"]:focus-visible:focus-visible,
+input[type="submit"]:focus-visible:focus-visible,
+.button:focus-visible:focus-visible,
+input[type="reset"]:focus-visible:focus-visible,
+:focus-visible:focus-visible::file-selector-button,
+.button-secondary:focus-visible:focus-visible {
+    opacity: 0.875;
+}
+button:focus-visible:focus-within,
+[role="button"]:focus-visible:focus-within,
+input[type="button"]:focus-visible:focus-within,
+input[type="submit"]:focus-visible:focus-within,
+.button:focus-visible:focus-within,
+input[type="reset"]:focus-visible:focus-within,
+:focus-visible:focus-within::file-selector-button,
+.button-secondary:focus-visible:focus-within {
+    opacity: 0.875;
+}
+button:focus-visible:hover,
+[role="button"]:focus-visible:hover,
+input[type="button"]:focus-visible:hover,
+input[type="submit"]:focus-visible:hover,
+.button:focus-visible:hover,
+input[type="reset"]:focus-visible:hover,
+:focus-visible:hover::file-selector-button,
+.button-secondary:focus-visible:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    button:focus-visible:focus-visible,
+    [role="button"]:focus-visible:focus-visible,
+    input[type="button"]:focus-visible:focus-visible,
+    input[type="submit"]:focus-visible:focus-visible,
+    .button:focus-visible:focus-visible,
+    input[type="reset"]:focus-visible:focus-visible,
+    :focus-visible:focus-visible::file-selector-button,
+    .button-secondary:focus-visible:focus-visible {
+        opacity: 0.875;
+    }
+    button:focus-visible:focus-within,
+    [role="button"]:focus-visible:focus-within,
+    input[type="button"]:focus-visible:focus-within,
+    input[type="submit"]:focus-visible:focus-within,
+    .button:focus-visible:focus-within,
+    input[type="reset"]:focus-visible:focus-within,
+    :focus-visible:focus-within::file-selector-button,
+    .button-secondary:focus-visible:focus-within {
+        opacity: 0.875;
+    }
+    button:focus-visible:hover,
+    [role="button"]:focus-visible:hover,
+    input[type="button"]:focus-visible:hover,
+    input[type="submit"]:focus-visible:hover,
+    .button:focus-visible:hover,
+    input[type="reset"]:focus-visible:hover,
+    :focus-visible:hover::file-selector-button,
+    .button-secondary:focus-visible:hover {
+        opacity: 0.875;
+    }
 }
 
 button:focus-within,
@@ -1234,204 +1985,135 @@ input[type="submit"]:focus-within,
 input[type="reset"]:focus-within,
 :focus-within::file-selector-button,
 .button-secondary:focus-within {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js button:focus-within:focus,
+.no-js [role="button"]:focus-within:focus,
+.no-js input[type="button"]:focus-within:focus,
+.no-js input[type="submit"]:focus-within:focus,
+.no-js .button:focus-within:focus,
+.no-js input[type="reset"]:focus-within:focus,
+.no-js :focus-within:focus::file-selector-button,
+.no-js .button-secondary:focus-within:focus,
+.js__no-where-selector button:focus-within:focus,
+.js__no-where-selector [role="button"]:focus-within:focus,
+.js__no-where-selector input[type="button"]:focus-within:focus,
+.js__no-where-selector input[type="submit"]:focus-within:focus,
+.js__no-where-selector .button:focus-within:focus,
+.js__no-where-selector input[type="reset"]:focus-within:focus,
+.js__no-where-selector :focus-within:focus::file-selector-button,
+.js__no-where-selector .button-secondary:focus-within:focus {
     opacity: 0.875;
 }
 
-[data-contrast-mode="high"].no-js button:focus,
-[data-contrast-mode="high"].no-js [role="button"]:focus,
-[data-contrast-mode="high"].no-js input[type="button"]:focus,
-[data-contrast-mode="high"].no-js input[type="submit"]:focus,
-[data-contrast-mode="high"].no-js .button:focus,
-[data-contrast-mode="high"].no-js input[type="reset"]:focus,
-[data-contrast-mode="high"].no-js :focus::file-selector-button,
-[data-contrast-mode="high"].no-js .button-secondary:focus,
-[data-contrast-mode="high"].js__no-where-selector button:focus,
-[data-contrast-mode="high"].js__no-where-selector [role="button"]:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="button"]:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="submit"]:focus,
-[data-contrast-mode="high"].js__no-where-selector .button:focus,
-[data-contrast-mode="high"].js__no-where-selector input[type="reset"]:focus,
-[data-contrast-mode="high"].js__no-where-selector :focus::file-selector-button,
-[data-contrast-mode="high"].js__no-where-selector .button-secondary:focus,
-[data-contrast-mode="forced-colors"].no-js button:focus,
-[data-contrast-mode="forced-colors"].no-js [role="button"]:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="button"]:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"].no-js .button:focus,
-[data-contrast-mode="forced-colors"].no-js input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"].no-js :focus::file-selector-button,
-[data-contrast-mode="forced-colors"].no-js .button-secondary:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector button:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    [role="button"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="button"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector .button:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    :focus::file-selector-button,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    .button-secondary:focus {
-    opacity: 1;
+:where(.js__no-focusVisible) button:focus-within:focus,
+:where(.js__no-focusVisible) [role="button"]:focus-within:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus-within:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus-within:focus,
+:where(.js__no-focusVisible) .button:focus-within:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus-within:focus,
+:where(.js__no-focusVisible) :focus-within:focus::file-selector-button,
+:where(.js__no-focusVisible) .button-secondary:focus-within:focus {
+    opacity: 0.875;
 }
 
-[data-contrast-mode="high"]:where(.js__no-focusVisible) button:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible) [role="button"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="button"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="submit"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible) .button:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    input[type="reset"]:focus,
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    :focus::file-selector-button,
-[data-contrast-mode="high"]:where(.js__no-focusVisible) .button-secondary:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible) button:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    [role="button"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="button"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="submit"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible) .button:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    input[type="reset"]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    :focus::file-selector-button,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    .button-secondary:focus {
-    opacity: 1;
+@media (prefers-contrast: less) {
+    .no-js button:focus-within:focus,
+    .no-js [role="button"]:focus-within:focus,
+    .no-js input[type="button"]:focus-within:focus,
+    .no-js input[type="submit"]:focus-within:focus,
+    .no-js .button:focus-within:focus,
+    .no-js input[type="reset"]:focus-within:focus,
+    .no-js :focus-within:focus::file-selector-button,
+    .no-js .button-secondary:focus-within:focus,
+    .js__no-where-selector button:focus-within:focus,
+    .js__no-where-selector [role="button"]:focus-within:focus,
+    .js__no-where-selector input[type="button"]:focus-within:focus,
+    .js__no-where-selector input[type="submit"]:focus-within:focus,
+    .js__no-where-selector .button:focus-within:focus,
+    .js__no-where-selector input[type="reset"]:focus-within:focus,
+    .js__no-where-selector :focus-within:focus::file-selector-button,
+    .js__no-where-selector .button-secondary:focus-within:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:focus-within:focus,
+    :where(.js__no-focusVisible) [role="button"]:focus-within:focus,
+    :where(.js__no-focusVisible) input[type="button"]:focus-within:focus,
+    :where(.js__no-focusVisible) input[type="submit"]:focus-within:focus,
+    :where(.js__no-focusVisible) .button:focus-within:focus,
+    :where(.js__no-focusVisible) input[type="reset"]:focus-within:focus,
+    :where(.js__no-focusVisible) :focus-within:focus::file-selector-button,
+    :where(.js__no-focusVisible) .button-secondary:focus-within:focus {
+        opacity: 0.875;
+    }
+}
+button:focus-within:focus-visible,
+[role="button"]:focus-within:focus-visible,
+input[type="button"]:focus-within:focus-visible,
+input[type="submit"]:focus-within:focus-visible,
+.button:focus-within:focus-visible,
+input[type="reset"]:focus-within:focus-visible,
+:focus-within:focus-visible::file-selector-button,
+.button-secondary:focus-within:focus-visible {
+    opacity: 0.875;
+}
+button:focus-within:focus-within,
+[role="button"]:focus-within:focus-within,
+input[type="button"]:focus-within:focus-within,
+input[type="submit"]:focus-within:focus-within,
+.button:focus-within:focus-within,
+input[type="reset"]:focus-within:focus-within,
+:focus-within:focus-within::file-selector-button,
+.button-secondary:focus-within:focus-within {
+    opacity: 0.875;
+}
+button:focus-within:hover,
+[role="button"]:focus-within:hover,
+input[type="button"]:focus-within:hover,
+input[type="submit"]:focus-within:hover,
+.button:focus-within:hover,
+input[type="reset"]:focus-within:hover,
+:focus-within:hover::file-selector-button,
+.button-secondary:focus-within:hover {
+    opacity: 0.875;
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    .no-js button:focus,
-    .no-js [role="button"]:focus,
-    .no-js input[type="button"]:focus,
-    .no-js input[type="submit"]:focus,
-    .no-js .button:focus,
-    .no-js input[type="reset"]:focus,
-    .no-js :focus::file-selector-button,
-    .no-js .button-secondary:focus,
-    .js__no-where-selector button:focus,
-    .js__no-where-selector [role="button"]:focus,
-    .js__no-where-selector input[type="button"]:focus,
-    .js__no-where-selector input[type="submit"]:focus,
-    .js__no-where-selector .button:focus,
-    .js__no-where-selector input[type="reset"]:focus,
-    .js__no-where-selector :focus::file-selector-button,
-    .js__no-where-selector .button-secondary:focus {
-        opacity: 1;
+@media (prefers-contrast: less) {
+    button:focus-within:focus-visible,
+    [role="button"]:focus-within:focus-visible,
+    input[type="button"]:focus-within:focus-visible,
+    input[type="submit"]:focus-within:focus-visible,
+    .button:focus-within:focus-visible,
+    input[type="reset"]:focus-within:focus-visible,
+    :focus-within:focus-visible::file-selector-button,
+    .button-secondary:focus-within:focus-visible {
+        opacity: 0.875;
     }
-    :where(.js__no-focusVisible) button:focus,
-    :where(.js__no-focusVisible) [role="button"]:focus,
-    :where(.js__no-focusVisible) input[type="button"]:focus,
-    :where(.js__no-focusVisible) input[type="submit"]:focus,
-    :where(.js__no-focusVisible) .button:focus,
-    :where(.js__no-focusVisible) input[type="reset"]:focus,
-    :where(.js__no-focusVisible) :focus::file-selector-button,
-    :where(.js__no-focusVisible) .button-secondary:focus {
-        opacity: 1;
+    button:focus-within:focus-within,
+    [role="button"]:focus-within:focus-within,
+    input[type="button"]:focus-within:focus-within,
+    input[type="submit"]:focus-within:focus-within,
+    .button:focus-within:focus-within,
+    input[type="reset"]:focus-within:focus-within,
+    :focus-within:focus-within::file-selector-button,
+    .button-secondary:focus-within:focus-within {
+        opacity: 0.875;
     }
-}
-[data-contrast-mode="high"] button:focus-visible,
-[data-contrast-mode="high"] [role="button"]:focus-visible,
-[data-contrast-mode="high"] input[type="button"]:focus-visible,
-[data-contrast-mode="high"] input[type="submit"]:focus-visible,
-[data-contrast-mode="high"] .button:focus-visible,
-[data-contrast-mode="high"] input[type="reset"]:focus-visible,
-[data-contrast-mode="high"] :focus-visible::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:focus-visible,
-[data-contrast-mode="forced-colors"] button:focus-visible,
-[data-contrast-mode="forced-colors"] [role="button"]:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="button"]:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="submit"]:focus-visible,
-[data-contrast-mode="forced-colors"] .button:focus-visible,
-[data-contrast-mode="forced-colors"] input[type="reset"]:focus-visible,
-[data-contrast-mode="forced-colors"] :focus-visible::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-visible {
-    opacity: 1;
-}
-[data-contrast-mode="high"] button:focus-within,
-[data-contrast-mode="high"] [role="button"]:focus-within,
-[data-contrast-mode="high"] input[type="button"]:focus-within,
-[data-contrast-mode="high"] input[type="submit"]:focus-within,
-[data-contrast-mode="high"] .button:focus-within,
-[data-contrast-mode="high"] input[type="reset"]:focus-within,
-[data-contrast-mode="high"] :focus-within::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:focus-within,
-[data-contrast-mode="forced-colors"] button:focus-within,
-[data-contrast-mode="forced-colors"] [role="button"]:focus-within,
-[data-contrast-mode="forced-colors"] input[type="button"]:focus-within,
-[data-contrast-mode="forced-colors"] input[type="submit"]:focus-within,
-[data-contrast-mode="forced-colors"] .button:focus-within,
-[data-contrast-mode="forced-colors"] input[type="reset"]:focus-within,
-[data-contrast-mode="forced-colors"] :focus-within::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:focus-within {
-    opacity: 1;
-}
-[data-contrast-mode="high"] button:hover,
-[data-contrast-mode="high"] [role="button"]:hover,
-[data-contrast-mode="high"] input[type="button"]:hover,
-[data-contrast-mode="high"] input[type="submit"]:hover,
-[data-contrast-mode="high"] .button:hover,
-[data-contrast-mode="high"] input[type="reset"]:hover,
-[data-contrast-mode="high"] :hover::file-selector-button,
-[data-contrast-mode="high"] .button-secondary:hover,
-[data-contrast-mode="forced-colors"] button:hover,
-[data-contrast-mode="forced-colors"] [role="button"]:hover,
-[data-contrast-mode="forced-colors"] input[type="button"]:hover,
-[data-contrast-mode="forced-colors"] input[type="submit"]:hover,
-[data-contrast-mode="forced-colors"] .button:hover,
-[data-contrast-mode="forced-colors"] input[type="reset"]:hover,
-[data-contrast-mode="forced-colors"] :hover::file-selector-button,
-[data-contrast-mode="forced-colors"] .button-secondary:hover {
-    opacity: 1;
+    button:focus-within:hover,
+    [role="button"]:focus-within:hover,
+    input[type="button"]:focus-within:hover,
+    input[type="submit"]:focus-within:hover,
+    .button:focus-within:hover,
+    input[type="reset"]:focus-within:hover,
+    :focus-within:hover::file-selector-button,
+    .button-secondary:focus-within:hover {
+        opacity: 0.875;
+    }
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    button:focus-visible,
-    [role="button"]:focus-visible,
-    input[type="button"]:focus-visible,
-    input[type="submit"]:focus-visible,
-    .button:focus-visible,
-    input[type="reset"]:focus-visible,
-    :focus-visible::file-selector-button,
-    .button-secondary:focus-visible {
-        opacity: 1;
-    }
-    button:focus-within,
-    [role="button"]:focus-within,
-    input[type="button"]:focus-within,
-    input[type="submit"]:focus-within,
-    .button:focus-within,
-    input[type="reset"]:focus-within,
-    :focus-within::file-selector-button,
-    .button-secondary:focus-within {
-        opacity: 1;
-    }
-    button:hover,
-    [role="button"]:hover,
-    input[type="button"]:hover,
-    input[type="submit"]:hover,
-    .button:hover,
-    input[type="reset"]:hover,
-    :hover::file-selector-button,
-    .button-secondary:hover {
-        opacity: 1;
-    }
-}
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
@@ -1440,10 +2122,10 @@ input[type="submit"]:active,
 input[type="reset"]:active,
 :active::file-selector-button,
 .button-secondary:active {
-    background-color: ButtonFace;
-    border-color: ButtonBorder;
-    color: ButtonText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    border-color: var(--sys-clr-button-border, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 button,
 [role="button"],
@@ -1472,7 +2154,7 @@ label {
     margin: var(--mrg-firm-400, 1.25rem) 0 0;
     font-weight: 600;
     line-height: var(--line-height-200, 1.3125);
-    color: CanvasText;
+    color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     display: grid;
@@ -1484,7 +2166,7 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
     text-wrap: balance;
-    color: CanvasText;
+    color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"]))
@@ -1511,7 +2193,7 @@ table {
     margin-bottom: calc(
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
-    background: AccentColor;
+    background: var(--sys-clr-accent-bg, CanvasText);
     width: min(var(--width-page, 53rem), 100%);
 }
 
@@ -1535,7 +2217,7 @@ th,
 td {
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
     min-width: 10em;
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     vertical-align: top;
     text-align: left;
 }
@@ -1551,8 +2233,8 @@ td > :last-child {
 th {
     padding-top: var(--mrg-soft-200, 0.3125rem);
     padding-bottom: var(--mrg-soft-200, 0.3125rem);
-    background: AccentColor;
-    color: AccentColorText;
+    background: var(--sys-clr-accent-bg, CanvasText);
+    color: var(--sys-clr-accent-text, Canvas);
 }
 
 /*! end of @maddimathon/utility-sass/templates/base */
@@ -2099,12 +2781,8 @@ body > aside > :first-child {
     visibility: visible;
 }
 
-:where(.js) [data-toggle-control]:visited {
-    color: VisitedText;
-}
-
 :where(.js) [data-toggle-container="open"] [data-toggle-control] {
-    color: ActiveText;
+    color: var(--sys-clr-active-text, ActiveText);
 }
 
 .no-js [data-toggle-container="open"] [data-toggle-control]:focus,
@@ -2114,7 +2792,7 @@ body > aside > :first-child {
     [data-toggle-control]:focus,
 .js__no-where-selector [data-toggle-control]:focus {
     text-decoration-color: transparent;
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 
 :where(.js__no-focusVisible)
@@ -2122,19 +2800,19 @@ body > aside > :first-child {
     [data-toggle-control]:focus,
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
     text-decoration-color: transparent;
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 
 [data-toggle-container="open"] [data-toggle-control]:hover,
 [data-toggle-control]:hover {
     text-decoration-color: transparent;
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 
 [data-toggle-container="open"] [data-toggle-control]:focus-visible,
 [data-toggle-control]:focus-visible {
     text-decoration-color: transparent;
-    color: LinkText;
+    color: var(--sys-clr-link-text, LinkText);
 }
 
 :where(.js) body > nav[data-toggle-container] {
@@ -2153,7 +2831,6 @@ body > aside > :first-child {
 :where(.js) body > nav[data-toggle-container] .toggle-title,
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
     grid-column: 1/-1;
-    font-size: var(--fs-heading-7, 1rem);
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
@@ -2169,8 +2846,8 @@ body > aside > :first-child {
     width: auto;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
-    background: Canvas;
-    color: CanvasText;
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
@@ -2181,8 +2858,8 @@ body > aside > :first-child {
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
     border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
     font-size: var(--fs-heading-6, 1.1875rem);
-    background: Canvas;
-    color: CanvasText;
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js)
     body
@@ -2225,7 +2902,7 @@ body > aside > :first-child {
 }
 
 .website-settings__content {
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     width: -moz-fit-content;
     width: fit-content;
     max-width: min(var(--width-content, 36rem), 90vw);
@@ -2326,155 +3003,782 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonBorder;
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    background-color: ButtonFace;
-    color: ButtonText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
 .js__no-where-selector
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .no-js
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible {
+    opacity: 0.875;
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within {
+    opacity: 0.875;
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus:hover,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible {
+        opacity: 0.875;
+    }
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-within,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-within {
+        opacity: 0.875;
+    }
+    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus:hover,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:hover {
+        opacity: 0.875;
+    }
 }
 
 :where(.js__no-focusVisible)
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
 }
 
-:where(.js) .website-settings-menu [data-toggle-control]:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
 }
 
-:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-[data-contrast-mode="high"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="high"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-    .js__no-where-selector
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js__no-focusVisible)
         :where(.js)
         .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible {
+        opacity: 0.875;
     }
     :where(.js__no-focusVisible)
         :where(.js)
         .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
+        [data-toggle-control]:focus:focus-within {
+        opacity: 0.875;
     }
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible {
-    opacity: 1;
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within {
-    opacity: 1;
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover {
-    opacity: 1;
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:hover {
+        opacity: 0.875;
+    }
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 1;
+:where(.js) .website-settings-menu [data-toggle-control]:hover {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:hover:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js :where(.js) .website-settings-menu [data-toggle-control]:hover:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus {
+        opacity: 0.875;
     }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 1;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 1;
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus {
+        opacity: 0.875;
     }
 }
+:where(.js) .website-settings-menu [data-toggle-control]:hover:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-visible {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:hover:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:hover:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:hover:hover {
+        opacity: 0.875;
+    }
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible {
+    opacity: 0.875;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:hover {
+        opacity: 0.875;
+    }
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible {
+    opacity: 0.875;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:hover {
+        opacity: 0.875;
+    }
+}
+
 :where(.js) .website-settings-menu [data-toggle-control]:active {
-    background-color: ButtonFace;
-    border-color: ButtonBorder;
-    color: ButtonText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    border-color: var(--sys-clr-button-border, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     -webkit-appearance: button;
@@ -2530,13 +3834,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop::before {
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     opacity: 0.625;
 }
 :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop::after {
-    background: LinkText;
+    background: var(--sys-clr-link-text, LinkText);
     opacity: 0.1875;
 }
 .no-js
@@ -2630,5 +3934,4 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }
 
-/*! end of @maddimathon/utility-astro/templates/html */
 /*! end of @maddimathon/utility-astro/templates/astro */

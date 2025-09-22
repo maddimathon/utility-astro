@@ -8,7 +8,7 @@
 }
 
 .website-settings__content {
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     width: -moz-fit-content;
     width: fit-content;
     max-width: min(var(--width-content, 36rem), 90vw);
@@ -109,155 +109,782 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonBorder;
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    background-color: ButtonFace;
-    color: ButtonText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
 .js__no-where-selector
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .no-js
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus,
+    :where(.js__no-focusVisible)
+        .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible {
+    opacity: 0.875;
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within {
+    opacity: 0.875;
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus:hover,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    .no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    .js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible {
+        opacity: 0.875;
+    }
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-within,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-within {
+        opacity: 0.875;
+    }
+    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus:hover,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:hover {
+        opacity: 0.875;
+    }
 }
 
 :where(.js__no-focusVisible)
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+.js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
 }
 
-:where(.js) .website-settings-menu [data-toggle-control]:hover {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
+:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus {
     opacity: 0.875;
 }
 
-:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-    background-color: SelectedItem;
-    border-color: SelectedItem;
-    color: SelectedItemText;
-    accent-color: ButtonText;
-    opacity: 0.875;
-}
-
-[data-contrast-mode="high"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="high"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-[data-contrast-mode="high"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="forced-colors"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 1;
-}
-
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-    .js__no-where-selector
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js__no-focusVisible)
         :where(.js)
         .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
+        [data-toggle-control]:focus:focus,
+    .js__no-where-selector
+        :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-visible {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:focus-within {
+    opacity: 0.875;
+}
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="low"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover,
+[data-contrast-mode="average"]
+    :where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:focus-visible {
+        opacity: 0.875;
     }
     :where(.js__no-focusVisible)
         :where(.js)
         .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 1;
+        [data-toggle-control]:focus:focus-within {
+        opacity: 0.875;
     }
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible {
-    opacity: 1;
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within {
-    opacity: 1;
-}
-[data-contrast-mode="high"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover,
-[data-contrast-mode="forced-colors"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover {
-    opacity: 1;
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus:hover {
+        opacity: 0.875;
+    }
 }
 
-@media (prefers-contrast: more),
-    (forced-colors: active),
-    (prefers-contrast: custom) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 1;
+:where(.js) .website-settings-menu [data-toggle-control]:hover {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:hover:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js :where(.js) .website-settings-menu [data-toggle-control]:hover:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus {
+        opacity: 0.875;
     }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 1;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 1;
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus {
+        opacity: 0.875;
     }
 }
+:where(.js) .website-settings-menu [data-toggle-control]:hover:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-visible {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:hover:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:hover:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:hover:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:hover:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:hover:hover {
+        opacity: 0.875;
+    }
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-visible {
+    opacity: 0.875;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-visible:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-visible:hover {
+        opacity: 0.875;
+    }
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+    background-color: var(--sys-clr-selected-bg, SelectedItem);
+    border-color: var(--sys-clr-selected-bg, SelectedItem);
+    color: var(--sys-clr-selected-text, SelectedItemText);
+    accent-color: var(--sys-clr-button-text, ButtonText);
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+.js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"].no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"].js__no-where-selector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="low"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus,
+[data-contrast-mode="average"]:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus,
+    .js__no-where-selector
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible)
+        :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus {
+        opacity: 0.875;
+    }
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-visible {
+    opacity: 0.875;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:focus-within {
+    opacity: 0.875;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within:hover,
+[data-contrast-mode="low"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:hover,
+[data-contrast-mode="average"]
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus-within:hover {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js)
+        .website-settings-menu
+        [data-toggle-control]:focus-within:hover {
+        opacity: 0.875;
+    }
+}
+
 :where(.js) .website-settings-menu [data-toggle-control]:active {
-    background-color: ButtonFace;
-    border-color: ButtonBorder;
-    color: ButtonText;
-    accent-color: ActiveText;
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    border-color: var(--sys-clr-button-border, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-active-text, ActiveText);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     -webkit-appearance: button;
@@ -313,13 +940,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop::before {
-    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
     opacity: 0.625;
 }
 :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop::after {
-    background: LinkText;
+    background: var(--sys-clr-link-text, LinkText);
     opacity: 0.1875;
 }
 .no-js
