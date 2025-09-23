@@ -111,6 +111,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     line-height: var(--line-height-100, 1.1875);
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-text, ButtonText);
     background-color: var(--sys-clr-button-bg, ButtonFace);
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: var(--sys-clr-button-text, ButtonText);
@@ -120,10 +121,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: var(--sys-clr-selected-bg, SelectedItem);
-    border-color: var(--sys-clr-selected-bg, SelectedItem);
-    color: var(--sys-clr-selected-text, SelectedItemText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-text-hover,
+        SelectedItemText
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
 }
 .no-js
     .no-js
@@ -379,10 +384,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    background-color: var(--sys-clr-selected-bg, SelectedItem);
-    border-color: var(--sys-clr-selected-bg, SelectedItem);
-    color: var(--sys-clr-selected-text, SelectedItemText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-text-hover,
+        SelectedItemText
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
 }
 .no-js
     :where(.js__no-focusVisible)
@@ -527,10 +536,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:hover {
-    background-color: var(--sys-clr-selected-bg, SelectedItem);
-    border-color: var(--sys-clr-selected-bg, SelectedItem);
-    color: var(--sys-clr-selected-text, SelectedItemText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-text-hover,
+        SelectedItemText
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:hover:focus,
 .js__no-where-selector
@@ -637,10 +650,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    background-color: var(--sys-clr-selected-bg, SelectedItem);
-    border-color: var(--sys-clr-selected-bg, SelectedItem);
-    color: var(--sys-clr-selected-text, SelectedItemText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-text-hover,
+        SelectedItemText
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
 }
 .no-js
     :where(.js)
@@ -759,10 +776,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-    background-color: var(--sys-clr-selected-bg, SelectedItem);
-    border-color: var(--sys-clr-selected-bg, SelectedItem);
-    color: var(--sys-clr-selected-text, SelectedItemText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-text-hover,
+        SelectedItemText
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
 }
 .no-js
     :where(.js)
@@ -881,10 +902,11 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:active {
-    background-color: var(--sys-clr-button-bg, ButtonFace);
-    border-color: var(--sys-clr-button-border, ButtonFace);
-    color: var(--sys-clr-button-text, ButtonText);
-    accent-color: var(--sys-clr-active-text, ActiveText);
+    --focus-ring-outline-color: var(--sys-clr-button-text-active, ButtonText);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-text-active, ButtonText);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     -webkit-appearance: button;
@@ -946,7 +968,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop::after {
-    background: var(--sys-clr-link-text, LinkText);
+    background: var(--sys-clr-link, LinkText);
     opacity: 0.1875;
 }
 .no-js

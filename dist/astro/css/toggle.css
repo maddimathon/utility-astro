@@ -295,7 +295,7 @@
 }
 
 :where(.js) [data-toggle-container="open"] [data-toggle-control] {
-    color: var(--sys-clr-active-text, ActiveText);
+    color: var(--sys-clr-text-active, ActiveText);
 }
 
 .no-js [data-toggle-container="open"] [data-toggle-control]:focus,
@@ -305,7 +305,7 @@
     [data-toggle-control]:focus,
 .js__no-where-selector [data-toggle-control]:focus {
     text-decoration-color: transparent;
-    color: var(--sys-clr-link-text, LinkText);
+    color: var(--sys-clr-link, LinkText);
 }
 
 :where(.js__no-focusVisible)
@@ -313,17 +313,17 @@
     [data-toggle-control]:focus,
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
     text-decoration-color: transparent;
-    color: var(--sys-clr-link-text, LinkText);
+    color: var(--sys-clr-link, LinkText);
 }
 
 [data-toggle-container="open"] [data-toggle-control]:hover,
 [data-toggle-control]:hover {
     text-decoration-color: transparent;
-    color: var(--sys-clr-link-text, LinkText);
+    color: var(--sys-clr-link, LinkText);
 }
 
 [data-toggle-container="open"] [data-toggle-control]:focus-visible,
 [data-toggle-control]:focus-visible {
     text-decoration-color: transparent;
-    color: var(--sys-clr-link-text, LinkText);
+    color: var(--sys-clr-link, LinkText);
 }

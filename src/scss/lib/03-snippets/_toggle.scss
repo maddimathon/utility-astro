@@ -289,7 +289,7 @@
     [data-toggle-control] {
         [data-toggle-container='open'] & {
             @include js {
-                color: #{var-sys-colour(active-text)};
+                color: #{var-sys-colour(text-active)};
             }
         }
 
@@ -297,7 +297,7 @@
         & {
             @include hover-focus-visible {
                 text-decoration-color: transparent;
-                color: #{var-sys-colour(link-text)};
+                color: #{var-sys-colour(link)};
             }
         }
     }
