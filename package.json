@@ -45,24 +45,19 @@
     "exports": {
 
         ".": {
+            "astro": "./dist/ts/index.js",
             "sass": "./dist/scss/lib/index.scss",
             "types": "./dist/ts/index.d.ts",
-
-            "astro": "./dist/ts/index.js",
             "default": "./dist/ts/index.js"
         },
 
-        "./jest.config":    "./jest.config.js",
         "./jest.config.js": "./jest.config.js",
-        
         "./package.json": "./package.json",
-
-        "./tsconfig":      "./tsconfig.json",
         "./tsconfig.json": "./tsconfig.json",
 
         
         "./components/*": "./dist/astro/components/*.astro",
-        "./css/*": "./dist/astro/css/*.astro",
+        "./css/*": "./dist/astro/css/*.css",
         "./layouts/*": "./dist/astro/layouts/*.astro",
         "./support/*": "./dist/astro/support/*.astro",
 
@@ -76,66 +71,36 @@
         ],
 
 
-        "./config": {
-            "sass": "./src/scss/config/index.scss"
-        },
-        "./config.scss": {
-            "sass": "./src/scss/config/index.scss"
-        },
+        "./config.scss": "./dist/scss/config/index.scss",
         "./config/*.scss": [
             "./dist/scss/config/*.scss",
             "./dist/scss/config/_*.scss",
             "./dist/scss/config/*/index.scss",
-            "./dist/scss/config/*/_index.scss",
-            "./dist/scss/config/_*/index.scss",
-            "./dist/scss/config/_*/_index.scss"
+            "./dist/scss/config/*/_index.scss"
         ],
 
-        "./notice": {
-            "sass": "./src/scss/_notice.scss"
-        },
-        "./notice.scss": {
-            "sass": "./src/scss/_notice.scss"
-        },
+        "./notice.scss": "./src/scss/_notice.scss",
         
         "./templates/*.scss": [
             "./dist/scss/templates/*.scss",
-            "./dist/scss/templates/_*.scss",
             "./dist/scss/templates/*/index.scss",
-            "./dist/scss/templates/*/_index.scss",
-            "./dist/scss/templates/_*/index.scss",
-            "./dist/scss/templates/_*/_index.scss"
+            "./dist/scss/templates/*/_index.scss"
         ],
 
-        "./tokens": {
-            "sass": "./src/scss/tokens/index.scss"
-        },
-        "./tokens.scss": {
-            "sass": "./src/scss/tokens/index.scss"
-        },
+        "./tokens.scss": "./src/scss/tokens/index.scss",
         "./tokens/*.scss": [
             "./dist/scss/tokens/*.scss",
             "./dist/scss/tokens/_*.scss",
             "./dist/scss/tokens/*/index.scss",
-            "./dist/scss/tokens/*/_index.scss",
-            "./dist/scss/tokens/_*/index.scss",
-            "./dist/scss/tokens/_*/_index.scss"
-        ],
-
-
-        "./types": "./dist/ts/types/index.d.ts",
-        "./types/*": [
-            "./dist/ts/types/*.d.ts",
-            "./dist/ts/types/*/index.d.ts",
-            "./dist/ts/types/*"
+            "./dist/scss/tokens/*/_index.scss"
         ],
 
 
         "./*.scss": [
             "./dist/scss/templates/*/index.scss",
             "./dist/scss/templates/*/_index.scss",
-            "./dist/scss/lib/*.scss",
-            "./dist/scss/lib/_*.scss",
+            "./dist/scss/lib/*",
+            "./dist/scss/lib/_*",
             "./dist/scss/lib/*/index.scss",
             "./dist/scss/lib/*/_index.scss"
         ],
@@ -145,15 +110,16 @@
             "sass": [
                 "./dist/scss/templates/*/index.scss",
                 "./dist/scss/templates/*/_index.scss",
-                "./dist/scss/lib/*.scss",
-                "./dist/scss/lib/_*.scss",
+                "./dist/scss/lib/*",
+                "./dist/scss/lib/_*",
                 "./dist/scss/lib/*/index.scss",
                 "./dist/scss/lib/*/_index.scss"
             ],
 
             "types": [
                 "./dist/ts/*.d.ts",
-                "./dist/ts/*/index.d.ts"
+                "./dist/ts/*/index.d.ts",
+                "./dist/ts/*"
             ],
 
             "astro": [
@@ -242,7 +208,8 @@
         "npm-run-all": "4.1.5",
         "tsx": "4.20.5",
         "typedoc": "0.28.12",
-        "typedoc-plugin-markdown": "^4.8.1",
+        "typedoc-plugin-markdown": "4.9.0",
+        "typedoc-plugin-inline-sources": "1.3.0",
         "typescript": "5.9.2",
         "watch-cli": "0.2.3"
     },

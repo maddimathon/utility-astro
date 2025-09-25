@@ -1,0 +1,55 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as TableProps } from './Table.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Table.d.ts';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<TableProps, 'table'>;
+
+const {
+    class: classList = [],
+    wrapper = {},
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<div
+    class:list={['table-wrapper', '||', [wrapper.class]]}
+    {...wrapper}
+>
+    <table
+        class:list={[classList]}
+        {...attributes}
+    >
+        <slot />
+    </table>
+</div>
+
+<style>
+    .table-wrapper {
+        > table {
+            min-width: 100%;
+        }
+    }
+</style>
