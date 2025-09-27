@@ -199,7 +199,6 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.4",
-        "@astrojs/ts-plugin": "1.10.4",
         "@maddimathon/build-utilities": "0.3.0-alpha",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.7.1",

@@ -18,11 +18,5 @@
         "skipLibCheck": true,
         "strictNullChecks": true,
         "verbatimModuleSyntax": true,
-
-        "plugins": [
-            {
-              "name": "@astrojs/ts-plugin"
-            },
-        ]
     }
 }

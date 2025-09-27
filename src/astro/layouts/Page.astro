@@ -68,7 +68,7 @@ const content = {
 
 /** ## CONSTANTS ==================================== **/
 
-const pageSlug: string = slugify( currentPagePath( Astro.url ) ) || 'home';
+const pageSlug: string = slugify( currentPagePath( Astro.url ).replace(/\.(html|php)$/gi, '') ) || 'home';
 
 const SiteTitleTag = ( content.title && content.title.length ) ? 'p' : 'h1';
 
