@@ -63,4 +63,9 @@ export interface MenuItem {
      * Whether this item should be marked as the current page.
      */
     current?: true | null;
+
+    /**
+     * Whether this item should be opened in a new window.
+     */
+    external?: boolean;
 }

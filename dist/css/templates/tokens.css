@@ -145,8 +145,10 @@ html {
     --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
     --fs-heading-6: 1.1875rem;
     --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
-    --fs-heading-7: 1rem;
-    --fs-heading-7: clamp(0.75rem, 1.3125svw + 1rem, 1.125rem);
+    --fs-heading-7: 0.9375rem;
+    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    --fs-heading-8: 0.8125rem;
+    --fs-heading-8: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
     --fs-smaller-2: 0.8125rem;
     --fs-smaller-1: 0.9375rem;
     --fs-normal: 1rem;

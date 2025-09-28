@@ -99,6 +99,9 @@ export class ElementToggle {
             getComputedStyle( this.#container ).getPropertyValue( '--toggle-closing-time' )
         );
 
+        const defaultIsOpen = this.#container.hasAttribute( 'data-toggle-container' )
+            && this.#container.getAttribute( 'data-toggle-container' ) === 'open';
+
         this.toggle = this.toggle.bind( this );
 
         this.#button.forEach( ( button ) => {
@@ -110,7 +113,12 @@ export class ElementToggle {
             }
         } );
 
-        this.#container.setAttribute( 'data-toggle-container', 'closed' );
+
+        if ( defaultIsOpen ) {
+            this.#open();
+        } else {
+            this.#container.setAttribute( 'data-toggle-container', 'closed' );
+        }
     }
 
     /**

@@ -1,0 +1,73 @@
+---
+/**
+ * @since 0.1.0-alpha.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as HeadingProps } from './Heading.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Heading.d.ts';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<HeadingProps, 'h2' | 'p'>;
+
+const {
+    class: classList = [],
+    displayHeading: displayHeadingRaw,
+    heading: headingRaw,
+    minimum = 2,
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const htmlContent = (await Astro.slots.render('default')) || false;
+
+/** is definitely an integer greater than 0 (0 defaults to 7) */
+const heading = Math.round(Number(headingRaw)) || 7;
+
+/** is definitely an integer greater than 0 (0 defaults to 7) */
+const displayHeading =
+    displayHeadingRaw && (Math.round(Number(displayHeadingRaw)) || 7);
+
+const Tag =
+    heading >= minimum && heading < 7
+        ? (`h${heading as 2 | 3 | 4 | 5 | 6}` as const)
+        : ('p' as const);
+---
+
+{
+    htmlContent &&
+        (Tag !== 'p' ? (
+            <Tag
+                {...attributes}
+                class:list={[
+                    { [`h${displayHeading}`]: displayHeading },
+                    classList,
+                ]}
+                set:html={htmlContent}
+            />
+        ) : (
+            <p
+                {...attributes}
+                aria-level={heading}
+                class:list={[`h${displayHeading ?? heading}`, '||', classList]}
+                role='heading'
+                set:html={htmlContent}
+            />
+        ))
+}

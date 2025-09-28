@@ -17,6 +17,7 @@ import type { GenericProps } from '../../ts/00-types/index.js';
 
 /* import - components */
 import CodeBlock from './CodeBlock.astro';
+import { arrayUnique } from '@maddimathon/utility-typescript/functions';
 
 /* import - layouts */
 
@@ -65,6 +66,14 @@ switch ( props.mode ) {
 
 /* CONSTANTS ===================================== */
 
+const allHeadingLevels = arrayUnique(
+    [1, 2, 3, 4, 5, 6].concat(
+        props.allHeadingLevels 
+        ? props.allHeadingLevels.map( Number ).filter(num=>!Number.isNaN(num))
+        : [7, 8]
+    )
+).sort();
+
 const {
     fancy,
     library,
@@ -81,7 +90,8 @@ const code = {
         '<p id="heading-4" class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
         '<p id="heading-5" class="h5">Heading 5 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
         '<p id="heading-6" class="h6">Heading 6 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        '<p id="heading-7" class="heading">Generic Subheading Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-7" class="h7">Heading 7 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p id="heading-7" class="h8">Heading 8 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
     ].join('\n'),
 
     php:[
@@ -103,13 +113,15 @@ const code = {
 { fancy && (
     <hr>
     <p id="title" class="page-title">Title (.page-title) Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-1" class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-2" class="h2">Heading 2 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-3" class="h3">Heading 3 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-4" class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-5" class="h5">Heading 5 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-6" class="h6">Heading 6 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
-    <p id="heading-7" class="heading">Generic Subheading Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
+    <Fragment>
+        { allHeadingLevels.map((num)=>(
+            <p 
+                class={`h${num}`}
+                id={`heading-${num}`}
+                set:text={`Heading ${num} Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum. Aenean Lacinia Urna Sed Lacus Interdum Faucibus.`}
+            />
+        )) }
+    </Fragment>
 ) }
 
 <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget. Donec quam erat, sagittis id diam a, hendrerit viverra ligula.</p>

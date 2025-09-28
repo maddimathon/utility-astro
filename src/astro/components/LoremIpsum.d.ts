@@ -16,6 +16,11 @@
 export interface Props {
 
     /**
+     * All heading levels to demo. Always includes 1-6.
+     */
+    allHeadingLevels?: number[];
+
+    /**
      * Determines what kind of elements to include.
      */
     mode?: "minimum" | "fancy" | "library";

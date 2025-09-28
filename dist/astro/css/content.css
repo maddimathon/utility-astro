@@ -105,7 +105,7 @@ body blockquote {
 }
 body
     :where(
-        .button,
+        a.button,
         button,
         [role="button"],
         input[type="button"],

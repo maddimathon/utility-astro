@@ -10,6 +10,8 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
+import Toggle_Control from '../support/Toggle_Control.astro';
+import Heading from './Heading.astro';
 import type { Props as ToggleProps } from './Toggle.d.ts';
 
 /* import - functions */
@@ -29,6 +31,7 @@ export type * from './Toggle.d.ts';
 export type Props = GenericElementProps<ToggleProps, 'div'>;
 
 const {
+    defaultOpen,
     heading = 7,
     id,
     class: classList = [],
@@ -42,69 +45,27 @@ const buttonHTML: string = (await Astro.slots.render('button')) || 'Toggle me';
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
 const titleID = `${id}-title`;
-
-const headingTag = heading
-    ? heading < 7
-        ? {
-              open: `<h${heading} class="h${heading}">`,
-              clo: `</h${heading}>`,
-          }
-        : {
-              open: `<p class="heading">`,
-              clo: `</p>`,
-          }
-    : null;
 ---
 
 <div
     id={id}
     class:list={classList}
     {...attributes}
-    data-toggle-container
+    data-toggle-container={defaultOpen ? 'open' : 'closed'}
 >
     <div
         id={titleID}
         class='toggle-title'
     >
-        {headingTag && <Fragment set:html={headingTag.open} />}
-        <button
-            id={buttonID}
-            class='toggle-control'
-            aria-disabled='true'
-            data-toggle-control={id}
-            role='button'
-        >
-            <span class='icon | toggle-icon'>
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    class='icon-plus'
-                    role='img'
-                    aria-hidden='true'
-                >
-                    <path
-                        id='a'
-                        d='M5 12h14'
-                    ></path>
-                    <path
-                        id='b'
-                        d='M12 5v14'
-                    ></path>
-                </svg>
-            </span>
-            <span
-                class='toggle-control-inner'
-                set:html={buttonHTML.trim()}
-            />
-        </button>
-        {headingTag && <Fragment set:html={headingTag.clo} />}
+        {
+            heading ? (
+                <Heading heading={heading}>
+                    <Toggle_Control {...{ id, buttonHTML, buttonID }} />
+                </Heading>
+            ) : (
+                <Toggle_Control {...{ id, buttonHTML, buttonID }} />
+            )
+        }
     </div>
 
     <section

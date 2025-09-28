@@ -23,7 +23,33 @@ import DocsPage from '../../layouts/DocsPage.astro';
 ---
 
 <DocsPage title={['Toggle', 'Components']}>
-    <ToggleComponent id='toggle-ex-1'>
+    <ToggleComponent
+        id='toggle-ex-1'
+        heading={false}
+    >
         <p>Boo!</p>
     </ToggleComponent>
+    <ToggleComponent
+        id='toggle-ex-2'
+        heading={false}
+        defaultOpen={true}
+    >
+        <Fragment slot='button'>I am open by default</Fragment>
+        <p>Boo!</p>
+    </ToggleComponent>
+
+    {
+        ([1, 2, 3, 4, 5, 6, 7, 8] as const).map((heading) => (
+            <ToggleComponent
+                id={`toggle-ex-heading-${heading}`}
+                heading={heading}
+            >
+                <Fragment
+                    slot='button'
+                    set:text={`Toggle Heading ${heading}`}
+                />
+                <p>Boo!</p>
+            </ToggleComponent>
+        ))
+    }
 </DocsPage>

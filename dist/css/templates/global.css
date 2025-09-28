@@ -146,8 +146,10 @@ html {
     --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
     --fs-heading-6: 1.1875rem;
     --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
-    --fs-heading-7: 1rem;
-    --fs-heading-7: clamp(0.75rem, 1.3125svw + 1rem, 1.125rem);
+    --fs-heading-7: 0.9375rem;
+    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    --fs-heading-8: 0.8125rem;
+    --fs-heading-8: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
     --fs-smaller-2: 0.8125rem;
     --fs-smaller-1: 0.9375rem;
     --fs-normal: 1rem;
@@ -312,11 +314,19 @@ i {
     font-style: italic;
 }
 em em,
-i em {
+i em,
+em i,
+i i {
     font-style: normal;
 }
 em em em,
-i em em {
+i em em,
+em em i,
+i em i,
+em i em,
+i i em,
+em i i,
+i i i {
     font-style: italic;
 }
 
@@ -460,12 +470,40 @@ pre:where(:has(> code)) > code {
 }
 
 h1 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: 0;
     font-weight: 900;
-    font-size: var(--fs-title, 2.75rem);
-    line-height: var(--line-height-100, 1.1875);
+    font-size: var(--fs-heading-1, 2.375rem);
+    line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
+}
+h1 button,
+h1 [role="button"],
+h1 input[type="button"],
+h1 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="1"]) {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: 0;
+    font-weight: 900;
+    font-size: var(--fs-heading-1, 2.375rem);
+    line-height: var(--line-height-200, 1.3125);
+    text-wrap: balance;
+}
+:where([role="heading"][aria-level="1"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 
 h2 {
@@ -476,6 +514,34 @@ h2 {
     line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
 }
+h2 button,
+h2 [role="button"],
+h2 input[type="button"],
+h2 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="2"]) {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: 0;
+    font-weight: 800;
+    font-size: var(--fs-heading-2, 2.0625rem);
+    line-height: var(--line-height-200, 1.3125);
+    text-wrap: balance;
+}
+:where([role="heading"][aria-level="2"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
 
 h3 {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -485,35 +551,276 @@ h3 {
     line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
 }
+h3 button,
+h3 [role="button"],
+h3 input[type="button"],
+h3 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="3"]) {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: var(--fs-heading-3, 1.8125rem);
+    line-height: var(--line-height-200, 1.3125);
+    text-wrap: balance;
+}
+:where([role="heading"][aria-level="3"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
 
 h4 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 700;
-    font-style: italic;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
+    font-style: italic;
+}
+h4 em,
+h4 i {
+    font-style: normal;
+}
+h4 em em,
+h4 em i,
+h4 i em,
+h4 i i {
+    font-style: italic;
+}
+h4 button,
+h4 [role="button"],
+h4 input[type="button"],
+h4 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="4"]) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: var(--fs-heading-4, 1.5625rem);
+    line-height: var(--line-height-300, 1.4375);
+    text-wrap: balance;
+    font-style: italic;
+}
+:where([role="heading"][aria-level="4"]) em,
+:where([role="heading"][aria-level="4"]) i {
+    font-style: normal;
+}
+:where([role="heading"][aria-level="4"]) em em,
+:where([role="heading"][aria-level="4"]) em i,
+:where([role="heading"][aria-level="4"]) i em,
+:where([role="heading"][aria-level="4"]) i i {
+    font-style: italic;
+}
+:where([role="heading"][aria-level="4"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 
 h5 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 600;
-    font-style: italic;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
+    font-style: italic;
+}
+h5 em,
+h5 i {
+    font-style: normal;
+}
+h5 em em,
+h5 em i,
+h5 i em,
+h5 i i {
+    font-style: italic;
+}
+h5 button,
+h5 [role="button"],
+h5 input[type="button"],
+h5 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="5"]) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: var(--fs-heading-5, 1.3125rem);
+    line-height: var(--line-height-300, 1.4375);
+    text-wrap: balance;
+    font-style: italic;
+}
+:where([role="heading"][aria-level="5"]) em,
+:where([role="heading"][aria-level="5"]) i {
+    font-style: normal;
+}
+:where([role="heading"][aria-level="5"]) em em,
+:where([role="heading"][aria-level="5"]) em i,
+:where([role="heading"][aria-level="5"]) i em,
+:where([role="heading"][aria-level="5"]) i i {
+    font-style: italic;
+}
+:where([role="heading"][aria-level="5"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 
 h6 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: 0;
     font-weight: 500;
-    font-style: italic;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
+    font-style: italic;
+}
+h6 em,
+h6 i {
+    font-style: normal;
+}
+h6 em em,
+h6 em i,
+h6 i em,
+h6 i i {
+    font-style: italic;
+}
+h6 button,
+h6 [role="button"],
+h6 input[type="button"],
+h6 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="6"]) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: var(--line-height-300, 1.4375);
+    text-wrap: balance;
+    font-style: italic;
+}
+:where([role="heading"][aria-level="6"]) em,
+:where([role="heading"][aria-level="6"]) i {
+    font-style: normal;
+}
+:where([role="heading"][aria-level="6"]) em em,
+:where([role="heading"][aria-level="6"]) em i,
+:where([role="heading"][aria-level="6"]) i em,
+:where([role="heading"][aria-level="6"]) i i {
+    font-style: italic;
+}
+:where([role="heading"][aria-level="6"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="7"]) {
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    font-style: italic;
+}
+:where([role="heading"][aria-level="7"]) em,
+:where([role="heading"][aria-level="7"]) i {
+    font-style: normal;
+}
+:where([role="heading"][aria-level="7"]) em em,
+:where([role="heading"][aria-level="7"]) em i,
+:where([role="heading"][aria-level="7"]) i em,
+:where([role="heading"][aria-level="7"]) i i {
+    font-style: italic;
+}
+:where([role="heading"][aria-level="7"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+:where([role="heading"][aria-level="8"]) {
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: var(--fs-heading-8, 0.8125rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    font-style: italic;
+}
+:where([role="heading"][aria-level="8"]) em,
+:where([role="heading"][aria-level="8"]) i {
+    font-style: normal;
+}
+:where([role="heading"][aria-level="8"]) em em,
+:where([role="heading"][aria-level="8"]) em i,
+:where([role="heading"][aria-level="8"]) i em,
+:where([role="heading"][aria-level="8"]) i i {
+    font-style: italic;
+}
+:where([role="heading"][aria-level="8"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 
 ol,
@@ -639,11 +946,27 @@ fieldset > legend + * {
 }
 
 fieldset legend {
-    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-top: var(--mrg-soft-400, 0.8125rem);
     margin-bottom: 0;
     font-weight: 600;
-    font-size: var(--fs-heading-7, 1rem);
+    font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
     text-wrap: balance;
+    font-style: italic;
+}
+fieldset legend em,
+fieldset legend i {
+    font-style: normal;
+}
+fieldset legend em em,
+fieldset legend em i,
+fieldset legend i em,
+fieldset legend i i {
+    font-style: italic;
+}
+fieldset legend {
     margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-top: 0;

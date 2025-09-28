@@ -14,31 +14,65 @@
     z-index: 1;
 }
 
+.toggle-title,
+.toggle-title > title,
+.toggle-title > .h1,
+.toggle-title > h1,
+.toggle-title > .h2,
+.toggle-title > h2,
+.toggle-title > .h3,
+.toggle-title > h3,
+.toggle-title > .h4,
+.toggle-title > h4,
+.toggle-title > .h5,
+.toggle-title > h5,
+.toggle-title > .h6,
+.toggle-title > h6,
+.toggle-title > .h7,
+.toggle-title > .h8,
+.toggle-title > .page-title {
+    margin: 0;
+    padding: 0;
+}
+
 .toggle-title {
     font-weight: 600;
 }
-
-.toggle-title,
-.toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
-    margin: 0;
-    padding: 0;
+.toggle-title > title .toggle-icon,
+.toggle-title > .h1 .toggle-icon,
+.toggle-title > h1 .toggle-icon,
+.toggle-title > .h2 .toggle-icon,
+.toggle-title > h2 .toggle-icon,
+.toggle-title > .h3 .toggle-icon,
+.toggle-title > h3 .toggle-icon,
+.toggle-title > .h4 .toggle-icon,
+.toggle-title > h4 .toggle-icon,
+.toggle-title > .h5 .toggle-icon,
+.toggle-title > h5 .toggle-icon,
+.toggle-title > .h6 .toggle-icon,
+.toggle-title > h6 .toggle-icon,
+.toggle-title > .h7 .toggle-icon,
+.toggle-title > .h8 .toggle-icon,
+.toggle-title > .page-title .toggle-icon {
+    padding-bottom: 0;
+}
+.toggle-title > title .toggle-icon > svg,
+.toggle-title > .h1 .toggle-icon > svg,
+.toggle-title > h1 .toggle-icon > svg,
+.toggle-title > .h2 .toggle-icon > svg,
+.toggle-title > h2 .toggle-icon > svg,
+.toggle-title > .h3 .toggle-icon > svg,
+.toggle-title > h3 .toggle-icon > svg,
+.toggle-title > .h4 .toggle-icon > svg,
+.toggle-title > h4 .toggle-icon > svg,
+.toggle-title > .h5 .toggle-icon > svg,
+.toggle-title > h5 .toggle-icon > svg,
+.toggle-title > .h6 .toggle-icon > svg,
+.toggle-title > h6 .toggle-icon > svg,
+.toggle-title > .h7 .toggle-icon > svg,
+.toggle-title > .h8 .toggle-icon > svg,
+.toggle-title > .page-title .toggle-icon > svg {
+    height: 1em;
 }
 
 [data-toggle-control] {
@@ -101,7 +135,8 @@
 .toggle-icon {
     display: inline-block;
     vertical-align: sub;
-    padding-bottom: 0.03125em;
+    padding-bottom: var(--stroke-relative-100, 0.03125em);
+    padding-right: var(--border-width-200, 0.125rem);
 }
 .toggle-icon > svg {
     display: block;
@@ -109,7 +144,11 @@
     height: 1.125em;
     width: auto;
     stroke: currentColor;
-    stroke-width: max(0.1875em, 1px);
+    stroke-width: clamp(
+        1px,
+        var(--stroke-relative-600, 0.1875em),
+        var(--border-width-400, 0.25rem)
+    );
     fill: none;
 }
 
@@ -124,25 +163,22 @@
 :where(.js) [data-toggle-content],
 :where(.js) [data-toggle-control],
 :where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ),
+:where(.js) .toggle-title > title,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title,
 :where(.js) [data-toggle-container] {
     --display: grid;
     display: grid;
@@ -163,28 +199,47 @@
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     z-index: 1;
 }
+:where(.js) [data-toggle-container]:has(.toggle-title > .page-title) {
+    margin-top: 0;
+}
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h1, .toggle-title > h1),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h2, .toggle-title > h2),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h3, .toggle-title > h3) {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+}
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h4, .toggle-title > h4),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h5, .toggle-title > h5),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h6, .toggle-title > h6) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+}
+:where(.js) [data-toggle-container]:has(.toggle-title > .h7 .h8) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+}
 :where(.js) [data-toggle-content],
 :where(.js) [data-toggle-control],
 :where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
+:where(.js) .toggle-title > title,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
     grid-template-columns: subgrid;
     grid-column: 1/-1;
     margin: 0;
@@ -192,25 +247,22 @@
 }
 
 :where(.js) .toggle-title,
-:where(.js)
-    .toggle-title
-    > :where(
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        heading,
-        .heading
-    ) {
+:where(.js) .toggle-title > title,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
     align-content: center;
     align-items: center;
     grid-row: 1/1;
@@ -218,6 +270,58 @@
 :where(.js) .toggle-title {
     padding-bottom: var(--mrg-firm-200, 0.5rem);
     z-index: 2;
+}
+:where(.js) .toggle-title > title,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+:where(.js) .toggle-title > title [data-toggle-control],
+:where(.js) .toggle-title > .h1 [data-toggle-control],
+:where(.js) .toggle-title > h1 [data-toggle-control],
+:where(.js) .toggle-title > .h2 [data-toggle-control],
+:where(.js) .toggle-title > h2 [data-toggle-control],
+:where(.js) .toggle-title > .h3 [data-toggle-control],
+:where(.js) .toggle-title > h3 [data-toggle-control],
+:where(.js) .toggle-title > .h4 [data-toggle-control],
+:where(.js) .toggle-title > h4 [data-toggle-control],
+:where(.js) .toggle-title > .h5 [data-toggle-control],
+:where(.js) .toggle-title > h5 [data-toggle-control],
+:where(.js) .toggle-title > .h6 [data-toggle-control],
+:where(.js) .toggle-title > h6 [data-toggle-control],
+:where(.js) .toggle-title > .h7 [data-toggle-control],
+:where(.js) .toggle-title > .h8 [data-toggle-control],
+:where(.js) .toggle-title > .page-title [data-toggle-control] {
+    font: inherit;
+}
+:where(.js) .toggle-title > .page-title,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6 {
+    padding-bottom: var(--stroke-relative-400, 0.125em);
 }
 :where(.js) [data-toggle-control] {
     align-content: center;
@@ -266,7 +370,7 @@
     margin-bottom: 0;
 }
 /** Opening & Closing ------------------ **/
-:where(.js) [data-toggle-container="open"] .toggle-icon > svg #b {
+:where(.js) [data-toggle-container="open"] > .toggle-title .toggle-icon svg #b {
     opacity: 0;
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {

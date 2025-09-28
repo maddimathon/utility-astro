@@ -22,10 +22,12 @@ export interface Props {
      */
     id: string;
 
+    defaultOpen?: boolean;
+
     /**
      * If any, the heading level used to wrap the toggle button.
      */
-    heading?: number;
+    heading?: number | false;
 
     /** 
      * Value for component's `class` attribute.

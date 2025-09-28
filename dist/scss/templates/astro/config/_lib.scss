@@ -6,5 +6,6 @@
 @forward '../../html/config' with (
     $internal_supressCredit: true,
     $include_featureCheck: true !default,
+    $mx_extendHeadingsByRole: false !default,
     $print_astro: true !default
 );

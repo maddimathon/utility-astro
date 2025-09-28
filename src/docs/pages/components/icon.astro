@@ -1,0 +1,38 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+import { SVG } from '../../../ts/svg.js';
+
+/* import - components */
+import IconComponent from '../../../astro/components/Icon.astro';
+
+/* import - layouts */
+import DocsPage from '../../layouts/DocsPage.astro';
+
+/* TYPES ===================================== */
+
+/* CONSTANTS ===================================== */
+
+const allIcons = Object.keys(SVG) as (keyof typeof SVG)[];
+---
+
+<DocsPage title={['Icon', 'Components']}>
+    {
+        allIcons.map((type) => (
+            <p>
+                <IconComponent type={type} />
+                {' '}
+                {type}
+            </p>
+        ))
+    }
+</DocsPage>

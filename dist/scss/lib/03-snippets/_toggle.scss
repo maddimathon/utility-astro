@@ -3,6 +3,7 @@
 /// @since 0.1.0-alpha.draft
 ///
 
+@use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 // @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
@@ -10,19 +11,33 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
+$_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title'));
+
+$_defaultHeadingSelectors_bigOnly: ('%title');
+
+$_defaultHeadingSelectors_greaterThan6: ();
+
+@each $level in token-all-heading-levels() {
+    @if $level < 7 {
+        $_defaultHeadingSelectors_bigOnly: list.append(
+            $_defaultHeadingSelectors_bigOnly,
+            ('%h#{$level}')
+        );
+    }
+    @if $level > 6 {
+        $_defaultHeadingSelectors_greaterThan6: list.append(
+            $_defaultHeadingSelectors_greaterThan6,
+            ('%h#{$level}')
+        );
+    }
+}
+
 ///
 /// Supports the Toggle astro component.
 ///
 @mixin snippet-support-toggle(
-    $headingSelectors: (
-        '%h1',
-        '%h2',
-        '%h3',
-        '%h4',
-        '%h5',
-        '%h6',
-        '%heading',
-    )
+    $headingSelectors: $_defaultHeadingSelectors,
+    $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
 ) {
     @at-root %_flex-contents-container {
         --display: flex;
@@ -41,14 +56,27 @@
         z-index: 1;
     }
 
-    .toggle-title {
-        font-weight: 600;
-    }
-
     .toggle-title,
-    .toggle-title > :where(#{$headingSelectors}) {
+    #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
         margin: 0;
         padding: 0;
+    }
+
+    .toggle-title {
+        font-weight: 600;
+
+        &:has(#{selector.nest('>', ($headingSelectors))}) {
+        }
+
+        #{selector.nest('>', ($headingSelectors))} {
+            .toggle-icon {
+                padding-bottom: 0;
+
+                > svg {
+                    height: 1em;
+                }
+            }
+        }
     }
 
     [data-toggle-control] {
@@ -90,7 +118,8 @@
         display: inline-block;
 
         vertical-align: sub;
-        padding-bottom: 0.03125em;
+        padding-bottom: #{var-stroke-relative('100')};
+        padding-inline-end: #{var-border-width('200')};
 
         > svg {
             display: block;
@@ -100,7 +129,11 @@
             width: auto;
 
             stroke: currentColor;
-            stroke-width: max(0.1875em, 1px);
+            stroke-width: clamp(
+                1px,
+                #{var-stroke-relative('600')},
+                #{var-border-width('400')}
+            );
             fill: none;
         }
     }
@@ -151,6 +184,28 @@
             margin: #{var-mrg-firm('400')} 0 #{var-mrg-half('400')};
 
             z-index: 1;
+
+            &:has(#{selector.nest( '.toggle-title', '>','%title' )}) {
+                margin-block-start: 0;
+            }
+
+            &:has(#{selector.nest( '.toggle-title', '>', '%h1' )}),
+            &:has(#{selector.nest( '.toggle-title', '>', '%h2' )}),
+            &:has(#{selector.nest( '.toggle-title', '>', '%h3' )}) {
+                margin-block-start: #{var-mrg-soft('800')};
+            }
+
+            &:has(#{selector.nest( '.toggle-title', '>', '%h4' )}),
+            &:has(#{selector.nest( '.toggle-title', '>', '%h5' )}),
+            &:has(#{selector.nest( '.toggle-title', '>', '%h6' )}) {
+                margin-block-start: #{var-mrg-soft('600')};
+            }
+
+            &:has(
+                #{selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 )}
+            ) {
+                margin-block-start: #{var-mrg-soft('600')};
+            }
         }
 
         @at-root %toggle-container-subgrid {
@@ -163,7 +218,7 @@
         }
 
         .toggle-title,
-        .toggle-title > :where(#{$headingSelectors}) {
+        #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
             @extend %toggle-container-subgrid;
             align-content: center;
             align-items: center;
@@ -175,6 +230,21 @@
             padding-block-end: #{var-mrg-firm('200')};
 
             z-index: 2;
+
+            &:has(#{selector.nest('>', ($headingSelectors))}) {
+            }
+
+            #{selector.nest('>', ($headingSelectors))} {
+                margin-block: 0;
+
+                [data-toggle-control] {
+                    font: inherit;
+                }
+            }
+
+            #{selector.nest('>', (list.join($headingSelectors_bigOnly, (), $separator: comma)))} {
+                padding-block-end: #{var-stroke-relative('400')};
+            }
         }
 
         [data-toggle-control] {
@@ -252,13 +322,21 @@
         }
 
         [data-toggle-container='open'] {
-            .toggle-icon {
-                > svg {
-                    #b {
-                        opacity: 0;
+            > .toggle-title {
+                .toggle-icon {
+                    svg {
+                        #b {
+                            opacity: 0;
+                        }
                     }
                 }
             }
+
+            // :where([data-toggle-container]) {
+            //     :where(.toggle-icon > svg #b) {
+            //         opacity: 1;
+            //     }
+            // }
 
             > [data-toggle-content] {
                 grid-template-rows: 1fr;

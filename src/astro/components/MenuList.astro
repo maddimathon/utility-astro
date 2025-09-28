@@ -46,11 +46,11 @@ const classes = submenu ? 'submenu' : null;
         { menu.map( ( item, index ) => ( ( item.href || item.child ) && (
             <li role="none">
                 { typeof item.href === 'string' ? (
-                    <a role="menuitem" href={item.href} set:html={item.label} aria-current={item.current ? 'page' : false} />
+                    <a role="menuitem" href={item.href} set:html={item.label} target={item.external ? '_blank' : undefined} aria-current={item.current ? 'page' : false} />
                 ) : item.href === false ? (
-                    <a role="menuitem" aria-disabled="true" set:html={item.label} />
+                    <a role="menuitem" aria-disabled="true" set:html={item.label} target={item.external ? '_blank' : undefined} />
                 ) : item.child?.length && (
-                    <span role="menuitem" set:html={item.label} />
+                    <span role="menuitem" set:html={item.label}  />
                 ) }
                 { item.child?.length && <Astro.self menu={item.child} submenu={true} /> }
             </li>

@@ -16,6 +16,8 @@
     @include snippet-support-content;
 }
 
+$_sels_allHeadings: selector-all-headings();
+
 %nav {
     ol,
     ul {
@@ -28,12 +30,12 @@
 }
 
 %content-header {
-    > :where(%h1, %h2, %h3, %h4, %h5, %h6),
+    > :where(#{$_sels_allHeadings}),
     > hgroup {
     }
 
-    > :where(%h1, %h2, %h3, %h4, %h5, %h6),
-    hgroup > :where(%h1, %h2, %h3, %h4, %h5, %h6) {
+    > :where(#{$_sels_allHeadings}),
+    hgroup > :where(#{$_sels_allHeadings}) {
         margin-block-start: 0;
     }
 

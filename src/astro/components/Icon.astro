@@ -1,0 +1,52 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as IconProps } from './Icon.d.ts';
+
+/* import - functions */
+
+/* import - values */
+import { SVG } from '../../ts/svg.js';
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Icon.d.ts';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<IconProps, 'div'>;
+
+const {
+    type,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<span
+    class:list={['icon', `icon--${type}`, classList]}
+    {...attributes}
+>
+    <Fragment set:html={SVG[type]} />
+</span>
+
+<style lang='scss'>
+    .icon {
+        display: inline-block;
+        height: 1.375em;
+        fill: currentColor;
+        vertical-align: middle;
+    }
+</style>

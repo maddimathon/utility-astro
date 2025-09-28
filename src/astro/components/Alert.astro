@@ -1,0 +1,45 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as AlertProps } from './Alert.d.ts';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import Icon from './Icon.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type * from './Alert.d.ts';
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<AlertProps, 'div'>;
+
+const {
+    type,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<div
+    class:list={['alert-block', classList]}
+    {...attributes}
+>
+    <Icon type={type} />
+    <slot name='headline' />
+    <slot />
+</div>
