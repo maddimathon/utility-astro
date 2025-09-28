@@ -12,7 +12,7 @@ import type { Props as IconProps } from './Icon.d.ts';
 /* import - functions */
 
 /* import - values */
-import { SVG } from '../../ts/svg.js';
+import { SVG, SVG_Label } from '../../ts/svg.js';
 
 /* import - components */
 
@@ -38,6 +38,7 @@ const {
 <span
     class:list={['icon', `icon--${type}`, classList]}
     {...attributes}
+    aria-label={`${SVG_Label} icon`}
 >
     <Fragment set:html={SVG[type]} />
 </span>
