@@ -7,7 +7,8 @@
 
 /* # FORCED COLOURS ONLY ==================================== */
 
-%forced-colors-mode-only {
+%forced-colors-mode-only,
+:global(.forced-colors-mode-only) {
     @include lib.snippet-forced-colors-mode-only;
 }
 

@@ -406,12 +406,12 @@ html {
     --fs-smaller-2: 0.8125rem;
     --fs-smaller-1: 0.9375rem;
     --fs-normal: 1rem;
-    --fs-bigger-1: 1.1875rem;
-    --fs-bigger-2: 1.3125rem;
-    --fs-bigger-3: 1.5625rem;
-    --fs-bigger-4: 1.8125rem;
-    --fs-bigger-5: 2.0625rem;
-    --fs-bigger-6: 2.375rem;
+    --fs-bigger-7: 2.75rem;
+    --fs-bigger-7: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-bigger-8: 3.1875rem;
+    --fs-bigger-8: clamp(2.375rem, 4.1875svw + 1rem, 3.5625rem);
+    --fs-bigger-9: 3.6875rem;
+    --fs-bigger-9: clamp(2.75rem, 4.8125svw + 1rem, 4.125rem);
 }
 
 /* #endregion Tokens - Font Size */
@@ -473,7 +473,7 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
 html {
-    --focus-ring-outline-width: 0.1875rem;
+    --focus-ring-outline-width: clamp(0.0625rem, 0.125em, 0.1875rem);
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }
@@ -500,22 +500,43 @@ html {
  */
 :focus {
     /* %focus-ring */
-    outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
+    outline: var(
+            --focus-ring-outline-width,
+            clamp(0.0625rem, 0.125em, 0.1875rem)
+        )
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-accent-bg, CanvasText)
+    );
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :where(.js__no-focusVisible) :focus {
     /* %focus-ring--where */
-    outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
+    outline: var(
+            --focus-ring-outline-width,
+            clamp(0.0625rem, 0.125em, 0.1875rem)
+        )
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-accent-bg, CanvasText)
+    );
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :focus-visible {
     /* %focus-ring--visible */
-    outline: var(--focus-ring-outline-width, 0.1875rem) dashed
-        var(--focus-ring-outline-color, var(--sys-clr-accent-bg, CanvasText));
+    outline: var(
+            --focus-ring-outline-width,
+            clamp(0.0625rem, 0.125em, 0.1875rem)
+        )
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-accent-bg, CanvasText)
+    );
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
@@ -1479,50 +1500,50 @@ input::placeholder {
     opacity: 1;
     color: currentColor;
 }
-[data-contrast-mode="low"] textarea::-moz-placeholder,
-[data-contrast-mode="low"] select::-moz-placeholder,
-[data-contrast-mode="low"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 62.5%, transparent);
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
-[data-contrast-mode="low"] textarea::placeholder,
-[data-contrast-mode="low"] select::placeholder,
-[data-contrast-mode="low"] input::placeholder {
-    color: color-mix(in srgb, currentColor 62.5%, transparent);
+textarea::placeholder,
+select::placeholder,
+input::placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
 @media (prefers-contrast: less) {
     textarea::-moz-placeholder,
     select::-moz-placeholder,
     input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 62.5%, transparent);
+        color: color-mix(in srgb, currentColor 75%, transparent);
     }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
-        color: color-mix(in srgb, currentColor 62.5%, transparent);
+        color: color-mix(in srgb, currentColor 75%, transparent);
     }
 }
 [data-contrast-mode="high"] textarea::-moz-placeholder,
 [data-contrast-mode="high"] select::-moz-placeholder,
 [data-contrast-mode="high"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
+    color: color-mix(in srgb, currentColor 90%, transparent);
 }
 [data-contrast-mode="high"] textarea::placeholder,
 [data-contrast-mode="high"] select::placeholder,
 [data-contrast-mode="high"] input::placeholder {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
+    color: color-mix(in srgb, currentColor 90%, transparent);
 }
 
 @media (prefers-contrast: more) {
     textarea::-moz-placeholder,
     select::-moz-placeholder,
     input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
+        color: color-mix(in srgb, currentColor 90%, transparent);
     }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
+        color: color-mix(in srgb, currentColor 90%, transparent);
     }
 }
 label + textarea,
@@ -1635,10 +1656,10 @@ a.button-secondary {
     line-height: var(--line-height-100, 1.1875);
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    --focus-ring-outline-color: var(--sys-clr-button-text, ButtonText);
+    --focus-ring-outline-color: var(--sys-clr-button-bg, ButtonFace);
     background-color: var(--sys-clr-button-bg, ButtonFace);
     color: var(--sys-clr-button-text, ButtonText);
-    accent-color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-bg, ButtonFace);
 }
 button:focus,
 [role="button"]:focus,
@@ -1648,57 +1669,11 @@ a.button:focus,
 input[type="reset"]:focus,
 :focus::file-selector-button,
 a.button-secondary:focus {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-text-hover,
-        SelectedItemText
-    );
+    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
-}
-button:focus:focus-within,
-[role="button"]:focus:focus-within,
-input[type="button"]:focus:focus-within,
-input[type="submit"]:focus:focus-within,
-a.button:focus:focus-within,
-input[type="reset"]:focus:focus-within,
-:focus:focus-within::file-selector-button,
-a.button-secondary:focus:focus-within {
-    opacity: 0.875;
-}
-button:focus:focus,
-[role="button"]:focus:focus,
-input[type="button"]:focus:focus,
-input[type="submit"]:focus:focus,
-a.button:focus:focus,
-input[type="reset"]:focus:focus,
-:focus:focus::file-selector-button,
-a.button-secondary:focus:focus {
-    opacity: 0.875;
-}
-
-@media (prefers-contrast: less) {
-    button:focus:focus-within,
-    [role="button"]:focus:focus-within,
-    input[type="button"]:focus:focus-within,
-    input[type="submit"]:focus:focus-within,
-    a.button:focus:focus-within,
-    input[type="reset"]:focus:focus-within,
-    :focus:focus-within::file-selector-button,
-    a.button-secondary:focus:focus-within {
-        opacity: 0.875;
-    }
-    button:focus:focus,
-    [role="button"]:focus:focus,
-    input[type="button"]:focus:focus,
-    input[type="submit"]:focus:focus,
-    a.button:focus:focus,
-    input[type="reset"]:focus:focus,
-    :focus:focus::file-selector-button,
-    a.button-secondary:focus:focus {
-        opacity: 0.875;
-    }
+    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
 }
 
 button:hover,
@@ -1709,57 +1684,11 @@ a.button:hover,
 input[type="reset"]:hover,
 :hover::file-selector-button,
 a.button-secondary:hover {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-text-hover,
-        SelectedItemText
-    );
+    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
-}
-button:hover:focus-within,
-[role="button"]:hover:focus-within,
-input[type="button"]:hover:focus-within,
-input[type="submit"]:hover:focus-within,
-a.button:hover:focus-within,
-input[type="reset"]:hover:focus-within,
-:hover:focus-within::file-selector-button,
-a.button-secondary:hover:focus-within {
-    opacity: 0.875;
-}
-button:hover:hover,
-[role="button"]:hover:hover,
-input[type="button"]:hover:hover,
-input[type="submit"]:hover:hover,
-a.button:hover:hover,
-input[type="reset"]:hover:hover,
-:hover:hover::file-selector-button,
-a.button-secondary:hover:hover {
-    opacity: 0.875;
-}
-
-@media (prefers-contrast: less) {
-    button:hover:focus-within,
-    [role="button"]:hover:focus-within,
-    input[type="button"]:hover:focus-within,
-    input[type="submit"]:hover:focus-within,
-    a.button:hover:focus-within,
-    input[type="reset"]:hover:focus-within,
-    :hover:focus-within::file-selector-button,
-    a.button-secondary:hover:focus-within {
-        opacity: 0.875;
-    }
-    button:hover:hover,
-    [role="button"]:hover:hover,
-    input[type="button"]:hover:hover,
-    input[type="submit"]:hover:hover,
-    a.button:hover:hover,
-    input[type="reset"]:hover:hover,
-    :hover:hover::file-selector-button,
-    a.button-secondary:hover:hover {
-        opacity: 0.875;
-    }
+    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
 }
 
 button:focus-within,
@@ -1770,75 +1699,96 @@ a.button:focus-within,
 input[type="reset"]:focus-within,
 :focus-within::file-selector-button,
 a.button-secondary:focus-within {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-text-hover,
-        SelectedItemText
-    );
+    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
 }
-button:focus-within:focus-within,
-[role="button"]:focus-within:focus-within,
-input[type="button"]:focus-within:focus-within,
-input[type="submit"]:focus-within:focus-within,
-a.button:focus-within:focus-within,
-input[type="reset"]:focus-within:focus-within,
-:focus-within:focus-within::file-selector-button,
-a.button-secondary:focus-within:focus-within {
+
+[data-contrast-mode="low"] button:focus-within,
+[data-contrast-mode="low"] [role="button"]:focus-within,
+[data-contrast-mode="low"] input[type="button"]:focus-within,
+[data-contrast-mode="low"] input[type="submit"]:focus-within,
+[data-contrast-mode="low"] a.button:focus-within,
+[data-contrast-mode="low"] input[type="reset"]:focus-within,
+[data-contrast-mode="low"] :focus-within::file-selector-button,
+[data-contrast-mode="low"] a.button-secondary:focus-within,
+[data-contrast-mode="average"] button:focus-within,
+[data-contrast-mode="average"] [role="button"]:focus-within,
+[data-contrast-mode="average"] input[type="button"]:focus-within,
+[data-contrast-mode="average"] input[type="submit"]:focus-within,
+[data-contrast-mode="average"] a.button:focus-within,
+[data-contrast-mode="average"] input[type="reset"]:focus-within,
+[data-contrast-mode="average"] :focus-within::file-selector-button,
+[data-contrast-mode="average"] a.button-secondary:focus-within {
     opacity: 0.875;
 }
-button:focus-within:focus,
-[role="button"]:focus-within:focus,
-input[type="button"]:focus-within:focus,
-input[type="submit"]:focus-within:focus,
-a.button:focus-within:focus,
-input[type="reset"]:focus-within:focus,
-:focus-within:focus::file-selector-button,
-a.button-secondary:focus-within:focus,
-button:focus-within:hover,
-[role="button"]:focus-within:hover,
-input[type="button"]:focus-within:hover,
-input[type="submit"]:focus-within:hover,
-a.button:focus-within:hover,
-input[type="reset"]:focus-within:hover,
-:focus-within:hover::file-selector-button,
-a.button-secondary:focus-within:hover {
+[data-contrast-mode="low"] button:focus,
+[data-contrast-mode="low"] [role="button"]:focus,
+[data-contrast-mode="low"] input[type="button"]:focus,
+[data-contrast-mode="low"] input[type="submit"]:focus,
+[data-contrast-mode="low"] a.button:focus,
+[data-contrast-mode="low"] button:hover,
+[data-contrast-mode="low"] [role="button"]:hover,
+[data-contrast-mode="low"] input[type="button"]:hover,
+[data-contrast-mode="low"] input[type="submit"]:hover,
+[data-contrast-mode="low"] a.button:hover,
+[data-contrast-mode="low"] input[type="reset"]:focus,
+[data-contrast-mode="low"] :focus::file-selector-button,
+[data-contrast-mode="low"] a.button-secondary:focus,
+[data-contrast-mode="low"] input[type="reset"]:hover,
+[data-contrast-mode="low"] :hover::file-selector-button,
+[data-contrast-mode="low"] a.button-secondary:hover,
+[data-contrast-mode="average"] button:focus,
+[data-contrast-mode="average"] [role="button"]:focus,
+[data-contrast-mode="average"] input[type="button"]:focus,
+[data-contrast-mode="average"] input[type="submit"]:focus,
+[data-contrast-mode="average"] a.button:focus,
+[data-contrast-mode="average"] button:hover,
+[data-contrast-mode="average"] [role="button"]:hover,
+[data-contrast-mode="average"] input[type="button"]:hover,
+[data-contrast-mode="average"] input[type="submit"]:hover,
+[data-contrast-mode="average"] a.button:hover,
+[data-contrast-mode="average"] input[type="reset"]:focus,
+[data-contrast-mode="average"] :focus::file-selector-button,
+[data-contrast-mode="average"] a.button-secondary:focus,
+[data-contrast-mode="average"] input[type="reset"]:hover,
+[data-contrast-mode="average"] :hover::file-selector-button,
+[data-contrast-mode="average"] a.button-secondary:hover {
     opacity: 0.875;
 }
 
 @media (prefers-contrast: less) {
-    button:focus-within:focus-within,
-    [role="button"]:focus-within:focus-within,
-    input[type="button"]:focus-within:focus-within,
-    input[type="submit"]:focus-within:focus-within,
-    a.button:focus-within:focus-within,
-    input[type="reset"]:focus-within:focus-within,
-    :focus-within:focus-within::file-selector-button,
-    a.button-secondary:focus-within:focus-within {
+    button:focus-within,
+    [role="button"]:focus-within,
+    input[type="button"]:focus-within,
+    input[type="submit"]:focus-within,
+    a.button:focus-within,
+    input[type="reset"]:focus-within,
+    :focus-within::file-selector-button,
+    a.button-secondary:focus-within {
         opacity: 0.875;
     }
-    button:focus-within:focus,
-    [role="button"]:focus-within:focus,
-    input[type="button"]:focus-within:focus,
-    input[type="submit"]:focus-within:focus,
-    a.button:focus-within:focus,
-    input[type="reset"]:focus-within:focus,
-    :focus-within:focus::file-selector-button,
-    a.button-secondary:focus-within:focus,
-    button:focus-within:hover,
-    [role="button"]:focus-within:hover,
-    input[type="button"]:focus-within:hover,
-    input[type="submit"]:focus-within:hover,
-    a.button:focus-within:hover,
-    input[type="reset"]:focus-within:hover,
-    :focus-within:hover::file-selector-button,
-    a.button-secondary:focus-within:hover {
+    button:focus,
+    [role="button"]:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    a.button:focus,
+    button:hover,
+    [role="button"]:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    a.button:hover,
+    input[type="reset"]:focus,
+    :focus::file-selector-button,
+    a.button-secondary:focus,
+    input[type="reset"]:hover,
+    :hover::file-selector-button,
+    a.button-secondary:hover {
         opacity: 0.875;
     }
 }
-
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
@@ -1847,11 +1797,11 @@ a.button:active,
 input[type="reset"]:active,
 :active::file-selector-button,
 a.button-secondary:active {
-    --focus-ring-outline-color: var(--sys-clr-button-text-active, ButtonText);
+    --focus-ring-outline-color: var(--sys-clr-button-bg-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
     color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-bg-active, ButtonFace);
 }
 button,
 [role="button"],
@@ -2011,28 +1961,16 @@ th {
     font-size: var(--fs-normal, 1rem);
 }
 
-.font-size-bigger-1 {
-    font-size: var(--fs-bigger-1, 1.1875rem);
+.font-size-bigger-7 {
+    font-size: var(--fs-bigger-7, 2.75rem);
 }
 
-.font-size-bigger-2 {
-    font-size: var(--fs-bigger-2, 1.3125rem);
+.font-size-bigger-8 {
+    font-size: var(--fs-bigger-8, 3.1875rem);
 }
 
-.font-size-bigger-3 {
-    font-size: var(--fs-bigger-3, 1.5625rem);
-}
-
-.font-size-bigger-4 {
-    font-size: var(--fs-bigger-4, 1.8125rem);
-}
-
-.font-size-bigger-5 {
-    font-size: var(--fs-bigger-5, 2.0625rem);
-}
-
-.font-size-bigger-6 {
-    font-size: var(--fs-bigger-6, 2.375rem);
+.font-size-bigger-9 {
+    font-size: var(--fs-bigger-9, 3.6875rem);
 }
 
 /*! end of @maddimathon/utility-sass/templates/base */

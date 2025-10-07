@@ -4,6 +4,7 @@
         "@releases/**/*": true,
         "dist/**/*": true,
         "docs/**/*": true,
+        "node_modules/**/*": true,
         "src/astro/css/**/*": true,
         "src/docs/css/**/*": true,
     },

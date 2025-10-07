@@ -1,1 +1,9 @@
 /* # FORCED COLOURS ONLY ==================================== */
+:global(.forced-colors-mode-only) {
+    display: none !important;
+}
+@media (forced-colors: active), (prefers-contrast: custom) {
+    :global(.forced-colors-mode-only) {
+        display: var(--display, block) !important;
+    }
+}

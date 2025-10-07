@@ -126,6 +126,7 @@
 
                     margin: 0;
                     padding: #{var-mrg-soft('200')} #{var-mrg-soft('200')};
+                    border: none;
 
                     justify-self: end;
                 }
@@ -229,6 +230,8 @@
                     max-height: calc(
                         90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
+
+                    border: none;
                     overflow: auto;
 
                     > .container {

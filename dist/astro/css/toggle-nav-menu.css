@@ -31,7 +31,6 @@
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     background: var(--sys-clr-background, Canvas);
-    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
@@ -43,7 +42,6 @@
     border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
     font-size: var(--fs-heading-6, 1.1875rem);
     background: var(--sys-clr-background, Canvas);
-    color: var(--sys-clr-text, CanvasText);
 }
 :where(.js)
     body

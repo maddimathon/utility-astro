@@ -56,7 +56,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 
                             padding-inline: #{var-mrg-firm('300')};
                             background: #{var-sys-colour(background)};
-                            color: #{var-sys-colour(text)};
+                            // color: #{var-sys-colour(text)};
                         }
                     }
 
@@ -74,7 +74,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 
                         font-size: #{var-fs(heading-6)};
                         background: #{var-sys-colour(background)};
-                        color: #{var-sys-colour(text)};
+                        // color: #{var-sys-colour(text)};
 
                         [data-toggle-control] {
                             @include snippet-support-content--page-width;
