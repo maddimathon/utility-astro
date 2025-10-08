@@ -277,7 +277,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     --display: block;
     display: block;
     margin: 0;
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-soft-200, 0.3125rem);
+    padding: var(--mrg-firm-200, 0.5rem) var(--mrg-firm-200, 0.5rem);
     border: none;
     justify-self: end;
 }

@@ -6,6 +6,7 @@
 @forward '../../global/config' with (
     $include_html: true !default,
 
+    $internal_extendSelectors: false,
     $internal_supressCredit: true,
 
     $print_astro: false !default,

@@ -6,8 +6,8 @@
 @forward '../../../config' with (
     $include_html: false !default,
 
-    $internal_supressCredit: true,
     $internal_sass_supressCredit: true !default,
+    $internal_supressCredit: true,
 
     $mx_extendHeadingsByRole: false !default,
 

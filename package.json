@@ -102,7 +102,9 @@
             "./dist/scss/lib/*",
             "./dist/scss/lib/_*",
             "./dist/scss/lib/*/index.scss",
-            "./dist/scss/lib/*/_index.scss"
+            "./dist/scss/lib/*/_index.scss",
+            "./dist/scss/templates/_*/index.scss",
+            "./dist/scss/templates/_*/_index.scss"
         ],
 
         "./*": {
@@ -113,7 +115,9 @@
                 "./dist/scss/lib/*",
                 "./dist/scss/lib/_*",
                 "./dist/scss/lib/*/index.scss",
-                "./dist/scss/lib/*/_index.scss"
+                "./dist/scss/lib/*/_index.scss",
+                "./dist/scss/templates/_*/index.scss",
+                "./dist/scss/templates/_*/_index.scss"
             ],
 
             "types": [

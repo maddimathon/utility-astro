@@ -7,11 +7,10 @@
     $print_utils, $print_tokens, print-globals, print-utils, print-tokens;
 
 @forward 'include';
-@forward 'support';
 
 @use '_lib' as lib;
 
-$internal_extendSelectors: true !default;
+$internal_extendSelectors: false !default;
 $internal_extendSelectors: lib.config-valid-bool(
     $internal_extendSelectors,
     'internal_extendSelectors'

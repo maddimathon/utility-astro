@@ -3,7 +3,7 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'lib' hide $internal_extendSelectors, $internal_supressCredit;
+@forward '_lib' hide $internal_extendSelectors, $internal_supressCredit;
 
 @use '../../tokens/config';
 
@@ -38,4 +38,10 @@ $print_astro_toggle: $print_astro !default;
 $print_astro_toggle: config.config-valid-bool(
     $print_astro_toggle,
     'print_astro_toggle'
+);
+
+$print_astro_toggleNav: $print_astro !default;
+$print_astro_toggleNav: config.config-valid-bool(
+    $print_astro_toggleNav,
+    'print_astro_toggleNav'
 );

@@ -3,8 +3,7 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '../../tokens/_content' hide extend-selector-globals,
-    extend-selector-utils;
+@forward '../../tokens/_content';
 
 @forward '01-globals';
 @forward '02-layouts';

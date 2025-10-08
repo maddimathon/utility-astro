@@ -1,9 +1,10 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
 ///
 
 @forward '../../html/config' with (
+    $internal_extendSelectors: false,
     $internal_supressCredit: true,
     $include_featureCheck: true !default,
     $mx_extendHeadingsByRole: false !default,

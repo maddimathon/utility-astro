@@ -239,12 +239,6 @@ html {
 }
 
 /* #endregion Tokens - Width */
-/*!
- * Utility Sass Template - Base
- * 
- * @maddimathon/utility-sass@0.1.0-alpha.draft
- * License: MIT
- */
 :focus {
     /* %focus-ring */
     outline: var(
@@ -1434,7 +1428,6 @@ th {
     color: var(--sys-clr-accent-text, Canvas);
 }
 
-/*! end of @maddimathon/utility-sass/templates/base */
 nav ol,
 nav ul {
     margin-top: 0;

@@ -9,11 +9,7 @@
 
 @forward '00-abstracts';
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base' hide
-        $internal_supressCredit,
-    $print_globals, $print_normalize, $print_utils, $print_tokens,
-    extend-selector-globals, extend-selector-utils, print-globals, print-utils,
-    print-tokens, tokens-all, tokens-width, width-value, var-width;
+@forward 'pkg:@maddimathon/utility-sass/templates/base/_content';
 
 // @forward '01-accessibility';
 // @forward '02-objects';

@@ -3,9 +3,15 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'lib' hide $internal_supressCredit;
+@forward '_lib' hide $internal_extendSelectors, $internal_supressCredit;
 
 @use '../../html/config';
+
+$internal_extendSelectors: true !default;
+$internal_extendSelectors: config.config-valid-bool(
+    $internal_extendSelectors,
+    'internal_extendSelectors'
+);
 
 $internal_supressCredit: false !default;
 $internal_supressCredit: config.config-valid-bool(
