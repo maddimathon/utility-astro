@@ -41,7 +41,7 @@ export type Props<
 > = GenericProps<{
 
     /**
-     * Page title.
+     * Page title. Used for metadata default and passed to the Content component.
      */
     title: string | string[];
 
@@ -50,12 +50,8 @@ export type Props<
      */
     meta: Page_MetaProps;
 
-    // } & {
     dir?: "ltr" | "rtl" | "auto";
     lang: string;
-    // } & {
-    //     [ K in Exclude<HTML_excludeAttributes, "dir" | "lang"> ]: HTMLAttributes<"html">[ K ];
-    // } & {
 
     /**
      * Email used for focus links to report accessibility issues.
@@ -73,7 +69,7 @@ export type Props<
     /**
      * Configuration for the child Content component.
      */
-    content?: Omit<ContentProps<T_ContentType>, "type" | "subtitle">;
+    content?: Omit<ContentProps<T_ContentType>, "subtitle" | "title" | "type">;
 
     /**
      * The content to include in the page footer, if any.
@@ -203,7 +199,7 @@ export type Props<
     skipLinks?: SkipLinksProps[ 'links' ];
 
     /**
-     * Page subtitle.
+     * Page subtitle. Passed to the Content component.
      */
     subtitle?: string | null;
 

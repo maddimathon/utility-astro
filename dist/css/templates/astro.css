@@ -357,6 +357,7 @@ html {
     --mrg-firm-200: 0.5rem;
     --mrg-firm-300: 0.8125rem;
     --mrg-firm-400: 1.25rem;
+    --mrg-firm-500: 1.6875rem;
     --mrg-firm-600: 2.25rem;
     --mrg-firm-800: 4rem;
     --mrg-firm-900: 7.125rem;
@@ -367,6 +368,7 @@ html {
     --mrg-soft-200: 0.3125rem;
     --mrg-soft-300: 0.5rem;
     --mrg-soft-400: 0.8125rem;
+    --mrg-soft-500: 1.1875rem;
     --mrg-soft-600: 1.625rem;
     --mrg-soft-800: 3.125rem;
     --mrg-soft-900: 5.8125rem;
@@ -377,6 +379,7 @@ html {
     --mrg-half-200: 0.1875rem;
     --mrg-half-300: 0.3125rem;
     --mrg-half-400: 0.4375rem;
+    --mrg-half-500: 0.5rem;
     --mrg-half-600: 0.625rem;
     --mrg-half-800: 0.875rem;
     --mrg-half-900: 1.3125rem;
@@ -385,10 +388,8 @@ html {
 /* #endregion Tokens - Margin */
 /* #region Tokens - Font Size */
 html {
-    --fs-title: 2.75rem;
-    --fs-title: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
-    --fs-heading-1: 2.375rem;
-    --fs-heading-1: clamp(1.8125rem, 3.125svw + 1rem, 2.6875rem);
+    --fs-heading-1: 2.75rem;
+    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
     --fs-heading-2: 2.0625rem;
     --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
     --fs-heading-3: 1.8125rem;
@@ -473,7 +474,7 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
 html {
-    --focus-ring-outline-width: clamp(0.0625rem, 0.125em, 0.1875rem);
+    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.1875rem);
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }
@@ -497,7 +498,7 @@ html {
     /* %focus-ring */
     outline: var(
             --focus-ring-outline-width,
-            clamp(0.0625rem, 0.125em, 0.1875rem)
+            clamp(0.125rem, 0.125em, 0.1875rem)
         )
         dashed currentColor;
     outline-color: var(
@@ -511,7 +512,7 @@ html {
     /* %focus-ring--where */
     outline: var(
             --focus-ring-outline-width,
-            clamp(0.0625rem, 0.125em, 0.1875rem)
+            clamp(0.125rem, 0.125em, 0.1875rem)
         )
         dashed currentColor;
     outline-color: var(
@@ -525,7 +526,7 @@ html {
     /* %focus-ring--visible */
     outline: var(
             --focus-ring-outline-width,
-            clamp(0.0625rem, 0.125em, 0.1875rem)
+            clamp(0.125rem, 0.125em, 0.1875rem)
         )
         dashed currentColor;
     outline-color: var(
@@ -643,11 +644,12 @@ i i i {
 
 a {
     --focus-ring-outline-color: currentColor;
+    --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
     border: none;
     -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
-    text-underline-offset: var(--stroke-relative-600, 0.1875em);
+    text-underline-offset: var(--stroke-relative-800, 0.25em);
     color: var(--sys-clr-link, LinkText);
 }
 a:visited {
@@ -799,9 +801,9 @@ h1,
 .h1,
 .page-title {
     margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
-    font-size: var(--fs-heading-1, 2.375rem);
+    font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
 }
@@ -828,7 +830,7 @@ h1 a.button,
 h2,
 .h2 {
     margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
@@ -852,7 +854,7 @@ h2 a.button,
 h3,
 .h3 {
     margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
@@ -876,7 +878,7 @@ h3 a.button,
 h4,
 .h4 {
     margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
@@ -917,7 +919,7 @@ h4 a.button,
 h5,
 .h5 {
     margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
@@ -958,7 +960,7 @@ h5 a.button,
 h6,
 .h6 {
     margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: 0;
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
@@ -997,25 +999,15 @@ h6 a.button,
 }
 
 .h7 {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    font-weight: 600;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
-    font-style: italic;
-}
-.h7 em,
-.h7 i {
     font-style: normal;
-}
-.h7 em em,
-.h7 em i,
-.h7 i em,
-.h7 i i {
-    font-style: italic;
 }
 .h7 button,
 .h7 [role="button"],
@@ -1028,9 +1020,9 @@ h6 a.button,
 }
 
 .h8 {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    font-weight: 400;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
@@ -1191,27 +1183,15 @@ fieldset > legend + * {
 }
 
 fieldset legend {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    font-weight: 600;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
-    font-style: italic;
-}
-fieldset legend em,
-fieldset legend i {
     font-style: normal;
-}
-fieldset legend em em,
-fieldset legend em i,
-fieldset legend i em,
-fieldset legend i i {
-    font-style: italic;
-}
-fieldset legend {
     margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-top: 0;
@@ -1838,12 +1818,8 @@ th {
     color: var(--sys-clr-accent-text, Canvas);
 }
 
-.font-size-title {
-    font-size: var(--fs-title, 2.75rem);
-}
-
 .font-size-heading-1 {
-    font-size: var(--fs-heading-1, 2.375rem);
+    font-size: var(--fs-heading-1, 2.75rem);
 }
 
 .font-size-heading-2 {
@@ -2025,6 +2001,10 @@ body > footer {
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: var(--gap-block-layout, 5vw);
 }
+body > aside > :first-child {
+    margin-top: 0;
+}
+
 :where(.layout_full-width > main > *) {
     grid-column: page-start/page-end;
     width: auto;
@@ -2077,17 +2057,10 @@ body > footer {
     }
 }
 
-nav ol,
-nav ul {
+.content-header > :first-child,
+.content-header > hgroup > :first-child {
     margin-top: 0;
-    margin-bottom: 0;
 }
-nav ol li,
-nav ul li {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .content-header
     > :where(
         title,
@@ -2127,19 +2100,14 @@ nav ul li {
     ) {
     margin-top: 0;
 }
-.content-header + * {
+.content-header + :where(*) {
     margin-top: var(--mrg-soft-600, 1.625rem);
 }
 
-body > aside > :first-child {
-    margin-top: 0;
-}
-
 .page-subtitle {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-top: var(--mrg-soft-200, 0.3125rem);
     margin-bottom: 0;
     font-weight: 500;
-    font-style: italic;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
@@ -2153,15 +2121,16 @@ body > aside > :first-child {
         opacity: 0.75;
     }
 }
-.page-subtitle em,
-.page-subtitle i {
-    font-style: normal;
+
+nav ol,
+nav ul {
+    margin-top: 0;
+    margin-bottom: 0;
 }
-.page-subtitle em em,
-.page-subtitle em i,
-.page-subtitle i em,
-.page-subtitle i i {
-    font-style: italic;
+nav ol li,
+nav ul li {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 [data-toggle-content] > .container,
@@ -2433,7 +2402,6 @@ body > aside > :first-child {
     grid-row: 1/1;
 }
 :where(.js) .toggle-title {
-    padding-bottom: var(--mrg-firm-200, 0.5rem);
     z-index: 2;
 }
 :where(.js) .toggle-title > title,
@@ -2473,7 +2441,24 @@ body > aside > :first-child {
 :where(.js) .toggle-title > .page-title [data-toggle-control] {
     font: inherit;
 }
-:where(.js) .toggle-title > .page-title,
+:where(.js) [data-toggle-control] {
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    font-weight: 600;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    cursor: pointer;
+}
+:where(.js) [data-toggle-control] .icon,
+:where(.js) [data-toggle-control] .icon svg {
+    display: block;
+    grid-column: icon;
+}
+:where(.js) .toggle-title > title,
 :where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h2,
@@ -2485,24 +2470,11 @@ body > aside > :first-child {
 :where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h5,
 :where(.js) .toggle-title > h6,
-:where(.js) .toggle-title > .h6 {
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
     padding-bottom: var(--stroke-relative-400, 0.125em);
-}
-:where(.js) [data-toggle-control] {
-    align-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    cursor: pointer;
-}
-:where(.js) [data-toggle-control] .icon,
-:where(.js) [data-toggle-control] .icon svg {
-    display: block;
-    grid-column: icon;
 }
 :where(.js) .toggle-control-inner {
     grid-column: content;
@@ -2540,7 +2512,7 @@ body > aside > :first-child {
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {
     grid-template-rows: 1fr;
-    border: var(--border-width-200, 0.125rem) dashed currentColor;
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
     border-top-style: solid;
 }
 :where(.js)
@@ -2616,7 +2588,7 @@ body > aside > :first-child {
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
-    margin-bottom: var(--border-width-200, 0.125rem);
+    margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;
 }
@@ -2670,7 +2642,7 @@ body > aside > :first-child {
     > .container {
     padding-top: var(--mrg-soft-400, 0.8125rem);
     padding-bottom: var(--mrg-soft-400, 0.8125rem);
-    border: var(--border-width-200, 0.125rem) dashed currentColor;
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
     border-top: none;
 }
 
@@ -2952,9 +2924,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     --display: block;
     display: block;
     margin: 0;
-    padding: var(--mrg-firm-200, 0.5rem) var(--mrg-firm-200, 0.5rem);
+    padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
     border: none;
     justify-self: end;
+}
+:where(.js) .website-settings-menu [data-toggle-control] .settings-icon > svg {
+    --icon-size: 1.625rem;
+    height: var(--icon-size);
+    width: var(--icon-size);
 }
 :where(.js)
     .website-settings-menu

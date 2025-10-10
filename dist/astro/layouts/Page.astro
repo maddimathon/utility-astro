@@ -57,11 +57,13 @@ const content = {
 
     ...p.content,
 
-    type: p.layout,
+    subtitle: p.subtitle,
 
-    title: Array.isArray(p.title)
-        ? ( p.title.length ? p.title:[] ) 
-        : ( p.title.length ? [p.title]:[] ),
+    title: Array.isArray( p.title )
+        ? ( p.title.length ? p.title: [] ) 
+        : ( p.title.length ? [ p.title ]: [] ),
+
+    type: p.layout,
 
 } satisfies ContentProps<ContentType>;
 

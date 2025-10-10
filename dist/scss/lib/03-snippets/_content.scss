@@ -244,6 +244,10 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                 margin-block: #{var-gap-block(layout)} 0;
             }
 
+            > header,
+            > footer,
+            > main,
+            > nav,
             > %body-subgrid {
                 @extend %_body-subgrid;
                 grid-column: 1 / -1;
@@ -299,6 +303,10 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 
             > aside {
                 @extend %_sidebar-width;
+
+                > :first-child {
+                    margin-block-start: 0;
+                }
             }
         }
 

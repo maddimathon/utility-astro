@@ -7,16 +7,53 @@
 
 @use '../../lib' as *;
 
-@if config.$print_astro_content {
+@if config.$print_astro_content or config.$print_globals {
     @include config.print-headings {
         /* # ASTRO LAYOUT SUPPORT
          * ======================================================================== */
     }
-
-    @include snippet-support-content;
 }
 
-$_sels_allHeadings: selector-all-headings();
+@if config.$print_astro_content {
+    @include snippet-support-content;
+
+    $_sels_allHeadings: selector-all-headings();
+
+    %content-header {
+        &,
+        > hgroup {
+            > :first-child {
+                margin-block-start: 0;
+            }
+        }
+
+        > :where(#{$_sels_allHeadings}),
+        > hgroup {
+        }
+
+        > :where(#{$_sels_allHeadings}),
+        hgroup > :where(#{$_sels_allHeadings}) {
+            margin-block-start: 0;
+        }
+
+        + :where(*) {
+            margin-block-start: #{var-mrg-soft('600')};
+        }
+    }
+
+    %page-subtitle {
+        margin-block: #{var-mrg-soft('200')} 0;
+
+        font-weight: 500;
+        font-size: #{var-fs(heading-6)};
+        line-height: #{var-line-height('300')};
+        text-wrap: balance;
+
+        @include colour-mode((low, average)) {
+            opacity: 0.75;
+        }
+    }
+}
 
 %nav {
     ol,
@@ -25,50 +62,6 @@ $_sels_allHeadings: selector-all-headings();
 
         li {
             margin-block: 0;
-        }
-    }
-}
-
-%content-header {
-    > :where(#{$_sels_allHeadings}),
-    > hgroup {
-    }
-
-    > :where(#{$_sels_allHeadings}),
-    hgroup > :where(#{$_sels_allHeadings}) {
-        margin-block-start: 0;
-    }
-
-    + * {
-        margin-block-start: #{var-mrg-soft('600')};
-    }
-}
-
-%body > aside {
-    > :first-child {
-        margin-block-start: 0;
-    }
-}
-
-%page-subtitle {
-    margin-block: #{var-mrg-soft('400')} 0;
-    font-weight: 500;
-    font-style: italic;
-    font-size: #{var-fs(heading-6)};
-    line-height: #{var-line-height('300')};
-    text-wrap: balance;
-
-    @include colour-mode((low, average)) {
-        opacity: 0.75;
-    }
-
-    em,
-    i {
-        font-style: normal;
-
-        em,
-        i {
-            font-style: italic;
         }
     }
 }

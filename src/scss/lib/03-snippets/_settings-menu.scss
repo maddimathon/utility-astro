@@ -125,10 +125,18 @@
                     display: block;
 
                     margin: 0;
-                    padding: #{var-mrg-firm('200')} #{var-mrg-firm('200')};
+                    padding: #{var-mrg-firm('100')} #{var-mrg-firm('100')};
                     border: none;
 
                     justify-self: end;
+                }
+
+                .settings-icon {
+                    > svg {
+                        --icon-size: 1.625rem;
+                        height: var(--icon-size);
+                        width: var(--icon-size);
+                    }
                 }
 
                 &.website-settings__backdrop {

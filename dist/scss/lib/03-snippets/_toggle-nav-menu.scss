@@ -16,6 +16,7 @@
 $_default_grid_page: snippet-support-content--default-grid-page();
 
 $_titleBorderWidth: var-border-width('200');
+$_titleBorderWidth_half: var-border-width('100');
 
 ///
 /// Supports the ToggleNavMenu astro component.
@@ -50,7 +51,7 @@ $_titleBorderWidth: var-border-width('200');
                     }
 
                     [data-toggle-content] {
-                        margin-block-end: #{$_titleBorderWidth};
+                        margin-block-end: #{$_titleBorderWidth_half};
                         padding: 0;
                         border: none;
 
@@ -59,7 +60,6 @@ $_titleBorderWidth: var-border-width('200');
 
                             padding-inline: #{var-mrg-firm('300')};
                             background: #{var-sys-colour(background)};
-                            // color: #{var-sys-colour(text)};
                         }
                     }
 
@@ -77,7 +77,6 @@ $_titleBorderWidth: var-border-width('200');
 
                         font-size: #{var-fs(heading-6)};
                         background: #{var-sys-colour(background)};
-                        // color: #{var-sys-colour(text)};
 
                         [data-toggle-control] {
                             @include snippet-support-content--page-width;
@@ -105,7 +104,7 @@ $_titleBorderWidth: var-border-width('200');
 
                         > .container {
                             padding-block: #{var-mrg-soft('400')};
-                            border: #{$_titleBorderWidth} dashed currentColor;
+                            border: #{$_titleBorderWidth} dotted currentColor;
                             border-block-start: none;
                         }
                     }

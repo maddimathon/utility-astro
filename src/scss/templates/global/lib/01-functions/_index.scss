@@ -22,8 +22,8 @@
         ('.layout_sidebar-left', 'layout-sidebar-left'),
         ('.layout_sidebar-right', 'layout-sidebar-right'),
         ('.content-header', 'content-header'),
-        ((pre, table), 'callout-width'),
-        ((header, footer, main, nav), 'body-subgrid')
+        ('.page-subtitle', 'page-subtitle'),
+        ((pre, table), 'callout-width')
     );
 
     @if config.$print_astro_settingsMenu {

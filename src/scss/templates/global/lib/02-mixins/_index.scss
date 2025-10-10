@@ -43,7 +43,7 @@ $_astroContentLayoutSelectors: if(
 
 @mixin extend-selector-utils($additional: (), $optional: null) {
     //
-    $additional: list.append($additional, ('.page-subtitle', 'page-subtitle'));
+    // $additional: list.append($additional, ('.page-subtitle', 'page-subtitle'));
 
     @if config.$print_astro_content {
         $additional: list.join(

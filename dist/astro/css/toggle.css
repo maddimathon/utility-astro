@@ -268,7 +268,6 @@
     grid-row: 1/1;
 }
 :where(.js) .toggle-title {
-    padding-bottom: var(--mrg-firm-200, 0.5rem);
     z-index: 2;
 }
 :where(.js) .toggle-title > title,
@@ -308,7 +307,24 @@
 :where(.js) .toggle-title > .page-title [data-toggle-control] {
     font: inherit;
 }
-:where(.js) .toggle-title > .page-title,
+:where(.js) [data-toggle-control] {
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    font-weight: 600;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    cursor: pointer;
+}
+:where(.js) [data-toggle-control] .icon,
+:where(.js) [data-toggle-control] .icon svg {
+    display: block;
+    grid-column: icon;
+}
+:where(.js) .toggle-title > title,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h2,
@@ -320,24 +336,11 @@
 :where(.js) .toggle-title > .h5,
 :where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h6,
-:where(.js) .toggle-title > h6 {
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
     padding-bottom: var(--stroke-relative-400, 0.125em);
-}
-:where(.js) [data-toggle-control] {
-    align-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    cursor: pointer;
-}
-:where(.js) [data-toggle-control] .icon,
-:where(.js) [data-toggle-control] .icon svg {
-    display: block;
-    grid-column: icon;
 }
 :where(.js) .toggle-control-inner {
     grid-column: content;
@@ -375,7 +378,7 @@
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {
     grid-template-rows: 1fr;
-    border: var(--border-width-200, 0.125rem) dashed currentColor;
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
     border-top-style: solid;
 }
 :where(.js)

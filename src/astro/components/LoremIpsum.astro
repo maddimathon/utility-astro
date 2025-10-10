@@ -72,7 +72,12 @@ const allHeadingLevels = arrayUnique(
         ? props.allHeadingLevels.map( Number ).filter(num=>!Number.isNaN(num))
         : [7, 8]
     )
-).sort();
+).map( 
+    num => {
+        const str = num.toString()
+        return str.padStart( 10 - str.length, '0' );
+    }
+ ).sort().map( Number );
 
 const {
     fancy,
@@ -112,15 +117,14 @@ const code = {
 
 { fancy && (
     <hr>
-    <p id="title" class="page-title">Title (.page-title) Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>
+    <p class="page-title | loremipsum-heading-sample">Title (.page-title) Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
     <Fragment>
-        { allHeadingLevels.map((num)=>(
+        { allHeadingLevels.map( (num) => ( num > 1 ) && (
             <p 
-                class={`h${num}`}
-                id={`heading-${num}`}
-                set:text={`Heading ${num} Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum. Aenean Lacinia Urna Sed Lacus Interdum Faucibus.`}
+                class={`h${num} | loremipsum-heading-sample`}
+                set:text={`Heading ${num} Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus`}
             />
-        )) }
+        ) ) }
     </Fragment>
 ) }
 
@@ -392,3 +396,14 @@ const code = {
 
 </form>
 ) } */}
+
+
+<style>
+    .loremipsum-heading-sample {
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        overflow: hidden;
+    }
+</style>

@@ -149,21 +149,9 @@
         "astro:start": "astro dev",
 
         "preview": "astro preview",
-
-        "x-scripts-tsc": "tsc --project .scripts/classes/tsconfig.json",
-
-        "x-precompile":     "npm run scripts-tsc",
-        "x-predoc":         "npm run scripts-tsc",
-        "x-predocument":    "npm run scripts-tsc",
-        "x-prebuild":       "npm run scripts-tsc",
-        "x-prequick-build": "npm run scripts-tsc",
-        "x-prestart":       "npm run scripts-tsc",
-        "x-prepackage":     "npm run scripts-tsc",
-        "x-predryrun":      "npm run scripts-tsc",
-        "x-prerelease":     "npm run scripts-tsc",
         
         
-        "xx-prestart": "npm run scripts-tsc && build-utils build -- --without minimize,prettify --without-document astro",
+        "x-prestart": "build-utils build -- --without minimize,prettify --without-document astro",
 
         "start": "run-p watch:* start:*",
             "watch:astro": "watch                                                            -p 'src/astro/**/*'     -c 'build-utils compile  --only astro                               --watchedWatcher \"watch:astro\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",

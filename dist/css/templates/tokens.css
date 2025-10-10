@@ -103,6 +103,7 @@ html {
     --mrg-firm-200: 0.5rem;
     --mrg-firm-300: 0.8125rem;
     --mrg-firm-400: 1.25rem;
+    --mrg-firm-500: 1.6875rem;
     --mrg-firm-600: 2.25rem;
     --mrg-firm-800: 4rem;
     --mrg-firm-900: 7.125rem;
@@ -113,6 +114,7 @@ html {
     --mrg-soft-200: 0.3125rem;
     --mrg-soft-300: 0.5rem;
     --mrg-soft-400: 0.8125rem;
+    --mrg-soft-500: 1.1875rem;
     --mrg-soft-600: 1.625rem;
     --mrg-soft-800: 3.125rem;
     --mrg-soft-900: 5.8125rem;
@@ -123,6 +125,7 @@ html {
     --mrg-half-200: 0.1875rem;
     --mrg-half-300: 0.3125rem;
     --mrg-half-400: 0.4375rem;
+    --mrg-half-500: 0.5rem;
     --mrg-half-600: 0.625rem;
     --mrg-half-800: 0.875rem;
     --mrg-half-900: 1.3125rem;
@@ -131,10 +134,8 @@ html {
 /* #endregion Tokens - Margin */
 /* #region Tokens - Font Size */
 html {
-    --fs-title: 2.75rem;
-    --fs-title: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
-    --fs-heading-1: 2.375rem;
-    --fs-heading-1: clamp(1.8125rem, 3.125svw + 1rem, 2.6875rem);
+    --fs-heading-1: 2.75rem;
+    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
     --fs-heading-2: 2.0625rem;
     --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
     --fs-heading-3: 1.8125rem;
@@ -219,7 +220,7 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
 html {
-    --focus-ring-outline-width: clamp(0.0625rem, 0.125em, 0.1875rem);
+    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.1875rem);
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
 }

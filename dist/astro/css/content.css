@@ -26,12 +26,12 @@ body > aside {
 }
 
 body,
-body > .subgrid,
-body > .body-subgrid,
 body > header,
 body > footer,
 body > main,
-body > nav {
+body > nav,
+body > .subgrid,
+body > .body-subgrid {
     --display: grid;
     display: grid;
     position: relative;
@@ -52,12 +52,12 @@ body > nav {
 }
 :where(
     body > *,
-    body > .subgrid > *,
-    body > .body-subgrid > *,
     body > header > *,
     body > footer > *,
     body > main > *,
-    body > nav > *
+    body > nav > *,
+    body > .subgrid > *,
+    body > .body-subgrid > *
 ) {
     grid-column: content-start/content-end;
     width: auto;
@@ -82,12 +82,12 @@ body {
     margin-bottom: 0;
 }
 
-body > .subgrid,
-body > .body-subgrid,
 body > header,
 body > footer,
 body > main,
-body > nav {
+body > nav,
+body > .subgrid,
+body > .body-subgrid {
     grid-column: 1/-1;
     grid-template-columns: subgrid;
     margin-left: 0;
@@ -126,6 +126,10 @@ body > footer {
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: var(--gap-block-layout, 5vw);
 }
+body > aside > :first-child {
+    margin-top: 0;
+}
+
 :where(.layout_full-width > main > *) {
     grid-column: page-start/page-end;
     width: auto;
