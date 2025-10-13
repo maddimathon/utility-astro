@@ -36,13 +36,13 @@
     --sys-clr-button-text-active: ButtonText;
     --sys-clr-button-text-hover: SelectedItemText;
     --sys-clr-input-bg: Field;
-    --sys-clr-input-bg-hover: SelectedItem;
+    --sys-clr-input-bg-hover: Field;
     --sys-clr-input-bg-active: Field;
     --sys-clr-input-border: FieldText;
-    --sys-clr-input-border-hover: SelectedItem;
+    --sys-clr-input-border-hover: FieldText;
     --sys-clr-input-border-active: FieldText;
     --sys-clr-input-text: FieldText;
-    --sys-clr-input-text-hover: SelectedItemText;
+    --sys-clr-input-text-hover: FieldText;
     --sys-clr-input-text-active: FieldText;
     --sys-clr-link: LinkText;
     --sys-clr-link-active: ActiveText;
@@ -72,23 +72,24 @@
         --sys-clr-text-disabled: GrayText !important;
         --sys-clr-button-bg: ButtonFace !important;
         --sys-clr-button-bg-active: ButtonFace !important;
-        --sys-clr-button-bg-hover: SelectedItem !important;
+        --sys-clr-button-bg-hover: ButtonFace !important;
         --sys-clr-button-border: ButtonFace !important;
         --sys-clr-button-border: ButtonBorder !important;
         --sys-clr-button-border-active: ButtonFace !important;
         --sys-clr-button-border-active: ButtonBorder !important;
-        --sys-clr-button-border-hover: SelectedItem !important;
+        --sys-clr-button-border-hover: ButtonFace !important;
+        --sys-clr-button-border-hover: ButtonBorder !important;
         --sys-clr-button-text: ButtonText !important;
         --sys-clr-button-text-active: ButtonText !important;
-        --sys-clr-button-text-hover: SelectedItemText !important;
+        --sys-clr-button-text-hover: ButtonText !important;
         --sys-clr-input-bg: Field !important;
-        --sys-clr-input-bg-hover: SelectedItem !important;
+        --sys-clr-input-bg-hover: Field !important;
         --sys-clr-input-bg-active: Field !important;
         --sys-clr-input-border: FieldText !important;
-        --sys-clr-input-border-hover: SelectedItem !important;
+        --sys-clr-input-border-hover: FieldText !important;
         --sys-clr-input-border-active: FieldText !important;
         --sys-clr-input-text: FieldText !important;
-        --sys-clr-input-text-hover: SelectedItemText !important;
+        --sys-clr-input-text-hover: FieldText !important;
         --sys-clr-input-text-active: FieldText !important;
         --sys-clr-link: LinkText !important;
         --sys-clr-link-active: ActiveText !important;
@@ -220,9 +221,9 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
 html {
-    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.1875rem);
+    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     --focus-ring-outline-offset: 0.125em;
-    --focus-ring-outline-color: var(--sys-clr-accent-bg, CanvasText);
+    --focus-ring-outline-color: var(--sys-clr-link, LinkText);
 }
 
 /* #endregion Tokens - Misc. */

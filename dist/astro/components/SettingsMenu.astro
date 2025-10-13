@@ -17,6 +17,7 @@ import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 /* import - values */
 
 /* import - components */
+import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* import - layouts */
 
@@ -64,6 +65,8 @@ function optionHTML(
 /* CONSTANTS ===================================== */
 
 const buttonID = `${id}-button`;
+const contentID = `${id}-content`;
+const titleID = `${id}-title`;
 
 const accessEmailSubject =
     'Accessibility Issue — ' +
@@ -77,8 +80,42 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     contrast: false,
     motion: false,
 
+    custom: [],
+
     ...inputSettings,
 };
+
+const buttonSVG = `<span class='icon | settings-icon'>
+    <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        class='icon-cog'
+        role='img'
+        aria-hidden='true'
+    >
+        <path d='M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z'></path>
+        <path d='M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z'></path>
+        <path d='M12 2v2'></path>
+        <path d='M12 22v-2'></path>
+        <path d='m17 20.66-1-1.73'></path>
+        <path d='M11 10.27 7 3.34'></path>
+        <path d='m20.66 17-1.73-1'></path>
+        <path d='m3.34 7 1.73 1'></path>
+        <path d='M14 12h8'></path>
+        <path d='M2 12h2'></path>
+        <path d='m20.66 7-1.73 1'></path>
+        <path d='m3.34 17 1.73-1'></path>
+        <path d='m17 3.34-1 1.73'></path>
+        <path d='m11 13.73-4 6.93'></path>
+    </svg>
+</span>`;
 
 /**
  * Rendered slot HTML.
@@ -124,55 +161,29 @@ const slots_render = mapToObject(
         <!-- /SLOT: "settings-menu" -->
     ) : <!-- SLOT: "settings-menu" (empty) / --> }
 
-    <button
-        id={buttonID}
-        class='website-settings__toggle'
-        role='button'
-        aria-label='Toggle settings menu'
+    <div
+        id={titleID}
+        class='toggle-title'
         title='Accessibility & Display Settings'
-        data-toggle-control={id}
     >
-        <span class='icon | settings-icon'>
-            <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                stroke-width='2'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                class='icon-cog'
-                role='img'
-                aria-hidden='true'
-            >
-                <path d='M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z'></path>
-                <path d='M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z'></path>
-                <path d='M12 2v2'></path>
-                <path d='M12 22v-2'></path>
-                <path d='m17 20.66-1-1.73'></path>
-                <path d='M11 10.27 7 3.34'></path>
-                <path d='m20.66 17-1.73-1'></path>
-                <path d='m3.34 7 1.73 1'></path>
-                <path d='M14 12h8'></path>
-                <path d='M2 12h2'></path>
-                <path d='m20.66 7-1.73 1'></path>
-                <path d='m3.34 17 1.73-1'></path>
-                <path d='m17 3.34-1 1.73'></path>
-                <path d='m11 13.73-4 6.93'></path>
-            </svg>
-        </span>
-    </button>
+        <Toggle_Control
+            {...{ id, buttonID }}
+            buttonHTML={buttonSVG + '<span class="screen-reader-text">Toggle settings menu</span>'}
+            class:list='website-settings__toggle'
+            data-toggle-primary-control={id}
+            icon={false}
+        />
+    </div>
 
-    <form
-        action=''
-        class='website-settings__content'
+    <section
+        aria-labelledby={buttonID}
+        class="website-settings__content"
         data-toggle-content={id}
+        id={contentID}
     >
-        <div class='container'>
+        <form class='container'>
             { slots_render.settingsMenuOpen ? (
-                <!-- SLOT: "settings-menu-open" -->
+                <!-- SLOT: "settings-menu-open" --> 
                 <slot name="settings-menu-open" />
                 <!-- /SLOT: "settings-menu-open" -->
             ) : <!-- SLOT: "settings-menu-open" (empty) / --> }
@@ -192,7 +203,7 @@ const slots_render = mapToObject(
             {
                 settings.brightness && (
                     <fieldset>
-                        <legend>Brightness Mode</legend>
+                        <legend class="h8">Brightness Mode</legend>
 
                         <div class='container'>
                             <Fragment
@@ -217,36 +228,53 @@ const slots_render = mapToObject(
             {
                 settings.contrast && (
                     <fieldset>
-                        <legend>Contrast Mode</legend>
+                        <legend class="h8">Contrast Mode</legend>
 
                         <div class='container'>
                             <Fragment
                                 set:html={optionHTML(
                                     'contrast-mode',
                                     'Low',
-                                    'low'
+                                    'low',
                                 )}
                             />
                             <Fragment
                                 set:html={optionHTML(
                                     'contrast-mode',
                                     'Average',
-                                    'average'
+                                    'average',
                                 )}
                             />
                             <Fragment
                                 set:html={optionHTML(
                                     'contrast-mode',
                                     'High',
-                                    'high'
+                                    'high',
+                                )}
+                            />
+                            { typeof settings.contrast === 'object' && settings.contrast.max && (
+                                <Fragment
+                                    set:html={optionHTML(
+                                        'contrast-mode',
+                                        'Maximum',
+                                        'max',
+                                    )}
+                                />
+                            ) }
+                            <Fragment
+                                set:html={optionHTML(
+                                    'contrast-mode',
+                                    'Custom',
+                                    'forced-colors',
+                                    'forced-colors-mode-only',
                                 )}
                             />
                         </div>
 
                         <p class='forced-colors-mode-only aside'>
-                            Your browser or computer has ‘forced colours’ mode
-                            enabled, so changing the contrast setting will have
-                            little impact (if any).
+                            Your browser or computer has a ‘forced colours’ or 
+                            custom contrast mode enabled, so changing the 
+                            contrast setting will have little impact (if any).
                         </p>
                     </fieldset>
                 )
@@ -255,7 +283,7 @@ const slots_render = mapToObject(
             {
                 settings.motion && (
                     <fieldset>
-                        <legend>Motion/Animation</legend>
+                        <legend class="h8">Motion/Animation</legend>
 
                         <div class='container'>
                             <Fragment
@@ -277,6 +305,29 @@ const slots_render = mapToObject(
                 )
             }
 
+            { settings.custom && settings.custom.map( ( setting ) => setting.options.length && (
+                <fieldset
+                    data-settings-menu-custom-setting={setting.id}
+                    data-settings-menu-custom-setting-default={setting.default}
+                >
+                    <legend 
+                        class="h8"
+                        set:text={setting.label}
+                    />
+
+                    <div class='container'>{ setting.options.map( ( opt ) => (
+                        <Fragment
+                            set:html={optionHTML(
+                                setting.id,
+                                opt.label,
+                                opt.value,
+                                opt.labelClass,
+                            )}
+                        />
+                    ) ) }</div>
+                </fieldset>
+            ) ) }
+
             <input
                 type='reset'
                 data-settings-reset
@@ -288,8 +339,8 @@ const slots_render = mapToObject(
                 <slot name="settings-menu-close" />
                 <!-- /SLOT: "settings-menu-close" -->
             ) : <!-- SLOT: "settings-menu-close" (empty) / --> }
-        </div>
-    </form>
+        </form>
+    </section>
 
     <div
         data-toggle-control={id}

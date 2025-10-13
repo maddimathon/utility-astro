@@ -6,18 +6,19 @@
     margin: 0;
     padding: 0;
 }
+.website-settings-menu[data-toggle-container] {
+    justify-content: start;
+    align-content: end;
+    align-items: end;
+    overscroll-behavior: none;
+    z-index: 999;
+}
 
 .website-settings__content {
     background: var(--sys-clr-background, Canvas);
     width: -moz-fit-content;
     width: fit-content;
     max-width: min(var(--width-content, 36rem), 90vw);
-}
-.website-settings__content > .container {
-    margin: 0;
-    padding: 0;
-    width: -moz-fit-content;
-    width: fit-content;
 }
 .website-settings__content fieldset,
 .website-settings__content a.button,
@@ -37,8 +38,8 @@
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
 .website-settings__content fieldset {
-    padding-top: var(--mrg-firm-200, 0.5rem);
-    padding-bottom: var(--mrg-firm-200, 0.5rem);
+    padding-top: var(--mrg-firm-100, 0.3125rem);
+    padding-bottom: var(--mrg-firm-100, 0.3125rem);
     padding-left: clamp(
         var(--mrg-firm-200, 0.5rem),
         3vw,
@@ -59,20 +60,15 @@
     margin-right: calc(var(--mrg-soft-200, 0.3125rem) * -1);
     padding-left: var(--mrg-soft-200, 0.3125rem);
     padding-right: var(--mrg-soft-200, 0.3125rem);
-    font-weight: 600;
-    font-size: var(--fs-normal, 1rem);
 }
 .website-settings__content fieldset > .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
-    grid-auto-rows: auto;
-    grid-auto-flow: column;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: start;
     justify-items: start;
     align-content: start;
     align-items: start;
-    grid-gap: var(--mrg-firm-200, 0.5rem)
-        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
     gap: var(--mrg-firm-200, 0.5rem)
         clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
     margin: 0;
@@ -98,10 +94,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu {
-    --display: block;
-    z-index: 999;
+    --display: flex;
+}
+:where(.js) .website-settings-menu .toggle-title {
+    margin: 0;
+    padding: 0;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
+    --focus-ring-outline-offset: 0.125rem;
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
@@ -111,56 +111,71 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     line-height: var(--line-height-100, 1.1875);
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
-    --focus-ring-outline-color: var(--sys-clr-button-bg, ButtonFace);
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: var(--sys-clr-button-bg, ButtonFace);
     color: var(--sys-clr-button-text, ButtonText);
-    accent-color: var(--sys-clr-button-bg, ButtonFace);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
 .js__no-where-selector
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js__no-focusVisible)
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:hover {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
@@ -260,11 +275,11 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     }
 }
 :where(.js) .website-settings-menu [data-toggle-control]:active {
-    --focus-ring-outline-color: var(--sys-clr-button-bg-active, ButtonFace);
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
     color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: var(--sys-clr-button-bg-active, ButtonFace);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     -webkit-appearance: button;
@@ -273,12 +288,12 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     text-decoration: none;
     cursor: pointer;
 }
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"] {
+    cursor: not-allowed;
+}
 :where(.js) .website-settings-menu [data-toggle-control] {
-    --display: block;
-    display: block;
     margin: 0;
     padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
-    border: none;
     justify-self: end;
 }
 :where(.js) .website-settings-menu [data-toggle-control] .settings-icon > svg {
@@ -390,20 +405,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-content] {
-    padding: 0;
     border: none;
-}
-:where(.js) .website-settings-menu [data-toggle-content] > .container {
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    padding: 0 var(--mrg-firm-300, 0.8125rem);
-}
-:where(.js) .website-settings-menu[data-toggle-container] {
-    --display: grid;
-    justify-content: end;
-    justify-items: end;
-    overscroll-behavior: none;
 }
 :where(.js) .website-settings-menu[data-toggle-container="open"],
 :where(.js) .website-settings-menu[data-toggle-container="closing"] {
@@ -417,17 +419,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
     [data-toggle-content] {
-    --display: block;
-    display: block;
     max-height: 80svh;
     max-height: calc(90svh - 2rem - var(--gap-block-layout, 5vw) * 2);
-    border: none;
-    overflow: auto;
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    [data-toggle-content]
-    > .container {
-    padding-top: var(--mrg-firm-300, 0.8125rem);
-    padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }

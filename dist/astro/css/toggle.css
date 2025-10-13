@@ -7,7 +7,6 @@
     justify-content: start;
     align-content: start;
     align-items: start;
-    display: contents; /* poor browser support atm */
 }
 
 [data-toggle-container] {
@@ -358,9 +357,8 @@
 :where(.js) [data-toggle-content] > .container {
     --display: flex;
     display: flex;
-    grid-column: content;
+    grid-column: 1/-1;
     padding: 0 var(--mrg-firm-300, 0.8125rem);
-    padding-left: var(--stroke-relative-200, 0.0625em);
     overflow-y: hidden;
     overflow-x: auto;
     visibility: hidden;

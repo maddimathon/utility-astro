@@ -7,6 +7,7 @@
 
 /* import - types */
 import type { Props as LibPageProps } from '../../astro/layouts/Page.d.ts';
+import type { ContentType } from '../../astro/layouts/Content.astro';
 
 /* import - functions */
 import {
@@ -17,15 +18,12 @@ import {
 import { absoluteInternalURL } from '../../astro/functions/index.js';
 
 /* import - values */
-// import cssUrl from '../css/main.css?url';
-// import pkgJson from '../../../package.json';
+import { SITE_TITLE } from '../constants.js';
 
 /* import - components */
 
 /* import - layouts */
 import LibPage from '../../astro/layouts/Page.astro';
-import type { ContentType } from 'src/astro/layouts/Content';
-import { SITE_TITLE } from '../constants';
 
 /* TYPES ===================================== */
 
@@ -59,6 +57,7 @@ const _defaultProps = {
         title: SITE_TITLE,
     },
 
+    // settings: false,
     settings: {
         settings: {
             brightness: true,
@@ -84,8 +83,6 @@ if (!props.meta.title) {
     ).join(' — ');
 }
 
-// const cssUrl_versioned = cssUrl + '?v=' + pkgJson.version;
-
 props.primaryMenu = [
     { label: 'Home', href: '' },
     {
@@ -101,7 +98,6 @@ props.primaryMenu = [
             },
             {
                 label: 'Layouts',
-                href: 'layouts',
                 child: [
                     { label: 'Content Only', href: 'layouts/content-only' },
                     { label: 'Extra-Wide', href: 'layouts/extra-wide' },
@@ -126,18 +122,6 @@ props.primaryMenu = [
         slot='head-open'
         name='head-open'
     />
-
-    <!-- <link
-        slot='head-open'
-        rel='preload'
-        href={cssUrl_versioned}
-        as='style'
-    />
-    <link
-        slot='head-open'
-        rel='stylesheet'
-        href={cssUrl_versioned}
-    /> -->
 
     <slot
         slot='head-close'

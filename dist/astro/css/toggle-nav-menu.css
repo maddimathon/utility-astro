@@ -1,4 +1,9 @@
 /* # TOGGLE BLOCKS ==================================== */
+body > nav[data-toggle-container] {
+    grid-column: page-start/page-end;
+    width: auto;
+}
+
 :where(.js) body > nav[data-toggle-container] {
     /* prettier-ignore */
     --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
@@ -29,9 +34,23 @@
     > .container {
     grid-column: page-start/page-end;
     width: auto;
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
+    padding-left: var(--mrg-firm-400, 1.25rem);
+    padding-right: var(--mrg-firm-400, 1.25rem);
     background: var(--sys-clr-background, Canvas);
+}
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    > ol,
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    > ul {
+    margin-left: 0;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */

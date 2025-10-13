@@ -16,8 +16,7 @@ import { parseMenuItem } from './NavMenu.astro';
 
 /* import - components */
 import MenuList from './MenuList.astro';
-// import NavMenu from './NavMenu.astro';
-// import Toggle from './Toggle.astro';
+import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* import - layouts */
 
@@ -58,49 +57,16 @@ const titleID = `${id}-title`;
         id={titleID}
         class='toggle-title'
     >
-        <button
-            id={buttonID}
-            class='toggle-control'
-            aria-disabled='true'
-            data-toggle-control={id}
-            role='button'
-        >
-            <span class='icon | toggle-icon'>
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    class='icon-plus'
-                    role='img'
-                    aria-hidden='true'
-                >
-                    <path
-                        id='a'
-                        d='M5 12h14'
-                    ></path>
-                    <path
-                        id='b'
-                        d='M12 5v14'
-                    ></path>
-                </svg>
-            </span>
-            <span
-                class='toggle-control-inner'
-                set:text='Menu'
-            />
-        </button>
+        <Toggle_Control
+            {...{ id, buttonHTML: 'Menu', buttonID }}
+            data-toggle-primary-control={id}
+        />
     </div>
 
     <section
+        aria-labelledby={titleID}
         data-toggle-content={id}
         id={contentID}
-        aria-labelledby={titleID}
     >
         <div class='container'><MenuList menu={parsedMenu} /></div>
     </section>

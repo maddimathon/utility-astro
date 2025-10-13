@@ -10,8 +10,6 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import Toggle_Control from '../support/Toggle_Control.astro';
-import Heading from './Heading.astro';
 import type { Props as ToggleProps } from './Toggle.d.ts';
 
 /* import - functions */
@@ -19,6 +17,8 @@ import type { Props as ToggleProps } from './Toggle.d.ts';
 /* import - values */
 
 /* import - components */
+import Heading from './Heading.astro';
+import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* import - layouts */
 
@@ -60,18 +60,24 @@ const titleID = `${id}-title`;
         {
             heading ? (
                 <Heading heading={heading}>
-                    <Toggle_Control {...{ id, buttonHTML, buttonID }} />
+                    <Toggle_Control
+                        {...{ id, buttonHTML, buttonID }}
+                        data-toggle-primary-control={id}
+                    />
                 </Heading>
             ) : (
-                <Toggle_Control {...{ id, buttonHTML, buttonID }} />
+                <Toggle_Control
+                    {...{ id, buttonHTML, buttonID }}
+                    data-toggle-primary-control={id}
+                />
             )
         }
     </div>
 
     <section
+        aria-labelledby={titleID}
         data-toggle-content={id}
         id={contentID}
-        aria-labelledby={titleID}
     >
         <div class='container'><slot /></div>
     </section>

@@ -257,9 +257,9 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                 margin-inline: 0;
             }
 
-            %callout-width,
-            %blockquote,
-            %form {
+            :where(%callout-width),
+            :where(%blockquote),
+            :where(%form) {
                 margin-inline: 0;
                 width: auto;
                 max-width: none;

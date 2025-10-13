@@ -32,7 +32,8 @@ export class ElementToggle {
             this.#closeEvent = new Event('toggle-close');
         }
     }
-    #button = null;
+    #primaryButton = null;
+    #allButtons = null;
     #container = null;
     /** @type {NodeJS.Timeout|null} */
     #closingTimeout = null;
@@ -50,35 +51,42 @@ export class ElementToggle {
             this.#abortConstructor();
             return;
         }
-        const buttons = this.#container.querySelectorAll(`[data-toggle-control=${containerID}]`);
+        const allButtons = this.#container.querySelectorAll(`[data-toggle-primary-control=${containerID}], [data-toggle-control=${containerID}]`);
         // returns
-        if (!buttons) {
+        if (!allButtons.length) {
             this.#abortConstructor();
             return;
         }
-        this.#button = Array.from(buttons);
+        this.#allButtons = Array.from(allButtons);
+        const primaryButton = this.#container.querySelector(`[data-toggle-primary-control=${containerID}]`);
+        this.#primaryButton = primaryButton ?? this.#allButtons[0];
         const content = this.#container.querySelector(`[data-toggle-content=${containerID}]`);
-        if (content) {
-            const contentID = content.id;
-            if (contentID) {
-                this.#button.forEach((button) => {
-                    if (button.getAttribute('role') == 'button'
-                        || button.tagName == 'BUTTON'
-                        || button.tagName == 'A') {
-                        button.setAttribute('aria-controls', contentID);
-                    }
-                });
-            }
+        // returns - invalid setup that won't work
+        if (!content || !this.#allButtons.length) {
+            this.#abortConstructor();
+            return;
+        }
+        const contentID = content.id;
+        content.setAttribute('aria-labelledby', this.#primaryButton.id);
+        content.setAttribute('role', 'region');
+        if (contentID) {
+            this.#allButtons.forEach((button) => {
+                if (button.getAttribute('role') == 'button'
+                    || button.tagName.toUpperCase() == 'BUTTON'
+                    || button.tagName.toUpperCase() == 'A') {
+                    button.setAttribute('aria-controls', contentID);
+                }
+            });
         }
         this.#closingTime = ElementToggle.cssTimeToMilliseconds(getComputedStyle(this.#container).getPropertyValue('--toggle-closing-time'));
         const defaultIsOpen = this.#container.hasAttribute('data-toggle-container')
             && this.#container.getAttribute('data-toggle-container') === 'open';
         this.toggle = this.toggle.bind(this);
-        this.#button.forEach((button) => {
+        this.#allButtons.forEach((button) => {
             button.addEventListener('click', this.toggle);
             if (button.getAttribute('aria-controls')) {
                 button.removeAttribute('aria-disabled');
-                button.removeAttribute('aria-expanded');
+                button.setAttribute('aria-expanded', 'false');
             }
         });
         if (defaultIsOpen) {
@@ -137,14 +145,14 @@ export class ElementToggle {
      * Toggles the element open.
      */
     #open() {
-        if (!this.#button) {
+        if (!this.#allButtons) {
             return;
         }
         if (!this.#container) {
             return;
         }
         this.#container.setAttribute('data-toggle-container', 'open');
-        this.#button.forEach((button) => {
+        this.#allButtons.forEach((button) => {
             if (button.getAttribute('aria-controls')) {
                 button.setAttribute('aria-expanded', 'true');
             }
@@ -156,7 +164,7 @@ export class ElementToggle {
      * Toggles the element closed.
      */
     #close() {
-        if (!this.#button) {
+        if (!this.#allButtons) {
             return;
         }
         if (!this.#container) {
@@ -166,9 +174,9 @@ export class ElementToggle {
          * Adjust the data-toggle-container on the container and the aria-expanded for
          * the button.
          */
-        this.#button.forEach((button) => {
+        this.#allButtons.forEach((button) => {
             if (button.getAttribute('aria-controls')) {
-                button.removeAttribute('aria-expanded');
+                button.setAttribute('aria-expanded', 'false');
             }
         });
         this.#container.setAttribute('data-toggle-container', 'closing');

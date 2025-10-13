@@ -93,10 +93,8 @@ body > .body-subgrid {
     margin-left: 0;
     margin-right: 0;
 }
-body .callout-width,
-body pre,
-body table,
-body blockquote {
+body :where(.callout-width, pre, table),
+body :where(blockquote) {
     margin-left: 0;
     margin-right: 0;
     width: auto;

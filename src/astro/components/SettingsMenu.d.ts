@@ -51,12 +51,51 @@ export interface Props {
         /**
          * @default false
          */
-        contrast?: boolean;
+        contrast?: boolean | {
+
+            /** 
+             * Whether to include the max contrast option.
+             * 
+             * @default false 
+             */
+            max?: boolean;
+        };
 
         /**
          * @default false
          */
         motion?: boolean;
+
+        /**
+         * Custom settings options to append to the defaults.
+         */
+        custom?: {
+
+            /** 
+             * Unique id value for this setting -- also used to set the associated data attribute.
+             */
+            id: string;
+
+            /**
+             * The display name for this setting in the menu.
+             */
+            label: string;
+
+            /**
+             * Default value.
+             */
+            default: string;
+
+            /**
+             * All options, including the default.
+             */
+            options: {
+                label: string;
+                value: string;
+
+                labelClass?: string;
+            }[];
+        }[];
     },
 
     /**

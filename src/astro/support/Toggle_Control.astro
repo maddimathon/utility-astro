@@ -6,6 +6,7 @@
  */
 
 /* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
 
@@ -19,13 +20,15 @@
 
 /* PROPS ===================================== */
 
-export interface Props {
+export interface Props extends Omit<GenericElementProps<{}, 'button'>, 'id'> {
     id: string;
     buttonHTML: string;
     buttonID: string;
+
+    icon?: boolean;
 }
 
-const { id, buttonHTML, buttonID }: Props = Astro.props;
+const { id, buttonHTML, buttonID, icon = true, ...attrs }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
@@ -35,33 +38,37 @@ const { id, buttonHTML, buttonID }: Props = Astro.props;
     class='toggle-control'
     aria-disabled='true'
     data-toggle-control={id}
-    role='button'
+    {...attrs}
 >
-    <span class='icon | toggle-icon'>
-        <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            class='icon-plus'
-            role='img'
-            aria-hidden='true'
-        >
-            <path
-                id='a'
-                d='M5 12h14'
-            ></path>
-            <path
-                id='b'
-                d='M12 5v14'
-            ></path>
-        </svg>
-    </span>
+    {
+        icon && (
+            <span class='icon | toggle-icon'>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='icon-plus'
+                    role='img'
+                    aria-hidden='true'
+                >
+                    <path
+                        id='a'
+                        d='M5 12h14'
+                    />
+                    <path
+                        id='b'
+                        d='M12 5v14'
+                    />
+                </svg>
+            </span>
+        )
+    }
     <span
         class='toggle-control-inner'
         set:html={buttonHTML.trim()}

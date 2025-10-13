@@ -75,7 +75,7 @@ export class JsCookie {
             const d = new Date();
             d.setTime( d.getTime() + ( expireDays * 24 * 60 * 60 * 1000 ) );
 
-            cookie.expires = d.toUTCString();
+            cookie[ 'expires' ] = d.toUTCString();
         }
 
         const cookieString = [];

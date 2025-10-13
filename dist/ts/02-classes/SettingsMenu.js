@@ -35,9 +35,9 @@ export class SettingsMenu {
     constructor(menu, selectors) {
         this.menu = menu;
         this.#rootElement = document.querySelector(selectors?.root || ':root');
-        this.#resetButton = menu.querySelector(selectors?.resetButton || '[data-settings-reset]');
-        this.#path = menu.getAttribute(selectors?.pathAttr || 'data-settings-path') || '/';
-        this.#inputs = menu.querySelectorAll(selectors?.inputs || 'input[data-settings-input]');
+        this.#resetButton = this.menu.querySelector(selectors?.resetButton || '[data-settings-reset]');
+        this.#path = this.menu.getAttribute(selectors?.pathAttr || 'data-settings-path') || '/';
+        this.#inputs = this.menu.querySelectorAll(selectors?.inputs || 'input[data-settings-input]');
         if (!this.#resetButton || !this.#inputs) {
             return;
         }
@@ -85,7 +85,7 @@ export class SettingsMenu {
                     .matches ||
                     window.matchMedia(`( prefers-contrast: custom )`)
                         .matches) {
-                    defaultValue = null;
+                    defaultValue = 'forced-colors';
                 }
                 break;
             case 'motion':
@@ -97,8 +97,13 @@ export class SettingsMenu {
                     defaultValue = 'no-preference';
                 }
                 break;
-            case 'typeface':
-                defaultValue = 'body';
+            default:
+                const fieldset = this.menu.querySelector(`[data-settings-menu-custom-setting=${attr}]`);
+                // breaks
+                if (!fieldset) {
+                    break;
+                }
+                defaultValue = fieldset.getAttribute('data-settings-menu-custom-setting-default');
                 break;
         }
         this.#defaults[attr] = defaultValue;
@@ -142,6 +147,10 @@ export class SettingsMenu {
         this.#timeout && clearTimeout(this.#timeout);
         this.#timeout = setTimeout(this._update_allInputs, 100);
     }
+    /**
+     * Inner logic for SettingsMenu.update_allInputs (so it can be passed to a
+     * timeout).
+     */
     _update_allInputs() {
         for (const input of Array.from(this.#inputs ?? [])) {
             const attr = input.getAttribute('name');

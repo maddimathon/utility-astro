@@ -286,7 +286,7 @@ const settings = p.settings && {
             <!-- /SLOT: "body-open" -->
         ) : <!-- SLOT: "body-open" (empty) / --> }
 
-        { settings && <SettingsMenu {...settings}>
+        { settings && <SettingsMenu {...settings}> 
             <slot name="settings-menu-open" slot="settings-menu-open" />
             <slot name="settings-menu" />
             <slot name="settings-menu-close" slot="settings-menu-close" />

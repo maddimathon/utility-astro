@@ -51,15 +51,15 @@ export class SettingsMenu {
             selectors?.root || ':root'
         ) as HTMLElement;
 
-        this.#resetButton = menu.querySelector(
+        this.#resetButton = this.menu.querySelector(
             selectors?.resetButton || '[data-settings-reset]'
         );
 
-        this.#path = menu.getAttribute(
+        this.#path = this.menu.getAttribute(
             selectors?.pathAttr || 'data-settings-path'
         ) || '/';
 
-        this.#inputs = menu.querySelectorAll(
+        this.#inputs = this.menu.querySelectorAll(
             selectors?.inputs || 'input[data-settings-input]'
         );
 
@@ -133,7 +133,7 @@ export class SettingsMenu {
                     window.matchMedia( `( prefers-contrast: custom )` )
                         .matches
                 ) {
-                    defaultValue = null;
+                    defaultValue = 'forced-colors';
                 }
                 break;
 
@@ -152,8 +152,16 @@ export class SettingsMenu {
                 }
                 break;
 
-            case 'typeface':
-                defaultValue = 'body';
+            default:
+
+                const fieldset = this.menu.querySelector( `[data-settings-menu-custom-setting=${ attr }]` );
+
+                // breaks
+                if ( !fieldset ) {
+                    break;
+                }
+
+                defaultValue = fieldset.getAttribute( 'data-settings-menu-custom-setting-default' );
                 break;
         }
 
@@ -209,6 +217,10 @@ export class SettingsMenu {
         this.#timeout = setTimeout( this._update_allInputs, 100 );
     }
 
+    /**
+     * Inner logic for SettingsMenu.update_allInputs (so it can be passed to a
+     * timeout).
+     */
     public _update_allInputs(): void {
         for ( const input of Array.from( this.#inputs ?? [] ) ) {
             const attr = input.getAttribute( 'name' );

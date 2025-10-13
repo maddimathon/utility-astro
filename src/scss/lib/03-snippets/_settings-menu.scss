@@ -3,9 +3,12 @@
 /// @since ___PKG_VERSION___
 ///
 
+@use 'pkg:@maddimathon/utility-sass/list';
+
 @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
 
 @use '../../config';
+@use '../../tokens';
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -21,6 +24,15 @@
         display: var(--display, none);
         margin: 0;
         padding: 0;
+
+        &[data-toggle-container] {
+            justify-content: start;
+            align-content: end;
+            align-items: end;
+
+            overscroll-behavior: none;
+            z-index: 999;
+        }
     }
 
     .website-settings__content {
@@ -29,10 +41,10 @@
         max-width: min(#{var-width(content)}, 90vw);
 
         > .container {
-            margin: 0;
-            padding: 0;
+            // margin: 0;
+            // padding: 0;
 
-            width: fit-content;
+            // width: fit-content;
         }
 
         fieldset,
@@ -47,7 +59,7 @@
         }
 
         fieldset {
-            padding-block: #{var-mrg-firm('200')};
+            padding-block: #{var-mrg-firm('100')};
             padding-inline: clamp(
                 #{var-mrg-firm('200')},
                 3vw,
@@ -61,20 +73,14 @@
                 &:first-child {
                     margin-block: 0;
                     margin-inline: calc(#{var-mrg-soft('200')} * -1);
-
                     padding-inline: #{var-mrg-soft('200')};
-
-                    font-weight: 600;
-                    font-size: #{var-fs(normal)};
                 }
             }
 
             > .container {
-                display: grid;
-
-                grid-template-columns: repeat(auto-fit, minmax(0, max-content));
-                grid-auto-rows: auto;
-                grid-auto-flow: column;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
 
                 justify-content: start;
                 justify-items: start;
@@ -114,21 +120,30 @@
 
     @include js {
         .website-settings-menu {
-            --display: block;
-            z-index: 999;
+            --display: flex;
+
+            .toggle-title {
+                margin: 0;
+                padding: 0;
+            }
 
             [data-toggle-control] {
                 @include utils.snippet-button;
 
                 & {
-                    --display: block;
-                    display: block;
+                    // --display: block;
+                    // display: block;
 
                     margin: 0;
                     padding: #{var-mrg-firm('100')} #{var-mrg-firm('100')};
-                    border: none;
 
                     justify-self: end;
+                    // border: none;
+
+                    // @include forced-colors {
+                    //     border: 0.125rem solid ButtonFace;
+                    //     border-color: ButtonBorder;
+                    // }
                 }
 
                 .settings-icon {
@@ -199,25 +214,17 @@
             }
 
             [data-toggle-content] {
-                padding: 0;
+                // padding: 0;
 
                 border: none;
 
                 > .container {
-                    justify-content: start;
-                    align-content: start;
-                    align-items: start;
+                    // justify-content: start;
+                    // align-content: start;
+                    // align-items: start;
 
-                    padding: 0 #{var-mrg-firm('300')};
+                    // padding: 0 #{var-mrg-firm('300')};
                 }
-            }
-
-            &[data-toggle-container] {
-                --display: grid;
-                justify-content: end;
-                justify-items: end;
-
-                overscroll-behavior: none;
             }
 
             &[data-toggle-container='open'],
@@ -231,19 +238,19 @@
                 }
 
                 [data-toggle-content] {
-                    --display: block;
-                    display: block;
+                    // --display: block;
+                    // display: block;
 
                     max-height: 80svh;
                     max-height: calc(
                         90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
 
-                    border: none;
-                    overflow: auto;
+                    // border: none;
+                    // overflow: auto;
 
                     > .container {
-                        padding-block: #{var-mrg-firm('300')};
+                        // padding-block: #{var-mrg-firm('300')};
                     }
                 }
             }

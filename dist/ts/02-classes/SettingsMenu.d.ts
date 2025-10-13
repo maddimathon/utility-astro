@@ -34,6 +34,10 @@ export declare class SettingsMenu {
      */
     settingSelected(input: HTMLInputElement): void;
     update_allInputs(): void;
+    /**
+     * Inner logic for SettingsMenu.update_allInputs (so it can be passed to a
+     * timeout).
+     */
     _update_allInputs(): void;
 }
 /**

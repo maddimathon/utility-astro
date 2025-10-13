@@ -22,6 +22,14 @@ $_titleBorderWidth_half: var-border-width('100');
 /// Supports the ToggleNavMenu astro component.
 ///
 @mixin snippet-support-toggle-nav-menu {
+    %body {
+        > %nav {
+            @at-root #{selector.unify(&, ('[data-toggle-container]'))} {
+                @include snippet-support-content--page-width;
+            }
+        }
+    }
+
     @include js-support(whereSelector) {
         %body {
             > %nav {
@@ -58,8 +66,13 @@ $_titleBorderWidth_half: var-border-width('100');
                         > .container {
                             @include snippet-support-content--page-width;
 
-                            padding-inline: #{var-mrg-firm('300')};
+                            padding-inline: #{var-mrg-firm('400')};
                             background: #{var-sys-colour(background)};
+
+                            > ol,
+                            > ul {
+                                margin-inline-start: 0;
+                            }
                         }
                     }
 
