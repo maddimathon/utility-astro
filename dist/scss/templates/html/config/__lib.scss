@@ -3,11 +3,13 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '../../global/config' with (
+@forward '../../../config' with (
     $include_html: true !default,
 
-    $internal_extendSelectors: false,
+    $internal_isTemplate: true !default,
     $internal_supressCredit: true,
+
+    $mx_extendHeadingsByRole: true !default,
 
     $print_astro: false !default,
     $print_globals: true !default,

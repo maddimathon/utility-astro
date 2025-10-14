@@ -3,10 +3,18 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@use '__pre-lib' as pre;
+@forward 'pkg:@maddimathon/utility-sass/config' with (
+    $include_html: false !default,
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base/config' with (
-    $internal_supressCredit: pre.$internal_sass_supressCredit,
+    $internal_isTemplate: false !default,
+    $internal_supressCredit: true,
+
+    $mx_extendHeadingsByRole: false !default,
+
+    $print_globals: false !default,
+    $print_normalize: false,
+    $print_tokens: false,
+    $print_utils: false !default,
 
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default,

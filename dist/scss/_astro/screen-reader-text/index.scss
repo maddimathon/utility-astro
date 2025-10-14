@@ -11,4 +11,4 @@
     @include lib.snippet-screen-reader-text;
 }
 
-@include lib.extend-selectors;
+@include lib.extend-selectors($optional: true);

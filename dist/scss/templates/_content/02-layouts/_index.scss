@@ -1,0 +1,67 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use '../../../config';
+
+@use '../../../lib' as *;
+
+@if config.$print_astro_content or config.$print_globals {
+    @if config.$print_headings {
+        /* # ASTRO LAYOUT SUPPORT
+         * ======================================================================== */
+    }
+}
+
+@if config.$print_astro_content {
+    @include snippet-support-content;
+
+    $_sels_allHeadings: selector-all-headings();
+
+    %content-header {
+        &,
+        > hgroup {
+            > :first-child {
+                margin-block-start: 0;
+            }
+        }
+
+        > :where(#{$_sels_allHeadings}),
+        > hgroup {
+        }
+
+        > :where(#{$_sels_allHeadings}),
+        hgroup > :where(#{$_sels_allHeadings}) {
+            margin-block-start: 0;
+        }
+
+        + :where(*) {
+            margin-block-start: #{var-mrg-soft('600')};
+        }
+    }
+
+    %page-subtitle {
+        margin-block: #{var-mrg-soft('200')} 0;
+
+        font-weight: 500;
+        font-size: #{var-fs(heading-6)};
+        line-height: #{var-line-height('300')};
+        text-wrap: balance;
+
+        @include colour-mode((low, average)) {
+            opacity: 0.75;
+        }
+    }
+}
+
+%nav {
+    ol,
+    ul {
+        margin-block: 0;
+
+        li {
+            margin-block: 0;
+        }
+    }
+}

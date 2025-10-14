@@ -81,8 +81,18 @@
 
         "./notice.scss": "./src/scss/_notice.scss",
         
+        "./template.scss": "./dist/scss/templates/default/index.scss",
+        "./template/content.scss": "./dist/scss/templates/_content/_index.scss",
+        
+        "./template/*.scss": [
+            "./dist/scss/templates/*.scss",
+            "./dist/scss/templates/_*.scss",
+            "./dist/scss/templates/*/index.scss",
+            "./dist/scss/templates/*/_index.scss"
+        ],
         "./templates/*.scss": [
             "./dist/scss/templates/*.scss",
+            "./dist/scss/templates/_*.scss",
             "./dist/scss/templates/*/index.scss",
             "./dist/scss/templates/*/_index.scss"
         ],

@@ -3,9 +3,10 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '__pre-lib';
+@forward 'utility-sass' hide $internal_supressCredit, $print_normalize,
+    $print_tokens;
 
-@forward 'utility-sass' hide $internal_supressCredit;
+@forward 'templates';
 
 @use 'utility-sass' as utils;
 
@@ -14,3 +15,9 @@ $internal_supressCredit: utils.config-valid-bool(
     $internal_supressCredit,
     'internal_supressCredit'
 );
+
+$print_normalize: utils.$include_html !default;
+$print_normalize: utils.config-valid-bool($print_normalize, 'print_normalize');
+
+$print_tokens: false !default;
+$print_tokens: utils.config-valid-bool($print_tokens, 'print_tokens');

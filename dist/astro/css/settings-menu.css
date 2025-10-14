@@ -16,7 +16,6 @@
 
 .website-settings__content {
     background: var(--sys-clr-background, Canvas);
-    width: -moz-fit-content;
     width: fit-content;
     max-width: min(var(--width-content, 36rem), 90vw);
 }
@@ -26,26 +25,18 @@
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
 .website-settings__content input[type="submit"] {
-    margin-top: var(--mrg-firm-300, 0.8125rem);
-    margin-bottom: var(--mrg-half-300, 0.3125rem);
-    margin-left: 0;
-    margin-right: 0;
+    margin-block: var(--mrg-firm-300, 0.8125rem) var(--mrg-half-300, 0.3125rem);
+    margin-inline: 0;
 }
 .website-settings__content input,
 .website-settings__content a.button,
 .website-settings__content button,
 .website-settings__content [role="button"] {
-    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-block-start: var(--mrg-firm-400, 1.25rem);
 }
 .website-settings__content fieldset {
-    padding-top: var(--mrg-firm-100, 0.3125rem);
-    padding-bottom: var(--mrg-firm-100, 0.3125rem);
-    padding-left: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        3vw,
-        var(--mrg-firm-300, 0.8125rem)
-    );
-    padding-right: clamp(
+    padding-block: var(--mrg-firm-100, 0.3125rem);
+    padding-inline: clamp(
         var(--mrg-firm-200, 0.5rem),
         3vw,
         var(--mrg-firm-300, 0.8125rem)
@@ -54,12 +45,9 @@
 }
 .website-settings__content fieldset > legend,
 .website-settings__content fieldset > legend:first-child {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: calc(var(--mrg-soft-200, 0.3125rem) * -1);
-    margin-right: calc(var(--mrg-soft-200, 0.3125rem) * -1);
-    padding-left: var(--mrg-soft-200, 0.3125rem);
-    padding-right: var(--mrg-soft-200, 0.3125rem);
+    margin-block: 0;
+    margin-inline: calc(var(--mrg-soft-200, 0.3125rem) * -1);
+    padding-inline: var(--mrg-soft-200, 0.3125rem);
 }
 .website-settings__content fieldset > .container {
     display: flex;
@@ -105,7 +93,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
-    width: -moz-fit-content;
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
@@ -282,8 +269,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    -webkit-appearance: button;
-    -moz-appearance: button;
     appearance: button;
     text-decoration: none;
     cursor: pointer;
@@ -315,7 +300,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     padding: 0;
     width: auto;
     height: auto;
-    -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
     background: none;
     border: none;

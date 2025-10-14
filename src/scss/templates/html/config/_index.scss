@@ -3,18 +3,12 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '_lib' hide $internal_extendSelectors, $internal_supressCredit;
+@forward '_lib' hide $internal_supressCredit;
 
-@use '../../global/config';
-
-$internal_extendSelectors: true !default;
-$internal_extendSelectors: config.config-valid-bool(
-    $internal_extendSelectors,
-    'internal_extendSelectors'
-);
+@use '_lib' as lib;
 
 $internal_supressCredit: false !default;
-$internal_supressCredit: config.config-valid-bool(
+$internal_supressCredit: lib.config-valid-bool(
     $internal_supressCredit,
     'internal_supressCredit'
 );

@@ -9,4 +9,4 @@
 
 @include lib.snippet-support-toggle-nav-menu;
 
-@include lib.extend-selectors;
+@include lib.extend-selectors($optional: true);

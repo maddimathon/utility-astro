@@ -3,9 +3,12 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets';
+@forward 'pkg:@maddimathon/utility-sass/03-snippets' hide
+        extend-selectors-globals,
+    extend-selectors-utils, extend-selectors;
 
 @forward 'content';
+@forward 'extend-selectors';
 @forward 'forced-colors-mode-only';
 @forward 'settings-menu';
 @forward 'toggle';

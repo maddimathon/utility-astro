@@ -5,22 +5,24 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '../templates/astro/config';
-@forward '../templates/astro/tokens';
+@forward '../templates/astro/config' with (
+    $include_html: true !default,
+
+    $internal_isTemplate: false !default,
+
+    $mx_extendHeadingsByRole: false !default,
+
+    $print_astro: true !default,
+    $print_globals: true !default,
+    $print_normalize: true !default,
+    $print_tokens: true !default,
+    $print_utils: true !default
+);
+@forward '../tokens';
 
 @forward '../notice';
 
-@forward '../templates/astro/lib';
+@forward '../lib';
 
 @use '../templates/astro/config';
-@use '../templates/astro/lib' as *;
-
-@mixin extend-selectors {
-    @include config.print-globals {
-        @include extend-selector-globals($optional: true);
-    }
-
-    @include config.print-utils {
-        @include extend-selector-utils($optional: true);
-    }
-}
+@use '../lib' as *;

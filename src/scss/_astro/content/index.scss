@@ -9,4 +9,4 @@
 
 @include lib.snippet-support-content;
 
-@include lib.extend-selectors;
+@include lib.extend-selectors($optional: true);

@@ -6,7 +6,7 @@
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/map';
 
-@use 'pkg:@maddimathon/utility-sass/templates/base/lib/01-functions' as utils;
+@use 'pkg:@maddimathon/utility-sass/01-functions' as utils;
 
 @use '../../config';
 // @use '../../tokens';

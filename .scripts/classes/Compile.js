@@ -67,7 +67,7 @@ export class Compile extends CompileStage {
             'scss/_astro',
             this.getSrcDir( undefined, 'astro/css' ),
             {
-                postCSS: true,
+                postCSS: this.params.packaging,
             },
         );
     }
@@ -81,7 +81,7 @@ export class Compile extends CompileStage {
             'scss/templates',
             this.getDistDir( undefined, 'css/templates' ),
             {
-                postCSS: true,
+                postCSS: this.params.packaging,
             },
         );
     }

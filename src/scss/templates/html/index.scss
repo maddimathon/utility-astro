@@ -4,29 +4,21 @@
 ///
 
 @forward 'config';
-@forward 'tokens';
+
+@forward '../../tokens';
 
 @forward '_header';
 
-@forward 'lib';
+@forward '../../lib';
 
-@forward '_content';
+@forward '../_content';
 
 @forward '_footer';
 
 /// # EXTENDING SELECTORS
 /// ======================================================================== ///
 
-@use 'config';
+@use '../../lib' as *;
+@use '../_content' as *;
 
-@use 'lib' as *;
-
-@if config.$internal_extendSelectors {
-    @include config.print-globals {
-        @include extend-selector-globals;
-    }
-
-    @include config.print-utils {
-        @include extend-selector-utils;
-    }
-}
+@include extend-selectors;

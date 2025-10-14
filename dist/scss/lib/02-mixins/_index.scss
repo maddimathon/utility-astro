@@ -3,8 +3,6 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/templates/base/lib/02-mixins' hide
-        tokens-all,
-    tokens-width;
+@forward 'pkg:@maddimathon/utility-sass/02-mixins' hide tokens-all, tokens-width;
 
 @forward '02-01-tokens';

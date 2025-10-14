@@ -6,7 +6,7 @@
 @use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
-@use 'pkg:@maddimathon/utility-sass/templates/base/lib/02-mixins' as utils;
+@use 'pkg:@maddimathon/utility-sass/02-mixins' as utils;
 
 @use '../../config';
 // @use '../../tokens';

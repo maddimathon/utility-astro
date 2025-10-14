@@ -1,0 +1,15 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/notice';
+
+@forward '00-abstracts';
+
+@forward 'pkg:@maddimathon/utility-sass/template/content';
+
+@forward '01-globals';
+@forward '02-layouts';
+@forward '03-utilities';
+@forward '04-components';

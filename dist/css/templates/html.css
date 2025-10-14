@@ -33,8 +33,6 @@ html {
       'Segoe UI Emoji'; */
     line-height: 1.15; /* 1. Correct the line height in all browsers. */
     -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
 }
 
@@ -258,6 +256,8 @@ pre {
 }
 
 /* #endregion Normalize */
+/* # TOKENS & PROPERTIES
+ * ======================================================================== */
 /* #region Tokens - System Colours */
 :where(html) {
     --sys-clr-background: Canvas;
@@ -494,7 +494,10 @@ html {
 }
 
 /* #endregion Tokens - Width */
-:focus {
+/* # GLOBALS - Accessibility
+ * ======================================================================== */
+.no-js :focus,
+.js__no-where-selector :focus {
     /* %focus-ring */
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
@@ -537,6 +540,8 @@ html {
     overflow: hidden !important;
 }
 
+/* # GLOBALS - Objects
+ * ======================================================================== */
 html,
 body {
     scroll-padding-top: var(--gap-block-layout, 5vw);
@@ -548,10 +553,8 @@ body {
     justify-content: start;
     align-items: center;
     gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
-    margin-top: var(--gap-block-layout, 5vw);
-    margin-bottom: var(--gap-block-layout, 5vw);
-    margin-left: var(--gap-inline-layout, 8vw);
-    margin-right: var(--gap-inline-layout, 8vw);
+    margin-block: var(--gap-block-layout, 5vw);
+    margin-inline: var(--gap-inline-layout, 8vw);
 }
 :where(body > *) {
     width: min(var(--width-page, 58rem), 100%);
@@ -559,35 +562,28 @@ body {
 
 hr {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-inline: var(--gap-inline-indent, 4vw);
 }
 @media (min-width: 25em) {
     hr {
-        margin-left: auto;
-        margin-right: auto;
+        margin-inline: auto;
         max-width: min(var(--width-callout, 29.25rem), 100%);
     }
 }
 hr {
     width: 100%;
-    margin-top: calc(
+    margin-block-start: calc(
         var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
     );
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: var(--mrg-firm-600, 2.25rem);
+    margin-block: var(--mrg-firm-600, 2.25rem);
     border: none;
-    border-bottom: currentColor solid 2px;
+    border-block-end: currentColor solid 2px;
 }
 
-::-moz-selection {
-    background-color: var(--sys-clr-selection-bg, Highlight);
-    color: var(--sys-clr-selection-text, HighlightText);
-}
-
+/* # GLOBALS - Typography
+ * ======================================================================== */
 ::selection {
     background-color: var(--sys-clr-selection-bg, Highlight);
     color: var(--sys-clr-selection-text, HighlightText);
@@ -599,6 +595,7 @@ html {
     color: var(--sys-clr-text, CanvasText);
 }
 
+/* ## Typography - Inline ==================================== */
 strong,
 b {
     font-weight: 700;
@@ -638,7 +635,6 @@ a {
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
     border: none;
-    -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-underline-offset: var(--stroke-relative-800, 0.25em);
     color: var(--sys-clr-link, LinkText);
@@ -646,12 +642,23 @@ a {
 a:visited {
     color: var(--sys-clr-link-visited, VisitedText);
 }
-a:focus {
+.no-js a:focus,
+.js__no-where-selector a:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+:where(.js__no-focusVisible) a:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a:hover {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+a:focus-visible {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
@@ -672,55 +679,45 @@ a[aria-disabled="true"] {
 }
 
 abbr[title] {
-    -webkit-text-decoration: dotted underline
-        var(--stroke-relative-400, 0.125em);
     text-decoration: dotted underline var(--stroke-relative-400, 0.125em);
     cursor: help;
 }
 
+/* ## Typography - Block ==================================== */
 p {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
+    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
 }
 hr + p {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 
 blockquote {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-inline: var(--gap-inline-indent, 4vw);
 }
 blockquote {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
+    margin-block: var(--mrg-soft-600, 1.625rem)
+        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
+    padding-inline-start: var(--mrg-firm-300, 0.8125rem);
+    border-inline-start: var(--border-width-200, 0.125rem) solid currentColor;
 }
 @media (min-width: 36em) {
     blockquote {
-        margin-left: var(--gap-inline-tab, 1.5vw);
-        margin-right: var(--gap-inline-tab, 1.5vw);
+        margin-inline: var(--gap-inline-tab, 1.5vw);
     }
 }
 blockquote > p:first-child {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 blockquote > cite {
     display: block;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    text-align: right;
+    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
+    text-align: end;
 }
 blockquote > cite::before {
-    content: "— ";
     content: "— "/"";
     color: currentColor;
 }
@@ -752,22 +749,16 @@ samp {
 
 pre {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-inline: var(--gap-inline-indent, 4vw);
 }
 pre {
     position: relative;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
+    margin-inline: 0;
+    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
+    margin-block: var(--mrg-soft-600, 1.625rem)
+        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
     border: var(--border-width-100, 0.0625rem) solid currentColor;
     max-width: min(120ch, 100%);
@@ -794,11 +785,11 @@ pre:where(:has(> code)) > code {
     overflow: visible;
 }
 
+/* ## Typography - Headings ==================================== */
 h1,
 .h1,
 .page-title {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
@@ -825,8 +816,7 @@ h1 a.button,
 }
 
 :where([role="heading"][aria-level="1"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
@@ -847,8 +837,7 @@ h1 a.button,
 
 h2,
 .h2 {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
@@ -870,8 +859,7 @@ h2 a.button,
 }
 
 :where([role="heading"][aria-level="2"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
@@ -892,8 +880,7 @@ h2 a.button,
 
 h3,
 .h3 {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
@@ -915,8 +902,7 @@ h3 a.button,
 }
 
 :where([role="heading"][aria-level="3"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
@@ -937,8 +923,7 @@ h3 a.button,
 
 h4,
 .h4 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
@@ -977,8 +962,7 @@ h4 a.button,
 }
 
 :where([role="heading"][aria-level="4"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1010,8 +994,7 @@ h4 a.button,
 
 h5,
 .h5 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1050,8 +1033,7 @@ h5 a.button,
 }
 
 :where([role="heading"][aria-level="5"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1083,8 +1065,7 @@ h5 a.button,
 
 h6,
 .h6 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1123,8 +1104,7 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="6"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1155,8 +1135,7 @@ h6 a.button,
 }
 
 .h7 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1176,8 +1155,7 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="7"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1200,8 +1178,7 @@ h6 a.button,
 }
 
 .h8 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1231,8 +1208,7 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="8"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1264,20 +1240,22 @@ h6 a.button,
     text-transform: inherit;
 }
 
+/* # GLOBALS - Lists
+ * ======================================================================== */
 ol,
 ul {
     margin: 0;
-    margin-left: 20%;
+    margin-inline-start: 20%;
     padding: 0;
-    padding-left: 1em;
-    margin-left: var(--gap-inline-tab, 1.5vw);
+    padding-inline-start: 1em;
+    margin-inline-start: var(--gap-inline-tab, 1.5vw);
     line-height: var(--line-height-400, 1.6875);
 }
 ol ol,
 ol ul,
 ul ol,
 ul ul {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 ol ol ol,
 ol ol ul,
@@ -1333,7 +1311,7 @@ ul ul ul ul {
 
 li {
     margin: 0;
-    margin-top: var(--mrg-soft-300, 0.5rem);
+    margin-block-start: var(--mrg-soft-300, 0.5rem);
     padding: 0;
 }
 li::marker {
@@ -1341,7 +1319,7 @@ li::marker {
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 li li li {
-    margin-top: var(--mrg-soft-200, 0.3125rem);
+    margin-block-start: var(--mrg-soft-200, 0.3125rem);
 }
 li li li::marker {
     font-size: var(--fs-smaller-2, 0.8125rem);
@@ -1360,6 +1338,8 @@ li li li li i i {
     font-style: italic;
 }
 
+/* # GLOBALS - Forms
+ * ======================================================================== */
 fieldset {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -1370,7 +1350,16 @@ fieldset {
     background-color: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
 }
-fieldset:focus {
+.no-js fieldset:focus,
+.js__no-where-selector fieldset:focus {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+:where(.js__no-focusVisible) fieldset:focus {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+fieldset:focus-visible {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
@@ -1385,18 +1374,17 @@ fieldset legend {
     display: block;
 }
 fieldset > :first-child {
-    margin-top: 0;
-    margin-top: calc(
+    margin-block-start: 0;
+    margin-block-start: calc(
         var(--mrg-soft-400, 0.8125rem) - var(--mrg-soft-200, 0.3125rem)
     );
 }
 fieldset > legend + * {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 
 fieldset legend {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1404,12 +1392,9 @@ fieldset legend {
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
-    margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
-    margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
-    margin-top: 0;
-    margin-bottom: var(--mrg-soft-300, 0.5rem);
-    padding-left: var(--mrg-soft-300, 0.5rem);
-    padding-right: var(--mrg-soft-300, 0.5rem);
+    margin-inline: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-block: 0 var(--mrg-soft-300, 0.5rem);
+    padding-inline: var(--mrg-soft-300, 0.5rem);
     font-style: italic;
 }
 
@@ -1430,9 +1415,22 @@ input {
     color: var(--sys-clr-input-text, FieldText);
     accent-color: var(--sys-clr-input-text, FieldText);
 }
-textarea:focus,
-select:focus,
-input:focus {
+.no-js textarea:focus,
+.no-js select:focus,
+.no-js input:focus,
+.js__no-where-selector textarea:focus,
+.js__no-where-selector select:focus,
+.js__no-where-selector input:focus {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) textarea:focus,
+:where(.js__no-focusVisible) select:focus,
+:where(.js__no-focusVisible) input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -1443,6 +1441,16 @@ input:focus {
 textarea:hover,
 select:hover,
 input:hover {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+textarea:focus-visible,
+select:focus-visible,
+input:focus-visible {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -1469,22 +1477,11 @@ input:active {
     color: var(--sys-clr-input-text-active, FieldText);
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    opacity: 1;
-    color: currentColor;
-}
 textarea::placeholder,
 select::placeholder,
 input::placeholder {
     opacity: 1;
     color: currentColor;
-}
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 textarea::placeholder,
 select::placeholder,
@@ -1493,21 +1490,11 @@ input::placeholder {
 }
 
 @media (prefers-contrast: less) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
-}
-[data-contrast-mode="high"] textarea::-moz-placeholder,
-[data-contrast-mode="high"] select::-moz-placeholder,
-[data-contrast-mode="high"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
 }
 [data-contrast-mode="high"] textarea::placeholder,
 [data-contrast-mode="high"] select::placeholder,
@@ -1516,11 +1503,6 @@ input::placeholder {
 }
 
 @media (prefers-contrast: more) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 90%, transparent);
-    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
@@ -1533,7 +1515,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+    margin-block-start: var(--mrg-firm-200, 0.5rem);
 }
 
 input[type="button"],
@@ -1569,13 +1551,25 @@ input[type="radio"] {
     width: auto;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
+.no-js input[type="checkbox"]:focus,
+.no-js input[type="radio"]:focus,
+.js__no-where-selector input[type="checkbox"]:focus,
+.js__no-where-selector input[type="radio"]:focus {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) input[type="checkbox"]:focus,
+:where(.js__no-focusVisible) input[type="radio"]:focus {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 input[type="checkbox"]:hover,
 input[type="radio"]:hover {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1602,10 +1596,8 @@ input[type="week"] {
     width: auto;
 }
 input[type="file"] {
-    padding-top: var(--mrg-soft-300, 0.5rem);
-    padding-bottom: var(--mrg-soft-300, 0.5rem);
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
+    padding-block: var(--mrg-soft-300, 0.5rem);
+    padding-inline: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 input[type="range"] {
@@ -1620,6 +1612,7 @@ textarea {
     cursor: text;
 }
 
+/* ## Forms - Buttons ==================================== */
 button,
 [role="button"],
 input[type="button"],
@@ -1632,7 +1625,6 @@ a.button-secondary {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
-    width: -moz-fit-content;
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
@@ -1643,14 +1635,40 @@ a.button-secondary {
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
-button:focus,
-[role="button"]:focus,
-input[type="button"]:focus,
-input[type="submit"]:focus,
-a.button:focus,
-input[type="reset"]:focus,
-:focus::file-selector-button,
-a.button-secondary:focus {
+.no-js button:focus,
+.no-js [role="button"]:focus,
+.no-js input[type="button"]:focus,
+.no-js input[type="submit"]:focus,
+.no-js a.button:focus,
+.no-js input[type="reset"]:focus,
+.no-js :focus::file-selector-button,
+.no-js a.button-secondary:focus,
+.js__no-where-selector button:focus,
+.js__no-where-selector [role="button"]:focus,
+.js__no-where-selector input[type="button"]:focus,
+.js__no-where-selector input[type="submit"]:focus,
+.js__no-where-selector a.button:focus,
+.js__no-where-selector input[type="reset"]:focus,
+.js__no-where-selector :focus::file-selector-button,
+.js__no-where-selector a.button-secondary:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) button:focus,
+:where(.js__no-focusVisible) [role="button"]:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus,
+:where(.js__no-focusVisible) a.button:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus,
+:where(.js__no-focusVisible) :focus::file-selector-button,
+:where(.js__no-focusVisible) a.button-secondary:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1679,6 +1697,24 @@ a.button-secondary:hover {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
+button:focus-visible,
+[role="button"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible,
+a.button:focus-visible,
+input[type="reset"]:focus-visible,
+:focus-visible::file-selector-button,
+a.button-secondary:focus-visible {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
 button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
@@ -1697,6 +1733,84 @@ a.button-secondary:focus-within {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
+.no-js button:focus,
+.no-js [role="button"]:focus,
+.no-js input[type="button"]:focus,
+.no-js input[type="submit"]:focus,
+.no-js a.button:focus,
+.no-js input[type="reset"]:focus,
+.no-js :focus::file-selector-button,
+.no-js a.button-secondary:focus,
+.js__no-where-selector button:focus,
+.js__no-where-selector [role="button"]:focus,
+.js__no-where-selector input[type="button"]:focus,
+.js__no-where-selector input[type="submit"]:focus,
+.js__no-where-selector a.button:focus,
+.js__no-where-selector input[type="reset"]:focus,
+.js__no-where-selector :focus::file-selector-button,
+.js__no-where-selector a.button-secondary:focus {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) button:focus,
+:where(.js__no-focusVisible) [role="button"]:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus,
+:where(.js__no-focusVisible) a.button:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus,
+:where(.js__no-focusVisible) :focus::file-selector-button,
+:where(.js__no-focusVisible) a.button-secondary:focus {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js button:focus,
+    .no-js [role="button"]:focus,
+    .no-js input[type="button"]:focus,
+    .no-js input[type="submit"]:focus,
+    .no-js a.button:focus,
+    .no-js input[type="reset"]:focus,
+    .no-js :focus::file-selector-button,
+    .no-js a.button-secondary:focus,
+    .js__no-where-selector button:focus,
+    .js__no-where-selector [role="button"]:focus,
+    .js__no-where-selector input[type="button"]:focus,
+    .js__no-where-selector input[type="submit"]:focus,
+    .js__no-where-selector a.button:focus,
+    .js__no-where-selector input[type="reset"]:focus,
+    .js__no-where-selector :focus::file-selector-button,
+    .js__no-where-selector a.button-secondary:focus {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) button:focus,
+    :where(.js__no-focusVisible) [role="button"]:focus,
+    :where(.js__no-focusVisible) input[type="button"]:focus,
+    :where(.js__no-focusVisible) input[type="submit"]:focus,
+    :where(.js__no-focusVisible) a.button:focus,
+    :where(.js__no-focusVisible) input[type="reset"]:focus,
+    :where(.js__no-focusVisible) :focus::file-selector-button,
+    :where(.js__no-focusVisible) a.button-secondary:focus {
+        opacity: 0.875;
+    }
+}
+[data-contrast-mode="low"] button:focus-visible,
+[data-contrast-mode="low"] [role="button"]:focus-visible,
+[data-contrast-mode="low"] input[type="button"]:focus-visible,
+[data-contrast-mode="low"] input[type="submit"]:focus-visible,
+[data-contrast-mode="low"] a.button:focus-visible,
+[data-contrast-mode="low"] input[type="reset"]:focus-visible,
+[data-contrast-mode="low"] :focus-visible::file-selector-button,
+[data-contrast-mode="low"] a.button-secondary:focus-visible,
+[data-contrast-mode="average"] button:focus-visible,
+[data-contrast-mode="average"] [role="button"]:focus-visible,
+[data-contrast-mode="average"] input[type="button"]:focus-visible,
+[data-contrast-mode="average"] input[type="submit"]:focus-visible,
+[data-contrast-mode="average"] a.button:focus-visible,
+[data-contrast-mode="average"] input[type="reset"]:focus-visible,
+[data-contrast-mode="average"] :focus-visible::file-selector-button,
+[data-contrast-mode="average"] a.button-secondary:focus-visible {
+    opacity: 0.875;
+}
 [data-contrast-mode="low"] button:focus-within,
 [data-contrast-mode="low"] [role="button"]:focus-within,
 [data-contrast-mode="low"] input[type="button"]:focus-within,
@@ -1715,35 +1829,19 @@ a.button-secondary:focus-within {
 [data-contrast-mode="average"] a.button-secondary:focus-within {
     opacity: 0.875;
 }
-[data-contrast-mode="low"] button:focus,
-[data-contrast-mode="low"] [role="button"]:focus,
-[data-contrast-mode="low"] input[type="button"]:focus,
-[data-contrast-mode="low"] input[type="submit"]:focus,
-[data-contrast-mode="low"] a.button:focus,
 [data-contrast-mode="low"] button:hover,
 [data-contrast-mode="low"] [role="button"]:hover,
 [data-contrast-mode="low"] input[type="button"]:hover,
 [data-contrast-mode="low"] input[type="submit"]:hover,
 [data-contrast-mode="low"] a.button:hover,
-[data-contrast-mode="low"] input[type="reset"]:focus,
-[data-contrast-mode="low"] :focus::file-selector-button,
-[data-contrast-mode="low"] a.button-secondary:focus,
 [data-contrast-mode="low"] input[type="reset"]:hover,
 [data-contrast-mode="low"] :hover::file-selector-button,
 [data-contrast-mode="low"] a.button-secondary:hover,
-[data-contrast-mode="average"] button:focus,
-[data-contrast-mode="average"] [role="button"]:focus,
-[data-contrast-mode="average"] input[type="button"]:focus,
-[data-contrast-mode="average"] input[type="submit"]:focus,
-[data-contrast-mode="average"] a.button:focus,
 [data-contrast-mode="average"] button:hover,
 [data-contrast-mode="average"] [role="button"]:hover,
 [data-contrast-mode="average"] input[type="button"]:hover,
 [data-contrast-mode="average"] input[type="submit"]:hover,
 [data-contrast-mode="average"] a.button:hover,
-[data-contrast-mode="average"] input[type="reset"]:focus,
-[data-contrast-mode="average"] :focus::file-selector-button,
-[data-contrast-mode="average"] a.button-secondary:focus,
 [data-contrast-mode="average"] input[type="reset"]:hover,
 [data-contrast-mode="average"] :hover::file-selector-button,
 [data-contrast-mode="average"] a.button-secondary:hover {
@@ -1751,6 +1849,16 @@ a.button-secondary:focus-within {
 }
 
 @media (prefers-contrast: less) {
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    input[type="button"]:focus-visible,
+    input[type="submit"]:focus-visible,
+    a.button:focus-visible,
+    input[type="reset"]:focus-visible,
+    :focus-visible::file-selector-button,
+    a.button-secondary:focus-visible {
+        opacity: 0.875;
+    }
     button:focus-within,
     [role="button"]:focus-within,
     input[type="button"]:focus-within,
@@ -1761,19 +1869,11 @@ a.button-secondary:focus-within {
     a.button-secondary:focus-within {
         opacity: 0.875;
     }
-    button:focus,
-    [role="button"]:focus,
-    input[type="button"]:focus,
-    input[type="submit"]:focus,
-    a.button:focus,
     button:hover,
     [role="button"]:hover,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     a.button:hover,
-    input[type="reset"]:focus,
-    :focus::file-selector-button,
-    a.button-secondary:focus,
     input[type="reset"]:hover,
     :hover::file-selector-button,
     a.button-secondary:hover {
@@ -1802,8 +1902,6 @@ a.button,
 input[type="reset"],
 ::file-selector-button,
 a.button-secondary {
-    -webkit-appearance: button;
-    -moz-appearance: button;
     appearance: button;
     text-decoration: none;
     cursor: pointer;
@@ -1822,7 +1920,7 @@ a[aria-disabled="true"].button-secondary {
 ::file-selector-button {
     display: initial;
     margin: 0;
-    margin-right: var(--mrg-firm-300, 0.8125rem);
+    margin-inline-end: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-normal, 1rem);
 }
 
@@ -1839,7 +1937,6 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
-    grid-gap: var(--mrg-soft-300, 0.5rem);
     gap: var(--mrg-soft-300, 0.5rem);
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
@@ -1849,28 +1946,26 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"]))
     + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+    margin-block-start: var(--mrg-firm-200, 0.5rem);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-block-start: var(--mrg-firm-400, 1.25rem);
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
 }
 
+/* # GLOBALS - Tables
+ * ======================================================================== */
 .table-wrapper,
 table {
     position: relative;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
+    margin-block: var(--mrg-firm-400, 1.25rem) 0;
+    margin-block: var(--mrg-firm-600, 2.25rem)
+        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
     background: var(--sys-clr-accent-bg, CanvasText);
     width: min(var(--width-page, 53rem), 100%);
 }
@@ -1915,6 +2010,9 @@ th {
     color: var(--sys-clr-accent-text, Canvas);
 }
 
+/* # UTILITIES - Typography
+ * ======================================================================== */
+/* ## Font Sizes ==================================== */
 .font-size-heading-1 {
     font-size: var(--fs-heading-1, 2.75rem);
 }
@@ -1971,15 +2069,15 @@ th {
     font-size: var(--fs-bigger-9, 3.6875rem);
 }
 
+/* # ASTRO LAYOUT SUPPORT
+ * ======================================================================== */
 nav ol,
 nav ul {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
 }
 nav ol li,
 nav ul li {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
 }
 
 /*! end of @maddimathon/utility-astro/templates/html */

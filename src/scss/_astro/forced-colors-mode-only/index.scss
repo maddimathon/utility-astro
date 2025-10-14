@@ -12,4 +12,4 @@
     @include lib.snippet-forced-colors-mode-only;
 }
 
-@include lib.extend-selectors;
+@include lib.extend-selectors($optional: true);

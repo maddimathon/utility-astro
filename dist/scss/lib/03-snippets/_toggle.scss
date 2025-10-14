@@ -6,7 +6,7 @@
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
-// @use 'pkg:@maddimathon/utility-sass/templates/base/lib/03-snippets' as utils;
+@use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;

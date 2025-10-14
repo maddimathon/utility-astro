@@ -41,14 +41,12 @@ body > .body-subgrid {
     align-items: start;
     grid-auto-rows: auto;
     grid-auto-flow: column;
-    grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
     --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
     /* prettier-ignore */
     grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
-    margin-left: 0;
-    margin-right: 0;
+    margin-inline: 0;
 }
 :where(
     body > *,
@@ -78,8 +76,7 @@ body {
     z-index: 1;
 }
 :where(body > * + *) {
-    margin-top: var(--gap-block-layout, 5vw);
-    margin-bottom: 0;
+    margin-block: var(--gap-block-layout, 5vw) 0;
 }
 
 body > header,
@@ -90,13 +87,11 @@ body > .subgrid,
 body > .body-subgrid {
     grid-column: 1/-1;
     grid-template-columns: subgrid;
-    margin-left: 0;
-    margin-right: 0;
+    margin-inline: 0;
 }
 body :where(.callout-width, pre, table),
 body :where(blockquote) {
-    margin-left: 0;
-    margin-right: 0;
+    margin-inline: 0;
     width: auto;
     max-width: none;
     justify-self: start;
@@ -121,11 +116,10 @@ body pre {
 }
 
 body > footer {
-    margin-top: var(--gap-block-layout, 5vw);
-    margin-bottom: var(--gap-block-layout, 5vw);
+    margin-block: var(--gap-block-layout, 5vw);
 }
 body > aside > :first-child {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 
 :where(.layout_full-width > main > *) {
