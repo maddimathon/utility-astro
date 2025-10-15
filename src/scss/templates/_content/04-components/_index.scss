@@ -13,7 +13,7 @@
          * ======================================================================== */
     }
 
-    @include snippet-support-toggle;
+    @include snippet-support-astro-toggle;
 }
 
 @if config.$print_astro_toggleNav {
@@ -22,7 +22,7 @@
          * ======================================================================== */
     }
 
-    @include snippet-support-toggle-nav-menu;
+    @include snippet-support-astro-toggle-nav-menu;
 }
 
 @if config.$print_astro_settingsMenu {
@@ -31,5 +31,5 @@
          * ======================================================================== */
     }
 
-    @include snippet-support-settings-menu;
+    @include snippet-support-astro-settings-menu;
 }

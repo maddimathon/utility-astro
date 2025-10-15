@@ -26,7 +26,7 @@ export type * from './ToggleNavMenu.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<ToggleNavMenuProps, 'div'>;
+export interface Props extends GenericElementProps<ToggleNavMenuProps, 'div'> {}
 
 const {
     id: menuID,
@@ -58,7 +58,8 @@ const titleID = `${id}-title`;
         class='toggle-title'
     >
         <Toggle_Control
-            {...{ id, buttonHTML: 'Menu', buttonID }}
+            {...{ id, buttonID }}
+            set:text='Menu'
             data-toggle-primary-control={id}
         />
     </div>

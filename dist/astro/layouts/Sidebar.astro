@@ -23,7 +23,7 @@ export type * from './Sidebar.js';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<SidebarProps, 'aside'>;
+export interface Props extends GenericElementProps<SidebarProps, 'aside'> {}
 
 const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;
@@ -36,7 +36,7 @@ const rendered = Astro.slots.has('default') && Astro.slots.render('default') || 
 <aside
     role='complementary'
     id='sidebar'
-    class:list={['site-sidebar', '||', ...classList]}
+    class:list={['site-sidebar', '||', classList]}
     {...attributes}
 >
     { rendered ? (

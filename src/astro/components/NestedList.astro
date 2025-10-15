@@ -23,7 +23,8 @@ export type * from './NestedList.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<NestedListProps, 'ul' | 'ol'>;
+export interface Props
+    extends GenericElementProps<NestedListProps, 'ul' | 'ol'> {}
 
 const {
     list,

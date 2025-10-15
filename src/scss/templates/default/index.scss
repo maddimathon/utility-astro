@@ -5,15 +5,13 @@
 
 @forward 'config';
 
-@forward '../../tokens';
+@forward '../_content/_header';
 
-@forward '_header';
+@forward '../../tokens';
 
 @forward '../../lib';
 
 @forward '../_content';
-
-@forward '_footer';
 
 /// # EXTENDING SELECTORS
 /// ======================================================================== ///

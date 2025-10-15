@@ -17,6 +17,7 @@ import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 /* import - values */
 
 /* import - components */
+import Icon from './Icon.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* import - layouts */
@@ -27,7 +28,7 @@ export type * from './SettingsMenu.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<SettingsMenuProps, 'div'>;
+export interface Props extends GenericElementProps<SettingsMenuProps, 'div'> {}
 
 const {
     accessibilityReportEmail,
@@ -85,38 +86,6 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
     ...inputSettings,
 };
 
-const buttonSVG = `<span class='icon | settings-icon'>
-    <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
-        class='icon-cog'
-        role='img'
-        aria-hidden='true'
-    >
-        <path d='M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z'></path>
-        <path d='M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z'></path>
-        <path d='M12 2v2'></path>
-        <path d='M12 22v-2'></path>
-        <path d='m17 20.66-1-1.73'></path>
-        <path d='M11 10.27 7 3.34'></path>
-        <path d='m20.66 17-1.73-1'></path>
-        <path d='m3.34 7 1.73 1'></path>
-        <path d='M14 12h8'></path>
-        <path d='M2 12h2'></path>
-        <path d='m20.66 7-1.73 1'></path>
-        <path d='m3.34 17 1.73-1'></path>
-        <path d='m17 3.34-1 1.73'></path>
-        <path d='m11 13.73-4 6.93'></path>
-    </svg>
-</span>`;
-
 /**
  * Rendered slot HTML.
  */
@@ -168,11 +137,16 @@ const slots_render = mapToObject(
     >
         <Toggle_Control
             {...{ id, buttonID }}
-            buttonHTML={buttonSVG + '<span class="screen-reader-text">Toggle settings menu</span>'}
             class:list='website-settings__toggle'
             data-toggle-primary-control={id}
-            icon={false}
-        />
+        >
+            <Icon 
+                slot='icon'
+                type='settings'
+                class:list={'settings-icon'}
+            />
+            <span class="screen-reader-text">Toggle settings menu</span>
+        </Toggle_Control>
     </div>
 
     <section

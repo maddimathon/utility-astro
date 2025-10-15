@@ -44,11 +44,6 @@ export interface Props<T_Item extends NestedListItem = NestedListItem> {
      */
     list: T_Item[];
 
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
-
     /**
      * Type of list to print.
      * 

@@ -23,7 +23,7 @@ export type * from './Table.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<TableProps, 'table'>;
+export interface Props extends GenericElementProps<TableProps, 'div'> {}
 
 const {
     class: classList = [],

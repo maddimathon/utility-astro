@@ -16,11 +16,5 @@ import type { Props as IconProps } from './Icon.d.ts';
  * @since ___PKG_VERSION___
  */
 export interface Props {
-
     type: IconProps[ 'type' ];
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
 }

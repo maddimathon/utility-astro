@@ -24,7 +24,7 @@ export type * from './Main.js';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<MainProps, 'main'>;
+export interface Props extends GenericElementProps<MainProps, 'main'> {}
 
 const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;
@@ -63,7 +63,7 @@ const slots_render = mapToObject(
 <main
     role='main'
     id='main'
-    class:list={['site-content', '||', ...classList]}
+    class:list={['site-content', '||', classList]}
     {...attributes}
 >
 

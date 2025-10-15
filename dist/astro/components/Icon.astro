@@ -24,7 +24,7 @@ export type * from './Icon.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<IconProps, 'div'>;
+export interface Props extends GenericElementProps<IconProps, 'span'> {}
 
 const {
     type,
@@ -44,10 +44,5 @@ const {
 </span>
 
 <style lang='scss'>
-    .icon {
-        display: inline-block;
-        height: 1.375em;
-        fill: currentColor;
-        vertical-align: middle;
-    }
+    @forward '../css/icon.css';
 </style>

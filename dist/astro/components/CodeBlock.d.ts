@@ -17,11 +17,6 @@ export interface Props {
 
     children?: any;
 
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
-
     /**
      * Code language, if any.
      */

@@ -16,11 +16,5 @@ import type { SVG } from '../../ts/svg.js';
  * @since ___PKG_VERSION___
  */
 export interface Props {
-
     type: keyof typeof SVG;
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
 }

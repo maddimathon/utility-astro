@@ -1,0 +1,18 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '_pre';
+
+@forward 'lib' hide $include_html, $internal_isTemplate,
+    $internal_supressCredit, $print_globals, $print_headings, $print_normalize,
+    $print_tokens, $print_utils;
+
+@use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+
+$internal_supressCredit: false !default;
+$internal_supressCredit: fns.config-valid-bool(
+    $internal_supressCredit,
+    'internal_supressCredit'
+);

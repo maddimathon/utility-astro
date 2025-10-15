@@ -16,7 +16,7 @@
 ///
 /// Supports the SettingsMenu astro component.
 ///
-@mixin snippet-support-settings-menu {
+@mixin snippet-support-astro-settings-menu {
     .website-settings-menu {
         grid-column: page-start / page-end;
 
@@ -39,13 +39,6 @@
         background: #{var-sys-colour(background)};
         width: fit-content;
         max-width: min(#{var-width(content)}, 90vw);
-
-        > .container {
-            // margin: 0;
-            // padding: 0;
-
-            // width: fit-content;
-        }
 
         fieldset,
         %button {
@@ -131,27 +124,14 @@
                 @include utils.snippet-button;
 
                 & {
-                    // --display: block;
-                    // display: block;
-
                     margin: 0;
                     padding: #{var-mrg-firm('100')} #{var-mrg-firm('100')};
 
                     justify-self: end;
-                    // border: none;
-
-                    // @include forced-colors {
-                    //     border: 0.125rem solid ButtonFace;
-                    //     border-color: ButtonBorder;
-                    // }
                 }
 
                 .settings-icon {
-                    > svg {
-                        --icon-size: 1.625rem;
-                        height: var(--icon-size);
-                        width: var(--icon-size);
-                    }
+                    --icon-size: 1.75rem;
                 }
 
                 &.website-settings__backdrop {
@@ -214,17 +194,7 @@
             }
 
             [data-toggle-content] {
-                // padding: 0;
-
                 border: none;
-
-                > .container {
-                    // justify-content: start;
-                    // align-content: start;
-                    // align-items: start;
-
-                    // padding: 0 #{var-mrg-firm('300')};
-                }
             }
 
             &[data-toggle-container='open'],
@@ -238,20 +208,10 @@
                 }
 
                 [data-toggle-content] {
-                    // --display: block;
-                    // display: block;
-
                     max-height: 80svh;
                     max-height: calc(
                         90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
-
-                    // border: none;
-                    // overflow: auto;
-
-                    > .container {
-                        // padding-block: #{var-mrg-firm('300')};
-                    }
                 }
             }
         }

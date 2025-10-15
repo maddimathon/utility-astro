@@ -23,7 +23,7 @@ export type * from './NewComponent.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<NewComponentProps, 'div'>;
+export interface Props extends GenericElementProps<NewComponentProps, 'div'> {}
 
 const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;

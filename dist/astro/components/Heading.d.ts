@@ -21,11 +21,6 @@ export interface Props {
     heading: number;
 
     /**
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[] | { [ key: string ]: boolean | string; };
-
-    /**
      * If any, the heading display level override for this heading (otherwise
      * the `heading` value is used).
      */

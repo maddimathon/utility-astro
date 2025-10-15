@@ -23,7 +23,7 @@ export type * from './Heading.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<HeadingProps, 'h2' | 'p'>;
+export interface Props extends GenericElementProps<HeadingProps, 'div'> {}
 
 const {
     class: classList = [],

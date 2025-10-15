@@ -7,6 +7,6 @@
 
 /* # TOGGLE BLOCKS ==================================== */
 
-@include lib.snippet-support-content;
+@include lib.snippet-support-astro-content;
 
 @include lib.extend-selectors($optional: true);

@@ -20,17 +20,55 @@ import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* PROPS ===================================== */
 
-export interface Props extends Omit<GenericElementProps<{}, 'button'>, 'id'> {
+export interface Props
+    extends Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> {
     id: string;
-    buttonHTML: string;
     buttonID: string;
 
     icon?: boolean;
 }
 
-const { id, buttonHTML, buttonID, icon = true, ...attrs }: Props = Astro.props;
+const {
+    buttonID,
+    id,
+
+    icon = true,
+    ...attrs
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const buttonHTML = (await Astro.slots.render('default')).trim() || 'Toggle me';
+
+const iconHTML =
+    (await Astro.slots.render('icon')) ||
+    `<span class='icon | toggle-icon'>
+        <svg
+            aria-ignore='true'
+            role='img'
+            width='100%'
+            height='100%'
+            viewBox='0 0 24 24'
+            version='1.1'
+            xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'
+            xml:space='preserve'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+        >
+            <path
+                id='a'
+                d='M5 12h14'
+            />
+            <path
+                id='b'
+                d='M12 5v14'
+            />
+        </svg>
+    </span>`;
 ---
 
 <button
@@ -40,37 +78,13 @@ const { id, buttonHTML, buttonID, icon = true, ...attrs }: Props = Astro.props;
     data-toggle-control={id}
     {...attrs}
 >
-    {
-        icon && (
-            <span class='icon | toggle-icon'>
-                <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='24'
-                    height='24'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    class='icon-plus'
-                    role='img'
-                    aria-hidden='true'
-                >
-                    <path
-                        id='a'
-                        d='M5 12h14'
-                    />
-                    <path
-                        id='b'
-                        d='M12 5v14'
-                    />
-                </svg>
-            </span>
-        )
-    }
+    {icon && <Fragment set:html={iconHTML} />}
     <span
         class='toggle-control-inner'
-        set:html={buttonHTML.trim()}
+        set:html={buttonHTML}
     />
 </button>
+
+<style lang='scss'>
+    @forward '../css/icon.css';
+</style>

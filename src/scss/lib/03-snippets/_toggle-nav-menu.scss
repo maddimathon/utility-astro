@@ -13,7 +13,7 @@
 @use 'content' as *;
 
 // prettier-ignore
-$_default_grid_page: snippet-support-content--default-grid-page();
+$_default_grid_page: snippet-support-astro-content--default-grid-page();
 
 $_titleBorderWidth: var-border-width('200');
 $_titleBorderWidth_half: var-border-width('100');
@@ -21,11 +21,11 @@ $_titleBorderWidth_half: var-border-width('100');
 ///
 /// Supports the ToggleNavMenu astro component.
 ///
-@mixin snippet-support-toggle-nav-menu {
+@mixin snippet-support-astro-toggle-nav-menu {
     %body {
         > %nav {
             @at-root #{selector.unify(&, ('[data-toggle-container]'))} {
-                @include snippet-support-content--page-width;
+                @include snippet-support-astro-content--page-width;
             }
         }
     }
@@ -64,7 +64,7 @@ $_titleBorderWidth_half: var-border-width('100');
                         border: none;
 
                         > .container {
-                            @include snippet-support-content--page-width;
+                            @include snippet-support-astro-content--page-width;
 
                             padding-inline: #{var-mrg-firm('400')};
                             background: #{var-sys-colour(background)};
@@ -92,7 +92,7 @@ $_titleBorderWidth_half: var-border-width('100');
                         background: #{var-sys-colour(background)};
 
                         [data-toggle-control] {
-                            @include snippet-support-content--page-width;
+                            @include snippet-support-astro-content--page-width;
 
                             // prettier-ignore
                             $_gridCols_toggle: [content] 1fr #{var-gap-inline(tab)} [icon] minmax(max-content, auto);

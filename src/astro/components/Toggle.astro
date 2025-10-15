@@ -28,7 +28,7 @@ export type * from './Toggle.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<ToggleProps, 'div'>;
+export interface Props extends GenericElementProps<ToggleProps, 'div'> {}
 
 const {
     defaultOpen,
@@ -39,8 +39,6 @@ const {
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
-
-const buttonHTML: string = (await Astro.slots.render('button')) || 'Toggle me';
 
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
@@ -61,15 +59,19 @@ const titleID = `${id}-title`;
             heading ? (
                 <Heading heading={heading}>
                     <Toggle_Control
-                        {...{ id, buttonHTML, buttonID }}
+                        {...{ id, buttonID }}
                         data-toggle-primary-control={id}
-                    />
+                    >
+                        <slot name='button' />
+                    </Toggle_Control>
                 </Heading>
             ) : (
                 <Toggle_Control
-                    {...{ id, buttonHTML, buttonID }}
+                    {...{ id, buttonID }}
                     data-toggle-primary-control={id}
-                />
+                >
+                    <slot name='button' />
+                </Toggle_Control>
             )
         }
     </div>

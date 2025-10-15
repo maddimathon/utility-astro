@@ -1,0 +1,14 @@
+/* # SCREEN READER TEXT ==================================== */
+.icon,
+.toggle-control > :global(.icon) {
+    --display: inline-block;
+    display: inline-block;
+    height: var(--icon-size, 1.375em);
+    vertical-align: middle;
+}
+.icon > svg,
+.toggle-control > :global(.icon) > svg {
+    --display: block;
+    display: block;
+    fill: currentColor;
+}

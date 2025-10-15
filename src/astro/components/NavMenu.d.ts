@@ -47,9 +47,4 @@ export interface Props {
          */
         child?: Props[ 'menu' ];
     } )[];
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
 }

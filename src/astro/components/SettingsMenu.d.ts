@@ -24,11 +24,6 @@ export interface Props {
     accessibilityReportEmail?: string;
 
     /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
-
-    /** 
      * Unique id attr.
      */
     id?: string;

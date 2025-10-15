@@ -23,7 +23,7 @@ export type * from './SkipLinks.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<SkipLinksProps, 'ul'>;
+export interface Props extends GenericElementProps<SkipLinksProps, 'div'> {}
 
 const {
     links,

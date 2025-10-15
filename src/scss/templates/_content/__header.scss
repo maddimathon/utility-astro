@@ -1,0 +1,26 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'config';
+
+@use 'sass:string';
+
+@use 'config';
+
+@if string.to-lower-case(config.$templateName) == default {
+    /*!
+     * Utility Astro Template
+     * 
+     * @maddimathon/utility-astro@___CURRENT_VERSION___
+     * License: MIT
+     */
+} @else {
+    /*!
+     * Utility Astro Template - #{config.$templateName}
+     * 
+     * @maddimathon/utility-astro@___CURRENT_VERSION___
+     * License: MIT
+     */
+}

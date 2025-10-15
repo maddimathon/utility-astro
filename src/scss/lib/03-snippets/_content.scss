@@ -21,19 +21,19 @@ $_contentCol_default: minmax(auto, $_width_content);
 ///
 /// @since ___PKG_VERSION___
 ///
-@function snippet-support-content--default-grid-page() {
+@function snippet-support-astro-content--default-grid-page() {
     // prettier-ignore
     @return 0 [page-start] 1fr [sidebar-start] 0 [content-start] #{$_contentCol_default} [content-end] 0 [sidebar-end] 1fr [page-end] 0;
 }
 
-$_default_grid_page: snippet-support-content--default-grid-page();
+$_default_grid_page: snippet-support-astro-content--default-grid-page();
 
 ///
 /// Includes the bascis properties for a page layout grid (but no columns).
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--base-grid {
+@mixin snippet-support-astro-content--base-grid {
     --display: grid;
     display: grid;
     position: relative;
@@ -52,7 +52,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--content-width {
+@mixin snippet-support-astro-content--content-width {
     grid-column: content-start / content-end;
     // width: 100%;
     width: auto;
@@ -62,7 +62,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--page-width {
+@mixin snippet-support-astro-content--page-width {
     grid-column: page-start / page-end;
     // width: 100%;
     width: auto;
@@ -72,7 +72,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--sidebar-width {
+@mixin snippet-support-astro-content--sidebar-width {
     grid-column: sidebar-start / sidebar-end;
     // width: 100%;
     width: auto;
@@ -82,7 +82,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content--site-width {
+@mixin snippet-support-astro-content--site-width {
     grid-column: site-start / site-end;
     // width: 100%;
     width: auto;
@@ -148,7 +148,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-content {
+@mixin snippet-support-astro-content {
     $bodyMargin: var-gap-inline(layout-half);
 
     $contentCol: $_contentCol_default;
@@ -165,16 +165,16 @@ $_default_grid_page: snippet-support-content--default-grid-page();
         /// for internal use
         ///
         %_site-width {
-            @include snippet-support-content--site-width;
+            @include snippet-support-astro-content--site-width;
         }
         %_page-width {
-            @include snippet-support-content--page-width;
+            @include snippet-support-astro-content--page-width;
         }
         %_content-width {
-            @include snippet-support-content--content-width;
+            @include snippet-support-astro-content--content-width;
         }
         %_sidebar-width {
-            @include snippet-support-content--sidebar-width;
+            @include snippet-support-astro-content--sidebar-width;
         }
 
         ///
@@ -182,16 +182,16 @@ $_default_grid_page: snippet-support-content--default-grid-page();
         /// for external use and nesting
         ///
         %site-width {
-            @include snippet-support-content--site-width;
+            @include snippet-support-astro-content--site-width;
         }
         %page-width {
-            @include snippet-support-content--page-width;
+            @include snippet-support-astro-content--page-width;
         }
         %content-width {
-            @include snippet-support-content--content-width;
+            @include snippet-support-astro-content--content-width;
         }
         %sidebar-width {
-            @include snippet-support-content--sidebar-width;
+            @include snippet-support-astro-content--sidebar-width;
         }
 
         ///
@@ -200,7 +200,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 
         %_body-grid,
         %_body-subgrid {
-            @include snippet-support-content--base-grid;
+            @include snippet-support-astro-content--base-grid;
 
             /* prettier-ignore */
             --grid-template-columns--page: #{$_default_grid_page};
@@ -214,7 +214,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
             /// BLOCK ///
 
             @at-root :where(#{selector.nest( &, '> *' )}) {
-                @include snippet-support-content--content-width;
+                @include snippet-support-astro-content--content-width;
             }
         }
 
@@ -287,7 +287,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--page-width;
+                    @include snippet-support-astro-content--page-width;
                 }
             }
             > header {
@@ -326,7 +326,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--page-width;
+                    @include snippet-support-astro-content--page-width;
                 }
             }
         }
@@ -336,7 +336,7 @@ $_default_grid_page: snippet-support-content--default-grid-page();
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
-                    @include snippet-support-content--site-width;
+                    @include snippet-support-astro-content--site-width;
                 }
             }
         }
@@ -357,13 +357,13 @@ $_default_grid_page: snippet-support-content--default-grid-page();
 
                     &,
                     & %page-width {
-                        @include snippet-support-content--content-width;
+                        @include snippet-support-astro-content--content-width;
                     }
 
                     /// BLOCK ///
 
                     @at-root :where(#{selector.nest( &, '> *' )}) {
-                        @include snippet-support-content--content-width;
+                        @include snippet-support-astro-content--content-width;
                     }
                 }
             }

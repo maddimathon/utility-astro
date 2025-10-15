@@ -3,24 +3,19 @@
 /// @since 0.1.0-alpha.draft
 ///
 
+@use '_pre' as pre;
+
 @forward 'pkg:@maddimathon/utility-sass/config' with (
-    $include_html: false !default,
-
-    $internal_isTemplate: false !default,
+    $include_html: pre.$include_html,
+    $internal_isTemplate: pre.$internal_isTemplate,
     $internal_supressCredit: true,
-
     $mx_extendHeadingsByRole: false !default,
-
-    $print_globals: false !default,
+    $print_globals: pre.$print_globals,
+    $print_headings: pre.$print_headings,
     $print_normalize: false,
     $print_tokens: false,
-    $print_utils: false !default,
-
+    $print_utils: pre.$print_utils,
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default,
-
-    $selector_root: (
-        'html',
-    )
-    !default
+    $selector_root: 'html' !default
 );

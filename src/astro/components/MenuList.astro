@@ -25,10 +25,12 @@ export type * from './MenuList.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<MenuListProps, "div">;
+export interface Props extends Omit<GenericElementProps<MenuListProps, "div">, 'role'> {}
 
 const {
     menu,
+    
+    class: classList = [],
     separator = null,
     submenu = false,
     ...attributes
@@ -37,20 +39,32 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const classes = submenu ? 'submenu' : null;
-
 ---
 
 { menu && (
-    <ul {...attributes} role="menu" class={classes}>
+    <ul 
+        {...attributes} 
+        role="menu" 
+        class:list={[ {submenu}, classList ]}
+    >
         { menu.map( ( item, index ) => ( ( item.href || item.child ) && (
             <li role="none">
-                { typeof item.href === 'string' ? (
-                    <a role="menuitem" href={item.href} set:html={item.label} target={item.external ? '_blank' : undefined} aria-current={item.current ? 'page' : false} />
-                ) : item.href === false ? (
-                    <a role="menuitem" aria-disabled="true" set:html={item.label} target={item.external ? '_blank' : undefined} />
+                { typeof item.href !== 'undefined' ? (
+                    <a
+                        role="menuitem"
+                        href={ item.href || undefined }
+                        target={( item.href && item.external ) ? '_blank' : undefined}
+
+                        aria-current={( item.href && item.current ) ? 'page' : undefined}
+                        aria-disabled={ item.href === false || undefined }
+
+                        set:html={item.label}
+                    />
                 ) : item.child?.length && (
-                    <span role="menuitem" set:html={item.label}  />
+                    <span
+                        role="menuitem" 
+                        set:html={item.label}
+                    />
                 ) }
                 { item.child?.length && <Astro.self menu={item.child} submenu={true} /> }
             </li>

@@ -33,7 +33,7 @@ export type Props_Inner = {
     lang?: Required<CodeBlockProps>['lang'];
 };
 
-export type Props = GenericElementProps<Props_Inner, 'div'>;
+export interface Props extends GenericElementProps<Props_Inner, 'div'> {}
 
 const {
     lang,

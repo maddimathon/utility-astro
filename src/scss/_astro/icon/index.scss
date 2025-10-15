@@ -1,0 +1,24 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../lib';
+
+/* # SCREEN READER TEXT ==================================== */
+
+.icon,
+.toggle-control > :global(.icon) {
+    --display: inline-block;
+    display: inline-block;
+    height: var(--icon-size, 1.375em);
+    vertical-align: middle;
+
+    > svg {
+        --display: block;
+        display: block;
+        fill: currentColor;
+    }
+}
+
+@include lib.extend-selectors($optional: true);

@@ -7,15 +7,28 @@
 
 @use '../../../lib' as *;
 
-@if config.$print_astro_content or config.$print_globals {
-    @if config.$print_headings {
-        /* # ASTRO LAYOUT SUPPORT
-         * ======================================================================== */
+@if config.$print_headings {
+    /* # LAYOUT - BASICS
+     * ======================================================================== */
+}
+
+%nav {
+    ol,
+    ul {
+        margin-block: 0;
+
+        li {
+            margin-block: 0;
+        }
     }
 }
 
 @if config.$print_astro_content {
-    @include snippet-support-content;
+    @if config.$print_headings {
+        /* # ASTRO LAYOUT - CONTENT SUPPORT
+         * ======================================================================== */
+    }
+    @include snippet-support-astro-content;
 
     $_sels_allHeadings: selector-all-headings();
 
@@ -51,17 +64,6 @@
 
         @include colour-mode((low, average)) {
             opacity: 0.75;
-        }
-    }
-}
-
-%nav {
-    ol,
-    ul {
-        margin-block: 0;
-
-        li {
-            margin-block: 0;
         }
     }
 }

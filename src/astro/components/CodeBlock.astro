@@ -24,7 +24,7 @@ export type * from './CodeBlock.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<CodeBlockProps, 'pre'>;
+export interface Props extends GenericElementProps<CodeBlockProps, 'div'> {}
 
 const {
     children,
@@ -47,9 +47,7 @@ const codeHTML: string =
             <Prism
                 code={codeHTML}
                 lang={lang}
-                class={
-                    Array.isArray(classList) ? classList.join(' ') : classList
-                }
+                class:list={classList}
                 {...attributes}
             />
         ) : (

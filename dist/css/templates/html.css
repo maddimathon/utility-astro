@@ -33,6 +33,8 @@ html {
       'Segoe UI Emoji'; */
     line-height: 1.15; /* 1. Correct the line height in all browsers. */
     -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
     tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
 }
 
@@ -494,6 +496,12 @@ html {
 }
 
 /* #endregion Tokens - Width */
+/*!
+ * Utility Sass Template
+ * 
+ * @maddimathon/utility-sass@0.1.0-alpha.draft
+ * License: MIT
+ */
 /* # GLOBALS - Accessibility
  * ======================================================================== */
 .no-js :focus,
@@ -553,8 +561,10 @@ body {
     justify-content: start;
     align-items: center;
     gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
-    margin-block: var(--gap-block-layout, 5vw);
-    margin-inline: var(--gap-inline-layout, 8vw);
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: var(--gap-block-layout, 5vw);
+    margin-left: var(--gap-inline-layout, 8vw);
+    margin-right: var(--gap-inline-layout, 8vw);
 }
 :where(body > *) {
     width: min(var(--width-page, 58rem), 100%);
@@ -562,28 +572,36 @@ body {
 
 hr {
     display: block;
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
     width: auto;
-    margin-inline: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
 }
 @media (min-width: 25em) {
     hr {
-        margin-inline: auto;
+        margin-left: auto;
+        margin-right: auto;
         max-width: min(var(--width-callout, 29.25rem), 100%);
     }
 }
 hr {
     width: 100%;
-    margin-block-start: calc(
+    margin-top: calc(
         var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
     );
-    margin-block: var(--mrg-firm-600, 2.25rem);
+    margin-top: var(--mrg-firm-600, 2.25rem);
+    margin-bottom: var(--mrg-firm-600, 2.25rem);
     border: none;
-    border-block-end: currentColor solid 2px;
+    border-bottom: currentColor solid 2px;
 }
 
 /* # GLOBALS - Typography
  * ======================================================================== */
+::-moz-selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
 ::selection {
     background-color: var(--sys-clr-selection-bg, Highlight);
     color: var(--sys-clr-selection-text, HighlightText);
@@ -635,6 +653,7 @@ a {
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
     border: none;
+    -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-underline-offset: var(--stroke-relative-800, 0.25em);
     color: var(--sys-clr-link, LinkText);
@@ -679,45 +698,56 @@ a[aria-disabled="true"] {
 }
 
 abbr[title] {
+    -webkit-text-decoration: dotted underline
+        var(--stroke-relative-400, 0.125em);
     text-decoration: dotted underline var(--stroke-relative-400, 0.125em);
     cursor: help;
 }
 
 /* ## Typography - Block ==================================== */
 p {
-    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
 }
 hr + p {
-    margin-block-start: 0;
+    margin-top: 0;
 }
 
 blockquote {
     display: block;
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
     width: auto;
-    margin-inline: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
 }
 blockquote {
-    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
-    margin-block: var(--mrg-soft-600, 1.625rem)
-        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
-    padding-inline-start: var(--mrg-firm-300, 0.8125rem);
-    border-inline-start: var(--border-width-200, 0.125rem) solid currentColor;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: var(--border-width-200, 0.125rem) solid currentColor;
 }
 @media (min-width: 36em) {
     blockquote {
-        margin-inline: var(--gap-inline-tab, 1.5vw);
+        margin-left: var(--gap-inline-tab, 1.5vw);
+        margin-right: var(--gap-inline-tab, 1.5vw);
     }
 }
 blockquote > p:first-child {
-    margin-block-start: 0;
+    margin-top: 0;
 }
 blockquote > cite {
     display: block;
-    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
-    text-align: end;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    text-align: right;
 }
 blockquote > cite::before {
+    content: "— ";
     content: "— "/"";
     color: currentColor;
 }
@@ -749,16 +779,22 @@ samp {
 
 pre {
     display: block;
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
     width: auto;
-    margin-inline: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
 }
 pre {
     position: relative;
-    margin-inline: 0;
-    margin-block: var(--mrg-soft-400, 0.8125rem) 0;
-    margin-block: var(--mrg-soft-600, 1.625rem)
-        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
     border: var(--border-width-100, 0.0625rem) solid currentColor;
     max-width: min(120ch, 100%);
@@ -789,7 +825,8 @@ pre:where(:has(> code)) > code {
 h1,
 .h1,
 .page-title {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
@@ -816,7 +853,8 @@ h1 a.button,
 }
 
 :where([role="heading"][aria-level="1"]) {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
@@ -837,7 +875,8 @@ h1 a.button,
 
 h2,
 .h2 {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
@@ -859,7 +898,8 @@ h2 a.button,
 }
 
 :where([role="heading"][aria-level="2"]) {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
@@ -880,7 +920,8 @@ h2 a.button,
 
 h3,
 .h3 {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
@@ -902,7 +943,8 @@ h3 a.button,
 }
 
 :where([role="heading"][aria-level="3"]) {
-    margin-block: var(--mrg-soft-800, 3.125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
@@ -923,7 +965,8 @@ h3 a.button,
 
 h4,
 .h4 {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
@@ -962,7 +1005,8 @@ h4 a.button,
 }
 
 :where([role="heading"][aria-level="4"]) {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
@@ -994,7 +1038,8 @@ h4 a.button,
 
 h5,
 .h5 {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1033,7 +1078,8 @@ h5 a.button,
 }
 
 :where([role="heading"][aria-level="5"]) {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1065,7 +1111,8 @@ h5 a.button,
 
 h6,
 .h6 {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1104,7 +1151,8 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="6"]) {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
@@ -1135,7 +1183,8 @@ h6 a.button,
 }
 
 .h7 {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1155,7 +1204,8 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="7"]) {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1178,7 +1228,8 @@ h6 a.button,
 }
 
 .h8 {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1208,7 +1259,8 @@ h6 a.button,
 }
 
 :where([role="heading"][aria-level="8"]) {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1245,17 +1297,17 @@ h6 a.button,
 ol,
 ul {
     margin: 0;
-    margin-inline-start: 20%;
+    margin-left: 20%;
     padding: 0;
-    padding-inline-start: 1em;
-    margin-inline-start: var(--gap-inline-tab, 1.5vw);
+    padding-left: 1em;
+    margin-left: var(--gap-inline-tab, 1.5vw);
     line-height: var(--line-height-400, 1.6875);
 }
 ol ol,
 ol ul,
 ul ol,
 ul ul {
-    margin-block-start: 0;
+    margin-top: 0;
 }
 ol ol ol,
 ol ol ul,
@@ -1311,7 +1363,7 @@ ul ul ul ul {
 
 li {
     margin: 0;
-    margin-block-start: var(--mrg-soft-300, 0.5rem);
+    margin-top: var(--mrg-soft-300, 0.5rem);
     padding: 0;
 }
 li::marker {
@@ -1319,7 +1371,7 @@ li::marker {
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 li li li {
-    margin-block-start: var(--mrg-soft-200, 0.3125rem);
+    margin-top: var(--mrg-soft-200, 0.3125rem);
 }
 li li li::marker {
     font-size: var(--fs-smaller-2, 0.8125rem);
@@ -1374,17 +1426,18 @@ fieldset legend {
     display: block;
 }
 fieldset > :first-child {
-    margin-block-start: 0;
-    margin-block-start: calc(
+    margin-top: 0;
+    margin-top: calc(
         var(--mrg-soft-400, 0.8125rem) - var(--mrg-soft-200, 0.3125rem)
     );
 }
 fieldset > legend + * {
-    margin-block-start: 0;
+    margin-top: 0;
 }
 
 fieldset legend {
-    margin-block: var(--mrg-soft-600, 1.625rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: var(--line-height-400, 1.6875);
@@ -1392,9 +1445,12 @@ fieldset legend {
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
-    margin-inline: calc(var(--mrg-soft-300, 0.5rem) * -1);
-    margin-block: 0 var(--mrg-soft-300, 0.5rem);
-    padding-inline: var(--mrg-soft-300, 0.5rem);
+    margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-top: 0;
+    margin-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-soft-300, 0.5rem);
+    padding-right: var(--mrg-soft-300, 0.5rem);
     font-style: italic;
 }
 
@@ -1477,11 +1533,22 @@ input:active {
     color: var(--sys-clr-input-text-active, FieldText);
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    opacity: 1;
+    color: currentColor;
+}
 textarea::placeholder,
 select::placeholder,
 input::placeholder {
     opacity: 1;
     color: currentColor;
+}
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 textarea::placeholder,
 select::placeholder,
@@ -1490,11 +1557,21 @@ input::placeholder {
 }
 
 @media (prefers-contrast: less) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
+}
+[data-contrast-mode="high"] textarea::-moz-placeholder,
+[data-contrast-mode="high"] select::-moz-placeholder,
+[data-contrast-mode="high"] input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
 }
 [data-contrast-mode="high"] textarea::placeholder,
 [data-contrast-mode="high"] select::placeholder,
@@ -1503,6 +1580,11 @@ input::placeholder {
 }
 
 @media (prefers-contrast: more) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 90%, transparent);
+    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
@@ -1515,7 +1597,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-block-start: var(--mrg-firm-200, 0.5rem);
+    margin-top: var(--mrg-firm-200, 0.5rem);
 }
 
 input[type="button"],
@@ -1596,8 +1678,10 @@ input[type="week"] {
     width: auto;
 }
 input[type="file"] {
-    padding-block: var(--mrg-soft-300, 0.5rem);
-    padding-inline: var(--mrg-firm-300, 0.8125rem);
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 input[type="range"] {
@@ -1625,6 +1709,7 @@ a.button-secondary {
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
     width: fit-content;
     font: inherit;
     line-height: var(--line-height-100, 1.1875);
@@ -1902,6 +1987,8 @@ a.button,
 input[type="reset"],
 ::file-selector-button,
 a.button-secondary {
+    -webkit-appearance: button;
+    -moz-appearance: button;
     appearance: button;
     text-decoration: none;
     cursor: pointer;
@@ -1920,7 +2007,7 @@ a[aria-disabled="true"].button-secondary {
 ::file-selector-button {
     display: initial;
     margin: 0;
-    margin-inline-end: var(--mrg-firm-300, 0.8125rem);
+    margin-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-normal, 1rem);
 }
 
@@ -1937,6 +2024,7 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
+    grid-gap: var(--mrg-soft-300, 0.5rem);
     gap: var(--mrg-soft-300, 0.5rem);
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
@@ -1946,16 +2034,17 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"]))
     + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    margin-block-start: var(--mrg-firm-200, 0.5rem);
+    margin-top: var(--mrg-firm-200, 0.5rem);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-block-start: var(--mrg-firm-400, 1.25rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
-    margin-block: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* # GLOBALS - Tables
@@ -1963,9 +2052,12 @@ label > input[type="radio"] {
 .table-wrapper,
 table {
     position: relative;
-    margin-block: var(--mrg-firm-400, 1.25rem) 0;
-    margin-block: var(--mrg-firm-600, 2.25rem)
-        calc(var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem));
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-firm-600, 2.25rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
     background: var(--sys-clr-accent-bg, CanvasText);
     width: min(var(--width-page, 53rem), 100%);
 }
@@ -2069,15 +2161,18 @@ th {
     font-size: var(--fs-bigger-9, 3.6875rem);
 }
 
-/* # ASTRO LAYOUT SUPPORT
+/*! end of @maddimathon/utility-sass/template */
+/* # LAYOUT - BASICS
  * ======================================================================== */
 nav ol,
 nav ul {
-    margin-block: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 nav ol li,
 nav ul li {
-    margin-block: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /*! end of @maddimathon/utility-astro/templates/html */

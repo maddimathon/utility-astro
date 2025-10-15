@@ -22,9 +22,4 @@ export interface Props {
         label: string;
         href: string;
     }[];
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
 }

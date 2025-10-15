@@ -35,7 +35,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 ///
 /// Supports the Toggle astro component.
 ///
-@mixin snippet-support-toggle(
+@mixin snippet-support-astro-toggle(
     $headingSelectors: $_defaultHeadingSelectors,
     $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
 ) {
@@ -68,11 +68,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         #{selector.nest('>', ($headingSelectors))} {
             .toggle-icon {
+                --icon-size: 1em;
                 padding-bottom: 0;
-
-                > svg {
-                    height: 1em;
-                }
             }
         }
     }
@@ -113,6 +110,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     }
 
     .toggle-icon {
+        --icon-size: 1.125em;
         display: inline-block;
 
         vertical-align: sub;
@@ -120,12 +118,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
         padding-inline-end: #{var-border-width('200')};
 
         > svg {
-            display: block;
-            position: relative;
-
-            height: 1.125em;
-            width: auto;
-
             stroke: currentColor;
             stroke-width: clamp(
                 1px,
@@ -327,12 +319,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
                     }
                 }
             }
-
-            // :where([data-toggle-container]) {
-            //     :where(.toggle-icon > svg #b) {
-            //         opacity: 1;
-            //     }
-            // }
 
             > [data-toggle-content] {
                 grid-template-rows: 1fr;

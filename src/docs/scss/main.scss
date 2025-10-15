@@ -5,9 +5,7 @@
 
 @forward '_header';
 
-@forward '../../scss/templates/astro/config' with (
-    $print_headings: true
-);
+@forward '../../scss/templates/astro/config';
 
 @forward '../../scss/templates/astro';
 

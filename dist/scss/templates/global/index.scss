@@ -5,20 +5,18 @@
 
 @forward 'config';
 
-@forward '../../tokens';
+@forward '../_content/_header' with (
+    $templateName: 'Global'
+);
 
-@forward '_header';
+@forward '../../tokens';
 
 @forward '../../lib';
 
 @forward '../_content';
 
-@forward '_footer';
-
 /// # EXTENDING SELECTORS
 /// ======================================================================== ///
-
-@use 'config';
 
 @use '../../lib' as *;
 @use '../_content' as *;

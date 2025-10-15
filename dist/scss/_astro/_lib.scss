@@ -23,6 +23,3 @@
 @forward '../notice';
 
 @forward '../lib';
-
-@use '../templates/astro/config';
-@use '../lib' as *;

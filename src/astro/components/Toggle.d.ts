@@ -28,9 +28,4 @@ export interface Props {
      * If any, the heading level used to wrap the toggle button.
      */
     heading?: number | false;
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
 }

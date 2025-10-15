@@ -16,11 +16,5 @@ import type { HTMLAttributes } from 'astro/types';
  * @since ___PKG_VERSION___
  */
 export interface Props {
-
-    /** 
-     * Value for component's `class` attribute.
-     */
-    class?: string | string[];
-
     wrapper?: HTMLAttributes<'div'>;
 }

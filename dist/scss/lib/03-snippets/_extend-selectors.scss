@@ -47,7 +47,7 @@ $_astroContentLayoutSelectors: if(
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
-    // $additional: list.append($additional, ('.page-subtitle', 'page-subtitle'));
+    // $additional: list.append($additional, ('.icon', 'icon'));
 
     @if config.$print_astro_content {
         $additional: list.join(

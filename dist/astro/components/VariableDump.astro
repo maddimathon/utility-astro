@@ -26,7 +26,7 @@ export type * from './VariableDump.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<VariableDumpProps, 'div'>;
+export interface Props extends GenericElementProps<VariableDumpProps, 'div'> {}
 
 const {
     var: variable,

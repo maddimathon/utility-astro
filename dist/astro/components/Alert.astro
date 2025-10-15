@@ -24,7 +24,7 @@ export type * from './Alert.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<AlertProps, 'div'>;
+export interface Props extends GenericElementProps<AlertProps, 'div'> {}
 
 const {
     type,

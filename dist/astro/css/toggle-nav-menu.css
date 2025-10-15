@@ -23,7 +23,7 @@ body > nav[data-toggle-container] {
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
-    margin-block-end: var(--border-width-100, 0.0625rem);
+    margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;
 }
@@ -34,7 +34,8 @@ body > nav[data-toggle-container] {
     > .container {
     grid-column: page-start/page-end;
     width: auto;
-    padding-inline: var(--mrg-firm-400, 1.25rem);
+    padding-left: var(--mrg-firm-400, 1.25rem);
+    padding-right: var(--mrg-firm-400, 1.25rem);
     background: var(--sys-clr-background, Canvas);
 }
 :where(.js)
@@ -49,7 +50,7 @@ body > nav[data-toggle-container] {
     [data-toggle-content]
     > .container
     > ul {
-    margin-inline-start: 0;
+    margin-left: 0;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
@@ -57,8 +58,8 @@ body > nav[data-toggle-container] {
     grid-template-columns: subgrid;
     align-content: stretch;
     align-items: center;
-    margin-block-end: calc(var(--border-width-200, 0.125rem) * -1);
-    border-block-end: var(--border-width-200, 0.125rem) solid currentColor;
+    margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
+    border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
     font-size: var(--fs-heading-6, 1.1875rem);
     background: var(--sys-clr-background, Canvas);
 }
@@ -81,14 +82,15 @@ body > nav[data-toggle-container] {
 }
 
 :where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
-    margin-block-end: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-firm-400, 1.25rem);
 }
 :where(.js)
     body
     > nav[data-toggle-container="open"]
     > [data-toggle-content]
     > .container {
-    padding-block: var(--mrg-soft-400, 0.8125rem);
+    padding-top: var(--mrg-soft-400, 0.8125rem);
+    padding-bottom: var(--mrg-soft-400, 0.8125rem);
     border: var(--border-width-200, 0.125rem) dotted currentColor;
-    border-block-start: none;
+    border-top: none;
 }

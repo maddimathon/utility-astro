@@ -10,6 +10,8 @@
 
 import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
+export type ClassList = undefined | string | { [ key: string ]: boolean | undefined; } | ClassList[];
+
 /**
  * Creates a props object for components.
  * 
@@ -34,10 +36,13 @@ export type GenericProps<T_Props> = T_Props & {
 export type GenericElementProps<
     T_Props,
     T_HtmlTag extends HTMLTag,
-> = GenericProps<T_Props>
+> =
+    GenericProps<T_Props & {
+        class?: ClassList;
+    }>
     & Partial<Omit<
         HTMLAttributes<T_HtmlTag>,
-        keyof T_Props | "class"
+        keyof T_Props | "class" | "class:list"
     >>
     & {
         'aria-description'?: string;
