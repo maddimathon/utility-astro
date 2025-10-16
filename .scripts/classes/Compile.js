@@ -78,8 +78,8 @@ export class Compile extends CompileStage {
     async templates() {
 
         await this.runCustomScssDirSubStage(
-            'scss/templates',
-            this.getDistDir( undefined, 'css/templates' ),
+            'scss/template',
+            this.getDistDir( undefined, 'css/template' ),
             {
                 postCSS: true,
             },

@@ -5,11 +5,14 @@
 
 @forward '_header';
 
-@forward '../../scss/templates/astro/config';
+@forward '../../scss/template/astro/config';
 
-@forward '../../scss/templates/astro';
+@forward '../../scss/template/astro' with (
+    $print_templateDocBlock: false,
+    $template_internal_supressCredit: false
+);
 
-@use '../../scss/templates/astro' as *;
+@use '../../scss/template/astro' as *;
 
 @include js-support(whereSelector) {
     $_navHeight: 3.125rem;

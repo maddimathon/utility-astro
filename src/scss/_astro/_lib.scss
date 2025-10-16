@@ -5,7 +5,7 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '../templates/astro/config' with (
+@forward '../template/astro/config' with (
     $include_html: true !default,
 
     $internal_isTemplate: false !default,

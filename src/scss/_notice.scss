@@ -3,13 +3,14 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward 'pkg:@maddimathon/utility-sass/notice';
+
 @use 'config';
 
-@if not config.$internal_supressCredit {
-    /*!
-     * This stylesheet includes css generated using 
-     * @maddimathon/utility-astro@___CURRENT_VERSION___
-     * 
-     * License: MIT
-     */
+@use 'lib/noticeMx' as *;
+
+@if not config.$internal_supressCredit and not config.$internal_isTemplate {
+    @at-root {
+        @include notice;
+    }
 }

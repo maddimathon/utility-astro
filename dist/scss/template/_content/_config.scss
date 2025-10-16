@@ -1,0 +1,17 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use 'sass:string';
+
+@use '../../config';
+
+$print_templateDocBlock: not config.$internal_supressCredit or
+    config.$internal_isTemplate !default;
+
+$template_name: 'Default' !default;
+
+$template_isDefault: string.to-lower-case($template_name) == default;
+
+$template_internal_supressCredit: not $print_templateDocBlock !default;

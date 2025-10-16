@@ -8,10 +8,16 @@
 @forward 'lib' hide $include_html, $internal_isTemplate,
     $internal_supressCredit, $print_globals, $print_headings, $print_normalize,
     $print_tokens, $print_utils;
+@forward 'pkg:@maddimathon/utility-sass/config' hide $include_html,
+    $internal_isTemplate, $internal_supressCredit, $print_globals,
+    $print_headings, $print_normalize, $print_tokens, $print_utils;
+
+/// OVERRIDES ///
 
 @use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+@use 'lib';
 
-$internal_supressCredit: false !default;
+$internal_supressCredit: lib.$internal_isTemplate !default;
 $internal_supressCredit: fns.config-valid-bool(
     $internal_supressCredit,
     'internal_supressCredit'

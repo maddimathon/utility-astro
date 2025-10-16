@@ -3,10 +3,11 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward 'noticeMx';
 @forward '../notice';
 
 @forward 'pkg:@maddimathon/utility-sass' hide extend-selectors-globals,
-    extend-selectors-utils, extend-selectors, tokens-all, tokens-width,
+    extend-selectors-utils, extend-selectors, notice, tokens-all, tokens-width,
     width-value, var-width;
 
 @forward '01-functions';

@@ -1,0 +1,22 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'config';
+@forward '../_content/_header' with (
+    $template_name: 'Global'
+);
+@forward '../../tokens';
+
+@forward '../../lib';
+
+@forward '../_content';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use '../../lib' as *;
+@use '../_content' as *;
+
+@include extend-selectors;

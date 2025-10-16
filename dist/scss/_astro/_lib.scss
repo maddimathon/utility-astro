@@ -5,7 +5,7 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward '../templates/astro/config' with (
+@forward '../template/astro/config' with (
     $include_html: true !default,
 
     $internal_isTemplate: false !default,

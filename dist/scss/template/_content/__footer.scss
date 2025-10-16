@@ -1,0 +1,16 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@forward 'config';
+
+@use 'sass:string';
+
+@use 'config';
+
+@if config.$template_isDefault {
+    /*! END of @maddimathon/utility-astro/template */
+} @else {
+    /*! END of @maddimathon/utility-astro/template/#{string.to-lower-case(config.$template_name)} */
+}

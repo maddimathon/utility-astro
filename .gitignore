@@ -6,7 +6,7 @@
 # SCRIPTS
 # ======= #
 .scripts/logs/
-.scripts/templates/
+.scripts/template/
 
 
 # RELEASES
