@@ -3,8 +3,6 @@
 /// @since ___PKG_VERSION___
 ///
 
-@use 'config';
-
 @forward 'pkg:@maddimathon/utility-sass/template/content' with (
     $print_templateDocBlock: false,
     $template_internal_supressCredit: true

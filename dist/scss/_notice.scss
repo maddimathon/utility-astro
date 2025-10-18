@@ -3,7 +3,8 @@
 /// @since 0.1.0-alpha.draft
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/notice';
+@forward 'pkg:@maddimathon/utility-sass/notice' hide $internal_isTemplate,
+    $internal_supressCredit;
 
 @use 'config';
 
@@ -11,6 +12,6 @@
 
 @if not config.$internal_supressCredit and not config.$internal_isTemplate {
     @at-root {
-        @include notice;
+        @include notice(true);
     }
 }
