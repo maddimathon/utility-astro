@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { HTMLAttributes } from 'astro/types';
 import type { Props as IconProps } from './Icon.d.ts';
 
 /* import - functions */
@@ -24,23 +24,30 @@ export type * from './Icon.d.ts';
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<IconProps, 'span'> {}
+// prettier-ignore
+export type Props = IconProps & Partial<Omit<HTMLAttributes<'span'>, keyof IconProps | 'class' | 'class:list'>>;
 
 const {
-    type,
+    slug,
+    svg,
+    svgLabel,
+    type = 'star',
     class: classList = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const label = `${svgLabel ?? SVG_Label[type]} icon`;
 ---
 
 <span
-    class:list={['icon', `icon--${type}`, classList]}
     {...attributes}
-    aria-label={`${SVG_Label} icon`}
+    class:list={['icon', `icon--${slug ?? type}`, '||', classList]}
+    aria-label={label}
+    title={label}
 >
-    <Fragment set:html={SVG[type]} />
+    {svg ? <Fragment set:html={svg} /> : <Fragment set:html={SVG[type]} />}
 </span>
 
 <style lang='scss'>

@@ -8,6 +8,7 @@
  * @license MIT
  */
 
+import type { ClassList } from '../../ts/00-types/index.js';
 import type { Props as IconProps } from './Icon.d.ts';
 
 /**
@@ -15,6 +16,22 @@ import type { Props as IconProps } from './Icon.d.ts';
  * 
  * @since ___PKG_VERSION___
  */
-export interface Props {
+export type Props = {
+    class?: ClassList;
+    heading?: number;
+
     type: IconProps[ 'type' ];
-}
+
+    slug?: never;
+    svg?: never;
+    svgLabel?: never;
+} | {
+    class?: ClassList;
+    heading?: number;
+
+    type?: never;
+
+    slug: string;
+    svg: string;
+    svgLabel: string;
+};

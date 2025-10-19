@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { HTMLAttributes } from 'astro/types';
 import type { Props as AlertProps } from './Alert.d.ts';
 
 /* import - functions */
@@ -15,6 +15,7 @@ import type { Props as AlertProps } from './Alert.d.ts';
 
 /* import - components */
 import Icon from './Icon.astro';
+import Heading from './Heading.astro';
 
 /* import - layouts */
 
@@ -24,22 +25,62 @@ export type * from './Alert.d.ts';
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<AlertProps, 'div'> {}
+// prettier-ignore
+export type Props = AlertProps & Partial<Omit<HTMLAttributes<'section'>, keyof AlertProps | 'class' | 'class:list'>>;
 
 const {
-    type,
+    heading,
+    slug,
+    svg,
+    svgLabel,
+    type = 'star',
     class: classList = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
 
-<div
-    class:list={['alert-block', classList]}
+<section
     {...attributes}
+    class:list={[
+        'alert-block',
+        `alert-block--${slug ?? type}`,
+        '||',
+        classList,
+    ]}
 >
-    <Icon type={type} />
-    <slot name='headline' />
+    {
+        heading ? (
+            <Heading
+                heading={heading}
+                class='alert-block__headline'
+            >
+                {svg ? (
+                    <Icon
+                        slug={slug}
+                        svg={svg}
+                        svgLabel={svgLabel}
+                    />
+                ) : (
+                    <Icon type={type} />
+                )}
+                <slot name='headline' />
+            </Heading>
+        ) : (
+            <header class='alert-block__headline'>
+                {svg ? (
+                    <Icon
+                        slug={slug}
+                        svg={svg}
+                        svgLabel={svgLabel}
+                    />
+                ) : (
+                    <Icon type={type} />
+                )}
+                <slot name='headline' />
+            </header>
+        )
+    }
     <slot />
-</div>
+</section>
