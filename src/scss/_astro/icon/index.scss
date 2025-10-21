@@ -9,9 +9,14 @@
 
 .icon,
 .toggle-control > :global(.icon) {
+    $_iconSize: var(--icon-size, 1.375em);
+
     --display: inline-block;
     display: inline-block;
-    height: var(--icon-size, 1.375em);
+
+    height: #{$_iconSize};
+    height: calc(#{$_iconSize} * var(--icon-size--font-multiplier, 1));
+
     vertical-align: middle;
 
     > svg {

@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.1
+ * @maddimathon/utility-sass@0.1.0-pre.2
  * 
  * License: MIT
  */
@@ -613,6 +613,7 @@ hr {
 }
 
 html {
+    font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
     background: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
@@ -860,7 +861,6 @@ h1 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 h2,
 .h2 {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -884,7 +884,6 @@ h2 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 h3,
 .h3 {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -908,7 +907,6 @@ h3 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 h4,
 .h4 {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -949,7 +947,6 @@ h4 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 h5,
 .h5 {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -990,7 +987,6 @@ h5 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 h6,
 .h6 {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -1031,7 +1027,6 @@ h6 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 .h7 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -1052,7 +1047,6 @@ h6 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 .h8 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -1083,7 +1077,6 @@ h6 a.button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 /* # GLOBALS - Lists
  * ======================================================================== */
 ol,

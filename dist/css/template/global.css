@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.1
+ * @maddimathon/utility-sass@0.1.0-pre.2
  * 
  * License: MIT
  */
@@ -442,7 +442,6 @@ h1 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="1"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -479,7 +478,6 @@ h2 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="2"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -516,7 +514,6 @@ h3 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="3"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -564,7 +561,6 @@ h4 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="4"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -623,7 +619,6 @@ h5 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="5"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -682,7 +677,6 @@ h6 input[type="submit"] {
     letter-spacing: inherit;
     text-transform: inherit;
 }
-
 :where([role="heading"][aria-level="6"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);

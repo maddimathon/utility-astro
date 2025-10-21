@@ -52,5 +52,5 @@
         @return var(--width-#{$slug});
     }
 
-    @return var(--width-#{$slug}, #{list.nth($fallback, 1)});
+    @return var(--width-#{$slug}, list.nth($fallback, 1));
 }
