@@ -7,6 +7,9 @@
         "node_modules/**/*": true,
         "src/astro/css/**/*": true,
         "src/docs/css/**/*": true,
+
+        "src/scss/new-lib/config/_default.scss": true,
+        "src/scss/new-template/*/config/_default.scss": true,
     },
     "scss.scannerExclude": [
         "**/.git",

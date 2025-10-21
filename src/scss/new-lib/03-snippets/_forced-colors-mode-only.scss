@@ -1,0 +1,22 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+// @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+
+// @use '../config';
+
+// @use '../01-functions' as *;
+// @use '../02-mixins' as *;
+
+// ///
+// /// Utility class support.
+// ///
+// @mixin snippet-forced-colors-mode-only {
+//     display: none !important;
+
+//     @include forced-colors {
+//         display: var(--display, block) !important;
+//     }
+// }

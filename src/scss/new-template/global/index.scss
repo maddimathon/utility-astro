@@ -1,0 +1,20 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@forward 'config';
+@forward '../../new-lib';
+@forward '../_content';
+
+@use 'config';
+
+/*
+    LOCAL
+
+    meta.module-variables( config ) = #{meta.var-dump(meta.module-variables( config ))}
+    meta.module-functions( config ) = #{meta.var-dump(meta.module-functions( config ))}
+    meta.module-mixins( config ) = #{meta.var-dump(meta.module-mixins( config ))}
+ */

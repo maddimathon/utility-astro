@@ -1,0 +1,10 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'default';
+
+@forward '../../../new-lib/config' with (
+    $defaultConfig: default.$default
+);

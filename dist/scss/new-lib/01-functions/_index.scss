@@ -1,0 +1,59 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
+/// @since 0.1.0-alpha.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/list';
+
+@forward 'pkg:@maddimathon/utility-sass/01-functions' hide width-value,
+    var-width;
+
+@forward '01-01-tokens';
+
+// @use 'pkg:@maddimathon/utility-sass/01-functions' as lib;
+
+@use '../config';
+
+///
+/// Selectors for supporting the content layout.
+///
+/// @since 0.1.0-alpha.draft
+///
+@function to-extend-selector-content-layout() {
+    $sels: (
+        ('.layout_content-only', 'layout-content-only'),
+        ('.layout_full-width', 'layout-full-width'),
+        ('.layout_extra-wide', 'layout-extra-wide'),
+        ('.layout_sidebar-left', 'layout-sidebar-left'),
+        ('.layout_sidebar-right', 'layout-sidebar-right'),
+        ('.content-header', 'content-header'),
+        ('.page-subtitle', 'page-subtitle'),
+        ((pre, table), 'callout-width')
+    );
+
+    @if config.$print_astro_settingsMenu {
+        $sels: list.append(
+            $sels,
+            ('.website-settings-menu', 'page-width'),
+            $separator: comma
+        );
+    }
+
+    @if config.$print_utils {
+        $sels: list.join(
+            $sels,
+            (
+                (('.subgrid', '.body-subgrid'), 'body-subgrid'),
+                // (('.subgrid', '.main-subgrid'), 'main-subgrid'),
+                ('.site-width', 'site-width'),
+                ('.page-width', 'page-width'),
+                ('.content-width', 'content-width'),
+                ('.sidebar-width', 'sidebar-width'),
+                ('.callout-width', 'callout-width')
+            ),
+            $separator: comma
+        );
+    }
+
+    @return $sels;
+}

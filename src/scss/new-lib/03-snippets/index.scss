@@ -1,0 +1,15 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/03-snippets' hide
+        extend-selectors-globals,
+    extend-selectors-utils, extend-selectors;
+
+@forward 'content';
+@forward 'extend-selectors';
+@forward 'forced-colors-mode-only';
+@forward 'settings-menu';
+@forward 'toggle';
+@forward 'toggle-nav-menu';

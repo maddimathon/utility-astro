@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.0
+ * @maddimathon/utility-sass@0.1.0-pre.1
  * 
  * License: MIT
  */
@@ -616,6 +616,10 @@ html {
     line-height: var(--line-height-400, 1.6875);
     background: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
+}
+
+body {
+    font-size: var(--fs-normal, 1rem);
 }
 
 /* ## Typography - Inline ==================================== */

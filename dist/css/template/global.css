@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.0
+ * @maddimathon/utility-sass@0.1.0-pre.1
  * 
  * License: MIT
  */
@@ -230,12 +230,6 @@ hr {
 ::selection {
     background-color: var(--sys-clr-selection-bg, Highlight);
     color: var(--sys-clr-selection-text, HighlightText);
-}
-
-html {
-    line-height: var(--line-height-400, 1.6875);
-    background: var(--sys-clr-background, Canvas);
-    color: var(--sys-clr-text, CanvasText);
 }
 
 /* ## Typography - Inline ==================================== */
