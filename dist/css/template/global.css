@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.2
+ * @maddimathon/utility-sass@0.1.0-pre.4
  * 
  * License: MIT
  */
@@ -153,8 +153,11 @@ html {
     --width-callout: 29.25rem;
     --width-page: 58rem;
     --width-page: calc(
-        var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
-            var(--width-sidebar, 16rem)
+        (
+                var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
+                    var(--width-sidebar, 16rem)
+            ) *
+            1
     );
 }
 
@@ -432,7 +435,10 @@ h1 {
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h1 button,
 h1 [role="button"],
@@ -448,7 +454,10 @@ h1 input[type="submit"] {
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="1"])
     :where(
@@ -468,7 +477,10 @@ h2 {
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h2 button,
 h2 [role="button"],
@@ -484,7 +496,10 @@ h2 input[type="submit"] {
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="2"])
     :where(
@@ -504,7 +519,10 @@ h3 {
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h3 button,
 h3 [role="button"],
@@ -520,7 +538,10 @@ h3 input[type="submit"] {
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="3"])
     :where(
@@ -540,6 +561,8 @@ h4 {
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -567,6 +590,8 @@ h4 input[type="submit"] {
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -598,6 +623,8 @@ h5 {
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -625,6 +652,8 @@ h5 input[type="submit"] {
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -656,6 +685,8 @@ h6 {
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -683,6 +714,8 @@ h6 input[type="submit"] {
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1128,8 +1161,7 @@ button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
-input[type="reset"],
-::file-selector-button {
+input[type="reset"] {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -1149,8 +1181,7 @@ button:focus,
 [role="button"]:focus,
 input[type="button"]:focus,
 input[type="submit"]:focus,
-input[type="reset"]:focus,
-:focus::file-selector-button {
+input[type="reset"]:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1165,8 +1196,7 @@ button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
-input[type="reset"]:hover,
-:hover::file-selector-button {
+input[type="reset"]:hover {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1181,8 +1211,7 @@ button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
 input[type="submit"]:focus-within,
-input[type="reset"]:focus-within,
-:focus-within::file-selector-button {
+input[type="reset"]:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1198,13 +1227,11 @@ input[type="reset"]:focus-within,
 [data-contrast-mode="low"] input[type="button"]:focus-within,
 [data-contrast-mode="low"] input[type="submit"]:focus-within,
 [data-contrast-mode="low"] input[type="reset"]:focus-within,
-[data-contrast-mode="low"] :focus-within::file-selector-button,
 [data-contrast-mode="average"] button:focus-within,
 [data-contrast-mode="average"] [role="button"]:focus-within,
 [data-contrast-mode="average"] input[type="button"]:focus-within,
 [data-contrast-mode="average"] input[type="submit"]:focus-within,
-[data-contrast-mode="average"] input[type="reset"]:focus-within,
-[data-contrast-mode="average"] :focus-within::file-selector-button {
+[data-contrast-mode="average"] input[type="reset"]:focus-within {
     opacity: 0.875;
 }
 [data-contrast-mode="low"] button:focus,
@@ -1216,9 +1243,7 @@ input[type="reset"]:focus-within,
 [data-contrast-mode="low"] input[type="button"]:hover,
 [data-contrast-mode="low"] input[type="submit"]:hover,
 [data-contrast-mode="low"] input[type="reset"]:focus,
-[data-contrast-mode="low"] :focus::file-selector-button,
 [data-contrast-mode="low"] input[type="reset"]:hover,
-[data-contrast-mode="low"] :hover::file-selector-button,
 [data-contrast-mode="average"] button:focus,
 [data-contrast-mode="average"] [role="button"]:focus,
 [data-contrast-mode="average"] input[type="button"]:focus,
@@ -1228,9 +1253,7 @@ input[type="reset"]:focus-within,
 [data-contrast-mode="average"] input[type="button"]:hover,
 [data-contrast-mode="average"] input[type="submit"]:hover,
 [data-contrast-mode="average"] input[type="reset"]:focus,
-[data-contrast-mode="average"] :focus::file-selector-button,
-[data-contrast-mode="average"] input[type="reset"]:hover,
-[data-contrast-mode="average"] :hover::file-selector-button {
+[data-contrast-mode="average"] input[type="reset"]:hover {
     opacity: 0.875;
 }
 
@@ -1239,8 +1262,7 @@ input[type="reset"]:focus-within,
     [role="button"]:focus-within,
     input[type="button"]:focus-within,
     input[type="submit"]:focus-within,
-    input[type="reset"]:focus-within,
-    :focus-within::file-selector-button {
+    input[type="reset"]:focus-within {
         opacity: 0.875;
     }
     button:focus,
@@ -1252,9 +1274,7 @@ input[type="reset"]:focus-within,
     input[type="button"]:hover,
     input[type="submit"]:hover,
     input[type="reset"]:focus,
-    :focus::file-selector-button,
-    input[type="reset"]:hover,
-    :hover::file-selector-button {
+    input[type="reset"]:hover {
         opacity: 0.875;
     }
 }
@@ -1262,8 +1282,7 @@ button:active,
 [role="button"]:active,
 input[type="button"]:active,
 input[type="submit"]:active,
-input[type="reset"]:active,
-:active::file-selector-button {
+input[type="reset"]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
@@ -1274,8 +1293,16 @@ button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
-input[type="reset"],
-::file-selector-button {
+input[type="reset"] {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -1286,11 +1313,105 @@ button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
 input[aria-disabled="true"][type="submit"],
-input[aria-disabled="true"][type="reset"],
-[aria-disabled="true"]::file-selector-button {
+input[aria-disabled="true"][type="reset"] {
     cursor: not-allowed;
 }
 
+::file-selector-button {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+:focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:hover::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-within::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+[data-contrast-mode="low"] :focus-within::file-selector-button,
+[data-contrast-mode="average"] :focus-within::file-selector-button {
+    opacity: 0.875;
+}
+[data-contrast-mode="low"] :focus::file-selector-button,
+[data-contrast-mode="low"] :hover::file-selector-button,
+[data-contrast-mode="average"] :focus::file-selector-button,
+[data-contrast-mode="average"] :hover::file-selector-button {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :focus-within::file-selector-button {
+        opacity: 0.875;
+    }
+    :focus::file-selector-button,
+    :hover::file-selector-button {
+        opacity: 0.875;
+    }
+}
+:active::file-selector-button {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+::file-selector-button {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+[aria-disabled="true"]::file-selector-button {
+    cursor: not-allowed;
+}
 ::file-selector-button {
     display: initial;
     margin: 0;

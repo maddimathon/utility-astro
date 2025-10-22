@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.2
+ * @maddimathon/utility-sass@0.1.0-pre.4
  * 
  * License: MIT
  */
@@ -500,8 +500,11 @@ html {
     --width-callout: 29.25rem;
     --width-page: 58rem;
     --width-page: calc(
-        var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
-            var(--width-sidebar, 16rem)
+        (
+                var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
+                    var(--width-sidebar, 16rem)
+            ) *
+            1
     );
 }
 
@@ -587,7 +590,7 @@ hr {
     hr {
         margin-left: auto;
         margin-right: auto;
-        max-width: min(var(--width-callout, 29.25rem), 100%);
+        max-width: min(var(--width-callout, 29.25rem), 80%);
     }
 }
 hr {
@@ -840,7 +843,10 @@ h1,
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h1 button,
 .h1 button,
@@ -867,7 +873,10 @@ h1 a.button,
     font-weight: 900;
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="1"])
     :where(
@@ -889,7 +898,10 @@ h2,
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h2 button,
 .h2 button,
@@ -911,7 +923,10 @@ h2 a.button,
     font-weight: 800;
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="2"])
     :where(
@@ -933,7 +948,10 @@ h3,
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 h3 button,
 .h3 button,
@@ -955,7 +973,10 @@ h3 a.button,
     font-weight: 700;
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
+    font-style: normal;
 }
 :where([role="heading"][aria-level="3"])
     :where(
@@ -977,6 +998,8 @@ h4,
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1016,6 +1039,8 @@ h4 a.button,
     font-weight: 700;
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1049,6 +1074,8 @@ h5,
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1088,6 +1115,8 @@ h5 a.button,
     font-weight: 600;
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1121,6 +1150,8 @@ h6,
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1160,6 +1191,8 @@ h6 a.button,
     font-weight: 500;
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
     text-wrap: balance;
     font-style: italic;
 }
@@ -1705,7 +1738,6 @@ input[type="button"],
 input[type="submit"],
 a.button,
 input[type="reset"],
-::file-selector-button,
 a.button-secondary {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
@@ -1728,7 +1760,6 @@ a.button-secondary {
 .no-js input[type="submit"]:focus,
 .no-js a.button:focus,
 .no-js input[type="reset"]:focus,
-.no-js :focus::file-selector-button,
 .no-js a.button-secondary:focus,
 .js__no-where-selector button:focus,
 .js__no-where-selector [role="button"]:focus,
@@ -1736,7 +1767,6 @@ a.button-secondary {
 .js__no-where-selector input[type="submit"]:focus,
 .js__no-where-selector a.button:focus,
 .js__no-where-selector input[type="reset"]:focus,
-.js__no-where-selector :focus::file-selector-button,
 .js__no-where-selector a.button-secondary:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
@@ -1754,7 +1784,6 @@ a.button-secondary {
 :where(.js__no-focusVisible) input[type="submit"]:focus,
 :where(.js__no-focusVisible) a.button:focus,
 :where(.js__no-focusVisible) input[type="reset"]:focus,
-:where(.js__no-focusVisible) :focus::file-selector-button,
 :where(.js__no-focusVisible) a.button-secondary:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
@@ -1772,7 +1801,6 @@ input[type="button"]:hover,
 input[type="submit"]:hover,
 a.button:hover,
 input[type="reset"]:hover,
-:hover::file-selector-button,
 a.button-secondary:hover {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
@@ -1790,7 +1818,6 @@ input[type="button"]:focus-visible,
 input[type="submit"]:focus-visible,
 a.button:focus-visible,
 input[type="reset"]:focus-visible,
-:focus-visible::file-selector-button,
 a.button-secondary:focus-visible {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
@@ -1808,7 +1835,6 @@ input[type="button"]:focus-within,
 input[type="submit"]:focus-within,
 a.button:focus-within,
 input[type="reset"]:focus-within,
-:focus-within::file-selector-button,
 a.button-secondary:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
@@ -1826,7 +1852,6 @@ a.button-secondary:focus-within {
 .no-js input[type="submit"]:focus,
 .no-js a.button:focus,
 .no-js input[type="reset"]:focus,
-.no-js :focus::file-selector-button,
 .no-js a.button-secondary:focus,
 .js__no-where-selector button:focus,
 .js__no-where-selector [role="button"]:focus,
@@ -1834,7 +1859,6 @@ a.button-secondary:focus-within {
 .js__no-where-selector input[type="submit"]:focus,
 .js__no-where-selector a.button:focus,
 .js__no-where-selector input[type="reset"]:focus,
-.js__no-where-selector :focus::file-selector-button,
 .js__no-where-selector a.button-secondary:focus {
     opacity: 0.875;
 }
@@ -1845,7 +1869,6 @@ a.button-secondary:focus-within {
 :where(.js__no-focusVisible) input[type="submit"]:focus,
 :where(.js__no-focusVisible) a.button:focus,
 :where(.js__no-focusVisible) input[type="reset"]:focus,
-:where(.js__no-focusVisible) :focus::file-selector-button,
 :where(.js__no-focusVisible) a.button-secondary:focus {
     opacity: 0.875;
 }
@@ -1857,7 +1880,6 @@ a.button-secondary:focus-within {
     .no-js input[type="submit"]:focus,
     .no-js a.button:focus,
     .no-js input[type="reset"]:focus,
-    .no-js :focus::file-selector-button,
     .no-js a.button-secondary:focus,
     .js__no-where-selector button:focus,
     .js__no-where-selector [role="button"]:focus,
@@ -1865,7 +1887,6 @@ a.button-secondary:focus-within {
     .js__no-where-selector input[type="submit"]:focus,
     .js__no-where-selector a.button:focus,
     .js__no-where-selector input[type="reset"]:focus,
-    .js__no-where-selector :focus::file-selector-button,
     .js__no-where-selector a.button-secondary:focus {
         opacity: 0.875;
     }
@@ -1875,7 +1896,6 @@ a.button-secondary:focus-within {
     :where(.js__no-focusVisible) input[type="submit"]:focus,
     :where(.js__no-focusVisible) a.button:focus,
     :where(.js__no-focusVisible) input[type="reset"]:focus,
-    :where(.js__no-focusVisible) :focus::file-selector-button,
     :where(.js__no-focusVisible) a.button-secondary:focus {
         opacity: 0.875;
     }
@@ -1886,7 +1906,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="low"] input[type="submit"]:focus-visible,
 [data-contrast-mode="low"] a.button:focus-visible,
 [data-contrast-mode="low"] input[type="reset"]:focus-visible,
-[data-contrast-mode="low"] :focus-visible::file-selector-button,
 [data-contrast-mode="low"] a.button-secondary:focus-visible,
 [data-contrast-mode="average"] button:focus-visible,
 [data-contrast-mode="average"] [role="button"]:focus-visible,
@@ -1894,7 +1913,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="average"] input[type="submit"]:focus-visible,
 [data-contrast-mode="average"] a.button:focus-visible,
 [data-contrast-mode="average"] input[type="reset"]:focus-visible,
-[data-contrast-mode="average"] :focus-visible::file-selector-button,
 [data-contrast-mode="average"] a.button-secondary:focus-visible {
     opacity: 0.875;
 }
@@ -1904,7 +1922,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="low"] input[type="submit"]:focus-within,
 [data-contrast-mode="low"] a.button:focus-within,
 [data-contrast-mode="low"] input[type="reset"]:focus-within,
-[data-contrast-mode="low"] :focus-within::file-selector-button,
 [data-contrast-mode="low"] a.button-secondary:focus-within,
 [data-contrast-mode="average"] button:focus-within,
 [data-contrast-mode="average"] [role="button"]:focus-within,
@@ -1912,7 +1929,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="average"] input[type="submit"]:focus-within,
 [data-contrast-mode="average"] a.button:focus-within,
 [data-contrast-mode="average"] input[type="reset"]:focus-within,
-[data-contrast-mode="average"] :focus-within::file-selector-button,
 [data-contrast-mode="average"] a.button-secondary:focus-within {
     opacity: 0.875;
 }
@@ -1922,7 +1938,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="low"] input[type="submit"]:hover,
 [data-contrast-mode="low"] a.button:hover,
 [data-contrast-mode="low"] input[type="reset"]:hover,
-[data-contrast-mode="low"] :hover::file-selector-button,
 [data-contrast-mode="low"] a.button-secondary:hover,
 [data-contrast-mode="average"] button:hover,
 [data-contrast-mode="average"] [role="button"]:hover,
@@ -1930,7 +1945,6 @@ a.button-secondary:focus-within {
 [data-contrast-mode="average"] input[type="submit"]:hover,
 [data-contrast-mode="average"] a.button:hover,
 [data-contrast-mode="average"] input[type="reset"]:hover,
-[data-contrast-mode="average"] :hover::file-selector-button,
 [data-contrast-mode="average"] a.button-secondary:hover {
     opacity: 0.875;
 }
@@ -1942,7 +1956,6 @@ a.button-secondary:focus-within {
     input[type="submit"]:focus-visible,
     a.button:focus-visible,
     input[type="reset"]:focus-visible,
-    :focus-visible::file-selector-button,
     a.button-secondary:focus-visible {
         opacity: 0.875;
     }
@@ -1952,7 +1965,6 @@ a.button-secondary:focus-within {
     input[type="submit"]:focus-within,
     a.button:focus-within,
     input[type="reset"]:focus-within,
-    :focus-within::file-selector-button,
     a.button-secondary:focus-within {
         opacity: 0.875;
     }
@@ -1962,7 +1974,6 @@ a.button-secondary:focus-within {
     input[type="submit"]:hover,
     a.button:hover,
     input[type="reset"]:hover,
-    :hover::file-selector-button,
     a.button-secondary:hover {
         opacity: 0.875;
     }
@@ -1973,7 +1984,6 @@ input[type="button"]:active,
 input[type="submit"]:active,
 a.button:active,
 input[type="reset"]:active,
-:active::file-selector-button,
 a.button-secondary:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
@@ -1987,8 +1997,16 @@ input[type="button"],
 input[type="submit"],
 a.button,
 input[type="reset"],
-::file-selector-button,
 a.button-secondary {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -2001,11 +2019,150 @@ input[aria-disabled="true"][type="button"],
 input[aria-disabled="true"][type="submit"],
 a[aria-disabled="true"].button,
 input[aria-disabled="true"][type="reset"],
-[aria-disabled="true"]::file-selector-button,
 a[aria-disabled="true"].button-secondary {
     cursor: not-allowed;
 }
 
+::file-selector-button {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+.no-js :focus::file-selector-button,
+.js__no-where-selector :focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) :focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:hover::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-visible::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-within::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+.no-js :focus::file-selector-button,
+.js__no-where-selector :focus::file-selector-button {
+    opacity: 0.875;
+}
+
+:where(.js__no-focusVisible) :focus::file-selector-button {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    .no-js :focus::file-selector-button,
+    .js__no-where-selector :focus::file-selector-button {
+        opacity: 0.875;
+    }
+    :where(.js__no-focusVisible) :focus::file-selector-button {
+        opacity: 0.875;
+    }
+}
+[data-contrast-mode="low"] :focus-visible::file-selector-button,
+[data-contrast-mode="average"] :focus-visible::file-selector-button {
+    opacity: 0.875;
+}
+[data-contrast-mode="low"] :focus-within::file-selector-button,
+[data-contrast-mode="average"] :focus-within::file-selector-button {
+    opacity: 0.875;
+}
+[data-contrast-mode="low"] :hover::file-selector-button,
+[data-contrast-mode="average"] :hover::file-selector-button {
+    opacity: 0.875;
+}
+
+@media (prefers-contrast: less) {
+    :focus-visible::file-selector-button {
+        opacity: 0.875;
+    }
+    :focus-within::file-selector-button {
+        opacity: 0.875;
+    }
+    :hover::file-selector-button {
+        opacity: 0.875;
+    }
+}
+:active::file-selector-button {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+::file-selector-button {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+[aria-disabled="true"]::file-selector-button {
+    cursor: not-allowed;
+}
 ::file-selector-button {
     display: initial;
     margin: 0;

@@ -21,6 +21,28 @@ export interface Props {
     allHeadingLevels?: number[];
 
     /**
+     * Additional button variations to include. 'primary' and 'disabled' are
+     * always included.
+     *
+     * @default 'secondary'
+     */
+    buttonVariations?: string[];
+
+    /**
+     * The starting heading level.
+     * 
+     * @default 2
+     */
+    heading?: number;
+
+    /**
+     * The starting visual heading level.
+     * 
+     * @default null
+     */
+    displayHeading?: null | number;
+
+    /**
      * Determines what kind of elements to include.
      */
     mode?: "minimum" | "fancy" | "library";

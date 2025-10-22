@@ -302,10 +302,9 @@ const slots_render = mapToObject(
                 </fieldset>
             ) ) }
 
-            <input
-                type='reset'
+            <button
                 data-settings-reset
-                value='Reset Settings'
+                set:text='Reset Settings'
             />
             
             { slots_render.settingsMenuClose ? (

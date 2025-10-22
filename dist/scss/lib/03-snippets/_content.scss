@@ -13,8 +13,8 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
-$_width_content: list.nth(width-value(content), 1);
-$_width_sidebar: list.nth(width-value(sidebar), 1);
+$_width_content: var-width(content);
+$_width_sidebar: var-width(sidebar);
 
 $_contentCol_default: minmax(auto, $_width_content);
 

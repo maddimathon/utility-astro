@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.2
+ * @maddimathon/utility-sass@0.1.0-pre.4
  * 
  * License: MIT
  */
@@ -56,9 +56,9 @@ body > .body-subgrid {
     grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
-    --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+    --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
     /* prettier-ignore */
-    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
+    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
     margin-left: 0;
     margin-right: 0;
 }
@@ -78,9 +78,9 @@ body > .body-subgrid {
 @media (min-width: 54em) {
     body {
         /* prettier-ignore */
-        --grid-template-columns--page: 0 [page-start] minmax(auto, 8rem) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, 8rem) [page-end] 0;
+        --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, 8rem) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, 8rem) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
@@ -177,17 +177,17 @@ body > aside > :first-child {
 @media (min-width: 54em) {
     .layout_sidebar-left {
         /* prettier-ignore */
-        --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, 16rem) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0;
+        --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, 16rem) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
 @media (min-width: 54em) {
     .layout_sidebar-right {
         /* prettier-ignore */
-        --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, 16rem) [sidebar-end] 0 [page-end] 0;
+        --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, 16rem) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }

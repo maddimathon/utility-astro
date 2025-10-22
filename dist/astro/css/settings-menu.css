@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.2
+ * @maddimathon/utility-sass@0.1.0-pre.4
  * 
  * License: MIT
  */
@@ -115,8 +115,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js) .website-settings-menu [data-toggle-control] {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    margin: 0;
+    padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
@@ -294,6 +294,15 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: 0;
+    text-align: left;
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
@@ -304,8 +313,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    margin: 0;
-    padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
     justify-self: end;
 }
 :where(.js) .website-settings-menu [data-toggle-control] .settings-icon {

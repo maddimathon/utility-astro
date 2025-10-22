@@ -12,12 +12,13 @@ import type { Props as LoremIpsumProps } from './LoremIpsum.d.ts';
 import type { GenericProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
+import { arrayUnique } from '@maddimathon/utility-typescript/functions';
 
 /* import - values */
 
 /* import - components */
 import CodeBlock from './CodeBlock.astro';
-import { arrayUnique } from '@maddimathon/utility-typescript/functions';
+import Heading from './Heading.astro';
 
 /* import - layouts */
 
@@ -31,7 +32,10 @@ export type * from './LoremIpsum.d.ts';
 
 export type Props = GenericProps<LoremIpsumProps>;
 
-const props: Props = Astro.props.frontmatter ?? Astro.props;
+const {
+    heading = 2,
+    ...props
+}: Props = Astro.props.frontmatter ?? Astro.props;
 
 let mode: { [ K in Required<Props>['mode'] ]: boolean };
 
@@ -108,10 +112,22 @@ const code = {
     ].join('\n'),
 };
 
+const buttonVariations = props.buttonVariations?.filter( 
+    v => v != 'primary' && v != 'disabled'
+) ?? ['secondary'];
+
+const displayHeading = props.displayHeading ?? heading;
+
 ---
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</p>
-<h2 id="suspendisse-potenti-ex">Suspendisse Potenti <a href="#">ex</a></h2>
+
+
+<Heading
+    displayHeading={displayHeading}
+    heading={heading}
+    id="suspendisse-potenti-ex"
+>Suspendisse Potenti <a href="#">ex</a></Heading>
 <p>Proin leo mauris, iaculis et est eget, egestas tincidunt metus. Quisque mattis semper semper. Suspendisse dapibus maximus leo, quis facilisis risus auctor et. Nam vitae dolor mi. Morbi vestibulum dictum ipsum vel fermentum. Donec tincidunt fermentum ante eu faucibus.</p>
 <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p>
 
@@ -129,6 +145,9 @@ const code = {
 ) }
 
 <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget. Donec quam erat, sagittis id diam a, hendrerit viverra ligula.</p>
+
+<slot />
+
 <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit. Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.</p>
 <ul>
     <li>Suspendisse risus augue, vulputate vel enim eu, vulputate vehicula quam.</li>
@@ -179,8 +198,48 @@ const code = {
     <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
 </ol>
 <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-<h3 id="praesent-blandit-ex">Praesent Blandit <a href="#">ex</a></h3>
+
+<slot name="two" />
+
+
+<Heading
+    displayHeading={1 + displayHeading}
+    heading={ 1 + heading }
+    id="praesent-blandit-ex"
+>Praesent Blandit <a href="#">ex</a></Heading>
 <p id="blockquote">Turpis maximus posuere rhoncus, nunc est aliquam ligula, non ultrices felis turpis in sapien. Proin efficitur rhoncus ex auctor faucibus. Maecenas sed ornare ante, vitae consequat tellus. Aliquam eget facilisis nunc. Mauris in arcu sagittis velit aliquam cursus dignissim at odio.</p>
+
+<button>This is a button</button>
+<button aria-disabled="true">This is a disabled button</button>
+
+<div class="button-span">
+    { buttonVariations.map( variant =><button
+        class={`button-${variant}`}
+        set:text={`This is a ${variant} button`}
+    /> ) }
+</div>
+
+{ fancy && (
+    <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
+    <input type="submit" value="This is a form’s submit button" />
+    <input type="reset" value="This is a form’s reset button" />
+) }
+
+<p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue. Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.</p>
+
+<slot name="three" />
+
+
+<Heading
+    displayHeading={2 + displayHeading}
+    heading={ 2 + heading }
+    id="nulla-facilisi-ex"
+>Nulla Facilisi <a href="#">ex</a></Heading>
+<p>Nullam malesuada tincidunt turpis. Nam blandit facilisis efficitur. Vivamus scelerisque, eros sed iaculis elementum, eros leo viverra magna, vitae interdum quam sem id sapien.</p>
+
+<slot name="four" />
+
+<p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p>
 
 { fancy && (
     <blockquote>
@@ -204,10 +263,15 @@ const code = {
     <pre><code set:text={code.html} /></pre>
 ) }
 
-<p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue. Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.</p>
-<h4 id="nulla-facilisi-ex">Nulla Facilisi <a href="#">ex</a></h4>
-<p>Nullam malesuada tincidunt turpis. Nam blandit facilisis efficitur. Vivamus scelerisque, eros sed iaculis elementum, eros leo viverra magna, vitae interdum quam sem id sapien.</p>
-<p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p>
+<p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p>
+
+
+<Heading
+    displayHeading={3 + displayHeading}
+    heading={ 3 + heading }
+    id="pretium-purus-ex"
+>Pretium Purus <a href="#">ex</a></Heading>
+<p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p>
 
 { fancy && (
     <div class="table-wrapper"><table>
@@ -229,40 +293,41 @@ const code = {
     </table></div>
 ) }
 
-<p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p>
-<h5 id="pretium-purus-ex">Pretium Purus <a href="#">ex</a></h5>
-<p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p>
-
-<!-- { fancy && !library && (
-    <details>
-        <summary>Lorem ipsum dolor sit amet consectetur adipisicing elit.</summary>
-        <div class="details-container">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequuntur tempora expedita omnis autem sed doloremque hic laboriosam, magni veritatis quidem, tempore rem aspernatur excepturi ipsa vel vero! Assumenda culpa molestias non libero iusto nihil similique nesciunt accusamus delectus neque in voluptas praesentium eos provident odit quibusdam fugit, nisi cumque ea vitae!</p>
-            <p>Unde velit molestias animi nemo dolor atque quasi architecto illum dignissimos, optio error? Aliquam, perferendis. Laudantium earum, cum quo labore similique vero dignissimos reiciendis rerum, nisi officia, consequatur quisquam nihil nesciunt asperiores blanditiis quia iure non?</p>
-        </div>
-    </details>
-    <details>
-        <summary>Quia sed nam temporibus? Saepe, quos repellat?</summary>
-        <div class="details-container">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab ad debitis soluta repellat ducimus reiciendis veritatis, velit accusamus saepe eveniet ipsam in fuga eius vel. Atque animi dolorum numquam voluptate labore non dignissimos adipisci quia quisquam. Porro officiis deleniti, a ipsum velit minima.</p>
-            <p>Nemo, tempore eum sequi natus eveniet inventore expedita numquam excepturi! Praesentium ex consequuntur nam, facere velit hic perferendis, commodi at qui dolore repellat nulla deserunt ea quibusdam eum voluptatibus? Sit nulla maiores impedit est quod possimus vitae non beatae ducimus commodi. Consequatur sunt id, explicabo consectetur modi nemo animi quia unde ipsum molestias?</p>
-        </div>
-    </details>
-) } -->
-
 <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p>
-<button>This is a button</button>
-<button class="button-secondary">This is a secondary button</button>
-<a class="button" href="#">This is a (link) button</a>
-<input type="submit" value="This is a (submit) button" />
-<h6 id="cras-volutpat-ex">Cras Volutpat <a href="#">ex</a></h6>
+
+{ 
+    // fancy && !library && (
+    // <details>
+    //     <summary>Lorem ipsum dolor sit amet consectetur adipisicing elit.</summary>
+    //     <div class="details-container">
+    //         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequuntur tempora expedita omnis autem sed doloremque hic laboriosam, magni veritatis quidem, tempore rem aspernatur excepturi ipsa vel vero! Assumenda culpa molestias non libero iusto nihil similique nesciunt accusamus delectus neque in voluptas praesentium eos provident odit quibusdam fugit, nisi cumque ea vitae!</p>
+    //         <p>Unde velit molestias animi nemo dolor atque quasi architecto illum dignissimos, optio error? Aliquam, perferendis. Laudantium earum, cum quo labore similique vero dignissimos reiciendis rerum, nisi officia, consequatur quisquam nihil nesciunt asperiores blanditiis quia iure non?</p>
+    //     </div>
+    // </details>
+    // <details>
+    //     <summary>Quia sed nam temporibus? Saepe, quos repellat?</summary>
+    //     <div class="details-container">
+    //         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab ad debitis soluta repellat ducimus reiciendis veritatis, velit accusamus saepe eveniet ipsam in fuga eius vel. Atque animi dolorum numquam voluptate labore non dignissimos adipisci quia quisquam. Porro officiis deleniti, a ipsum velit minima.</p>
+    //         <p>Nemo, tempore eum sequi natus eveniet inventore expedita numquam excepturi! Praesentium ex consequuntur nam, facere velit hic perferendis, commodi at qui dolore repellat nulla deserunt ea quibusdam eum voluptatibus? Sit nulla maiores impedit est quod possimus vitae non beatae ducimus commodi. Consequatur sunt id, explicabo consectetur modi nemo animi quia unde ipsum molestias?</p>
+    //     </div>
+    // </details>
+    // ) 
+}
+
+<Heading
+    displayHeading={4 + displayHeading}
+    heading={ 4 + heading }
+    id="cras-volutpat-ex"
+>Cras Volutpat <a href="#">ex</a></Heading>
 <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p>
 
 { fancy && (
-
     <hr/>
 
-    <h2>Simple Form</h2>
+    <Heading
+        displayHeading={displayHeading}
+        heading={heading}
+    >Simple Form</Heading>
     <form>
 
         <label>Your Name</label>
@@ -287,7 +352,10 @@ const code = {
 
 <hr/>
 
-<h2>Fancy Forms</h2>
+<Heading
+    displayHeading={displayHeading}
+    heading={heading}
+>Fancy Forms</Heading>
 <form>
 
     <label for="input1">Text Input</label>
@@ -398,12 +466,32 @@ const code = {
 ) } */}
 
 
-<style>
+<style lang="scss">
     .loremipsum-heading-sample {
+        $_line_clamp: var(--loremipsum-heading-sample-line-clamp, 3);
+        
         display: -webkit-inline-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
+        -webkit-line-clamp: #{$_line_clamp};
+        line-clamp: #{$_line_clamp};
         overflow: hidden;
+    }
+
+    :where( .button-span ) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        margin-block: var(--mrg-firm-400, 1.25rem) var(--mrg-half-400, 0.4375rem);
+        gap: var(--mrg-firm-300, 0.8125rem) var(--mrg-firm-400, 1.25rem);
+
+        > :where( button ),
+        > :where( a.button ),
+        > :where( [role=button] ),
+        > :where( input[type=button] ),
+        > :where( input[type=reset] ),
+        > :where( input[type=submit] ) {
+            margin: 0;
+        }
     }
 </style>

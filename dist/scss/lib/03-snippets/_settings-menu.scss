@@ -121,12 +121,13 @@
             }
 
             [data-toggle-control] {
-                @include utils.snippet-button;
+                @include utils.snippet-button(
+                    $gap: 0,
+                    $margin: 0,
+                    $padding: var-mrg-firm('100') var-mrg-firm('100')
+                );
 
                 & {
-                    margin: 0;
-                    padding: #{var-mrg-firm('100')} #{var-mrg-firm('100')};
-
                     justify-self: end;
                 }
 
