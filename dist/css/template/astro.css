@@ -4,7 +4,7 @@
  */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.4
+ * @maddimathon/utility-sass@0.1.0-pre.5
  * 
  * License: MIT
  */
@@ -2377,6 +2377,7 @@ body > aside > :first-child {
 }
 
 [data-toggle-control] {
+    --icon-color: currentColor;
     margin: 0;
     width: auto;
     font: inherit;
@@ -2393,21 +2394,19 @@ body > aside > :first-child {
     appearance: none;
     cursor: text;
 }
-[data-toggle-control][aria-disabled] .icon {
+[data-toggle-control][aria-disabled] .toggle-icon {
     display: none;
 }
 .no-js [data-toggle-control]:focus,
 .js__no-where-selector [data-toggle-control]:focus {
     border: none;
     background: none;
-    color: inherit;
     opacity: 1;
 }
 
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
     border: none;
     background: none;
-    color: inherit;
     opacity: 1;
 }
 
@@ -2415,21 +2414,18 @@ body > aside > :first-child {
 [data-toggle-control]:active {
     border: none;
     background: none;
-    color: inherit;
     opacity: 1;
 }
 
 [data-toggle-control]:focus-visible {
     border: none;
     background: none;
-    color: inherit;
     opacity: 1;
 }
 
 [data-toggle-control]:focus-within {
     border: none;
     background: none;
-    color: inherit;
     opacity: 1;
 }
 
@@ -2583,23 +2579,6 @@ body > aside > :first-child {
     margin-top: 0;
     margin-bottom: 0;
 }
-:where(.js) .toggle-title > h1 [data-toggle-control],
-:where(.js) .toggle-title > .h1 [data-toggle-control],
-:where(.js) .toggle-title > h2 [data-toggle-control],
-:where(.js) .toggle-title > .h2 [data-toggle-control],
-:where(.js) .toggle-title > h3 [data-toggle-control],
-:where(.js) .toggle-title > .h3 [data-toggle-control],
-:where(.js) .toggle-title > h4 [data-toggle-control],
-:where(.js) .toggle-title > .h4 [data-toggle-control],
-:where(.js) .toggle-title > h5 [data-toggle-control],
-:where(.js) .toggle-title > .h5 [data-toggle-control],
-:where(.js) .toggle-title > h6 [data-toggle-control],
-:where(.js) .toggle-title > .h6 [data-toggle-control],
-:where(.js) .toggle-title > .h7 [data-toggle-control],
-:where(.js) .toggle-title > .h8 [data-toggle-control],
-:where(.js) .toggle-title > .page-title [data-toggle-control] {
-    font: inherit;
-}
 :where(.js) [data-toggle-control] {
     align-content: center;
     align-items: center;
@@ -2612,10 +2591,16 @@ body > aside > :first-child {
     appearance: button;
     cursor: pointer;
 }
-:where(.js) [data-toggle-control] .icon,
-:where(.js) [data-toggle-control] .icon svg {
-    display: block;
+:where(.js) [data-toggle-control] .toggle-icon {
     grid-column: icon;
+}
+:where(.js) [data-toggle-control] .toggle-icon,
+:where(.js) [data-toggle-control] .toggle-icon svg {
+    display: block;
+}
+:where(.js) [data-toggle-control] .toggle-icon svg #a,
+:where(.js) [data-toggle-control] .toggle-icon svg #b {
+    transform-origin: center;
 }
 :where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
@@ -2643,7 +2628,8 @@ body > aside > :first-child {
     grid-template-rows: 0fr;
     margin: 0;
     padding: 0;
-    border-top: var(--border-width-200, 0.125rem) solid currentColor;
+    border: 0 dotted currentColor;
+    border-top-width: var(--border-width-200, 0.125rem);
     border-top-style: solid;
     overflow: hidden;
 }
@@ -2664,13 +2650,26 @@ body > aside > :first-child {
     margin-bottom: 0;
 }
 /** Opening & Closing ------------------ **/
-:where(.js) [data-toggle-container="open"] > .toggle-title .toggle-icon svg #b {
-    opacity: 0;
+:where(.js) [data-toggle-container="open"] > [data-toggle-content] > .container,
+:where(.js)
+    [data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    visibility: visible;
+}
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control]
+    .toggle-icon
+    > svg
+    #b {
+    transform: rotate(270deg);
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {
+    border-left-width: var(--border-width-200, 0.125rem);
+    border-right-width: var(--border-width-200, 0.125rem);
+    border-bottom-width: var(--border-width-200, 0.125rem);
     grid-template-rows: 1fr;
-    border: var(--border-width-200, 0.125rem) dotted currentColor;
-    border-top-style: solid;
 }
 :where(.js)
     [data-toggle-container="open"]
@@ -2679,7 +2678,14 @@ body > aside > :first-child {
     padding-top: var(--mrg-soft-300, 0.5rem);
     padding-bottom: var(--mrg-soft-300, 0.5rem);
     opacity: 1;
-    visibility: visible;
+}
+:where(.js)
+    [data-toggle-container="closing"]
+    [data-toggle-control]
+    .toggle-icon
+    > svg
+    #b {
+    transform: rotate(540deg);
 }
 :where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
     grid-template-rows: 0fr;
@@ -2810,6 +2816,20 @@ body > nav[data-toggle-container] {
     width: 100%;
 }
 
+:where(.js)
+    body
+    > nav[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container,
+:where(.js)
+    body
+    > nav[data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
+    border-top: none;
+}
+
 :where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
     margin-bottom: var(--mrg-firm-400, 1.25rem);
 }
@@ -2820,8 +2840,6 @@ body > nav[data-toggle-container] {
     > .container {
     padding-top: var(--mrg-soft-400, 0.8125rem);
     padding-bottom: var(--mrg-soft-400, 0.8125rem);
-    border: var(--border-width-200, 0.125rem) dotted currentColor;
-    border-top: none;
 }
 
 /* # ASTRO COMPONENT - SETTINGS MENU
@@ -2913,6 +2931,7 @@ body > nav[data-toggle-container] {
 
 .website-settings__backdrop {
     display: none;
+    opacity: 0;
 }
 
 /* With Javascript ==================================== */
@@ -3128,10 +3147,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    justify-self: end;
-}
-:where(.js) .website-settings-menu [data-toggle-control] .settings-icon {
     --icon-size: 1.75rem;
+    justify-self: end;
 }
 :where(.js)
     .website-settings-menu
@@ -3151,7 +3168,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     backdrop-filter: blur(1rem);
     background: none;
     border: none;
-    opacity: 1;
     z-index: -1;
     cursor: pointer;
 }
@@ -3193,7 +3209,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js__no-focusVisible)
@@ -3203,7 +3218,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -3215,7 +3229,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -3224,7 +3237,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -3233,7 +3245,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js) .website-settings-menu [data-toggle-content] {
@@ -3245,14 +3256,29 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
+    .website-settings__backdrop,
+:where(.js)
+    .website-settings-menu[data-toggle-container="closing"]
     .website-settings__backdrop {
     display: var(--display, block);
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
-    [data-toggle-content] {
+    .website-settings__backdrop {
+    opacity: 1;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content] {
     max-height: 80svh;
     max-height: calc(90svh - 2rem - var(--gap-block-layout, 5vw) * 2);
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-soft-400, 0.8125rem);
+    padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }
 
 /*! END of @maddimathon/utility-astro/template/astro */

@@ -101,6 +101,7 @@
 
     .website-settings__backdrop {
         display: none;
+        opacity: 0;
     }
 
     /* With Javascript ==================================== */
@@ -128,11 +129,8 @@
                 );
 
                 & {
-                    justify-self: end;
-                }
-
-                .settings-icon {
                     --icon-size: 1.75rem;
+                    justify-self: end;
                 }
 
                 &.website-settings__backdrop {
@@ -153,7 +151,6 @@
                     backdrop-filter: blur(1rem);
                     background: none;
                     border: none;
-                    opacity: 1;
 
                     z-index: -1;
                     cursor: pointer;
@@ -189,7 +186,6 @@
                         border: none;
                         background: none;
                         color: inherit;
-                        opacity: 1;
                     }
                 }
             }
@@ -201,18 +197,27 @@
             &[data-toggle-container='open'],
             &[data-toggle-container='closing'] {
                 z-index: 999999;
+
+                .website-settings__backdrop {
+                    display: var(--display, block);
+                }
             }
 
             &[data-toggle-container='open'] {
                 .website-settings__backdrop {
-                    display: var(--display, block);
+                    opacity: 1;
                 }
 
-                [data-toggle-content] {
+                > [data-toggle-content] {
                     max-height: 80svh;
                     max-height: calc(
                         90svh - 2rem - (#{var-gap-block(layout)} * 2)
                     );
+
+                    > .container {
+                        padding-block: #{var-mrg-soft('400')}
+                            #{var-mrg-firm('300')};
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.4
+ * @maddimathon/utility-sass@0.1.0-pre.5
  * 
  * License: MIT
  */
@@ -98,6 +98,7 @@
 
 .website-settings__backdrop {
     display: none;
+    opacity: 0;
 }
 
 /* With Javascript ==================================== */
@@ -313,10 +314,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    justify-self: end;
-}
-:where(.js) .website-settings-menu [data-toggle-control] .settings-icon {
     --icon-size: 1.75rem;
+    justify-self: end;
 }
 :where(.js)
     .website-settings-menu
@@ -336,7 +335,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     backdrop-filter: blur(1rem);
     background: none;
     border: none;
-    opacity: 1;
     z-index: -1;
     cursor: pointer;
 }
@@ -378,7 +376,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js__no-focusVisible)
@@ -388,7 +385,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -400,7 +396,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -409,7 +404,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js)
@@ -418,7 +412,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border: none;
     background: none;
     color: inherit;
-    opacity: 1;
 }
 
 :where(.js) .website-settings-menu [data-toggle-content] {
@@ -430,12 +423,27 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
+    .website-settings__backdrop,
+:where(.js)
+    .website-settings-menu[data-toggle-container="closing"]
     .website-settings__backdrop {
     display: var(--display, block);
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
-    [data-toggle-content] {
+    .website-settings__backdrop {
+    opacity: 1;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content] {
     max-height: 80svh;
     max-height: calc(90svh - 2rem - var(--gap-block-layout, 5vw) * 2);
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-soft-400, 0.8125rem);
+    padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }

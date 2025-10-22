@@ -193,6 +193,10 @@ export class ElementToggle {
         if ( !this.#allButtons ) { return; }
         if ( !this.#container ) { return; }
 
+        this.#closingTime = ElementToggle.cssTimeToMilliseconds(
+            getComputedStyle( this.#container ).getPropertyValue( '--toggle-closing-time' )
+        );
+
         this.#container.setAttribute( 'data-toggle-container', 'open' );
 
         this.#allButtons.forEach( ( button ) => {

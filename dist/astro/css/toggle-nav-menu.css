@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.4
+ * @maddimathon/utility-sass@0.1.0-pre.5
  * 
  * License: MIT
  */
@@ -93,6 +93,20 @@ body > nav[data-toggle-container] {
     width: 100%;
 }
 
+:where(.js)
+    body
+    > nav[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container,
+:where(.js)
+    body
+    > nav[data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
+    border-top: none;
+}
+
 :where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
     margin-bottom: var(--mrg-firm-400, 1.25rem);
 }
@@ -103,6 +117,4 @@ body > nav[data-toggle-container] {
     > .container {
     padding-top: var(--mrg-soft-400, 0.8125rem);
     padding-bottom: var(--mrg-soft-400, 0.8125rem);
-    border: var(--border-width-200, 0.125rem) dotted currentColor;
-    border-top: none;
 }
