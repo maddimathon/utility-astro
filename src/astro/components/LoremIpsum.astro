@@ -209,20 +209,21 @@ const displayHeading = props.displayHeading ?? heading;
 >Praesent Blandit <a href="#">ex</a></Heading>
 <p id="blockquote">Turpis maximus posuere rhoncus, nunc est aliquam ligula, non ultrices felis turpis in sapien. Proin efficitur rhoncus ex auctor faucibus. Maecenas sed ornare ante, vitae consequat tellus. Aliquam eget facilisis nunc. Mauris in arcu sagittis velit aliquam cursus dignissim at odio.</p>
 
-<button>This is a button</button>
-<button aria-disabled="true">This is a disabled button</button>
+<button type="button">This is a button</button>
+<button aria-disabled="true" type="button">This is a disabled button</button>
 
 <div class="button-span">
     { buttonVariations.map( variant =><button
         class={`button-${variant}`}
         set:text={`This is a ${variant} button`}
+        type="button"
     /> ) }
 </div>
 
 { fancy && (
     <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
-    <input type="submit" value="This is a form’s submit button" />
-    <input type="reset" value="This is a form’s reset button" />
+    <button type="submit" set:text="This is a submit button" />
+    <button type="reset" set:text="This is a reset button" />
 ) }
 
 <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue. Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.</p>

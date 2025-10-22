@@ -72,10 +72,11 @@ const iconHTML =
 ---
 
 <button
-    id={buttonID}
-    class='toggle-control'
     aria-disabled='true'
+    class='toggle-control'
     data-toggle-control={id}
+    id={buttonID}
+    type='button'
     {...attrs}
 >
     {icon && <Fragment set:html={iconHTML} />}
