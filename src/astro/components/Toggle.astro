@@ -9,8 +9,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as ToggleProps } from './Toggle.d.ts';
+import type { ElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
 
@@ -22,21 +21,45 @@ import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* import - layouts */
 
-/* TYPES ===================================== */
-
-export type * from './Toggle.d.ts';
-
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<ToggleProps, 'div'> {}
+/**
+ * Input props for the Toggle component.
+ *
+ * @since ___PKG_VERSION___
+ */
+export interface ToggleProps {
+    children: any; // these are the slots
+
+    /**
+     * Unique id attr.
+     */
+    id: string;
+
+    defaultOpen?: boolean;
+
+    /**
+     * If any, the heading display level override for this heading (otherwise
+     * the `heading` value is used).
+     */
+    displayHeading?: number;
+
+    /**
+     * If any, the heading level used to wrap the toggle button.
+     */
+    heading?: number | false;
+}
+
+export interface Props extends ElementProps<ToggleProps, 'div'> {}
 
 const {
     defaultOpen,
-    heading = 7,
+    displayHeading,
+    heading,
     id,
     class: classList = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -45,19 +68,22 @@ const contentID = `${id}-content`;
 const titleID = `${id}-title`;
 ---
 
-<div
+<section
     id={id}
     class:list={classList}
     {...attributes}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
 >
-    <div
+    <header
         id={titleID}
         class='toggle-title'
     >
         {
             heading ? (
-                <Heading heading={heading}>
+                <Heading
+                    heading={heading}
+                    displayHeading={displayHeading}
+                >
                     <Toggle_Control
                         {...{ id, buttonID }}
                         data-toggle-primary-control={id}
@@ -67,6 +93,7 @@ const titleID = `${id}-title`;
                 </Heading>
             ) : (
                 <Toggle_Control
+                    class:list={`h${displayHeading ?? 7}`}
                     {...{ id, buttonID }}
                     data-toggle-primary-control={id}
                 >
@@ -74,13 +101,13 @@ const titleID = `${id}-title`;
                 </Toggle_Control>
             )
         }
-    </div>
+    </header>
 
-    <section
+    <div
         aria-labelledby={titleID}
         data-toggle-content={id}
         id={contentID}
     >
         <div class='container'><slot /></div>
-    </section>
-</div>
+    </div>
+</section>

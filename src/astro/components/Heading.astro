@@ -23,7 +23,7 @@ export type * from './Heading.d.ts';
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<HeadingProps, 'div'> {}
+export type Props = GenericElementProps<HeadingProps, 'div'>;
 
 const {
     class: classList = [],
@@ -40,9 +40,9 @@ const htmlContent = (await Astro.slots.render('default')) || false;
 /** is definitely an integer greater than 0 (0 defaults to 7) */
 const heading = Math.round(Number(headingRaw)) || 7;
 
-/** is definitely an integer greater than 0 (0 defaults to 7) */
+/** is definitely an integer greater than 0 (0 defaults to undefined) */
 const displayHeading =
-    displayHeadingRaw && (Math.round(Number(displayHeadingRaw)) || 7);
+    displayHeadingRaw && (Math.round(Number(displayHeadingRaw)) || undefined);
 
 const Tag =
     heading >= minimum && heading < 7
@@ -56,7 +56,7 @@ const Tag =
             <Tag
                 {...attributes}
                 class:list={[
-                    { [`h${displayHeading}`]: displayHeading },
+                    displayHeading && `h${displayHeading} ||`,
                     classList,
                 ]}
                 set:html={htmlContent}
@@ -65,7 +65,10 @@ const Tag =
             <p
                 {...attributes}
                 aria-level={heading > 1 ? heading : undefined}
-                class:list={[`h${displayHeading ?? heading}`, '||', classList]}
+                class:list={[
+                    displayHeading && `h${displayHeading} ||`,
+                    classList,
+                ]}
                 role='heading'
                 set:html={htmlContent}
             />
