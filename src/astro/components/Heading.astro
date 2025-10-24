@@ -66,10 +66,11 @@ const Tag =
                 {...attributes}
                 aria-level={heading > 1 ? heading : undefined}
                 class:list={[
-                    displayHeading && `h${displayHeading} ||`,
+                    displayHeading ? `h${displayHeading}` : `h${heading}`,
+                    '||',
                     classList,
                 ]}
-                role='heading'
+                role={heading > 1 ? 'heading' : undefined}
                 set:html={htmlContent}
             />
         ))
