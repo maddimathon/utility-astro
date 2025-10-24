@@ -66,6 +66,26 @@
     --icon-size: 1em;
     padding-bottom: 0;
 }
+.toggle-title > .h1 [data-toggle-control],
+.toggle-title > h1 [data-toggle-control],
+.toggle-title > .h2 [data-toggle-control],
+.toggle-title > h2 [data-toggle-control],
+.toggle-title > .h3 [data-toggle-control],
+.toggle-title > h3 [data-toggle-control],
+.toggle-title > .h4 [data-toggle-control],
+.toggle-title > h4 [data-toggle-control],
+.toggle-title > .h5 [data-toggle-control],
+.toggle-title > h5 [data-toggle-control],
+.toggle-title > .h6 [data-toggle-control],
+.toggle-title > h6 [data-toggle-control],
+.toggle-title > .h7 [data-toggle-control],
+.toggle-title > .h8 [data-toggle-control],
+.toggle-title > .page-title [data-toggle-control] {
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
 
 [data-toggle-control] {
     --icon-color: currentColor;

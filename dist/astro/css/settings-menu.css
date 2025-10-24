@@ -245,6 +245,17 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         opacity: 0.875;
     }
 }
+@media (prefers-contrast: less) {
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:hover {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"]
     :where(.js)
     .website-settings-menu
@@ -276,17 +287,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 0.875;
-    }
-}
 :where(.js) .website-settings-menu [data-toggle-control]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);

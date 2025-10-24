@@ -360,23 +360,22 @@ blockquote > cite::before {
     content: "— "/"";
     color: currentColor;
 }
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
 @media (prefers-contrast: less) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
 }
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
 @media (prefers-contrast: more) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
     }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
 }
 
 code,
@@ -1017,17 +1016,6 @@ input::placeholder {
     opacity: 1;
     color: currentColor;
 }
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-textarea::placeholder,
-select::placeholder,
-input::placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
 @media (prefers-contrast: less) {
     textarea::-moz-placeholder,
     select::-moz-placeholder,
@@ -1040,15 +1028,15 @@ input::placeholder {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
 }
-[data-contrast-mode="high"] textarea::-moz-placeholder,
-[data-contrast-mode="high"] select::-moz-placeholder,
-[data-contrast-mode="high"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
-[data-contrast-mode="high"] textarea::placeholder,
-[data-contrast-mode="high"] select::placeholder,
-[data-contrast-mode="high"] input::placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
+textarea::placeholder,
+select::placeholder,
+input::placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
 @media (prefers-contrast: more) {
@@ -1063,6 +1051,17 @@ input::placeholder {
         color: color-mix(in srgb, currentColor 90%, transparent);
     }
 }
+[data-contrast-mode="high"] textarea::-moz-placeholder,
+[data-contrast-mode="high"] select::-moz-placeholder,
+[data-contrast-mode="high"] input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+[data-contrast-mode="high"] textarea::placeholder,
+[data-contrast-mode="high"] select::placeholder,
+[data-contrast-mode="high"] input::placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+
 label + textarea,
 label + select,
 label + input,
@@ -1222,6 +1221,27 @@ input[type="reset"]:focus-within {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
+@media (prefers-contrast: less) {
+    button:focus-within,
+    [role="button"]:focus-within,
+    input[type="button"]:focus-within,
+    input[type="submit"]:focus-within,
+    input[type="reset"]:focus-within {
+        opacity: 0.875;
+    }
+    button:focus,
+    [role="button"]:focus,
+    input[type="button"]:focus,
+    input[type="submit"]:focus,
+    button:hover,
+    [role="button"]:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="reset"]:focus,
+    input[type="reset"]:hover {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"] button:focus-within,
 [data-contrast-mode="low"] [role="button"]:focus-within,
 [data-contrast-mode="low"] input[type="button"]:focus-within,
@@ -1257,27 +1277,6 @@ input[type="reset"]:focus-within {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    button:focus-within,
-    [role="button"]:focus-within,
-    input[type="button"]:focus-within,
-    input[type="submit"]:focus-within,
-    input[type="reset"]:focus-within {
-        opacity: 0.875;
-    }
-    button:focus,
-    [role="button"]:focus,
-    input[type="button"]:focus,
-    input[type="submit"]:focus,
-    button:hover,
-    [role="button"]:hover,
-    input[type="button"]:hover,
-    input[type="submit"]:hover,
-    input[type="reset"]:focus,
-    input[type="reset"]:hover {
-        opacity: 0.875;
-    }
-}
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
@@ -1366,6 +1365,15 @@ input[aria-disabled="true"][type="reset"] {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
+@media (prefers-contrast: less) {
+    :focus-within::file-selector-button {
+        opacity: 0.875;
+    }
+    :focus::file-selector-button,
+    :hover::file-selector-button {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"] :focus-within::file-selector-button,
 [data-contrast-mode="average"] :focus-within::file-selector-button {
     opacity: 0.875;
@@ -1377,15 +1385,6 @@ input[aria-disabled="true"][type="reset"] {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    :focus-within::file-selector-button {
-        opacity: 0.875;
-    }
-    :focus::file-selector-button,
-    :hover::file-selector-button {
-        opacity: 0.875;
-    }
-}
 :active::file-selector-button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);

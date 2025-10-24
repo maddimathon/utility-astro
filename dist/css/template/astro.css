@@ -218,19 +218,13 @@ html[data-brightness-mode="light"] {
     color-scheme: light;
 }
 
-@media (prefers-color-scheme: light) {
-    html {
-        color-scheme: light;
-    }
-}
-html[data-brightness-mode="dark"] {
-    color-scheme: dark;
-}
-
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;
     }
+}
+html[data-brightness-mode="dark"] {
+    color-scheme: dark;
 }
 
 html {
@@ -363,6 +357,52 @@ pre {
         --sys-clr-link-visited: VisitedText !important;
     }
 }
+[data-contrast-mode="forced-colors"] {
+    --sys-clr-background: Canvas !important;
+    --sys-clr-text: CanvasText !important;
+    --sys-clr-accent-bg: CanvasText !important;
+    --sys-clr-accent-bg: AccentColor !important;
+    --sys-clr-accent-text: Canvas !important;
+    --sys-clr-accent-text: AccentColorText !important;
+    --sys-clr-mark-bg: CanvasText !important;
+    --sys-clr-mark-bg: AccentColor !important;
+    --sys-clr-mark-bg: Mark !important;
+    --sys-clr-mark-text: Canvas !important;
+    --sys-clr-mark-text: AccentColorText !important;
+    --sys-clr-mark-text: MarkText !important;
+    --sys-clr-selected-bg: SelectedItem !important;
+    --sys-clr-selected-text: SelectedItemText !important;
+    --sys-clr-selection-bg: Highlight !important;
+    --sys-clr-selection-text: HighlightText !important;
+    --sys-clr-text-active: ActiveText !important;
+    --sys-clr-text-disabled: GrayText !important;
+    --sys-clr-button-bg: ButtonFace !important;
+    --sys-clr-button-bg-active: ButtonFace !important;
+    --sys-clr-button-bg-hover: ButtonFace !important;
+    --sys-clr-button-border: ButtonFace !important;
+    --sys-clr-button-border: ButtonBorder !important;
+    --sys-clr-button-border-active: ButtonFace !important;
+    --sys-clr-button-border-active: ButtonBorder !important;
+    --sys-clr-button-border-hover: ButtonFace !important;
+    --sys-clr-button-border-hover: ButtonBorder !important;
+    --sys-clr-button-text: ButtonText !important;
+    --sys-clr-button-text-active: ButtonText !important;
+    --sys-clr-button-text-hover: ButtonText !important;
+    --sys-clr-input-bg: Field !important;
+    --sys-clr-input-bg-hover: Field !important;
+    --sys-clr-input-bg-active: Field !important;
+    --sys-clr-input-border: FieldText !important;
+    --sys-clr-input-border-hover: FieldText !important;
+    --sys-clr-input-border-active: FieldText !important;
+    --sys-clr-input-text: FieldText !important;
+    --sys-clr-input-text-hover: FieldText !important;
+    --sys-clr-input-text-active: FieldText !important;
+    --sys-clr-link: LinkText !important;
+    --sys-clr-link-active: ActiveText !important;
+    --sys-clr-link-hover: ActiveText !important;
+    --sys-clr-link-visited: VisitedText !important;
+}
+
 /* #endregion Tokens - System Colours */
 /* #region Tokens - Margin */
 html {
@@ -764,23 +804,22 @@ blockquote > cite::before {
     content: "— "/"";
     color: currentColor;
 }
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
 @media (prefers-contrast: less) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
 }
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
 @media (prefers-contrast: more) {
     blockquote > cite {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
     }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
 }
 
 code,
@@ -1348,17 +1387,6 @@ input::placeholder {
     opacity: 1;
     color: currentColor;
 }
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-textarea::placeholder,
-select::placeholder,
-input::placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
 @media (prefers-contrast: less) {
     textarea::-moz-placeholder,
     select::-moz-placeholder,
@@ -1371,15 +1399,15 @@ input::placeholder {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
 }
-[data-contrast-mode="high"] textarea::-moz-placeholder,
-[data-contrast-mode="high"] select::-moz-placeholder,
-[data-contrast-mode="high"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
-[data-contrast-mode="high"] textarea::placeholder,
-[data-contrast-mode="high"] select::placeholder,
-[data-contrast-mode="high"] input::placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
+textarea::placeholder,
+select::placeholder,
+input::placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
 @media (prefers-contrast: more) {
@@ -1394,6 +1422,17 @@ input::placeholder {
         color: color-mix(in srgb, currentColor 90%, transparent);
     }
 }
+[data-contrast-mode="high"] textarea::-moz-placeholder,
+[data-contrast-mode="high"] select::-moz-placeholder,
+[data-contrast-mode="high"] input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+[data-contrast-mode="high"] textarea::placeholder,
+[data-contrast-mode="high"] select::placeholder,
+[data-contrast-mode="high"] input::placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+
 label + textarea,
 label + select,
 label + input,
@@ -1668,6 +1707,35 @@ a.button-secondary:focus-within {
         opacity: 0.875;
     }
 }
+@media (prefers-contrast: less) {
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    input[type="button"]:focus-visible,
+    input[type="submit"]:focus-visible,
+    a.button:focus-visible,
+    input[type="reset"]:focus-visible,
+    a.button-secondary:focus-visible {
+        opacity: 0.875;
+    }
+    button:focus-within,
+    [role="button"]:focus-within,
+    input[type="button"]:focus-within,
+    input[type="submit"]:focus-within,
+    a.button:focus-within,
+    input[type="reset"]:focus-within,
+    a.button-secondary:focus-within {
+        opacity: 0.875;
+    }
+    button:hover,
+    [role="button"]:hover,
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    a.button:hover,
+    input[type="reset"]:hover,
+    a.button-secondary:hover {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"] button:focus-visible,
 [data-contrast-mode="low"] [role="button"]:focus-visible,
 [data-contrast-mode="low"] input[type="button"]:focus-visible,
@@ -1717,35 +1785,6 @@ a.button-secondary:focus-within {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    button:focus-visible,
-    [role="button"]:focus-visible,
-    input[type="button"]:focus-visible,
-    input[type="submit"]:focus-visible,
-    a.button:focus-visible,
-    input[type="reset"]:focus-visible,
-    a.button-secondary:focus-visible {
-        opacity: 0.875;
-    }
-    button:focus-within,
-    [role="button"]:focus-within,
-    input[type="button"]:focus-within,
-    input[type="submit"]:focus-within,
-    a.button:focus-within,
-    input[type="reset"]:focus-within,
-    a.button-secondary:focus-within {
-        opacity: 0.875;
-    }
-    button:hover,
-    [role="button"]:hover,
-    input[type="button"]:hover,
-    input[type="submit"]:hover,
-    a.button:hover,
-    input[type="reset"]:hover,
-    a.button-secondary:hover {
-        opacity: 0.875;
-    }
-}
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
@@ -1881,6 +1920,17 @@ a[aria-disabled="true"].button-secondary {
         opacity: 0.875;
     }
 }
+@media (prefers-contrast: less) {
+    :focus-visible::file-selector-button {
+        opacity: 0.875;
+    }
+    :focus-within::file-selector-button {
+        opacity: 0.875;
+    }
+    :hover::file-selector-button {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"] :focus-visible::file-selector-button,
 [data-contrast-mode="average"] :focus-visible::file-selector-button {
     opacity: 0.875;
@@ -1894,17 +1944,6 @@ a[aria-disabled="true"].button-secondary {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    :focus-visible::file-selector-button {
-        opacity: 0.875;
-    }
-    :focus-within::file-selector-button {
-        opacity: 0.875;
-    }
-    :hover::file-selector-button {
-        opacity: 0.875;
-    }
-}
 :active::file-selector-button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
@@ -2308,14 +2347,13 @@ body > aside > :first-child {
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
 }
-.page-subtitle {
-    opacity: 0.75;
-}
-
 @media (prefers-contrast: less) {
     .page-subtitle {
         opacity: 0.75;
     }
+}
+.page-subtitle {
+    opacity: 0.75;
 }
 
 /* # ASTRO COMPONENT - TOGGLE
@@ -2374,6 +2412,26 @@ body > aside > :first-child {
 .toggle-title > .page-title .toggle-icon {
     --icon-size: 1em;
     padding-bottom: 0;
+}
+.toggle-title > h1 [data-toggle-control],
+.toggle-title > .h1 [data-toggle-control],
+.toggle-title > h2 [data-toggle-control],
+.toggle-title > .h2 [data-toggle-control],
+.toggle-title > h3 [data-toggle-control],
+.toggle-title > .h3 [data-toggle-control],
+.toggle-title > h4 [data-toggle-control],
+.toggle-title > .h4 [data-toggle-control],
+.toggle-title > h5 [data-toggle-control],
+.toggle-title > .h5 [data-toggle-control],
+.toggle-title > h6 [data-toggle-control],
+.toggle-title > .h6 [data-toggle-control],
+.toggle-title > .h7 [data-toggle-control],
+.toggle-title > .h8 [data-toggle-control],
+.toggle-title > .page-title [data-toggle-control] {
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 
 [data-toggle-control] {
@@ -3078,6 +3136,17 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         opacity: 0.875;
     }
 }
+@media (prefers-contrast: less) {
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+        opacity: 0.875;
+    }
+    :where(.js) .website-settings-menu [data-toggle-control]:hover {
+        opacity: 0.875;
+    }
+}
 [data-contrast-mode="low"]
     :where(.js)
     .website-settings-menu
@@ -3109,17 +3178,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     opacity: 0.875;
 }
 
-@media (prefers-contrast: less) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 0.875;
-    }
-}
 :where(.js) .website-settings-menu [data-toggle-control]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
