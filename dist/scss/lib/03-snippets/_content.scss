@@ -257,20 +257,6 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
                 margin-inline: 0;
             }
 
-            :where(%callout-width),
-            :where(%blockquote),
-            :where(%form) {
-                margin-inline: 0;
-                width: auto;
-                max-width: none;
-                justify-self: start;
-            }
-
-            :where(%button) {
-                width: auto;
-                justify-self: start;
-            }
-
             %pre {
                 width: min(120ch, 100%);
 
@@ -308,6 +294,20 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
                     margin-block-start: 0;
                 }
             }
+        }
+
+        :where(%body > %callout-width),
+        :where(%body > %blockquote),
+        :where(%body > %form) {
+            margin-inline: 0;
+            width: auto;
+            max-width: none;
+            justify-self: start;
+        }
+
+        :where(%body > %button) {
+            width: auto;
+            justify-self: start;
         }
 
         ///

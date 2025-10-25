@@ -136,7 +136,10 @@ const displayHeading = props.displayHeading ?? heading;
     <p class="page-title | loremipsum-heading-sample">Title (.page-title) Maecenas Facilisis <a href="#">Sollicitudin Nisi</a>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
     <Fragment>
         { allHeadingLevels.map( (num) => ( num > 1 ) && (
-            <p class:list={`h${num} | loremipsum-heading-sample`}>Heading {num} Maecenas Facilisis <a href="#">Sollicitudin Nisi</a>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
+            <p
+                class:list={`h${num} | loremipsum-heading-sample`}
+                id={`heading-${num}`}
+            >Heading {num} Maecenas Facilisis <a href="#">Sollicitudin Nisi</a>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
         ) ) }
     </Fragment>
 ) }

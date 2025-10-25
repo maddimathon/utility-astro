@@ -105,25 +105,6 @@ body > .body-subgrid {
     margin-left: 0;
     margin-right: 0;
 }
-body :where(.callout-width, pre, table),
-body :where(blockquote) {
-    margin-left: 0;
-    margin-right: 0;
-    width: auto;
-    max-width: none;
-    justify-self: start;
-}
-body
-    :where(
-        a.button,
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"]
-    ) {
-    width: auto;
-    justify-self: start;
-}
 body pre {
     width: min(120ch, 100%);
 }
@@ -138,6 +119,26 @@ body > footer {
 }
 body > aside > :first-child {
     margin-top: 0;
+}
+
+:where(body > .callout-width, body > pre, body > table),
+:where(body > blockquote) {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+    max-width: none;
+    justify-self: start;
+}
+
+:where(
+    body > a.button,
+    body > button,
+    body > [role="button"],
+    body > input[type="button"],
+    body > input[type="submit"]
+) {
+    width: auto;
+    justify-self: start;
 }
 
 :where(.layout_full-width > main > *) {

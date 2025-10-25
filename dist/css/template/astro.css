@@ -1538,12 +1538,49 @@ textarea {
     cursor: text;
 }
 
+label {
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 0;
+    font-weight: 600;
+    line-height: var(--line-height-200, 1.3125);
+    color: var(--sys-clr-text, CanvasText);
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"])) {
+    --display: grid;
+    display: grid;
+    grid-template-columns: fit-content(0) 1fr;
+    justify-content: end;
+    align-items: baseline;
+    grid-gap: var(--mrg-soft-300, 0.5rem);
+    gap: var(--mrg-soft-300, 0.5rem);
+    font-weight: 400;
+    line-height: var(--line-height-400, 1.6875);
+    text-wrap: balance;
+    color: var(--sys-clr-text, CanvasText);
+    cursor: pointer;
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"]))
+    + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
+    margin-top: var(--mrg-firm-200, 0.5rem);
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
+    margin-top: var(--mrg-firm-400, 1.25rem);
+}
+label > input[type="checkbox"],
+label > input[type="radio"] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /* ## Forms - Buttons ==================================== */
 button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
 a.button,
+button[type="reset"],
 input[type="reset"],
 a.button-secondary {
     --focus-ring-outline-offset: 0.125rem;
@@ -1803,6 +1840,7 @@ button,
 input[type="button"],
 input[type="submit"],
 a.button,
+button[type="reset"],
 input[type="reset"],
 a.button-secondary {
     --display: flex;
@@ -1975,42 +2013,6 @@ a[aria-disabled="true"].button-secondary {
     margin: 0;
     margin-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-normal, 1rem);
-}
-
-label {
-    display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 0;
-    font-weight: 600;
-    line-height: var(--line-height-200, 1.3125);
-    color: var(--sys-clr-text, CanvasText);
-}
-label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    --display: grid;
-    display: grid;
-    grid-template-columns: fit-content(0) 1fr;
-    justify-content: end;
-    align-items: baseline;
-    grid-gap: var(--mrg-soft-300, 0.5rem);
-    gap: var(--mrg-soft-300, 0.5rem);
-    font-weight: 400;
-    line-height: var(--line-height-400, 1.6875);
-    text-wrap: balance;
-    color: var(--sys-clr-text, CanvasText);
-    cursor: pointer;
-}
-label:has(> :where(input[type="checkbox"], input[type="radio"]))
-    + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    margin-top: var(--mrg-firm-200, 0.5rem);
-}
-label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
-label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
-label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: var(--mrg-firm-400, 1.25rem);
-}
-label > input[type="checkbox"],
-label > input[type="radio"] {
-    margin-top: 0;
-    margin-bottom: 0;
 }
 
 /* # GLOBALS - Tables
@@ -2237,25 +2239,6 @@ body > .body-subgrid {
     margin-left: 0;
     margin-right: 0;
 }
-body :where(pre, table, .callout-width),
-body :where(blockquote) {
-    margin-left: 0;
-    margin-right: 0;
-    width: auto;
-    max-width: none;
-    justify-self: start;
-}
-body
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button
-    ) {
-    width: auto;
-    justify-self: start;
-}
 body pre {
     width: min(120ch, 100%);
 }
@@ -2270,6 +2253,26 @@ body > footer {
 }
 body > aside > :first-child {
     margin-top: 0;
+}
+
+:where(body > pre, body > table, body > .callout-width),
+:where(body > blockquote) {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+    max-width: none;
+    justify-self: start;
+}
+
+:where(
+    body > button,
+    body > [role="button"],
+    body > input[type="button"],
+    body > input[type="submit"],
+    body > a.button
+) {
+    width: auto;
+    justify-self: start;
 }
 
 :where(.layout_full-width > main > *) {
