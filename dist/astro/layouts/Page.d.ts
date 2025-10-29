@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
@@ -24,7 +24,7 @@ import type { Props as ContentProps, ContentType, DefaultContentType } from './C
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 type HTML_excludeAttributes = "dir" | "lang";
 
@@ -32,7 +32,7 @@ type HTML_excludeAttributes = "dir" | "lang";
 /**
  * Input props for the NewComponent component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @interface
  */

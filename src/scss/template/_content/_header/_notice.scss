@@ -3,12 +3,12 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '../../../notice';
+// @forward '../../../notice';
 
-@use '../../../lib/noticeMx' as *;
+// @use '../../../lib/noticeMx' as *;
 
-@use '../config';
+// @use '../config';
 
-@if not config.$template_internal_supressCredit {
-    @include notice(true);
-}
+// @if not config.$template_internal_supressCredit {
+//     @include notice(true);
+// }

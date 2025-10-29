@@ -64,10 +64,11 @@ export class Compile extends CompileStage {
         await this.runCustomDirCopySubStage( 'scss' );
 
         await this.runCustomScssDirSubStage(
-            'scss/_astro',
-            this.getSrcDir( undefined, 'astro/css' ),
+            '',
+            'src/astro/css',
             {
                 postCSS: true,
+                srcDir: 'src/scss/_astro',
             },
         );
     }
@@ -91,51 +92,5 @@ export class Compile extends CompileStage {
                 postCSS: true,
             },
         );
-
-
-
-        // this.console.progress( 'building new templates...', 1 );
-
-        // const { templates } = ( await import( '../../dist/ts/scssTemplates.js' ) );
-
-        // await Promise.all( Object.values( templates ).map( async ( template ) => {
-
-        //     const files = template.toScssFiles();
-
-        //     this.console.verbose( 'writing scss files...', 2 );
-
-        //     return Promise.all( files.map( async ( { path, content } ) => this.try(
-        //         this.fs.write,
-        //         ( this.params.verbose ? 3 : 2 ),
-        //         [
-        //             this.getSrcDir( undefined, 'scss/new-template', template.slug, path ),
-        //             content,
-        //             { force: true, rename: false },
-        //         ],
-        //     ) ) );
-        // } ) );
-
-        // this.try(
-        //     this.fs.write,
-        //     ( this.params.verbose ? 3 : 2 ),
-        //     [
-        //         this.getSrcDir( undefined, 'scss/new-lib/config/_default.scss' ),
-        //         (
-        //             '// this file is auto-generated'
-        //             + '\n\n'
-        //             + `$config: ${ templates.default.config.toScss() };`
-        //         ),
-        //         { force: true, rename: false },
-        //     ],
-        // );
-
-
-        // await this.runCustomScssDirSubStage(
-        //     'scss/new-template',
-        //     this.getDistDir( undefined, 'css/new-template' ),
-        //     {
-        //         postCSS: true,
-        //     },
-        // );
     }
 }

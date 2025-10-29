@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
@@ -14,7 +14,7 @@ import { Props as StylesProps } from '../support/SettingsMenu_Styles.astro';
 /**
  * Input props for the SettingsMenu component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export interface Props {
 

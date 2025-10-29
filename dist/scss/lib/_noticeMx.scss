@@ -1,17 +1,17 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@0.1.0-alpha
+/// @since 0.1.0-alpha
 ///
 
-@use 'pkg:@maddimathon/utility-sass/lib/noticeMx' as lib;
+// @use 'pkg:@maddimathon/utility-sass/lib/noticeMx' as lib;
 
 @mixin notice($includeLib: false) {
-    @if $includeLib {
-        @include lib.notice;
-    }
+    // @if $includeLib {
+    //     @include lib.notice;
+    // }
     /*!
      * This stylesheet includes css generated using 
-     * @maddimathon/utility-astro@0.1.0-alpha.draft
+     * @maddimathon/utility-astro@0.1.0-alpha
      * 
      * License: MIT
      */

@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
@@ -23,7 +23,7 @@ export type DefaultContentType = "content-only" & ContentType;
 /**
  * Input props for the Content component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export interface Props<
     T_Type extends ContentType = DefaultContentType,
@@ -47,7 +47,7 @@ export interface Props<
 /**
  * Completed props for the Content sub-components.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export type Props_Full<
     T_Type extends ContentType,

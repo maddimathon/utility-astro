@@ -1,0 +1,3089 @@
+@charset "UTF-8";
+/**
+ * Utility Astro Template - Astro
+ */
+/*! START of @maddimathon/utility-astro/template/astro */
+/* #region Normalize */
+/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*
+Document
+========
+*/
+/**
+Use a better box model (opinionated).
+*/
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
+    /* font-family:
+      system-ui,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji'; */
+    line-height: 1.15; /* 1. Correct the line height in all browsers. */
+    -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+}
+
+/*
+Sections
+========
+*/
+body {
+    margin: 0; /* Remove the margin in all browsers. */
+}
+
+/*
+Text-level semantics
+====================
+*/
+/**
+Add the correct font weight in Chrome and Safari.
+*/
+b,
+strong {
+    font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+code,
+kbd,
+samp,
+pre {
+    /* font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Consolas,
+      'Liberation Mono',
+      Menlo,
+      monospace; */ /* 1 */
+    font-size: 1em; /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+small {
+    font-size: 80%;
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/*
+Tabular data
+============
+*/
+/**
+Correct table border color inheritance in Chrome and Safari. (https://issues.chromium.org/issues/40615503, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+table {
+    border-color: currentcolor;
+}
+
+/*
+Forms
+=====
+*/
+/**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 1 */
+    line-height: 1.15; /* 1 */
+    margin: 0; /* 2 */
+}
+
+/**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+legend {
+    padding: 0;
+}
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+progress {
+    vertical-align: baseline;
+}
+
+/**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+
+/**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+}
+
+/**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
+}
+
+/*
+Interactive
+===========
+*/
+/*
+Add the correct display in Chrome and Safari.
+*/
+summary {
+    display: list-item;
+}
+
+/*! end of modern-normalize */
+html {
+    color-scheme: light, dark;
+}
+html[data-brightness-mode="light"] {
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+    }
+}
+html[data-brightness-mode="dark"] {
+    color-scheme: dark;
+}
+
+html {
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol";
+    font-size: 115%;
+}
+@media (min-width: 50em) {
+    html {
+        font-size: 105%;
+    }
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family:
+        ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+        monospace;
+}
+
+/* #endregion Normalize */
+/* # TOKENS & PROPERTIES
+ * ======================================================================== */
+/* #region Tokens - System Colours */
+:where(html) {
+    --sys-clr-background: Canvas;
+    --sys-clr-text: CanvasText;
+    --sys-clr-accent-bg: CanvasText;
+    --sys-clr-accent-bg: AccentColor;
+    --sys-clr-accent-text: Canvas;
+    --sys-clr-accent-text: AccentColorText;
+    --sys-clr-mark-bg: CanvasText;
+    --sys-clr-mark-bg: AccentColor;
+    --sys-clr-mark-bg: Mark;
+    --sys-clr-mark-text: Canvas;
+    --sys-clr-mark-text: AccentColorText;
+    --sys-clr-mark-text: MarkText;
+    --sys-clr-selected-bg: SelectedItem;
+    --sys-clr-selected-text: SelectedItemText;
+    --sys-clr-selection-bg: Highlight;
+    --sys-clr-selection-text: HighlightText;
+    --sys-clr-text-active: ActiveText;
+    --sys-clr-text-disabled: GrayText;
+    --sys-clr-button-bg: ButtonFace;
+    --sys-clr-button-bg-active: ButtonFace;
+    --sys-clr-button-bg-hover: SelectedItem;
+    --sys-clr-button-border: ButtonFace;
+    --sys-clr-button-border: ButtonBorder;
+    --sys-clr-button-border-active: ButtonFace;
+    --sys-clr-button-border-active: ButtonBorder;
+    --sys-clr-button-border-hover: SelectedItem;
+    --sys-clr-button-text: ButtonText;
+    --sys-clr-button-text-active: ButtonText;
+    --sys-clr-button-text-hover: SelectedItemText;
+    --sys-clr-input-bg: Field;
+    --sys-clr-input-bg-hover: Field;
+    --sys-clr-input-bg-active: Field;
+    --sys-clr-input-border: FieldText;
+    --sys-clr-input-border-hover: FieldText;
+    --sys-clr-input-border-active: FieldText;
+    --sys-clr-input-text: FieldText;
+    --sys-clr-input-text-hover: FieldText;
+    --sys-clr-input-text-active: FieldText;
+    --sys-clr-link: LinkText;
+    --sys-clr-link-active: ActiveText;
+    --sys-clr-link-hover: ActiveText;
+    --sys-clr-link-visited: VisitedText;
+}
+
+@media (forced-colors: active), (prefers-contrast: custom) {
+    html {
+        --sys-clr-background: Canvas !important;
+        --sys-clr-text: CanvasText !important;
+        --sys-clr-accent-bg: CanvasText !important;
+        --sys-clr-accent-bg: AccentColor !important;
+        --sys-clr-accent-text: Canvas !important;
+        --sys-clr-accent-text: AccentColorText !important;
+        --sys-clr-mark-bg: CanvasText !important;
+        --sys-clr-mark-bg: AccentColor !important;
+        --sys-clr-mark-bg: Mark !important;
+        --sys-clr-mark-text: Canvas !important;
+        --sys-clr-mark-text: AccentColorText !important;
+        --sys-clr-mark-text: MarkText !important;
+        --sys-clr-selected-bg: SelectedItem !important;
+        --sys-clr-selected-text: SelectedItemText !important;
+        --sys-clr-selection-bg: Highlight !important;
+        --sys-clr-selection-text: HighlightText !important;
+        --sys-clr-text-active: ActiveText !important;
+        --sys-clr-text-disabled: GrayText !important;
+        --sys-clr-button-bg: ButtonFace !important;
+        --sys-clr-button-bg-active: ButtonFace !important;
+        --sys-clr-button-bg-hover: ButtonFace !important;
+        --sys-clr-button-border: ButtonFace !important;
+        --sys-clr-button-border: ButtonBorder !important;
+        --sys-clr-button-border-active: ButtonFace !important;
+        --sys-clr-button-border-active: ButtonBorder !important;
+        --sys-clr-button-border-hover: ButtonFace !important;
+        --sys-clr-button-border-hover: ButtonBorder !important;
+        --sys-clr-button-text: ButtonText !important;
+        --sys-clr-button-text-active: ButtonText !important;
+        --sys-clr-button-text-hover: ButtonText !important;
+        --sys-clr-input-bg: Field !important;
+        --sys-clr-input-bg-hover: Field !important;
+        --sys-clr-input-bg-active: Field !important;
+        --sys-clr-input-border: FieldText !important;
+        --sys-clr-input-border-hover: FieldText !important;
+        --sys-clr-input-border-active: FieldText !important;
+        --sys-clr-input-text: FieldText !important;
+        --sys-clr-input-text-hover: FieldText !important;
+        --sys-clr-input-text-active: FieldText !important;
+        --sys-clr-link: LinkText !important;
+        --sys-clr-link-active: ActiveText !important;
+        --sys-clr-link-hover: ActiveText !important;
+        --sys-clr-link-visited: VisitedText !important;
+    }
+}
+[data-contrast-mode="forced-colors"] {
+    --sys-clr-background: Canvas !important;
+    --sys-clr-text: CanvasText !important;
+    --sys-clr-accent-bg: CanvasText !important;
+    --sys-clr-accent-bg: AccentColor !important;
+    --sys-clr-accent-text: Canvas !important;
+    --sys-clr-accent-text: AccentColorText !important;
+    --sys-clr-mark-bg: CanvasText !important;
+    --sys-clr-mark-bg: AccentColor !important;
+    --sys-clr-mark-bg: Mark !important;
+    --sys-clr-mark-text: Canvas !important;
+    --sys-clr-mark-text: AccentColorText !important;
+    --sys-clr-mark-text: MarkText !important;
+    --sys-clr-selected-bg: SelectedItem !important;
+    --sys-clr-selected-text: SelectedItemText !important;
+    --sys-clr-selection-bg: Highlight !important;
+    --sys-clr-selection-text: HighlightText !important;
+    --sys-clr-text-active: ActiveText !important;
+    --sys-clr-text-disabled: GrayText !important;
+    --sys-clr-button-bg: ButtonFace !important;
+    --sys-clr-button-bg-active: ButtonFace !important;
+    --sys-clr-button-bg-hover: ButtonFace !important;
+    --sys-clr-button-border: ButtonFace !important;
+    --sys-clr-button-border: ButtonBorder !important;
+    --sys-clr-button-border-active: ButtonFace !important;
+    --sys-clr-button-border-active: ButtonBorder !important;
+    --sys-clr-button-border-hover: ButtonFace !important;
+    --sys-clr-button-border-hover: ButtonBorder !important;
+    --sys-clr-button-text: ButtonText !important;
+    --sys-clr-button-text-active: ButtonText !important;
+    --sys-clr-button-text-hover: ButtonText !important;
+    --sys-clr-input-bg: Field !important;
+    --sys-clr-input-bg-hover: Field !important;
+    --sys-clr-input-bg-active: Field !important;
+    --sys-clr-input-border: FieldText !important;
+    --sys-clr-input-border-hover: FieldText !important;
+    --sys-clr-input-border-active: FieldText !important;
+    --sys-clr-input-text: FieldText !important;
+    --sys-clr-input-text-hover: FieldText !important;
+    --sys-clr-input-text-active: FieldText !important;
+    --sys-clr-link: LinkText !important;
+    --sys-clr-link-active: ActiveText !important;
+    --sys-clr-link-hover: ActiveText !important;
+    --sys-clr-link-visited: VisitedText !important;
+}
+
+/* #endregion Tokens - System Colours */
+/* #region Tokens - Margin */
+html {
+    --mrg-firm-100: 0.3125rem;
+    --mrg-firm-200: 0.5rem;
+    --mrg-firm-300: 0.8125rem;
+    --mrg-firm-400: 1.25rem;
+    --mrg-firm-500: 1.6875rem;
+    --mrg-firm-600: 2.25rem;
+    --mrg-firm-800: 4rem;
+    --mrg-firm-900: 7.125rem;
+}
+
+html {
+    --mrg-soft-100: 0.1875rem;
+    --mrg-soft-200: 0.3125rem;
+    --mrg-soft-300: 0.5rem;
+    --mrg-soft-400: 0.8125rem;
+    --mrg-soft-500: 1.1875rem;
+    --mrg-soft-600: 1.625rem;
+    --mrg-soft-800: 3.125rem;
+    --mrg-soft-900: 5.8125rem;
+}
+
+html {
+    --mrg-half-100: 0.125rem;
+    --mrg-half-200: 0.1875rem;
+    --mrg-half-300: 0.3125rem;
+    --mrg-half-400: 0.4375rem;
+    --mrg-half-500: 0.5rem;
+    --mrg-half-600: 0.625rem;
+    --mrg-half-800: 0.875rem;
+    --mrg-half-900: 1.3125rem;
+}
+
+/* #endregion Tokens - Margin */
+/* #region Tokens - Font Size */
+html {
+    --fs-heading-1: 2.75rem;
+    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-heading-2: 2.0625rem;
+    --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
+    --fs-heading-3: 1.8125rem;
+    --fs-heading-3: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
+    --fs-heading-4: 1.5625rem;
+    --fs-heading-4: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
+    --fs-heading-5: 1.3125rem;
+    --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
+    --fs-heading-6: 1.1875rem;
+    --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    --fs-heading-7: 0.9375rem;
+    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    --fs-heading-8: 0.8125rem;
+    --fs-heading-8: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
+    --fs-smaller-2: 0.8125rem;
+    --fs-smaller-1: 0.9375rem;
+    --fs-normal: 1rem;
+    --fs-bigger-7: 2.75rem;
+    --fs-bigger-7: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-bigger-8: 3.1875rem;
+    --fs-bigger-8: clamp(2.375rem, 4.1875svw + 1rem, 3.5625rem);
+    --fs-bigger-9: 3.6875rem;
+    --fs-bigger-9: clamp(2.75rem, 4.8125svw + 1rem, 4.125rem);
+}
+
+/* #endregion Tokens - Font Size */
+/* #region Tokens - Line Heights */
+html {
+    --line-height-100: 1.1875;
+    --line-height-200: 1.3125;
+    --line-height-300: 1.4375;
+    --line-height-400: 1.6875;
+    --line-height-500: 1.90625;
+    --line-height-600: 2.1875;
+}
+
+/* #endregion Tokens - Line Heights */
+/* #region Tokens - Gap */
+html {
+    --gap-block-layout: 5vw;
+    --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
+    --gap-block-layout-half: 2.5vw;
+    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
+    --gap-inline-indent: 4vw;
+    --gap-inline-indent: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        4svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+    --gap-inline-layout: 8vw;
+    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
+    --gap-inline-layout-half: 4vw;
+    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
+    --gap-inline-tab: 1.5vw;
+    --gap-inline-tab: clamp(
+        var(--mrg-firm-100, 0.3125rem),
+        1.5svw,
+        var(--mrg-firm-600, 2.25rem)
+    );
+}
+
+/* #endregion Tokens - Gap */
+/* #region Tokens - Border Width */
+html {
+    --border-width-100: 0.0625rem;
+    --border-width-200: 0.125rem;
+    --border-width-300: 0.1875rem;
+    --border-width-400: 0.25rem;
+}
+
+/* #endregion Tokens - Border Width */
+/* #region Tokens - Stroke Relative */
+html {
+    --stroke-relative-100: 0.03125em;
+    --stroke-relative-200: 0.0625em;
+    --stroke-relative-400: 0.125em;
+    --stroke-relative-600: 0.1875em;
+    --stroke-relative-800: 0.25em;
+    --stroke-relative-900: 0.375em;
+}
+
+/* #endregion Tokens - Stroke Relative */
+/* #region Tokens - Misc. */
+html {
+    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    --focus-ring-outline-offset: 0.125em;
+    --focus-ring-outline-color: var(--sys-clr-link, LinkText);
+}
+
+/* #endregion Tokens - Misc. */
+/* #region Tokens - Width */
+html {
+    --width-content: 36rem;
+    --width-sidebar: 16rem;
+    --width-callout: 29.25rem;
+    --width-page: 58rem;
+    --width-page: calc(
+        (
+                var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
+                    var(--width-sidebar, 16rem)
+            ) *
+            1
+    );
+}
+
+/* #endregion Tokens - Width */
+/*! START of @maddimathon/utility-sass/template */
+/* # GLOBALS - Accessibility
+ * ======================================================================== */
+.no-js :focus,
+.js__no-whereSelector :focus {
+    /* %focus-ring */
+    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: var(--focus-ring-outline-offset, 0.125em);
+}
+
+:where(.js__no-focusVisible) :focus {
+    /* %focus-ring--where */
+    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: var(--focus-ring-outline-offset, 0.125em);
+}
+
+:focus-visible {
+    /* %focus-ring--visible */
+    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
+        dashed currentColor;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: var(--focus-ring-outline-offset, 0.125em);
+}
+
+.screen-reader-text {
+    position: absolute !important;
+    left: -10000px !important;
+    margin: 0 !important;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden !important;
+}
+
+/* # GLOBALS - Objects
+ * ======================================================================== */
+html,
+body {
+    scroll-padding-top: var(--gap-block-layout, 5vw);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: var(--gap-block-layout, 5vw);
+    margin-left: var(--gap-inline-layout, 8vw);
+    margin-right: var(--gap-inline-layout, 8vw);
+}
+:where(body > *) {
+    width: min(var(--width-page, 58rem), 100%);
+}
+
+hr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+@media (min-width: 25em) {
+    hr {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: min(var(--width-callout, 29.25rem), 80%);
+    }
+}
+hr {
+    width: 100%;
+    margin-top: calc(
+        var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
+    );
+    margin-top: var(--mrg-firm-600, 2.25rem);
+    margin-bottom: var(--mrg-firm-600, 2.25rem);
+    border: none;
+    border-bottom: currentColor solid 2px;
+}
+
+/* # GLOBALS - Typography
+ * ======================================================================== */
+::-moz-selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+::selection {
+    background-color: var(--sys-clr-selection-bg, Highlight);
+    color: var(--sys-clr-selection-text, HighlightText);
+}
+
+html {
+    font-weight: 400;
+    line-height: var(--line-height-400, 1.6875);
+    background: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
+}
+
+body {
+    font-size: var(--fs-normal, 1rem);
+}
+
+/* ## Typography - Inline ==================================== */
+strong,
+b {
+    font-weight: 700;
+}
+strong strong,
+b strong {
+    font-weight: 800;
+}
+strong strong strong,
+b strong strong {
+    font-weight: 900;
+}
+
+em,
+i {
+    font-style: italic;
+}
+em em,
+i em,
+em i,
+i i {
+    font-style: normal;
+}
+em em em,
+i em em,
+em em i,
+i em i,
+em i em,
+i i em,
+em i i,
+i i i {
+    font-style: italic;
+}
+
+a {
+    --focus-ring-outline-color: currentColor;
+    --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
+    display: inline;
+    border: none;
+    -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
+    text-decoration: underline var(--stroke-relative-200, 0.0625em);
+    text-underline-offset: var(--stroke-relative-800, 0.25em);
+    color: var(--sys-clr-link, LinkText);
+}
+a:visited {
+    color: var(--sys-clr-link-visited, VisitedText);
+}
+.no-js a:focus,
+.js__no-whereSelector a:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+:where(.js__no-focusVisible) a:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+a:hover {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+a:focus-visible {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+a:active {
+    color: var(--sys-clr-link-active, ActiveText);
+}
+a.no-style {
+    text-decoration: none;
+    font-weight: inherit;
+    color: inherit;
+}
+a[aria-disabled="true"] {
+    text-decoration-line: line-through;
+    color: var(--sys-clr-text-disabled, GrayText);
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+abbr[title] {
+    -webkit-text-decoration: dotted underline
+        var(--stroke-relative-400, 0.125em);
+    text-decoration: dotted underline var(--stroke-relative-400, 0.125em);
+    cursor: help;
+}
+
+/* ## Typography - Block ==================================== */
+p {
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+}
+hr + p {
+    margin-top: 0;
+}
+
+blockquote {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+blockquote {
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+}
+@media (min-width: 36em) {
+    blockquote {
+        margin-left: var(--gap-inline-tab, 1.5vw);
+        margin-right: var(--gap-inline-tab, 1.5vw);
+    }
+}
+blockquote > p:first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    display: block;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    text-align: right;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+    color: currentColor;
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+code,
+kbd,
+pre,
+samp {
+    position: relative;
+}
+
+pre {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    margin-left: var(--gap-inline-indent, 4vw);
+    margin-right: var(--gap-inline-indent, 4vw);
+}
+pre {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
+    border: var(--border-width-100, 0.0625rem) solid currentColor;
+    max-width: min(120ch, 100%);
+    overflow: auto;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+pre > code {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:where(:has(> code)) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:where(:has(> code)) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+    overflow: visible;
+}
+
+/* ## Typography - Headings ==================================== */
+h1,
+.h1,
+.page-title {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 900;
+    font-size: var(--fs-heading-1, 2.75rem);
+    line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: normal;
+}
+h1 button,
+.h1 button,
+h1 [role="button"],
+.h1 [role="button"],
+h1 input[type="button"],
+.h1 input[type="button"],
+h1 input[type="submit"],
+.h1 input[type="submit"],
+h1 a.button,
+.h1 a.button,
+h1 a.button-secondary,
+.h1 a.button-secondary,
+.page-title button,
+.page-title [role="button"],
+.page-title input[type="button"],
+.page-title input[type="submit"],
+.page-title a.button,
+.page-title a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+h2,
+.h2 {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 800;
+    font-size: var(--fs-heading-2, 2.0625rem);
+    line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: normal;
+}
+h2 button,
+.h2 button,
+h2 [role="button"],
+.h2 [role="button"],
+h2 input[type="button"],
+.h2 input[type="button"],
+h2 input[type="submit"],
+.h2 input[type="submit"],
+h2 a.button,
+.h2 a.button,
+h2 a.button-secondary,
+.h2 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+h3,
+.h3 {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 700;
+    font-size: var(--fs-heading-3, 1.8125rem);
+    line-height: var(--line-height-200, 1.3125);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: normal;
+}
+h3 button,
+.h3 button,
+h3 [role="button"],
+.h3 [role="button"],
+h3 input[type="button"],
+.h3 input[type="button"],
+h3 input[type="submit"],
+.h3 input[type="submit"],
+h3 a.button,
+.h3 a.button,
+h3 a.button-secondary,
+.h3 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+h4,
+.h4 {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 700;
+    font-size: var(--fs-heading-4, 1.5625rem);
+    line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: italic;
+}
+h4 em,
+.h4 em,
+h4 i,
+.h4 i {
+    font-style: normal;
+}
+h4 em em,
+.h4 em em,
+h4 em i,
+.h4 em i,
+h4 i em,
+.h4 i em,
+h4 i i,
+.h4 i i {
+    font-style: italic;
+}
+h4 button,
+.h4 button,
+h4 [role="button"],
+.h4 [role="button"],
+h4 input[type="button"],
+.h4 input[type="button"],
+h4 input[type="submit"],
+.h4 input[type="submit"],
+h4 a.button,
+.h4 a.button,
+h4 a.button-secondary,
+.h4 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+h5,
+.h5 {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 600;
+    font-size: var(--fs-heading-5, 1.3125rem);
+    line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: italic;
+}
+h5 em,
+.h5 em,
+h5 i,
+.h5 i {
+    font-style: normal;
+}
+h5 em em,
+.h5 em em,
+h5 em i,
+.h5 em i,
+h5 i em,
+.h5 i em,
+h5 i i,
+.h5 i i {
+    font-style: italic;
+}
+h5 button,
+.h5 button,
+h5 [role="button"],
+.h5 [role="button"],
+h5 input[type="button"],
+.h5 input[type="button"],
+h5 input[type="submit"],
+.h5 input[type="submit"],
+h5 a.button,
+.h5 a.button,
+h5 a.button-secondary,
+.h5 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+h6,
+.h6 {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
+    font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: var(--line-height-300, 1.4375);
+    letter-spacing: normal;
+    text-transform: none;
+    text-wrap: balance;
+    font-style: italic;
+}
+h6 em,
+.h6 em,
+h6 i,
+.h6 i {
+    font-style: normal;
+}
+h6 em em,
+.h6 em em,
+h6 em i,
+.h6 em i,
+h6 i em,
+.h6 i em,
+h6 i i,
+.h6 i i {
+    font-style: italic;
+}
+h6 button,
+.h6 button,
+h6 [role="button"],
+.h6 [role="button"],
+h6 input[type="button"],
+.h6 input[type="button"],
+h6 input[type="submit"],
+.h6 input[type="submit"],
+h6 a.button,
+.h6 a.button,
+h6 a.button-secondary,
+.h6 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+.h7 {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
+    font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    font-style: normal;
+}
+.h7 button,
+.h7 [role="button"],
+.h7 input[type="button"],
+.h7 input[type="submit"],
+.h7 a.button,
+.h7 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+.h8 {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
+    font-size: var(--fs-heading-8, 0.8125rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    font-style: italic;
+}
+.h8 em,
+.h8 i {
+    font-style: normal;
+}
+.h8 em em,
+.h8 em i,
+.h8 i em,
+.h8 i i {
+    font-style: italic;
+}
+.h8 button,
+.h8 [role="button"],
+.h8 input[type="button"],
+.h8 input[type="submit"],
+.h8 a.button,
+.h8 a.button-secondary {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+/* # GLOBALS - Lists
+ * ======================================================================== */
+ol,
+ul {
+    margin: 0;
+    margin-left: 20%;
+    padding: 0;
+    padding-left: 1em;
+    margin-left: var(--gap-inline-tab, 1.5vw);
+    line-height: var(--line-height-400, 1.6875);
+}
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+    margin-top: 0;
+}
+ol ol ol,
+ol ol ul,
+ol ul ol,
+ol ul ul,
+ul ol ol,
+ul ol ul,
+ul ul ol,
+ul ul ul {
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+ol {
+    /* level 1 - ol */
+    list-style-type: decimal;
+}
+ol ol {
+    /* level 2 - ol ol */
+    list-style-type: lower-alpha;
+}
+ol ol ol {
+    /* level 3 - ol ol ol */
+    list-style-type: lower-roman;
+}
+ol ol ol ol {
+    /* level 4 - ol ol ol ol */
+}
+ol ol ol ol ol {
+    /* level 5 - ol ol ol ol ol */
+}
+
+ul {
+    /* level 1 - ul */
+    list-style-type: disc;
+}
+ul ul {
+    /* level 2 - ul ul */
+    list-style-type: circle;
+}
+ol ol ol ol,
+ul ul ul {
+    /* level 3 - ul ul ul */
+    /* level 4 - ol ol ol ol */
+    list-style-type: square; /* fallback */
+    list-style-type: "–  ";
+}
+ol ol ol ol ol,
+ol ol ol ol ul,
+ul ul ul ul {
+    /* level 4 - ul ul ul ul */
+    /* level 5 - ol ol ol ol ol */
+}
+
+li {
+    margin: 0;
+    margin-top: var(--mrg-soft-300, 0.5rem);
+    padding: 0;
+}
+li::marker {
+    font-weight: 500;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+li li li {
+    margin-top: var(--mrg-soft-200, 0.3125rem);
+}
+li li li::marker {
+    font-size: var(--fs-smaller-2, 0.8125rem);
+}
+li li li li {
+    font-style: italic;
+}
+li li li li em,
+li li li li i {
+    font-style: normal;
+}
+li li li li em em,
+li li li li em i,
+li li li li i em,
+li li li li i i {
+    font-style: italic;
+}
+
+/* # GLOBALS - Forms
+ * ======================================================================== */
+fieldset {
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
+        var(--mrg-firm-300, 0.8125rem);
+    border: 0.0625rem solid var(--sys-clr-accent-bg, CanvasText);
+    border-radius: 0;
+    background-color: var(--sys-clr-background, Canvas);
+    color: var(--sys-clr-text, CanvasText);
+}
+.no-js fieldset:focus,
+.js__no-whereSelector fieldset:focus {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+:where(.js__no-focusVisible) fieldset:focus {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+fieldset:focus-visible {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+fieldset:focus-within {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+fieldset:active {
+    border-color: var(--sys-clr-accent-bg, CanvasText);
+}
+fieldset legend {
+    display: block;
+}
+fieldset > :first-child {
+    margin-top: 0;
+    margin-top: calc(
+        var(--mrg-soft-400, 0.8125rem) - var(--mrg-soft-200, 0.3125rem)
+    );
+}
+fieldset > legend + * {
+    margin-top: 0;
+}
+
+fieldset legend {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 500;
+    font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: 0.0625em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    font-style: normal;
+    margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-top: 0;
+    margin-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-soft-300, 0.5rem);
+    padding-right: var(--mrg-soft-300, 0.5rem);
+    font-style: italic;
+}
+
+textarea,
+select,
+input {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-200, 0.5rem);
+    width: 100%;
+    font: inherit;
+    line-height: var(--line-height-200, 1.3125);
+    border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg, Field);
+    color: var(--sys-clr-input-text, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+.no-js textarea:focus,
+.no-js select:focus,
+.no-js input:focus,
+.js__no-whereSelector textarea:focus,
+.js__no-whereSelector select:focus,
+.js__no-whereSelector input:focus {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) textarea:focus,
+:where(.js__no-focusVisible) select:focus,
+:where(.js__no-focusVisible) input:focus {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+textarea:hover,
+select:hover,
+input:hover {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+textarea:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+textarea:focus-within,
+select:focus-within,
+input:focus-within {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+textarea:active,
+select:active,
+input:active {
+    --focus-ring-outline-color: var(--sys-clr-text-active, ActiveText);
+    background-color: var(--sys-clr-input-bg-active, Field);
+    border-color: var(--sys-clr-input-border-active, FieldText);
+    color: var(--sys-clr-input-text-active, FieldText);
+    accent-color: var(--sys-clr-text-active, ActiveText);
+}
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    opacity: 1;
+    color: currentColor;
+}
+textarea::placeholder,
+select::placeholder,
+input::placeholder {
+    opacity: 1;
+    color: currentColor;
+}
+@media (prefers-contrast: less) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+    textarea::placeholder,
+    select::placeholder,
+    input::placeholder {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+textarea::-moz-placeholder,
+select::-moz-placeholder,
+input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+textarea::placeholder,
+select::placeholder,
+input::placeholder {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    textarea::-moz-placeholder,
+    select::-moz-placeholder,
+    input::-moz-placeholder {
+        color: color-mix(in srgb, currentColor 90%, transparent);
+    }
+    textarea::placeholder,
+    select::placeholder,
+    input::placeholder {
+        color: color-mix(in srgb, currentColor 90%, transparent);
+    }
+}
+[data-contrast-mode="high"] textarea::-moz-placeholder,
+[data-contrast-mode="high"] select::-moz-placeholder,
+[data-contrast-mode="high"] input::-moz-placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+[data-contrast-mode="high"] textarea::placeholder,
+[data-contrast-mode="high"] select::placeholder,
+[data-contrast-mode="high"] input::placeholder {
+    color: color-mix(in srgb, currentColor 90%, transparent);
+}
+
+label + textarea,
+label + select,
+label + input,
+label > textarea,
+label > select,
+label > input {
+    margin-top: var(--mrg-firm-200, 0.5rem);
+}
+
+input[type="button"],
+input[type="checkbox"],
+input[type="color"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="file"],
+input[type="month"],
+input[type="radio"],
+input[type="range"],
+input[type="reset"],
+input[type="submit"],
+input[type="time"],
+input[type="week"] {
+    cursor: pointer;
+}
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+input[type="week"] {
+    cursor: text;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+    padding: 0;
+    width: auto;
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+.no-js input[type="checkbox"]:focus,
+.no-js input[type="radio"]:focus,
+.js__no-whereSelector input[type="checkbox"]:focus,
+.js__no-whereSelector input[type="radio"]:focus {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) input[type="checkbox"]:focus,
+:where(.js__no-focusVisible) input[type="radio"]:focus {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+input[type="checkbox"]:focus-within,
+input[type="radio"]:focus-within {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+input[type="checkbox"]:active,
+input[type="radio"]:active {
+    accent-color: var(--sys-clr-text-active, ActiveText);
+}
+input[type="color"] {
+    padding: 0;
+    height: 2.25em;
+    width: 2.25em;
+}
+input[type="date"],
+input[type="datetime-local"],
+input[type="file"],
+input[type="month"],
+input[type="time"],
+input[type="week"] {
+    width: auto;
+}
+input[type="file"] {
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+input[type="range"] {
+    padding: 0;
+}
+
+select {
+    cursor: pointer;
+}
+
+textarea {
+    cursor: text;
+}
+
+label {
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 0;
+    font-weight: 600;
+    line-height: var(--line-height-200, 1.3125);
+    color: var(--sys-clr-text, CanvasText);
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"])) {
+    --display: grid;
+    display: grid;
+    grid-template-columns: fit-content(0) 1fr;
+    justify-content: end;
+    align-items: baseline;
+    grid-gap: var(--mrg-soft-300, 0.5rem);
+    gap: var(--mrg-soft-300, 0.5rem);
+    font-weight: 400;
+    line-height: var(--line-height-400, 1.6875);
+    text-wrap: balance;
+    color: var(--sys-clr-text, CanvasText);
+    cursor: pointer;
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"]))
+    + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
+    margin-top: var(--mrg-firm-200, 0.5rem);
+}
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
+label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
+    margin-top: var(--mrg-firm-400, 1.25rem);
+}
+label > input[type="checkbox"],
+label > input[type="radio"] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* ## Forms - Buttons ==================================== */
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+a.button,
+a.button-secondary,
+button[type="reset"],
+input[type="reset"],
+button.button-secondary,
+[role="button"].button-secondary,
+input[type="button"].button-secondary,
+input[type="submit"].button-secondary {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+.no-js button:focus,
+.no-js [role="button"]:focus,
+.no-js input[type="button"]:focus,
+.no-js input[type="submit"]:focus,
+.no-js a.button:focus,
+.no-js a.button-secondary:focus,
+.no-js input[type="reset"]:focus,
+.js__no-whereSelector button:focus,
+.js__no-whereSelector [role="button"]:focus,
+.js__no-whereSelector input[type="button"]:focus,
+.js__no-whereSelector input[type="submit"]:focus,
+.js__no-whereSelector a.button:focus,
+.js__no-whereSelector a.button-secondary:focus,
+.js__no-whereSelector input[type="reset"]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) button:focus,
+:where(.js__no-focusVisible) [role="button"]:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus,
+:where(.js__no-focusVisible) a.button:focus,
+:where(.js__no-focusVisible) a.button-secondary:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:hover,
+[role="button"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+a.button:hover,
+a.button-secondary:hover,
+input[type="reset"]:hover {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="submit"]:focus-visible,
+a.button:focus-visible,
+a.button-secondary:focus-visible,
+input[type="reset"]:focus-visible {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:focus-within,
+[role="button"]:focus-within,
+input[type="button"]:focus-within,
+input[type="submit"]:focus-within,
+a.button:focus-within,
+a.button-secondary:focus-within,
+input[type="reset"]:focus-within {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:active,
+[role="button"]:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+a.button:active,
+a.button-secondary:active,
+input[type="reset"]:active {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+a.button,
+a.button-secondary,
+button[type="reset"],
+input[type="reset"],
+button.button-secondary,
+[role="button"].button-secondary,
+input[type="button"].button-secondary,
+input[type="submit"].button-secondary {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+button[aria-disabled="true"],
+[aria-disabled="true"][role="button"],
+input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="submit"],
+a[aria-disabled="true"].button,
+a[aria-disabled="true"].button-secondary,
+input[aria-disabled="true"][type="reset"] {
+    cursor: not-allowed;
+}
+
+::file-selector-button {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+.no-js :focus::file-selector-button,
+.js__no-whereSelector :focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) :focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:hover::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-visible::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-within::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:active::file-selector-button {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+::file-selector-button {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+[aria-disabled="true"]::file-selector-button {
+    cursor: not-allowed;
+}
+::file-selector-button {
+    display: initial;
+    margin: 0;
+    margin-right: var(--mrg-firm-300, 0.8125rem);
+    font-size: var(--fs-normal, 1rem);
+}
+
+/* # GLOBALS - Tables
+ * ======================================================================== */
+.table-wrapper,
+table {
+    position: relative;
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-firm-600, 2.25rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    background: var(--sys-clr-accent-bg, CanvasText);
+    width: min(var(--width-page, 53rem), 100%);
+}
+
+table {
+    border-spacing: var(--border-width-200, 0.125rem);
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+.table-wrapper {
+    display: block;
+    overflow-x: auto;
+    overscroll-behavior-x: none;
+}
+.table-wrapper > table {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+th,
+td {
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    min-width: 10em;
+    background: var(--sys-clr-background, Canvas);
+    vertical-align: top;
+    text-align: left;
+}
+th > :first-child,
+td > :first-child {
+    margin-top: 0;
+}
+th > :last-child,
+td > :last-child {
+    margin-bottom: 0;
+}
+
+th {
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    background: var(--sys-clr-accent-bg, CanvasText);
+    color: var(--sys-clr-accent-text, Canvas);
+}
+
+/* # UTILITIES - Typography
+ * ======================================================================== */
+/* ## Font Sizes ==================================== */
+.font-size-heading-1 {
+    font-size: var(--fs-heading-1, 2.75rem);
+}
+
+.font-size-heading-2 {
+    font-size: var(--fs-heading-2, 2.0625rem);
+}
+
+.font-size-heading-3 {
+    font-size: var(--fs-heading-3, 1.8125rem);
+}
+
+.font-size-heading-4 {
+    font-size: var(--fs-heading-4, 1.5625rem);
+}
+
+.font-size-heading-5 {
+    font-size: var(--fs-heading-5, 1.3125rem);
+}
+
+.font-size-heading-6 {
+    font-size: var(--fs-heading-6, 1.1875rem);
+}
+
+.font-size-heading-7 {
+    font-size: var(--fs-heading-7, 0.9375rem);
+}
+
+.font-size-heading-8 {
+    font-size: var(--fs-heading-8, 0.8125rem);
+}
+
+.font-size-smaller-2 {
+    font-size: var(--fs-smaller-2, 0.8125rem);
+}
+
+.font-size-smaller-1 {
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+.font-size-normal {
+    font-size: var(--fs-normal, 1rem);
+}
+
+.font-size-bigger-7 {
+    font-size: var(--fs-bigger-7, 2.75rem);
+}
+
+.font-size-bigger-8 {
+    font-size: var(--fs-bigger-8, 3.1875rem);
+}
+
+.font-size-bigger-9 {
+    font-size: var(--fs-bigger-9, 3.6875rem);
+}
+
+/*! END of @maddimathon/utility-sass/template */
+/* # LAYOUT - BASICS
+ * ======================================================================== */
+nav ol,
+nav ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+nav ol li,
+nav ul li {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* # ASTRO LAYOUT - CONTENT SUPPORT
+ * ======================================================================== */
+body > aside {
+    grid-column: sidebar-start/sidebar-end;
+    width: auto;
+}
+
+.site-width {
+    grid-column: site-start/site-end;
+    width: auto;
+}
+
+.website-settings-menu,
+.page-width {
+    grid-column: page-start/page-end;
+    width: auto;
+}
+
+.content-width {
+    grid-column: content-start/content-end;
+    width: auto;
+}
+
+.sidebar-width {
+    grid-column: sidebar-start/sidebar-end;
+    width: auto;
+}
+
+body,
+body > header,
+body > footer,
+body > main,
+body > nav,
+body > .subgrid,
+body > .body-subgrid {
+    --display: grid;
+    display: grid;
+    position: relative;
+    justify-content: center;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+    grid-gap: 0;
+    gap: 0;
+    /* prettier-ignore */
+    --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+    /* prettier-ignore */
+    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
+    margin-left: 0;
+    margin-right: 0;
+}
+:where(
+    body > *,
+    body > header > *,
+    body > footer > *,
+    body > main > *,
+    body > nav > *,
+    body > .subgrid > *,
+    body > .body-subgrid > *
+) {
+    grid-column: content-start/content-end;
+    width: auto;
+}
+
+@media (min-width: 54em) {
+    body {
+        /* prettier-ignore */
+        --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) [page-end] 0;
+        /* prettier-ignore */
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 16rem) / 2)) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}
+:where(body > * + *) {
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: 0;
+}
+
+body > header,
+body > footer,
+body > main,
+body > nav,
+body > .subgrid,
+body > .body-subgrid {
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
+    margin-left: 0;
+    margin-right: 0;
+}
+body pre {
+    width: min(120ch, 100%);
+}
+:where(body > header > *, body > footer > *, body > nav > *) {
+    grid-column: page-start/page-end;
+    width: auto;
+}
+
+body > footer {
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: var(--gap-block-layout, 5vw);
+}
+body > aside > :first-child {
+    margin-top: 0;
+}
+
+:where(body > pre, body > table, body > .callout-width),
+:where(body > blockquote) {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+    max-width: none;
+    justify-self: start;
+}
+
+:where(
+    body > button,
+    body > [role="button"],
+    body > input[type="button"],
+    body > input[type="submit"],
+    body > a.button,
+    body > a.button-secondary
+) {
+    width: auto;
+    justify-self: start;
+}
+
+:where(.layout_full-width > main > *) {
+    grid-column: page-start/page-end;
+    width: auto;
+}
+
+:where(.layout_extra-wide > main > *) {
+    grid-column: site-start/site-end;
+    width: auto;
+}
+
+@media (min-width: 54em) {
+    .layout_sidebar-left > main,
+    .layout_sidebar-right > main {
+        /* prettier-ignore */
+        --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
+        /* prettier-ignore */
+        grid-template-columns: 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0 [site-end] 0;
+        grid-template-columns: subgrid;
+    }
+    .layout_sidebar-left > main,
+    .layout_sidebar-left > main .website-settings-menu,
+    .layout_sidebar-left > main .page-width,
+    .layout_sidebar-right > main,
+    .layout_sidebar-right > main .website-settings-menu,
+    .layout_sidebar-right > main .page-width {
+        grid-column: content-start/content-end;
+        width: auto;
+    }
+    :where(.layout_sidebar-left > main > *, .layout_sidebar-right > main > *) {
+        grid-column: content-start/content-end;
+        width: auto;
+    }
+}
+
+@media (min-width: 54em) {
+    .layout_sidebar-left {
+        /* prettier-ignore */
+        --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
+        /* prettier-ignore */
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+    }
+}
+
+@media (min-width: 54em) {
+    .layout_sidebar-right {
+        /* prettier-ignore */
+        --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] 0 [page-end] 0;
+        /* prettier-ignore */
+        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 16rem)) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+    }
+}
+
+.content-header > :first-child,
+.content-header > hgroup > :first-child {
+    margin-top: 0;
+}
+.content-header
+    > :where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h7, .h8),
+.content-header
+    hgroup
+    > :where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h7, .h8) {
+    margin-top: 0;
+}
+.content-header + :where(*) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+}
+
+.page-subtitle {
+    margin-top: var(--mrg-soft-200, 0.3125rem);
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: var(--line-height-300, 1.4375);
+    text-wrap: balance;
+}
+@media (prefers-contrast: less) {
+    .page-subtitle {
+        opacity: 0.75;
+    }
+}
+.page-subtitle {
+    opacity: 0.75;
+}
+
+/* # ASTRO COMPONENT - TOGGLE
+ * ======================================================================== */
+[data-toggle-content] > .container,
+[data-toggle-container] {
+    --display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+}
+
+[data-toggle-container] {
+    z-index: 1;
+}
+
+.toggle-title,
+.toggle-title > h1,
+.toggle-title > .h1,
+.toggle-title > h2,
+.toggle-title > .h2,
+.toggle-title > h3,
+.toggle-title > .h3,
+.toggle-title > h4,
+.toggle-title > .h4,
+.toggle-title > h5,
+.toggle-title > .h5,
+.toggle-title > h6,
+.toggle-title > .h6,
+.toggle-title > .h7,
+.toggle-title > .h8,
+.toggle-title > .page-title {
+    margin: 0;
+    padding: 0;
+}
+
+.toggle-title {
+    font-weight: 600;
+}
+.toggle-title > h1 .toggle-icon,
+.toggle-title > .h1 .toggle-icon,
+.toggle-title > h2 .toggle-icon,
+.toggle-title > .h2 .toggle-icon,
+.toggle-title > h3 .toggle-icon,
+.toggle-title > .h3 .toggle-icon,
+.toggle-title > h4 .toggle-icon,
+.toggle-title > .h4 .toggle-icon,
+.toggle-title > h5 .toggle-icon,
+.toggle-title > .h5 .toggle-icon,
+.toggle-title > h6 .toggle-icon,
+.toggle-title > .h6 .toggle-icon,
+.toggle-title > .h7 .toggle-icon,
+.toggle-title > .h8 .toggle-icon,
+.toggle-title > .page-title .toggle-icon {
+    --icon-size: 1em;
+    padding-bottom: 0;
+}
+.toggle-title > h1 [data-toggle-control],
+.toggle-title > .h1 [data-toggle-control],
+.toggle-title > h2 [data-toggle-control],
+.toggle-title > .h2 [data-toggle-control],
+.toggle-title > h3 [data-toggle-control],
+.toggle-title > .h3 [data-toggle-control],
+.toggle-title > h4 [data-toggle-control],
+.toggle-title > .h4 [data-toggle-control],
+.toggle-title > h5 [data-toggle-control],
+.toggle-title > .h5 [data-toggle-control],
+.toggle-title > h6 [data-toggle-control],
+.toggle-title > .h6 [data-toggle-control],
+.toggle-title > .h7 [data-toggle-control],
+.toggle-title > .h8 [data-toggle-control],
+.toggle-title > .page-title [data-toggle-control] {
+    font: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+[data-toggle-control] {
+    --icon-color: currentColor;
+    margin: 0;
+    width: auto;
+    font: inherit;
+    text-align: inherit;
+    border: none;
+    background: none;
+    color: inherit;
+}
+[data-toggle-control][aria-disabled] {
+    margin: var(--mrg-soft-400, 0.8125rem) 0 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: text;
+}
+[data-toggle-control][aria-disabled] .toggle-icon {
+    display: none;
+}
+.no-js [data-toggle-control]:focus,
+.js__no-whereSelector [data-toggle-control]:focus {
+    border: none;
+    background: none;
+    opacity: 1;
+}
+
+:where(.js__no-focusVisible) [data-toggle-control]:focus {
+    border: none;
+    background: none;
+    opacity: 1;
+}
+
+[data-toggle-control]:hover,
+[data-toggle-control]:active {
+    border: none;
+    background: none;
+    opacity: 1;
+}
+
+[data-toggle-control]:focus-visible {
+    border: none;
+    background: none;
+    opacity: 1;
+}
+
+[data-toggle-control]:focus-within {
+    border: none;
+    background: none;
+    opacity: 1;
+}
+
+.toggle-icon {
+    --icon-size: 1.125em;
+    display: inline-block;
+    vertical-align: sub;
+    padding-bottom: var(--stroke-relative-100, 0.03125em);
+    padding-right: var(--border-width-200, 0.125rem);
+}
+.toggle-icon > svg {
+    stroke: currentColor;
+    stroke-width: clamp(
+        1px,
+        var(--stroke-relative-600, 0.1875em),
+        var(--border-width-400, 0.25rem)
+    );
+    fill: none;
+}
+
+[data-toggle-content] {
+    display: grid;
+    justify-content: stretch;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+}
+/* With Javascript ==================================== */
+:where(.js) [data-toggle-content],
+:where(.js) [data-toggle-control],
+:where(.js) .toggle-title,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title,
+:where(.js) [data-toggle-container] {
+    --display: grid;
+    display: grid;
+    --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
+        1fr;
+    grid-template-columns: var(--grid-template-columns--toggle);
+    grid-auto-rows: auto;
+    grid-auto-flow: column;
+    justify-content: stretch;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
+    gap: 0 var(--mrg-firm-200, 0.5rem);
+}
+
+:where(.js) [data-toggle-container] {
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    z-index: 1;
+}
+:where(.js) [data-toggle-container]:has(.toggle-title > .page-title) {
+    margin-top: 0;
+}
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h1, .toggle-title > .h1),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h2, .toggle-title > .h2),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h3, .toggle-title > .h3) {
+    margin-top: var(--mrg-soft-800, 3.125rem);
+}
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h4, .toggle-title > .h4),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h5, .toggle-title > .h5),
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > h6, .toggle-title > .h6) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+}
+:where(.js) [data-toggle-container]:has(.toggle-title > .h7 .h8) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+}
+:where(.js) [data-toggle-content],
+:where(.js) [data-toggle-control],
+:where(.js) .toggle-title,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    grid-template-columns: subgrid;
+    grid-column: 1/-1;
+    margin: 0;
+    padding: 0;
+}
+
+:where(.js) .toggle-title,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    align-content: center;
+    align-items: center;
+    grid-row: 1/1;
+}
+:where(.js) .toggle-title {
+    z-index: 2;
+}
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+:where(.js) [data-toggle-control] {
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    font-weight: 600;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    cursor: pointer;
+}
+:where(.js) [data-toggle-control] .toggle-icon {
+    grid-column: icon;
+}
+:where(.js) [data-toggle-control] .toggle-icon,
+:where(.js) [data-toggle-control] .toggle-icon svg {
+    display: block;
+}
+:where(.js) [data-toggle-control] .toggle-icon svg #a,
+:where(.js) [data-toggle-control] .toggle-icon svg #b {
+    transform-origin: center;
+}
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    padding-bottom: var(--stroke-relative-400, 0.125em);
+}
+:where(.js) .toggle-control-inner {
+    grid-column: content;
+}
+:where(.js) [data-toggle-content] {
+    grid-column: 1/-1;
+    grid-row: 2/2;
+    grid-template-rows: 0fr;
+    margin: 0;
+    padding: 0;
+    border: 0 dotted currentColor;
+    border-top-width: var(--border-width-200, 0.125rem);
+    border-top-style: solid;
+    overflow: hidden;
+}
+:where(.js) [data-toggle-content] > .container {
+    --display: flex;
+    display: flex;
+    grid-column: 1/-1;
+    padding: 0 var(--mrg-firm-300, 0.8125rem);
+    overflow-y: hidden;
+    overflow-x: auto;
+    visibility: hidden;
+    opacity: 0;
+}
+:where(.js) [data-toggle-content] > .container > :first-child {
+    margin-top: 0;
+}
+:where(.js) [data-toggle-content] > .container > :last-child {
+    margin-bottom: 0;
+}
+/** Opening & Closing ------------------ **/
+:where(.js) [data-toggle-container="open"] > [data-toggle-content] > .container,
+:where(.js)
+    [data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    visibility: visible;
+}
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control]
+    .toggle-icon
+    > svg
+    #b {
+    transform: rotate(270deg);
+}
+:where(.js) [data-toggle-container="open"] > [data-toggle-content] {
+    border-left-width: var(--border-width-200, 0.125rem);
+    border-right-width: var(--border-width-200, 0.125rem);
+    border-bottom-width: var(--border-width-200, 0.125rem);
+    grid-template-rows: 1fr;
+}
+:where(.js)
+    [data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
+    opacity: 1;
+}
+:where(.js)
+    [data-toggle-container="closing"]
+    [data-toggle-control]
+    .toggle-icon
+    > svg
+    #b {
+    transform: rotate(540deg);
+}
+:where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
+    grid-template-rows: 0fr;
+}
+:where(.js)
+    [data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    opacity: 0;
+    visibility: visible;
+}
+
+:where(.js) [data-toggle-container="open"] [data-toggle-control] {
+    color: var(--sys-clr-text-active, ActiveText);
+}
+
+.no-js [data-toggle-container="open"] [data-toggle-control]:focus,
+.no-js [data-toggle-control]:focus,
+.js__no-whereSelector
+    [data-toggle-container="open"]
+    [data-toggle-control]:focus,
+.js__no-whereSelector [data-toggle-control]:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link, LinkText);
+}
+
+:where(.js__no-focusVisible)
+    [data-toggle-container="open"]
+    [data-toggle-control]:focus,
+:where(.js__no-focusVisible) [data-toggle-control]:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link, LinkText);
+}
+
+[data-toggle-container="open"] [data-toggle-control]:hover,
+[data-toggle-control]:hover {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link, LinkText);
+}
+
+[data-toggle-container="open"] [data-toggle-control]:focus-visible,
+[data-toggle-control]:focus-visible {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link, LinkText);
+}
+
+/* # ASTRO COMPONENT - TOGGLE NAV MENU
+ * ======================================================================== */
+body > nav[data-toggle-container] {
+    grid-column: page-start/page-end;
+    width: auto;
+}
+
+:where(.js) body > nav[data-toggle-container] {
+    /* prettier-ignore */
+    --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
+    /* prettier-ignore */
+    grid-template-columns: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
+    grid-template-columns: subgrid;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    grid-column: 1/-1;
+    padding: 0;
+}
+:where(.js) body > nav[data-toggle-container] .toggle-title,
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] {
+    grid-column: 1/-1;
+    gap: 0;
+}
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] {
+    margin-bottom: var(--border-width-100, 0.0625rem);
+    padding: 0;
+    border: none;
+}
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container {
+    grid-column: page-start/page-end;
+    width: auto;
+    padding-left: var(--mrg-firm-400, 1.25rem);
+    padding-right: var(--mrg-firm-400, 1.25rem);
+    background: var(--sys-clr-background, Canvas);
+}
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    > ol,
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    > ul {
+    margin-left: 0;
+}
+:where(.js) body > nav[data-toggle-container] .toggle-title {
+    /* prettier-ignore */
+    grid-template-columns: var(--grid-template-columns--toggle, var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0));
+    grid-template-columns: subgrid;
+    align-content: stretch;
+    align-items: center;
+    margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
+    border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
+    font-size: var(--fs-heading-6, 1.1875rem);
+    background: var(--sys-clr-background, Canvas);
+}
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    .toggle-title
+    [data-toggle-control] {
+    grid-column: page-start/page-end;
+    width: auto;
+    /* prettier-ignore */
+    --grid-template-columns--toggle: [content] 1fr var(--gap-inline-tab, 1.5vw) [icon] minmax(max-content, auto);
+    /* prettier-ignore */
+    grid-template-columns: var(--grid-template-columns--toggle, [content] 1fr var(--gap-inline-tab, 1.5vw) [icon] minmax(max-content, auto));
+    justify-content: space-between;
+    justify-items: start;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+}
+
+:where(.js)
+    body
+    > nav[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container,
+:where(.js)
+    body
+    > nav[data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    border: var(--border-width-200, 0.125rem) dotted currentColor;
+    border-top: none;
+}
+
+:where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
+    margin-bottom: var(--mrg-firm-400, 1.25rem);
+}
+:where(.js)
+    body
+    > nav[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-soft-400, 0.8125rem);
+    padding-bottom: var(--mrg-soft-400, 0.8125rem);
+}
+
+/* # ASTRO COMPONENT - SETTINGS MENU
+ * ======================================================================== */
+.website-settings-menu {
+    grid-column: page-start/page-end;
+    --display: none;
+    display: var(--display, none);
+    margin: 0;
+    padding: 0;
+}
+.website-settings-menu[data-toggle-container] {
+    justify-content: start;
+    align-content: end;
+    align-items: end;
+    overscroll-behavior: none;
+    z-index: 999;
+}
+
+.website-settings__content {
+    background: var(--sys-clr-background, Canvas);
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: min(var(--width-content, 36rem), 90vw);
+}
+.website-settings__content fieldset,
+.website-settings__content button,
+.website-settings__content [role="button"],
+.website-settings__content input[type="button"],
+.website-settings__content input[type="submit"],
+.website-settings__content a.button,
+.website-settings__content a.button-secondary {
+    margin-top: var(--mrg-firm-300, 0.8125rem);
+    margin-bottom: var(--mrg-half-300, 0.3125rem);
+    margin-left: 0;
+    margin-right: 0;
+}
+.website-settings__content input,
+.website-settings__content button,
+.website-settings__content [role="button"],
+.website-settings__content a.button,
+.website-settings__content a.button-secondary {
+    margin-top: var(--mrg-firm-400, 1.25rem);
+}
+.website-settings__content fieldset {
+    padding-top: var(--mrg-firm-100, 0.3125rem);
+    padding-bottom: var(--mrg-firm-100, 0.3125rem);
+    padding-left: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        3vw,
+        var(--mrg-firm-300, 0.8125rem)
+    );
+    padding-right: clamp(
+        var(--mrg-firm-200, 0.5rem),
+        3vw,
+        var(--mrg-firm-300, 0.8125rem)
+    );
+    align-self: stretch;
+}
+.website-settings__content fieldset > legend,
+.website-settings__content fieldset > legend:first-child {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: calc(var(--mrg-soft-200, 0.3125rem) * -1);
+    margin-right: calc(var(--mrg-soft-200, 0.3125rem) * -1);
+    padding-left: var(--mrg-soft-200, 0.3125rem);
+    padding-right: var(--mrg-soft-200, 0.3125rem);
+}
+.website-settings__content fieldset > .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    justify-items: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-firm-200, 0.5rem)
+        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
+    margin: 0;
+    padding: 0;
+}
+.website-settings__content fieldset > .container > label,
+.website-settings__content fieldset > .container > input {
+    margin: 0;
+}
+
+.website-settings__disclaimer {
+    font-style: italic;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+}
+
+.website-settings__backdrop {
+    display: none;
+    opacity: 0;
+}
+
+/* With Javascript ==================================== */
+body:has(.website-settings-menu[data-toggle-container="open"]) {
+    overflow: hidden;
+}
+
+:where(.js) .website-settings-menu {
+    --display: flex;
+}
+:where(.js) .website-settings-menu .toggle-title {
+    margin: 0;
+    padding: 0;
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: 0;
+    padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
+.js__no-whereSelector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:hover {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:focus-within {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js) .website-settings-menu [data-toggle-control]:active {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: 0;
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"] {
+    cursor: not-allowed;
+}
+:where(.js) .website-settings-menu [data-toggle-control] {
+    --icon-size: 1.75rem;
+    justify-self: end;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop {
+    display: none;
+    position: fixed;
+    justify-self: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+    background: none;
+    border: none;
+    z-index: -1;
+    cursor: pointer;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::before,
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::after {
+    content: "";
+    content: ""/"";
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::before {
+    background: var(--sys-clr-background, Canvas);
+    opacity: 0.625;
+}
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop::after {
+    background: var(--sys-clr-link, LinkText);
+    opacity: 0.1875;
+}
+.no-js
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus,
+.js__no-whereSelector
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:hover,
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:active {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus-visible {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control].website-settings__backdrop:focus-within {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js) .website-settings-menu [data-toggle-content] {
+    border: none;
+}
+:where(.js) .website-settings-menu[data-toggle-container="open"],
+:where(.js) .website-settings-menu[data-toggle-container="closing"] {
+    z-index: 999999;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    .website-settings__backdrop,
+:where(.js)
+    .website-settings-menu[data-toggle-container="closing"]
+    .website-settings__backdrop {
+    display: var(--display, block);
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    .website-settings__backdrop {
+    opacity: 1;
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content] {
+    max-height: 80svh;
+    max-height: calc(90svh - 2rem - var(--gap-block-layout, 5vw) * 2);
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    padding-top: var(--mrg-soft-400, 0.8125rem);
+    padding-bottom: var(--mrg-firm-300, 0.8125rem);
+}
+
+/*! END of @maddimathon/utility-astro/template/astro */

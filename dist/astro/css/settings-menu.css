@@ -1,15 +1,3 @@
-/*!
- * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-pre.5.draft
- * 
- * License: MIT
- */
-/*!
- * This stylesheet includes css generated using 
- * @maddimathon/utility-astro@0.1.0-alpha.draft
- * 
- * License: MIT
- */
 /* # TOGGLE BLOCKS ==================================== */
 .website-settings-menu {
     grid-column: page-start/page-end;
@@ -34,6 +22,7 @@
 }
 .website-settings__content fieldset,
 .website-settings__content a.button,
+.website-settings__content a.button-secondary,
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
@@ -45,6 +34,7 @@
 }
 .website-settings__content input,
 .website-settings__content a.button,
+.website-settings__content a.button-secondary,
 .website-settings__content button,
 .website-settings__content [role="button"] {
     margin-top: var(--mrg-firm-400, 1.25rem);
@@ -130,7 +120,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-.js__no-where-selector
+.js__no-whereSelector
     :where(.js)
     .website-settings-menu
     [data-toggle-control]:focus {
@@ -189,102 +179,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: var(--sys-clr-button-text-hover, SelectedItemText);
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-.no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-.js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="low"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="low"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="average"].no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="average"].js__no-where-selector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 0.875;
-}
-
-:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="low"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus,
-[data-contrast-mode="average"]:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus {
-    opacity: 0.875;
-}
-
-@media (prefers-contrast: less) {
-    .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
-    .js__no-where-selector
-        :where(.js)
-        .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 0.875;
-    }
-    :where(.js__no-focusVisible)
-        :where(.js)
-        .website-settings-menu
-        [data-toggle-control]:focus {
-        opacity: 0.875;
-    }
-}
-@media (prefers-contrast: less) {
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:focus-within {
-        opacity: 0.875;
-    }
-    :where(.js) .website-settings-menu [data-toggle-control]:hover {
-        opacity: 0.875;
-    }
-}
-[data-contrast-mode="low"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible,
-[data-contrast-mode="average"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-visible {
-    opacity: 0.875;
-}
-[data-contrast-mode="low"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within,
-[data-contrast-mode="average"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:focus-within {
-    opacity: 0.875;
-}
-[data-contrast-mode="low"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover,
-[data-contrast-mode="average"]
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control]:hover {
-    opacity: 0.875;
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:active {
@@ -369,7 +263,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop:focus,
-.js__no-where-selector
+.js__no-whereSelector
     :where(.js)
     .website-settings-menu
     [data-toggle-control].website-settings__backdrop:focus {

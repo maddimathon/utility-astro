@@ -1,17 +1,17 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 import { JsCookie } from './JsCookie.js';
 /**
  * Sets up and manages the SettingsMenu component's js.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export class SettingsMenu {
     menu;
@@ -179,13 +179,13 @@ export class SettingsMenu {
 /**
  * Utilities for the {@link SettingsMenu} class.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 (function (SettingsMenu) {
     /**
      * Initializes the given settings menu(s).
      *
-     * @since 0.1.0-alpha.draft
+     * @since 0.1.0-alpha
      */
     async function init(settingsMenus, scrollBehaviour = 'auto', selectors) {
         const mapper = async (menu) => {

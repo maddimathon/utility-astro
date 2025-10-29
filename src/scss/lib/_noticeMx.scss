@@ -3,12 +3,12 @@
 /// @since ___PKG_VERSION___
 ///
 
-@use 'pkg:@maddimathon/utility-sass/lib/noticeMx' as lib;
+// @use 'pkg:@maddimathon/utility-sass/lib/noticeMx' as lib;
 
 @mixin notice($includeLib: false) {
-    @if $includeLib {
-        @include lib.notice;
-    }
+    // @if $includeLib {
+    //     @include lib.notice;
+    // }
     /*!
      * This stylesheet includes css generated using 
      * @maddimathon/utility-astro@___CURRENT_VERSION___

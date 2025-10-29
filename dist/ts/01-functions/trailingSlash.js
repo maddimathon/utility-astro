@@ -1,21 +1,21 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 /**
  * Functions for adding and removing trailing slashes.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export var trailingSlash;
 (function (trailingSlash) {
     /**
-     * @since 0.1.0-alpha.draft
+     * @since 0.1.0-alpha
      */
     function add(str) {
         // returns
@@ -27,7 +27,7 @@ export var trailingSlash;
     trailingSlash.add = add;
     ;
     /**
-     * @since 0.1.0-alpha.draft
+     * @since 0.1.0-alpha
      */
     function remove(str) {
         return str.replace(/\/$/gi, '');

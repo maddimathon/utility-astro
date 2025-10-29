@@ -1,17 +1,17 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
 /**
  * Input props for the MenuList component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export interface Props {
 
@@ -39,7 +39,7 @@ export interface Props {
 /**
  * A single menu item for the MenuList component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export interface MenuItem {
 

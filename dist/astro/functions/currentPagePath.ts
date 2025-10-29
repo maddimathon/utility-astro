@@ -1,17 +1,17 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
 import { escRegExp } from '@maddimathon/utility-typescript/functions';
 
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export function currentPagePath(
     currentURL: URL,

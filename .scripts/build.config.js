@@ -32,6 +32,7 @@ const config = {
     launchYear: '2025',
 
     compiler: {
+
         postCSS: {
             presetEnv: {
                 features: {
@@ -46,6 +47,11 @@ const config = {
                     // "logical-viewport-units": false,
                 },
             },
+        },
+
+        sass: {
+            benchmarkCompileTime: true,
+            // compileViaCLI: true,
         },
     },
 

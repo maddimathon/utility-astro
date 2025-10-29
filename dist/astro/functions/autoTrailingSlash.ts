@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
@@ -20,7 +20,7 @@ import {
  * Auto-applies or removes a trailing slash for the given path depending on the
  * astro configuration.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export function autoTrailingSlash( url: string ) {
 

@@ -1,16 +1,16 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 /**
  * Sets up and manages the SettingsMenu component's js.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export declare class SettingsMenu {
     #private;
@@ -43,13 +43,13 @@ export declare class SettingsMenu {
 /**
  * Utilities for the {@link SettingsMenu} class.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export declare namespace SettingsMenu {
     /**
      * Initializes the given settings menu(s).
      *
-     * @since 0.1.0-alpha.draft
+     * @since 0.1.0-alpha
      */
     function init(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, scrollBehaviour?: ScrollBehavior, selectors?: {
         /**

@@ -3,6 +3,7 @@
 /// @since ___PKG_VERSION___
 ///
 
+@use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
@@ -112,7 +113,7 @@
         }
     }
 
-    @include js {
+    @include feature-check.js {
         .website-settings-menu {
             --display: flex;
 

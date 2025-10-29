@@ -1,8 +1,9 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@0.1.0-alpha
+/// @since 0.1.0-alpha
 ///
 
+@use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
@@ -112,7 +113,7 @@
         }
     }
 
-    @include js {
+    @include feature-check.js {
         .website-settings-menu {
             --display: flex;
 

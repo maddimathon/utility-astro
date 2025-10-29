@@ -3,15 +3,15 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/notice' hide $internal_isTemplate,
-    $internal_supressCredit;
+// @forward 'pkg:@maddimathon/utility-sass/notice' hide $internal_isTemplate,
+//     $internal_supressCredit;
 
-@use 'config';
+// @use 'config';
 
-@use 'lib/noticeMx' as *;
+// @use 'lib/noticeMx' as *;
 
-@if not config.$internal_supressCredit and not config.$internal_isTemplate {
-    @at-root {
-        @include notice(true);
-    }
-}
+// @if not config.$internal_supressCredit and not config.$internal_isTemplate {
+//     @at-root {
+//         @include notice(true);
+//     }
+// }

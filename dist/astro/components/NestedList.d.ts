@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 
@@ -12,7 +12,7 @@
 /**
  * Individual list items.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export type NestedListItem = {
     /**
@@ -35,7 +35,7 @@ export type NestedListItem = {
 /**
  * Input props for the NestedList component.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export interface Props<T_Item extends NestedListItem = NestedListItem> {
 

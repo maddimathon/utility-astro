@@ -1,16 +1,16 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 /**
  * Converts a map or iterable key-value pairs into a matching object.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export function mapToObject(input) {
     const map = input instanceof Map ? input : new Map(input);

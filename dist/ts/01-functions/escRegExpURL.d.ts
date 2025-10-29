@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 /**
@@ -14,7 +14,7 @@
  * - makes last slash optional
  * - makes www. prefix optional.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export declare function escRegExpURL(url: string): string;
 //# sourceMappingURL=escRegExpURL.d.ts.map

@@ -1,8 +1,9 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@0.1.0-alpha
+/// @since 0.1.0-alpha
 ///
 
+@use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
@@ -30,7 +31,7 @@ $_titleBorderWidth_half: var-border-width('100');
         }
     }
 
-    @include js-support(whereSelector) {
+    @include feature-check.js-support(whereSelector) {
         %body {
             > %nav {
                 @at-root #{selector.unify(&, ('[data-toggle-container]'))} {

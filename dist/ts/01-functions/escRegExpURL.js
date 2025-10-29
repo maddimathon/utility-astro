@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.draft
+ * @maddimathon/utility-astro@0.1.0-alpha
  * @license MIT
  */
 import { escRegExp } from '@maddimathon/utility-typescript/functions';
@@ -15,7 +15,7 @@ import { escRegExp } from '@maddimathon/utility-typescript/functions';
  * - makes last slash optional
  * - makes www. prefix optional.
  *
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  */
 export function escRegExpURL(url) {
     const matches = url.match(/^((?:https?:\/\/)?)((?:www\.)?)(.*)(\/?)$/i);

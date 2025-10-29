@@ -3,6 +3,7 @@
 /// @since ___PKG_VERSION___
 ///
 
+@use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
@@ -156,7 +157,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     /* With Javascript ==================================== */
 
-    @include js {
+    @include feature-check.js {
         @at-root %_toggle-container-grid-basics {
             --display: grid;
             display: grid;
@@ -376,7 +377,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     [data-toggle-control] {
         [data-toggle-container='open'] & {
-            @include js {
+            @include feature-check.js {
                 color: #{var-sys-colour(text-active)};
             }
         }

@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@0.1.0-alpha
+/// @since 0.1.0-alpha
 ///
 
 // @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
@@ -19,7 +19,7 @@ $_width_sidebar: var-width(sidebar);
 $_contentCol_default: minmax(auto, $_width_content);
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @function snippet-support-astro-content--default-grid-page() {
     // prettier-ignore
@@ -31,7 +31,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 ///
 /// Includes the bascis properties for a page layout grid (but no columns).
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--base-grid {
     --display: grid;
@@ -50,7 +50,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--content-width {
     grid-column: content-start / content-end;
@@ -60,7 +60,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--page-width {
     grid-column: page-start / page-end;
@@ -70,7 +70,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--sidebar-width {
     grid-column: sidebar-start / sidebar-end;
@@ -80,7 +80,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--site-width {
     grid-column: site-start / site-end;
@@ -90,7 +90,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin _body-grid--layout-content-only(
     $bodyMargin,
@@ -111,7 +111,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 }
 
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin _body-grid--layout-sidebar(
     $side,
@@ -146,7 +146,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 ///
 /// Supports the Content astro layout.
 ///
-/// @since 0.1.0-alpha.draft
+/// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content {
     $bodyMargin: var-gap-inline(layout-half);

@@ -2,7 +2,7 @@
 /**
  * Displays placeholder elements to test and display styles.
  * 
- * @since 0.1.0-alpha.draft
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -476,6 +476,8 @@ const displayHeading = props.displayHeading ?? heading;
         -webkit-line-clamp: #{$_line_clamp};
         line-clamp: #{$_line_clamp};
         overflow: hidden;
+
+        padding-block-end: var(--stroke-relative-400, 0.125em);
     }
 
     :where( .button-span ) {

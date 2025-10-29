@@ -1,14 +1,14 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.draft
-/// @since 0.1.0-alpha.draft
+/// @package @maddimathon/utility-astro@0.1.0-alpha
+/// @since 0.1.0-alpha
 ///
 
-@forward '../../../notice';
+// @forward '../../../notice';
 
-@use '../../../lib/noticeMx' as *;
+// @use '../../../lib/noticeMx' as *;
 
-@use '../config';
+// @use '../config';
 
-@if not config.$template_internal_supressCredit {
-    @include notice(true);
-}
+// @if not config.$template_internal_supressCredit {
+//     @include notice(true);
+// }

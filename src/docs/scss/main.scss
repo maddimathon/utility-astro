@@ -12,9 +12,11 @@
     $template_internal_supressCredit: false
 );
 
+@use 'pkg:@maddimathon/utility-sass/feature-check';
+
 @use '../../scss/template/astro' as *;
 
-@include js-support(whereSelector) {
+@include feature-check.js-support(whereSelector) {
     $_navHeight: 3.125rem;
     $_scrollPaddingFallback: calc(#{$_navHeight} + #{var-gap-block(layout)});
 
