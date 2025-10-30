@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha
+ * @maddimathon/utility-astro@0.1.0-alpha.1
  * @license MIT
  */
 export const SVG = {
