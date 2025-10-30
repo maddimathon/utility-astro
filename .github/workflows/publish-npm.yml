@@ -13,13 +13,13 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@maddimathon'
+      - name: Reconfigure git to use HTTP authentication
+        run: git config --global url."https://github.com/".insteadOf ssh://git@github.com/
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
