@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.1
+/// @package @maddimathon/utility-astro@0.1.0-alpha.2
 /// @since 0.1.0-alpha
 ///
 
@@ -8,7 +8,7 @@
 @forward 'pkg:@maddimathon/utility-sass/config' with (
     $include_html: pre.$include_html,
     $internal_isTemplate: pre.$internal_isTemplate,
-    $internal_supressCredit: true,
+    $internal_supressCredit: false,
     $mx_extendHeadingsByRole: false !default,
     $print_globals: pre.$print_globals,
     $print_headings: pre.$print_headings,

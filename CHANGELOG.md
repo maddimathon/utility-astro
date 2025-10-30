@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.2** — 2025-10-30
+
+Quick fix to utility-sass notice config.
+
+
 ## **0.1.0-alpha.1** — 2025-10-29
 
 Forgot to include all files.
