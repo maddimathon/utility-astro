@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -11,12 +11,12 @@
 /**
  * Functions for adding and removing trailing slashes.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export namespace trailingSlash {
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-alpha
      */
     export function add( str: string ) {
 
@@ -29,7 +29,7 @@ export namespace trailingSlash {
     };
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-alpha
      */
     export function remove( str: string ) {
         return str.replace( /\/$/gi, '' );

@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
@@ -115,6 +115,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             border: none;
             background: none;
             opacity: 1;
+            color: inherit;
         }
     }
 

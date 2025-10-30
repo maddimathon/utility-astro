@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
@@ -17,7 +17,7 @@
 ///
 /// Selectors for supporting the content layout.
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 @function to-extend-selector-content-layout() {
     $sels: (

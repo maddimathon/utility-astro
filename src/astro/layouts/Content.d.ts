@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -23,7 +23,7 @@ export type DefaultContentType = "content-only" & ContentType;
 /**
  * Input props for the Content component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export interface Props<
     T_Type extends ContentType = DefaultContentType,
@@ -47,7 +47,7 @@ export interface Props<
 /**
  * Completed props for the Content sub-components.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export type Props_Full<
     T_Type extends ContentType,

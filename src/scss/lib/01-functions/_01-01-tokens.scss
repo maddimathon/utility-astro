@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
@@ -16,7 +16,7 @@
 ///
 /// @return {list}
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 @function width-value($slug, $returnAsNumber: true, $multiplier: 1) {
     $libValue: math.round-to-pixel(
@@ -51,7 +51,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 @function var-width($slug) {
     $fallback: width-value($slug, $returnAsNumber: true);

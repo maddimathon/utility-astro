@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -17,7 +17,7 @@ import { escRegExp } from '@maddimathon/utility-typescript/functions';
  * - makes last slash optional
  * - makes www. prefix optional.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export function escRegExpURL( url: string ): string {
 

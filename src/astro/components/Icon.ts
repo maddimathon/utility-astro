@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -14,7 +14,7 @@ import type { SVG } from '../../ts/svg.js';
 /**
  * Input props for the Icon component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export type Props = {
     class?: ClassList;

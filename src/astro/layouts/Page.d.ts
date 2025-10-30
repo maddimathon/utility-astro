@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -24,7 +24,7 @@ import type { Props as ContentProps, ContentType, DefaultContentType } from './C
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 type HTML_excludeAttributes = "dir" | "lang";
 
@@ -32,7 +32,7 @@ type HTML_excludeAttributes = "dir" | "lang";
 /**
  * Input props for the NewComponent component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @interface
  */

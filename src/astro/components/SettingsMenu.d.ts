@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -14,7 +14,7 @@ import { Props as StylesProps } from '../support/SettingsMenu_Styles.astro';
 /**
  * Input props for the SettingsMenu component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export interface Props {
 

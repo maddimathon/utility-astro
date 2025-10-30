@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -11,7 +11,7 @@
 import { escRegExp } from '@maddimathon/utility-typescript/functions';
 
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export function currentPagePath(
     currentURL: URL,

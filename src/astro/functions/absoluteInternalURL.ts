@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -19,7 +19,7 @@ import { autoTrailingSlash } from './autoTrailingSlash.js';
 /**
  * Outputs an absolute URL, optionally made relative to the URL root.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export function absoluteInternalURL(
     currentURL: URL,

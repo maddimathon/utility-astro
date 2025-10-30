@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -11,7 +11,7 @@
 /**
  * Manages a simple, vanilla JS cookie value client-side.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export class JsCookie {
 

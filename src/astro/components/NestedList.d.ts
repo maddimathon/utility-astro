@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -12,7 +12,7 @@
 /**
  * Individual list items.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export type NestedListItem = {
     /**
@@ -35,7 +35,7 @@ export type NestedListItem = {
 /**
  * Input props for the NestedList component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export interface Props<T_Item extends NestedListItem = NestedListItem> {
 

@@ -2301,12 +2301,14 @@ body > aside > :first-child {
     border: none;
     background: none;
     opacity: 1;
+    color: inherit;
 }
 
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
     border: none;
     background: none;
     opacity: 1;
+    color: inherit;
 }
 
 [data-toggle-control]:hover,
@@ -2314,18 +2316,21 @@ body > aside > :first-child {
     border: none;
     background: none;
     opacity: 1;
+    color: inherit;
 }
 
 [data-toggle-control]:focus-visible {
     border: none;
     background: none;
     opacity: 1;
+    color: inherit;
 }
 
 [data-toggle-control]:focus-within {
     border: none;
     background: none;
     opacity: 1;
+    color: inherit;
 }
 
 .toggle-icon {

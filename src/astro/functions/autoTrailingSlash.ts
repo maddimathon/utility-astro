@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -20,7 +20,7 @@ import {
  * Auto-applies or removes a trailing slash for the given path depending on the
  * astro configuration.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export function autoTrailingSlash( url: string ) {
 

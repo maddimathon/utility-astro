@@ -17,3 +17,9 @@ and this project adheres to
 
 
 <!--CHANGELOG_NEW-->
+
+
+## **0.1.0-alpha** — 2025-10-29
+
+A quick pre-release converting templates to scss-templater.  Version 0.1.0 won't
+progress beyond alpha.

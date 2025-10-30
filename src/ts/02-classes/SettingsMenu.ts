@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -13,7 +13,7 @@ import { JsCookie } from './JsCookie.js';
 /**
  * Sets up and manages the SettingsMenu component's js.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export class SettingsMenu {
     readonly #attributeKeys: string[] = [];
@@ -254,14 +254,14 @@ export class SettingsMenu {
 /**
  * Utilities for the {@link SettingsMenu} class.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export namespace SettingsMenu {
 
     /**
      * Initializes the given settings menu(s).
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-alpha
      */
     export async function init(
         settingsMenus: HTMLElement | NodeListOf<HTMLElement>,

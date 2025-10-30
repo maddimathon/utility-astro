@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -13,7 +13,7 @@ import type { Props as NavMenuProps } from './NavMenu.d.ts';
 /**
  * Input props for the ToggleNavMenu component.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export interface Props extends NavMenuProps {
 }

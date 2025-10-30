@@ -153,7 +153,8 @@ html {
 /*! START of @maddimathon/utility-sass/template */
 /* # GLOBALS - Accessibility
  * ======================================================================== */
-:focus {
+.no-js :focus,
+.js__no-whereSelector :focus {
     /* %focus-ring */
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
@@ -271,7 +272,13 @@ a {
 a:visited {
     color: var(--sys-clr-link-visited, VisitedText);
 }
-a:focus {
+.no-js a:focus,
+.js__no-whereSelector a:focus {
+    text-decoration-color: transparent;
+    color: var(--sys-clr-link-hover, ActiveText);
+}
+
+:where(.js__no-focusVisible) a:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
@@ -893,11 +900,21 @@ fieldset {
     background-color: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
 }
-fieldset:focus {
+.no-js fieldset:focus,
+.js__no-whereSelector fieldset:focus {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
-fieldset:focus-within {
+:where(.js__no-focusVisible) fieldset:focus {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+.no-js fieldset:focus-within,
+.js__no-whereSelector fieldset:focus-within {
+    border-color: var(--sys-clr-text-active, ActiveText);
+}
+
+:where(.js__no-focusVisible) fieldset:focus-within {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
@@ -953,9 +970,22 @@ input {
     color: var(--sys-clr-input-text, FieldText);
     accent-color: var(--sys-clr-input-text, FieldText);
 }
-textarea:focus,
-select:focus,
-input:focus {
+.no-js textarea:focus,
+.no-js select:focus,
+.no-js input:focus,
+.js__no-whereSelector textarea:focus,
+.js__no-whereSelector select:focus,
+.js__no-whereSelector input:focus {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) textarea:focus,
+:where(.js__no-focusVisible) select:focus,
+:where(.js__no-focusVisible) input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -973,9 +1003,22 @@ input:hover {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-textarea:focus-within,
-select:focus-within,
-input:focus-within {
+.no-js textarea:focus-within,
+.no-js select:focus-within,
+.no-js input:focus-within,
+.js__no-whereSelector textarea:focus-within,
+.js__no-whereSelector select:focus-within,
+.js__no-whereSelector input:focus-within {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) textarea:focus-within,
+:where(.js__no-focusVisible) select:focus-within,
+:where(.js__no-focusVisible) input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -1092,8 +1135,15 @@ input[type="radio"] {
     width: auto;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
-input[type="checkbox"]:focus,
-input[type="radio"]:focus {
+.no-js input[type="checkbox"]:focus,
+.no-js input[type="radio"]:focus,
+.js__no-whereSelector input[type="checkbox"]:focus,
+.js__no-whereSelector input[type="radio"]:focus {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) input[type="checkbox"]:focus,
+:where(.js__no-focusVisible) input[type="radio"]:focus {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1102,8 +1152,15 @@ input[type="radio"]:hover {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-input[type="checkbox"]:focus-within,
-input[type="radio"]:focus-within {
+.no-js input[type="checkbox"]:focus-within,
+.no-js input[type="radio"]:focus-within,
+.js__no-whereSelector input[type="checkbox"]:focus-within,
+.js__no-whereSelector input[type="radio"]:focus-within {
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
+
+:where(.js__no-focusVisible) input[type="checkbox"]:focus-within,
+:where(.js__no-focusVisible) input[type="radio"]:focus-within {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1201,11 +1258,31 @@ input[type="reset"] {
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
-button:focus,
-[role="button"]:focus,
-input[type="button"]:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus {
+.no-js button:focus,
+.no-js [role="button"]:focus,
+.no-js input[type="button"]:focus,
+.no-js input[type="submit"]:focus,
+.no-js input[type="reset"]:focus,
+.js__no-whereSelector button:focus,
+.js__no-whereSelector [role="button"]:focus,
+.js__no-whereSelector input[type="button"]:focus,
+.js__no-whereSelector input[type="submit"]:focus,
+.js__no-whereSelector input[type="reset"]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) button:focus,
+:where(.js__no-focusVisible) [role="button"]:focus,
+:where(.js__no-focusVisible) input[type="button"]:focus,
+:where(.js__no-focusVisible) input[type="submit"]:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1231,11 +1308,31 @@ input[type="reset"]:hover {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-button:focus-within,
-[role="button"]:focus-within,
-input[type="button"]:focus-within,
-input[type="submit"]:focus-within,
-input[type="reset"]:focus-within {
+.no-js button:focus-within,
+.no-js [role="button"]:focus-within,
+.no-js input[type="button"]:focus-within,
+.no-js input[type="submit"]:focus-within,
+.no-js input[type="reset"]:focus-within,
+.js__no-whereSelector button:focus-within,
+.js__no-whereSelector [role="button"]:focus-within,
+.js__no-whereSelector input[type="button"]:focus-within,
+.js__no-whereSelector input[type="submit"]:focus-within,
+.js__no-whereSelector input[type="reset"]:focus-within {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) button:focus-within,
+:where(.js__no-focusVisible) [role="button"]:focus-within,
+:where(.js__no-focusVisible) input[type="button"]:focus-within,
+:where(.js__no-focusVisible) input[type="submit"]:focus-within,
+:where(.js__no-focusVisible) input[type="reset"]:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1302,7 +1399,19 @@ input[aria-disabled="true"][type="reset"] {
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
-:focus::file-selector-button {
+.no-js :focus::file-selector-button,
+.js__no-whereSelector :focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) :focus::file-selector-button {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1324,7 +1433,19 @@ input[aria-disabled="true"][type="reset"] {
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-:focus-within::file-selector-button {
+.no-js :focus-within::file-selector-button,
+.js__no-whereSelector :focus-within::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js__no-focusVisible) :focus-within::file-selector-button {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem

@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
@@ -12,7 +12,7 @@
 /**
  * Converts a map or iterable key-value pairs into a matching object.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  */
 export function mapToObject<
     T_Key extends string | number | symbol,

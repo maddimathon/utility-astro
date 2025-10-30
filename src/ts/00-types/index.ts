@@ -1,7 +1,7 @@
 /**
  * Exports utility types only.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-alpha
  * 
  * @packageDocumentation
  */
