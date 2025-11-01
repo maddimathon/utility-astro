@@ -1,0 +1,22 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use '../../config';
+// @use '../../tokens';
+
+@use '../../old-lib' as *;
+
+@if config.$print_normalize {
+    @include normalize;
+}
+
+@if config.$print_tokens {
+    @if config.$print_headings {
+        /* # TOKENS & PROPERTIES
+         * ======================================================================== */
+    }
+
+    @include tokens-all;
+}

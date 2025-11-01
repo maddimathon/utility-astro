@@ -5,16 +5,16 @@
 
 @forward '_header';
 
-@forward '../../scss/template/astro/config';
+@forward '../../scss/old-template/astro/config';
 
-@forward '../../scss/template/astro' with (
+@forward '../../scss/old-template/astro' with (
     $print_templateDocBlock: false,
     $template_internal_supressCredit: false
 );
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 
-@use '../../scss/template/astro' as *;
+@use '../../scss/old-template/astro' as *;
 
 @include feature-check.js-support(whereSelector) {
     $_navHeight: 3.125rem;

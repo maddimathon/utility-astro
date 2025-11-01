@@ -1,20 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___
 ///
 
-@forward 'config';
-
-@forward '_header';
-
-@forward '00-abstracts';
-
-@forward 'utility-sass' hide $print_templateDocBlock,
-    $template_internal_supressCredit, $template_isDefault, $template_name;
-
-@forward '01-globals';
-@forward '02-layouts';
-@forward '03-utilities';
-@forward '04-components';
-
-@forward '_footer';
+@forward 'pkg:@maddimathon/scss-templater/template/content';

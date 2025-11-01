@@ -16,7 +16,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.2
+ * @maddimathon/utility-astro@0.1.0-alpha.2.draft
  * @license MIT
  */
 export * from './00-types/index.js';

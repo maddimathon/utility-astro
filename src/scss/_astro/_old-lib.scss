@@ -1,0 +1,25 @@
+///
+/// Used in subdirs to easily reference the old-lib.
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@forward '../old-template/astro/config' with (
+    $include_html: true !default,
+
+    $internal_isTemplate: false !default,
+
+    $mx_extendHeadingsByRole: false !default,
+
+    $print_astro: true !default,
+    $print_globals: true !default,
+    $print_normalize: true !default,
+    $print_tokens: true !default,
+    $print_utils: true !default
+);
+@forward '../tokens';
+
+// @forward '../notice';
+
+@forward '../old-lib';

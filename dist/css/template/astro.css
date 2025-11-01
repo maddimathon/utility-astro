@@ -1,0 +1,797 @@
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/utility-sass@0.1.0-alpha.1
+ * 
+ * https://maddimathon.github.io/utility-sass
+ */
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/scss-templater@0.1.0-draft
+ * 
+ * https://maddimathon.github.io/scss-templater
+ */
+/**
+ * Sass Template - Astro
+ */
+/*! START of @maddimathon/scss-templater/template/astro */
+/**
+ * CONFIG
+ */
+/*#region config.$config  */
+/* <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "Astro", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "astro" ) ) */
+/*#endregion config.$config  */
+/* --- */
+/**
+ * TOKENS
+ */
+/*#region tokens.$tokens  */
+/* <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ) */
+/*#endregion tokens.$tokens  */
+/* --- */
+/* --- */
+/* #region Normalize */
+/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*
+Document
+========
+*/
+/**
+Use a better box model (opinionated).
+*/
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
+    /* font-family:
+      system-ui,
+      'Segoe UI',
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji'; */
+    line-height: 1.15; /* 1. Correct the line height in all browsers. */
+    -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+    tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
+}
+
+/*
+Sections
+========
+*/
+body {
+    margin: 0; /* Remove the margin in all browsers. */
+}
+
+/*
+Text-level semantics
+====================
+*/
+/**
+Add the correct font weight in Chrome and Safari.
+*/
+b,
+strong {
+    font-weight: bolder;
+}
+
+/**
+1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
+2. Correct the odd 'em' font sizing in all browsers.
+*/
+code,
+kbd,
+samp,
+pre {
+    /* font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Consolas,
+      'Liberation Mono',
+      Menlo,
+      monospace; */ /* 1 */
+    font-size: 1em; /* 2 */
+}
+
+/**
+Add the correct font size in all browsers.
+*/
+small {
+    font-size: 80%;
+}
+
+/**
+Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
+*/
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/*
+Tabular data
+============
+*/
+/**
+Correct table border color inheritance in Chrome and Safari. (https://issues.chromium.org/issues/40615503, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+table {
+    border-color: currentcolor;
+}
+
+/*
+Forms
+=====
+*/
+/**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 1 */
+    line-height: 1.15; /* 1 */
+    margin: 0; /* 2 */
+}
+
+/**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+/**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+legend {
+    padding: 0;
+}
+
+/**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+progress {
+    vertical-align: baseline;
+}
+
+/**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+    height: auto;
+}
+
+/**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    outline-offset: -2px; /* 2 */
+}
+
+/**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+::-webkit-file-upload-button {
+    -webkit-appearance: button; /* 1 */
+    font: inherit; /* 2 */
+}
+
+/*
+Interactive
+===========
+*/
+/*
+Add the correct display in Chrome and Safari.
+*/
+summary {
+    display: list-item;
+}
+
+/*! end of modern-normalize */
+html {
+    color-scheme: light, dark;
+    /* $queries = <()> ( () ) */
+    /* $queries = <()> ( <S> "( prefers-color-scheme: dark )" ) */
+}
+@media (prefers-color-scheme: dark) {
+    html {
+        color-scheme: dark;
+    }
+}
+
+html {
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen-Sans,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol";
+    font-size: 115%;
+}
+@media (min-width: 50em) {
+    html {
+        font-size: 105%;
+    }
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family:
+        ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+        monospace;
+}
+
+/* #endregion Normalize */
+/* # TOKENS & CUSTOM PROPERTIES
+ * ======================================================================== */
+/* #region Tokens - Margins */
+html {
+    --mrg-firm-100: 0.3125rem;
+    --mrg-firm-200: 0.5rem;
+    --mrg-firm-300: 0.8125rem;
+    --mrg-firm-400: 1.25rem;
+    --mrg-firm-600: 2.25rem;
+    --mrg-firm-800: 4rem;
+    --mrg-firm-900: 7.125rem;
+}
+
+html {
+    --mrg-soft-100: 0.1875rem;
+    --mrg-soft-200: 0.3125rem;
+    --mrg-soft-300: 0.5rem;
+    --mrg-soft-400: 0.8125rem;
+    --mrg-soft-600: 1.4375rem;
+    --mrg-soft-800: 2.5rem;
+    --mrg-soft-900: 4.4375rem;
+}
+
+html {
+    --mrg-half-100: 0.125rem;
+    --mrg-half-200: 0.1875rem;
+    --mrg-half-300: 0.3125rem;
+    --mrg-half-400: 0.4375rem;
+    --mrg-half-600: 0.8125rem;
+    --mrg-half-800: 1.5rem;
+    --mrg-half-900: 2.6875rem;
+}
+
+/* #endregion Tokens - Margins */
+/* #region Tokens - Gaps */
+/* #endregion Tokens - Gaps */
+/* #region Tokens - Border Width */
+html {
+    --border-width-100: 0.0625rem;
+    --border-width-200: 0.125rem;
+    --border-width-300: 0.1875rem;
+    --border-width-400: 0.25rem;
+}
+
+/* #endregion Tokens - Border Width */
+/* #region Tokens - Stroke Relative */
+html {
+    --stroke-relatives-100: 0.03125em;
+    --stroke-relatives-200: 0.0625em;
+    --stroke-relatives-400: 0.125em;
+    --stroke-relatives-600: 0.1875em;
+    --stroke-relatives-800: 0.25em;
+}
+
+/* #endregion Tokens - Stroke Relative */
+/* #region Tokens - Font Size */
+html {
+    --fs-heading-1: 2.75rem;
+    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-heading-2: 2.0625rem;
+    --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
+    --fs-heading-3: 1.8125rem;
+    --fs-heading-3: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
+    --fs-heading-4: 1.5625rem;
+    --fs-heading-4: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
+    --fs-heading-5: 1.3125rem;
+    --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
+    --fs-heading-6: 1.1875rem;
+    --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    --fs-heading-7: 0.9375rem;
+    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    --fs-heading-8: 0.875rem;
+    --fs-heading-8: clamp(0.6875rem, 1.125svw + 1rem, 1rem);
+    --fs-body: 1rem;
+    --fs-smaller-1: 0.875rem;
+    --fs-smaller-2: 0.8125rem;
+    --fs-smaller-3: 0.75rem;
+}
+
+/* #endregion Tokens - Font Size */
+/* #region Tokens - Line Heights */
+html {
+    --line-height-100: 1.1875;
+    --line-height-200: 1.3125;
+    --line-height-300: 1.4375;
+    --line-height-400: 1.6875;
+    --line-height-500: 1.90625;
+    --line-height-600: 2.1875;
+}
+
+/* #endregion Tokens - Line Heights */
+/* # GLOBALS - Accessibility
+ * ======================================================================== */
+.no-js :focus,
+.js__no-whereSelector :focus {
+    outline: var(--focus-ring-outline-width, 400) dashed
+        var(--focus-ring-outline-color, LinkText);
+    outline-offset: var(--focus-ring-outline-offset, 400);
+}
+
+:where(.js__no-focusVisible) :focus {
+    outline: var(--focus-ring-outline-width, 400) dashed
+        var(--focus-ring-outline-color, LinkText);
+    outline-offset: var(--focus-ring-outline-offset, 400);
+}
+
+:focus-visible {
+    outline: var(--focus-ring-outline-width, 400) dashed
+        var(--focus-ring-outline-color, LinkText);
+    outline-offset: var(--focus-ring-outline-offset, 400);
+}
+
+.screen-reader-text {
+    position: absolute !important;
+    left: -10000px !important;
+    margin: 0 !important;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden !important;
+}
+
+/* # GLOBALS - Typography
+ * ======================================================================== */
+root {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+body {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+/* ## Typography - Inline ==================================== */
+b,
+strong {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+em,
+i {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+a {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+abbr {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+/* ## Typography - Block ==================================== */
+p {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+blockquote {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+code,
+kbd,
+pre,
+samp {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+code,
+kbd,
+samp {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+pre {
+    /* TODO - IMPLEMENT STYLES */
+}
+
+/* ## Typography - Headings ==================================== */
+h1,
+.h1 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h1 button,
+.h1 button,
+h1 [role="button"],
+.h1 [role="button"],
+h1 input[type="button"],
+.h1 input[type="button"],
+h1 input[type="submit"],
+.h1 input[type="submit"],
+h1 input[type="reset"],
+.h1 input[type="reset"],
+h1 a.button,
+.h1 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="1"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="1"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+h2,
+.h2 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h2 button,
+.h2 button,
+h2 [role="button"],
+.h2 [role="button"],
+h2 input[type="button"],
+.h2 input[type="button"],
+h2 input[type="submit"],
+.h2 input[type="submit"],
+h2 input[type="reset"],
+.h2 input[type="reset"],
+h2 a.button,
+.h2 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="2"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="2"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+h3,
+.h3 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h3 button,
+.h3 button,
+h3 [role="button"],
+.h3 [role="button"],
+h3 input[type="button"],
+.h3 input[type="button"],
+h3 input[type="submit"],
+.h3 input[type="submit"],
+h3 input[type="reset"],
+.h3 input[type="reset"],
+h3 a.button,
+.h3 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="3"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="3"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+h4,
+.h4 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h4 button,
+.h4 button,
+h4 [role="button"],
+.h4 [role="button"],
+h4 input[type="button"],
+.h4 input[type="button"],
+h4 input[type="submit"],
+.h4 input[type="submit"],
+h4 input[type="reset"],
+.h4 input[type="reset"],
+h4 a.button,
+.h4 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="4"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="4"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+h5,
+.h5 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h5 button,
+.h5 button,
+h5 [role="button"],
+.h5 [role="button"],
+h5 input[type="button"],
+.h5 input[type="button"],
+h5 input[type="submit"],
+.h5 input[type="submit"],
+h5 input[type="reset"],
+.h5 input[type="reset"],
+h5 a.button,
+.h5 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="5"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="5"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+h6,
+.h6 {
+    /* TODO - IMPLEMENT STYLES */
+}
+h6 button,
+.h6 button,
+h6 [role="button"],
+.h6 [role="button"],
+h6 input[type="button"],
+.h6 input[type="button"],
+h6 input[type="submit"],
+.h6 input[type="submit"],
+h6 input[type="reset"],
+.h6 input[type="reset"],
+h6 a.button,
+.h6 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="6"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="6"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+.h7 {
+    /* TODO - IMPLEMENT STYLES */
+}
+.h7 button,
+.h7 [role="button"],
+.h7 input[type="button"],
+.h7 input[type="submit"],
+.h7 input[type="reset"],
+.h7 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="7"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="7"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+.h8 {
+    /* TODO - IMPLEMENT STYLES */
+}
+.h8 button,
+.h8 [role="button"],
+.h8 input[type="button"],
+.h8 input[type="submit"],
+.h8 input[type="reset"],
+.h8 a.button {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+:where([role="heading"][aria-level="8"]) {
+    /* TODO - IMPLEMENT STYLES */
+}
+:where([role="heading"][aria-level="8"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"],
+        input[type="reset"],
+        a.button
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
+/* # UTILITIES - Typography
+ * ======================================================================== */
+/* ## Font Sizes ==================================== */
+.font-size-heading-1 {
+    font-size: var(--fs-heading-1, 2.75rem);
+}
+
+.font-size-heading-2 {
+    font-size: var(--fs-heading-2, 2.0625rem);
+}
+
+.font-size-heading-3 {
+    font-size: var(--fs-heading-3, 1.8125rem);
+}
+
+.font-size-heading-4 {
+    font-size: var(--fs-heading-4, 1.5625rem);
+}
+
+.font-size-heading-5 {
+    font-size: var(--fs-heading-5, 1.3125rem);
+}
+
+.font-size-heading-6 {
+    font-size: var(--fs-heading-6, 1.1875rem);
+}
+
+.font-size-heading-7 {
+    font-size: var(--fs-heading-7, 0.9375rem);
+}
+
+.font-size-heading-8 {
+    font-size: var(--fs-heading-8, 0.875rem);
+}
+
+.font-size-body {
+    font-size: var(--fs-body, 1rem);
+}
+
+.font-size-smaller-1 {
+    font-size: var(--fs-smaller-1, 0.875rem);
+}
+
+.font-size-smaller-2 {
+    font-size: var(--fs-smaller-2, 0.8125rem);
+}
+
+.font-size-smaller-3 {
+    font-size: var(--fs-smaller-3, 0.75rem);
+}
+
+/*! END of @maddimathon/scss-templater/template/astro */
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/utility-sass@0.1.0-alpha.1
+ * 
+ * https://maddimathon.github.io/utility-sass
+ */
+/*
+    LOCAL
+
+    meta.module-variables( config ) = <:> ( "defaultConfig": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "Astro", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "astro" ) ), "baseConfig": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <()> ( <S> "a" ), "abbr": <()> ( <S> "abbr" ), "blockquote": <()> ( <S> "blockquote" ), "body": <()> ( <S> "body" ), "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <()> ( <S> "code" ), "em": <()> ( <S> "em", <S> "i" ), "fieldset": <()> ( <S> "fieldset" ), "file-selector-button": <()> ( <S> "::file-selector-button" ), "h1": <()> ( <S> "h1" ), "h2": <()> ( <S> "h2" ), "h3": <()> ( <S> "h3" ), "h4": <()> ( <S> "h4" ), "h5": <()> ( <S> "h5" ), "h6": <()> ( <S> "h6" ), "hr": <()> ( <S> "hr" ), "input": <()> ( <S> "input" ), "kbd": <()> ( <S> "kbd" ), "label": <()> ( <S> "label" ), "legend": <()> ( <S> "legend" ), "li": <()> ( <S> "li" ), "ol": <()> ( <S> "ol" ), "p": <()> ( <S> "p" ), "pre": <()> ( <S> "pre" ), "root": <()> ( <S> "root" ), "samp": <()> ( <S> "samp" ), "screen-reader-text": <()> ( <S> ".screen-reader-text" ), "select": <()> ( <S> "select" ), "strong": <()> ( <S> "b", <S> "strong" ), "table": <()> ( <S> "table" ), "td": <()> ( <S> "td" ), "textarea": <()> ( <S> "textarea" ), "th": <()> ( <S> "th" ), "tr": <()> ( <S> "tr" ), "ul": <()> ( <S> "ul" ) ), "utils": <:> ( "button": <()> ( <S> "a.button" ), "table-wrapper": <()> ( <S> "table-wrapper" ) ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> false, "html": </> false, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> false, "globals": </> false, "headings": </> false, "normalize": </> false, "tokens": </> false, "utilities": </> false ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "default" ) ), "config": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "Astro", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "astro" ) ), "selector-null": <S> %null, "fn-clampFontSize-multiplier-min": <#> 0.75, "fn-clampFontSize-multiplier-svw": <#> 1.3125, "fn-clampFontSize-multiplier-max": <#> 1.125, "fn-clampFontSize-svw-rem": <#> 1, "fn-fontSizeValue-defaultFontScale": <#> 1, "fn-fontSizeValue-roundToPixelFactor": <#> 16, "mx-colourModeEach-includeSelectors-forcedColors": </> false, "include-defaultMediaQueries": </> false, "include-html": </> true, "include-featureCheck": </> true, "include-noPreferenceMediaQueries": </> false, "internal-isTemplate": </> false, "internal-supressCredit": </> false, "selector-body": <S> body, "selector-root": <S> html, "selectorType-mode": <S> "null", "selectorType-motion": <S> "null", "print-globals": </> true, "print-normalize": </> true, "print-tokens": </> true, "print-utils": </> true, "print-headings": </> true, "mx-extendHeadingsByRole": </> true, "mx-interactive-states-include-fallbacks": </> true, "mx-interactive-states-include-fallbacks-only": </> false, "mx-colourMode-includeQuery-default": </> true, "mx-colourMode-includeSelectors-default": </> false, "warnIfGlobalJsFunctionsMissing": </> true, "print-docBlock": </> true, "template-name": <S> "Astro", "template-slug": <S> "astro", "template-packageSlug": <S> "@maddimathon/scss-templater", "fn-var-replaceWithValue-borderRadius": </> true, "fn-var-replaceWithValue-borderWidth": </> false, "fn-var-replaceWithValue-margin": </> false, "fn-var-replaceWithValue-strokeRelative": </> false, "fn-var-replaceWithValue-style": </> false, "mx-tokens-printDefault-borderRadius": </> false, "mx-tokens-printDefault-borderWidth": </> true, "mx-tokens-printDefault-margin": </> true, "mx-tokens-printDefault-strokeRelative": </> true, "mx-tokens-printDefault-style": </> false, "mx-extendSelectors-optionalDefault": </> false, "mx-extendSelectors-extendHeadingsByRole": </> true, "mx-extendSelectors-utilsIncludeHeadings": </> true, "mx-extendSelectors-utilsIncludeFontSizes": </> true )
+    meta.module-variables( tokens ) = <:> ( "defaultTokens": <-> null, "baseTokens": <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ), "tokens": <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "brightnessMode-all": <()> ( <S> "light", <S> "dark" ), "contrastMode-all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "brightnessMode-default": <S> "light", "contrastMode-default": <S> "average", "scaleMultiplier": <#> 1.15625, "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ), "font-sizes": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ), "font-sizes--flat--rem": <:> ( "heading-1": <#> 2.75, "heading-2": <#> 2.0625, "heading-3": <#> 1.8125, "heading-4": <#> 1.5625, "heading-5": <#> 1.3125, "heading-6": <#> 1.1875, "heading-7": <#> 0.9375, "heading-8": <#> 0.875, "body": <#> 1, "smaller-1": <#> 0.875, "smaller-2": <#> 0.8125, "smaller-3": <#> 0.75 ), "lineHeight-base": <#> 1.6875, "line-heights": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "line-heights--rel": <:> ( "100": <#> 1.1875, "200": <#> 1.3125, "300": <#> 1.4375, "400": <#> 1.6875, "500": <#> 1.90625, "600": <#> 2.1875 ), "border-radii": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "strokes-relative": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "border-widths": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ), "gap-vw": <#> 8, "gaps": <()> ( () ), "gaps-block": <()> ( () ), "gaps-inline": <()> ( () ), "margin-softener": <#> 0.625, "margins": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ), "margins--calc": <:> ( "firm": <:> ( "100": <#> 0.3125, "200": <#> 0.5, "300": <#> 0.8125, "400": <#> 1.25, "600": <#> 2.25, "800": <#> 4, "900": <#> 7.125 ), "soft": <:> ( "100": <#> 0.1875, "200": <#> 0.3125, "300": <#> 0.5, "400": <#> 0.8125, "600": <#> 1.4375, "800": <#> 2.5, "900": <#> 4.4375 ), "half": <:> ( "100": <#> 0.125, "200": <#> 0.1875, "300": <#> 0.3125, "400": <#> 0.4375, "600": <#> 0.8125, "800": <#> 1.5, "900": <#> 2.6875 ) ), "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "styles--replaced": <:> ( "focus-ring-outline-width": <S> "400", "focus-ring-outline-offset": <S> "400", "focus-ring-outline-color": <S> "LinkText" ) )
+    meta.module-functions( config ) = <:> ( "templater-parse-config": <@> get-function("templater-parse-config"), "config-round-to-pixel": <@> get-function("config-round-to-pixel"), "config-valid-bool": <@> get-function("config-valid-bool"), "config-valid-list-strings": <@> get-function("config-valid-list-strings"), "config-valid-selector": <@> get-function("config-valid-selector"), "config-valid-selector-type": <@> get-function("config-valid-selector-type"), "config-valid-number": <@> get-function("config-valid-number"), "config-valid-string": <@> get-function("config-valid-string") )
+    meta.module-mixins( config ) = <:> ()
+ */

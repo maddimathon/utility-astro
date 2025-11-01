@@ -1,0 +1,14 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+// @forward '../../../notice';
+
+// @use '../../../old-lib/noticeMx' as *;
+
+// @use '../config';
+
+// @if not config.$template_internal_supressCredit {
+//     @include notice(true);
+// }

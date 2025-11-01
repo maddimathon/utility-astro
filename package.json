@@ -143,7 +143,7 @@
     "scripts": {
         "commit": "sh .scripts/commit.sh",
 
-        "rm": "rm -rf dist docs src/astro/css",
+        "rm": "rm -rf dist docs src/astro/css src/scss/lib/config/_default.scss src/scss/lib/tokens/_default.scss src/scss/template/astro/_config.scss src/scss/template/globals/_config.scss src/scss/template/html/_config.scss src/scss/template/tokens/_config.scss src/scss/template/astro/_tokens.scss src/scss/template/globals/_tokens.scss src/scss/template/html/_tokens.scss src/scss/template/tokens/_tokens.scss",
 
         "astro:check": "astro check",
         "astro:build": "astro check && astro build",
@@ -183,8 +183,9 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
+        "@maddimathon/scss-templater": "file:../scss-templater",
         "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.1",
-        "@maddimathon/utility-typescript": "2.0.0-beta",
+        "@maddimathon/utility-typescript": "2.0.0-beta.1",
         "astro": "^5.15.2",
         "luxon": "^3.7.2",
         "zod": "^3.25.76"
