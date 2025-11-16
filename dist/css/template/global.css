@@ -1,403 +1,16 @@
 @charset "UTF-8";
 /**
- * Utility Astro Template - HTML
+ * Utility Astro Template - Global
  */
-/*! START of @maddimathon/utility-astro/template/html */
+/*! START of @maddimathon/utility-astro/template/global */
 /*!
  * This stylesheet includes css generated using 
  * @maddimathon/utility-sass@0.1.0-alpha.5
  * 
  * https://maddimathon.github.io/utility-sass
  */
-/* #region Normalize */
-/*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
-/*
-Document
-========
-*/
-/**
-Use a better box model (opinionated).
-*/
-*,
-::before,
-::after {
-    box-sizing: border-box;
-}
-
-html {
-    /* Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3) */
-    /* font-family:
-      system-ui,
-      'Segoe UI',
-      Roboto,
-      Helvetica,
-      Arial,
-      sans-serif,
-      'Apple Color Emoji',
-      'Segoe UI Emoji'; */
-    line-height: 1.15; /* 1. Correct the line height in all browsers. */
-    -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
-}
-
-/*
-Sections
-========
-*/
-body {
-    margin: 0; /* Remove the margin in all browsers. */
-}
-
-/*
-Text-level semantics
-====================
-*/
-/**
-Add the correct font weight in Chrome and Safari.
-*/
-b,
-strong {
-    font-weight: bolder;
-}
-
-/**
-1. Improve consistency of default fonts in all browsers. (https://github.com/sindresorhus/modern-normalize/issues/3)
-2. Correct the odd 'em' font sizing in all browsers.
-*/
-code,
-kbd,
-samp,
-pre {
-    /* font-family:
-      ui-monospace,
-      SFMono-Regular,
-      Consolas,
-      'Liberation Mono',
-      Menlo,
-      monospace; */ /* 1 */
-    font-size: 1em; /* 2 */
-}
-
-/**
-Add the correct font size in all browsers.
-*/
-small {
-    font-size: 80%;
-}
-
-/**
-Prevent 'sub' and 'sup' elements from affecting the line height in all browsers.
-*/
-sub,
-sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-}
-
-sub {
-    bottom: -0.25em;
-}
-
-sup {
-    top: -0.5em;
-}
-
-/*
-Tabular data
-============
-*/
-/**
-Correct table border color inheritance in Chrome and Safari. (https://issues.chromium.org/issues/40615503, https://bugs.webkit.org/show_bug.cgi?id=195016)
-*/
-table {
-    border-color: currentcolor;
-}
-
-/*
-Forms
-=====
-*/
-/**
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-*/
-button,
-input,
-optgroup,
-select,
-textarea {
-    font-family: inherit; /* 1 */
-    font-size: 100%; /* 1 */
-    line-height: 1.15; /* 1 */
-    margin: 0; /* 2 */
-}
-
-/**
-Correct the inability to style clickable types in iOS and Safari.
-*/
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-    -webkit-appearance: button;
-}
-
-/**
-Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
-*/
-legend {
-    padding: 0;
-}
-
-/**
-Add the correct vertical alignment in Chrome and Firefox.
-*/
-progress {
-    vertical-align: baseline;
-}
-
-/**
-Correct the cursor style of increment and decrement buttons in Safari.
-*/
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-    height: auto;
-}
-
-/**
-1. Correct the odd appearance in Chrome and Safari.
-2. Correct the outline style in Safari.
-*/
-[type="search"] {
-    -webkit-appearance: textfield; /* 1 */
-    outline-offset: -2px; /* 2 */
-}
-
-/**
-Remove the inner padding in Chrome and Safari on macOS.
-*/
-::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-/**
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to 'inherit' in Safari.
-*/
-::-webkit-file-upload-button {
-    -webkit-appearance: button; /* 1 */
-    font: inherit; /* 2 */
-}
-
-/*
-Interactive
-===========
-*/
-/*
-Add the correct display in Chrome and Safari.
-*/
-summary {
-    display: list-item;
-}
-
-/*! end of modern-normalize */
-html {
-    color-scheme: light, dark;
-}
-html[data-brightness-mode="light"] {
-    color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
-}
-html[data-brightness-mode="dark"] {
-    color-scheme: dark;
-}
-
-html {
-    font-family:
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen-Sans,
-        Ubuntu,
-        Cantarell,
-        "Helvetica Neue",
-        Helvetica,
-        Arial,
-        sans-serif,
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol";
-    font-size: 115%;
-}
-@media (min-width: 50em) {
-    html {
-        font-size: 105%;
-    }
-}
-
-code,
-kbd,
-samp,
-pre {
-    font-family:
-        ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
-        monospace;
-}
-
-/* #endregion Normalize */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
-/* #region Tokens - System Colours */
-:where(html) {
-    --sys-clr-background: Canvas;
-    --sys-clr-text: CanvasText;
-    --sys-clr-accent-bg: CanvasText;
-    --sys-clr-accent-bg: AccentColor;
-    --sys-clr-accent-text: Canvas;
-    --sys-clr-accent-text: AccentColorText;
-    --sys-clr-mark-bg: CanvasText;
-    --sys-clr-mark-bg: AccentColor;
-    --sys-clr-mark-bg: Mark;
-    --sys-clr-mark-text: Canvas;
-    --sys-clr-mark-text: AccentColorText;
-    --sys-clr-mark-text: MarkText;
-    --sys-clr-selected-bg: SelectedItem;
-    --sys-clr-selected-text: SelectedItemText;
-    --sys-clr-selection-bg: Highlight;
-    --sys-clr-selection-text: HighlightText;
-    --sys-clr-text-active: ActiveText;
-    --sys-clr-text-disabled: GrayText;
-    --sys-clr-button-bg: ButtonFace;
-    --sys-clr-button-bg-active: ButtonFace;
-    --sys-clr-button-bg-hover: SelectedItem;
-    --sys-clr-button-border: ButtonFace;
-    --sys-clr-button-border: ButtonBorder;
-    --sys-clr-button-border-active: ButtonFace;
-    --sys-clr-button-border-active: ButtonBorder;
-    --sys-clr-button-border-hover: SelectedItem;
-    --sys-clr-button-text: ButtonText;
-    --sys-clr-button-text-active: ButtonText;
-    --sys-clr-button-text-hover: SelectedItemText;
-    --sys-clr-input-bg: Field;
-    --sys-clr-input-bg-hover: Field;
-    --sys-clr-input-bg-active: Field;
-    --sys-clr-input-border: FieldText;
-    --sys-clr-input-border-hover: FieldText;
-    --sys-clr-input-border-active: FieldText;
-    --sys-clr-input-text: FieldText;
-    --sys-clr-input-text-hover: FieldText;
-    --sys-clr-input-text-active: FieldText;
-    --sys-clr-link: LinkText;
-    --sys-clr-link-active: ActiveText;
-    --sys-clr-link-hover: ActiveText;
-    --sys-clr-link-visited: VisitedText;
-}
-
-@media (forced-colors: active), (prefers-contrast: custom) {
-    html {
-        --sys-clr-background: Canvas !important;
-        --sys-clr-text: CanvasText !important;
-        --sys-clr-accent-bg: CanvasText !important;
-        --sys-clr-accent-bg: AccentColor !important;
-        --sys-clr-accent-text: Canvas !important;
-        --sys-clr-accent-text: AccentColorText !important;
-        --sys-clr-mark-bg: CanvasText !important;
-        --sys-clr-mark-bg: AccentColor !important;
-        --sys-clr-mark-bg: Mark !important;
-        --sys-clr-mark-text: Canvas !important;
-        --sys-clr-mark-text: AccentColorText !important;
-        --sys-clr-mark-text: MarkText !important;
-        --sys-clr-selected-bg: SelectedItem !important;
-        --sys-clr-selected-text: SelectedItemText !important;
-        --sys-clr-selection-bg: Highlight !important;
-        --sys-clr-selection-text: HighlightText !important;
-        --sys-clr-text-active: ActiveText !important;
-        --sys-clr-text-disabled: GrayText !important;
-        --sys-clr-button-bg: ButtonFace !important;
-        --sys-clr-button-bg-active: ButtonFace !important;
-        --sys-clr-button-bg-hover: ButtonFace !important;
-        --sys-clr-button-border: ButtonFace !important;
-        --sys-clr-button-border: ButtonBorder !important;
-        --sys-clr-button-border-active: ButtonFace !important;
-        --sys-clr-button-border-active: ButtonBorder !important;
-        --sys-clr-button-border-hover: ButtonFace !important;
-        --sys-clr-button-border-hover: ButtonBorder !important;
-        --sys-clr-button-text: ButtonText !important;
-        --sys-clr-button-text-active: ButtonText !important;
-        --sys-clr-button-text-hover: ButtonText !important;
-        --sys-clr-input-bg: Field !important;
-        --sys-clr-input-bg-hover: Field !important;
-        --sys-clr-input-bg-active: Field !important;
-        --sys-clr-input-border: FieldText !important;
-        --sys-clr-input-border-hover: FieldText !important;
-        --sys-clr-input-border-active: FieldText !important;
-        --sys-clr-input-text: FieldText !important;
-        --sys-clr-input-text-hover: FieldText !important;
-        --sys-clr-input-text-active: FieldText !important;
-        --sys-clr-link: LinkText !important;
-        --sys-clr-link-active: ActiveText !important;
-        --sys-clr-link-hover: ActiveText !important;
-        --sys-clr-link-visited: VisitedText !important;
-    }
-}
-[data-contrast-mode="forced-colors"] {
-    --sys-clr-background: Canvas !important;
-    --sys-clr-text: CanvasText !important;
-    --sys-clr-accent-bg: CanvasText !important;
-    --sys-clr-accent-bg: AccentColor !important;
-    --sys-clr-accent-text: Canvas !important;
-    --sys-clr-accent-text: AccentColorText !important;
-    --sys-clr-mark-bg: CanvasText !important;
-    --sys-clr-mark-bg: AccentColor !important;
-    --sys-clr-mark-bg: Mark !important;
-    --sys-clr-mark-text: Canvas !important;
-    --sys-clr-mark-text: AccentColorText !important;
-    --sys-clr-mark-text: MarkText !important;
-    --sys-clr-selected-bg: SelectedItem !important;
-    --sys-clr-selected-text: SelectedItemText !important;
-    --sys-clr-selection-bg: Highlight !important;
-    --sys-clr-selection-text: HighlightText !important;
-    --sys-clr-text-active: ActiveText !important;
-    --sys-clr-text-disabled: GrayText !important;
-    --sys-clr-button-bg: ButtonFace !important;
-    --sys-clr-button-bg-active: ButtonFace !important;
-    --sys-clr-button-bg-hover: ButtonFace !important;
-    --sys-clr-button-border: ButtonFace !important;
-    --sys-clr-button-border: ButtonBorder !important;
-    --sys-clr-button-border-active: ButtonFace !important;
-    --sys-clr-button-border-active: ButtonBorder !important;
-    --sys-clr-button-border-hover: ButtonFace !important;
-    --sys-clr-button-border-hover: ButtonBorder !important;
-    --sys-clr-button-text: ButtonText !important;
-    --sys-clr-button-text-active: ButtonText !important;
-    --sys-clr-button-text-hover: ButtonText !important;
-    --sys-clr-input-bg: Field !important;
-    --sys-clr-input-bg-hover: Field !important;
-    --sys-clr-input-bg-active: Field !important;
-    --sys-clr-input-border: FieldText !important;
-    --sys-clr-input-border-hover: FieldText !important;
-    --sys-clr-input-border-active: FieldText !important;
-    --sys-clr-input-text: FieldText !important;
-    --sys-clr-input-text-hover: FieldText !important;
-    --sys-clr-input-text-active: FieldText !important;
-    --sys-clr-link: LinkText !important;
-    --sys-clr-link-active: ActiveText !important;
-    --sys-clr-link-hover: ActiveText !important;
-    --sys-clr-link-visited: VisitedText !important;
-}
-
-/* #endregion Tokens - System Colours */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -592,46 +205,14 @@ html {
 
 /* # GLOBALS - Objects
  * ======================================================================== */
-html,
-body {
-    scroll-padding-top: var(--gap-block-layout, 5vw);
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
-    margin-top: var(--gap-block-layout, 5vw);
-    margin-bottom: var(--gap-block-layout, 5vw);
-    margin-left: var(--gap-inline-layout, 8vw);
-    margin-right: var(--gap-inline-layout, 8vw);
-}
-:where(body > *) {
-    width: min(var(--width-page, 58rem), 100%);
-}
-
 hr {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
-}
-@media (min-width: 25em) {
-    hr {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: min(var(--width-callout, 29.25rem), 80%);
-    }
 }
 hr {
     width: 100%;
-    margin-top: calc(
-        var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
-    );
     margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: var(--mrg-firm-600, 2.25rem);
     border: none;
@@ -647,17 +228,6 @@ hr {
 ::selection {
     background-color: var(--sys-clr-selection-bg, Highlight);
     color: var(--sys-clr-selection-text, HighlightText);
-}
-
-html {
-    font-weight: 400;
-    line-height: var(--line-height-400, 1.6875);
-    background: var(--sys-clr-background, Canvas);
-    color: var(--sys-clr-text, CanvasText);
-}
-
-body {
-    font-size: var(--fs-normal, 1rem);
 }
 
 /* ## Typography - Inline ==================================== */
@@ -724,11 +294,6 @@ a:hover {
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:focus-visible {
-    text-decoration-color: transparent;
-    color: var(--sys-clr-link-hover, ActiveText);
-}
-
 a:active {
     color: var(--sys-clr-link-active, ActiveText);
 }
@@ -765,8 +330,6 @@ blockquote {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
 }
 blockquote {
     margin-top: var(--mrg-soft-400, 0.8125rem);
@@ -828,8 +391,6 @@ pre {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
 }
 pre {
     position: relative;
@@ -868,9 +429,7 @@ pre:where(:has(> code)) > code {
 }
 
 /* ## Typography - Headings ==================================== */
-h1,
-.h1,
-.page-title {
+h1 {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 900;
@@ -880,28 +439,6 @@ h1,
     text-transform: none;
     text-wrap: balance;
     font-style: normal;
-}
-h1 button,
-.h1 button,
-h1 [role="button"],
-.h1 [role="button"],
-h1 input[type="button"],
-.h1 input[type="button"],
-h1 input[type="submit"],
-.h1 input[type="submit"],
-h1 a.button,
-.h1 a.button,
-h1 a.button-secondary,
-.h1 a.button-secondary,
-.page-title button,
-.page-title [role="button"],
-.page-title input[type="button"],
-.page-title input[type="submit"],
-.page-title a.button,
-.page-title a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="1"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -914,22 +451,7 @@ h1 a.button-secondary,
     text-wrap: balance;
     font-style: normal;
 }
-:where([role="heading"][aria-level="1"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-h2,
-.h2 {
+h2 {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 800;
@@ -939,22 +461,6 @@ h2,
     text-transform: none;
     text-wrap: balance;
     font-style: normal;
-}
-h2 button,
-.h2 button,
-h2 [role="button"],
-.h2 [role="button"],
-h2 input[type="button"],
-.h2 input[type="button"],
-h2 input[type="submit"],
-.h2 input[type="submit"],
-h2 a.button,
-.h2 a.button,
-h2 a.button-secondary,
-.h2 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="2"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -967,22 +473,7 @@ h2 a.button-secondary,
     text-wrap: balance;
     font-style: normal;
 }
-:where([role="heading"][aria-level="2"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-h3,
-.h3 {
+h3 {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
@@ -992,22 +483,6 @@ h3,
     text-transform: none;
     text-wrap: balance;
     font-style: normal;
-}
-h3 button,
-.h3 button,
-h3 [role="button"],
-.h3 [role="button"],
-h3 input[type="button"],
-.h3 input[type="button"],
-h3 input[type="submit"],
-.h3 input[type="submit"],
-h3 a.button,
-.h3 a.button,
-h3 a.button-secondary,
-.h3 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="3"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -1020,22 +495,7 @@ h3 a.button-secondary,
     text-wrap: balance;
     font-style: normal;
 }
-:where([role="heading"][aria-level="3"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-h4,
-.h4 {
+h4 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 700;
@@ -1047,36 +507,14 @@ h4,
     font-style: italic;
 }
 h4 em,
-.h4 em,
-h4 i,
-.h4 i {
+h4 i {
     font-style: normal;
 }
 h4 em em,
-.h4 em em,
 h4 em i,
-.h4 em i,
 h4 i em,
-.h4 i em,
-h4 i i,
-.h4 i i {
+h4 i i {
     font-style: italic;
-}
-h4 button,
-.h4 button,
-h4 [role="button"],
-.h4 [role="button"],
-h4 input[type="button"],
-.h4 input[type="button"],
-h4 input[type="submit"],
-.h4 input[type="submit"],
-h4 a.button,
-.h4 a.button,
-h4 a.button-secondary,
-.h4 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="4"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -1099,22 +537,7 @@ h4 a.button-secondary,
 :where([role="heading"][aria-level="4"]) i i {
     font-style: italic;
 }
-:where([role="heading"][aria-level="4"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-h5,
-.h5 {
+h5 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
@@ -1126,36 +549,14 @@ h5,
     font-style: italic;
 }
 h5 em,
-.h5 em,
-h5 i,
-.h5 i {
+h5 i {
     font-style: normal;
 }
 h5 em em,
-.h5 em em,
 h5 em i,
-.h5 em i,
 h5 i em,
-.h5 i em,
-h5 i i,
-.h5 i i {
+h5 i i {
     font-style: italic;
-}
-h5 button,
-.h5 button,
-h5 [role="button"],
-.h5 [role="button"],
-h5 input[type="button"],
-.h5 input[type="button"],
-h5 input[type="submit"],
-.h5 input[type="submit"],
-h5 a.button,
-.h5 a.button,
-h5 a.button-secondary,
-.h5 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="5"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -1178,22 +579,7 @@ h5 a.button-secondary,
 :where([role="heading"][aria-level="5"]) i i {
     font-style: italic;
 }
-:where([role="heading"][aria-level="5"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-h6,
-.h6 {
+h6 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 500;
@@ -1205,36 +591,14 @@ h6,
     font-style: italic;
 }
 h6 em,
-.h6 em,
-h6 i,
-.h6 i {
+h6 i {
     font-style: normal;
 }
 h6 em em,
-.h6 em em,
 h6 em i,
-.h6 em i,
 h6 i em,
-.h6 i em,
-h6 i i,
-.h6 i i {
+h6 i i {
     font-style: italic;
-}
-h6 button,
-.h6 button,
-h6 [role="button"],
-.h6 [role="button"],
-h6 input[type="button"],
-.h6 input[type="button"],
-h6 input[type="submit"],
-.h6 input[type="submit"],
-h6 a.button,
-.h6 a.button,
-h6 a.button-secondary,
-.h6 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="6"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -1257,41 +621,6 @@ h6 a.button-secondary,
 :where([role="heading"][aria-level="6"]) i i {
     font-style: italic;
 }
-:where([role="heading"][aria-level="6"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-.h7 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
-    font-weight: 500;
-    font-size: var(--fs-heading-7, 0.9375rem);
-    line-height: var(--line-height-400, 1.6875);
-    letter-spacing: 0.0625em;
-    text-transform: uppercase;
-    text-wrap: balance;
-    font-style: normal;
-}
-.h7 button,
-.h7 [role="button"],
-.h7 input[type="button"],
-.h7 input[type="submit"],
-.h7 a.button,
-.h7 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
 :where([role="heading"][aria-level="7"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -1302,51 +631,6 @@ h6 a.button-secondary,
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
-}
-:where([role="heading"][aria-level="7"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-.h8 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
-    font-weight: 500;
-    font-size: var(--fs-heading-8, 0.8125rem);
-    line-height: var(--line-height-400, 1.6875);
-    letter-spacing: 0.0625em;
-    text-transform: uppercase;
-    text-wrap: balance;
-    font-style: italic;
-}
-.h8 em,
-.h8 i {
-    font-style: normal;
-}
-.h8 em em,
-.h8 em i,
-.h8 i em,
-.h8 i i {
-    font-style: italic;
-}
-.h8 button,
-.h8 [role="button"],
-.h8 input[type="button"],
-.h8 input[type="submit"],
-.h8 a.button,
-.h8 a.button-secondary {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
 }
 :where([role="heading"][aria-level="8"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -1369,20 +653,6 @@ h6 a.button-secondary,
 :where([role="heading"][aria-level="8"]) i i {
     font-style: italic;
 }
-:where([role="heading"][aria-level="8"])
-    :where(
-        button,
-        [role="button"],
-        input[type="button"],
-        input[type="submit"],
-        a.button,
-        a.button-secondary
-    ) {
-    font: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
 /* # GLOBALS - Lists
  * ======================================================================== */
 ol,
@@ -1391,7 +661,6 @@ ul {
     margin-left: 20%;
     padding: 0;
     padding-left: 1em;
-    margin-left: var(--gap-inline-tab, 1.5vw);
     line-height: var(--line-height-400, 1.6875);
 }
 ol ol,
@@ -1502,11 +771,12 @@ fieldset {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
-fieldset:focus-visible {
+.no-js fieldset:focus-within,
+.js__no-whereSelector fieldset:focus-within {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
-fieldset:focus-within {
+:where(.js__no-focusVisible) fieldset:focus-within {
     border-color: var(--sys-clr-text-active, ActiveText);
 }
 
@@ -1595,9 +865,12 @@ input:hover {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-textarea:focus-visible,
-select:focus-visible,
-input:focus-visible {
+.no-js textarea:focus-within,
+.no-js select:focus-within,
+.no-js input:focus-within,
+.js__no-whereSelector textarea:focus-within,
+.js__no-whereSelector select:focus-within,
+.js__no-whereSelector input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -1605,9 +878,9 @@ input:focus-visible {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-textarea:focus-within,
-select:focus-within,
-input:focus-within {
+:where(.js__no-focusVisible) textarea:focus-within,
+:where(.js__no-focusVisible) select:focus-within,
+:where(.js__no-focusVisible) input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: var(--sys-clr-input-bg-hover, Field);
     border-color: var(--sys-clr-input-border-hover, FieldText);
@@ -1741,13 +1014,15 @@ input[type="radio"]:hover {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-input[type="checkbox"]:focus-visible,
-input[type="radio"]:focus-visible {
+.no-js input[type="checkbox"]:focus-within,
+.no-js input[type="radio"]:focus-within,
+.js__no-whereSelector input[type="checkbox"]:focus-within,
+.js__no-whereSelector input[type="radio"]:focus-within {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-input[type="checkbox"]:focus-within,
-input[type="radio"]:focus-within {
+:where(.js__no-focusVisible) input[type="checkbox"]:focus-within,
+:where(.js__no-focusVisible) input[type="radio"]:focus-within {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1824,283 +1099,8 @@ label > input[type="radio"] {
 }
 
 /* ## Forms - Buttons ==================================== */
-button,
-[role="button"],
-input[type="button"],
-input[type="submit"],
-a.button,
-a.button-secondary,
-button[type="reset"],
-input[type="reset"],
-button.button-secondary,
-[role="button"].button-secondary,
-input[type="button"].button-secondary,
-input[type="submit"].button-secondary {
-    --focus-ring-outline-offset: 0.125rem;
-    display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
-    width: -moz-fit-content;
-    width: fit-content;
-    font: inherit;
-    line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
-    border-radius: 0;
-    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
-    background-color: var(--sys-clr-button-bg, ButtonFace);
-    color: var(--sys-clr-button-text, ButtonText);
-    accent-color: var(--sys-clr-button-border, ButtonFace);
-}
-.no-js button:focus,
-.no-js [role="button"]:focus,
-.no-js input[type="button"]:focus,
-.no-js input[type="submit"]:focus,
-.no-js a.button:focus,
-.no-js a.button-secondary:focus,
-.no-js input[type="reset"]:focus,
-.js__no-whereSelector button:focus,
-.js__no-whereSelector [role="button"]:focus,
-.js__no-whereSelector input[type="button"]:focus,
-.js__no-whereSelector input[type="submit"]:focus,
-.js__no-whereSelector a.button:focus,
-.js__no-whereSelector a.button-secondary:focus,
-.js__no-whereSelector input[type="reset"]:focus {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:where(.js__no-focusVisible) button:focus,
-:where(.js__no-focusVisible) [role="button"]:focus,
-:where(.js__no-focusVisible) input[type="button"]:focus,
-:where(.js__no-focusVisible) input[type="submit"]:focus,
-:where(.js__no-focusVisible) a.button:focus,
-:where(.js__no-focusVisible) a.button-secondary:focus,
-:where(.js__no-focusVisible) input[type="reset"]:focus {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-button:hover,
-[role="button"]:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover,
-a.button:hover,
-a.button-secondary:hover,
-input[type="reset"]:hover {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-button:focus-visible,
-[role="button"]:focus-visible,
-input[type="button"]:focus-visible,
-input[type="submit"]:focus-visible,
-a.button:focus-visible,
-a.button-secondary:focus-visible,
-input[type="reset"]:focus-visible {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-button:focus-within,
-[role="button"]:focus-within,
-input[type="button"]:focus-within,
-input[type="submit"]:focus-within,
-a.button:focus-within,
-a.button-secondary:focus-within,
-input[type="reset"]:focus-within {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-button:active,
-[role="button"]:active,
-input[type="button"]:active,
-input[type="submit"]:active,
-a.button:active,
-a.button-secondary:active,
-input[type="reset"]:active {
-    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: var(--sys-clr-button-bg-active, ButtonFace);
-    border-color: var(--sys-clr-button-border-active, ButtonFace);
-    color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: var(--sys-clr-button-border-active, ButtonFace);
-}
-button,
-[role="button"],
-input[type="button"],
-input[type="submit"],
-a.button,
-a.button-secondary,
-button[type="reset"],
-input[type="reset"],
-button.button-secondary,
-[role="button"].button-secondary,
-input[type="button"].button-secondary,
-input[type="submit"].button-secondary {
-    --display: flex;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
-    text-align: left;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    cursor: pointer;
-}
-button[aria-disabled="true"],
-[aria-disabled="true"][role="button"],
-input[aria-disabled="true"][type="button"],
-input[aria-disabled="true"][type="submit"],
-a[aria-disabled="true"].button,
-a[aria-disabled="true"].button-secondary,
-input[aria-disabled="true"][type="reset"] {
-    cursor: not-allowed;
-}
-
-::file-selector-button {
-    --focus-ring-outline-offset: 0.125rem;
-    display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
-    width: -moz-fit-content;
-    width: fit-content;
-    font: inherit;
-    line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
-    border-radius: 0;
-    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
-    background-color: var(--sys-clr-button-bg, ButtonFace);
-    color: var(--sys-clr-button-text, ButtonText);
-    accent-color: var(--sys-clr-button-border, ButtonFace);
-}
-.no-js :focus::file-selector-button,
-.js__no-whereSelector :focus::file-selector-button {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:where(.js__no-focusVisible) :focus::file-selector-button {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:hover::file-selector-button {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:focus-visible::file-selector-button {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:focus-within::file-selector-button {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:active::file-selector-button {
-    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: var(--sys-clr-button-bg-active, ButtonFace);
-    border-color: var(--sys-clr-button-border-active, ButtonFace);
-    color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: var(--sys-clr-button-border-active, ButtonFace);
-}
-::file-selector-button {
-    --display: flex;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
-    text-align: left;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    cursor: pointer;
-}
-[aria-disabled="true"]::file-selector-button {
-    cursor: not-allowed;
-}
-::file-selector-button {
-    display: initial;
-    margin: 0;
-    margin-right: var(--mrg-firm-300, 0.8125rem);
-    font-size: var(--fs-normal, 1rem);
-}
-
 /* # GLOBALS - Tables
  * ======================================================================== */
-.table-wrapper,
 table {
     position: relative;
     margin-top: var(--mrg-firm-400, 1.25rem);
@@ -2110,23 +1110,11 @@ table {
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
     background: var(--sys-clr-accent-bg, CanvasText);
-    width: min(var(--width-page, 53rem), 100%);
 }
 
 table {
     border-spacing: var(--border-width-200, 0.125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
-}
-
-.table-wrapper {
-    display: block;
-    overflow-x: auto;
-    overscroll-behavior-x: none;
-}
-.table-wrapper > table {
-    margin: 0;
-    padding: 0;
-    background: transparent;
 }
 
 th,
@@ -2156,62 +1144,6 @@ th {
 /* # UTILITIES - Typography
  * ======================================================================== */
 /* ## Font Sizes ==================================== */
-.font-size-heading-1 {
-    font-size: var(--fs-heading-1, 2.75rem);
-}
-
-.font-size-heading-2 {
-    font-size: var(--fs-heading-2, 2.0625rem);
-}
-
-.font-size-heading-3 {
-    font-size: var(--fs-heading-3, 1.8125rem);
-}
-
-.font-size-heading-4 {
-    font-size: var(--fs-heading-4, 1.5625rem);
-}
-
-.font-size-heading-5 {
-    font-size: var(--fs-heading-5, 1.3125rem);
-}
-
-.font-size-heading-6 {
-    font-size: var(--fs-heading-6, 1.1875rem);
-}
-
-.font-size-heading-7 {
-    font-size: var(--fs-heading-7, 0.9375rem);
-}
-
-.font-size-heading-8 {
-    font-size: var(--fs-heading-8, 0.8125rem);
-}
-
-.font-size-smaller-2 {
-    font-size: var(--fs-smaller-2, 0.8125rem);
-}
-
-.font-size-smaller-1 {
-    font-size: var(--fs-smaller-1, 0.9375rem);
-}
-
-.font-size-normal {
-    font-size: var(--fs-normal, 1rem);
-}
-
-.font-size-bigger-7 {
-    font-size: var(--fs-bigger-7, 2.75rem);
-}
-
-.font-size-bigger-8 {
-    font-size: var(--fs-bigger-8, 3.1875rem);
-}
-
-.font-size-bigger-9 {
-    font-size: var(--fs-bigger-9, 3.6875rem);
-}
-
 /*! END of @maddimathon/utility-sass/template */
 /* # LAYOUT - BASICS
  * ======================================================================== */
@@ -2226,4 +1158,4 @@ nav ul li {
     margin-bottom: 0;
 }
 
-/*! END of @maddimathon/utility-astro/template/html */
+/*! END of @maddimathon/utility-astro/template/global */

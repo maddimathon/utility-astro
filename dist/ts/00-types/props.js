@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.2.draft
+ * @maddimathon/utility-astro@0.1.0-alpha.3
  * @license MIT
  */
 export {};

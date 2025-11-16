@@ -7,13 +7,6 @@
         "node_modules/**/*": true,
         "src/astro/css/**/*": true,
         "src/docs/css/**/*": true,
-
-        "src/scss/lib/config/_default.scss": true,
-        "src/scss/lib/tokens/_default.scss": true,
-        "src/scss/lib/config/_template.scss": true,
-        "src/scss/lib/tokens/_template.scss": true,
-        "src/scss/template/*/_config.scss": true,
-        "src/scss/template/*/_tokens.scss": true,
     },
     "scss.scannerExclude": [
         "**/.git",

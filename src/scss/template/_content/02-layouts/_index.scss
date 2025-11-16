@@ -5,7 +5,7 @@
 
 @use '../../../config';
 
-@use '../../../old-lib' as *;
+@use '../../../lib' as *;
 
 @if config.$print_headings {
     /* # LAYOUT - BASICS

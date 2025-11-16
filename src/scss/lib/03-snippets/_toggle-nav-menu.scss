@@ -31,7 +31,7 @@ $_titleBorderWidth_half: var-border-width('100');
         }
     }
 
-    @include feature-check.js-support(whereSelector) {
+    @include feature-check.supports(whereSelector) {
         %body {
             > %nav {
                 @at-root #{selector.unify(&, ('[data-toggle-container]'))} {

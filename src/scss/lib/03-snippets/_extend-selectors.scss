@@ -5,7 +5,7 @@
 
 @use 'pkg:@maddimathon/utility-sass/list';
 
-@use 'pkg:@maddimathon/utility-sass/03-snippets' as old-lib;
+@use 'pkg:@maddimathon/utility-sass/03-snippets' as lib;
 
 @use '../../config';
 
@@ -34,7 +34,7 @@ $_astroContentLayoutSelectors: if(
         );
     }
 
-    @include old-lib.extend-selectors-globals(
+    @include lib.extend-selectors-globals(
         $additional: $additional,
         $optional: $optional,
         $allHeadingLevels: $allHeadingLevels
@@ -57,7 +57,7 @@ $_astroContentLayoutSelectors: if(
         );
     }
 
-    @include old-lib.extend-selectors-utils(
+    @include lib.extend-selectors-utils(
         $additional: $additional,
         $optional: $optional,
         $allHeadingLevels: $allHeadingLevels

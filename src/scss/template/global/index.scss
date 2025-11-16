@@ -9,14 +9,14 @@
 );
 @forward '../../tokens';
 
-@forward '../../old-lib';
+@forward '../../lib';
 
 @forward '../_content';
 
 /// # EXTENDING SELECTORS
 /// ======================================================================== ///
 
-@use '../../old-lib' as *;
+@use '../../lib' as *;
 @use '../_content' as *;
 
 @include extend-selectors;

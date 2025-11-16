@@ -6,7 +6,7 @@
 @use '../../config';
 // @use '../../tokens';
 
-@use '../../old-lib' as *;
+@use '../../lib' as *;
 
 @if config.$print_normalize {
     @include normalize;

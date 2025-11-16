@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.1.0-alpha.2",
+    "version": "0.1.0-alpha.3",
 
     "author": "Maddi Mathon (www.maddimathon.com)",
     "description": "Astro utilities to use in a variety of projects.",
@@ -143,7 +143,7 @@
     "scripts": {
         "commit": "sh .scripts/commit.sh",
 
-        "rm": "rm -rf dist docs src/astro/css src/scss/lib/config/_default.scss src/scss/lib/tokens/_default.scss src/scss/template/astro/_config.scss src/scss/template/globals/_config.scss src/scss/template/html/_config.scss src/scss/template/tokens/_config.scss src/scss/template/astro/_tokens.scss src/scss/template/globals/_tokens.scss src/scss/template/html/_tokens.scss src/scss/template/tokens/_tokens.scss",
+        "rm": "rm -rf dist docs src/astro/css",
 
         "astro:check": "astro check",
         "astro:build": "astro check && astro build",
@@ -183,16 +183,15 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/scss-templater": "file:../scss-templater",
-        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.1",
+        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.5",
         "@maddimathon/utility-typescript": "2.0.0-beta.1",
-        "astro": "^5.15.2",
+        "astro": "^5.15.5",
         "luxon": "^3.7.2",
         "zod": "^3.25.76"
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.4",
-        "@maddimathon/build-utilities": "0.3.0-alpha.4",
+        "@maddimathon/build-utilities": "0.3.0-alpha.8",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.7.1",
         "@types/node": "22.15.30",
@@ -207,9 +206,9 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "~0.1.0-alpha.1",
-        "@maddimathon/utility-typescript": "~2.0.0-beta",
-        "astro": "^5.15.2",
+        "@maddimathon/utility-sass": "~0.1.0-alpha.5",
+        "@maddimathon/utility-typescript": "~2.0.0-beta.1",
+        "astro": "^5.15.5",
         "zod": "^3.25.76"
     },
     "peerDependenciesMeta": {

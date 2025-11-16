@@ -3,13 +3,13 @@
 /// @since 0.1.0-alpha
 ///
 
-@use '../old-lib';
+@use '../lib';
 
 /* # FORCED COLOURS ONLY ==================================== */
 
 %forced-colors-mode-only,
 :global(.forced-colors-mode-only) {
-    @include old-lib.snippet-forced-colors-mode-only;
+    @include lib.snippet-forced-colors-mode-only;
 }
 
-@include old-lib.extend-selectors($optional: true);
+@include lib.extend-selectors($optional: true);

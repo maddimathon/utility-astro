@@ -19,6 +19,12 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.3** — 2025-11-15
+
+### Breaking
+- Updated utility-sass to 0.1.0-alpha.5
+
+
 ## **0.1.0-alpha.2** — 2025-10-30
 
 Quick fix to utility-sass notice config.

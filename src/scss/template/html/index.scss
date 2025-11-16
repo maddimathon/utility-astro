@@ -1,10 +1,13 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 
 @forward 'config';
-@forward 'tokens';
+@forward '../_content/_header' with (
+    $template_name: 'HTML'
+);
+@forward '../../tokens';
 
 @forward '../../lib';
 
@@ -13,20 +16,7 @@
 /// # EXTENDING SELECTORS
 /// ======================================================================== ///
 
-@use 'pkg:@maddimathon/utility-sass/meta';
-
-@use 'config';
-@use 'tokens';
-
 @use '../../lib' as *;
+@use '../_content' as *;
 
-/*
-    LOCAL
-
-    meta.module-variables( config ) = #{meta.var-dump(meta.module-variables( config ))}
-    meta.module-variables( tokens ) = #{meta.var-dump(meta.module-variables( tokens ))}
-    meta.module-functions( config ) = #{meta.var-dump(meta.module-functions( config ))}
-    meta.module-mixins( config ) = #{meta.var-dump(meta.module-mixins( config ))}
- */
-
-@include extend-selectors($optional: true);
+@include extend-selectors;

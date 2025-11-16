@@ -3,7 +3,7 @@
 /// @since 0.1.0-alpha
 ///
 
-@use '../old-lib';
+@use '../lib';
 
 /* # SCREEN READER TEXT ==================================== */
 
@@ -26,4 +26,4 @@
     }
 }
 
-@include old-lib.extend-selectors($optional: true);
+@include lib.extend-selectors($optional: true);

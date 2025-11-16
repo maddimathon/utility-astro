@@ -1,6 +1,11 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-alpha
 ///
 
-@forward 'pkg:@maddimathon/scss-templater';
+// @forward 'noticeMx';
+// @forward '../notice';
+
+@forward '01-functions';
+@forward '02-mixins';
+@forward '03-snippets';
