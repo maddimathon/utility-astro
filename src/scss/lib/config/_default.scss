@@ -135,13 +135,13 @@ $defaultConfig: (
         'noPreferenceMediaQueries': false
     ),
     'print': (
+        'astro': false,
         'docBlock': false,
         'globals': false,
         'headings': false,
         'normalize': false,
         'tokens': false,
-        'utilities': false,
-        'astro': false
+        'utilities': false
     ),
     'selector': (
         'body': 'body',

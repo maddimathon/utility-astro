@@ -30,6 +30,7 @@ $defaultTokens: (
         'tablet': 50,
         'sidebar': 54
     ),
+    'colours': (),
     'font': (
         'size': (
             'heading': (
@@ -104,5 +105,1119 @@ $defaultTokens: (
         'content': 36,
         'page': 58,
         'sidebar': 16
+    ),
+    'themes': (
+        'default': (
+            'forcedColors': (
+                'background': 'Canvas',
+                'button': (
+                    'primary': (
+                        'bg': (
+                            '$': 'ButtonFace',
+                            'hover': 'ButtonFace',
+                            'active': 'ButtonFace'
+                        ),
+                        'border': (
+                            '$': 'ButtonBorder',
+                            'hover': 'ButtonBorder',
+                            'active': 'ButtonBorder'
+                        ),
+                        'outline': (
+                            'hover': 'ActiveText',
+                            'active': 'ActiveText'
+                        ),
+                        'text': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        ),
+                        'ui': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        )
+                    ),
+                    'secondary': (
+                        'bg': (
+                            '$': 'ButtonFace',
+                            'hover': 'ButtonFace',
+                            'active': 'ButtonFace'
+                        ),
+                        'border': (
+                            '$': 'ButtonBorder',
+                            'hover': 'ButtonBorder',
+                            'active': 'ButtonBorder'
+                        ),
+                        'outline': (
+                            'hover': 'ActiveText',
+                            'active': 'ActiveText'
+                        ),
+                        'text': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        ),
+                        'ui': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        )
+                    ),
+                    'disabled': (
+                        'bg': (
+                            '$': 'ButtonFace',
+                            'hover': 'ButtonFace',
+                            'active': 'ButtonFace'
+                        ),
+                        'border': (
+                            '$': 'ButtonBorder',
+                            'hover': 'ButtonBorder',
+                            'active': 'ButtonBorder'
+                        ),
+                        'outline': (
+                            'hover': 'ActiveText',
+                            'active': 'ActiveText'
+                        ),
+                        'text': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        ),
+                        'ui': (
+                            '$': 'ButtonText',
+                            'hover': 'ButtonText',
+                            'active': 'ButtonText'
+                        )
+                    )
+                ),
+                'heading': (
+                    '1': 'CanvasText',
+                    '2': 'CanvasText',
+                    '3': 'CanvasText',
+                    '4': 'CanvasText',
+                    '5': 'CanvasText',
+                    '6': 'CanvasText',
+                    '7': 'CanvasText',
+                    '8': 'CanvasText'
+                ),
+                'highlight': (
+                    'bg': 'Mark',
+                    'text': 'MarkText'
+                ),
+                'input': (
+                    'accent': (
+                        '$': 'auto',
+                        'hover': 'auto',
+                        'active': 'auto'
+                    ),
+                    'bg': (
+                        '$': 'Field',
+                        'hover': 'Field',
+                        'active': 'Field'
+                    ),
+                    'border': (
+                        '$': 'FieldText',
+                        'hover': 'FieldText',
+                        'active': 'FieldText'
+                    ),
+                    'text': (
+                        '$': 'FieldText',
+                        'hover': 'FieldText',
+                        'active': 'FieldText'
+                    )
+                ),
+                'link': (
+                    '$': 'LinkText',
+                    'active': 'ActiveText',
+                    'disabled': 'GrayText',
+                    'hover': 'LinkText',
+                    'visited': 'VisitedText'
+                ),
+                'link-icon': (
+                    '$': 'LinkText',
+                    'active': 'ActiveText',
+                    'disabled': 'GrayText',
+                    'hover': 'LinkText',
+                    'visited': 'VisitedText'
+                ),
+                'link-decor': (
+                    '$': 'LinkText',
+                    'active': 'ActiveText',
+                    'disabled': 'GrayText',
+                    'hover': 'LinkText',
+                    'visited': 'VisitedText'
+                ),
+                'text': (
+                    '$': 'CanvasText',
+                    'primary': 'CanvasText',
+                    'secondary': 'CanvasText',
+                    'grey': 'CanvasText',
+                    'disabled': 'CanvasText'
+                ),
+                'ui': (
+                    '$': 'CanvasText',
+                    'primary': 'CanvasText',
+                    'secondary': 'CanvasText',
+                    'grey': 'CanvasText',
+                    'disabled': 'CanvasText'
+                ),
+                'selection': (
+                    'bg': 'Highlight',
+                    'text': 'HighlightText'
+                )
+            ),
+            'light': (
+                'low': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                ),
+                'average': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                ),
+                'high': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                )
+            ),
+            'dark': (
+                'low': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                ),
+                'average': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                ),
+                'high': (
+                    'background': 'Canvas',
+                    'button': (
+                        'primary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'secondary': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        ),
+                        'disabled': (
+                            'bg': (
+                                '$': 'ButtonFace',
+                                'hover': 'ButtonFace',
+                                'active': 'ButtonFace'
+                            ),
+                            'border': (
+                                '$': 'ButtonBorder',
+                                'hover': 'ButtonBorder',
+                                'active': 'ButtonBorder'
+                            ),
+                            'outline': (
+                                'hover': 'ActiveText',
+                                'active': 'ActiveText'
+                            ),
+                            'text': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            ),
+                            'ui': (
+                                '$': 'ButtonText',
+                                'hover': 'ButtonText',
+                                'active': 'ButtonText'
+                            )
+                        )
+                    ),
+                    'heading': (
+                        '1': 'CanvasText',
+                        '2': 'CanvasText',
+                        '3': 'CanvasText',
+                        '4': 'CanvasText',
+                        '5': 'CanvasText',
+                        '6': 'CanvasText',
+                        '7': 'CanvasText',
+                        '8': 'CanvasText'
+                    ),
+                    'highlight': (
+                        'bg': 'Mark',
+                        'text': 'MarkText'
+                    ),
+                    'input': (
+                        'accent': (
+                            '$': 'auto',
+                            'hover': 'auto',
+                            'active': 'auto'
+                        ),
+                        'bg': (
+                            '$': 'Field',
+                            'hover': 'Field',
+                            'active': 'Field'
+                        ),
+                        'border': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        ),
+                        'text': (
+                            '$': 'FieldText',
+                            'hover': 'FieldText',
+                            'active': 'FieldText'
+                        )
+                    ),
+                    'link': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-icon': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'link-decor': (
+                        '$': 'LinkText',
+                        'active': 'ActiveText',
+                        'disabled': 'GrayText',
+                        'hover': 'LinkText',
+                        'visited': 'VisitedText'
+                    ),
+                    'text': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'ui': (
+                        '$': 'CanvasText',
+                        'primary': 'CanvasText',
+                        'secondary': 'CanvasText',
+                        'grey': 'CanvasText',
+                        'disabled': 'CanvasText'
+                    ),
+                    'selection': (
+                        'bg': 'Highlight',
+                        'text': 'HighlightText'
+                    )
+                )
+            )
+        )
     )
 ) !default;

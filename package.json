@@ -184,15 +184,15 @@
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
         "@maddimathon/scss-templater": "file:../scss-templater",
-        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.1",
+        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.5",
         "@maddimathon/utility-typescript": "2.0.0-beta.1",
-        "astro": "^5.15.2",
+        "astro": "^5.15.5",
         "luxon": "^3.7.2",
         "zod": "^3.25.76"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.4",
-        "@maddimathon/build-utilities": "0.3.0-alpha.4",
+        "@astrojs/check": "^0.9.5",
+        "@maddimathon/build-utilities": "0.3.0-alpha.8",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.7.1",
         "@types/node": "22.15.30",
@@ -207,9 +207,9 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "~0.1.0-alpha.1",
-        "@maddimathon/utility-typescript": "~2.0.0-beta",
-        "astro": "^5.15.2",
+        "@maddimathon/utility-sass": "~0.1.0-alpha.5",
+        "@maddimathon/utility-typescript": "~2.0.0-beta.1",
+        "astro": "^5.15.5",
         "zod": "^3.25.76"
     },
     "peerDependenciesMeta": {

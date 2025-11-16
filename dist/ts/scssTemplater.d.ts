@@ -31,7 +31,7 @@ export declare namespace ScssTemplater {
             };
         }
     }
-    const template: Template<Config.Values, import("@maddimathon/scss-templater").Tokens.Values, MapParser.Class<Config.Values, MapParser.Instance<Config.Values>>, MapParser.Class<import("@maddimathon/scss-templater").Tokens.Values, MapParser.Instance<import("@maddimathon/scss-templater").Tokens.Values>>>;
+    const template: Template<Config.Values, import("@maddimathon/scss-templater").Tokens.Values<never, never, never>, MapParser.Class<Config.Values, MapParser.Instance<Config.Values>, RecursivePartial<Config.Values>>, MapParser.Class<import("@maddimathon/scss-templater").Tokens.Values<never, never, never>, MapParser.Instance<import("@maddimathon/scss-templater").Tokens.Values<never, never, never>>, RecursivePartial<import("@maddimathon/scss-templater").Tokens.Values<never, never, never>>>>;
     namespace DEFAULT_CONFIG {
         const tokens: {
             print: {

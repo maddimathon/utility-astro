@@ -136,13 +136,13 @@
         'noPreferenceMediaQueries': false
     ),
     'print': (
+        'astro': false,
         'docBlock': true,
         'globals': true,
         'headings': true,
         'normalize': false,
         'tokens': true,
-        'utilities': false,
-        'astro': false
+        'utilities': false
     ),
     'selector': (
         'body': 'body',

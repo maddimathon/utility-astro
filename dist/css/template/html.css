@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.1
+ * @maddimathon/utility-sass@0.1.0-alpha.4
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -17,16 +17,9 @@
 /**
  * CONFIG
  */
-/*#region config.$config  */
-/* <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> false ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ) */
-/*#endregion config.$config  */
-/* --- */
-/**
- * TOKENS
- */
-/*#region tokens.$tokens  */
-/* <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ) */
-/*#endregion tokens.$tokens  */
+/*#region config.$config */
+/* <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "astro": </> false, "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ) */
+/*#endregion config.$config */
 /* --- */
 /* --- */
 /* #region Normalize */
@@ -225,8 +218,6 @@ summary {
 /*! end of modern-normalize */
 html {
     color-scheme: light, dark;
-    /* $queries = <()> ( () ) */
-    /* $queries = <()> ( <S> "( prefers-color-scheme: dark )" ) */
 }
 @media (prefers-color-scheme: dark) {
     html {
@@ -360,6 +351,803 @@ html {
 }
 
 /* #endregion Tokens - Line Heights */
+/* #region Tokens - Theme - light mode + average contrast */
+html {
+    --theme-background: Canvas;
+    --theme-button-primary-bg: ButtonFace;
+    --theme-button-primary-bg-hover: ButtonFace;
+    --theme-button-primary-bg-active: ButtonFace;
+    --theme-button-primary-border: ButtonFace;
+    --theme-button-primary-border: ButtonBorder;
+    --theme-button-primary-border-hover: ButtonFace;
+    --theme-button-primary-border-hover: ButtonBorder;
+    --theme-button-primary-border-active: ButtonFace;
+    --theme-button-primary-border-active: ButtonBorder;
+    --theme-button-primary-outline-hover: ActiveText;
+    --theme-button-primary-outline-active: ActiveText;
+    --theme-button-primary-text: ButtonText;
+    --theme-button-primary-text-hover: ButtonText;
+    --theme-button-primary-text-active: ButtonText;
+    --theme-button-primary-ui: ButtonText;
+    --theme-button-primary-ui-hover: ButtonText;
+    --theme-button-primary-ui-active: ButtonText;
+    --theme-button-secondary-bg: ButtonFace;
+    --theme-button-secondary-bg-hover: ButtonFace;
+    --theme-button-secondary-bg-active: ButtonFace;
+    --theme-button-secondary-border: ButtonFace;
+    --theme-button-secondary-border: ButtonBorder;
+    --theme-button-secondary-border-hover: ButtonFace;
+    --theme-button-secondary-border-hover: ButtonBorder;
+    --theme-button-secondary-border-active: ButtonFace;
+    --theme-button-secondary-border-active: ButtonBorder;
+    --theme-button-secondary-outline-hover: ActiveText;
+    --theme-button-secondary-outline-active: ActiveText;
+    --theme-button-secondary-text: ButtonText;
+    --theme-button-secondary-text-hover: ButtonText;
+    --theme-button-secondary-text-active: ButtonText;
+    --theme-button-secondary-ui: ButtonText;
+    --theme-button-secondary-ui-hover: ButtonText;
+    --theme-button-secondary-ui-active: ButtonText;
+    --theme-button-disabled-bg: ButtonFace;
+    --theme-button-disabled-bg-hover: ButtonFace;
+    --theme-button-disabled-bg-active: ButtonFace;
+    --theme-button-disabled-border: ButtonFace;
+    --theme-button-disabled-border: ButtonBorder;
+    --theme-button-disabled-border-hover: ButtonFace;
+    --theme-button-disabled-border-hover: ButtonBorder;
+    --theme-button-disabled-border-active: ButtonFace;
+    --theme-button-disabled-border-active: ButtonBorder;
+    --theme-button-disabled-outline-hover: ActiveText;
+    --theme-button-disabled-outline-active: ActiveText;
+    --theme-button-disabled-text: ButtonText;
+    --theme-button-disabled-text-hover: ButtonText;
+    --theme-button-disabled-text-active: ButtonText;
+    --theme-button-disabled-ui: ButtonText;
+    --theme-button-disabled-ui-hover: ButtonText;
+    --theme-button-disabled-ui-active: ButtonText;
+    --theme-heading-1: CanvasText;
+    --theme-heading-2: CanvasText;
+    --theme-heading-3: CanvasText;
+    --theme-heading-4: CanvasText;
+    --theme-heading-5: CanvasText;
+    --theme-heading-6: CanvasText;
+    --theme-heading-7: CanvasText;
+    --theme-heading-8: CanvasText;
+    --theme-highlight-bg: CanvasText;
+    --theme-highlight-bg: AccentColor;
+    --theme-highlight-bg: Mark;
+    --theme-highlight-text: Canvas;
+    --theme-highlight-text: AccentColorText;
+    --theme-highlight-text: MarkText;
+    --theme-input-accent: auto;
+    --theme-input-accent-hover: auto;
+    --theme-input-accent-active: auto;
+    --theme-input-bg: Field;
+    --theme-input-bg-hover: Field;
+    --theme-input-bg-active: Field;
+    --theme-input-border: FieldText;
+    --theme-input-border-hover: FieldText;
+    --theme-input-border-active: FieldText;
+    --theme-input-text: FieldText;
+    --theme-input-text-hover: FieldText;
+    --theme-input-text-active: FieldText;
+    --theme-link: LinkText;
+    --theme-link-active: ActiveText;
+    --theme-link-disabled: GrayText;
+    --theme-link-hover: LinkText;
+    --theme-link-visited: VisitedText;
+    --theme-link-icon: LinkText;
+    --theme-link-icon-active: ActiveText;
+    --theme-link-icon-disabled: GrayText;
+    --theme-link-icon-hover: LinkText;
+    --theme-link-icon-visited: VisitedText;
+    --theme-link-decor: LinkText;
+    --theme-link-decor-active: ActiveText;
+    --theme-link-decor-disabled: GrayText;
+    --theme-link-decor-hover: LinkText;
+    --theme-link-decor-visited: VisitedText;
+    --theme-text: CanvasText;
+    --theme-text-primary: CanvasText;
+    --theme-text-secondary: CanvasText;
+    --theme-text-grey: CanvasText;
+    --theme-text-disabled: CanvasText;
+    --theme-ui: CanvasText;
+    --theme-ui-primary: CanvasText;
+    --theme-ui-secondary: CanvasText;
+    --theme-ui-grey: CanvasText;
+    --theme-ui-disabled: CanvasText;
+    --theme-selection-bg: Highlight;
+    --theme-selection-text: HighlightText;
+    --icon-color: var(--theme-ui, CanvasText);
+    background: var(--theme-background, Canvas);
+    color: var(--theme-text, CanvasText);
+}
+
+/* #endregion Tokens - Theme - light mode + average contrast */
+/* #region Tokens - Theme - light mode + low contrast */
+@media (prefers-contrast: less) {
+    html {
+        --theme-background: Canvas;
+        --theme-button-primary-bg: ButtonFace;
+        --theme-button-primary-bg-hover: ButtonFace;
+        --theme-button-primary-bg-active: ButtonFace;
+        --theme-button-primary-border: ButtonFace;
+        --theme-button-primary-border: ButtonBorder;
+        --theme-button-primary-border-hover: ButtonFace;
+        --theme-button-primary-border-hover: ButtonBorder;
+        --theme-button-primary-border-active: ButtonFace;
+        --theme-button-primary-border-active: ButtonBorder;
+        --theme-button-primary-outline-hover: ActiveText;
+        --theme-button-primary-outline-active: ActiveText;
+        --theme-button-primary-text: ButtonText;
+        --theme-button-primary-text-hover: ButtonText;
+        --theme-button-primary-text-active: ButtonText;
+        --theme-button-primary-ui: ButtonText;
+        --theme-button-primary-ui-hover: ButtonText;
+        --theme-button-primary-ui-active: ButtonText;
+        --theme-button-secondary-bg: ButtonFace;
+        --theme-button-secondary-bg-hover: ButtonFace;
+        --theme-button-secondary-bg-active: ButtonFace;
+        --theme-button-secondary-border: ButtonFace;
+        --theme-button-secondary-border: ButtonBorder;
+        --theme-button-secondary-border-hover: ButtonFace;
+        --theme-button-secondary-border-hover: ButtonBorder;
+        --theme-button-secondary-border-active: ButtonFace;
+        --theme-button-secondary-border-active: ButtonBorder;
+        --theme-button-secondary-outline-hover: ActiveText;
+        --theme-button-secondary-outline-active: ActiveText;
+        --theme-button-secondary-text: ButtonText;
+        --theme-button-secondary-text-hover: ButtonText;
+        --theme-button-secondary-text-active: ButtonText;
+        --theme-button-secondary-ui: ButtonText;
+        --theme-button-secondary-ui-hover: ButtonText;
+        --theme-button-secondary-ui-active: ButtonText;
+        --theme-button-disabled-bg: ButtonFace;
+        --theme-button-disabled-bg-hover: ButtonFace;
+        --theme-button-disabled-bg-active: ButtonFace;
+        --theme-button-disabled-border: ButtonFace;
+        --theme-button-disabled-border: ButtonBorder;
+        --theme-button-disabled-border-hover: ButtonFace;
+        --theme-button-disabled-border-hover: ButtonBorder;
+        --theme-button-disabled-border-active: ButtonFace;
+        --theme-button-disabled-border-active: ButtonBorder;
+        --theme-button-disabled-outline-hover: ActiveText;
+        --theme-button-disabled-outline-active: ActiveText;
+        --theme-button-disabled-text: ButtonText;
+        --theme-button-disabled-text-hover: ButtonText;
+        --theme-button-disabled-text-active: ButtonText;
+        --theme-button-disabled-ui: ButtonText;
+        --theme-button-disabled-ui-hover: ButtonText;
+        --theme-button-disabled-ui-active: ButtonText;
+        --theme-heading-1: CanvasText;
+        --theme-heading-2: CanvasText;
+        --theme-heading-3: CanvasText;
+        --theme-heading-4: CanvasText;
+        --theme-heading-5: CanvasText;
+        --theme-heading-6: CanvasText;
+        --theme-heading-7: CanvasText;
+        --theme-heading-8: CanvasText;
+        --theme-highlight-bg: CanvasText;
+        --theme-highlight-bg: AccentColor;
+        --theme-highlight-bg: Mark;
+        --theme-highlight-text: Canvas;
+        --theme-highlight-text: AccentColorText;
+        --theme-highlight-text: MarkText;
+        --theme-input-accent: auto;
+        --theme-input-accent-hover: auto;
+        --theme-input-accent-active: auto;
+        --theme-input-bg: Field;
+        --theme-input-bg-hover: Field;
+        --theme-input-bg-active: Field;
+        --theme-input-border: FieldText;
+        --theme-input-border-hover: FieldText;
+        --theme-input-border-active: FieldText;
+        --theme-input-text: FieldText;
+        --theme-input-text-hover: FieldText;
+        --theme-input-text-active: FieldText;
+        --theme-link: LinkText;
+        --theme-link-active: ActiveText;
+        --theme-link-disabled: GrayText;
+        --theme-link-hover: LinkText;
+        --theme-link-visited: VisitedText;
+        --theme-link-icon: LinkText;
+        --theme-link-icon-active: ActiveText;
+        --theme-link-icon-disabled: GrayText;
+        --theme-link-icon-hover: LinkText;
+        --theme-link-icon-visited: VisitedText;
+        --theme-link-decor: LinkText;
+        --theme-link-decor-active: ActiveText;
+        --theme-link-decor-disabled: GrayText;
+        --theme-link-decor-hover: LinkText;
+        --theme-link-decor-visited: VisitedText;
+        --theme-text: CanvasText;
+        --theme-text-primary: CanvasText;
+        --theme-text-secondary: CanvasText;
+        --theme-text-grey: CanvasText;
+        --theme-text-disabled: CanvasText;
+        --theme-ui: CanvasText;
+        --theme-ui-primary: CanvasText;
+        --theme-ui-secondary: CanvasText;
+        --theme-ui-grey: CanvasText;
+        --theme-ui-disabled: CanvasText;
+        --theme-selection-bg: Highlight;
+        --theme-selection-text: HighlightText;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - light mode + low contrast */
+/* #region Tokens - Theme - light mode + high contrast */
+@media (prefers-contrast: more) {
+    html {
+        --theme-background: Canvas;
+        --theme-button-primary-bg: ButtonFace;
+        --theme-button-primary-bg-hover: ButtonFace;
+        --theme-button-primary-bg-active: ButtonFace;
+        --theme-button-primary-border: ButtonFace;
+        --theme-button-primary-border: ButtonBorder;
+        --theme-button-primary-border-hover: ButtonFace;
+        --theme-button-primary-border-hover: ButtonBorder;
+        --theme-button-primary-border-active: ButtonFace;
+        --theme-button-primary-border-active: ButtonBorder;
+        --theme-button-primary-outline-hover: ActiveText;
+        --theme-button-primary-outline-active: ActiveText;
+        --theme-button-primary-text: ButtonText;
+        --theme-button-primary-text-hover: ButtonText;
+        --theme-button-primary-text-active: ButtonText;
+        --theme-button-primary-ui: ButtonText;
+        --theme-button-primary-ui-hover: ButtonText;
+        --theme-button-primary-ui-active: ButtonText;
+        --theme-button-secondary-bg: ButtonFace;
+        --theme-button-secondary-bg-hover: ButtonFace;
+        --theme-button-secondary-bg-active: ButtonFace;
+        --theme-button-secondary-border: ButtonFace;
+        --theme-button-secondary-border: ButtonBorder;
+        --theme-button-secondary-border-hover: ButtonFace;
+        --theme-button-secondary-border-hover: ButtonBorder;
+        --theme-button-secondary-border-active: ButtonFace;
+        --theme-button-secondary-border-active: ButtonBorder;
+        --theme-button-secondary-outline-hover: ActiveText;
+        --theme-button-secondary-outline-active: ActiveText;
+        --theme-button-secondary-text: ButtonText;
+        --theme-button-secondary-text-hover: ButtonText;
+        --theme-button-secondary-text-active: ButtonText;
+        --theme-button-secondary-ui: ButtonText;
+        --theme-button-secondary-ui-hover: ButtonText;
+        --theme-button-secondary-ui-active: ButtonText;
+        --theme-button-disabled-bg: ButtonFace;
+        --theme-button-disabled-bg-hover: ButtonFace;
+        --theme-button-disabled-bg-active: ButtonFace;
+        --theme-button-disabled-border: ButtonFace;
+        --theme-button-disabled-border: ButtonBorder;
+        --theme-button-disabled-border-hover: ButtonFace;
+        --theme-button-disabled-border-hover: ButtonBorder;
+        --theme-button-disabled-border-active: ButtonFace;
+        --theme-button-disabled-border-active: ButtonBorder;
+        --theme-button-disabled-outline-hover: ActiveText;
+        --theme-button-disabled-outline-active: ActiveText;
+        --theme-button-disabled-text: ButtonText;
+        --theme-button-disabled-text-hover: ButtonText;
+        --theme-button-disabled-text-active: ButtonText;
+        --theme-button-disabled-ui: ButtonText;
+        --theme-button-disabled-ui-hover: ButtonText;
+        --theme-button-disabled-ui-active: ButtonText;
+        --theme-heading-1: CanvasText;
+        --theme-heading-2: CanvasText;
+        --theme-heading-3: CanvasText;
+        --theme-heading-4: CanvasText;
+        --theme-heading-5: CanvasText;
+        --theme-heading-6: CanvasText;
+        --theme-heading-7: CanvasText;
+        --theme-heading-8: CanvasText;
+        --theme-highlight-bg: CanvasText;
+        --theme-highlight-bg: AccentColor;
+        --theme-highlight-bg: Mark;
+        --theme-highlight-text: Canvas;
+        --theme-highlight-text: AccentColorText;
+        --theme-highlight-text: MarkText;
+        --theme-input-accent: auto;
+        --theme-input-accent-hover: auto;
+        --theme-input-accent-active: auto;
+        --theme-input-bg: Field;
+        --theme-input-bg-hover: Field;
+        --theme-input-bg-active: Field;
+        --theme-input-border: FieldText;
+        --theme-input-border-hover: FieldText;
+        --theme-input-border-active: FieldText;
+        --theme-input-text: FieldText;
+        --theme-input-text-hover: FieldText;
+        --theme-input-text-active: FieldText;
+        --theme-link: LinkText;
+        --theme-link-active: ActiveText;
+        --theme-link-disabled: GrayText;
+        --theme-link-hover: LinkText;
+        --theme-link-visited: VisitedText;
+        --theme-link-icon: LinkText;
+        --theme-link-icon-active: ActiveText;
+        --theme-link-icon-disabled: GrayText;
+        --theme-link-icon-hover: LinkText;
+        --theme-link-icon-visited: VisitedText;
+        --theme-link-decor: LinkText;
+        --theme-link-decor-active: ActiveText;
+        --theme-link-decor-disabled: GrayText;
+        --theme-link-decor-hover: LinkText;
+        --theme-link-decor-visited: VisitedText;
+        --theme-text: CanvasText;
+        --theme-text-primary: CanvasText;
+        --theme-text-secondary: CanvasText;
+        --theme-text-grey: CanvasText;
+        --theme-text-disabled: CanvasText;
+        --theme-ui: CanvasText;
+        --theme-ui-primary: CanvasText;
+        --theme-ui-secondary: CanvasText;
+        --theme-ui-grey: CanvasText;
+        --theme-ui-disabled: CanvasText;
+        --theme-selection-bg: Highlight;
+        --theme-selection-text: HighlightText;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - light mode + high contrast */
+/* #region Tokens - Theme - dark mode + average contrast */
+@media (prefers-color-scheme: dark) {
+    html {
+        --theme-background: Canvas;
+        --theme-button-primary-bg: ButtonFace;
+        --theme-button-primary-bg-hover: ButtonFace;
+        --theme-button-primary-bg-active: ButtonFace;
+        --theme-button-primary-border: ButtonFace;
+        --theme-button-primary-border: ButtonBorder;
+        --theme-button-primary-border-hover: ButtonFace;
+        --theme-button-primary-border-hover: ButtonBorder;
+        --theme-button-primary-border-active: ButtonFace;
+        --theme-button-primary-border-active: ButtonBorder;
+        --theme-button-primary-outline-hover: ActiveText;
+        --theme-button-primary-outline-active: ActiveText;
+        --theme-button-primary-text: ButtonText;
+        --theme-button-primary-text-hover: ButtonText;
+        --theme-button-primary-text-active: ButtonText;
+        --theme-button-primary-ui: ButtonText;
+        --theme-button-primary-ui-hover: ButtonText;
+        --theme-button-primary-ui-active: ButtonText;
+        --theme-button-secondary-bg: ButtonFace;
+        --theme-button-secondary-bg-hover: ButtonFace;
+        --theme-button-secondary-bg-active: ButtonFace;
+        --theme-button-secondary-border: ButtonFace;
+        --theme-button-secondary-border: ButtonBorder;
+        --theme-button-secondary-border-hover: ButtonFace;
+        --theme-button-secondary-border-hover: ButtonBorder;
+        --theme-button-secondary-border-active: ButtonFace;
+        --theme-button-secondary-border-active: ButtonBorder;
+        --theme-button-secondary-outline-hover: ActiveText;
+        --theme-button-secondary-outline-active: ActiveText;
+        --theme-button-secondary-text: ButtonText;
+        --theme-button-secondary-text-hover: ButtonText;
+        --theme-button-secondary-text-active: ButtonText;
+        --theme-button-secondary-ui: ButtonText;
+        --theme-button-secondary-ui-hover: ButtonText;
+        --theme-button-secondary-ui-active: ButtonText;
+        --theme-button-disabled-bg: ButtonFace;
+        --theme-button-disabled-bg-hover: ButtonFace;
+        --theme-button-disabled-bg-active: ButtonFace;
+        --theme-button-disabled-border: ButtonFace;
+        --theme-button-disabled-border: ButtonBorder;
+        --theme-button-disabled-border-hover: ButtonFace;
+        --theme-button-disabled-border-hover: ButtonBorder;
+        --theme-button-disabled-border-active: ButtonFace;
+        --theme-button-disabled-border-active: ButtonBorder;
+        --theme-button-disabled-outline-hover: ActiveText;
+        --theme-button-disabled-outline-active: ActiveText;
+        --theme-button-disabled-text: ButtonText;
+        --theme-button-disabled-text-hover: ButtonText;
+        --theme-button-disabled-text-active: ButtonText;
+        --theme-button-disabled-ui: ButtonText;
+        --theme-button-disabled-ui-hover: ButtonText;
+        --theme-button-disabled-ui-active: ButtonText;
+        --theme-heading-1: CanvasText;
+        --theme-heading-2: CanvasText;
+        --theme-heading-3: CanvasText;
+        --theme-heading-4: CanvasText;
+        --theme-heading-5: CanvasText;
+        --theme-heading-6: CanvasText;
+        --theme-heading-7: CanvasText;
+        --theme-heading-8: CanvasText;
+        --theme-highlight-bg: CanvasText;
+        --theme-highlight-bg: AccentColor;
+        --theme-highlight-bg: Mark;
+        --theme-highlight-text: Canvas;
+        --theme-highlight-text: AccentColorText;
+        --theme-highlight-text: MarkText;
+        --theme-input-accent: auto;
+        --theme-input-accent-hover: auto;
+        --theme-input-accent-active: auto;
+        --theme-input-bg: Field;
+        --theme-input-bg-hover: Field;
+        --theme-input-bg-active: Field;
+        --theme-input-border: FieldText;
+        --theme-input-border-hover: FieldText;
+        --theme-input-border-active: FieldText;
+        --theme-input-text: FieldText;
+        --theme-input-text-hover: FieldText;
+        --theme-input-text-active: FieldText;
+        --theme-link: LinkText;
+        --theme-link-active: ActiveText;
+        --theme-link-disabled: GrayText;
+        --theme-link-hover: LinkText;
+        --theme-link-visited: VisitedText;
+        --theme-link-icon: LinkText;
+        --theme-link-icon-active: ActiveText;
+        --theme-link-icon-disabled: GrayText;
+        --theme-link-icon-hover: LinkText;
+        --theme-link-icon-visited: VisitedText;
+        --theme-link-decor: LinkText;
+        --theme-link-decor-active: ActiveText;
+        --theme-link-decor-disabled: GrayText;
+        --theme-link-decor-hover: LinkText;
+        --theme-link-decor-visited: VisitedText;
+        --theme-text: CanvasText;
+        --theme-text-primary: CanvasText;
+        --theme-text-secondary: CanvasText;
+        --theme-text-grey: CanvasText;
+        --theme-text-disabled: CanvasText;
+        --theme-ui: CanvasText;
+        --theme-ui-primary: CanvasText;
+        --theme-ui-secondary: CanvasText;
+        --theme-ui-grey: CanvasText;
+        --theme-ui-disabled: CanvasText;
+        --theme-selection-bg: Highlight;
+        --theme-selection-text: HighlightText;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - dark mode + average contrast */
+/* #region Tokens - Theme - dark mode + low contrast */
+@media (( prefers-color-scheme: dark ) and ( prefers-contrast: less )) {
+    html {
+        --theme-background: Canvas;
+        --theme-button-primary-bg: ButtonFace;
+        --theme-button-primary-bg-hover: ButtonFace;
+        --theme-button-primary-bg-active: ButtonFace;
+        --theme-button-primary-border: ButtonFace;
+        --theme-button-primary-border: ButtonBorder;
+        --theme-button-primary-border-hover: ButtonFace;
+        --theme-button-primary-border-hover: ButtonBorder;
+        --theme-button-primary-border-active: ButtonFace;
+        --theme-button-primary-border-active: ButtonBorder;
+        --theme-button-primary-outline-hover: ActiveText;
+        --theme-button-primary-outline-active: ActiveText;
+        --theme-button-primary-text: ButtonText;
+        --theme-button-primary-text-hover: ButtonText;
+        --theme-button-primary-text-active: ButtonText;
+        --theme-button-primary-ui: ButtonText;
+        --theme-button-primary-ui-hover: ButtonText;
+        --theme-button-primary-ui-active: ButtonText;
+        --theme-button-secondary-bg: ButtonFace;
+        --theme-button-secondary-bg-hover: ButtonFace;
+        --theme-button-secondary-bg-active: ButtonFace;
+        --theme-button-secondary-border: ButtonFace;
+        --theme-button-secondary-border: ButtonBorder;
+        --theme-button-secondary-border-hover: ButtonFace;
+        --theme-button-secondary-border-hover: ButtonBorder;
+        --theme-button-secondary-border-active: ButtonFace;
+        --theme-button-secondary-border-active: ButtonBorder;
+        --theme-button-secondary-outline-hover: ActiveText;
+        --theme-button-secondary-outline-active: ActiveText;
+        --theme-button-secondary-text: ButtonText;
+        --theme-button-secondary-text-hover: ButtonText;
+        --theme-button-secondary-text-active: ButtonText;
+        --theme-button-secondary-ui: ButtonText;
+        --theme-button-secondary-ui-hover: ButtonText;
+        --theme-button-secondary-ui-active: ButtonText;
+        --theme-button-disabled-bg: ButtonFace;
+        --theme-button-disabled-bg-hover: ButtonFace;
+        --theme-button-disabled-bg-active: ButtonFace;
+        --theme-button-disabled-border: ButtonFace;
+        --theme-button-disabled-border: ButtonBorder;
+        --theme-button-disabled-border-hover: ButtonFace;
+        --theme-button-disabled-border-hover: ButtonBorder;
+        --theme-button-disabled-border-active: ButtonFace;
+        --theme-button-disabled-border-active: ButtonBorder;
+        --theme-button-disabled-outline-hover: ActiveText;
+        --theme-button-disabled-outline-active: ActiveText;
+        --theme-button-disabled-text: ButtonText;
+        --theme-button-disabled-text-hover: ButtonText;
+        --theme-button-disabled-text-active: ButtonText;
+        --theme-button-disabled-ui: ButtonText;
+        --theme-button-disabled-ui-hover: ButtonText;
+        --theme-button-disabled-ui-active: ButtonText;
+        --theme-heading-1: CanvasText;
+        --theme-heading-2: CanvasText;
+        --theme-heading-3: CanvasText;
+        --theme-heading-4: CanvasText;
+        --theme-heading-5: CanvasText;
+        --theme-heading-6: CanvasText;
+        --theme-heading-7: CanvasText;
+        --theme-heading-8: CanvasText;
+        --theme-highlight-bg: CanvasText;
+        --theme-highlight-bg: AccentColor;
+        --theme-highlight-bg: Mark;
+        --theme-highlight-text: Canvas;
+        --theme-highlight-text: AccentColorText;
+        --theme-highlight-text: MarkText;
+        --theme-input-accent: auto;
+        --theme-input-accent-hover: auto;
+        --theme-input-accent-active: auto;
+        --theme-input-bg: Field;
+        --theme-input-bg-hover: Field;
+        --theme-input-bg-active: Field;
+        --theme-input-border: FieldText;
+        --theme-input-border-hover: FieldText;
+        --theme-input-border-active: FieldText;
+        --theme-input-text: FieldText;
+        --theme-input-text-hover: FieldText;
+        --theme-input-text-active: FieldText;
+        --theme-link: LinkText;
+        --theme-link-active: ActiveText;
+        --theme-link-disabled: GrayText;
+        --theme-link-hover: LinkText;
+        --theme-link-visited: VisitedText;
+        --theme-link-icon: LinkText;
+        --theme-link-icon-active: ActiveText;
+        --theme-link-icon-disabled: GrayText;
+        --theme-link-icon-hover: LinkText;
+        --theme-link-icon-visited: VisitedText;
+        --theme-link-decor: LinkText;
+        --theme-link-decor-active: ActiveText;
+        --theme-link-decor-disabled: GrayText;
+        --theme-link-decor-hover: LinkText;
+        --theme-link-decor-visited: VisitedText;
+        --theme-text: CanvasText;
+        --theme-text-primary: CanvasText;
+        --theme-text-secondary: CanvasText;
+        --theme-text-grey: CanvasText;
+        --theme-text-disabled: CanvasText;
+        --theme-ui: CanvasText;
+        --theme-ui-primary: CanvasText;
+        --theme-ui-secondary: CanvasText;
+        --theme-ui-grey: CanvasText;
+        --theme-ui-disabled: CanvasText;
+        --theme-selection-bg: Highlight;
+        --theme-selection-text: HighlightText;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - dark mode + low contrast */
+/* #region Tokens - Theme - dark mode + high contrast */
+@media (( prefers-color-scheme: dark ) and ( prefers-contrast: more )) {
+    html {
+        --theme-background: Canvas;
+        --theme-button-primary-bg: ButtonFace;
+        --theme-button-primary-bg-hover: ButtonFace;
+        --theme-button-primary-bg-active: ButtonFace;
+        --theme-button-primary-border: ButtonFace;
+        --theme-button-primary-border: ButtonBorder;
+        --theme-button-primary-border-hover: ButtonFace;
+        --theme-button-primary-border-hover: ButtonBorder;
+        --theme-button-primary-border-active: ButtonFace;
+        --theme-button-primary-border-active: ButtonBorder;
+        --theme-button-primary-outline-hover: ActiveText;
+        --theme-button-primary-outline-active: ActiveText;
+        --theme-button-primary-text: ButtonText;
+        --theme-button-primary-text-hover: ButtonText;
+        --theme-button-primary-text-active: ButtonText;
+        --theme-button-primary-ui: ButtonText;
+        --theme-button-primary-ui-hover: ButtonText;
+        --theme-button-primary-ui-active: ButtonText;
+        --theme-button-secondary-bg: ButtonFace;
+        --theme-button-secondary-bg-hover: ButtonFace;
+        --theme-button-secondary-bg-active: ButtonFace;
+        --theme-button-secondary-border: ButtonFace;
+        --theme-button-secondary-border: ButtonBorder;
+        --theme-button-secondary-border-hover: ButtonFace;
+        --theme-button-secondary-border-hover: ButtonBorder;
+        --theme-button-secondary-border-active: ButtonFace;
+        --theme-button-secondary-border-active: ButtonBorder;
+        --theme-button-secondary-outline-hover: ActiveText;
+        --theme-button-secondary-outline-active: ActiveText;
+        --theme-button-secondary-text: ButtonText;
+        --theme-button-secondary-text-hover: ButtonText;
+        --theme-button-secondary-text-active: ButtonText;
+        --theme-button-secondary-ui: ButtonText;
+        --theme-button-secondary-ui-hover: ButtonText;
+        --theme-button-secondary-ui-active: ButtonText;
+        --theme-button-disabled-bg: ButtonFace;
+        --theme-button-disabled-bg-hover: ButtonFace;
+        --theme-button-disabled-bg-active: ButtonFace;
+        --theme-button-disabled-border: ButtonFace;
+        --theme-button-disabled-border: ButtonBorder;
+        --theme-button-disabled-border-hover: ButtonFace;
+        --theme-button-disabled-border-hover: ButtonBorder;
+        --theme-button-disabled-border-active: ButtonFace;
+        --theme-button-disabled-border-active: ButtonBorder;
+        --theme-button-disabled-outline-hover: ActiveText;
+        --theme-button-disabled-outline-active: ActiveText;
+        --theme-button-disabled-text: ButtonText;
+        --theme-button-disabled-text-hover: ButtonText;
+        --theme-button-disabled-text-active: ButtonText;
+        --theme-button-disabled-ui: ButtonText;
+        --theme-button-disabled-ui-hover: ButtonText;
+        --theme-button-disabled-ui-active: ButtonText;
+        --theme-heading-1: CanvasText;
+        --theme-heading-2: CanvasText;
+        --theme-heading-3: CanvasText;
+        --theme-heading-4: CanvasText;
+        --theme-heading-5: CanvasText;
+        --theme-heading-6: CanvasText;
+        --theme-heading-7: CanvasText;
+        --theme-heading-8: CanvasText;
+        --theme-highlight-bg: CanvasText;
+        --theme-highlight-bg: AccentColor;
+        --theme-highlight-bg: Mark;
+        --theme-highlight-text: Canvas;
+        --theme-highlight-text: AccentColorText;
+        --theme-highlight-text: MarkText;
+        --theme-input-accent: auto;
+        --theme-input-accent-hover: auto;
+        --theme-input-accent-active: auto;
+        --theme-input-bg: Field;
+        --theme-input-bg-hover: Field;
+        --theme-input-bg-active: Field;
+        --theme-input-border: FieldText;
+        --theme-input-border-hover: FieldText;
+        --theme-input-border-active: FieldText;
+        --theme-input-text: FieldText;
+        --theme-input-text-hover: FieldText;
+        --theme-input-text-active: FieldText;
+        --theme-link: LinkText;
+        --theme-link-active: ActiveText;
+        --theme-link-disabled: GrayText;
+        --theme-link-hover: LinkText;
+        --theme-link-visited: VisitedText;
+        --theme-link-icon: LinkText;
+        --theme-link-icon-active: ActiveText;
+        --theme-link-icon-disabled: GrayText;
+        --theme-link-icon-hover: LinkText;
+        --theme-link-icon-visited: VisitedText;
+        --theme-link-decor: LinkText;
+        --theme-link-decor-active: ActiveText;
+        --theme-link-decor-disabled: GrayText;
+        --theme-link-decor-hover: LinkText;
+        --theme-link-decor-visited: VisitedText;
+        --theme-text: CanvasText;
+        --theme-text-primary: CanvasText;
+        --theme-text-secondary: CanvasText;
+        --theme-text-grey: CanvasText;
+        --theme-text-disabled: CanvasText;
+        --theme-ui: CanvasText;
+        --theme-ui-primary: CanvasText;
+        --theme-ui-secondary: CanvasText;
+        --theme-ui-grey: CanvasText;
+        --theme-ui-disabled: CanvasText;
+        --theme-selection-bg: Highlight;
+        --theme-selection-text: HighlightText;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - dark mode + high contrast */
+/* #region Tokens - Theme - light, dark mode + forced-colors contrast */
+@media (forced-colors: active), (prefers-contrast: custom) {
+    html {
+        --theme-background: Canvas !important;
+        --theme-button-primary-bg: ButtonFace !important;
+        --theme-button-primary-bg-hover: ButtonFace !important;
+        --theme-button-primary-bg-active: ButtonFace !important;
+        --theme-button-primary-border: ButtonFace !important;
+        --theme-button-primary-border: ButtonBorder !important;
+        --theme-button-primary-border-hover: ButtonFace !important;
+        --theme-button-primary-border-hover: ButtonBorder !important;
+        --theme-button-primary-border-active: ButtonFace !important;
+        --theme-button-primary-border-active: ButtonBorder !important;
+        --theme-button-primary-outline-hover: ActiveText !important;
+        --theme-button-primary-outline-active: ActiveText !important;
+        --theme-button-primary-text: ButtonText !important;
+        --theme-button-primary-text-hover: ButtonText !important;
+        --theme-button-primary-text-active: ButtonText !important;
+        --theme-button-primary-ui: ButtonText !important;
+        --theme-button-primary-ui-hover: ButtonText !important;
+        --theme-button-primary-ui-active: ButtonText !important;
+        --theme-button-secondary-bg: ButtonFace !important;
+        --theme-button-secondary-bg-hover: ButtonFace !important;
+        --theme-button-secondary-bg-active: ButtonFace !important;
+        --theme-button-secondary-border: ButtonFace !important;
+        --theme-button-secondary-border: ButtonBorder !important;
+        --theme-button-secondary-border-hover: ButtonFace !important;
+        --theme-button-secondary-border-hover: ButtonBorder !important;
+        --theme-button-secondary-border-active: ButtonFace !important;
+        --theme-button-secondary-border-active: ButtonBorder !important;
+        --theme-button-secondary-outline-hover: ActiveText !important;
+        --theme-button-secondary-outline-active: ActiveText !important;
+        --theme-button-secondary-text: ButtonText !important;
+        --theme-button-secondary-text-hover: ButtonText !important;
+        --theme-button-secondary-text-active: ButtonText !important;
+        --theme-button-secondary-ui: ButtonText !important;
+        --theme-button-secondary-ui-hover: ButtonText !important;
+        --theme-button-secondary-ui-active: ButtonText !important;
+        --theme-button-disabled-bg: ButtonFace !important;
+        --theme-button-disabled-bg-hover: ButtonFace !important;
+        --theme-button-disabled-bg-active: ButtonFace !important;
+        --theme-button-disabled-border: ButtonFace !important;
+        --theme-button-disabled-border: ButtonBorder !important;
+        --theme-button-disabled-border-hover: ButtonFace !important;
+        --theme-button-disabled-border-hover: ButtonBorder !important;
+        --theme-button-disabled-border-active: ButtonFace !important;
+        --theme-button-disabled-border-active: ButtonBorder !important;
+        --theme-button-disabled-outline-hover: ActiveText !important;
+        --theme-button-disabled-outline-active: ActiveText !important;
+        --theme-button-disabled-text: ButtonText !important;
+        --theme-button-disabled-text-hover: ButtonText !important;
+        --theme-button-disabled-text-active: ButtonText !important;
+        --theme-button-disabled-ui: ButtonText !important;
+        --theme-button-disabled-ui-hover: ButtonText !important;
+        --theme-button-disabled-ui-active: ButtonText !important;
+        --theme-heading-1: CanvasText !important;
+        --theme-heading-2: CanvasText !important;
+        --theme-heading-3: CanvasText !important;
+        --theme-heading-4: CanvasText !important;
+        --theme-heading-5: CanvasText !important;
+        --theme-heading-6: CanvasText !important;
+        --theme-heading-7: CanvasText !important;
+        --theme-heading-8: CanvasText !important;
+        --theme-highlight-bg: CanvasText !important;
+        --theme-highlight-bg: AccentColor !important;
+        --theme-highlight-bg: Mark !important;
+        --theme-highlight-text: Canvas !important;
+        --theme-highlight-text: AccentColorText !important;
+        --theme-highlight-text: MarkText !important;
+        --theme-input-accent: auto !important;
+        --theme-input-accent-hover: auto !important;
+        --theme-input-accent-active: auto !important;
+        --theme-input-bg: Field !important;
+        --theme-input-bg-hover: Field !important;
+        --theme-input-bg-active: Field !important;
+        --theme-input-border: FieldText !important;
+        --theme-input-border-hover: FieldText !important;
+        --theme-input-border-active: FieldText !important;
+        --theme-input-text: FieldText !important;
+        --theme-input-text-hover: FieldText !important;
+        --theme-input-text-active: FieldText !important;
+        --theme-link: LinkText !important;
+        --theme-link-active: ActiveText !important;
+        --theme-link-disabled: GrayText !important;
+        --theme-link-hover: LinkText !important;
+        --theme-link-visited: VisitedText !important;
+        --theme-link-icon: LinkText !important;
+        --theme-link-icon-active: ActiveText !important;
+        --theme-link-icon-disabled: GrayText !important;
+        --theme-link-icon-hover: LinkText !important;
+        --theme-link-icon-visited: VisitedText !important;
+        --theme-link-decor: LinkText !important;
+        --theme-link-decor-active: ActiveText !important;
+        --theme-link-decor-disabled: GrayText !important;
+        --theme-link-decor-hover: LinkText !important;
+        --theme-link-decor-visited: VisitedText !important;
+        --theme-text: CanvasText !important;
+        --theme-text-primary: CanvasText !important;
+        --theme-text-secondary: CanvasText !important;
+        --theme-text-grey: CanvasText !important;
+        --theme-text-disabled: CanvasText !important;
+        --theme-ui: CanvasText !important;
+        --theme-ui-primary: CanvasText !important;
+        --theme-ui-secondary: CanvasText !important;
+        --theme-ui-grey: CanvasText !important;
+        --theme-ui-disabled: CanvasText !important;
+        --theme-selection-bg: Highlight !important;
+        --theme-selection-text: HighlightText !important;
+        --icon-color: var(--theme-ui, CanvasText);
+        background: var(--theme-background, Canvas);
+        color: var(--theme-text, CanvasText);
+    }
+}
+/* #endregion Tokens - Theme - light, dark mode + forced-colors contrast */
 /* # GLOBALS - Accessibility
  * ======================================================================== */
 .no-js :focus,
@@ -790,8 +1578,8 @@ h6 a.button,
 /*
     LOCAL
 
-    meta.module-variables( config ) = <:> ( "defaultConfig": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> false ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ), "baseConfig": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <()> ( <S> "a" ), "abbr": <()> ( <S> "abbr" ), "blockquote": <()> ( <S> "blockquote" ), "body": <()> ( <S> "body" ), "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <()> ( <S> "code" ), "em": <()> ( <S> "em", <S> "i" ), "fieldset": <()> ( <S> "fieldset" ), "file-selector-button": <()> ( <S> "::file-selector-button" ), "h1": <()> ( <S> "h1" ), "h2": <()> ( <S> "h2" ), "h3": <()> ( <S> "h3" ), "h4": <()> ( <S> "h4" ), "h5": <()> ( <S> "h5" ), "h6": <()> ( <S> "h6" ), "hr": <()> ( <S> "hr" ), "input": <()> ( <S> "input" ), "kbd": <()> ( <S> "kbd" ), "label": <()> ( <S> "label" ), "legend": <()> ( <S> "legend" ), "li": <()> ( <S> "li" ), "ol": <()> ( <S> "ol" ), "p": <()> ( <S> "p" ), "pre": <()> ( <S> "pre" ), "root": <()> ( <S> "root" ), "samp": <()> ( <S> "samp" ), "screen-reader-text": <()> ( <S> ".screen-reader-text" ), "select": <()> ( <S> "select" ), "strong": <()> ( <S> "b", <S> "strong" ), "table": <()> ( <S> "table" ), "td": <()> ( <S> "td" ), "textarea": <()> ( <S> "textarea" ), "th": <()> ( <S> "th" ), "tr": <()> ( <S> "tr" ), "ul": <()> ( <S> "ul" ) ), "utils": <:> ( "button": <()> ( <S> "a.button" ), "table-wrapper": <()> ( <S> "table-wrapper" ) ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> false, "html": </> false, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> false, "globals": </> false, "headings": </> false, "normalize": </> false, "tokens": </> false, "utilities": </> false ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "default" ) ), "config": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true, "astro": </> false ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ), "selector-null": <S> %null, "fn-clampFontSize-multiplier-min": <#> 0.75, "fn-clampFontSize-multiplier-svw": <#> 1.3125, "fn-clampFontSize-multiplier-max": <#> 1.125, "fn-clampFontSize-svw-rem": <#> 1, "fn-fontSizeValue-defaultFontScale": <#> 1, "fn-fontSizeValue-roundToPixelFactor": <#> 16, "mx-colourModeEach-includeSelectors-forcedColors": </> false, "include-defaultMediaQueries": </> false, "include-html": </> true, "include-featureCheck": </> true, "include-noPreferenceMediaQueries": </> false, "internal-isTemplate": </> false, "internal-supressCredit": </> false, "selector-body": <S> body, "selector-root": <S> html, "selectorType-mode": <S> "null", "selectorType-motion": <S> "null", "print-globals": </> true, "print-normalize": </> true, "print-tokens": </> true, "print-utils": </> true, "print-headings": </> true, "mx-extendHeadingsByRole": </> true, "mx-interactive-states-include-fallbacks": </> true, "mx-interactive-states-include-fallbacks-only": </> false, "mx-colourMode-includeQuery-default": </> true, "mx-colourMode-includeSelectors-default": </> false, "warnIfGlobalJsFunctionsMissing": </> true, "print-docBlock": </> true, "template-name": <S> "HTML", "template-slug": <S> "html", "template-packageSlug": <S> "@maddimathon/scss-templater", "fn-var-replaceWithValue-borderRadius": </> true, "fn-var-replaceWithValue-borderWidth": </> false, "fn-var-replaceWithValue-margin": </> false, "fn-var-replaceWithValue-strokeRelative": </> false, "fn-var-replaceWithValue-style": </> false, "mx-tokens-printDefault-borderRadius": </> false, "mx-tokens-printDefault-borderWidth": </> true, "mx-tokens-printDefault-margin": </> true, "mx-tokens-printDefault-strokeRelative": </> true, "mx-tokens-printDefault-style": </> false, "mx-extendSelectors-optionalDefault": </> false, "mx-extendSelectors-extendHeadingsByRole": </> true, "mx-extendSelectors-utilsIncludeHeadings": </> true, "mx-extendSelectors-utilsIncludeFontSizes": </> true )
-    meta.module-variables( tokens ) = <:> ( "defaultTokens": <-> null, "baseTokens": <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ), "tokens": <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "brightnessMode-all": <()> ( <S> "light", <S> "dark" ), "contrastMode-all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "brightnessMode-default": <S> "light", "contrastMode-default": <S> "average", "scaleMultiplier": <#> 1.15625, "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ), "font-sizes": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ), "font-sizes--flat--rem": <:> ( "heading-1": <#> 2.75, "heading-2": <#> 2.0625, "heading-3": <#> 1.8125, "heading-4": <#> 1.5625, "heading-5": <#> 1.3125, "heading-6": <#> 1.1875, "heading-7": <#> 0.9375, "heading-8": <#> 0.875, "body": <#> 1, "smaller-1": <#> 0.875, "smaller-2": <#> 0.8125, "smaller-3": <#> 0.75 ), "lineHeight-base": <#> 1.6875, "line-heights": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "line-heights--rel": <:> ( "100": <#> 1.1875, "200": <#> 1.3125, "300": <#> 1.4375, "400": <#> 1.6875, "500": <#> 1.90625, "600": <#> 2.1875 ), "border-radii": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "strokes-relative": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "border-widths": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ), "gap-vw": <#> 8, "gaps": <()> ( () ), "gaps-block": <()> ( () ), "gaps-inline": <()> ( () ), "margin-softener": <#> 0.625, "margins": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ), "margins--calc": <:> ( "firm": <:> ( "100": <#> 0.3125, "200": <#> 0.5, "300": <#> 0.8125, "400": <#> 1.25, "600": <#> 2.25, "800": <#> 4, "900": <#> 7.125 ), "soft": <:> ( "100": <#> 0.1875, "200": <#> 0.3125, "300": <#> 0.5, "400": <#> 0.8125, "600": <#> 1.4375, "800": <#> 2.5, "900": <#> 4.4375 ), "half": <:> ( "100": <#> 0.125, "200": <#> 0.1875, "300": <#> 0.3125, "400": <#> 0.4375, "600": <#> 0.8125, "800": <#> 1.5, "900": <#> 2.6875 ) ), "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "styles--replaced": <:> ( "focus-ring-outline-width": <S> "400", "focus-ring-outline-offset": <S> "400", "focus-ring-outline-color": <S> "LinkText" ) )
+    meta.module-variables( config ) = <:> ( "cssColourKeywords": <()> ( <S> "auto", <S> "currentColor", <S> "inherit", <S> "initial", <S> "transparent", <S> "unset" ), "cssSystemColourKeywords": <()> ( <S> "AccentColor", <S> "AccentColorText", <S> "ActiveText", <S> "ButtonBorder", <S> "ButtonFace", <S> "ButtonText", <S> "Canvas", <S> "CanvasText", <S> "Field", <S> "FieldText", <S> "GrayText", <S> "Highlight", <S> "HighlightText", <S> "LinkText", <S> "Mark", <S> "MarkText", <S> "SelectedItem", <S> "SelectedItemText", <S> "VisitedText" ), "cssSystemColourFallbacks": <:> ( "AccentColor": <()> ( <S> "CanvasText", <S> "AccentColor" ), "AccentColorText": <()> ( <S> "Canvas", <S> "AccentColorText" ), "ButtonBorder": <()> ( <S> "ButtonFace", <S> "ButtonBorder" ), "Mark": <()> ( <S> "CanvasText", <S> "AccentColor", <S> "Mark" ), "MarkText": <()> ( <S> "Canvas", <S> "AccentColorText", <S> "MarkText" ) ), "defaultConfig": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "astro": </> false, "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ), "config": <:> ( "extend-selectors": <:> ( "globals": <:> ( "a": <S> "a", "abbr": <S> "abbr", "blockquote": <S> "blockquote", "body": <S> "body", "button": <()> ( <S> "button", <S> '[role="button"]', <S> 'input[type="button"]', <S> 'input[type="submit"]', <S> 'input[type="reset"]' ), "button-secondary": <()> ( <S> 'button[type="reset"]', <S> 'input[type="reset"]' ), "code": <S> "code", "em": <()> ( <S> "em", <S> "i" ), "fieldset": <S> "fieldset", "file-selector-button": <S> "::file-selector-button", "h1": <S> "h1", "h2": <S> "h2", "h3": <S> "h3", "h4": <S> "h4", "h5": <S> "h5", "h6": <S> "h6", "hr": <S> "hr", "input": <S> "input", "kbd": <S> "kbd", "label": <S> "label", "legend": <S> "legend", "li": <S> "li", "ol": <S> "ol", "p": <S> "p", "pre": <S> "pre", "root": <S> "root", "samp": <S> "samp", "screen-reader-text": <S> ".screen-reader-text", "select": <S> "select", "strong": <()> ( <S> "b", <S> "strong" ), "table": <S> "table", "td": <S> "td", "textarea": <S> "textarea", "th": <S> "th", "tr": <S> "tr", "ul": <S> "ul" ), "utils": <:> ( "button": <S> "a.button", "table-wrapper": <S> "table-wrapper" ) ), "include": <:> ( "defaultMediaQueries": </> false, "featureCheck": </> true, "html": </> true, "noPreferenceMediaQueries": </> false ), "print": <:> ( "astro": </> false, "docBlock": </> true, "globals": </> true, "headings": </> true, "normalize": </> true, "tokens": </> true, "utilities": </> true ), "selector": <:> ( "body": <S> "body", "null": <S> "%null", "root": <S> "html", "type": <:> ( "mode": <S> "null", "motion": <S> "null" ) ), "template": <:> ( "name": <S> "HTML", "packageSlug": <S> "@maddimathon/scss-templater", "slug": <S> "html" ) ), "include-html": </> true, "print-astro": </> false, "print-docBlock": </> true, "print-globals": </> true, "print-headings": </> true, "print-normalize": </> true, "print-tokens": </> true, "print-utils": </> true, "useNativeConfigParsing": </> true, "warnIfGlobalJsFunctionsMissing": </> false, "selector-null": <S> %null, "fn-clampFontSize-multiplier-min": <#> 0.75, "fn-clampFontSize-multiplier-svw": <#> 1.3125, "fn-clampFontSize-multiplier-max": <#> 1.125, "fn-clampFontSize-svw-rem": <#> 1, "fn-fontSizeValue-defaultFontScale": <#> 1, "fn-fontSizeValue-roundToPixelFactor": <#> 16, "include-defaultMediaQueries": </> false, "include-featureCheck": </> true, "include-noPreferenceMediaQueries": </> false, "internal-isTemplate": </> false, "internal-supressCredit": </> false, "selector-body": <S> body, "selector-root": <S> html, "selectorType-mode": <S> "null", "selectorType-motion": <S> "null", "mx-extendHeadingsByRole": </> true, "mx-interactive-states-include-fallbacks": </> true, "mx-interactive-states-include-fallbacks-only": </> false, "mx-colourMode-includeQuery-default": </> true, "mx-colourMode-includeSelectors-default": </> false, "mx-colourModeEach-includeSelectors-forcedColors": </> false, "mx-colourModeEach-nestModeSelectors": </> false, "template-name": <S> "HTML", "template-slug": <S> "html", "template-packageSlug": <S> "@maddimathon/scss-templater", "fn-var-replaceWithValue-borderRadius": </> true, "fn-var-replaceWithValue-borderWidth": </> false, "fn-var-replaceWithValue-colour": </> true, "fn-var-replaceWithValue-margin": </> false, "fn-var-replaceWithValue-strokeRelative": </> false, "fn-var-replaceWithValue-style": </> false, "mx-tokens-printDefault-borderRadius": </> false, "mx-tokens-printDefault-borderWidth": </> true, "mx-tokens-printDefault-margin": </> true, "mx-tokens-printDefault-strokeRelative": </> true, "mx-tokens-printDefault-style": </> false, "mx-tokensTheme-includeNonActiveThemes": </> false, "mx-tokensTheme-separateQueriesAndSelectors": </> false, "mx-tokensTheme-setBaseProperties": </> true, "mx-tokensTheme-unifyActiveThemeSelectors": </> false, "mx-tokensTheme-includeDefaultSelectors": </> true, "mx-extendSelectors-optionalDefault": </> false, "mx-extendSelectors-extendHeadingsByRole": </> true, "mx-extendSelectors-utilsIncludeHeadings": </> true, "mx-extendSelectors-utilsIncludeFontSizes": </> true )
+    meta.module-variables( tokens ) = <:> ( "defaultTokens": <-> null, "tokens": <:> ( "border": <:> ( "radius": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "stroke": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "width": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ) ), "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "colours": <()> ( () ), "font": <:> ( "size": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ) ), "lineHeight": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "lineHeightBase": <#> 1.6875, "margin": <:> ( "softener": <#> 0.625, "gapVW": <#> 8, "levels": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ) ), "modes": <:> ( "brightness": <:> ( "all": <()> ( <S> "light", <S> "dark" ), "default": <S> "light" ), "contrast": <:> ( "all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "default": <S> "average" ) ), "scaleMultiplier": <#> 1.15625, "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ), "themes": <:> ( "default": <:> ( "forcedColors": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "light": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ), "dark": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ) ) ) ), "useNativeTokensParsing": </> true, "breakpoints": <:> ( "content": <#> 36, "indent": <#> 25, "mobile": <#> 25, "page": <#> 58, "tablet": <#> 50, "sidebar": <#> 54 ), "brightnessMode-all": <()> ( <S> "light", <S> "dark" ), "contrastMode-all": <()> ( <S> "average", <S> "low", <S> "high", <S> "forced-colors" ), "brightnessMode-default": <S> "light", "contrastMode-default": <S> "average", "scaleMultiplier": <#> 1.15625, "widths": <:> ( "callout": <#> 29.25, "content": <#> 36, "page": <#> 58, "sidebar": <#> 16 ), "font-sizes": <:> ( "heading": <:> ( "1": <#> 7, "2": <#> 5, "3": <#> 4, "4": <#> 3, "5": <#> 2, "6": <#> 1, "7": <#> -0.5, "8": <#> -1 ), "body": <#> 0, "smaller": <:> ( "1": <#> -0.75, "2": <#> -1.5, "3": <#> -2 ), "bigger": <()> ( () ) ), "font-sizes--flat--rem": <:> ( "heading-1": <#> 2.75, "heading-2": <#> 2.0625, "heading-3": <#> 1.8125, "heading-4": <#> 1.5625, "heading-5": <#> 1.3125, "heading-6": <#> 1.1875, "heading-7": <#> 0.9375, "heading-8": <#> 0.875, "body": <#> 1, "smaller-1": <#> 0.875, "smaller-2": <#> 0.8125, "smaller-3": <#> 0.75 ), "lineHeight-base": <#> 1.6875, "line-heights": <:> ( "100": <#> -2.75, "200": <#> -2, "300": <#> -1.25, "400": <#> 0, "500": <#> 1, "600": <#> 2 ), "line-heights--rel": <:> ( "100": <#> 1.1875, "200": <#> 1.3125, "300": <#> 1.4375, "400": <#> 1.6875, "500": <#> 1.90625, "600": <#> 2.1875 ), "border-radii": <:> ( "100": <#> 0.25, "200": <#> 0.375, "400": <#> 0.625, "600": <#> 1.25 ), "strokes-relative": <:> ( "100": <#> 0.03125, "200": <#> 0.0625, "400": <#> 0.125, "600": <#> 0.1875, "800": <#> 0.25 ), "border-widths": <:> ( "100": <#> 0.0625, "200": <#> 0.125, "300": <#> 0.1875, "400": <#> 0.25 ), "gap-vw": <#> 8, "gaps": <()> ( () ), "gaps-block": <()> ( () ), "gaps-inline": <()> ( () ), "margin-softener": <#> 0.625, "margins": <:> ( "100": <#> -9, "200": <#> -6, "300": <#> -3, "400": <#> 0, "600": <#> 4, "800": <#> 8, "900": <#> 12 ), "margins--calc": <:> ( "firm": <:> ( "100": <#> 0.3125, "200": <#> 0.5, "300": <#> 0.8125, "400": <#> 1.25, "600": <#> 2.25, "800": <#> 4, "900": <#> 7.125 ), "soft": <:> ( "100": <#> 0.1875, "200": <#> 0.3125, "300": <#> 0.5, "400": <#> 0.8125, "600": <#> 1.4375, "800": <#> 2.5, "900": <#> 4.4375 ), "half": <:> ( "100": <#> 0.125, "200": <#> 0.1875, "300": <#> 0.3125, "400": <#> 0.4375, "600": <#> 0.8125, "800": <#> 1.5, "900": <#> 2.6875 ) ), "styles": <:> ( "focus-ring": <:> ( "outline-width": <S> "400", "outline-offset": <S> "400", "outline-color": <S> "LinkText" ) ), "styles--replaced": <:> ( "focus-ring-outline-width": <S> "400", "focus-ring-outline-offset": <S> "400", "focus-ring-outline-color": <S> "LinkText" ), "colours": <-> null, "colours--flat": <()> ( () ), "themes": <:> ( "default": <:> ( "forcedColors": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "light": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ), "dark": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ) ) ), "activeTheme": <S> "default", "themes--parsed": <:> ( "default": <:> ( "values": <:> ( "forcedColors": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "light": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ), "dark": <:> ( "low": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "average": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ), "high": <:> ( "background": <S> "Canvas", "button": <:> ( "primary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "secondary": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ), "disabled": <:> ( "bg": <:> ( "$": <S> "ButtonFace", "hover": <S> "ButtonFace", "active": <S> "ButtonFace" ), "border": <:> ( "$": <S> "ButtonBorder", "hover": <S> "ButtonBorder", "active": <S> "ButtonBorder" ), "outline": <:> ( "hover": <S> "ActiveText", "active": <S> "ActiveText" ), "text": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ), "ui": <:> ( "$": <S> "ButtonText", "hover": <S> "ButtonText", "active": <S> "ButtonText" ) ) ), "heading": <:> ( "1": <S> "CanvasText", "2": <S> "CanvasText", "3": <S> "CanvasText", "4": <S> "CanvasText", "5": <S> "CanvasText", "6": <S> "CanvasText", "7": <S> "CanvasText", "8": <S> "CanvasText" ), "highlight": <:> ( "bg": <S> "Mark", "text": <S> "MarkText" ), "input": <:> ( "accent": <:> ( "$": <S> "auto", "hover": <S> "auto", "active": <S> "auto" ), "bg": <:> ( "$": <S> "Field", "hover": <S> "Field", "active": <S> "Field" ), "border": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ), "text": <:> ( "$": <S> "FieldText", "hover": <S> "FieldText", "active": <S> "FieldText" ) ), "link": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-icon": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "link-decor": <:> ( "$": <S> "LinkText", "active": <S> "ActiveText", "disabled": <S> "GrayText", "hover": <S> "LinkText", "visited": <S> "VisitedText" ), "text": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "ui": <:> ( "$": <S> "CanvasText", "primary": <S> "CanvasText", "secondary": <S> "CanvasText", "grey": <S> "CanvasText", "disabled": <S> "CanvasText" ), "selection": <:> ( "bg": <S> "Highlight", "text": <S> "HighlightText" ) ) ) ), "flat": <:> ( "forcedColors": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ), "light": <:> ( "low": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ), "average": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ), "high": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ) ), "dark": <:> ( "low": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ), "average": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ), "high": <:> ( "background": <S> "Canvas", "button-primary-bg": <S> "ButtonFace", "button-primary-bg-hover": <S> "ButtonFace", "button-primary-bg-active": <S> "ButtonFace", "button-primary-border": <S> "ButtonBorder", "button-primary-border-hover": <S> "ButtonBorder", "button-primary-border-active": <S> "ButtonBorder", "button-primary-outline-hover": <S> "ActiveText", "button-primary-outline-active": <S> "ActiveText", "button-primary-text": <S> "ButtonText", "button-primary-text-hover": <S> "ButtonText", "button-primary-text-active": <S> "ButtonText", "button-primary-ui": <S> "ButtonText", "button-primary-ui-hover": <S> "ButtonText", "button-primary-ui-active": <S> "ButtonText", "button-secondary-bg": <S> "ButtonFace", "button-secondary-bg-hover": <S> "ButtonFace", "button-secondary-bg-active": <S> "ButtonFace", "button-secondary-border": <S> "ButtonBorder", "button-secondary-border-hover": <S> "ButtonBorder", "button-secondary-border-active": <S> "ButtonBorder", "button-secondary-outline-hover": <S> "ActiveText", "button-secondary-outline-active": <S> "ActiveText", "button-secondary-text": <S> "ButtonText", "button-secondary-text-hover": <S> "ButtonText", "button-secondary-text-active": <S> "ButtonText", "button-secondary-ui": <S> "ButtonText", "button-secondary-ui-hover": <S> "ButtonText", "button-secondary-ui-active": <S> "ButtonText", "button-disabled-bg": <S> "ButtonFace", "button-disabled-bg-hover": <S> "ButtonFace", "button-disabled-bg-active": <S> "ButtonFace", "button-disabled-border": <S> "ButtonBorder", "button-disabled-border-hover": <S> "ButtonBorder", "button-disabled-border-active": <S> "ButtonBorder", "button-disabled-outline-hover": <S> "ActiveText", "button-disabled-outline-active": <S> "ActiveText", "button-disabled-text": <S> "ButtonText", "button-disabled-text-hover": <S> "ButtonText", "button-disabled-text-active": <S> "ButtonText", "button-disabled-ui": <S> "ButtonText", "button-disabled-ui-hover": <S> "ButtonText", "button-disabled-ui-active": <S> "ButtonText", "heading-1": <S> "CanvasText", "heading-2": <S> "CanvasText", "heading-3": <S> "CanvasText", "heading-4": <S> "CanvasText", "heading-5": <S> "CanvasText", "heading-6": <S> "CanvasText", "heading-7": <S> "CanvasText", "heading-8": <S> "CanvasText", "highlight-bg": <S> "Mark", "highlight-text": <S> "MarkText", "input-accent": <S> "auto", "input-accent-hover": <S> "auto", "input-accent-active": <S> "auto", "input-bg": <S> "Field", "input-bg-hover": <S> "Field", "input-bg-active": <S> "Field", "input-border": <S> "FieldText", "input-border-hover": <S> "FieldText", "input-border-active": <S> "FieldText", "input-text": <S> "FieldText", "input-text-hover": <S> "FieldText", "input-text-active": <S> "FieldText", "link": <S> "LinkText", "link-active": <S> "ActiveText", "link-disabled": <S> "GrayText", "link-hover": <S> "LinkText", "link-visited": <S> "VisitedText", "link-icon": <S> "LinkText", "link-icon-active": <S> "ActiveText", "link-icon-disabled": <S> "GrayText", "link-icon-hover": <S> "LinkText", "link-icon-visited": <S> "VisitedText", "link-decor": <S> "LinkText", "link-decor-active": <S> "ActiveText", "link-decor-disabled": <S> "GrayText", "link-decor-hover": <S> "LinkText", "link-decor-visited": <S> "VisitedText", "text": <S> "CanvasText", "text-primary": <S> "CanvasText", "text-secondary": <S> "CanvasText", "text-grey": <S> "CanvasText", "text-disabled": <S> "CanvasText", "ui": <S> "CanvasText", "ui-primary": <S> "CanvasText", "ui-secondary": <S> "CanvasText", "ui-grey": <S> "CanvasText", "ui-disabled": <S> "CanvasText", "selection-bg": <S> "Highlight", "selection-text": <S> "HighlightText" ) ) ) ) ) )
     meta.module-functions( config ) = <:> ( "templater-parse-config": <@> get-function("templater-parse-config"), "config-round-to-pixel": <@> get-function("config-round-to-pixel"), "config-valid-bool": <@> get-function("config-valid-bool"), "config-valid-list-strings": <@> get-function("config-valid-list-strings"), "config-valid-selector": <@> get-function("config-valid-selector"), "config-valid-selector-type": <@> get-function("config-valid-selector-type"), "config-valid-number": <@> get-function("config-valid-number"), "config-valid-string": <@> get-function("config-valid-string") )
     meta.module-mixins( config ) = <:> ()
  */

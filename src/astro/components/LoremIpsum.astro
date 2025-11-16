@@ -349,122 +349,121 @@ const displayHeading = props.displayHeading ?? heading;
     </form>
 ) }
 
-{/* { fancy && (
+{ fancy && (
+    <hr/>
 
-<hr/>
+    <Heading
+        displayHeading={displayHeading}
+        heading={heading}
+    >Fancy Forms</Heading>
+    <form>
 
-<Heading
-    displayHeading={displayHeading}
-    heading={heading}
->Fancy Forms</Heading>
-<form>
+        <label for="input1">Text Input</label>
+        <input type="text" id="input1" name="input1">
 
-    <label for="input1">Text Input</label>
-    <input type="text" id="input1" name="input1">
+        <label for="input2a">Telephone Input</label>
+        <input type="tel" id="input2a" name="input2a">
 
-    <label for="input2a">Telephone Input</label>
-    <input type="tel" id="input2a" name="input2a">
+        <label for="input2b">Telephone Input with Pattern</label>
+        <input type="tel" id="input2b" name="input2b" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
 
-    <label for="input2b">Telephone Input with Pattern</label>
-    <input type="tel" id="input2b" name="input2b" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+        <label for="input3">Email Input</label>
+        <input type="email" id="input3" name="input3">
 
-    <label for="input3">Email Input</label>
-    <input type="email" id="input3" name="input3">
+        <label for="input4">URL Input</label>
+        <input type="url" id="input4" name="input4">
 
-    <label for="input4">URL Input</label>
-    <input type="url" id="input4" name="input4">
+        <label for="input5">Password Input</label>
+        <input type="password" id="input5" name="input5">
+        
+        <label for="textarea">Textarea Element</label>
+        <textarea id="textarea" name="textarea" rows="5"></textarea>
 
-    <label for="input5">Password Input</label>
-    <input type="password" id="input5" name="input5">
-    
-    <label for="textarea">Textarea Element</label>
-    <textarea id="textarea" name="textarea" rows="5"></textarea>
+        <fieldset>
 
-    <fieldset>
+            <legend>Numerical Elements</legend>
+        
+            <label for="input6">Number Input</label>
+            <input type="number" id="input6" name="input6" min="" max="" step="1">
+                
+            <label for="input7">Range Input</label>
+            <input type="range" id="input7" name="input7" min="0" max="100" step="1">
 
-        <legend>Numerical Elements</legend>
-    
-        <label for="input6">Number Input</label>
-        <input type="number" id="input6" name="input6" min="" max="" step="1">
-            
-        <label for="input7">Range Input</label>
-        <input type="range" id="input7" name="input7" min="0" max="100" step="1">
+        </fieldset>
 
-    </fieldset>
+        <fieldset aria-label="Multi-Choice Elements">
 
-    <fieldset aria-label="Multi-Choice Elements">
+            <label class="checkbox-label" for="input8-1"><input type="checkbox" id="input8-1" name="input8" value="input8-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores rem labore assumenda quod?</label>
+            <label class="checkbox-label" for="input8-2"><input type="checkbox" id="input8-2" name="input8" value="input8-2">Qui commodi odio, rem assumenda laboriosam quidem, nesciunt magni provident, animi autem iusto.</label>
+            <label class="checkbox-label" for="input8-3"><input type="checkbox" id="input8-3" name="input8" value="input8-3">Error, delectus! Vel similique quidem nam culpa ipsum repudiandae assumenda suscipit reprehenderit nihil. Placeat labore fuga excepturi?</label>
+            <label class="checkbox-label" for="input8-4"><input type="checkbox" id="input8-4" name="input8" value="input8-4">Odio atque explicabo deleniti praesentium, illo dolorem tempora.</label>
+            <label class="checkbox-label" for="input8-5"><input type="checkbox" id="input8-5" name="input8" value="input8-5">Numquam veniam quod minima nisi ratione! Minima nemo aliquid eaque ducimus cupiditate cumque quibusdam a aspernatur accusantium excepturi?</label>
+            <label class="checkbox-label" for="input8-6"><input type="checkbox" id="input8-6" name="input8" value="input8-6">Ab hic perferendis nesciunt asperiores animi maxime dolore. Sint dolores sed magnam ab dolorum vel eius unde labore quae autem.</label>
 
-        <label class="checkbox-label" for="input8-1"><input type="checkbox" id="input8-1" name="input8" value="input8-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores rem labore assumenda quod?</label>
-        <label class="checkbox-label" for="input8-2"><input type="checkbox" id="input8-2" name="input8" value="input8-2">Qui commodi odio, rem assumenda laboriosam quidem, nesciunt magni provident, animi autem iusto.</label>
-        <label class="checkbox-label" for="input8-3"><input type="checkbox" id="input8-3" name="input8" value="input8-3">Error, delectus! Vel similique quidem nam culpa ipsum repudiandae assumenda suscipit reprehenderit nihil. Placeat labore fuga excepturi?</label>
-        <label class="checkbox-label" for="input8-4"><input type="checkbox" id="input8-4" name="input8" value="input8-4">Odio atque explicabo deleniti praesentium, illo dolorem tempora.</label>
-        <label class="checkbox-label" for="input8-5"><input type="checkbox" id="input8-5" name="input8" value="input8-5">Numquam veniam quod minima nisi ratione! Minima nemo aliquid eaque ducimus cupiditate cumque quibusdam a aspernatur accusantium excepturi?</label>
-        <label class="checkbox-label" for="input8-6"><input type="checkbox" id="input8-6" name="input8" value="input8-6">Ab hic perferendis nesciunt asperiores animi maxime dolore. Sint dolores sed magnam ab dolorum vel eius unde labore quae autem.</label>
+            <label class="checkbox-label" for="input9-1"><input type="radio" id="input9-1" name="input9" value="input9-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit esse voluptates architecto asperiores rerum sed nobis nulla, sequi beatae?</label>
+            <label class="checkbox-label" for="input9-2"><input type="radio" id="input9-2" name="input9" value="input9-2">Quam atque cupiditate, quia labore ut asperiores corporis perferendis vero odio ratione!</label>
+            <label class="checkbox-label" for="input9-3"><input type="radio" id="input9-3" name="input9" value="input9-3">Aut doloremque ullam deleniti, obcaecati architecto maiores temporibus ipsam sapiente dolore! Eveniet dignissimos eum ex sequi sit nobis ipsa soluta minima.</label>
+            <label class="checkbox-label" for="input9-4"><input type="radio" id="input9-4" name="input9" value="input9-4">Deleniti iste a distinctio exercitationem animi optio quas placeat id omnis enim, error ad corrupti necessitatibus odio.</label>
+            <label class="checkbox-label" for="input9-5"><input type="radio" id="input9-5" name="input9" value="input9-5">Provident totam impedit laborum autem, accusamus perspiciatis fugiat molestiae eius commodi, ullam, assumenda rem placeat magnam ratione sequi?</label>
+            <label class="checkbox-label" for="input9-6"><input type="radio" id="input9-6" name="input9" value="input9-6">Repellendus a dolorem voluptatum, fugiat quas harum nesciunt iure doloribus nostrum cumque reprehenderit iusto. Non, ipsa? Veritatis?</label>
+        
+            <select class="no-label" id="select1" name="select1">
+                <option value="opt1">Lorem, ipsum dolor.</option>
+                <option value="opt2">Tenetur, amet sunt.</option>
+                <option value="opt3">Iusto et mollitia sunt!</option>
+                <option value="opt4">Provident at consectetur quisquam?</option>
+                <option value="opt5">Aperiam, nemo.</option>
+                <option value="opt6">Ipsam iste eos suscipit.</option>
+            </select>
+        
+            <select class="no-label" id="select2" name="select2" size="3" multiple>
+                <option value="opt1">Lorem, ipsum dolor.</option>
+                <option value="opt2">Tenetur, amet sunt.</option>
+                <option value="opt3">Iusto et mollitia sunt!</option>
+                <option value="opt4">Provident at consectetur quisquam?</option>
+                <option value="opt5">Aperiam, nemo.</option>
+                <option value="opt6">Ipsam iste eos suscipit.</option>
+            </select>
 
-        <label class="checkbox-label" for="input9-1"><input type="radio" id="input9-1" name="input9" value="input9-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit esse voluptates architecto asperiores rerum sed nobis nulla, sequi beatae?</label>
-        <label class="checkbox-label" for="input9-2"><input type="radio" id="input9-2" name="input9" value="input9-2">Quam atque cupiditate, quia labore ut asperiores corporis perferendis vero odio ratione!</label>
-        <label class="checkbox-label" for="input9-3"><input type="radio" id="input9-3" name="input9" value="input9-3">Aut doloremque ullam deleniti, obcaecati architecto maiores temporibus ipsam sapiente dolore! Eveniet dignissimos eum ex sequi sit nobis ipsa soluta minima.</label>
-        <label class="checkbox-label" for="input9-4"><input type="radio" id="input9-4" name="input9" value="input9-4">Deleniti iste a distinctio exercitationem animi optio quas placeat id omnis enim, error ad corrupti necessitatibus odio.</label>
-        <label class="checkbox-label" for="input9-5"><input type="radio" id="input9-5" name="input9" value="input9-5">Provident totam impedit laborum autem, accusamus perspiciatis fugiat molestiae eius commodi, ullam, assumenda rem placeat magnam ratione sequi?</label>
-        <label class="checkbox-label" for="input9-6"><input type="radio" id="input9-6" name="input9" value="input9-6">Repellendus a dolorem voluptatum, fugiat quas harum nesciunt iure doloribus nostrum cumque reprehenderit iusto. Non, ipsa? Veritatis?</label>
-    
-        <select class="no-label" id="select1" name="select1">
-            <option value="opt1">Lorem, ipsum dolor.</option>
-            <option value="opt2">Tenetur, amet sunt.</option>
-            <option value="opt3">Iusto et mollitia sunt!</option>
-            <option value="opt4">Provident at consectetur quisquam?</option>
-            <option value="opt5">Aperiam, nemo.</option>
-            <option value="opt6">Ipsam iste eos suscipit.</option>
-        </select>
-    
-        <select class="no-label" id="select2" name="select2" size="3" multiple>
-            <option value="opt1">Lorem, ipsum dolor.</option>
-            <option value="opt2">Tenetur, amet sunt.</option>
-            <option value="opt3">Iusto et mollitia sunt!</option>
-            <option value="opt4">Provident at consectetur quisquam?</option>
-            <option value="opt5">Aperiam, nemo.</option>
-            <option value="opt6">Ipsam iste eos suscipit.</option>
-        </select>
+        </fieldset>
 
-    </fieldset>
+        <label for="input10">Date Input</label>
+        <input type="date" id="input10" name="input10" min="" max="">
 
-    <label for="input10">Date Input</label>
-    <input type="date" id="input10" name="input10" min="" max="">
+        <label for="input11">Time Input</label>
+        <input type="time" id="input11" name="input11">
 
-    <label for="input11">Time Input</label>
-    <input type="time" id="input11" name="input11">
+        <label for="input12">Datetime-Local Input</label>
+        <input type="datetime-local" id="input12" name="input12">
 
-    <label for="input12">Datetime-Local Input</label>
-    <input type="datetime-local" id="input12" name="input12">
+        <label for="input13">Week Input</label>
+        <input type="week" id="input13" name="input13">
 
-    <label for="input13">Week Input</label>
-    <input type="week" id="input13" name="input13">
+        <label for="input14">Month Input</label>
+        <input type="month" id="input14" name="input14">
 
-    <label for="input14">Month Input</label>
-    <input type="month" id="input14" name="input14">
+        <label for="input15">File Input</label>
+        <input type="file" id="input15" name="input15">
 
-    <label for="input15">File Input</label>
-    <input type="file" id="input15" name="input15">
+        <label for="input16">Colour Input</label>
+        <input type="color" id="input16" name="input16">
 
-    <label for="input16">Colour Input</label>
-    <input type="color" id="input16" name="input16">
+        <label for="input17">Hidden Field</label>
+        <input type="hidden" id="input17" name="input17" value="hidden">
 
-    <label for="input17">Hidden Field</label>
-    <input type="hidden" id="input17" name="input17" value="hidden">
+        <label for="input18">Search Field</label>
+        <input type="search" id="input18" name="input18">
 
-    <label for="input18">Search Field</label>
-    <input type="search" id="input18" name="input18">
+        <button type="button" id="button" name="button" onclick="alert('Hello World!')">Say Hello</button>
 
-    <button type="button" id="button" name="button" onclick="alert('Hello World!')">Say Hello</button>
+        <input type="button" id="input19" name="input19" value="Nothing Button">
 
-    <input type="button" id="input19" name="input19" value="Nothing Button">
+        <input type="reset" id="input20" name="input20" value="Reset Button">
+        
+        <input type="submit" id="input21" name="input21" value="Submit Button">
 
-    <input type="reset" id="input20" name="input20" value="Reset Button">
-    
-    <input type="submit" id="input21" name="input21" value="Submit Button">
-
-</form>
-) } */}
+    </form>
+) }
 
 
 <style lang="scss">
