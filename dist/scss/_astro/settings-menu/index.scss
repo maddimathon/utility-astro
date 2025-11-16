@@ -1,0 +1,12 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use '../lib';
+
+/* # TOGGLE BLOCKS ==================================== */
+
+@include lib.snippet-support-astro-settings-menu;
+
+@include lib.extend-selectors($optional: true);

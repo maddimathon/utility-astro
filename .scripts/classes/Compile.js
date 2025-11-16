@@ -61,7 +61,7 @@ export class Compile extends CompileStage {
      * @override
      */
     async scss() {
-        // await this.runCustomDirCopySubStage( 'scss' );
+        await this.runCustomDirCopySubStage( 'scss' );
 
         await this.runCustomScssDirSubStage(
             '',

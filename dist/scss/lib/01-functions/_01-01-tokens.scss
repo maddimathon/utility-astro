@@ -1,0 +1,65 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/math';
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@use 'pkg:@maddimathon/utility-sass/01-functions' as utils;
+
+@use '../../config';
+// @use '../../tokens';
+
+///
+/// @return {list}
+///
+/// @since 0.1.0-alpha
+///
+@function width-value($slug, $returnAsNumber: true, $multiplier: 1) {
+    $libValue: math.round-to-pixel(
+        utils.width-value($slug, $returnAsNumber: $returnAsNumber) * $multiplier
+    );
+
+    // returns
+    @if $slug == 'page' and list.length($libValue) > 0 {
+        $_rem: list.nth($libValue, 1);
+
+        @return if(
+            $returnAsNumber,
+            $libValue,
+            list.join(
+                $libValue,
+                (
+                    calc(
+                        (
+                                var-width(content) +
+                                    utils.var-gap-inline(layout) +
+                                    var-width(sidebar)
+                            ) *
+                            $multiplier
+                    )
+                ),
+                $separator: comma
+            )
+        );
+    }
+
+    @return $libValue;
+}
+
+///
+/// @since 0.1.0-alpha
+///
+@function var-width($slug) {
+    $fallback: width-value($slug, $returnAsNumber: true);
+
+    // returns
+    @if meta.type-of($fallback) == list and list.length($fallback) < 1 {
+        @return var(--width-#{$slug});
+    }
+
+    @return var(--width-#{$slug}, $fallback);
+}

@@ -5,7 +5,7 @@
 * https://maddimathon.github.io/utility-sass
 */.forced-colors-mode-only{display:none!important}@media (forced-colors: active),(prefers-contrast: custom){.forced-colors-mode-only{display:var(--display, block)!important}}[data-astro-cid-tvhzxmj5][data-contrast-mode=forced-colors] .forced-colors-mode-only{display:var(--display, block)!important}.skip-link[data-astro-cid-z2k3rc5l]{display:block;position:fixed;margin:0;top:-100%;width:fit-content;z-index:999999}.skip-link[data-astro-cid-z2k3rc5l]:focus{top:0}.skip-link-list[data-astro-cid-z2k3rc5l]{grid-column:1/-1;grid-column:page-start/page-end;list-style:none;margin:0;padding:0}.skip-link-list[data-astro-cid-z2k3rc5l] li[data-astro-cid-z2k3rc5l]{margin:0;padding:0}/*!
  * Utility Astro Documentation
- * @maddimathon/utility-astro@0.1.0-alpha.3
+ * @maddimathon/utility-astro@0.1.0-alpha.4
  * 
  * https://maddimathon.github.io/utility-astro
  * 

@@ -1,0 +1,25 @@
+///
+/// Used in subdirs to easily reference the lib.
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@forward '../template/astro/config' with (
+    $include_html: true !default,
+
+    $internal_isTemplate: false !default,
+
+    $mx_extendHeadingsByRole: false !default,
+
+    $print_astro: true !default,
+    $print_globals: true !default,
+    $print_normalize: true !default,
+    $print_tokens: true !default,
+    $print_utils: true !default
+);
+@forward '../tokens';
+
+// @forward '../notice';
+
+@forward '../lib';

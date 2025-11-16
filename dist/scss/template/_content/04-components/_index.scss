@@ -1,0 +1,35 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use '../../../config';
+
+@use '../../../lib' as *;
+
+@if config.$print_astro_toggle {
+    @if config.$print_headings {
+        /* # ASTRO COMPONENT - TOGGLE
+         * ======================================================================== */
+    }
+
+    @include snippet-support-astro-toggle;
+}
+
+@if config.$print_astro_toggleNav {
+    @if config.$print_headings {
+        /* # ASTRO COMPONENT - TOGGLE NAV MENU
+         * ======================================================================== */
+    }
+
+    @include snippet-support-astro-toggle-nav-menu;
+}
+
+@if config.$print_astro_settingsMenu {
+    @if config.$print_headings {
+        /* # ASTRO COMPONENT - SETTINGS MENU
+         * ======================================================================== */
+    }
+
+    @include snippet-support-astro-settings-menu;
+}

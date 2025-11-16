@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.4** — 2025-11-15
+
+Now actually compiling the scss to dist.
+
+
 ## **0.1.0-alpha.3** — 2025-11-15
 
 ### Breaking

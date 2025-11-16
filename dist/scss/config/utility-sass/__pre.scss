@@ -1,0 +1,34 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+
+$include_html: false !default;
+$include_html: fns.config-valid-bool($include_html, 'include_html');
+
+$internal_isTemplate: false !default;
+$internal_isTemplate: fns.config-valid-bool(
+    $internal_isTemplate,
+    'internal_isTemplate'
+);
+
+$print_globals: $include_html !default;
+$print_globals: fns.config-valid-bool($print_globals, 'print_globals');
+
+$print_normalize: $include_html and $internal_isTemplate !default;
+$print_normalize: fns.config-valid-bool($print_normalize, 'print_normalize');
+
+$print_tokens: false !default;
+$print_tokens: fns.config-valid-bool($print_tokens, 'print_tokens');
+
+$print_utils: false !default;
+$print_utils: fns.config-valid-bool($print_utils, 'print_utils');
+
+$print_astro: $include_html and $print_globals !default;
+$print_astro: fns.config-valid-bool($print_astro, 'print_astro');
+
+// prettier-ignore
+$print_headings: ( $print_globals or $print_normalize or $print_tokens or $print_utils or $print_astro ) and $internal_isTemplate !default;
+$print_headings: fns.config-valid-bool($print_headings, 'print_headings');

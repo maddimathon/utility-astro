@@ -1,0 +1,15 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use '../lib';
+
+/* # FORCED COLOURS ONLY ==================================== */
+
+%forced-colors-mode-only,
+:global(.forced-colors-mode-only) {
+    @include lib.snippet-forced-colors-mode-only;
+}
+
+@include lib.extend-selectors($optional: true);

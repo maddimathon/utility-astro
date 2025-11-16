@@ -1,0 +1,18 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @since 0.1.0-alpha
+///
+
+@use '../config';
+
+@if config.$print_templateDocBlock {
+    @if config.$template_isDefault {
+        /**
+         * Utility Astro Template
+         */
+    } @else {
+        /**
+         * Utility Astro Template - #{config.$template_name}
+         */
+    }
+}
