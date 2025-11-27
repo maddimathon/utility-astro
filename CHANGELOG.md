@@ -19,6 +19,12 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.6** — 2025-11-26
+
+Forgot to actually add a backdrop to ToggleNavMenu and fixed lack of
+auto-scrolling for the toggle nav menu and website settings in short viewports.
+
+
 ## **0.1.0-alpha.5** — 2025-11-26
 
 ### Changed

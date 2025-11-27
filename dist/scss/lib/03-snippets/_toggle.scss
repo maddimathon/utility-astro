@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.5
+/// @package @maddimathon/utility-astro@0.1.0-alpha.6
 /// @since 0.1.0-alpha
 ///
 
@@ -52,7 +52,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     [data-toggle-container] {
         @extend %_flex-contents-container;
-        z-index: 1;
+        z-index: 999;
     }
 
     .toggle-title,
@@ -121,6 +121,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     [data-toggle-control-backdrop] {
         display: none;
+        position: fixed;
         opacity: 0;
     }
 
@@ -257,6 +258,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             cursor: pointer;
 
             &[data-toggle-control-backdrop] {
+                --display: block;
                 display: none;
                 position: fixed;
                 justify-self: auto;
@@ -274,15 +276,17 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 backdrop-filter: blur(1rem);
                 background: none;
                 border: none;
+                border-radius: 0;
 
-                z-index: -1;
+                opacity: 1;
+                z-index: -2;
                 cursor: pointer;
 
                 &::before,
                 &::after {
                     content: '';
                     content: '' / '';
-                    display: flex;
+                    display: block;
                     position: absolute;
 
                     top: 0;
@@ -309,6 +313,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                     border: none;
                     background: none;
                     color: inherit;
+                    opacity: 1;
                 }
             }
 
@@ -361,8 +366,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
                 padding: 0 #{var-mrg-firm('300')};
 
-                overflow-block: hidden;
-                overflow-inline: auto;
+                // overflow-block: hidden;
+                // overflow-inline: auto;
+                overflow: auto;
+                max-height: 100%;
 
                 visibility: hidden;
                 opacity: 0;
@@ -394,8 +401,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 }
             }
 
-            [data-toggle-control-backdrop] {
-                display: var(--display, block);
+            [data-toggle-control] {
+                &[data-toggle-control-backdrop] {
+                    display: var(--display, block);
+                }
             }
         }
 
@@ -406,10 +415,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
                         transform: rotate(270deg);
                     }
                 }
-            }
 
-            [data-toggle-control-backdrop] {
-                opacity: 1;
+                &[data-toggle-control-backdrop] {
+                    opacity: 1;
+                }
             }
 
             > [data-toggle-content] {

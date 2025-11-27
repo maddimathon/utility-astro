@@ -16,6 +16,8 @@
 
 @use '../../scss/template/astro' as *;
 
+@include snippet-support-astro-toggle-nav-menu;
+
 @include feature-check.supports(whereSelector) {
     $_navHeight: 3.125rem;
     $_scrollPaddingFallback: calc(#{$_navHeight} + #{var-gap-block(layout)});
@@ -52,13 +54,6 @@
             [data-toggle-control] {
                 padding-block: min(0.75vh, #{var-mrg-soft('300')});
             }
-        }
-
-        > [data-toggle-content] {
-            padding-inline: #{var-gap-block(layout-half)};
-            width: 100%;
-
-            z-index: -1;
         }
     }
     .website-settings-menu {

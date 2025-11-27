@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.5
+/// @package @maddimathon/utility-astro@0.1.0-alpha.6
 /// @since 0.1.0-alpha
 ///
 
@@ -7,6 +7,8 @@
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+
+@use '../../config';
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -23,18 +25,22 @@ $_titleBorderWidth_half: var-border-width('100');
 /// Supports the ToggleNavMenu astro component.
 ///
 @mixin snippet-support-astro-toggle-nav-menu {
-    %body {
-        > %nav {
-            @at-root #{selector.unify(&, ('[data-toggle-container]'))} {
+    #{config.$selector_body} {
+        &:has(> nav[data-toggle-container='open']) {
+            overflow: hidden;
+        }
+
+        > nav {
+            &[data-toggle-container] {
                 @include snippet-support-astro-content--page-width;
             }
         }
     }
 
     @include feature-check.supports(whereSelector) {
-        %body {
-            > %nav {
-                @at-root #{selector.unify(&, ('[data-toggle-container]'))} {
+        #{config.$selector_body} {
+            > nav {
+                &[data-toggle-container] {
                     // prettier-ignore
                     $_gridCols_toggle: var(--grid-template-columns--page, #{$_default_grid_page});
                     /* prettier-ignore */
@@ -60,6 +66,7 @@ $_titleBorderWidth_half: var-border-width('100');
                     }
 
                     [data-toggle-content] {
+                        grid-column: page-start / page-end;
                         position: absolute;
                         top: 0;
                         justify-content: center;
@@ -79,6 +86,9 @@ $_titleBorderWidth_half: var-border-width('100');
 
                             padding-inline: #{var-mrg-firm('400')};
                             background: #{var-sys-colour(background)};
+
+                            max-height: 80svh;
+                            overflow: auto;
 
                             > ol,
                             > ul {
