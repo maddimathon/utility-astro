@@ -29,9 +29,16 @@ body > nav[data-toggle-container] {
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    justify-items: stretch;
+    /* prettier-ignore */
+    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, var(--width-page, 58rem)) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;
+    font-size: var(--fs-smaller-1, 0.9375rem);
 }
 :where(.js)
     body

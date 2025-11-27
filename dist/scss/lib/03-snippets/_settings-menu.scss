@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @package @maddimathon/utility-astro@0.1.0-alpha.5
 /// @since 0.1.0-alpha
 ///
 
@@ -100,10 +100,10 @@
         font-size: #{var-fs(smaller-1)};
     }
 
-    .website-settings__backdrop {
-        display: none;
-        opacity: 0;
-    }
+    // .website-settings__backdrop {
+    //     display: none;
+    //     opacity: 0;
+    // }
 
     /* With Javascript ==================================== */
 
@@ -134,61 +134,61 @@
                     justify-self: end;
                 }
 
-                &.website-settings__backdrop {
-                    display: none;
-                    position: fixed;
-                    justify-self: auto;
+                // &.website-settings__backdrop {
+                //     display: none;
+                //     position: fixed;
+                //     justify-self: auto;
 
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
+                //     top: 0;
+                //     left: 0;
+                //     right: 0;
+                //     bottom: 0;
 
-                    margin: 0;
-                    padding: 0;
-                    width: auto;
-                    height: auto;
+                //     margin: 0;
+                //     padding: 0;
+                //     width: auto;
+                //     height: auto;
 
-                    backdrop-filter: blur(1rem);
-                    background: none;
-                    border: none;
+                //     backdrop-filter: blur(1rem);
+                //     background: none;
+                //     border: none;
 
-                    z-index: -1;
-                    cursor: pointer;
+                //     z-index: -1;
+                //     cursor: pointer;
 
-                    &::before,
-                    &::after {
-                        content: '';
-                        content: '' / '';
-                        display: flex;
-                        position: absolute;
+                //     &::before,
+                //     &::after {
+                //         content: '';
+                //         content: '' / '';
+                //         display: flex;
+                //         position: absolute;
 
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                    }
+                //         top: 0;
+                //         bottom: 0;
+                //         left: 0;
+                //         right: 0;
+                //     }
 
-                    &::before {
-                        background: #{var-sys-colour(background)};
-                        opacity: 0.625;
-                    }
+                //     &::before {
+                //         background: #{var-sys-colour(background)};
+                //         opacity: 0.625;
+                //     }
 
-                    &::after {
-                        background: #{var-sys-colour(link)};
-                        opacity: 0.1875;
-                    }
+                //     &::after {
+                //         background: #{var-sys-colour(link)};
+                //         opacity: 0.1875;
+                //     }
 
-                    @include hover-focus-visible-or-within(
-                        $addSelectors: (
-                            '&:active',
-                        )
-                    ) {
-                        border: none;
-                        background: none;
-                        color: inherit;
-                    }
-                }
+                //     @include hover-focus-visible-or-within(
+                //         $addSelectors: (
+                //             '&:active',
+                //         )
+                //     ) {
+                //         border: none;
+                //         background: none;
+                //         color: inherit;
+                //     }
+                // }
             }
 
             [data-toggle-content] {
@@ -199,15 +199,15 @@
             &[data-toggle-container='closing'] {
                 z-index: 999999;
 
-                .website-settings__backdrop {
-                    display: var(--display, block);
-                }
+                // .website-settings__backdrop {
+                //     display: var(--display, block);
+                // }
             }
 
             &[data-toggle-container='open'] {
-                .website-settings__backdrop {
-                    opacity: 1;
-                }
+                // .website-settings__backdrop {
+                //     opacity: 1;
+                // }
 
                 > [data-toggle-content] {
                     max-height: 80svh;

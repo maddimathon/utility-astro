@@ -19,6 +19,14 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.5** — 2025-11-26
+
+### Changed
+- Switched styles for settings menu backdrop to styles in the toggle snippet via
+  data-toggle-control-backdrop attribute selector
+- Updates to the astro toggle menu scss
+
+
 ## **0.1.0-alpha.4** — 2025-11-15
 
 Now actually compiling the scss to dist.

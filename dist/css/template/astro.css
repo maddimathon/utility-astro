@@ -2339,6 +2339,11 @@ body > aside > :first-child {
     color: inherit;
 }
 
+[data-toggle-control-backdrop] {
+    display: none;
+    opacity: 0;
+}
+
 .toggle-icon {
     --icon-size: 1.125em;
     display: inline-block;
@@ -2501,6 +2506,80 @@ body > aside > :first-child {
     appearance: button;
     cursor: pointer;
 }
+:where(.js) [data-toggle-control][data-toggle-control-backdrop] {
+    display: none;
+    position: fixed;
+    justify-self: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+    background: none;
+    border: none;
+    z-index: -1;
+    cursor: pointer;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::before,
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
+    content: "";
+    content: ""/"";
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::before {
+    background: var(--sys-clr-background, Canvas);
+    opacity: 0.625;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
+    background: var(--sys-clr-link, LinkText);
+    opacity: 0.1875;
+}
+.no-js :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus,
+.js__no-whereSelector
+    :where(.js)
+    [data-toggle-control][data-toggle-control-backdrop]:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    [data-toggle-control][data-toggle-control-backdrop]:focus {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
+    border: none;
+    background: none;
+    color: inherit;
+}
+
 :where(.js) [data-toggle-control] .toggle-icon {
     grid-column: icon;
 }
@@ -2567,6 +2646,10 @@ body > aside > :first-child {
     > .container {
     visibility: visible;
 }
+:where(.js) [data-toggle-container="open"] [data-toggle-control-backdrop],
+:where(.js) [data-toggle-container="closing"] [data-toggle-control-backdrop] {
+    display: var(--display, block);
+}
 :where(.js)
     [data-toggle-container="open"]
     [data-toggle-control]
@@ -2574,6 +2657,9 @@ body > aside > :first-child {
     > svg
     #b {
     transform: rotate(270deg);
+}
+:where(.js) [data-toggle-container="open"] [data-toggle-control-backdrop] {
+    opacity: 1;
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {
     border-left-width: var(--border-width-200, 0.125rem);
@@ -2668,9 +2754,16 @@ body > nav[data-toggle-container] {
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    justify-items: stretch;
+    /* prettier-ignore */
+    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, var(--width-page, 58rem)) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;
+    font-size: var(--fs-smaller-1, 0.9375rem);
 }
 :where(.js)
     body
@@ -2841,11 +2934,6 @@ body > nav[data-toggle-container] {
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 
-.website-settings__backdrop {
-    display: none;
-    opacity: 0;
-}
-
 /* With Javascript ==================================== */
 body:has(.website-settings-menu[data-toggle-container="open"]) {
     overflow: hidden;
@@ -2966,122 +3054,12 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     --icon-size: 1.75rem;
     justify-self: end;
 }
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop {
-    display: none;
-    position: fixed;
-    justify-self: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
-    -webkit-backdrop-filter: blur(1rem);
-    backdrop-filter: blur(1rem);
-    background: none;
-    border: none;
-    z-index: -1;
-    cursor: pointer;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::before,
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::after {
-    content: "";
-    content: ""/"";
-    display: flex;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::before {
-    background: var(--sys-clr-background, Canvas);
-    opacity: 0.625;
-}
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop::after {
-    background: var(--sys-clr-link, LinkText);
-    opacity: 0.1875;
-}
-.no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus,
-.js__no-whereSelector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:hover,
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:active {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus-visible {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control].website-settings__backdrop:focus-within {
-    border: none;
-    background: none;
-    color: inherit;
-}
-
 :where(.js) .website-settings-menu [data-toggle-content] {
     border: none;
 }
 :where(.js) .website-settings-menu[data-toggle-container="open"],
 :where(.js) .website-settings-menu[data-toggle-container="closing"] {
     z-index: 999999;
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    .website-settings__backdrop,
-:where(.js)
-    .website-settings-menu[data-toggle-container="closing"]
-    .website-settings__backdrop {
-    display: var(--display, block);
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    .website-settings__backdrop {
-    opacity: 1;
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]

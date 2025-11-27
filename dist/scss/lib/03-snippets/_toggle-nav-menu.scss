@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.4
+/// @package @maddimathon/utility-astro@0.1.0-alpha.5
 /// @since 0.1.0-alpha
 ///
 
@@ -60,9 +60,19 @@ $_titleBorderWidth_half: var-border-width('100');
                     }
 
                     [data-toggle-content] {
+                        position: absolute;
+                        top: 0;
+                        justify-content: center;
+                        justify-items: stretch;
+
+                        /* prettier-ignore */
+                        grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, #{var-width(page)}) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+
                         margin-block-end: #{$_titleBorderWidth_half};
                         padding: 0;
                         border: none;
+
+                        font-size: #{var-fs(smaller-1)};
 
                         > .container {
                             @include snippet-support-astro-content--page-width;
