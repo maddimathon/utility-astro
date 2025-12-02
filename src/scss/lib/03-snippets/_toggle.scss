@@ -43,11 +43,12 @@ $_defaultHeadingSelectors_greaterThan6: ();
     @at-root %_flex-contents-container {
         --display: flex;
         display: flex;
+        position: relative;
         flex-direction: column;
 
         justify-content: start;
         align-content: start;
-        align-items: start;
+        align-items: stretch;
     }
 
     [data-toggle-container] {
@@ -149,6 +150,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     [data-toggle-content] {
         display: grid;
+        position: relative;
 
         justify-content: stretch;
         justify-items: stretch;
@@ -313,6 +315,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                     border: none;
                     background: none;
                     color: inherit;
+                    outline: none;
                     opacity: 1;
                 }
             }
@@ -334,6 +337,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
             padding-block-end: #{var-stroke-relative('400')};
+
+            &:where(%unstyled-heading) {
+                padding-block-end: 0;
+            }
         }
 
         .toggle-control-inner {
@@ -379,6 +386,13 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 }
                 > :last-child {
                     margin-block-end: 0;
+                }
+
+                > %ol,
+                > %ul {
+                    &:only-child {
+                        margin-inline: 0;
+                    }
                 }
             }
         }

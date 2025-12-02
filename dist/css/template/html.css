@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/html */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.5
+ * @maddimathon/utility-sass@0.1.0-alpha.6
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -263,15 +263,47 @@ pre {
     --sys-clr-background: Canvas;
     --sys-clr-text: CanvasText;
     --sys-clr-accent-bg: CanvasText;
-    --sys-clr-accent-bg: AccentColor;
+}
+@supports (color: AccentColor) {
+    :where(html) {
+        --sys-clr-accent-bg: AccentColor;
+    }
+}
+:where(html) {
     --sys-clr-accent-text: Canvas;
-    --sys-clr-accent-text: AccentColorText;
+}
+@supports (color: AccentColorText) {
+    :where(html) {
+        --sys-clr-accent-text: AccentColorText;
+    }
+}
+:where(html) {
     --sys-clr-mark-bg: CanvasText;
-    --sys-clr-mark-bg: AccentColor;
-    --sys-clr-mark-bg: Mark;
+}
+@supports (color: AccentColor) {
+    :where(html) {
+        --sys-clr-mark-bg: AccentColor;
+    }
+}
+@supports (color: Mark) {
+    :where(html) {
+        --sys-clr-mark-bg: Mark;
+    }
+}
+:where(html) {
     --sys-clr-mark-text: Canvas;
-    --sys-clr-mark-text: AccentColorText;
-    --sys-clr-mark-text: MarkText;
+}
+@supports (color: AccentColorText) {
+    :where(html) {
+        --sys-clr-mark-text: AccentColorText;
+    }
+}
+@supports (color: MarkText) {
+    :where(html) {
+        --sys-clr-mark-text: MarkText;
+    }
+}
+:where(html) {
     --sys-clr-selected-bg: SelectedItem;
     --sys-clr-selected-text: SelectedItemText;
     --sys-clr-selection-bg: Highlight;
@@ -282,9 +314,21 @@ pre {
     --sys-clr-button-bg-active: ButtonFace;
     --sys-clr-button-bg-hover: SelectedItem;
     --sys-clr-button-border: ButtonFace;
-    --sys-clr-button-border: ButtonBorder;
+}
+@supports (color: ButtonBorder) {
+    :where(html) {
+        --sys-clr-button-border: ButtonBorder;
+    }
+}
+:where(html) {
     --sys-clr-button-border-active: ButtonFace;
-    --sys-clr-button-border-active: ButtonBorder;
+}
+@supports (color: ButtonBorder) {
+    :where(html) {
+        --sys-clr-button-border-active: ButtonBorder;
+    }
+}
+:where(html) {
     --sys-clr-button-border-hover: SelectedItem;
     --sys-clr-button-text: ButtonText;
     --sys-clr-button-text-active: ButtonText;
@@ -480,20 +524,20 @@ html {
     --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
     --gap-block-layout-half: 2.5vw;
     --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
-    --gap-inline-indent: 4vw;
+    --gap-inline-indent: 9%;
     --gap-inline-indent: clamp(
         var(--mrg-firm-200, 0.5rem),
-        4svw,
-        var(--mrg-firm-600, 2.25rem)
+        9%,
+        var(--mrg-firm-800, 4rem)
     );
     --gap-inline-layout: 8vw;
     --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
     --gap-inline-layout-half: 4vw;
     --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
-    --gap-inline-tab: 1.5vw;
+    --gap-inline-tab: 5%;
     --gap-inline-tab: clamp(
         var(--mrg-firm-100, 0.3125rem),
-        1.5svw,
+        5%,
         var(--mrg-firm-600, 2.25rem)
     );
 }
@@ -558,7 +602,8 @@ html {
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
-:where(.js__no-focusVisible) :focus {
+:where(.js__no-focusVisible) :focus,
+:where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
@@ -617,8 +662,8 @@ hr {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 9%);
+    margin-right: var(--gap-inline-indent, 9%);
 }
 @media (min-width: 25em) {
     hr {
@@ -679,23 +724,15 @@ i {
     font-style: italic;
 }
 em em,
-i em,
-em i,
-i i {
+i em {
     font-style: normal;
 }
 em em em,
-i em em,
-em em i,
-i em i,
-em i em,
-i i em,
-em i i,
-i i i {
+i em em {
     font-style: italic;
 }
 
-a {
+a[href] {
     --focus-ring-outline-color: currentColor;
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
@@ -705,39 +742,39 @@ a {
     text-underline-offset: var(--stroke-relative-800, 0.25em);
     color: var(--sys-clr-link, LinkText);
 }
-a:visited {
+a[href]:visited {
     color: var(--sys-clr-link-visited, VisitedText);
 }
-.no-js a:focus,
-.js__no-whereSelector a:focus {
+.no-js a[href]:focus,
+.js__no-whereSelector a[href]:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-:where(.js__no-focusVisible) a:focus {
+:where(.js__no-focusVisible) a[href]:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:hover {
+a[href]:hover {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:focus-visible {
+a[href]:focus-visible {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:active {
+a[href]:active {
     color: var(--sys-clr-link-active, ActiveText);
 }
-a.no-style {
+a.no-style[href] {
     text-decoration: none;
     font-weight: inherit;
     color: inherit;
 }
-a[aria-disabled="true"] {
+a[aria-disabled="true"][href] {
     text-decoration-line: line-through;
     color: var(--sys-clr-text-disabled, GrayText);
     opacity: 1;
@@ -765,8 +802,8 @@ blockquote {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 9%);
+    margin-right: var(--gap-inline-indent, 9%);
 }
 blockquote {
     margin-top: var(--mrg-soft-400, 0.8125rem);
@@ -780,8 +817,8 @@ blockquote {
 }
 @media (min-width: 36em) {
     blockquote {
-        margin-left: var(--gap-inline-tab, 1.5vw);
-        margin-right: var(--gap-inline-tab, 1.5vw);
+        margin-left: var(--gap-inline-indent, 9%);
+        margin-right: var(--gap-inline-indent, 9%);
     }
 }
 blockquote > p:first-child {
@@ -828,8 +865,8 @@ pre {
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    margin-left: var(--gap-inline-indent, 4vw);
-    margin-right: var(--gap-inline-indent, 4vw);
+    margin-left: var(--gap-inline-indent, 9%);
+    margin-right: var(--gap-inline-indent, 9%);
 }
 pre {
     position: relative;
@@ -1047,19 +1084,11 @@ h4,
     font-style: italic;
 }
 h4 em,
-.h4 em,
-h4 i,
-.h4 i {
+.h4 em {
     font-style: normal;
 }
 h4 em em,
-.h4 em em,
-h4 em i,
-.h4 em i,
-h4 i em,
-.h4 i em,
-h4 i i,
-.h4 i i {
+.h4 em em {
     font-style: italic;
 }
 h4 button,
@@ -1089,14 +1118,10 @@ h4 a.button-secondary,
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="4"]) em,
-:where([role="heading"][aria-level="4"]) i {
+:where([role="heading"][aria-level="4"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="4"]) em em,
-:where([role="heading"][aria-level="4"]) em i,
-:where([role="heading"][aria-level="4"]) i em,
-:where([role="heading"][aria-level="4"]) i i {
+:where([role="heading"][aria-level="4"]) em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="4"])
@@ -1126,19 +1151,11 @@ h5,
     font-style: italic;
 }
 h5 em,
-.h5 em,
-h5 i,
-.h5 i {
+.h5 em {
     font-style: normal;
 }
 h5 em em,
-.h5 em em,
-h5 em i,
-.h5 em i,
-h5 i em,
-.h5 i em,
-h5 i i,
-.h5 i i {
+.h5 em em {
     font-style: italic;
 }
 h5 button,
@@ -1168,14 +1185,10 @@ h5 a.button-secondary,
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="5"]) em,
-:where([role="heading"][aria-level="5"]) i {
+:where([role="heading"][aria-level="5"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="5"]) em em,
-:where([role="heading"][aria-level="5"]) em i,
-:where([role="heading"][aria-level="5"]) i em,
-:where([role="heading"][aria-level="5"]) i i {
+:where([role="heading"][aria-level="5"]) em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="5"])
@@ -1205,19 +1218,11 @@ h6,
     font-style: italic;
 }
 h6 em,
-.h6 em,
-h6 i,
-.h6 i {
+.h6 em {
     font-style: normal;
 }
 h6 em em,
-.h6 em em,
-h6 em i,
-.h6 em i,
-h6 i em,
-.h6 i em,
-h6 i i,
-.h6 i i {
+.h6 em em {
     font-style: italic;
 }
 h6 button,
@@ -1247,14 +1252,10 @@ h6 a.button-secondary,
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="6"]) em,
-:where([role="heading"][aria-level="6"]) i {
+:where([role="heading"][aria-level="6"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="6"]) em em,
-:where([role="heading"][aria-level="6"]) em i,
-:where([role="heading"][aria-level="6"]) i em,
-:where([role="heading"][aria-level="6"]) i i {
+:where([role="heading"][aria-level="6"]) em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="6"])
@@ -1328,14 +1329,10 @@ h6 a.button-secondary,
     text-wrap: balance;
     font-style: italic;
 }
-.h8 em,
-.h8 i {
+.h8 em {
     font-style: normal;
 }
-.h8 em em,
-.h8 em i,
-.h8 i em,
-.h8 i i {
+.h8 em em {
     font-style: italic;
 }
 .h8 button,
@@ -1359,14 +1356,10 @@ h6 a.button-secondary,
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="8"]) em,
-:where([role="heading"][aria-level="8"]) i {
+:where([role="heading"][aria-level="8"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="8"]) em em,
-:where([role="heading"][aria-level="8"]) em i,
-:where([role="heading"][aria-level="8"]) i em,
-:where([role="heading"][aria-level="8"]) i i {
+:where([role="heading"][aria-level="8"]) em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="8"])
@@ -1383,6 +1376,100 @@ h6 a.button-secondary,
     text-transform: inherit;
 }
 
+.unstyled-heading {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 600;
+    font-size: var(--fs-normal, 1rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: normal;
+    font-style: normal;
+}
+.unstyled-heading em {
+    font-style: italic;
+}
+.unstyled-heading em em {
+    font-style: normal;
+}
+.unstyled-heading em em em {
+    font-style: italic;
+}
+
+.h1:where(.unstyled-heading),
+.h2:where(.unstyled-heading),
+.h3:where(.unstyled-heading),
+.h4:where(.unstyled-heading),
+.h5:where(.unstyled-heading),
+.h6:where(.unstyled-heading),
+.h7:where(.unstyled-heading),
+.h8:where(.unstyled-heading),
+h1:where(.unstyled-heading),
+h2:where(.unstyled-heading),
+h3:where(.unstyled-heading),
+h4:where(.unstyled-heading),
+h5:where(.unstyled-heading),
+h6:where(.unstyled-heading) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 600;
+    font-size: var(--fs-normal, 1rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: normal;
+    font-style: normal;
+}
+.h1:where(.unstyled-heading) em,
+.h2:where(.unstyled-heading) em,
+.h3:where(.unstyled-heading) em,
+.h4:where(.unstyled-heading) em,
+.h5:where(.unstyled-heading) em,
+.h6:where(.unstyled-heading) em,
+.h7:where(.unstyled-heading) em,
+.h8:where(.unstyled-heading) em,
+h1:where(.unstyled-heading) em,
+h2:where(.unstyled-heading) em,
+h3:where(.unstyled-heading) em,
+h4:where(.unstyled-heading) em,
+h5:where(.unstyled-heading) em,
+h6:where(.unstyled-heading) em {
+    font-style: italic;
+}
+.h1:where(.unstyled-heading) em em,
+.h2:where(.unstyled-heading) em em,
+.h3:where(.unstyled-heading) em em,
+.h4:where(.unstyled-heading) em em,
+.h5:where(.unstyled-heading) em em,
+.h6:where(.unstyled-heading) em em,
+.h7:where(.unstyled-heading) em em,
+.h8:where(.unstyled-heading) em em,
+h1:where(.unstyled-heading) em em,
+h2:where(.unstyled-heading) em em,
+h3:where(.unstyled-heading) em em,
+h4:where(.unstyled-heading) em em,
+h5:where(.unstyled-heading) em em,
+h6:where(.unstyled-heading) em em {
+    font-style: normal;
+}
+.h1:where(.unstyled-heading) em em em,
+.h2:where(.unstyled-heading) em em em,
+.h3:where(.unstyled-heading) em em em,
+.h4:where(.unstyled-heading) em em em,
+.h5:where(.unstyled-heading) em em em,
+.h6:where(.unstyled-heading) em em em,
+.h7:where(.unstyled-heading) em em em,
+.h8:where(.unstyled-heading) em em em,
+h1:where(.unstyled-heading) em em em,
+h2:where(.unstyled-heading) em em em,
+h3:where(.unstyled-heading) em em em,
+h4:where(.unstyled-heading) em em em,
+h5:where(.unstyled-heading) em em em,
+h6:where(.unstyled-heading) em em em {
+    font-style: italic;
+}
+
 /* # GLOBALS - Lists
  * ======================================================================== */
 ol,
@@ -1391,7 +1478,7 @@ ul {
     margin-left: 20%;
     padding: 0;
     padding-left: 1em;
-    margin-left: var(--gap-inline-tab, 1.5vw);
+    margin-left: var(--gap-inline-tab, 5%);
     line-height: var(--line-height-400, 1.6875);
 }
 ol ol,
@@ -1412,46 +1499,25 @@ ul ul ul {
 }
 
 ol {
-    /* level 1 - ol */
     list-style-type: decimal;
 }
 ol ol {
-    /* level 2 - ol ol */
     list-style-type: lower-alpha;
 }
 ol ol ol {
-    /* level 3 - ol ol ol */
     list-style-type: lower-roman;
 }
-ol ol ol ol {
-    /* level 4 - ol ol ol ol */
-}
-ol ol ol ol ol {
-    /* level 5 - ol ol ol ol ol */
-}
-
 ul {
-    /* level 1 - ul */
     list-style-type: disc;
 }
 ul ul {
-    /* level 2 - ul ul */
     list-style-type: circle;
 }
 ol ol ol ol,
 ul ul ul {
-    /* level 3 - ul ul ul */
-    /* level 4 - ol ol ol ol */
     list-style-type: square; /* fallback */
     list-style-type: "–  ";
 }
-ol ol ol ol ol,
-ol ol ol ol ul,
-ul ul ul ul {
-    /* level 4 - ul ul ul ul */
-    /* level 5 - ol ol ol ol ol */
-}
-
 li {
     margin: 0;
     margin-top: var(--mrg-soft-300, 0.5rem);
@@ -1470,14 +1536,10 @@ li li li::marker {
 li li li li {
     font-style: italic;
 }
-li li li li em,
-li li li li i {
+li li li li em {
     font-style: normal;
 }
-li li li li em em,
-li li li li em i,
-li li li li i em,
-li li li li i i {
+li li li li em em {
     font-style: italic;
 }
 
@@ -1536,6 +1598,18 @@ fieldset legend {
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
+}
+fieldset legend:where(.unstyled-heading) {
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    font-weight: 600;
+    font-size: var(--fs-normal, 1rem);
+    line-height: var(--line-height-400, 1.6875);
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: normal;
+}
+fieldset legend {
     margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-top: 0;

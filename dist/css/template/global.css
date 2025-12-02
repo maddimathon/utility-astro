@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/global */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.5
+ * @maddimathon/utility-sass@0.1.0-alpha.6
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -93,20 +93,20 @@ html {
     --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
     --gap-block-layout-half: 2.5vw;
     --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
-    --gap-inline-indent: 4vw;
+    --gap-inline-indent: 9%;
     --gap-inline-indent: clamp(
         var(--mrg-firm-200, 0.5rem),
-        4svw,
-        var(--mrg-firm-600, 2.25rem)
+        9%,
+        var(--mrg-firm-800, 4rem)
     );
     --gap-inline-layout: 8vw;
     --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
     --gap-inline-layout-half: 4vw;
     --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
-    --gap-inline-tab: 1.5vw;
+    --gap-inline-tab: 5%;
     --gap-inline-tab: clamp(
         var(--mrg-firm-100, 0.3125rem),
-        1.5svw,
+        5%,
         var(--mrg-firm-600, 2.25rem)
     );
 }
@@ -171,7 +171,8 @@ html {
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
-:where(.js__no-focusVisible) :focus {
+:where(.js__no-focusVisible) :focus,
+:where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
@@ -249,23 +250,15 @@ i {
     font-style: italic;
 }
 em em,
-i em,
-em i,
-i i {
+i em {
     font-style: normal;
 }
 em em em,
-i em em,
-em em i,
-i em i,
-em i em,
-i i em,
-em i i,
-i i i {
+i em em {
     font-style: italic;
 }
 
-a {
+a[href] {
     --focus-ring-outline-color: currentColor;
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
@@ -275,34 +268,34 @@ a {
     text-underline-offset: var(--stroke-relative-800, 0.25em);
     color: var(--sys-clr-link, LinkText);
 }
-a:visited {
+a[href]:visited {
     color: var(--sys-clr-link-visited, VisitedText);
 }
-.no-js a:focus,
-.js__no-whereSelector a:focus {
+.no-js a[href]:focus,
+.js__no-whereSelector a[href]:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-:where(.js__no-focusVisible) a:focus {
+:where(.js__no-focusVisible) a[href]:focus {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:hover {
+a[href]:hover {
     text-decoration-color: transparent;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
-a:active {
+a[href]:active {
     color: var(--sys-clr-link-active, ActiveText);
 }
-a.no-style {
+a.no-style[href] {
     text-decoration: none;
     font-weight: inherit;
     color: inherit;
 }
-a[aria-disabled="true"] {
+a[aria-disabled="true"][href] {
     text-decoration-line: line-through;
     color: var(--sys-clr-text-disabled, GrayText);
     opacity: 1;
@@ -343,8 +336,8 @@ blockquote {
 }
 @media (min-width: 36em) {
     blockquote {
-        margin-left: var(--gap-inline-tab, 1.5vw);
-        margin-right: var(--gap-inline-tab, 1.5vw);
+        margin-left: var(--gap-inline-indent, 9%);
+        margin-right: var(--gap-inline-indent, 9%);
     }
 }
 blockquote > p:first-child {
@@ -506,14 +499,10 @@ h4 {
     text-wrap: balance;
     font-style: italic;
 }
-h4 em,
-h4 i {
+h4 em {
     font-style: normal;
 }
-h4 em em,
-h4 em i,
-h4 i em,
-h4 i i {
+h4 em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="4"]) {
@@ -527,14 +516,10 @@ h4 i i {
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="4"]) em,
-:where([role="heading"][aria-level="4"]) i {
+:where([role="heading"][aria-level="4"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="4"]) em em,
-:where([role="heading"][aria-level="4"]) em i,
-:where([role="heading"][aria-level="4"]) i em,
-:where([role="heading"][aria-level="4"]) i i {
+:where([role="heading"][aria-level="4"]) em em {
     font-style: italic;
 }
 h5 {
@@ -548,14 +533,10 @@ h5 {
     text-wrap: balance;
     font-style: italic;
 }
-h5 em,
-h5 i {
+h5 em {
     font-style: normal;
 }
-h5 em em,
-h5 em i,
-h5 i em,
-h5 i i {
+h5 em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="5"]) {
@@ -569,14 +550,10 @@ h5 i i {
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="5"]) em,
-:where([role="heading"][aria-level="5"]) i {
+:where([role="heading"][aria-level="5"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="5"]) em em,
-:where([role="heading"][aria-level="5"]) em i,
-:where([role="heading"][aria-level="5"]) i em,
-:where([role="heading"][aria-level="5"]) i i {
+:where([role="heading"][aria-level="5"]) em em {
     font-style: italic;
 }
 h6 {
@@ -590,14 +567,10 @@ h6 {
     text-wrap: balance;
     font-style: italic;
 }
-h6 em,
-h6 i {
+h6 em {
     font-style: normal;
 }
-h6 em em,
-h6 em i,
-h6 i em,
-h6 i i {
+h6 em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="6"]) {
@@ -611,14 +584,10 @@ h6 i i {
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="6"]) em,
-:where([role="heading"][aria-level="6"]) i {
+:where([role="heading"][aria-level="6"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="6"]) em em,
-:where([role="heading"][aria-level="6"]) em i,
-:where([role="heading"][aria-level="6"]) i em,
-:where([role="heading"][aria-level="6"]) i i {
+:where([role="heading"][aria-level="6"]) em em {
     font-style: italic;
 }
 :where([role="heading"][aria-level="7"]) {
@@ -643,14 +612,10 @@ h6 i i {
     text-wrap: balance;
     font-style: italic;
 }
-:where([role="heading"][aria-level="8"]) em,
-:where([role="heading"][aria-level="8"]) i {
+:where([role="heading"][aria-level="8"]) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="8"]) em em,
-:where([role="heading"][aria-level="8"]) em i,
-:where([role="heading"][aria-level="8"]) i em,
-:where([role="heading"][aria-level="8"]) i i {
+:where([role="heading"][aria-level="8"]) em em {
     font-style: italic;
 }
 /* # GLOBALS - Lists
@@ -681,46 +646,25 @@ ul ul ul {
 }
 
 ol {
-    /* level 1 - ol */
     list-style-type: decimal;
 }
 ol ol {
-    /* level 2 - ol ol */
     list-style-type: lower-alpha;
 }
 ol ol ol {
-    /* level 3 - ol ol ol */
     list-style-type: lower-roman;
 }
-ol ol ol ol {
-    /* level 4 - ol ol ol ol */
-}
-ol ol ol ol ol {
-    /* level 5 - ol ol ol ol ol */
-}
-
 ul {
-    /* level 1 - ul */
     list-style-type: disc;
 }
 ul ul {
-    /* level 2 - ul ul */
     list-style-type: circle;
 }
 ol ol ol ol,
 ul ul ul {
-    /* level 3 - ul ul ul */
-    /* level 4 - ol ol ol ol */
     list-style-type: square; /* fallback */
     list-style-type: "–  ";
 }
-ol ol ol ol ol,
-ol ol ol ol ul,
-ul ul ul ul {
-    /* level 4 - ul ul ul ul */
-    /* level 5 - ol ol ol ol ol */
-}
-
 li {
     margin: 0;
     margin-top: var(--mrg-soft-300, 0.5rem);
@@ -739,14 +683,10 @@ li li li::marker {
 li li li li {
     font-style: italic;
 }
-li li li li em,
-li li li li i {
+li li li li em {
     font-style: normal;
 }
-li li li li em em,
-li li li li em i,
-li li li li i em,
-li li li li i i {
+li li li li em em {
     font-style: italic;
 }
 
@@ -806,6 +746,8 @@ fieldset legend {
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
+}
+fieldset legend {
     margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
     margin-top: 0;

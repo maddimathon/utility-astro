@@ -43,6 +43,26 @@ export class Build extends BuildStage {
         'document',
     ];
 
+    /**
+     * @override
+     */
+    // @ts-expect-error
+    get ARGS_DEFAULT() {
+        // returns
+        if ( this.params.starting && !this.params.packaging && !this.params.releasing ) {
+
+            /** @type {Stage.Args.Build} */
+            const args = {
+                ...super.ARGS_DEFAULT,
+                prettify: false,
+            };
+
+            return args;
+        }
+
+        return super.ARGS_DEFAULT;
+    }
+
 
     /**
      * @protected

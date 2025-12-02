@@ -1,0 +1,177 @@
+---
+/**
+ * @since 0.1.0-alpha.7
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { Props as NavMenuProps } from './NavMenu.d.ts';
+import type { NestedListItem } from './NestedList.d.ts';
+
+/* import - functions */
+import  { htmlAttributeString } from '../../ts/01-functions/index.js';
+import { parseItemAttributes } from './MenuList.astro';
+import { parseMenuItem } from './NavMenu.astro';
+
+/* import - values */
+
+/* import - components */
+import Heading from './Heading.astro';
+import NestedList from './NestedList.astro';
+import Toggle from './Toggle.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+type NavMenu_PartialKeys = 'id';
+
+type NavMenu_SemiProps = Omit<
+    NavMenuProps,
+    NavMenu_PartialKeys | 'aria-label' | 'aria-labelledby'
+> & Partial<Pick<NavMenuProps, NavMenu_PartialKeys>>;
+
+/**
+ * Input props for the TableOfContents component.
+ *
+ * @since 0.1.0-alpha.7
+ */
+export interface TableOfContents_Props extends NavMenu_SemiProps {
+    /**
+     * The base heading level for this TOC.
+     */
+    heading: number;
+
+    /**
+     * Whether the table of contents should be in a Toggle component.
+     *
+     * @default true
+     */
+    asToggle?: boolean;
+
+    defaultOpen?: boolean;
+
+    /**
+     * The base display heading level for this TOC, if any.
+     * 
+     * @default false
+     */
+    displayHeading?: false | number | undefined;
+
+    /**
+     * Type of list tag used for display (tables of content should always be
+     * ordered lists) via utility class.
+     */
+    listTag?: 'ol' | 'ul';
+}
+
+export interface Props
+    extends GenericElementProps<
+        TableOfContents_Props,
+        'div',
+        'aria-label' | 'aria-labelledby'
+    > {}
+
+const {
+    heading,
+    menu,
+    // optional
+    asToggle = true,
+    class: classList = [],
+    defaultOpen,
+    displayHeading = false,
+    id = 'toc',
+    listTag,
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* FUNCTIONS ===================================== */
+
+export function parseTableOfContents(
+    currentURL: URL,
+    item: TableOfContents_Props['menu'][number],
+): NestedListItem {
+
+    const asMenuItem = parseMenuItem(currentURL, item);
+
+    const html_attrs = parseItemAttributes(asMenuItem);
+
+    const html = html_attrs.href
+        ? `<a${htmlAttributeString({
+            ...html_attrs,
+            href: item.href instanceof URL ? item.href.toString() : item.href,
+            child: undefined,
+        })}>${html_attrs.html}</a>`
+        : `<span>${html_attrs.html}</span>`;
+
+    if (!asMenuItem.child?.length) {
+        return { html };
+    }
+
+    const children = item.child?.map(_childItem =>parseTableOfContents(currentURL, _childItem));
+
+    return {
+        html,
+        children,
+        childrenTag: 'ol',
+    };
+}
+
+/* CONSTANTS ===================================== */
+
+const headingID = `${id}---heading-element`;
+
+const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item));
+
+const headingHTML =
+    (await Astro.slots.render('button'))?.trim() || 'Table of Contents';
+
+const fullClassList = [
+    'table-of-contents',
+    listTag && `table-of-contents--${listTag}`,
+    '||',
+    classList,
+];
+---
+
+{asToggle ? (
+    <Toggle
+        id={id}
+        heading={heading}
+        class:list={fullClassList}
+        displayHeading={displayHeading}
+        defaultOpen={defaultOpen}
+        tag="nav"
+    >
+        <Fragment slot="button" set:html={headingHTML} />
+        <NestedList
+            tag='ol'
+            list={nestedLists}
+        />
+    </Toggle>
+) : (
+    <Heading
+        id={headingID}
+        heading={heading}
+        displayHeading={displayHeading }
+        set:html={headingHTML}
+    />
+    <nav
+        {...attributes}
+        aria-labelledby={headingID}
+        id={id}
+        class:list={fullClassList}
+        role='navigation'
+    >
+        <NestedList
+            tag='ol'
+            list={nestedLists}
+        />
+    </nav>
+)}
+
+

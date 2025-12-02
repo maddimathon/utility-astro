@@ -3,10 +3,10 @@
 /// @since 0.1.0-alpha
 ///
 
-@use '../lib';
+@use 'lib';
 
 /* # TOGGLE BLOCKS ==================================== */
 
-@include lib.snippet-support-astro-settings-menu;
+@include lib.snippet-support-astro-content;
 
 @include lib.extend-selectors($optional: true);

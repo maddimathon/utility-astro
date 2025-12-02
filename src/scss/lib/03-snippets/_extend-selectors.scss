@@ -4,6 +4,7 @@
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as lib;
 
@@ -25,6 +26,15 @@ $_astroContentLayoutSelectors: if(
 ) {
     //
     $additional: list.append($additional, (nav));
+    $additional: list.append(
+        $additional,
+        (
+            (
+                ':where(.js) [data-toggle-control][data-toggle-is-current-target]'
+            ),
+            focus-ring--where
+        )
+    );
 
     @if config.$print_astro_content and not config.$print_utils {
         $additional: list.join(
@@ -53,6 +63,27 @@ $_astroContentLayoutSelectors: if(
         $additional: list.join(
             $additional,
             $_astroContentLayoutSelectors,
+            $separator: comma
+        );
+    }
+
+    @if config.$print_astro_toggle {
+        $_baseLevelListSelector: (
+            '.table-of-contents [data-toggle-content] > .container ol',
+            '.table-of-contents > ol'
+        );
+        $_baseLevelListSelector_lvl2: selector.nest(
+            $_baseLevelListSelector,
+            'ol, ul'
+        );
+
+        $additional: list.join(
+            $additional,
+            (
+                ($_baseLevelListSelector, 'ul'),
+                ($_baseLevelListSelector_lvl2, 'ul-2'),
+                (selector.nest($_baseLevelListSelector_lvl2, 'ol, ul'), 'ul-3')
+            ),
             $separator: comma
         );
     }

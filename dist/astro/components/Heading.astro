@@ -7,7 +7,6 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as HeadingProps } from './Heading.d.ts';
 
 /* import - functions */
 
@@ -19,11 +18,35 @@ import type { Props as HeadingProps } from './Heading.d.ts';
 
 /* TYPES ===================================== */
 
-export type * from './Heading.d.ts';
-
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<HeadingProps, 'div'>;
+/**
+ * Input props for the Heading component.
+ *
+ * @since 0.1.0-alpha
+ */
+export interface HeadingProps {
+    /**
+     * Logical heading order value for this heading.
+     */
+    heading: number;
+
+    /**
+     * If any, the heading display level override for this heading (otherwise
+     * the `heading` value is used).  If false, a 'unstyled-heading' utility
+     * class is adding to the heading.
+     *
+     * @since 0.1.0-alpha.7 — Added false and undefined options.
+     */
+    displayHeading?: number | false | undefined;
+
+    /**
+     * The minimum allowed value for this heading.
+     */
+    minimum?: number;
+}
+
+export interface Props extends GenericElementProps<HeadingProps, 'div'> {}
 
 const {
     class: classList = [],
@@ -52,7 +75,15 @@ const Tag =
 
 {
     htmlContent &&
-        (Tag !== 'p' ? (
+        (displayHeading === false ? (
+            <p
+                {...attributes}
+                aria-level={heading > 1 ? heading : undefined}
+                class:list={['unstyled-heading ||', classList]}
+                role={heading > 1 ? 'heading' : undefined}
+                set:html={htmlContent}
+            />
+        ) : Tag !== 'p' ? (
             <Tag
                 {...attributes}
                 class:list={[

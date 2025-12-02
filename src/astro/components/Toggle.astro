@@ -36,45 +36,89 @@ export interface ToggleProps {
      */
     id: string;
 
+    class?: string;
+
     defaultOpen?: boolean;
 
     /**
      * If any, the heading display level override for this heading (otherwise
      * the `heading` value is used).
+     *
+     * @since 0.1.0-alpha.7 — Added false and undefined options.
      */
-    displayHeading?: number;
+    displayHeading?: number | false | undefined;
 
     /**
      * If any, the heading level used to wrap the toggle button.
      */
     heading?: number | false;
+
+    /**
+     * The HTML tag used for the container element.
+     *
+     * @default 'section'
+     *
+     * @since 0.1.0-alpha.7
+     */
+    tag?: undefined | 'div' | 'li' | 'nav' | 'section';
+
+    /**
+     * The HTML tag used for the container's header element. If tag is
+     * 'section', default is 'header', else it is 'div'.
+     *
+     * @since 0.1.0-alpha.7
+     */
+    headerTag?: undefined | 'div' | 'header';
 }
 
-export interface Props extends ElementProps<ToggleProps, 'div'> {}
+export interface Props
+    extends ElementProps<
+        ToggleProps,
+        'div',
+        'aria-label' | 'aria-labelledby' | 'class' | 'class:list'
+    > {}
 
 const {
     defaultOpen,
     displayHeading,
     heading,
     id,
-    class: classList = [],
+    // optional
+    headerTag,
+    tag: Container = 'section',
     ...attributes
 }: Props = Astro.props;
 
+/* FUNCTIONS ===================================== */
+
+/**
+ * Functions that generate ID values for Toggle elements.
+ *
+ * @since 0.1.0-alpha.7
+ */
+export const generateID = {
+    button: (_id: string) => `${_id}-button`,
+    content: (_id: string) => `${_id}-content`,
+    title: (_id: string) => `${_id}-title`,
+};
+
 /* CONSTANTS ===================================== */
 
-const buttonID = `${id}-button`;
-const contentID = `${id}-content`;
-const titleID = `${id}-title`;
+const buttonID = generateID.button(id);
+const contentID = generateID.content(id);
+const titleID = generateID.title(id);
+
+const ContainerHeader =
+    headerTag ?? (Container === 'section' ? 'header' : 'div');
 ---
 
-<section
+<Container
     id={id}
-    class:list={classList}
     {...attributes}
+    aria-labelledby={titleID}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
 >
-    <header
+    <ContainerHeader
         id={titleID}
         class='toggle-title'
     >
@@ -101,13 +145,12 @@ const titleID = `${id}-title`;
                 </Toggle_Control>
             )
         }
-    </header>
+    </ContainerHeader>
 
     <div
-        aria-labelledby={titleID}
         data-toggle-content={id}
         id={contentID}
     >
         <div class='container'><slot /></div>
     </div>
-</section>
+</Container>

@@ -53,17 +53,20 @@ export type ElementProps<
  * ```ts
  * export type Props = GenericElementProps<PageProps, "div"|"a">;
  * ```
+ * 
+ * @since 0.1.0-alpha.7 — Added optional T_OmitKeys type param.
  */
 export type GenericElementProps<
     T_Props,
     T_HtmlTag extends HTMLTag,
+    T_OmitKeys extends number | string = never,
 > =
     GenericProps<T_Props & {
         class?: ClassList;
     }>
     & Partial<Omit<
         HTMLAttributes<T_HtmlTag>,
-        keyof T_Props | "class" | "class:list"
+        T_OmitKeys | "class" | "class:list"
     >>
     & {
         'aria-description'?: string;

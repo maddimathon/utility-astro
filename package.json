@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.1.0-alpha.6",
+    "version": "0.1.0-alpha.7",
 
     "author": "Maddi Mathon (www.maddimathon.com)",
     "description": "Astro utilities to use in a variety of projects.",
@@ -153,7 +153,7 @@
         "preview": "astro preview",
         
         
-        "build-start": "build-utils build -- --starting --without prettify --without-document astro && npm run start",
+        "build-start": "build-utils build --starting && npm run start",
 
         "start": "run-p watch:* start:*",
             "watch:scss":  "watch -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -p 'src/scss/**/*'                         -c 'build-utils build --without minimize,readme,document --only-compile scss  --watchedWatcher \"watch:scss\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
@@ -183,21 +183,21 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.5",
+        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.6",
         "@maddimathon/utility-typescript": "2.0.0-beta.1",
-        "astro": "^5.15.8",
+        "astro": "^5.16.3",
         "luxon": "^3.7.2",
         "zod": "^3.25.76"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.5",
-        "@maddimathon/build-utilities": "0.3.0-alpha.8",
+        "@astrojs/check": "^0.9.6",
+        "@maddimathon/build-utilities": "0.3.0-alpha.9",
         "@types/jest": "30.0.0",
         "@types/luxon": "3.7.1",
         "@types/node": "22.15.30",
         "jest": "30.2.0",
         "npm-run-all": "4.1.5",
-        "typedoc": "0.28.14",
+        "typedoc": "0.28.15",
         "typedoc-plugin-inline-sources": "1.3.0",
         "typedoc-plugin-markdown": "4.9.0",
         "typescript": "5.9.3",
@@ -206,9 +206,9 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "~0.1.0-alpha.5",
+        "@maddimathon/utility-sass": "~0.1.0-alpha.6",
         "@maddimathon/utility-typescript": "~2.0.0-beta.1",
-        "astro": "^5.15.8",
+        "astro": "^5.16.3",
         "zod": "^3.25.76"
     },
     "peerDependenciesMeta": {

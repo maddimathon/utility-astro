@@ -19,6 +19,37 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.7** — 2025-12-01
+
+ElementToggle class and Toggle component updates.  New TableOfContents component.
+
+### Misc. Breaking
+- ElementToggle constructor properties changed (now requires elements, not just
+  container id)
+
+### Added
+- Added tag option to Toggle props
+- New ElementToggle static methods to construct asynchronously
+  (ElementToggle.init() and ElementToggle.new())
+- New TableOfContents component
+- Added option to set displayHeading to false in Heading props to add
+  'unstyled-heading' utility class
+- Added tag and headerTag options to Toggle props to change the element tags
+- New htmlAttributeString() function for formatting html attributes from objects
+- Added toc option to LoremIpsum props to display
+
+### Changed
+- Various improvements to the ElementToggle scripts:
+    - Opts can now be passed to constructors for better configuration
+    - By default or when opts.openWhenTargetted is true — if a toggle block is
+      the url's targeted anchor, that toggle will be opened and focus will be
+      set to the primary button (with focusVisible, including a fallback for
+      poor browser support)
+
+### Fixed
+- Icon width display issue in Chrome (scss)
+
+
 ## **0.1.0-alpha.6** — 2025-11-26
 
 Forgot to actually add a backdrop to ToggleNavMenu and fixed lack of

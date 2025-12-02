@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.5
+ * @maddimathon/utility-sass@0.1.0-alpha.6
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -11,6 +11,10 @@
     display: inline-block;
     height: var(--icon-size, 1.375em);
     height: calc(
+        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
+    );
+    min-width: var(--icon-size, 1.375em);
+    min-width: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
     );
     vertical-align: middle;

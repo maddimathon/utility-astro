@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.5
+ * @maddimathon/utility-sass@0.1.0-alpha.6
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -22,8 +22,7 @@
 
 .website-settings__content {
     background: var(--sys-clr-background, Canvas);
-    width: -moz-fit-content;
-    width: fit-content;
+    width: 100%;
     max-width: min(var(--width-content, 36rem), 90vw);
 }
 .website-settings__content fieldset,

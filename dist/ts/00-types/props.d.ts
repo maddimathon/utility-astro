@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.6
+ * @maddimathon/utility-astro@0.1.0-alpha.7
  * @license MIT
  */
 import type { HTMLAttributes, HTMLTag } from 'astro/types';
@@ -43,10 +43,12 @@ export type ElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys extends 
  * ```ts
  * export type Props = GenericElementProps<PageProps, "div"|"a">;
  * ```
+ *
+ * @since 0.1.0-alpha.7 — Added optional T_OmitKeys type param.
  */
-export type GenericElementProps<T_Props, T_HtmlTag extends HTMLTag> = GenericProps<T_Props & {
+export type GenericElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys extends number | string = never> = GenericProps<T_Props & {
     class?: ClassList;
-}> & Partial<Omit<HTMLAttributes<T_HtmlTag>, keyof T_Props | "class" | "class:list">> & {
+}> & Partial<Omit<HTMLAttributes<T_HtmlTag>, T_OmitKeys | "class" | "class:list">> & {
     'aria-description'?: string;
 };
 //# sourceMappingURL=props.d.ts.map

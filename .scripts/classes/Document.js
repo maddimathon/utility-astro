@@ -112,27 +112,35 @@ export class Document extends DocumentStage {
      * @protected
      */
     async astro() {
-        this.console.progress( 'building astro docs...', 1 );
+        const checkOnly = this.params.starting && !this.params.packaging && !this.params.releasing;
+
+        if ( checkOnly ) {
+            this.console.progress( 'checking astro docs...', 1 );
+        } else {
+            this.console.progress( 'building astro docs...', 1 );
+        }
 
         const distDir = this.getDistDir( 'docs' ).trim().replace( /\/$/g, '' );
 
-        if ( this.fs.exists( distDir ) ) {
-            this.console.verbose( 'deleting existing files...', 2 );
-            this.fs.delete( distDir, this.params.verbose ? 3 : 2 );
+        if ( this.fs.exists( distDir ) && this.params.starting ) {
+            this.console[ this.params.starting ? 'progress' : 'verbose' ]( 'deleting existing files...', 2 );
+            this.fs.delete( distDir, ( this.params.verbose && !this.params.starting ) ? 3 : 2 );
         }
 
         this.console.verbose( 'checking astro types...', 2 );
         this.try(
             this.console.nc.cmd,
             this.params.verbose ? 3 : 2,
-            [ 'astro check' ]
+            [ 'astro check' ],
         );
 
-        this.console.verbose( 'compiling to ' + distDir + '...', 2 );
-        this.try(
-            this.console.nc.cmd,
-            this.params.verbose ? 3 : 2,
-            [ 'astro build' ]
-        );
+        if ( !checkOnly ) {
+            this.console.verbose( 'compiling to ' + distDir + '...', 2 );
+            this.try(
+                this.console.nc.cmd,
+                this.params.verbose ? 3 : 2,
+                [ 'astro build' ],
+            );
+        }
     }
 }

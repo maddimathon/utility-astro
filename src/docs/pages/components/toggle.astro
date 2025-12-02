@@ -6,12 +6,14 @@
  */
 
 /* import - types */
+import type { ComponentProps } from 'astro/types';
 
 /* import - functions */
 
 /* import - values */
 
 /* import - components */
+import TableOfContents from '../../../astro/components/TableOfContents.astro';
 import ToggleComponent from '../../../astro/components/Toggle.astro';
 
 /* import - layouts */
@@ -20,17 +22,66 @@ import DocsPage from '../../layouts/DocsPage.astro';
 /* TYPES ===================================== */
 
 /* CONSTANTS ===================================== */
+
+const headingLevels = [1, 2, 3, 4, 5, 6, 7, 8] as const;
+
+const exampleMenuIds_entries = [
+    ['one' as const, { label: 'Example 1', id: 'toggle-ex-1' }],
+    ['two' as const, { label: 'Example 2', id: 'toggle-ex-2' }],
+
+    ...headingLevels.map(
+        (num) =>
+            [
+                `heading-${num}`,
+                {
+                    label: `Example Heading ${num}`,
+                    id: `toggle-ex-heading-${num}`,
+                },
+            ] as const
+    ),
+] as const;
+
+type ExampleKeys = (typeof exampleMenuIds_entries)[number][0];
+type ExampleValues = (typeof exampleMenuIds_entries)[number][1];
+
+const exampleMenuIds = Object.fromEntries(exampleMenuIds_entries) as {
+    [K in ExampleKeys]: ExampleValues;
+};
+
+const tocMenu: ComponentProps<typeof TableOfContents>['menu'] = [
+    ...[exampleMenuIds.one, exampleMenuIds.two].map((item) => ({
+        ...item,
+        id: undefined,
+        href: `#${item.id}`,
+    })),
+
+    {
+        label: 'Headings',
+        href: false,
+        child: headingLevels.map((num) => ({
+            label: exampleMenuIds[`heading-${num}`].label,
+            href: `#${exampleMenuIds[`heading-${num}`].id}`,
+        })),
+    },
+];
 ---
 
 <DocsPage title={['Toggle', 'Components']}>
+    <TableOfContents
+        heading={2}
+        menu={tocMenu}
+    />
+
+    <hr />
+
     <ToggleComponent
-        id='toggle-ex-1'
+        id={exampleMenuIds.one.id}
         heading={false}
     >
         <p>Boo!</p>
     </ToggleComponent>
     <ToggleComponent
-        id='toggle-ex-2'
+        id={exampleMenuIds.two.id}
         heading={false}
         defaultOpen={true}
     >
@@ -39,9 +90,9 @@ import DocsPage from '../../layouts/DocsPage.astro';
     </ToggleComponent>
 
     {
-        ([1, 2, 3, 4, 5, 6, 7, 8] as const).map((heading) => (
+        headingLevels.map((heading) => (
             <ToggleComponent
-                id={`toggle-ex-heading-${heading}`}
+                id={exampleMenuIds[`heading-${heading}`].id}
                 heading={heading}
             >
                 <Fragment
