@@ -67,26 +67,24 @@ $_astroContentLayoutSelectors: if(
         );
     }
 
-    @if config.$print_astro_toggle {
-        $_baseLevelListSelector: (
-            '.table-of-contents [data-toggle-content] > .container ol',
-            '.table-of-contents > ol'
-        );
-        $_baseLevelListSelector_lvl2: selector.nest(
-            $_baseLevelListSelector,
-            'ol, ul'
-        );
+    $_baseLevelListSelector: (
+        '.table-of-contents [data-toggle-content] > .container ol',
+        '.table-of-contents > ol'
+    );
+    $_baseLevelListSelector_lvl2: selector.nest(
+        $_baseLevelListSelector,
+        'ol, ul'
+    );
 
-        $additional: list.join(
-            $additional,
-            (
-                ($_baseLevelListSelector, 'ul'),
-                ($_baseLevelListSelector_lvl2, 'ul-2'),
-                (selector.nest($_baseLevelListSelector_lvl2, 'ol, ul'), 'ul-3')
-            ),
-            $separator: comma
-        );
-    }
+    $additional: list.join(
+        $additional,
+        (
+            ($_baseLevelListSelector, 'ul'),
+            ($_baseLevelListSelector_lvl2, 'ul-2'),
+            (selector.nest($_baseLevelListSelector_lvl2, 'ol, ul'), 'ul-3')
+        ),
+        $separator: comma
+    );
 
     @include lib.extend-selectors-utils(
         $additional: $additional,

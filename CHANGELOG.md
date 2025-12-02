@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.9** — 2025-12-02
+
+Quick fix to extend table-of-contents utilities non-conditionally.
+
+
 ## **0.1.0-alpha.8** — 2025-12-02
 
 Very small LoremIpsum content updates.
