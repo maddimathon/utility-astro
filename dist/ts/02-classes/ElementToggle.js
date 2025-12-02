@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.7
+ * @maddimathon/utility-astro@0.1.0-alpha.8
  * @license MIT
  */
 // import { VariableInspector } from '../../../node_modules/@maddimathon/utility-typescript/dist/classes/VariableInspector.js';

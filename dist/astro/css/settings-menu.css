@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.6
+ * @maddimathon/utility-sass@0.1.0-alpha.7
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -26,8 +26,8 @@
     max-width: min(var(--width-content, 36rem), 90vw);
 }
 .website-settings__content fieldset,
-.website-settings__content a.button,
-.website-settings__content a.button-secondary,
+.website-settings__content a.button[href],
+.website-settings__content a.button-secondary[href],
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
@@ -38,8 +38,8 @@
     margin-right: 0;
 }
 .website-settings__content input,
-.website-settings__content a.button,
-.website-settings__content a.button-secondary,
+.website-settings__content a.button[href],
+.website-settings__content a.button-secondary[href],
 .website-settings__content button,
 .website-settings__content [role="button"] {
     margin-top: var(--mrg-firm-400, 1.25rem);

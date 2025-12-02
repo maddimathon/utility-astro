@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.8** — 2025-12-02
+
+Very small LoremIpsum content updates.
+
+
 ## **0.1.0-alpha.7** — 2025-12-01
 
 ElementToggle class and Toggle component updates.  New TableOfContents component.

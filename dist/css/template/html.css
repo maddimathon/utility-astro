@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/html */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.6
+ * @maddimathon/utility-sass@0.1.0-alpha.7
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -926,16 +926,16 @@ h1 input[type="button"],
 .h1 input[type="button"],
 h1 input[type="submit"],
 .h1 input[type="submit"],
-h1 a.button,
-.h1 a.button,
-h1 a.button-secondary,
-.h1 a.button-secondary,
+h1 a.button[href],
+.h1 a.button[href],
+h1 a.button-secondary[href],
+.h1 a.button-secondary[href],
 .page-title button,
 .page-title [role="button"],
 .page-title input[type="button"],
 .page-title input[type="submit"],
-.page-title a.button,
-.page-title a.button-secondary {
+.page-title a.button[href],
+.page-title a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -957,8 +957,8 @@ h1 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -985,10 +985,10 @@ h2 input[type="button"],
 .h2 input[type="button"],
 h2 input[type="submit"],
 .h2 input[type="submit"],
-h2 a.button,
-.h2 a.button,
-h2 a.button-secondary,
-.h2 a.button-secondary {
+h2 a.button[href],
+.h2 a.button[href],
+h2 a.button-secondary[href],
+.h2 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1010,8 +1010,8 @@ h2 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1038,10 +1038,10 @@ h3 input[type="button"],
 .h3 input[type="button"],
 h3 input[type="submit"],
 .h3 input[type="submit"],
-h3 a.button,
-.h3 a.button,
-h3 a.button-secondary,
-.h3 a.button-secondary {
+h3 a.button[href],
+.h3 a.button[href],
+h3 a.button-secondary[href],
+.h3 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1063,8 +1063,8 @@ h3 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1099,10 +1099,10 @@ h4 input[type="button"],
 .h4 input[type="button"],
 h4 input[type="submit"],
 .h4 input[type="submit"],
-h4 a.button,
-.h4 a.button,
-h4 a.button-secondary,
-.h4 a.button-secondary {
+h4 a.button[href],
+.h4 a.button[href],
+h4 a.button-secondary[href],
+.h4 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1130,8 +1130,8 @@ h4 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1166,10 +1166,10 @@ h5 input[type="button"],
 .h5 input[type="button"],
 h5 input[type="submit"],
 .h5 input[type="submit"],
-h5 a.button,
-.h5 a.button,
-h5 a.button-secondary,
-.h5 a.button-secondary {
+h5 a.button[href],
+.h5 a.button[href],
+h5 a.button-secondary[href],
+.h5 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1197,8 +1197,8 @@ h5 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1233,10 +1233,10 @@ h6 input[type="button"],
 .h6 input[type="button"],
 h6 input[type="submit"],
 .h6 input[type="submit"],
-h6 a.button,
-.h6 a.button,
-h6 a.button-secondary,
-.h6 a.button-secondary {
+h6 a.button[href],
+.h6 a.button[href],
+h6 a.button-secondary[href],
+.h6 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1264,8 +1264,8 @@ h6 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1287,8 +1287,8 @@ h6 a.button-secondary,
 .h7 [role="button"],
 .h7 input[type="button"],
 .h7 input[type="submit"],
-.h7 a.button,
-.h7 a.button-secondary {
+.h7 a.button[href],
+.h7 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1310,8 +1310,8 @@ h6 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1339,8 +1339,8 @@ h6 a.button-secondary,
 .h8 [role="button"],
 .h8 input[type="button"],
 .h8 input[type="submit"],
-.h8 a.button,
-.h8 a.button-secondary {
+.h8 a.button[href],
+.h8 a.button-secondary[href] {
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -1368,8 +1368,8 @@ h6 a.button-secondary,
         [role="button"],
         input[type="button"],
         input[type="submit"],
-        a.button,
-        a.button-secondary
+        a.button[href],
+        a.button-secondary[href]
     ) {
     font: inherit;
     letter-spacing: inherit;
@@ -1902,10 +1902,11 @@ button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
-a.button,
-a.button-secondary,
+a.button[href],
+a.button-secondary[href],
 button[type="reset"],
 input[type="reset"],
+a.button-secondary,
 button.button-secondary,
 [role="button"].button-secondary,
 input[type="button"].button-secondary,
@@ -1929,16 +1930,16 @@ input[type="submit"].button-secondary {
 .no-js [role="button"]:focus,
 .no-js input[type="button"]:focus,
 .no-js input[type="submit"]:focus,
-.no-js a.button:focus,
-.no-js a.button-secondary:focus,
+.no-js a.button[href]:focus,
 .no-js input[type="reset"]:focus,
+.no-js a.button-secondary:focus,
 .js__no-whereSelector button:focus,
 .js__no-whereSelector [role="button"]:focus,
 .js__no-whereSelector input[type="button"]:focus,
 .js__no-whereSelector input[type="submit"]:focus,
-.js__no-whereSelector a.button:focus,
-.js__no-whereSelector a.button-secondary:focus,
-.js__no-whereSelector input[type="reset"]:focus {
+.js__no-whereSelector a.button[href]:focus,
+.js__no-whereSelector input[type="reset"]:focus,
+.js__no-whereSelector a.button-secondary:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1953,9 +1954,9 @@ input[type="submit"].button-secondary {
 :where(.js__no-focusVisible) [role="button"]:focus,
 :where(.js__no-focusVisible) input[type="button"]:focus,
 :where(.js__no-focusVisible) input[type="submit"]:focus,
-:where(.js__no-focusVisible) a.button:focus,
-:where(.js__no-focusVisible) a.button-secondary:focus,
-:where(.js__no-focusVisible) input[type="reset"]:focus {
+:where(.js__no-focusVisible) a.button[href]:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus,
+:where(.js__no-focusVisible) a.button-secondary:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1970,9 +1971,9 @@ button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
-a.button:hover,
-a.button-secondary:hover,
-input[type="reset"]:hover {
+a.button[href]:hover,
+input[type="reset"]:hover,
+a.button-secondary:hover {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1987,9 +1988,9 @@ button:focus-visible,
 [role="button"]:focus-visible,
 input[type="button"]:focus-visible,
 input[type="submit"]:focus-visible,
-a.button:focus-visible,
-a.button-secondary:focus-visible,
-input[type="reset"]:focus-visible {
+a.button[href]:focus-visible,
+input[type="reset"]:focus-visible,
+a.button-secondary:focus-visible {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2004,9 +2005,9 @@ button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
 input[type="submit"]:focus-within,
-a.button:focus-within,
-a.button-secondary:focus-within,
-input[type="reset"]:focus-within {
+a.button[href]:focus-within,
+input[type="reset"]:focus-within,
+a.button-secondary:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2021,9 +2022,9 @@ button:active,
 [role="button"]:active,
 input[type="button"]:active,
 input[type="submit"]:active,
-a.button:active,
-a.button-secondary:active,
-input[type="reset"]:active {
+a.button[href]:active,
+input[type="reset"]:active,
+a.button-secondary:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
@@ -2034,10 +2035,11 @@ button,
 [role="button"],
 input[type="button"],
 input[type="submit"],
-a.button,
-a.button-secondary,
+a.button[href],
+a.button-secondary[href],
 button[type="reset"],
 input[type="reset"],
+a.button-secondary,
 button.button-secondary,
 [role="button"].button-secondary,
 input[type="button"].button-secondary,
@@ -2061,9 +2063,9 @@ button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
 input[aria-disabled="true"][type="submit"],
-a[aria-disabled="true"].button,
-a[aria-disabled="true"].button-secondary,
-input[aria-disabled="true"][type="reset"] {
+a[aria-disabled="true"].button[href],
+input[aria-disabled="true"][type="reset"],
+a[aria-disabled="true"].button-secondary {
     cursor: not-allowed;
 }
 
