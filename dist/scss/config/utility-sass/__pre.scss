@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.11
+/// @package @maddimathon/utility-astro@0.1.0-alpha.12
 /// @since 0.1.0-alpha
 ///
 
@@ -12,6 +12,15 @@ $internal_isTemplate: false !default;
 $internal_isTemplate: fns.config-valid-bool(
     $internal_isTemplate,
     'internal_isTemplate'
+);
+
+///
+/// @since 0.1.0-alpha.12
+///
+$internal_supressCredit_sass: false !default;
+$internal_supressCredit_sass: fns.config-valid-bool(
+    $internal_supressCredit_sass,
+    'internal_supressCredit_sass'
 );
 
 $print_globals: $include_html !default;

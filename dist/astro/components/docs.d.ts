@@ -13,7 +13,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.11
+ * @maddimathon/utility-astro@0.1.0-alpha.12
  * @license MIT
  */
 

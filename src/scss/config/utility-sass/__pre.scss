@@ -14,6 +14,15 @@ $internal_isTemplate: fns.config-valid-bool(
     'internal_isTemplate'
 );
 
+///
+/// @since 0.1.0-alpha.12
+///
+$internal_supressCredit_sass: false !default;
+$internal_supressCredit_sass: fns.config-valid-bool(
+    $internal_supressCredit_sass,
+    'internal_supressCredit_sass'
+);
+
 $print_globals: $include_html !default;
 $print_globals: fns.config-valid-bool($print_globals, 'print_globals');
 

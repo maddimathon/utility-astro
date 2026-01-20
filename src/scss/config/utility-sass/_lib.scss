@@ -8,7 +8,7 @@
 @forward 'pkg:@maddimathon/utility-sass/config' with (
     $include_html: pre.$include_html,
     $internal_isTemplate: pre.$internal_isTemplate,
-    $internal_supressCredit: false,
+    $internal_supressCredit: pre.$internal_supressCredit_sass,
     $mx_extendHeadingsByRole: false !default,
     $print_globals: pre.$print_globals,
     $print_headings: pre.$print_headings,
