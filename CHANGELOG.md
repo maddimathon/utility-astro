@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.11** — 2026-01-20
+
+Fixed issue loading FeatureCheck script in Page layout.
+
+
 ## **0.1.0-alpha.10** — 2026-01-19
 
 Testing $customPropertyPrefix config var from utility-sass.

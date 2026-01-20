@@ -21,7 +21,7 @@ import type { Props } from './Page.d.ts';
 /* import - functions */
 import { DateTime } from 'luxon';
 import { mergeArgs, slugify } from '@maddimathon/utility-typescript/functions';
-import { FeatureCheck } from '@maddimathon/utility-sass';
+import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
 
 import { currentPagePath } from '../functions/index.js';
 import { mapToObject } from '../../ts/01-functions/mapToObject.js';
@@ -415,7 +415,7 @@ const settings = p.settings && {
 </html>
 
 { scripts.featureCheck && <script>
-    import { FeatureCheck } from '@maddimathon/utility-sass';
+    import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
 
     // run the checks and update class names
     new FeatureCheck().check();
