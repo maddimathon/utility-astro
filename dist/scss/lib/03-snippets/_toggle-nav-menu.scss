@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.9
+/// @package @maddimathon/utility-astro@0.1.0-alpha.10
 /// @since 0.1.0-alpha
 ///
 
@@ -42,11 +42,11 @@ $_titleBorderWidth_half: var-border-width('100');
             > nav {
                 &[data-toggle-container] {
                     // prettier-ignore
-                    $_gridCols_toggle: var(--grid-template-columns--page, #{$_default_grid_page});
+                    $_gridCols_toggle: var(--#{config.$cxPropPre}grid-template-columns--page, #{$_default_grid_page});
                     /* prettier-ignore */
-                    --grid-template-columns--toggle: #{ $_gridCols_toggle};
+                    @include cx-prop( grid-template-columns--toggle,  $_gridCols_toggle );
                     /* prettier-ignore */
-                    grid-template-columns: var(--grid-template-columns--page, #{$_default_grid_page});
+                    grid-template-columns: var(--#{config.$cxPropPre}grid-template-columns--page, #{$_default_grid_page});
                     grid-template-columns: subgrid;
 
                     justify-content: center;
@@ -99,7 +99,7 @@ $_titleBorderWidth_half: var-border-width('100');
 
                     .toggle-title {
                         /* prettier-ignore */
-                        grid-template-columns: var(--grid-template-columns--toggle, var(--grid-template-columns--page, #{$_default_grid_page}));
+                        grid-template-columns: var(--#{config.$cxPropPre}grid-template-columns--toggle, var(--#{config.$cxPropPre}grid-template-columns--page, #{$_default_grid_page}));
                         grid-template-columns: subgrid;
 
                         align-content: stretch;
@@ -118,9 +118,9 @@ $_titleBorderWidth_half: var-border-width('100');
                             // prettier-ignore
                             $_gridCols_toggle: [content] 1fr #{var-gap-inline(tab)} [icon] minmax(max-content, auto);
                             /* prettier-ignore */
-                            --grid-template-columns--toggle: #{ $_gridCols_toggle};
+                            @include cx-prop( grid-template-columns--toggle,  $_gridCols_toggle );
                             /* prettier-ignore */
-                            grid-template-columns: var(--grid-template-columns--toggle, #{$_gridCols_toggle});
+                            grid-template-columns: var(--#{config.$cxPropPre}grid-template-columns--toggle, #{$_gridCols_toggle});
 
                             justify-content: space-between;
                             justify-items: start;

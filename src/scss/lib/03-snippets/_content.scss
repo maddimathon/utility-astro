@@ -34,7 +34,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 /// @since 0.1.0-alpha
 ///
 @mixin snippet-support-astro-content--base-grid {
-    --display: grid;
+    @include cx-prop(display, grid);
     display: grid;
     position: relative;
 
@@ -103,7 +103,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
 
         /* prettier-ignore */
-        --grid-template-columns--page: #{$_default_grid_page};
+        @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
         /* prettier-ignore */
         grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
@@ -136,7 +136,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         $_default_grid_page: 0 [page-start] 0 #{$_firstColumn} #{$gutterCol} #{$_secondColumn} 0 [page-end] 0;
 
         /* prettier-ignore */
-        --grid-template-columns--page: #{$_default_grid_page};
+        @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
         /* prettier-ignore */
         grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
@@ -203,7 +203,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
             @include snippet-support-astro-content--base-grid;
 
             /* prettier-ignore */
-            --grid-template-columns--page: #{$_default_grid_page};
+            @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
             /* prettier-ignore */
             grid-template-columns: #{$bodyMargin} [site-start] #{$_default_grid_page} [site-end] #{$bodyMargin};
@@ -349,7 +349,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
                     $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
 
                     /* prettier-ignore */
-                    --grid-template-columns--page: #{$_default_grid_page};
+                    @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
                     /* prettier-ignore */
                     grid-template-columns: 0 [site-start] #{$_default_grid_page} [site-end] 0;

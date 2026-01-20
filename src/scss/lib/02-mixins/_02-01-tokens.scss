@@ -18,7 +18,7 @@
     #{selector.parent-or-root()} {
         @each $slug, $_value in config.$widths {
             @each $value in width-value($slug, $returnAsNumber: false) {
-                --width-#{$slug}: #{$value};
+                @include utils.cx-prop(width-#{$slug}, $value);
             }
         }
     }

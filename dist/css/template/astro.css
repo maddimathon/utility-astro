@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/astro */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.7
+ * @maddimathon/utility-sass@0.1.0-alpha.13
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -1990,7 +1990,7 @@ table {
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
     background: var(--sys-clr-accent-bg, CanvasText);
-    width: min(var(--width-page, 53rem), 100%);
+    width: min(var(--width-page, 58rem), 100%);
 }
 
 table {

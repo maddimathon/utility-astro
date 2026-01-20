@@ -9,6 +9,8 @@
 
 @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
 
+@use '../../config';
+
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
@@ -41,7 +43,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
 ) {
     @at-root %_flex-contents-container {
-        --display: flex;
+        @include cx-prop(display, flex);
         display: flex;
         position: relative;
         flex-direction: column;
@@ -70,7 +72,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         #{selector.nest('>', ($headingSelectors))} {
             .toggle-icon {
-                --icon-size: 1em;
+                @include cx-prop(icon-size, 1em);
                 padding-bottom: 0;
             }
 
@@ -84,7 +86,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     }
 
     [data-toggle-control] {
-        --icon-color: currentColor;
+        @include cx-prop(icon-color, currentColor);
 
         margin: 0;
         width: auto;
@@ -127,7 +129,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     }
 
     .toggle-icon {
-        --icon-size: 1.125em;
+        @include cx-prop(icon-size, 1.125em);
         display: inline-block;
 
         vertical-align: sub;
@@ -168,12 +170,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     @include feature-check.js {
         @at-root %_toggle-container-grid-basics {
-            --display: grid;
+            @include cx-prop(display, grid);
             display: grid;
 
-            --grid-template-columns--toggle: [icon] minmax(max-content, auto)
-                [content] 1fr;
-            grid-template-columns: var(--grid-template-columns--toggle);
+            @include cx-prop(
+                grid-template-columns--toggle,
+                [icon] minmax(max-content, auto) [content] 1fr
+            );
+            grid-template-columns: var(
+                --#{config.$cxPropPre}grid-template-columns--toggle
+            );
 
             grid-auto-rows: auto;
             grid-auto-flow: column;
@@ -260,7 +266,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             cursor: pointer;
 
             &[data-toggle-control-backdrop] {
-                --display: block;
+                @include cx-prop(display, block);
                 display: none;
                 position: fixed;
                 justify-self: auto;
@@ -367,7 +373,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             /// BLOCK ///
 
             > .container {
-                --display: flex;
+                @include cx-prop(display, flex);
                 display: flex;
                 grid-column: 1 / -1;
 
@@ -417,7 +423,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             [data-toggle-control] {
                 &[data-toggle-control-backdrop] {
-                    display: var(--display, block);
+                    display: var(--#{config.$cxPropPre}display, block);
                 }
             }
         }

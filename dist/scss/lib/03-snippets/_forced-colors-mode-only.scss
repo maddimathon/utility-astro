@@ -1,11 +1,11 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.9
+/// @package @maddimathon/utility-astro@0.1.0-alpha.10
 /// @since 0.1.0-alpha
 ///
 
 // @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
 
-// @use '../../config';
+@use '../../config';
 
 // @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -17,6 +17,6 @@
     display: none !important;
 
     @include forced-colors {
-        display: var(--display, block) !important;
+        display: var(--#{config.$cxPropPre}display, block) !important;
     }
 }

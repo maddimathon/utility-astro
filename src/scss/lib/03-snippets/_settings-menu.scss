@@ -21,8 +21,8 @@
     .website-settings-menu {
         grid-column: page-start / page-end;
 
-        --display: none;
-        display: var(--display, none);
+        @include cx-prop(display, none);
+        display: var(--#{config.$cxPropPre}display, none);
         margin: 0;
         padding: 0;
 
@@ -110,7 +110,7 @@
 
     @include feature-check.js {
         .website-settings-menu {
-            --display: flex;
+            @include cx-prop(display, flex);
 
             .toggle-title {
                 margin: 0;
@@ -125,7 +125,7 @@
                 );
 
                 & {
-                    --icon-size: 1.75rem;
+                    @include cx-prop(icon-size, 1.75rem);
                     justify-self: end;
                 }
 
@@ -170,7 +170,7 @@
                 z-index: 999999;
 
                 [data-toggle-control-backdrop] {
-                    display: var(--display, block);
+                    display: var(--#{config.$cxPropPre}display, block);
                 }
             }
 
@@ -183,7 +183,7 @@
                     max-height: 80svh;
                     max-height: calc(
                         95svh - var(
-                                --scroll-padding-top,
+                                --#{config.$cxPropPre}scroll-padding-top,
                                 calc(
                                     2.75rem +
                                         (#{var-gap-block(layout-half)} * 2)

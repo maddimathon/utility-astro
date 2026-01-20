@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.10** — 2026-01-19
+
+Testing $customPropertyPrefix config var from utility-sass.
+
+
 ## **0.1.0-alpha.9** — 2025-12-02
 
 Quick fix to extend table-of-contents utilities non-conditionally.

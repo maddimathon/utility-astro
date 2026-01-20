@@ -14,6 +14,8 @@ import {
     Stage_Compiler,
 } from '@maddimathon/build-utilities/internal';
 
+import { sassCompilerOpts } from '@maddimathon/utility-sass';
+
 import { Build } from './classes/Build.js';
 import { Compile } from './classes/Compile.js';
 import { Document } from './classes/Document.js';
@@ -49,10 +51,10 @@ const config = {
             },
         },
 
-        sass: {
+        sass: sassCompilerOpts( {
             benchmarkCompileTime: true,
             // compileViaCLI: true,
-        },
+        } ),
     },
 
     stages: {
