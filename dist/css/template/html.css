@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/html */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.13
+ * @maddimathon/utility-sass@0.1.0-alpha.20
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -452,6 +452,14 @@ html {
     --mrg-firm-600: 2.25rem;
     --mrg-firm-800: 4rem;
     --mrg-firm-900: 7.125rem;
+    --pad-firm-100: 0.3125em;
+    --pad-firm-200: 0.5em;
+    --pad-firm-300: 0.8125em;
+    --pad-firm-400: 1.25em;
+    --pad-firm-500: 1.6875em;
+    --pad-firm-600: 2.25em;
+    --pad-firm-800: 4em;
+    --pad-firm-900: 7.125em;
 }
 
 html {
@@ -463,6 +471,14 @@ html {
     --mrg-soft-600: 1.625rem;
     --mrg-soft-800: 3.125rem;
     --mrg-soft-900: 5.8125rem;
+    --pad-soft-100: 0.1875em;
+    --pad-soft-200: 0.3125em;
+    --pad-soft-300: 0.5em;
+    --pad-soft-400: 0.8125em;
+    --pad-soft-500: 1.1875em;
+    --pad-soft-600: 1.625em;
+    --pad-soft-800: 3.125em;
+    --pad-soft-900: 5.8125em;
 }
 
 html {
@@ -474,6 +490,14 @@ html {
     --mrg-half-600: 0.625rem;
     --mrg-half-800: 0.875rem;
     --mrg-half-900: 1.3125rem;
+    --pad-half-100: 0.125em;
+    --pad-half-200: 0.1875em;
+    --pad-half-300: 0.3125em;
+    --pad-half-400: 0.4375em;
+    --pad-half-500: 0.5em;
+    --pad-half-600: 0.625em;
+    --pad-half-800: 0.875em;
+    --pad-half-900: 1.3125em;
 }
 
 /* #endregion Tokens - Margin */
@@ -525,21 +549,13 @@ html {
     --gap-block-layout-half: 2.5vw;
     --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
     --gap-inline-indent: 9%;
-    --gap-inline-indent: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        9%,
-        var(--mrg-firm-800, 4rem)
-    );
+    --gap-inline-indent: clamp(0.5rem, 9%, 4rem);
     --gap-inline-layout: 8vw;
-    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
+    --gap-inline-layout: clamp(0.8125rem, 8svw, 5.8125rem);
     --gap-inline-layout-half: 4vw;
-    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
+    --gap-inline-layout-half: clamp(0.40625rem, 4svw, 2.90625rem);
     --gap-inline-tab: 5%;
-    --gap-inline-tab: clamp(
-        var(--mrg-firm-100, 0.3125rem),
-        5%,
-        var(--mrg-firm-600, 2.25rem)
-    );
+    --gap-inline-tab: clamp(0.3125rem, 5%, 2.25rem);
 }
 
 /* #endregion Tokens - Gap */
@@ -578,11 +594,8 @@ html {
     --width-callout: 29.25rem;
     --width-page: 58rem;
     --width-page: calc(
-        (
-                var(--width-content, 36rem) + var(--gap-inline-layout, 8vw) +
-                    var(--width-sidebar, 16rem)
-            ) *
-            1
+        var(--width-content, 36rem) + var(--width-sidebar, 16rem) +
+            var(--gap-inline-layout, 8vw)
     );
 }
 

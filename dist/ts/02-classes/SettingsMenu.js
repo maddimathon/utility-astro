@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.12
+ * @maddimathon/utility-astro@0.1.0-alpha.13
  * @license MIT
  */
 import { JsCookie } from './JsCookie.js';

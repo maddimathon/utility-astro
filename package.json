@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.1.0-alpha.12",
+    "version": "0.1.0-alpha.13",
 
     "author": "Maddi Mathon (www.maddimathon.com)",
     "description": "Astro utilities to use in a variety of projects.",
@@ -183,7 +183,7 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.14",
+        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-alpha.20",
         "@maddimathon/utility-typescript": "2.0.0-beta.1",
         "astro": "^5.16.11",
         "luxon": "^3.7.2",
@@ -207,9 +207,9 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "~0.1.0-alpha.7",
+        "@maddimathon/utility-sass": "~0.1.0-alpha.20",
         "@maddimathon/utility-typescript": "~2.0.0-beta.1",
-        "astro": "^5.16.3",
+        "astro": "^5.16.0",
         "zod": "^3.25.76"
     },
     "peerDependenciesMeta": {

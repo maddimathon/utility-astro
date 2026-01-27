@@ -13,11 +13,17 @@
 
 @use '../01-functions' as *;
 
-@mixin tokens-width {
+///
+/// Prints out the width custom property tokens based on breakpoints config.
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-alpha.13 — Added $multiplier param.
+///
+@mixin tokens-width($multiplier: 1) {
     /* #region Tokens - Width */
     #{selector.parent-or-root()} {
         @each $slug, $_value in config.$widths {
-            @each $value in width-value($slug, $returnAsNumber: false) {
+            @each $value in width-value($slug, $multiplier: $multiplier, $returnAsNumber: false) {
                 @include utils.cx-prop(width-#{$slug}, $value);
             }
         }
@@ -25,13 +31,13 @@
     /* #endregion Tokens - Width */
 }
 
-@mixin tokens-all($width: true, $args...) {
+@mixin tokens-all($width: true, $multiplier_width: 1, $args...) {
     $args: meta.keywords($args);
 
     @include utils.tokens-all($width: false, $args...);
 
     // spacing
     @if $width {
-        @include tokens-width;
+        @include tokens-width($multiplier: $multiplier_width);
     }
 }
