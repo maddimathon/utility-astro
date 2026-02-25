@@ -1,0 +1,94 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha.14
+///
+
+@use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/meta';
+@use 'pkg:@maddimathon/utility-sass/selector';
+
+// @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+
+@use '../../config';
+// @use '../../tokens';
+
+@use '../01-functions' as *;
+// @use '../02-mixins' as *;
+
+///
+/// @since 0.1.0-alpha.14
+///
+@mixin snippet-support-astro-skip-links($focus_top: var-gap-block(layout), $zIndex: 999999) {
+    $_content_exits: meta.content-exists();
+
+    $baseSelectors: list.join(('.skip-link'), config.$selectors_skipLinks_extra, $separator: comma);
+
+    $skipSelectors: ();
+
+    @each $sel in $baseSelectors {
+        $skipSelectors: list.join(
+            $skipSelectors,
+            ($sel, selector.unify($sel, '[href]'), selector.unify($sel, 'a[href]')),
+            $separator: comma
+        );
+    }
+
+    #{$skipSelectors} {
+        display: block;
+        position: fixed;
+        margin: 0;
+
+        top: -100%;
+
+        width: fit-content;
+
+        z-index: #{$zIndex};
+
+        @if $_content_exits {
+            @content ($location: 'link-root');
+        }
+
+        @at-root #{selector.unify(&, ':focus')} {
+            top: #{$focus_top};
+
+            @if $_content_exits {
+                @content ($location: 'link-focus');
+            }
+        }
+
+        @at-root #{selector.unify(&, ':focus-within')} {
+            top: #{$focus_top};
+
+            @if $_content_exits {
+                @content ($location: 'link-focus');
+            }
+        }
+
+        @at-root #{selector.unify(&, ':active')} {
+            @if $_content_exits {
+                @content ($location: 'link-active');
+            }
+        }
+    }
+
+    %skip-link-list {
+        grid-column: 1 / -1;
+        grid-column: page-start / page-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @if $_content_exits {
+            @content ($location: 'list-root');
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+
+            @if $_content_exits {
+                @content ($location: 'list-item');
+            }
+        }
+    }
+}

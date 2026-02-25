@@ -28,20 +28,11 @@ $_astroContentLayoutSelectors: if(
     $additional: list.append($additional, (nav));
     $additional: list.append(
         $additional,
-        (
-            (
-                ':where(.js) [data-toggle-control][data-toggle-is-current-target]'
-            ),
-            focus-ring--where
-        )
+        ((':where(.js) [data-toggle-control][data-toggle-is-current-target]'), focus-ring--where)
     );
 
     @if config.$print_astro_content and not config.$print_utils {
-        $additional: list.join(
-            $additional,
-            $_astroContentLayoutSelectors,
-            $separator: comma
-        );
+        $additional: list.join($additional, $_astroContentLayoutSelectors, $separator: comma);
     }
 
     @include lib.extend-selectors-globals(
@@ -60,9 +51,13 @@ $_astroContentLayoutSelectors: if(
     // $additional: list.append($additional, ('.icon', 'icon'));
 
     @if config.$print_astro_content {
-        $additional: list.join(
+        $additional: list.join($additional, $_astroContentLayoutSelectors, $separator: comma);
+    }
+
+    @if config.$print_astro_skipLinks {
+        $additional: list.append(
             $additional,
-            $_astroContentLayoutSelectors,
+            ('.skip-link-list', 'skip-link-list'),
             $separator: comma
         );
     }
@@ -71,10 +66,7 @@ $_astroContentLayoutSelectors: if(
         '.table-of-contents [data-toggle-content] > .container ol',
         '.table-of-contents > ol'
     );
-    $_baseLevelListSelector_lvl2: selector.nest(
-        $_baseLevelListSelector,
-        'ol, ul'
-    );
+    $_baseLevelListSelector_lvl2: selector.nest($_baseLevelListSelector, 'ol, ul');
 
     $additional: list.join(
         $additional,

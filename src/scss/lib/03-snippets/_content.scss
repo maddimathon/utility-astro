@@ -92,12 +92,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 ///
 /// @since 0.1.0-alpha
 ///
-@mixin _body-grid--layout-content-only(
-    $bodyMargin,
-    $contentCol,
-    $gutterHalfCol,
-    $sidebarHalfCol
-) {
+@mixin _body-grid--layout-content-only($bodyMargin, $contentCol, $gutterHalfCol, $sidebarHalfCol) {
     @include min-width(sidebar) {
         // prettier-ignore
         $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
@@ -113,13 +108,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
 ///
 /// @since 0.1.0-alpha
 ///
-@mixin _body-grid--layout-sidebar(
-    $side,
-    $bodyMargin,
-    $contentCol,
-    $gutterCol,
-    $sidebarCol
-) {
+@mixin _body-grid--layout-sidebar($side, $bodyMargin, $contentCol, $gutterCol, $sidebarCol) {
     $contentCol: [content-start] #{$contentCol} [content-end];
     $sidebarCol: [sidebar-start] #{$sidebarCol} [sidebar-end];
 
@@ -315,6 +304,13 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         ///
 
         %layout-content-only {
+            > header {
+                /// BLOCK ///
+
+                @at-root :where(#{selector.nest( &, '> *' )}) {
+                    @include snippet-support-astro-content--content-width;
+                }
+            }
         }
 
         %layout-full-width,

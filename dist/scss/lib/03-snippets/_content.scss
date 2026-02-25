@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.13
+/// @package @maddimathon/utility-astro@0.1.0-alpha.14
 /// @since 0.1.0-alpha
 ///
 
@@ -315,6 +315,13 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         ///
 
         %layout-content-only {
+            > header {
+                /// BLOCK ///
+
+                @at-root :where(#{selector.nest( &, '> *' )}) {
+                    @include snippet-support-astro-content--content-width;
+                }
+            }
         }
 
         %layout-full-width,

@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/astro */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.20
+ * @maddimathon/utility-sass@0.1.0-alpha.35
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -545,15 +545,15 @@ html {
 /* #region Tokens - Gap */
 html {
     --gap-block-layout: 5vw;
-    --gap-block-layout: clamp(1.625rem, 5svw, 5.8125rem);
+    --gap-block-layout: clamp(1.625rem, 5svw, 3.125rem);
     --gap-block-layout-half: 2.5vw;
-    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 2.90625rem);
+    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 1.5625rem);
     --gap-inline-indent: 9%;
     --gap-inline-indent: clamp(0.5rem, 9%, 4rem);
     --gap-inline-layout: 8vw;
-    --gap-inline-layout: clamp(0.8125rem, 8svw, 5.8125rem);
+    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
     --gap-inline-layout-half: 4vw;
-    --gap-inline-layout-half: clamp(0.40625rem, 4svw, 2.90625rem);
+    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
     --gap-inline-tab: 5%;
     --gap-inline-tab: clamp(0.3125rem, 5%, 2.25rem);
 }
@@ -581,9 +581,9 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
 html {
-    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
+    --focus-ring-outline-offset: 0.125em;
+    --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
 }
 
 /* #endregion Tokens - Misc. */
@@ -687,13 +687,10 @@ hr {
 }
 hr {
     width: 100%;
-    margin-top: calc(
-        var(--mrg-soft-400, 0.8125rem) + var(--mrg-firm-600, 2.25rem)
-    );
     margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: var(--mrg-firm-600, 2.25rem);
     border: none;
-    border-bottom: currentColor solid 2px;
+    border-bottom: currentColor solid var(--border-width-200, 0.125rem);
 }
 
 /* # GLOBALS - Typography
@@ -885,11 +882,11 @@ pre {
     position: relative;
     margin-left: 0;
     margin-right: 0;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+        var(--mrg-firm-600, 2.25rem) - var(--mrg-firm-400, 1.25rem)
     );
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
     border: var(--border-width-100, 0.0625rem) solid currentColor;
@@ -1515,6 +1512,14 @@ input:active {
     color: var(--sys-clr-input-text-active, FieldText);
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
+label + textarea,
+label + select,
+label + input,
+label > textarea,
+label > select,
+label > input {
+    margin-top: var(--mrg-firm-200, 0.5rem);
+}
 textarea::-moz-placeholder,
 select::-moz-placeholder,
 input::-moz-placeholder {
@@ -1573,13 +1578,13 @@ input::placeholder {
     color: color-mix(in srgb, currentColor 90%, transparent);
 }
 
-label + textarea,
-label + select,
-label + input,
-label > textarea,
-label > select,
-label > input {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+textarea[aria-disabled="true"],
+select[aria-disabled="true"],
+input[aria-disabled="true"],
+textarea[disabled],
+select[disabled],
+input[disabled] {
+    cursor: not-allowed;
 }
 
 input[type="button"],
@@ -1613,38 +1618,6 @@ input[type="radio"] {
     display: inline-block;
     padding: 0;
     width: auto;
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-.no-js input[type="checkbox"]:focus,
-.no-js input[type="radio"]:focus,
-.js__no-whereSelector input[type="checkbox"]:focus,
-.js__no-whereSelector input[type="radio"]:focus {
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-
-:where(.js__no-focusVisible) input[type="checkbox"]:focus,
-:where(.js__no-focusVisible) input[type="radio"]:focus {
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-
-input[type="checkbox"]:hover,
-input[type="radio"]:hover {
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-
-input[type="checkbox"]:focus-visible,
-input[type="radio"]:focus-visible {
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-
-input[type="checkbox"]:focus-within,
-input[type="radio"]:focus-within {
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
-
-input[type="checkbox"]:active,
-input[type="radio"]:active {
-    accent-color: var(--sys-clr-text-active, ActiveText);
 }
 input[type="color"] {
     padding: 0;
@@ -1680,9 +1653,13 @@ textarea {
 
 label {
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
     font-weight: 600;
     line-height: var(--line-height-200, 1.3125);
+    text-wrap: balance;
     color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) {
@@ -1695,7 +1672,6 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     gap: var(--mrg-soft-300, 0.5rem);
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
-    text-wrap: balance;
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
@@ -1706,12 +1682,11 @@ label:has(> :where(input[type="checkbox"], input[type="radio"]))
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-top: var(--mrg-soft-400, 0.8125rem) var(--mrg-half-400, 0.4375rem);
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 /* ## Forms - Buttons ==================================== */
@@ -1848,6 +1823,22 @@ a.button-secondary:active {
     color: var(--sys-clr-button-text-active, ButtonText);
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+button[aria-disabled="true"],
+[aria-disabled="true"][role="button"],
+input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="submit"],
+a[aria-disabled="true"].button[href],
+button[disabled],
+[disabled][role="button"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+a[disabled].button[href],
+input[aria-disabled="true"][type="reset"],
+a[aria-disabled="true"].button-secondary,
+input[disabled][type="reset"],
+a[disabled].button-secondary {
+    cursor: not-allowed;
+}
 button,
 [role="button"],
 input[type="button"],
@@ -1881,8 +1872,15 @@ button[aria-disabled="true"],
 input[aria-disabled="true"][type="button"],
 input[aria-disabled="true"][type="submit"],
 a[aria-disabled="true"].button[href],
+button[disabled],
+[disabled][role="button"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+a[disabled].button[href],
 input[aria-disabled="true"][type="reset"],
-a[aria-disabled="true"].button-secondary {
+a[aria-disabled="true"].button-secondary,
+input[disabled][type="reset"],
+a[disabled].button-secondary {
     cursor: not-allowed;
 }
 
@@ -1965,6 +1963,10 @@ a[aria-disabled="true"].button-secondary {
     color: var(--sys-clr-button-text-active, ButtonText);
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+[aria-disabled="true"]::file-selector-button,
+[disabled]::file-selector-button {
+    cursor: not-allowed;
+}
 ::file-selector-button {
     --display: flex;
     display: flex;
@@ -1981,7 +1983,8 @@ a[aria-disabled="true"].button-secondary {
     text-decoration: none;
     cursor: pointer;
 }
-[aria-disabled="true"]::file-selector-button {
+[aria-disabled="true"]::file-selector-button,
+[disabled]::file-selector-button {
     cursor: not-allowed;
 }
 ::file-selector-button {
@@ -2106,6 +2109,43 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
+/* # ASTRO COMPONENT - SKIP LINKS
+ * ======================================================================== */
+.skip-link,
+.skip-link[href],
+a.skip-link[href] {
+    display: block;
+    position: fixed;
+    margin: 0;
+    top: -100%;
+    width: -moz-fit-content;
+    width: fit-content;
+    z-index: 999999;
+}
+.skip-link:focus,
+.skip-link[href]:focus,
+a.skip-link[href]:focus {
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:focus-within,
+.skip-link[href]:focus-within,
+a.skip-link[href]:focus-within {
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link-list {
+    grid-column: 1/-1;
+    grid-column: page-start/page-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.skip-link-list li {
+    margin: 0;
+    padding: 0;
+}
+
 /* # LAYOUT - BASICS
  * ======================================================================== */
 nav ol,
@@ -2250,6 +2290,11 @@ body > aside > :first-child {
 ) {
     width: auto;
     justify-self: start;
+}
+
+:where(.layout_content-only > header > *) {
+    grid-column: content-start/content-end;
+    width: auto;
 }
 
 :where(.layout_full-width > main > *) {
@@ -3253,6 +3298,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     color: var(--sys-clr-button-text-active, ButtonText);
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
+:where(.js) .website-settings-menu [data-toggle-control][disabled] {
+    cursor: not-allowed;
+}
 :where(.js) .website-settings-menu [data-toggle-control] {
     --display: flex;
     display: flex;
@@ -3269,7 +3318,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     text-decoration: none;
     cursor: pointer;
 }
-:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"] {
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
+:where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {

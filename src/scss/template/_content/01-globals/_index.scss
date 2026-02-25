@@ -2,3 +2,16 @@
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since 0.1.0-alpha
 ///
+
+@use '../../../config';
+
+@use '../../../lib' as *;
+
+@if config.$print_astro_skipLinks {
+    @if config.$print_headings {
+        /* # ASTRO COMPONENT - SKIP LINKS
+         * ======================================================================== */
+    }
+
+    @include snippet-support-astro-skip-links;
+}

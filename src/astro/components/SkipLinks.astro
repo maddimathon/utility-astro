@@ -62,34 +62,3 @@ if (
         </ul>
     )
 }
-
-<style lang='scss'>
-    .skip-link {
-        display: block;
-        position: fixed;
-        margin: 0;
-
-        top: -100%;
-
-        width: fit-content;
-
-        z-index: 999999;
-
-        &:focus {
-            top: 0;
-        }
-    }
-
-    .skip-link-list {
-        grid-column: 1 / -1;
-        grid-column: page-start / page-end;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-            margin: 0;
-            padding: 0;
-        }
-    }
-</style>

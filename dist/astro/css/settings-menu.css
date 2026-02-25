@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.20
+ * @maddimathon/utility-sass@0.1.0-alpha.35
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -188,6 +188,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     color: var(--sys-clr-button-text-active, ButtonText);
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
+:where(.js) .website-settings-menu [data-toggle-control][disabled] {
+    cursor: not-allowed;
+}
 :where(.js) .website-settings-menu [data-toggle-control] {
     --display: flex;
     display: flex;
@@ -204,7 +208,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     text-decoration: none;
     cursor: pointer;
 }
-:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"] {
+:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
+:where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {

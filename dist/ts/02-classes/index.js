@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.13
+ * @maddimathon/utility-astro@0.1.0-alpha.14
  * @license MIT
  */
 export * from './ElementToggle.js';

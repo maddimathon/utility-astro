@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.20
+ * @maddimathon/utility-sass@0.1.0-alpha.35
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -134,6 +134,11 @@ body > aside > :first-child {
 ) {
     width: auto;
     justify-self: start;
+}
+
+:where(.layout_content-only > header > *) {
+    grid-column: content-start/content-end;
+    width: auto;
 }
 
 :where(.layout_full-width > main > *) {
