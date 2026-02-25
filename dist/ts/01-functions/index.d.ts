@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.14
+ * @maddimathon/utility-astro@0.1.0-alpha.15
  * @license MIT
  */
 export * from './escRegExpURL.js';

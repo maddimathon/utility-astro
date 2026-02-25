@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.14
+/// @package @maddimathon/utility-astro@0.1.0-alpha.15
 /// @since 0.1.0-alpha
 ///
 
@@ -61,8 +61,8 @@
 
     // returns
     @if meta.type-of($fallback) == list and list.length($fallback) < 1 {
-        @return var(--#{config.$cxPropPre}width-#{$slug});
+        @return utils.do-var(width-#{$slug});
     }
 
-    @return var(--#{config.$cxPropPre}width-#{$slug}, $fallback);
+    @return utils.do-var(width-#{$slug}, $fallback);
 }

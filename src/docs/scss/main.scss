@@ -21,26 +21,8 @@
 
 @include feature-check.supports(whereSelector) {
     $_navHeight: 3.125rem;
-    $_scrollPaddingFallback: calc(#{$_navHeight} + #{var-gap-block(layout)});
 
-    &,
-    & body {
-        @include cx-prop(height-nav-primary, $_navHeight);
-
-        @include cx-prop(scroll-padding-top, $_scrollPaddingFallback);
-        @include cx-prop(
-            scroll-padding-top,
-            calc(
-                var(--#{config.$cxPropPre}height-nav-primary, #{$_navHeight}) +
-                    #{var-gap-block(layout)}
-            )
-        );
-
-        scroll-padding-top: var(
-            --#{config.$cxPropPre}scroll-padding-top,
-            #{$_scrollPaddingFallback}
-        );
-    }
+    @include cx-prop(height-nav-primary, $_navHeight);
 
     .nav-primary[data-toggle-container] {
         position: sticky;
@@ -54,10 +36,7 @@
         z-index: 9999;
 
         > .toggle-title {
-            min-height: var(
-                --#{config.$cxPropPre}height-nav-primary,
-                #{$_navHeight}
-            );
+            min-height: #{do-var(height-nav-primary, $_navHeight)};
 
             [data-toggle-control] {
                 padding-block: min(0.75vh, #{var-mrg-soft('300')});

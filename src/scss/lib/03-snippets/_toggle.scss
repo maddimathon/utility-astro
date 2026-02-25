@@ -138,11 +138,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         > svg {
             stroke: currentColor;
-            stroke-width: clamp(
-                1px,
-                #{var-stroke-relative('600')},
-                #{var-border-width('400')}
-            );
+            stroke-width: clamp(1px, #{var-stroke-relative('600')}, #{var-border-width('400')});
             fill: none;
         }
     }
@@ -177,9 +173,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 grid-template-columns--toggle,
                 [icon] minmax(max-content, auto) [content] 1fr
             );
-            grid-template-columns: var(
-                --#{config.$cxPropPre}grid-template-columns--toggle
-            );
+            grid-template-columns: #{do-var(grid-template-columns--toggle)};
 
             grid-auto-rows: auto;
             grid-auto-flow: column;
@@ -423,7 +417,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             [data-toggle-control] {
                 &[data-toggle-control-backdrop] {
-                    display: var(--#{config.$cxPropPre}display, block);
+                    display: #{do-var(display, block)};
                 }
             }
         }

@@ -1,10 +1,10 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.35
+ * @maddimathon/utility-sass@0.1.0-alpha.36
  * 
  * https://maddimathon.github.io/utility-sass
  */
-/* # SCREEN READER TEXT ==================================== */
+/* # ICONS ==================================== */
 .icon,
 .toggle-control > :global(.icon) {
     --display: inline-block;

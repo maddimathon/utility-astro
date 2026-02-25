@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.14
+/// @package @maddimathon/utility-astro@0.1.0-alpha.15
 /// @since 0.1.0-alpha
 ///
 
@@ -177,9 +177,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 grid-template-columns--toggle,
                 [icon] minmax(max-content, auto) [content] 1fr
             );
-            grid-template-columns: var(
-                --#{config.$cxPropPre}grid-template-columns--toggle
-            );
+            grid-template-columns: #{do-var(grid-template-columns--toggle)};
 
             grid-auto-rows: auto;
             grid-auto-flow: column;
@@ -423,7 +421,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             [data-toggle-control] {
                 &[data-toggle-control-backdrop] {
-                    display: var(--#{config.$cxPropPre}display, block);
+                    display: #{do-var(display, block)};
                 }
             }
         }

@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.14
+/// @package @maddimathon/utility-astro@0.1.0-alpha.15
 /// @since 0.1.0-alpha
 ///
 
@@ -22,7 +22,7 @@
         grid-column: page-start / page-end;
 
         @include cx-prop(display, none);
-        display: var(--#{config.$cxPropPre}display, none);
+        display: #{do-var(display, none)};
         margin: 0;
         padding: 0;
 
@@ -170,7 +170,7 @@
                 z-index: 999999;
 
                 [data-toggle-control-backdrop] {
-                    display: var(--#{config.$cxPropPre}display, block);
+                    display: #{do-var(display, block)};
                 }
             }
 
@@ -182,12 +182,9 @@
                 > [data-toggle-content] {
                     max-height: 80svh;
                     max-height: calc(
-                        95svh - var(
-                                --#{config.$cxPropPre}scroll-padding-top,
-                                calc(
-                                    2.75rem +
-                                        (#{var-gap-block(layout-half)} * 2)
-                                )
+                        95svh - do-var(
+                                scroll-padding-top,
+                                calc(2.75rem + (var-gap-block(layout-half) * 2))
                             )
                     );
 

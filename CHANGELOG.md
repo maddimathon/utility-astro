@@ -19,6 +19,11 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.15** — 2026-02-25
+
+Updated with utility-sass
+
+
 ## **0.1.0-alpha.14** — 2026-02-24
 
 ### Added

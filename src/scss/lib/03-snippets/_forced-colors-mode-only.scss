@@ -7,7 +7,7 @@
 
 @use '../../config';
 
-// @use '../01-functions' as *;
+@use '../01-functions' as *;
 @use '../02-mixins' as *;
 
 ///
@@ -17,6 +17,6 @@
     display: none !important;
 
     @include forced-colors {
-        display: var(--#{config.$cxPropPre}display, block) !important;
+        display: #{do-var(display, block)} !important;
     }
 }

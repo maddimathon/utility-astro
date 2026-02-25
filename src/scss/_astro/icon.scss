@@ -6,24 +6,20 @@
 @use 'lib';
 @use '../config';
 
-/* # SCREEN READER TEXT ==================================== */
+/* # ICONS ==================================== */
 
 .icon,
 .toggle-control > :global(.icon) {
-    $_iconSize: var(--#{config.$cxPropPre}icon-size, 1.375em);
+    $_iconSize: lib.do-var(icon-size, 1.375em);
 
     @include lib.cx-prop(display, inline-block);
     display: inline-block;
 
     height: #{$_iconSize};
-    height: calc(
-        #{$_iconSize} * var(--#{config.$cxPropPre}icon-size--font-multiplier, 1)
-    );
+    height: calc($_iconSize * lib.do-var(icon-size--font-multiplier, 1));
 
     min-width: #{$_iconSize};
-    min-width: calc(
-        #{$_iconSize} * var(--#{config.$cxPropPre}icon-size--font-multiplier, 1)
-    );
+    min-width: calc($_iconSize * lib.do-var(icon-size--font-multiplier, 1));
 
     vertical-align: middle;
 

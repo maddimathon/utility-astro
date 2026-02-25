@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/html */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.35
+ * @maddimathon/utility-sass@0.1.0-alpha.36
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -650,9 +650,16 @@ html {
 
 /* # GLOBALS - Objects
  * ======================================================================== */
+html {
+    --scroll-padding-top: var(--gap-block-layout, 5vw);
+    --scroll-padding-top: calc(
+        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
+    );
+}
+
 html,
 body {
-    scroll-padding-top: var(--gap-block-layout, 5vw);
+    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
 }
 
 body {

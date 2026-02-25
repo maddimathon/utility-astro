@@ -22,7 +22,7 @@
         grid-column: page-start / page-end;
 
         @include cx-prop(display, none);
-        display: var(--#{config.$cxPropPre}display, none);
+        display: #{do-var(display, none)};
         margin: 0;
         padding: 0;
 
@@ -54,11 +54,7 @@
 
         fieldset {
             padding-block: #{var-mrg-firm('100')};
-            padding-inline: clamp(
-                #{var-mrg-firm('200')},
-                3vw,
-                #{var-mrg-firm('300')}
-            );
+            padding-inline: clamp(#{var-mrg-firm('200')}, 3vw, #{var-mrg-firm('300')});
 
             align-self: stretch;
 
@@ -170,7 +166,7 @@
                 z-index: 999999;
 
                 [data-toggle-control-backdrop] {
-                    display: var(--#{config.$cxPropPre}display, block);
+                    display: #{do-var(display, block)};
                 }
             }
 
@@ -182,18 +178,14 @@
                 > [data-toggle-content] {
                     max-height: 80svh;
                     max-height: calc(
-                        95svh - var(
-                                --#{config.$cxPropPre}scroll-padding-top,
-                                calc(
-                                    2.75rem +
-                                        (#{var-gap-block(layout-half)} * 2)
-                                )
+                        95svh - do-var(
+                                scroll-padding-top,
+                                calc(2.75rem + (var-gap-block(layout-half) * 2))
                             )
                     );
 
                     > .container {
-                        padding-block: #{var-mrg-soft('400')}
-                            #{var-mrg-firm('300')};
+                        padding-block: #{var-mrg-soft('400')} #{var-mrg-firm('300')};
                     }
                 }
             }
