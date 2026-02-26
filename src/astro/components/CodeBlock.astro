@@ -6,7 +6,6 @@
  */
 
 /* import - types */
-import type { Props as CodeBlockProps } from './CodeBlock.d.ts';
 import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
@@ -20,9 +19,23 @@ import { Prism } from '@astrojs/prism';
 
 /* TYPES ===================================== */
 
-export type * from './CodeBlock.d.ts';
-
 /* PROPS ===================================== */
+
+/**
+ * Input props for the CodeBlock component.
+ * 
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface CodeBlockProps {
+
+    children?: any;
+
+    /**
+     * Code language, if any.
+     */
+    lang?: string;
+}
 
 export interface Props extends GenericElementProps<CodeBlockProps, 'div'> {}
 

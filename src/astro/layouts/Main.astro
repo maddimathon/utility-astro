@@ -7,7 +7,6 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/index.js';
-import type { Props as MainProps } from './Main.js';
 
 /* import - functions */
 import { mapToObject } from '../../ts/index.js';
@@ -20,7 +19,14 @@ import { mapToObject } from '../../ts/index.js';
 
 /* TYPES ===================================== */
 
-export type * from './Main.js';
+/**
+ * Input props for the Main component.
+ * 
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface MainProps {
+}
 
 /* PROPS ===================================== */
 

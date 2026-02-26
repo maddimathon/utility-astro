@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { Props as LibPageProps } from '../../astro/layouts/Page.d.ts';
+import type { Props as LibPageProps } from '../../astro/layouts/Page.astro';
 import type { ContentType } from '../../astro/layouts/Content.astro';
 
 /* import - functions */
@@ -70,7 +70,7 @@ const _defaultProps = {
 const props = mergeArgs<Props & LibPageProps<ContentType>, Props>(
     _defaultProps,
     Astro.props.frontmatter ?? Astro.props,
-    true
+    true,
 );
 
 /* CONSTANTS ===================================== */
@@ -79,7 +79,7 @@ const title = Array.isArray(props.title) ? props.title : [props.title];
 
 if (!props.meta.title) {
     props.meta.title = arrayUnique(
-        title.concat([_defaultProps.meta.title])
+        title.concat([_defaultProps.meta.title]),
     ).join(' — ');
 }
 
@@ -93,6 +93,7 @@ props.primaryMenu = [
                 child: [
                     // { label: 'Alert', href: 'components/alert' },
                     { label: 'Icon', href: 'components/icon' },
+                    { label: 'LoremIpsum', href: 'components/lorem-ipsum' },
                     { label: 'Toggle', href: 'components/toggle' },
                 ],
             },

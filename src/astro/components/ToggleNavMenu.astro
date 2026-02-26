@@ -7,7 +7,7 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as ToggleNavMenuProps } from './ToggleNavMenu.d.ts';
+import type { NavMenuProps } from './NavMenu.astro';
 
 /* import - functions */
 import { parseMenuItem } from './NavMenu.astro';
@@ -22,7 +22,13 @@ import Toggle_Control from '../support/Toggle_Control.astro';
 
 /* TYPES ===================================== */
 
-export type * from './ToggleNavMenu.d.ts';
+/**
+ * Input props for the ToggleNavMenu component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface ToggleNavMenuProps extends NavMenuProps {}
 
 /* PROPS ===================================== */
 

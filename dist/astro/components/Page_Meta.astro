@@ -7,7 +7,6 @@
 
 /* import - types */
 import type { GenericProps } from '../../ts/00-types/index.js';
-import type { Props as Page_MetaProps } from './Page_Meta.d.ts';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions/index.js';
@@ -21,7 +20,40 @@ import { absoluteInternalURL } from '../functions/index.js';
 
 /* TYPES ===================================== */
 
-export type * from './Page_Meta.d.ts';
+/**
+ * Input props for the Page_Meta component.
+ * 
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface Page_MetaProps {
+
+    /**
+     * Page meta title.
+     */
+    title: string;
+
+    /**
+     * Whether to allow archiving of this page.
+     */
+    archive?: boolean;
+
+    /**
+     * Whether to allow bot indexing of this page.
+     */
+    bots?: boolean;
+
+    /**
+     * Canonical URL or relative path.
+     */
+    canonical?: string | URL;
+
+    description?: string;
+
+    keywords?: string[];
+
+    themeColor?: string;
+}
 
 
 /* PROPS ===================================== */

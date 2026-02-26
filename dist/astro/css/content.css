@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.38
+ * @maddimathon/utility-sass@0.1.0-alpha.39
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -129,6 +129,7 @@ body > aside > :first-child {
     body > button,
     body > [role="button"],
     body > input[type="button"],
+    body > input[type="reset"],
     body > input[type="submit"]
 ) {
     width: auto;

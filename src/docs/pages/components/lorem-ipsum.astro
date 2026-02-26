@@ -1,0 +1,110 @@
+---
+/**
+ * @since 0.1.0-alpha.17
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import LoremIpsumComponent from '../../../astro/components/LoremIpsum.astro';
+import Toggle from '../../../astro/components/Toggle.astro';
+
+/* import - layouts */
+import DocsPage from '../../layouts/DocsPage.astro';
+
+/* TYPES ===================================== */
+
+/* CONSTANTS ===================================== */
+---
+
+<DocsPage title={['LoremIpsum', 'Components']}>
+    <Toggle id='loremipsum-sample-super-abbreviated'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Super Abbreviated'
+        />
+        <LoremIpsumComponent
+            mode='minimum'
+            superAbbreviated={true}
+        />
+    </Toggle>
+    <Toggle id='loremipsum-sample-super-abbreviated-library'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Super Abbreviated - Library'
+        />
+        <LoremIpsumComponent
+            mode='library'
+            superAbbreviated={true}
+        />
+    </Toggle>
+    <Toggle id='loremipsum-sample-super-abbreviated-fancy'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Super Abbreviated - Fancy'
+        />
+        <LoremIpsumComponent
+            mode='fancy'
+            superAbbreviated={true}
+        />
+    </Toggle>
+
+    <Toggle id='loremipsum-sample-abbreviated'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Abbreviated'
+        />
+        <LoremIpsumComponent
+            abbreviated={true}
+            mode='minimum'
+        />
+    </Toggle>
+    <Toggle id='loremipsum-sample-abbreviated-library'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Abbreviated - Library'
+        />
+        <LoremIpsumComponent
+            abbreviated={true}
+            mode='library'
+        />
+    </Toggle>
+    <Toggle id='loremipsum-sample-abbreviated-fancy'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Abbreviated - Fancy'
+        />
+        <LoremIpsumComponent
+            abbreviated={true}
+            mode='fancy'
+        />
+    </Toggle>
+
+    <Toggle id='loremipsum-sample-default'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Default'
+        />
+        <LoremIpsumComponent mode='minimum' />
+    </Toggle>
+    <Toggle id='loremipsum-sample-default-library'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Default - Library'
+        />
+        <LoremIpsumComponent mode='library' />
+    </Toggle>
+    <Toggle id='loremipsum-sample-default-fancy'>
+        <Fragment
+            slot='button'
+            set:text='LoremIpsum - Default - Fancy'
+        />
+        <LoremIpsumComponent mode='fancy' />
+    </Toggle>
+</DocsPage>

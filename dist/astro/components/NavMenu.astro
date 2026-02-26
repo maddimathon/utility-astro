@@ -8,8 +8,7 @@
 /* import - types */
 import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 import type { GenericElementProps } from '../../ts/00-types/index.ts';
-import type { MenuItem } from './MenuList.d.ts';
-import type { Props as NavMenuProps } from './NavMenu.d.ts';
+import type { MenuItem } from './MenuList.astro';
 
 /* import - functions */
 import { escRegExp } from '@maddimathon/utility-typescript/functions';
@@ -26,7 +25,43 @@ import MenuList from './MenuList.astro';
 
 /* TYPES ===================================== */
 
-export type * from './NavMenu.d.ts';
+/**
+ * Input props for the NavMenu component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface NavMenuProps {
+    /**
+     * Screen-reader label for the navigation menu.
+     */
+    'aria-label': string;
+
+    /**
+     * Unique id attr.
+     */
+    'id': string;
+
+    /**
+     * To pass to the `MenuList` component, see that component for details.
+     *
+     * Must have at least one item.
+     */
+    'menu': (Omit<MenuItem, 'child' | 'href'> & {
+        /**
+         * If false, the link prints without href and with aria-disabled.  If
+         * null or undefined, the list item is not printed at all.
+         *
+         * If a string, this is assumed to be a path relative to the home page.
+         */
+        href?: URL | string | false;
+
+        /**
+         * Child menu items, if any.
+         */
+        child?: Props['menu'];
+    })[];
+}
 
 /* PROPS ===================================== */
 
@@ -47,7 +82,7 @@ const {
  */
 export function parseMenuItem(
     currentURL: URL,
-    item: ArrayItem<NavMenuProps['menu']>
+    item: ArrayItem<NavMenuProps['menu']>,
 ): MenuItem {
     /**
      * The strings representing this page (used to check for current status).
@@ -55,22 +90,22 @@ export function parseMenuItem(
     const parseMenuItem_thisPage = {
         object: new RegExp(
             `^(${escRegExpURL(
-                currentURL.toString().replace(/\/$/gi, '/')
+                currentURL.toString().replace(/\/$/gi, '/'),
             )}|${escRegExpURL(
                 config_site +
                     absoluteInternalURL(
                         currentURL,
-                        currentURL.pathname
-                    ).replace(/\/$/gi, '/')
+                        currentURL.pathname,
+                    ).replace(/\/$/gi, '/'),
             )})\/?$`,
-            'gi'
+            'gi',
         ),
 
         string: new RegExp(
             `^(${escRegExp(
-                absoluteInternalURL(currentURL, currentURL.pathname)
+                absoluteInternalURL(currentURL, currentURL.pathname),
             )})\/?$`,
-            'gi'
+            'gi',
         ),
     };
 

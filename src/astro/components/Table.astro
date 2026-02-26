@@ -6,8 +6,8 @@
  */
 
 /* import - types */
+import type { HTMLAttributes } from 'astro/types';
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as TableProps } from './Table.d.ts';
 
 /* import - functions */
 
@@ -19,7 +19,15 @@ import type { Props as TableProps } from './Table.d.ts';
 
 /* TYPES ===================================== */
 
-export type * from './Table.d.ts';
+/**
+ * Input props for the Table component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface TableProps {
+    wrapper?: HTMLAttributes<'div'>;
+}
 
 /* PROPS ===================================== */
 

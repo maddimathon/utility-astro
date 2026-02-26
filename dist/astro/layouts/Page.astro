@@ -2,29 +2,34 @@
 /**
  * 
  * 
- * @package boilerplate-astro-project@0.1.0-alpha.16
+ * @package boilerplate-astro-project@0.1.0-alpha.17
  * @since 0.1.0-alpha
  */
 
 /* import - types */
+
 import type {
     Objects,
 } from '@maddimathon/utility-typescript/types';
 
-import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
+import type { GenericProps } from '../../ts/index.ts';
+
+import type { NavMenuProps } from '../components/NavMenu.astro';
+
 import type {
-    Props as ContentProps,
-    ContentType
+    Props as ContentProps, 
+    ContentType, 
 } from './Content.astro';
-import type { Props } from './Page.d.ts';
+
+import type { PageProps } from './Page.d.ts';
 
 /* import - functions */
 import { DateTime } from 'luxon';
 import { mergeArgs, slugify } from '@maddimathon/utility-typescript/functions';
 import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
 
-import { currentPagePath } from '../functions/index.js';
 import { mapToObject } from '../../ts/01-functions/mapToObject.js';
+import { currentPagePath } from '../functions/index.js';
 import Toggle_Scripts from '../support/Toggle_Scripts.astro';
 
 /* import - values */
@@ -40,14 +45,16 @@ import SkipLinks from '../components/SkipLinks.astro';
 import ToggleNavMenu from '../components/ToggleNavMenu.astro';
 
 
-/** ## PROPS ==================================== **/
+/** ## TYPES ==================================== **/
 
-export type { Props };
 export type * from './Page.d.ts';
 
-const p = {
-    ...Astro.props.frontmatter ?? Astro.props,
-} satisfies Props<ContentType>;
+
+/** ## PROPS ==================================== **/
+
+export type Props<T_ContentType extends ContentType = ContentType> = GenericProps<PageProps<T_ContentType>>;
+
+const p = Astro.props.frontmatter ?? Astro.props;
 
 
 /* ### Content Props ------------------ */
@@ -59,9 +66,7 @@ const content = {
 
     subtitle: p.subtitle,
 
-    title: Array.isArray( p.title )
-        ? ( p.title.length ? p.title: [] ) 
-        : ( p.title.length ? [ p.title ]: [] ),
+    title: Array.isArray( p.title ) ? ( p.title.length ? p.title : [] )  : ( p.title.length ? [ p.title ] : [] ),
 
     type: p.layout,
 
@@ -243,7 +248,7 @@ const settings = p.settings && {
 >
     <!-- 
         This page includes html generated using
-        @maddimathon/utility-astro@0.1.0-alpha.16
+        @maddimathon/utility-astro@0.1.0-alpha.17
 
         Author: Maddi Mathon (www.maddimathon.com)
         License: MIT

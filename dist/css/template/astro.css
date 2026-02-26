@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/astro */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.38
+ * @maddimathon/utility-sass@0.1.0-alpha.39
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -941,6 +941,8 @@ h1 [role="button"],
 .h1 [role="button"],
 h1 input[type="button"],
 .h1 input[type="button"],
+h1 input[type="reset"],
+.h1 input[type="reset"],
 h1 input[type="submit"],
 .h1 input[type="submit"],
 h1 a.button[href],
@@ -948,6 +950,7 @@ h1 a.button[href],
 .page-title button,
 .page-title [role="button"],
 .page-title input[type="button"],
+.page-title input[type="reset"],
 .page-title input[type="submit"],
 .page-title a.button[href] {
     font: inherit;
@@ -972,6 +975,8 @@ h2 [role="button"],
 .h2 [role="button"],
 h2 input[type="button"],
 .h2 input[type="button"],
+h2 input[type="reset"],
+.h2 input[type="reset"],
 h2 input[type="submit"],
 .h2 input[type="submit"],
 h2 a.button[href],
@@ -998,6 +1003,8 @@ h3 [role="button"],
 .h3 [role="button"],
 h3 input[type="button"],
 .h3 input[type="button"],
+h3 input[type="reset"],
+.h3 input[type="reset"],
 h3 input[type="submit"],
 .h3 input[type="submit"],
 h3 a.button[href],
@@ -1032,6 +1039,8 @@ h4 [role="button"],
 .h4 [role="button"],
 h4 input[type="button"],
 .h4 input[type="button"],
+h4 input[type="reset"],
+.h4 input[type="reset"],
 h4 input[type="submit"],
 .h4 input[type="submit"],
 h4 a.button[href],
@@ -1066,6 +1075,8 @@ h5 [role="button"],
 .h5 [role="button"],
 h5 input[type="button"],
 .h5 input[type="button"],
+h5 input[type="reset"],
+.h5 input[type="reset"],
 h5 input[type="submit"],
 .h5 input[type="submit"],
 h5 a.button[href],
@@ -1100,6 +1111,8 @@ h6 [role="button"],
 .h6 [role="button"],
 h6 input[type="button"],
 .h6 input[type="button"],
+h6 input[type="reset"],
+.h6 input[type="reset"],
 h6 input[type="submit"],
 .h6 input[type="submit"],
 h6 a.button[href],
@@ -1122,6 +1135,7 @@ h6 a.button[href],
 .h7 button,
 .h7 [role="button"],
 .h7 input[type="button"],
+.h7 input[type="reset"],
 .h7 input[type="submit"],
 .h7 a.button[href] {
     font: inherit;
@@ -1148,6 +1162,7 @@ h6 a.button[href],
 .h8 button,
 .h8 [role="button"],
 .h8 input[type="button"],
+.h8 input[type="reset"],
 .h8 input[type="submit"],
 .h8 a.button[href] {
     font: inherit;
@@ -1685,10 +1700,9 @@ label > input[type="radio"] {
 button,
 [role="button"],
 input[type="button"],
+input[type="reset"],
 input[type="submit"],
-a.button[href],
-button[type="reset"],
-input[type="reset"] {
+a.button[href] {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -1707,15 +1721,15 @@ input[type="reset"] {
 .no-js button:focus,
 .no-js [role="button"]:focus,
 .no-js input[type="button"]:focus,
+.no-js input[type="reset"]:focus,
 .no-js input[type="submit"]:focus,
 .no-js a.button[href]:focus,
-.no-js input[type="reset"]:focus,
 .js__no-whereSelector button:focus,
 .js__no-whereSelector [role="button"]:focus,
 .js__no-whereSelector input[type="button"]:focus,
+.js__no-whereSelector input[type="reset"]:focus,
 .js__no-whereSelector input[type="submit"]:focus,
-.js__no-whereSelector a.button[href]:focus,
-.js__no-whereSelector input[type="reset"]:focus {
+.js__no-whereSelector a.button[href]:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1729,9 +1743,9 @@ input[type="reset"] {
 :where(.js__no-focusVisible) button:focus,
 :where(.js__no-focusVisible) [role="button"]:focus,
 :where(.js__no-focusVisible) input[type="button"]:focus,
+:where(.js__no-focusVisible) input[type="reset"]:focus,
 :where(.js__no-focusVisible) input[type="submit"]:focus,
-:where(.js__no-focusVisible) a.button[href]:focus,
-:where(.js__no-focusVisible) input[type="reset"]:focus {
+:where(.js__no-focusVisible) a.button[href]:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1745,9 +1759,9 @@ input[type="reset"] {
 button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
+input[type="reset"]:hover,
 input[type="submit"]:hover,
-a.button[href]:hover,
-input[type="reset"]:hover {
+a.button[href]:hover {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1761,9 +1775,9 @@ input[type="reset"]:hover {
 button:focus-visible,
 [role="button"]:focus-visible,
 input[type="button"]:focus-visible,
+input[type="reset"]:focus-visible,
 input[type="submit"]:focus-visible,
-a.button[href]:focus-visible,
-input[type="reset"]:focus-visible {
+a.button[href]:focus-visible {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1777,9 +1791,9 @@ input[type="reset"]:focus-visible {
 button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
+input[type="reset"]:focus-within,
 input[type="submit"]:focus-within,
-a.button[href]:focus-within,
-input[type="reset"]:focus-within {
+a.button[href]:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1793,9 +1807,9 @@ input[type="reset"]:focus-within {
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
+input[type="reset"]:active,
 input[type="submit"]:active,
-a.button[href]:active,
-input[type="reset"]:active {
+a.button[href]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
@@ -1805,24 +1819,23 @@ input[type="reset"]:active {
 button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="reset"],
 input[aria-disabled="true"][type="submit"],
 a[aria-disabled="true"].button[href],
 button[disabled],
 [disabled][role="button"],
 input[disabled][type="button"],
+input[disabled][type="reset"],
 input[disabled][type="submit"],
-a[disabled].button[href],
-input[aria-disabled="true"][type="reset"],
-input[disabled][type="reset"] {
+a[disabled].button[href] {
     cursor: not-allowed;
 }
 button,
 [role="button"],
 input[type="button"],
+input[type="reset"],
 input[type="submit"],
-a.button[href],
-button[type="reset"],
-input[type="reset"] {
+a.button[href] {
     --display: flex;
     display: flex;
     flex-direction: row;
@@ -1841,15 +1854,15 @@ input[type="reset"] {
 button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="reset"],
 input[aria-disabled="true"][type="submit"],
 a[aria-disabled="true"].button[href],
 button[disabled],
 [disabled][role="button"],
 input[disabled][type="button"],
+input[disabled][type="reset"],
 input[disabled][type="submit"],
-a[disabled].button[href],
-input[aria-disabled="true"][type="reset"],
-input[disabled][type="reset"] {
+a[disabled].button[href] {
     cursor: not-allowed;
 }
 
@@ -2253,6 +2266,7 @@ body > aside > :first-child {
     body > button,
     body > [role="button"],
     body > input[type="button"],
+    body > input[type="reset"],
     body > input[type="submit"],
     body > a.button[href]
 ) {
@@ -3107,6 +3121,7 @@ body > nav[data-toggle-container] {
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
+.website-settings__content input[type="reset"],
 .website-settings__content input[type="submit"],
 .website-settings__content a.button[href] {
     margin-top: var(--mrg-firm-300, 0.8125rem);

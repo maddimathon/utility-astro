@@ -7,7 +7,7 @@
 
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
-import type { Props as IconProps } from './Icon.d.ts';
+import type { ClassList } from '../../ts/00-types/index.js';
 
 /* import - functions */
 
@@ -20,7 +20,29 @@ import { SVG, SVG_Label } from '../../ts/svg.js';
 
 /* TYPES ===================================== */
 
-export type * from './Icon.d.ts';
+type IconProps_Slug = {
+    class?: ClassList;
+    type: keyof typeof SVG;
+    slug?: never;
+    svg?: never;
+    svgLabel?: never;
+};
+
+type IconProps_Svg = {
+    class?: ClassList;
+    type?: never;
+    slug: string;
+    svg: string;
+    svgLabel: string;
+};
+
+/**
+ * Input props for the Icon component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export type IconProps = IconProps_Slug | IconProps_Svg;
 
 /* PROPS ===================================== */
 

@@ -7,7 +7,6 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as SkipLinksProps } from './SkipLinks.d.ts';
 
 /* import - functions */
 
@@ -19,7 +18,21 @@ import type { Props as SkipLinksProps } from './SkipLinks.d.ts';
 
 /* TYPES ===================================== */
 
-export type * from './SkipLinks.d.ts';
+/**
+ * Input props for the SkipLinks component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface SkipLinksProps {
+    /**
+     * The links used for skipping.
+     */
+    links: {
+        label: string;
+        href: string;
+    }[];
+}
 
 /* PROPS ===================================== */
 

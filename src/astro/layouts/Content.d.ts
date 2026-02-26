@@ -8,32 +8,40 @@
  * @license MIT
  */
 
-import type { Props as MainProps } from './Main.d.ts';
-import type { Props as SidebarProps } from './Sidebar.d.ts';
+import type { HTMLAttributes } from 'astro/types';
 
+import type { MainProps } from './Main.astro';
+import type { SidebarProps } from './Sidebar.astro';
+
+/**
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
 export type ContentType =
-    | "content-only"
-    | "full-width"
-    | "extra-wide"
-    | "sidebar-left"
-    | "sidebar-right";
+    | 'content-only'
+    | 'full-width'
+    | 'extra-wide'
+    | 'sidebar-left'
+    | 'sidebar-right';
 
-export type DefaultContentType = "content-only" & ContentType;
+/**
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export type DefaultContentType = 'content-only' & ContentType;
 
 /**
  * Input props for the Content component.
- * 
+ *
  * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface Props<
-    T_Type extends ContentType = DefaultContentType,
-> {
-
-    attrs?: T_Type extends "sidebar-left" | "sidebar-right" ? {
-        main?: MainProps,
-        sidebar?: HTMLAttributes<"aside">,
-    } : {
-        main?: MainProps,
+export interface ContentProps<T_Type extends ContentType = DefaultContentType> {
+    attrs?: T_Type extends 'sidebar-left' | 'sidebar-right'
+    ? {
+        main?: MainProps;
+        sidebar?: HTMLAttributes<'aside'>;
+    }
+    : {
+        main?: MainProps;
     };
 
     /**
@@ -46,20 +54,20 @@ export interface Props<
 
 /**
  * Completed props for the Content sub-components.
- * 
+ *
  * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export type Props_Full<
-    T_Type extends ContentType,
-> = {
-    [ K in keyof Omit<Props, "attrs"> ]-?: Props[ K ];
+export type ContentProps_Full<T_Type extends ContentType> = {
+    [ K in keyof Omit<ContentProps, 'attrs'> ]-?: ContentProps[ K ];
 } & {
-
-    attrs: T_Type extends "sidebar-left" | "sidebar-right" ? {
-        main: MainProps,
-        sidebar: SidebarProps,
-    } : {
-        main: MainProps,
+    attrs: T_Type extends 'sidebar-left' | 'sidebar-right'
+    ? {
+        main: MainProps;
+        sidebar: SidebarProps;
+    }
+    : {
+        main: MainProps;
     };
 
     // [ key: string ]: unknown;

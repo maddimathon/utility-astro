@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/global */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.38
+ * @maddimathon/utility-sass@0.1.0-alpha.39
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -443,6 +443,7 @@ h1 {
 h1 button,
 h1 [role="button"],
 h1 input[type="button"],
+h1 input[type="reset"],
 h1 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -464,6 +465,7 @@ h1 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -485,6 +487,7 @@ h2 {
 h2 button,
 h2 [role="button"],
 h2 input[type="button"],
+h2 input[type="reset"],
 h2 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -506,6 +509,7 @@ h2 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -527,6 +531,7 @@ h3 {
 h3 button,
 h3 [role="button"],
 h3 input[type="button"],
+h3 input[type="reset"],
 h3 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -548,6 +553,7 @@ h3 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -575,6 +581,7 @@ h4 em em {
 h4 button,
 h4 [role="button"],
 h4 input[type="button"],
+h4 input[type="reset"],
 h4 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -602,6 +609,7 @@ h4 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -629,6 +637,7 @@ h5 em em {
 h5 button,
 h5 [role="button"],
 h5 input[type="button"],
+h5 input[type="reset"],
 h5 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -656,6 +665,7 @@ h5 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -683,6 +693,7 @@ h6 em em {
 h6 button,
 h6 [role="button"],
 h6 input[type="button"],
+h6 input[type="reset"],
 h6 input[type="submit"] {
     font: inherit;
     letter-spacing: inherit;
@@ -710,6 +721,7 @@ h6 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -733,6 +745,7 @@ h6 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -762,6 +775,7 @@ h6 input[type="submit"] {
         button,
         [role="button"],
         input[type="button"],
+        input[type="reset"],
         input[type="submit"]
     ) {
     font: inherit;
@@ -1135,9 +1149,8 @@ label > input[type="radio"] {
 button,
 [role="button"],
 input[type="button"],
-input[type="submit"],
-button[type="reset"],
-input[type="reset"] {
+input[type="reset"],
+input[type="submit"] {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
@@ -1156,8 +1169,8 @@ input[type="reset"] {
 button:focus,
 [role="button"]:focus,
 input[type="button"]:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus {
+input[type="reset"]:focus,
+input[type="submit"]:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1171,8 +1184,8 @@ input[type="reset"]:focus {
 button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover {
+input[type="reset"]:hover,
+input[type="submit"]:hover {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1186,8 +1199,8 @@ input[type="reset"]:hover {
 button:focus-within,
 [role="button"]:focus-within,
 input[type="button"]:focus-within,
-input[type="submit"]:focus-within,
-input[type="reset"]:focus-within {
+input[type="reset"]:focus-within,
+input[type="submit"]:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -1201,8 +1214,8 @@ input[type="reset"]:focus-within {
 button:active,
 [role="button"]:active,
 input[type="button"]:active,
-input[type="submit"]:active,
-input[type="reset"]:active {
+input[type="reset"]:active,
+input[type="submit"]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: var(--sys-clr-button-border-active, ButtonFace);
@@ -1212,21 +1225,20 @@ input[type="reset"]:active {
 button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="reset"],
 input[aria-disabled="true"][type="submit"],
 button[disabled],
 [disabled][role="button"],
 input[disabled][type="button"],
-input[disabled][type="submit"],
-input[aria-disabled="true"][type="reset"],
-input[disabled][type="reset"] {
+input[disabled][type="reset"],
+input[disabled][type="submit"] {
     cursor: not-allowed;
 }
 button,
 [role="button"],
 input[type="button"],
-input[type="submit"],
-button[type="reset"],
-input[type="reset"] {
+input[type="reset"],
+input[type="submit"] {
     --display: flex;
     display: flex;
     flex-direction: row;
@@ -1245,13 +1257,13 @@ input[type="reset"] {
 button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="reset"],
 input[aria-disabled="true"][type="submit"],
 button[disabled],
 [disabled][role="button"],
 input[disabled][type="button"],
-input[disabled][type="submit"],
-input[aria-disabled="true"][type="reset"],
-input[disabled][type="reset"] {
+input[disabled][type="reset"],
+input[disabled][type="submit"] {
     cursor: not-allowed;
 }
 

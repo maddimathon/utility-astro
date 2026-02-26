@@ -7,7 +7,6 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as NestedListProps } from './NestedList.d.ts';
 
 /* import - functions */
 
@@ -19,12 +18,56 @@ import type { Props as NestedListProps } from './NestedList.d.ts';
 
 /* TYPES ===================================== */
 
-export type * from './NestedList.d.ts';
+/**
+ * Individual list items.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export type NestedListItem = {
+    /**
+     * Escaped HTML content for this item.
+     */
+    html: string;
+
+    /**
+     * Items for a sublist of this item.
+     */
+    children?: NestedListItem[];
+
+    /**
+     * Type of list to print for children, else inherits from parent list.
+     */
+    childrenTag?: 'ol' | 'ul';
+};
+
+/**
+ * Input props for the NestedList component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+// prettier-ignore
+export interface NestedListProps<T_Item extends NestedListItem = NestedListItem> {
+    /**
+     * Nested list to print.
+     */
+    list: T_Item[];
+
+    /**
+     * Type of list to print.
+     *
+     * @default "ul"
+     */
+    tag?: 'ol' | 'ul';
+}
 
 /* PROPS ===================================== */
 
-export interface Props
-    extends GenericElementProps<NestedListProps, 'ul' | 'ol'> {}
+export interface Props extends GenericElementProps<
+    NestedListProps,
+    'ul' | 'ol'
+> {}
 
 const {
     list,

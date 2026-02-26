@@ -8,7 +8,7 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/00-types/index.js';
-import type { Props as VariableDumpProps } from './VariableDump.d.ts';
+import type { CodeBlockProps } from './CodeBlock.astro';
 
 /* import - functions */
 import { VariableInspector } from '@maddimathon/utility-typescript/classes';
@@ -22,7 +22,26 @@ import CodeBlock from './CodeBlock.astro';
 
 /* TYPES ===================================== */
 
-export type * from './VariableDump.d.ts';
+/**
+ * Input props for the VariableDump component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
+ */
+export interface VariableDumpProps extends Omit<
+    CodeBlockProps,
+    'children' | 'lang'
+> {
+    /**
+     * The variable to dump.
+     */
+    var: unknown;
+
+    /**
+     * Optional name to prefix the output.
+     */
+    name?: string;
+}
 
 /* PROPS ===================================== */
 
@@ -40,7 +59,7 @@ const stringified = VariableInspector.stringify(
     { [name ?? 'var']: variable },
     {
         includePrefix: !!name,
-    }
+    },
 ).trim();
 ---
 

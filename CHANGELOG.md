@@ -19,6 +19,18 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.17** — 2026-02-25
+
+### Moved & Renamed
+- Moved all astro component/layout types into the component/layout files
+
+### Added
+- More options for LoremIpsum output length (now has a preview page in docs)
+
+### Changed
+- Updated with utility-sass
+
+
 ## **0.1.0-alpha.16** — 2026-02-25
 
 Updated with utility-sass

@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.38
+ * @maddimathon/utility-sass@0.1.0-alpha.39
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -30,6 +30,7 @@
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
+.website-settings__content input[type="reset"],
 .website-settings__content input[type="submit"] {
     margin-top: var(--mrg-firm-300, 0.8125rem);
     margin-bottom: var(--mrg-half-300, 0.3125rem);

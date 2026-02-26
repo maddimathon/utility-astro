@@ -7,7 +7,8 @@
 
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
-import type { Props as AlertProps } from './Alert.d.ts';
+import type { ClassList } from '../../ts/00-types/index.js';
+import type { IconProps } from './Icon.astro';
 
 /* import - functions */
 
@@ -21,12 +22,40 @@ import Heading from './Heading.astro';
 
 /* TYPES ===================================== */
 
-export type * from './Alert.d.ts';
+type AlertProps_Slug = {
+    class?: ClassList;
+    heading?: number;
+
+    type: IconProps['type'];
+
+    slug?: never;
+    svg?: never;
+    svgLabel?: never;
+};
+
+type AlertProps_Svg = {
+    class?: ClassList;
+    heading?: number;
+
+    type?: never;
+
+    slug: string;
+    svg: string;
+    svgLabel: string;
+};
+
+/**
+ * Input props for the Alert component.
+ *
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file and renamed to AlertProps.
+ */
+export type AlertProps = AlertProps_Slug | AlertProps_Svg;
 
 /* PROPS ===================================== */
 
 // prettier-ignore
-export type Props = AlertProps & Partial<Omit<HTMLAttributes<'section'>, keyof AlertProps | 'class' | 'class:list'>>;
+export type Props = AlertProps & Partial<Omit<HTMLAttributes<'section'>, keyof AlertProps|'class'|'class:list'>>;
 
 const {
     heading,

@@ -8,18 +8,21 @@
  * @license MIT
  */
 
-import type { Objects } from '@maddimathon/utility-typescript/types';
-
 import type { HTMLAttributes } from 'astro/types';
 
-import type { GenericProps } from '../../ts/index.ts';
+import type {
+    Objects,
+} from '@maddimathon/utility-typescript/types';
 
-import type { Props as NavMenuProps } from '../components/NavMenu.d.ts';
-import type { Props as Page_MetaProps } from '../components/Page_Meta.d.ts';
-import type { Props as SettingsMenuProps } from '../components/SettingsMenu.d.ts';
-import type { Props as SkipLinksProps } from '../components/SkipLinks.d.ts';
+import type { NavMenuProps } from '../components/NavMenu.astro';
+import type { Page_MetaProps } from '../components/Page_Meta.astro';
+import type { SettingsMenuProps } from '../components/SettingsMenu.astro';
+import type { SkipLinksProps } from '../components/SkipLinks.astro';
 
-import type { Props as ContentProps, ContentType, DefaultContentType } from './Content.d.ts';
+import type {
+    Props as ContentProps,
+    ContentType,
+} from './Content.astro';
 
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
@@ -28,17 +31,70 @@ import type { Props as ContentProps, ContentType, DefaultContentType } from './C
  */
 type HTML_excludeAttributes = "dir" | "lang";
 
+type Copyright_HTML = {
+    /**
+     * Escaped HTML to include after the copyright symbol.
+     */
+    html: string;
+
+    owner?: undefined;
+
+    /**
+     * If undefined, this defaults to the current year. If it is greater
+     * than the current year, this is displayed as a range.
+     * 
+     * *Text to be escaped, NOT html.*
+     */
+    year?: number;
+};
+
+type Copyright_PlainOwner = {
+    html?: undefined;
+
+    /**
+     * Text to follow the copyright symbol and date.
+     * 
+     * *Text to be escaped, NOT html.*
+     */
+    owner: string;
+
+    /**
+     * If undefined, this defaults to the current year. If it is greater
+     * than the current year, this is displayed as a range.
+     * 
+     * *Text to be escaped, NOT html.*
+     */
+    year?: number;
+};
+
+type Copyright_PlainYear = {
+    html?: undefined;
+
+    /**
+     * Text to follow the copyright symbol and date.
+     * 
+     * *Text to be escaped, NOT html.*
+     */
+    owner?: string;
+
+    /**
+     * If undefined, this defaults to the current year. If it is greater
+     * than the current year, this is displayed as a range.
+     * 
+     * *Text to be escaped, NOT html.*
+     */
+    year: number;
+};
 
 /**
  * Input props for the NewComponent component.
  * 
  * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.17 — Moved to component file.
  * 
  * @interface
  */
-export type Props<
-    T_ContentType extends ContentType = ContentType,
-> = GenericProps<{
+export interface PageProps<T_ContentType extends ContentType = ContentType> {
 
     /**
      * Page title. Used for metadata default and passed to the Content component.
@@ -62,8 +118,8 @@ export type Props<
      * Attributes for elements on the page.
      */
     attrs?: {
-        html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes>,
-        body?: HTMLAttributes<"body">,
+        html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes>;
+        body?: HTMLAttributes<"body">;
     };
 
     /**
@@ -85,59 +141,7 @@ export type Props<
          * 
          * An empty object can also be passed to enable the default output.
          */
-        copyright?: false | {
-
-            /**
-             * Escaped HTML to include after the copyright symbol.
-             */
-            html: string;
-
-            owner?: undefined;
-
-            /**
-             * If undefined, this defaults to the current year. If it is greater
-             * than the current year, this is displayed as a range.
-             * 
-             * *Text to be escaped, NOT html.*
-             */
-            year?: number;
-        } | {
-
-            html?: undefined;
-
-            /**
-             * Text to follow the copyright symbol and date.
-             * 
-             * *Text to be escaped, NOT html.*
-             */
-            owner: string;
-
-            /**
-             * If undefined, this defaults to the current year. If it is greater
-             * than the current year, this is displayed as a range.
-             * 
-             * *Text to be escaped, NOT html.*
-             */
-            year?: number;
-        } | {
-
-            html?: undefined;
-
-            /**
-             * Text to follow the copyright symbol and date.
-             * 
-             * *Text to be escaped, NOT html.*
-             */
-            owner?: string;
-
-            /**
-             * If undefined, this defaults to the current year. If it is greater
-             * than the current year, this is displayed as a range.
-             * 
-             * *Text to be escaped, NOT html.*
-             */
-            year: number;
-        };
+        copyright?: false | Copyright_HTML | Copyright_PlainOwner | Copyright_PlainYear;
 
         /**
          * Escaped HTML to include.
@@ -229,4 +233,4 @@ export type Props<
          */
         toggle?: boolean;
     };
-}>;
+};

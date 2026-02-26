@@ -6,16 +6,17 @@
  */
 
 /* import - types */
-import { mergeArgs } from '@maddimathon/utility-typescript/functions';
 import type { GenericProps } from '../../ts/00-types/index.js';
+
 import type {
-    Props as ContentProps,
-    Props_Full,
     ContentType,
     DefaultContentType,
-} from './Content.js';
+    ContentProps,
+    ContentProps_Full,
+} from './Content.d.ts';
 
 /* import - functions */
+import { mergeArgs } from '@maddimathon/utility-typescript/functions';
 
 /* import - values */
 
@@ -30,7 +31,7 @@ import Content_SidebarRight from './content/Content_SidebarRight.astro';
 
 /* TYPES ===================================== */
 
-export type { ContentType, DefaultContentType, Props_Full };
+export type * from './Content.d.ts';
 
 /* PROPS ===================================== */
 
@@ -39,7 +40,8 @@ export type Props<T_Type extends ContentType = DefaultContentType> =
         type?: T_Type | undefined;
     };
 
-const _defProps: Props_Full<ContentType> & Pick<Required<Props>, 'type'> = {
+const _defProps: ContentProps_Full<ContentType> &
+    Pick<Required<Props>, 'type'> = {
     type: 'content-only',
 
     title: null,
@@ -52,6 +54,7 @@ const _defProps: Props_Full<ContentType> & Pick<Required<Props>, 'type'> = {
 };
 
 const p = mergeArgs(_defProps, Astro.props.frontmatter ?? Astro.props, true);
+
 /* CONSTANTS ===================================== */
 
 const title = Array.isArray(p.title)
@@ -65,7 +68,11 @@ const title = Array.isArray(p.title)
 const titleString = title.reverse().join(' / ');
 
 const contentTypes: {
-    [K in ContentType]: (result: any, props: Props_Full<K>, slots?: any) => any;
+    [K in ContentType]: (
+        result: any,
+        props: ContentProps_Full<K>,
+        slots?: any,
+    ) => any;
 } = {
     'content-only': Content_Only,
     'full-width': Content_FullWidth,
