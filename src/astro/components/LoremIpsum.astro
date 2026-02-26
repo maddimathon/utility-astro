@@ -302,15 +302,16 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
     <p>Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
     <div class="button-span">
         <button type="button">This is a button</button>
-        <button aria-disabled="true" type="button">This is a disabled button</button>
         
-        { library && <Fragment>{ buttonVariations.map(
-            variant => <button
+        { library && <button aria-disabled="true" type="button">This is a disabled button</button>}
+        
+        { buttonVariations.map(
+            variant => ( fancy || variant === 'secondary' || variant === 'tertiary' ) && <button
                 class={`button-${variant}`}
                 set:text={`This is a ${variant} button`}
                 type="button"
             />
-        ) }</Fragment> }
+        ) }
     </div>
     <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo.</p>
     
@@ -508,15 +509,16 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
         <button type="button">This is a button</button>
 
         <div class="button-span">
-            <button aria-disabled="true" type="button">This is a disabled button</button>
-            { buttonVariations.map( variant =><button
+            {library && <button aria-disabled="true" type="button">This is a disabled button</button>}
+
+            { buttonVariations.map( variant => <button
                 class={`button-${variant}`}
                 set:text={`This is a ${variant} button`}
                 type="button"
             /> ) }
         </div>
 
-        { library && <div class="button-span">
+        { fancy && <div class="button-span">
             <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
             <button type="submit" set:text="This is a submit button" />
             <button type="reset" set:text="This is a reset button" />
