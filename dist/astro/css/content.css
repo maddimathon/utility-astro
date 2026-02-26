@@ -1,6 +1,6 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.36
+ * @maddimathon/utility-sass@0.1.0-alpha.38
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -126,7 +126,6 @@ body > aside > :first-child {
 
 :where(
     body > a.button[href],
-    body > a.button-secondary[href],
     body > button,
     body > [role="button"],
     body > input[type="button"],

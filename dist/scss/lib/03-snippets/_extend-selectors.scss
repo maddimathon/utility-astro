@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.15
+/// @package @maddimathon/utility-astro@0.1.0-alpha.16
 /// @since 0.1.0-alpha
 ///
 
@@ -13,14 +13,12 @@
 @use '../01-functions' as *;
 // @use '../02-mixins' as *;
 
-$_astroContentLayoutSelectors: if(
-    config.$print_astro_content,
-    to-extend-selector-content-layout(),
-    ()
-);
-
+///
+/// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
+///
 @mixin extend-selectors-globals(
     $additional: (),
+    $additional_optional: (),
     $optional: null,
     $allHeadingLevels: token-all-heading-levels()
 ) {
@@ -36,44 +34,37 @@ $_astroContentLayoutSelectors: if(
         )
     );
 
-    @if config.$print_astro_content and not config.$print_utils {
-        $additional: list.join(
-            $additional,
-            $_astroContentLayoutSelectors,
-            $separator: comma
-        );
-    }
-
     @include lib.extend-selectors-globals(
         $additional: $additional,
+        $additional_optional: $additional_optional,
         $optional: $optional,
         $allHeadingLevels: $allHeadingLevels
     );
 }
 
+///
+/// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
+///
 @mixin extend-selectors-utils(
     $additional: (),
+    $additional_optional: (),
     $optional: null,
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
     // $additional: list.append($additional, ('.icon', 'icon'));
 
-    @if config.$print_astro_content {
-        $additional: list.join(
-            $additional,
-            $_astroContentLayoutSelectors,
-            $separator: comma
-        );
-    }
+    $additional_optional: list.join(
+        $additional_optional,
+        to-extend-selector-content-layout(),
+        $separator: comma
+    );
 
-    @if config.$print_astro_skipLinks {
-        $additional: list.append(
-            $additional,
-            ('.skip-link-list', 'skip-link-list'),
-            $separator: comma
-        );
-    }
+    $additional_optional: list.append(
+        $additional_optional,
+        ('.skip-link-list', 'skip-link-list'),
+        $separator: comma
+    );
 
     $_baseLevelListSelector: (
         '.table-of-contents [data-toggle-content] > .container ol',
@@ -96,6 +87,7 @@ $_astroContentLayoutSelectors: if(
 
     @include lib.extend-selectors-utils(
         $additional: $additional,
+        $additional_optional: $additional_optional,
         $optional: $optional,
         $allHeadingLevels: $allHeadingLevels
     );
@@ -104,12 +96,15 @@ $_astroContentLayoutSelectors: if(
 @mixin extend-selectors(
     $optional: null,
     $additional_globals: (),
+    $additional_globals_optional: (),
     $additional_utils: (),
+    $additional_utils_optional: (),
     $allHeadingLevels: token-all-heading-levels()
 ) {
     @if config.$print_globals {
         @include extend-selectors-globals(
             $additional: $additional_globals,
+            $additional_optional: $additional_globals_optional,
             $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );
@@ -118,6 +113,7 @@ $_astroContentLayoutSelectors: if(
     @if config.$print_utils {
         @include extend-selectors-utils(
             $additional: $additional_utils,
+            $additional_optional: $additional_utils_optional,
             $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );

@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/global */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.36
+ * @maddimathon/utility-sass@0.1.0-alpha.38
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -440,6 +440,14 @@ h1 {
     text-wrap: balance;
     font-style: normal;
 }
+h1 button,
+h1 [role="button"],
+h1 input[type="button"],
+h1 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
 :where([role="heading"][aria-level="1"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -451,6 +459,18 @@ h1 {
     text-wrap: balance;
     font-style: normal;
 }
+:where([role="heading"][aria-level="1"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 h2 {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -461,6 +481,14 @@ h2 {
     text-transform: none;
     text-wrap: balance;
     font-style: normal;
+}
+h2 button,
+h2 [role="button"],
+h2 input[type="button"],
+h2 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 :where([role="heading"][aria-level="2"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -473,6 +501,18 @@ h2 {
     text-wrap: balance;
     font-style: normal;
 }
+:where([role="heading"][aria-level="2"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 h3 {
     margin-top: var(--mrg-soft-800, 3.125rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -483,6 +523,14 @@ h3 {
     text-transform: none;
     text-wrap: balance;
     font-style: normal;
+}
+h3 button,
+h3 [role="button"],
+h3 input[type="button"],
+h3 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 :where([role="heading"][aria-level="3"]) {
     margin-top: var(--mrg-soft-800, 3.125rem);
@@ -495,6 +543,18 @@ h3 {
     text-wrap: balance;
     font-style: normal;
 }
+:where([role="heading"][aria-level="3"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 h4 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -511,6 +571,14 @@ h4 em {
 }
 h4 em em {
     font-style: italic;
+}
+h4 button,
+h4 [role="button"],
+h4 input[type="button"],
+h4 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 :where([role="heading"][aria-level="4"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -529,6 +597,18 @@ h4 em em {
 :where([role="heading"][aria-level="4"]) em em {
     font-style: italic;
 }
+:where([role="heading"][aria-level="4"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 h5 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -545,6 +625,14 @@ h5 em {
 }
 h5 em em {
     font-style: italic;
+}
+h5 button,
+h5 [role="button"],
+h5 input[type="button"],
+h5 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 :where([role="heading"][aria-level="5"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -563,6 +651,18 @@ h5 em em {
 :where([role="heading"][aria-level="5"]) em em {
     font-style: italic;
 }
+:where([role="heading"][aria-level="5"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 h6 {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -579,6 +679,14 @@ h6 em {
 }
 h6 em em {
     font-style: italic;
+}
+h6 button,
+h6 [role="button"],
+h6 input[type="button"],
+h6 input[type="submit"] {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
 }
 :where([role="heading"][aria-level="6"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
@@ -597,6 +705,18 @@ h6 em em {
 :where([role="heading"][aria-level="6"]) em em {
     font-style: italic;
 }
+:where([role="heading"][aria-level="6"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 :where([role="heading"][aria-level="7"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -608,6 +728,18 @@ h6 em em {
     text-wrap: balance;
     font-style: normal;
 }
+:where([role="heading"][aria-level="7"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 :where([role="heading"][aria-level="8"]) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
@@ -625,6 +757,18 @@ h6 em em {
 :where([role="heading"][aria-level="8"]) em em {
     font-style: italic;
 }
+:where([role="heading"][aria-level="8"])
+    :where(
+        button,
+        [role="button"],
+        input[type="button"],
+        input[type="submit"]
+    ) {
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+}
+
 /* # GLOBALS - Lists
  * ======================================================================== */
 ol,
@@ -988,6 +1132,216 @@ label > input[type="radio"] {
 }
 
 /* ## Forms - Buttons ==================================== */
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+button[type="reset"],
+input[type="reset"] {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+button:focus,
+[role="button"]:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:hover,
+[role="button"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:focus-within,
+[role="button"]:focus-within,
+input[type="button"]:focus-within,
+input[type="submit"]:focus-within,
+input[type="reset"]:focus-within {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+button:active,
+[role="button"]:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+button[aria-disabled="true"],
+[aria-disabled="true"][role="button"],
+input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="submit"],
+button[disabled],
+[disabled][role="button"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+input[aria-disabled="true"][type="reset"],
+input[disabled][type="reset"] {
+    cursor: not-allowed;
+}
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+button[type="reset"],
+input[type="reset"] {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+button[aria-disabled="true"],
+[aria-disabled="true"][role="button"],
+input[aria-disabled="true"][type="button"],
+input[aria-disabled="true"][type="submit"],
+button[disabled],
+[disabled][role="button"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+input[aria-disabled="true"][type="reset"],
+input[disabled][type="reset"] {
+    cursor: not-allowed;
+}
+
+::file-selector-button {
+    --focus-ring-outline-offset: 0.125rem;
+    display: block;
+    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    width: -moz-fit-content;
+    width: fit-content;
+    font: inherit;
+    line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-radius: 0;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: var(--sys-clr-button-text, ButtonText);
+    accent-color: var(--sys-clr-button-border, ButtonFace);
+}
+:focus::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:hover::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:focus-within::file-selector-button {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:active::file-selector-button {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+[aria-disabled="true"]::file-selector-button,
+[disabled]::file-selector-button {
+    cursor: not-allowed;
+}
+::file-selector-button {
+    --display: flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+}
+[aria-disabled="true"]::file-selector-button,
+[disabled]::file-selector-button {
+    cursor: not-allowed;
+}
+::file-selector-button {
+    display: initial;
+    margin: 0;
+    margin-right: var(--mrg-firm-300, 0.8125rem);
+    font-size: var(--fs-normal, 1rem);
+}
+
 /* # GLOBALS - Tables
  * ======================================================================== */
 table {
