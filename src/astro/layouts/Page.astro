@@ -106,6 +106,7 @@ if ( p.primaryMenu ) {
         'aria-label': 'Primary Menu',
         id: 'primary-menu',
         ..._menu,
+        convertHrefStringsToAbsolute: p.convertHrefStringsToAbsolute,
     };
 }
 
@@ -125,6 +126,7 @@ if ( p.secondaryMenu ) {
         'aria-label': 'Secondary Menu',
         id: 'secondary-menu',
         ..._menu,
+        convertHrefStringsToAbsolute: p.convertHrefStringsToAbsolute,
     };
 }
 

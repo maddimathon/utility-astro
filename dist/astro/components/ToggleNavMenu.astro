@@ -35,15 +35,18 @@ export interface ToggleNavMenuProps extends NavMenuProps {}
 export interface Props extends GenericElementProps<ToggleNavMenuProps, 'div'> {}
 
 const {
+    class: classList = [],
+    convertHrefStringsToAbsolute = null,
     id: menuID,
     menu,
-    class: classList = [],
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map((_item) => parseMenuItem(Astro.url, _item));
+const parsedMenu = menu.map((_item) =>
+    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute),
+);
 
 const id = `${menuID}-toggle`;
 

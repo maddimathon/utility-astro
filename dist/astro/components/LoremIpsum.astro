@@ -592,11 +592,11 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
 
        { !abbreviated && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }
 
-        { !abbreviated || fancy && <Heading
+        { (!abbreviated || fancy) ? <Heading
             displayHeading={4 + displayHeading}
             heading={ 4 + heading }
         >Cras Volutpat <a href="#">ex</a></Heading>
-        <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p> }
+        <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p> : '' }
 
         { fancy && (
             <hr />

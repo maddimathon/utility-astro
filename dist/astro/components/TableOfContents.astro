@@ -53,6 +53,8 @@ export interface TableOfContents_Props extends NavMenu_SemiProps {
      */
     asToggle?: boolean;
 
+    convertHrefStringsToAbsolute?: boolean | null;
+
     defaultOpen?: boolean;
 
     /**
@@ -77,15 +79,15 @@ export interface Props
     > {}
 
 const {
-    heading,
-    menu,
-    // optional
     asToggle = true,
     class: classList = [],
+    convertHrefStringsToAbsolute = null,
     defaultOpen,
     displayHeading = false,
+    heading,
     id = 'toc',
     listTag,
+    menu,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -94,9 +96,10 @@ const {
 export function parseTableOfContents(
     currentURL: URL,
     item: TableOfContents_Props['menu'][number],
+    convertHrefStringsToAbsolutePath: boolean | null = null,
 ): NestedListItem {
 
-    const asMenuItem = parseMenuItem(currentURL, item);
+    const asMenuItem = parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
 
     const html_attrs = parseItemAttributes(asMenuItem);
 
@@ -125,7 +128,7 @@ export function parseTableOfContents(
 
 const headingID = `${id}---heading-element`;
 
-const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item));
+const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item, convertHrefStringsToAbsolute));
 
 const headingHTML =
     (await Astro.slots.render('button'))?.trim() || 'Table of Contents';

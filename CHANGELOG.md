@@ -19,6 +19,15 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.19** — 2026-02-26
+
+### Added
+- convertHrefStringsToAbsolute prop to NavMenu, TableOfContents, ToggleNavMenu, and Page
+
+### Fixed
+- LoremIpsum display sometimes had an accidental 'true' output
+
+
 ## **0.1.0-alpha.18** — 2026-02-26
 
 Small updates to LoremIpsum button variation display.

@@ -37,6 +37,8 @@ export interface NavMenuProps {
      */
     'aria-label': string;
 
+    'convertHrefStringsToAbsolute'?: boolean | null;
+
     /**
      * Unique id attr.
      */
@@ -68,9 +70,10 @@ export interface NavMenuProps {
 export interface Props extends GenericElementProps<NavMenuProps, 'nav'> {}
 
 const {
+    class: classList = [],
+    convertHrefStringsToAbsolute = null,
     id,
     menu,
-    class: classList = [],
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -78,17 +81,31 @@ const {
 
 /**
  * Converts an item input to the nav params to one for the
- * @param item Menu item to convert.
  */
 export function parseMenuItem(
     currentURL: URL,
     item: ArrayItem<NavMenuProps['menu']>,
+    convertHrefStringsToAbsolutePath: boolean | null = null,
 ): MenuItem {
     /**
-     * The strings representing this page (used to check for current status).
+     * The regex representing the current page's url (used to check for
+     * isCurrentPage value).
      */
-    const parseMenuItem_thisPage = {
-        object: new RegExp(
+    const isCurrentPage_regex = {
+        /**
+         * To use on string values, assuming they are paths relative to the root.
+         */
+        string: new RegExp(
+            `^(${escRegExp(
+                absoluteInternalURL(currentURL, currentURL.pathname),
+            )})\/?$`,
+            'gi',
+        ),
+
+        /**
+         * To use on URL.toString() values.
+         */
+        url: new RegExp(
             `^(${escRegExpURL(
                 currentURL.toString().replace(/\/$/gi, '/'),
             )}|${escRegExpURL(
@@ -100,16 +117,9 @@ export function parseMenuItem(
             )})\/?$`,
             'gi',
         ),
-
-        string: new RegExp(
-            `^(${escRegExp(
-                absoluteInternalURL(currentURL, currentURL.pathname),
-            )})\/?$`,
-            'gi',
-        ),
     };
 
-    let current: boolean = item.current ?? false;
+    let isCurrentPage: boolean = item.current ?? false;
 
     let href: MenuItem['href'];
 
@@ -120,19 +130,24 @@ export function parseMenuItem(
                 break;
             }
 
-            href = item.href?.toString();
+            href = item.href.toString();
 
-            current =
-                current || href?.match(parseMenuItem_thisPage.object) !== null;
+            isCurrentPage =
+                isCurrentPage || href.match(isCurrentPage_regex.url) !== null;
             break;
 
         case 'string':
-            href = item.href.match(/^(\.|\/|[a-z]+:\/\/)/)
-                ? item.href
-                : absoluteInternalURL(currentURL, item.href);
+            href = item.href;
 
-            current =
-                current || href.match(parseMenuItem_thisPage.string) !== null;
+            if (
+                convertHrefStringsToAbsolutePath ??
+                href.match(/^(\.\.?\/|\/|[a-z]+:\/\/)/) === null
+            ) {
+                href = absoluteInternalURL(currentURL, item.href);
+            }
+            isCurrentPage =
+                isCurrentPage ||
+                href.match(isCurrentPage_regex.string) !== null;
             break;
 
         default:
@@ -143,20 +158,24 @@ export function parseMenuItem(
     let child: MenuItem['child'];
 
     if (item.child?.length) {
-        child = item.child.map((_item) => parseMenuItem(currentURL, _item));
+        child = [...item.child].map((_item) =>
+            parseMenuItem(currentURL, _item, convertHrefStringsToAbsolutePath),
+        );
     }
 
     return {
         ...item,
         href,
-        current: current || null,
+        current: isCurrentPage || null,
         child,
     };
 }
 
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map((_item) => parseMenuItem(Astro.url, _item));
+const parsedMenu = [...menu].map((_item) =>
+    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute),
+);
 ---
 
 <nav

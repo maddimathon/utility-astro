@@ -128,6 +128,11 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     content?: Omit<ContentProps<T_ContentType>, "subtitle" | "title" | "type">;
 
     /**
+     * Used for NavMenu, ToggleNavMenu, and TableOfContents components.
+     */
+    convertHrefStringsToAbsolute?: boolean | null;
+
+    /**
      * The content to include in the page footer, if any.
      *
      * An empty object can also be passed to enable the wrapper and slot without
@@ -177,7 +182,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
+    primaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -187,7 +192,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "menu">;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
 
     /**
      * Whether to inlcude the settings menu. Optionally this can be an object of
