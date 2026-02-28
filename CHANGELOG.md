@@ -19,6 +19,12 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.20** — 2026-02-28
+
+### Changed
+- More modular display settings available for LoremIpsum
+
+
 ## **0.1.0-alpha.19** — 2026-02-26
 
 ### Added

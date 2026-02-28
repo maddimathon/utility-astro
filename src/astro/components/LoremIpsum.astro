@@ -20,6 +20,7 @@ import { arrayUnique } from '@maddimathon/utility-typescript/functions';
 import TableOfContents from './TableOfContents.astro';
 import CodeBlock from './CodeBlock.astro';
 import Heading from './Heading.astro';
+import Toggle from './Toggle.astro';
 
 /* import - layouts */
 
@@ -27,60 +28,96 @@ import Heading from './Heading.astro';
 /* TYPES ===================================== */
 
 /**
- * Input props for the LoremIpsum component.
- * 
- * @since 0.1.0-alpha
- * @since 0.1.0-alpha.7 — Moved to component file.
+ * @since 0.1.0-alpha.20
  */
-export interface LoremIpsumProps {
+export interface LoremIpsum_DisplaySettings {
 
     /**
-     * Whether to output an abbreviated version (e.g., when displaying multiple 
-     * on a page or as placeholder content).
-     * 
-     * @since 0.1.0-alpha.17
+     * @since 0.1.0-alpha.20
      */
-    abbreviated?: boolean;
+    blockquote?: boolean;
 
     /**
-     * All heading levels to demo. Always includes 1-6.
+     * @since 0.1.0-alpha.20
      */
-    allHeadingLevels?: number[];
+    buttonTypes?: boolean;
 
     /**
      * Additional button variations to include. 'primary' and 'disabled' are
      * always included.
      *
-     * @default 'secondary'
-     */
-    buttonVariations?: string[];
-
-    /**
-     * The starting visual heading level.
+     * @default ['secondary']
      * 
-     * @default null
+     * @since 0.1.0-alpha.20 — Moved to LoremIpsum_DisplaySettings and renamed.
      */
-    displayHeading?: null | number;
+    buttonVariations?: false | string[];
 
     /**
-     * The starting heading level.
+     * @since 0.1.0-alpha.20
+     */
+    buttonVariationsAll?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    code?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    disabledButton?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    forms?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    formsLong?: boolean;
+
+    /**
+     * All heading levels to demo. Always includes 1-6.
      * 
-     * @default 2
+     * @since 0.1.0-alpha.20 — Moved to LoremIpsum_DisplaySettings and renamed.
      */
-    heading?: number;
+    headingLevels?: number[];
 
     /**
-     * Determines what kind of elements to include.
+     * @since 0.1.0-alpha.20
      */
-    mode?: "minimum" | "fancy" | "library";
+    headingsList?: boolean;
 
     /**
-     * Whether to output a very abbreviated version (e.g., inside an alert or
-     * widget).
-     * 
-     * @since 0.1.0-alpha.17
+     * @since 0.1.0-alpha.20
      */
-    superAbbreviated?: boolean;
+    listsLong?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    listsMedium?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    table?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    textLong?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    textMedium?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    textPage?: boolean;
 
     /**
      * Whether to include a table of contents.
@@ -97,6 +134,65 @@ export interface LoremIpsumProps {
      * @since 0.1.0-alpha.7
      */
     tocDefaultOpen?: boolean;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    toggleBlocks?: boolean;
+}
+
+interface LoremIpsum_DisplaySettings_Parsed extends Omit<Required<LoremIpsum_DisplaySettings>, 'buttonVariations'> {
+    buttonVariations: string[];
+}
+
+/**
+ * Input props for the LoremIpsum component.
+ * 
+ * @since 0.1.0-alpha
+ * @since 0.1.0-alpha.7 — Moved to component file.
+ * @since 0.1.0-alpha.20 — Moved allHeadingLevels, buttonVariations, toc, tocDefaultOpen to LoremIpsum_DisplaySettings and renamed.
+ */
+export interface LoremIpsumProps {
+
+    /**
+     * Whether to output an abbreviated version (e.g., when displaying multiple 
+     * on a page or as placeholder content).
+     * 
+     * @since 0.1.0-alpha.17
+     */
+    abbreviated?: boolean;
+
+    /**
+     * The starting visual heading level.
+     * 
+     * @default null
+     */
+    displayHeading?: null | number;
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    displaySettings?: LoremIpsum_DisplaySettings;
+
+    /**
+     * The starting heading level.
+     * 
+     * @default 2
+     */
+    heading?: number;
+
+    /**
+     * Determines what preset to use for the display value to include.
+     */
+    mode?: "minimum" | "fancy" | "library";
+
+    /**
+     * Whether to output a very abbreviated version (e.g., inside an alert or
+     * widget).
+     * 
+     * @since 0.1.0-alpha.17
+     */
+    superAbbreviated?: boolean;
 }
 
 
@@ -105,10 +201,8 @@ export interface LoremIpsumProps {
 export type Props = GenericProps<LoremIpsumProps>;
 
 const {
-    abbreviated = false,
+    // abbreviated = false,
     superAbbreviated = false,
-    toc = false,
-    tocDefaultOpen = true,
     ...props
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -119,6 +213,7 @@ export function getLoremIpsumIds() {
 
     return {
         headings: { label: 'Headings', id: 'headings' },
+        toggles: { label: 'Toggle Blocks', id: 'toggles' },
         lists: { label: 'Lists', id: 'lists' },
         buttons: { label: 'Buttons', id: 'buttons' },
         blockquotes: { label: 'Blockquotes', id: 'blockquotes' },
@@ -126,48 +221,114 @@ export function getLoremIpsumIds() {
     } as const satisfies { [ key: string ]: { label: string, id: string, } };
 }
 
-export function getLoremIpsumMode( mode: typeof props.mode ): { [ K in Required<Props>['mode'] ]: boolean } {
+export function getLoremIpsumMode( _props: Props ): LoremIpsum_DisplaySettings_Parsed {
+
+    const {
+        abbreviated = false,
+        displaySettings: settings = {},
+        mode,
+    } = _props;
+
+    let modeValues: { 
+        isFancy: boolean;
+        isLibrary: boolean;
+    };
 
     switch ( mode ) {
 
         case 'fancy':
-            return {
-                fancy: true,
-                library: true,
-                minimum: true,
+            modeValues = {
+                isFancy: true,
+                isLibrary: true,
             };
+            break;
 
         case 'library':
-            return {
-                fancy: false,
-                library: true,
-                minimum: true,
+            modeValues = {
+                isFancy: false,
+                isLibrary: true,
             };
+            break;
 
         case 'minimum':
         default:
-            return {
-                fancy: false,
-                library: false,
-                minimum: true,
+            modeValues = {
+                isFancy: false,
+                isLibrary: false,
             };
+            break;
     }
+
+    const { isFancy, isLibrary } = modeValues;
+
+    const buttonVariations = settings.buttonVariations 
+        ? settings.buttonVariations?.filter( 
+            v => v != 'primary' && v != 'disabled'
+        ) ?? ['secondary'] 
+        : [];
+
+    const headingLevels = arrayUnique(
+        [1, 2, 3, 4, 5, 6].concat(
+            settings.headingLevels 
+            ? settings.headingLevels.map( Number ).filter(num => !Number.isNaN(num))
+            : [7, 8]
+        )
+    ).map( 
+        ( num ) => {
+            const str = num.toString()
+            return str.padStart( 10, '0' );
+        }
+    ).sort().map( Number );
+
+    const toc = ( settings.toc ?? false ) && !abbreviated;
+
+    const parsed =  {
+        blockquote: isFancy && !abbreviated,
+        buttonTypes: isFancy,
+        buttonVariationsAll: isFancy,
+        code: isLibrary && !abbreviated,
+        disabledButton: isLibrary,
+        forms: isFancy,
+        formsLong: isFancy && !abbreviated,
+        headingsList: isFancy && !abbreviated,
+        listsMedium: isLibrary,
+        listsLong: isFancy && !abbreviated,
+        table: isFancy && !abbreviated,
+        textMedium: isLibrary,
+        textLong: isFancy && !abbreviated,
+        textPage: !abbreviated,
+        toggleBlocks: isFancy && !abbreviated,
+
+        toc,
+        tocDefaultOpen: true,
+
+        ...settings,
+        
+        buttonVariations,
+        headingLevels,
+    } satisfies LoremIpsum_DisplaySettings_Parsed;
+
+    parsed.formsLong = parsed.formsLong && parsed.forms;
+    parsed.textLong = parsed.textLong && parsed.textMedium;
+
+    return parsed;
 }
 
 export function getLoremIpsumToc( 
-    mode?: typeof props.mode,
-    tableOfContentIds?: ReturnType<typeof getLoremIpsumIds> = getLoremIpsumIds(),
+    _props: Props,
+    tableOfContentIds?: ReturnType<typeof getLoremIpsumIds>,
 ) {
+    tableOfContentIds = tableOfContentIds ?? getLoremIpsumIds();
 
     const {
-        fancy,
-        // library,
-        // minimum,
-    } = getLoremIpsumMode( mode );
+        blockquote,
+        headingsList,
+        forms,
+    } = getLoremIpsumMode( _props );
 
     return (
         [
-            fancy && {
+            headingsList && {
                 label: tableOfContentIds.headings.label,
                 href: `#${tableOfContentIds.headings.id}`,
             },
@@ -179,11 +340,11 @@ export function getLoremIpsumToc(
                 label: tableOfContentIds.buttons.label,
                 href: `#${tableOfContentIds.buttons.id}`,
             },
-            fancy && {
+            blockquote && {
                 label: tableOfContentIds.blockquotes.label,
                 href: `#${tableOfContentIds.blockquotes.id}`,
             },
-            fancy && {
+            forms && {
                 label: tableOfContentIds.form.label,
                 href: `#${tableOfContentIds.form.id}`,
             },
@@ -194,28 +355,11 @@ export function getLoremIpsumToc(
 
 /* CONSTANTS ===================================== */
 
-const {
-    fancy:_fancy,
-    library,
-    // minimum: _minimum,
-} = getLoremIpsumMode( props.mode );
+const ifDisplay = getLoremIpsumMode( props );
 
-const fancy = _fancy && ( ! abbreviated || superAbbreviated );
+// const fancy = _fancy && ( ! abbreviated || superAbbreviated );
 
 export const tableOfContentIds = getLoremIpsumIds();
-
-const allHeadingLevels = arrayUnique(
-    [1, 2, 3, 4, 5, 6].concat(
-        props.allHeadingLevels 
-        ? props.allHeadingLevels.map( Number ).filter(num=>!Number.isNaN(num))
-        : [7, 8]
-    )
-).map( 
-    ( num ) => {
-        const str = num.toString()
-        return str.padStart( 10 - str.length, '0' );
-    }
-).sort().map( Number );
 
 const code = {
 
@@ -240,25 +384,21 @@ const code = {
     ].join('\n'),
 };
 
-const buttonVariations = props.buttonVariations?.filter( 
-    v => v != 'primary' && v != 'disabled'
-) ?? ['secondary'];
-
 let _heading = props.heading ?? 2;
 
 const displayHeading = props.displayHeading ?? _heading;
 
-const heading = _heading+ (abbreviated ? -1 : 0);
+const heading = _heading + ( props.abbreviated ? -1 : 0 );
 
-const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfContentIds );
+const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
 
 ---
 
 { superAbbreviated ? (
-    <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ library && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ fancy && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
+    <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ ifDisplay.textMedium && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ ifDisplay.textLong && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
     <ul>
         <li>Etiam ullamcorper commodo risus.</li>
-        { library && <li>Fusce mattis, odio at varius pharetra.
+        { ifDisplay.listsMedium && <li>Fusce mattis, odio at varius pharetra.
             <ol>
                 <li>Tellus arcu convallis erat, vel blandit nulla sem nec enim.
                     <ul>
@@ -267,7 +407,7 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
                                 <li>Convallis nisl vel, ultricies lorem.
                                     <ul>
                                         <li>Duis hendrerit eu lacus at egestas.
-                                            { fancy && <ol>
+                                            { ifDisplay.listsLong && <ol>
                                                 <li>Cras consequat id tortor nec dapibus.
                                                     <ol>
                                                         <li>Suspendisse dapibus maximus leo, quis.
@@ -303,15 +443,15 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
     <div class="button-span">
         <button type="button">This is a button</button>
         
-        { library && <button aria-disabled="true" type="button">This is a disabled button</button>}
+        { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button>}
         
-        { buttonVariations.map(
-            variant => ( fancy || variant === 'secondary' || variant === 'tertiary' ) && <button
+        { ifDisplay.buttonVariations ? ifDisplay.buttonVariations.map(
+            variant => ( ifDisplay.buttonVariationsAll || variant === 'secondary' || variant === 'tertiary' ) && <button
                 class={`button-${variant}`}
                 set:text={`This is a ${variant} button`}
                 type="button"
             />
-        ) }
+        ) : '' }
     </div>
     <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo.</p>
     
@@ -323,29 +463,29 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
         { tocMenu && (
             <TableOfContents
                 class="sidebar-width"
-                defaultOpen={tocDefaultOpen}
+                defaultOpen={ifDisplay.tocDefaultOpen}
                 heading={2}
                 menu={tocMenu} 
             />
             <hr />
         ) }
 
-        <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ (!abbreviated || library) ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ !abbreviated ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
+        <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
 
 
-        { !abbreviated && <Heading
+        { ifDisplay.textPage && <Heading
             displayHeading={displayHeading}
             heading={heading}
         >Suspendisse Potenti <a href="#">ex</a></Heading>
         <p>Proin leo mauris, iaculis et est eget, egestas tincidunt metus. Quisque mattis semper semper. Suspendisse dapibus maximus leo, quis facilisis risus auctor et. Nam vitae dolor mi. Morbi vestibulum dictum ipsum vel fermentum. Donec tincidunt fermentum ante eu faucibus.</p> }
 
-        { !abbreviated && <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p> }
+        { ifDisplay.textPage && <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p> }
 
-        { fancy && (
+        { ifDisplay.headingsList && (
             <hr />
             <p class="page-title | loremipsum-heading-sample" id={tableOfContentIds.headings.id}>Title (.page-title) Maecenas Facilisis <a href="#">Sollicitudin Nisi</a>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
             <Fragment>
-                { allHeadingLevels.map( (num) => ( num > 1 ) && (
+                { ifDisplay.headingLevels.map( (num) => ( num > 1 ) && (
                     <p
                         class:list={`h${num} | loremipsum-heading-sample`}
                     >Heading {num} Maecenas Facilisis <a href="#">Sollicitudin Nisi</a>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
@@ -353,13 +493,45 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
             </Fragment>
         ) }
 
-        { !abbreviated && <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p> }
+        { ifDisplay.textPage && <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p> }
 
         <slot />
 
-        <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ !abbreviated && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentIds.lists.id}></a></p>
+        { ifDisplay.toggleBlocks ? (
+            <hr />
+            
+            <Toggle
+                id={tableOfContentIds.toggles.id}
+                heading={false}
+            >
+                <p>Boo!</p>
+                <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
+            </Toggle>
+            <Toggle
+                id={`${tableOfContentIds.toggles.id}-open-default`}
+                heading={false}
+                defaultOpen={true}
+            >
+                <Fragment slot='button'>I am open by default</Fragment>
+                <p>Boo!</p>
+            </Toggle>
 
-        { fancy && (
+            <Fragment>{ ifDisplay.headingLevels.map( heading => <Toggle
+                id={`${tableOfContentIds.toggles.id}-heading${heading}`}
+                heading={heading}
+            >
+                <Fragment
+                    slot='button'
+                    set:text={`Toggle Heading ${heading}`}
+                />
+                <p>Boo!</p>
+                <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
+            </Toggle> ) }</Fragment>
+        ) : '' }
+
+        <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ ifDisplay.textPage && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentIds.lists.id}></a></p>
+
+        { ifDisplay.textLong && (
             <ul id="example-list-ul">
                 <li>Suspendisse risus augue, vulputate vel enim eu, vulputate vehicula quam.</li>
                 <li>Suspendisse accumsan ex sed ante lobortis sodales.
@@ -419,11 +591,11 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
                             <li>In hac habitasse platea dictumst.
                                 <ul>
                                     <li>At feugiat odio mollis ut.
-                                        { library && <ol>
+                                        { ifDisplay.listsMedium && <ol>
                                             <li>Mauris a tincidunt mauris.
                                                 <ol>
                                                     <li>Aliquam luctus fringilla nunc.
-                                                        {fancy && <ol>
+                                                        { ifDisplay.listsLong && <ol>
                                                             <li>Suspendisse dapibus maximus leo, quis.
                                                                 <ol>
                                                                     <li>Proin vel risus finibus.
@@ -436,7 +608,7 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
                                                                 </ol>
                                                             </li>
                                                             <li>Nam vitae dolor mi.</li>
-                                                        </ol>}
+                                                        </ol> }
                                                     </li>
                                                     <li>Ut maximus arcu hendrerit in.</li>
                                                 </ol>
@@ -460,11 +632,11 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
                             <li>Proin gravida aliquam purus, at feugiat odio mollis ut.
                                 <ol>
                                     <li>Convallis nisl vel, ultricies lorem.
-                                        { library && <ul>
+                                        { ifDisplay.listsMedium && <ul>
                                             <li>Duis hendrerit eu lacus at egestas.
                                                 <ol>
                                                     <li>Cras consequat id tortor nec dapibus.
-                                                        {fancy && <ol>
+                                                        { ifDisplay.listsLong && <ol>
                                                             <li>Suspendisse dapibus maximus leo, quis.
                                                                 <ol>
                                                                     <li>Proin vel risus finibus.
@@ -477,7 +649,7 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
                                                                 </ol>
                                                             </li>
                                                             <li>Nam vitae dolor mi.</li>
-                                                        </ol>}
+                                                        </ol> }
                                                     </li>
                                                     <li>Ut maximus arcu hendrerit in.</li>
                                                 </ol>
@@ -495,7 +667,7 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
             <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
         </ol>
 
-        <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ !abbreviated && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
+        <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
 
         <slot name="two" />
 
@@ -509,22 +681,22 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
         <button type="button">This is a button</button>
 
         <div class="button-span">
-            {library && <button aria-disabled="true" type="button">This is a disabled button</button>}
+            {ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button>}
 
-            { buttonVariations.map( variant => <button
+            { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
                 class={`button-${variant}`}
                 set:text={`This is a ${variant} button`}
                 type="button"
-            /> ) }
+            /> ) : '' }
         </div>
 
-        { fancy && <div class="button-span">
+        { ifDisplay.buttonTypes && <div class="button-span">
             <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
             <button type="submit" set:text="This is a submit button" />
             <button type="reset" set:text="This is a reset button" />
         </div> }
 
-        <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue.{ !abbreviated && ' Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.' }</p>
+        <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue.{ ifDisplay.textPage && ' Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.' }</p>
 
         <slot name="three" />
 
@@ -537,9 +709,9 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
 
         <slot name="four" />
 
-        { !abbreviated && <p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p> }
+        { ifDisplay.textPage && <p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p> }
 
-        { fancy && (
+        { ifDisplay.blockquote && (
             <blockquote id={tableOfContentIds.blockquotes.id}>
                 <p>This is a blockquote. Suspendisse euismod, felis ut malesuada pulvinar, mi diam elementum neque, sit amet maximus est urna sed ipsum. Suspendisse venenatis interdum massa ac tincidunt.</p>
                 <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
@@ -553,24 +725,21 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
             <p>Look!  It's <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
         ) }
 
-        { !abbreviated && library ? (
+        { ifDisplay.code ? (
             <CodeBlock lang="php" children={code.php} />
             <CodeBlock lang="html" children={code.html} />
-        ) : fancy && (
-            <pre><code set:text={code.php} /></pre>
-            <pre><code set:text={code.html} /></pre>
-        ) }
+        ) : '' }
 
-        { !abbreviated && <p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p> }
+        { ifDisplay.textPage && <p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p> }
 
 
-        { !abbreviated && <Heading
+        { ifDisplay.textPage && <Heading
             displayHeading={3 + displayHeading}
             heading={ 3 + heading }
         >Pretium Purus <a href="#">ex</a></Heading>
         <p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p> }
 
-        { fancy && (
+        { ifDisplay.table && (
             <div class="table-wrapper"><table>
                 <tr>
                     <th>Table Heading 1</th>
@@ -590,15 +759,15 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
             </table></div>
         ) }
 
-       { !abbreviated && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }
+        { ifDisplay.textPage && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }
 
-        { (!abbreviated || fancy) ? <Heading
+        { ifDisplay.textLong ? <Heading
             displayHeading={4 + displayHeading}
             heading={ 4 + heading }
         >Cras Volutpat <a href="#">ex</a></Heading>
         <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p> : '' }
 
-        { fancy && (
+        { ifDisplay.forms && (
             <hr />
 
             <Heading
@@ -627,7 +796,7 @@ const tocMenu = !abbreviated && toc && getLoremIpsumToc( props.mode, tableOfCont
             </form>
         ) }
 
-        { fancy && (
+        { ifDisplay.formsLong && (
             <hr/>
 
             <Heading

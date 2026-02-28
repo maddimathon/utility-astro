@@ -5,7 +5,7 @@
 * https://maddimathon.github.io/utility-sass
 */.forced-colors-mode-only{display:none!important}@media(forced-colors:active),(prefers-contrast:custom){.forced-colors-mode-only{display:var(--display, block)!important}}[data-astro-cid-tvhzxmj5][data-contrast-mode=forced-colors] .forced-colors-mode-only{display:var(--display, block)!important}/*!
  * Utility Astro Documentation
- * @maddimathon/utility-astro@0.1.0-alpha.19
+ * @maddimathon/utility-astro@0.1.0-alpha.20
  * 
  * https://maddimathon.github.io/utility-astro
  * 
