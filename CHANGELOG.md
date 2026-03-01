@@ -19,6 +19,15 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-alpha.21** — 2026-03-01
+
+### Added
+- Added pseudo selectors to content support snippet - %main-content, %main-nav, %site-header, %site-footer, %site-sidebar
+
+### Changed
+- Better Alert output for empty headlines
+
+
 ## **0.1.0-alpha.20** — 2026-02-28
 
 ### Changed

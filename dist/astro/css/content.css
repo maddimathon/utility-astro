@@ -1,11 +1,11 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.39
+ * @maddimathon/utility-sass@0.1.0-alpha.40
  * 
  * https://maddimathon.github.io/utility-sass
  */
 /* # TOGGLE BLOCKS ==================================== */
-body > aside {
+body aside {
     grid-column: sidebar-start/sidebar-end;
     width: auto;
 }
@@ -111,7 +111,7 @@ body > footer {
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: var(--gap-block-layout, 5vw);
 }
-body > aside > :first-child {
+body aside > :first-child {
     margin-top: 0;
 }
 

@@ -68,6 +68,8 @@ const {
 }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
 ---
 
 <section
@@ -80,7 +82,17 @@ const {
     ]}
 >
     {
-        heading ? (
+        !headlineHTML ? (
+            svg ? (
+                <Icon
+                    slug={slug}
+                    svg={svg}
+                    svgLabel={svgLabel}
+                />
+            ) : (
+                <Icon type={type} />
+            )
+        ) : heading ? (
             <Heading
                 heading={heading}
                 class='alert-block__headline'
@@ -94,7 +106,7 @@ const {
                 ) : (
                     <Icon type={type} />
                 )}
-                <slot name='headline' />
+                <Fragment set:html={headlineHTML} />
             </Heading>
         ) : (
             <header class='alert-block__headline'>
@@ -107,7 +119,7 @@ const {
                 ) : (
                     <Icon type={type} />
                 )}
-                <slot name='headline' />
+                <Fragment set:html={headlineHTML} />
             </header>
         )
     }

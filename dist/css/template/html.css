@@ -5,7 +5,7 @@
 /*! START of @maddimathon/utility-astro/template/html */
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.39
+ * @maddimathon/utility-sass@0.1.0-alpha.40
  * 
  * https://maddimathon.github.io/utility-sass
  */
@@ -1498,7 +1498,7 @@ ul,
     padding: 0;
     padding-left: 1em;
     margin-left: var(--gap-inline-tab, 5%);
-    line-height: var(--line-height-400, 1.6875);
+    line-height: inherit;
 }
 ol ol,
 ol ul,
@@ -1572,6 +1572,10 @@ li::marker {
     font-weight: 500;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
+li > a:only-child {
+    display: inline-block;
+    vertical-align: top;
+}
 li li li {
     margin-top: var(--mrg-soft-200, 0.3125rem);
 }
@@ -1595,30 +1599,30 @@ fieldset {
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
         var(--mrg-firm-300, 0.8125rem);
-    border: 0.0625rem solid var(--sys-clr-accent-bg, CanvasText);
+    border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     background-color: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
 }
 .no-js fieldset:focus,
 .js__no-whereSelector fieldset:focus {
-    border-color: var(--sys-clr-text-active, ActiveText);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 :where(.js__no-focusVisible) fieldset:focus {
-    border-color: var(--sys-clr-text-active, ActiveText);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:focus-visible {
-    border-color: var(--sys-clr-text-active, ActiveText);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:focus-within {
-    border-color: var(--sys-clr-text-active, ActiveText);
+    border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:active {
-    border-color: var(--sys-clr-accent-bg, CanvasText);
+    border-color: var(--sys-clr-input-border-active, FieldText);
 }
 fieldset legend {
     display: block;
@@ -2218,6 +2222,7 @@ table {
 table {
     border-spacing: var(--border-width-200, 0.125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
+    line-height: inherit;
 }
 
 .table-wrapper {

@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.20
+/// @package @maddimathon/utility-astro@0.1.0-alpha.21
 /// @since 0.1.0-alpha
 ///
 
@@ -244,10 +244,10 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
                 margin-block: #{var-gap-block(layout)} 0;
             }
 
-            > header,
-            > footer,
-            > main,
-            > nav,
+            > %site-header,
+            > %site-footer,
+            > %main-content,
+            > %main-nav,
             > %body-subgrid {
                 @extend %_body-subgrid;
                 grid-column: 1 / -1;
@@ -267,27 +267,27 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
             %table {
             }
 
-            > header,
-            > footer,
-            > nav {
+            > %site-header,
+            > %site-footer,
+            > %main-nav {
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
                     @include snippet-support-astro-content--page-width;
                 }
             }
-            > header {
+            > %site-header {
             }
-            > footer {
+            > %site-footer {
                 margin-block: #{var-gap-block(layout)};
             }
-            > nav {
+            > %main-nav {
             }
 
-            > main {
+            > %main-content {
             }
 
-            > aside {
+            %site-sidebar {
                 @extend %_sidebar-width;
 
                 > :first-child {
@@ -315,7 +315,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         ///
 
         %layout-content-only {
-            > header {
+            > %site-header {
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
@@ -329,7 +329,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         }
 
         %layout-full-width {
-            > main {
+            > %main-content {
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
@@ -339,7 +339,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         }
 
         %layout-extra-wide {
-            > main {
+            > %main-content {
                 /// BLOCK ///
 
                 @at-root :where(#{selector.nest( &, '> *' )}) {
@@ -351,7 +351,7 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
         %layout-sidebar-left,
         %layout-sidebar-right {
             @include min-width(sidebar) {
-                > main {
+                > %main-content {
                     // prettier-ignore
                     $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
 
@@ -394,6 +394,26 @@ $_default_grid_page: snippet-support-astro-content--default-grid-page();
                 $gutterCol: $gutterCol,
                 $sidebarCol: $sidebarCol
             );
+        }
+
+        aside {
+            @extend %site-sidebar;
+        }
+
+        footer {
+            @extend %site-footer;
+        }
+
+        header {
+            @extend %site-header;
+        }
+
+        main {
+            @extend %main-content;
+        }
+
+        nav {
+            @extend %main-nav;
         }
     }
 }
