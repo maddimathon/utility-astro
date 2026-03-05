@@ -12,8 +12,8 @@
     $template_name: 'Default',
     $template_print_docBlock: false,
     $template_print_globals: pre.$template_print_globals,
-    $template_print_normalize: false,
-    $template_print_tokens: false,
+    $template_print_normalize: pre.$template_print_normalize,
+    $template_print_tokens: pre.$template_print_tokens,
     $template_print_utils: pre.$template_print_utils,
     $template_slug: 'default',
     //

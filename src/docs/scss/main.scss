@@ -8,8 +8,7 @@
 // @forward '../../scss/template/astro/config';
 
 @forward '../../scss/template/astro' with (
-    $template_print_docBlock: false,
-    $template_internal_supressCredit: false
+    $template_print_docBlock: false
 );
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';

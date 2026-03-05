@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since 0.1.0-alpha
 ///
 
@@ -38,7 +38,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 ///
 /// Supports the Toggle astro component.
 ///
-@mixin snippet-support-astro-toggle(
+@mixin snippet-support-toggle-block(
     $headingSelectors: $_defaultHeadingSelectors,
     $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
 ) {
@@ -138,11 +138,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         > svg {
             stroke: currentColor;
-            stroke-width: clamp(
-                1px,
-                #{var-stroke-relative('600')},
-                #{var-border-width('400')}
-            );
+            stroke-width: clamp(1px, #{var-stroke-relative('600')}, #{var-border-width('400')});
             fill: none;
         }
     }

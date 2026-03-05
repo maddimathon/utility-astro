@@ -4,7 +4,7 @@
 ///
 
 @use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
-@use 'pkg:@maddimathon/utility-sass/string';
+@use 'sass:string';
 
 @use '../../../../config' as lib;
 
@@ -16,7 +16,7 @@ $template_name: 'Default' !default;
 ///
 /// @since 0.1.0-alpha
 ///
-$template_slug: string.slugify($template_name) !default;
+$template_slug: string.to-lower-case($template_name) !default;
 
 ///
 /// @since ___PKG_VERSION___
@@ -52,7 +52,7 @@ $template_print_tokens: $template_print_globals !default;
 /// @since 0.1.0-alpha
 /// @since ___PKG_VERSION___ — Renamed from $print_astro to $template_print_astro and moved from lib to template config.
 ///
-$template_print_astro: lib.$include_html and $template_print_globals !default;
+$template_print_astro: false !default;
 
 ///
 /// Whether to include the extend selectors mixin after the template content.

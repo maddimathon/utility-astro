@@ -3,12 +3,11 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/03-snippets' hide extend-selectors-globals,
-    extend-selectors-utils, extend-selectors;
+@forward 'pkg:@maddimathon/utility-sass/03-snippets';
 
-@forward 'content';
-@forward 'forced-colors-mode-only';
-@forward 'settings-menu';
-@forward 'skip-links';
-@forward 'toggle';
-@forward 'toggle-nav-menu';
+@forward '03--content';
+@forward '03--forced-colors-mode-only';
+@forward '03--settings-menu';
+@forward '03--skip-links';
+@forward '03--toggle';
+@forward '03--toggle-nav-menu';

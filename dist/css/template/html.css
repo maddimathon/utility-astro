@@ -1,10 +1,18 @@
 @charset "UTF-8";
 /**
  * Utility Astro - Template - HTML
- * 
  * @maddimathon/utility-astro/template/html@0.1.0-beta.0.draft
+ * 
+ * https://maddimathon.github.io/utility-astro
+ */
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/utility-sass@0.1.0-beta.0.draft
+ * 
+ * https://maddimathon.github.io/utility-sass
  */
 /*! START of @maddimathon/utility-astro/template/html */
+/*! START of @maddimathon/utility-sass/template */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
@@ -438,6 +446,19 @@ pre {
 }
 
 /* #endregion Tokens - System Colours */
+/* #region Tokens - Width */
+html {
+    --width-content: 36rem;
+    --width-sidebar: 18rem;
+    --width-callout: 29.25rem;
+    --width-page: 60rem;
+    --width-page: calc(
+        var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
+            var(--gap-inline-layout, 8vw)
+    );
+}
+
+/* #endregion Tokens - Width */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -583,20 +604,6 @@ html {
 }
 
 /* #endregion Tokens - Misc. */
-/* #region Tokens - Width */
-html {
-    --width-content: 36rem;
-    --width-sidebar: 18rem;
-    --width-callout: 29.25rem;
-    --width-page: 60rem;
-    --width-page: calc(
-        var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
-            var(--gap-inline-layout, 8vw)
-    );
-}
-
-/* #endregion Tokens - Width */
-/*! START of @maddimathon/utility-sass/template */
 /* # GLOBALS - Accessibility
  * ======================================================================== */
 .no-js :focus,
@@ -2316,7 +2323,7 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO COMPONENT - SKIP LINKS
+/* # ASTRO - SKIP LINKS
  * ======================================================================== */
 .skip-link,
 .skip-link[href],
@@ -2353,17 +2360,6 @@ a.skip-link[href]:focus-within {
     padding: 0;
 }
 
-/* # LAYOUT - BASICS
+/* # ASTRO LAYOUT
  * ======================================================================== */
-nav ol,
-nav ul {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-nav ol li,
-nav ul li {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 /*! END of @maddimathon/utility-astro/template/html */

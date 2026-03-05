@@ -7,11 +7,11 @@
 
 @use '../../../lib' as *;
 
-@if config.$template_print_astro_skipLinks {
+@if config.$template_print_skipLinks {
     @if config.$template_include_cssHeadings {
-        /* # ASTRO COMPONENT - SKIP LINKS
+        /* # ASTRO - SKIP LINKS
          * ======================================================================== */
     }
 
-    @include snippet-support-astro-skip-links;
+    @include snippet-support-skip-links;
 }

@@ -7,13 +7,13 @@
 
 @use '../../../lib' as *;
 
-@if config.$template_print_astro_toggle {
+@if config.$template_print_toggleBlock {
     @if config.$template_include_cssHeadings {
-        /* # ASTRO COMPONENT - TOGGLE
+        /* # ASTRO SUPPORT - TOGGLE BLOCK
          * ======================================================================== */
     }
 
-    @include snippet-support-astro-toggle;
+    @include snippet-support-toggle-block;
 }
 
 @if config.$template_print_astro_toggleNav {
@@ -25,11 +25,11 @@
     @include snippet-support-astro-toggle-nav-menu;
 }
 
-@if config.$template_print_astro_settingsMenu {
+@if config.$template_print_siteSettingsMenu {
     @if config.$template_include_cssHeadings {
-        /* # ASTRO COMPONENT - SETTINGS MENU
+        /* # ASTRO SUPPORT - SETTINGS MENU
          * ======================================================================== */
     }
 
-    @include snippet-support-astro-settings-menu;
+    @include snippet-support-site-settings-menu;
 }

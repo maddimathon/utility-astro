@@ -18,7 +18,7 @@
 ///
 /// @since 0.1.0-alpha.14
 ///
-@mixin snippet-support-astro-skip-links(
+@mixin snippet-support-skip-links(
     $focus_top: var-gap-block(layout),
     $zIndex: 999999
 ) {

@@ -27,7 +27,8 @@
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
-    $additional: list.append($additional, (nav));
+    $additional_optional: list.append($additional_optional, (nav));
+
     $additional: list.append(
         $additional,
         ((':where(.js) [data-toggle-control][data-toggle-is-current-target]'), focus-ring--where)
@@ -55,7 +56,7 @@
 
     $additional_optional: list.join(
         $additional_optional,
-        to-extend-selector-content-layout(),
+        to-extend-selectors-body-grid(),
         $separator: comma
     );
 
@@ -81,7 +82,7 @@
         $separator: comma
     );
 
-    @if config.$template_print_astro_settingsMenu {
+    @if config.$template_print_siteSettingsMenu {
         $additional_optional: list.append(
             $additional_optional,
             ('.website-settings-menu', 'page-width'),

@@ -8,27 +8,27 @@
 @use '../../../lib' as *;
 
 @if config.$template_include_cssHeadings {
-    /* # LAYOUT - BASICS
+    /* # ASTRO LAYOUT
      * ======================================================================== */
 }
 
-%nav {
-    ol,
-    ul {
-        margin-block: 0;
-
-        li {
+@if config.$template_print_astro_bodyGrid {
+    %nav {
+        ol,
+        ul {
             margin-block: 0;
+
+            li {
+                margin-block: 0;
+            }
         }
     }
-}
 
-@if config.$template_print_astro_content {
     @if config.$template_include_cssHeadings {
-        /* # ASTRO LAYOUT - CONTENT SUPPORT
+        /* # ASTRO LAYOUT - BODY GRID SUPPORT
          * ======================================================================== */
     }
-    @include snippet-support-astro-content;
+    @include snippet-support-astro-body-grid;
 
     $_sels_allHeadings: selector-all-headings();
 

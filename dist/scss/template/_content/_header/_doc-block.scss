@@ -9,14 +9,16 @@
     @if config.$template_isDefault {
         /**
          * Utility Astro - Template
-         * 
          * @maddimathon/utility-astro/template@0.1.0-beta.0.draft
+         * 
+         * https://maddimathon.github.io/utility-astro
          */
     } @else {
         /**
          * Utility Astro - Template - #{config.$template_name}
-         * 
          * @maddimathon/utility-astro/template/#{config.$template_slug}@0.1.0-beta.0.draft
+         * 
+         * https://maddimathon.github.io/utility-astro
          */
     }
 }

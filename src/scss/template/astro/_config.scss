@@ -3,20 +3,12 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward '../_content/config' with (
-    $template_name: 'Astro',
-
-    $include_html: true !default,
-
-    $isTemplate: true !default,
+@forward '../html/config' with (
+    $template_name: 'Astro' !default,
 
     $mx_extendSelectors_headingsByRole: false !default,
 
     $template_print_astro: true !default,
-    $template_print_globals: true !default,
-    $template_print_normalize: true !default,
-    $template_print_tokens: true !default,
-    $template_print_utils: true !default,
     //
      //
 );

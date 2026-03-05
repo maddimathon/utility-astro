@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 /// @since 0.1.0-alpha
 ///
 
@@ -17,7 +17,7 @@
 ///
 /// Supports the SettingsMenu astro component.
 ///
-@mixin snippet-support-astro-settings-menu {
+@mixin snippet-support-site-settings-menu {
     .website-settings-menu {
         grid-column: page-start / page-end;
 
@@ -54,11 +54,7 @@
 
         fieldset {
             padding-block: #{var-mrg-firm('100')};
-            padding-inline: clamp(
-                #{var-mrg-firm('200')},
-                3vw,
-                #{var-mrg-firm('300')}
-            );
+            padding-inline: clamp(#{var-mrg-firm('200')}, 3vw, #{var-mrg-firm('300')});
 
             align-self: stretch;
 
@@ -189,8 +185,7 @@
                     );
 
                     > .container {
-                        padding-block: #{var-mrg-soft('400')}
-                            #{var-mrg-firm('300')};
+                        padding-block: #{var-mrg-soft('400')} #{var-mrg-firm('300')};
                     }
                 }
             }

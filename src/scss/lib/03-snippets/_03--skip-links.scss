@@ -18,7 +18,7 @@
 ///
 /// @since 0.1.0-alpha.14
 ///
-@mixin snippet-support-astro-skip-links($focus_top: var-gap-block(layout), $zIndex: 999999) {
+@mixin snippet-support-skip-links($focus_top: var-gap-block(layout), $zIndex: 999999) {
     $_content_exits: meta.content-exists();
 
     $baseSelectors: list.join(('.skip-link'), config.$selectors_skipLinks_extra, $separator: comma);

@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -13,10 +13,10 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
-@use 'content' as *;
+@use '03--content' as *;
 
 // prettier-ignore
-$_default_grid_page: snippet-support-astro-content--default-grid-page();
+$_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 
 $_titleBorderWidth: var-border-width('200');
 $_titleBorderWidth_half: var-border-width('100');
@@ -32,7 +32,7 @@ $_titleBorderWidth_half: var-border-width('100');
 
         > nav {
             &[data-toggle-container] {
-                @include snippet-support-astro-content--page-width;
+                @include snippet-support-astro-body-grid--page-width;
             }
         }
     }
@@ -82,7 +82,7 @@ $_titleBorderWidth_half: var-border-width('100');
                         font-size: #{var-fs(smaller-1)};
 
                         > .container {
-                            @include snippet-support-astro-content--page-width;
+                            @include snippet-support-astro-body-grid--page-width;
 
                             padding-inline: #{var-mrg-firm('400')};
                             background: #{var-sys-colour(background)};
@@ -106,13 +106,14 @@ $_titleBorderWidth_half: var-border-width('100');
                         align-items: center;
 
                         margin-block-end: calc(#{$_titleBorderWidth} * -1);
-                        border-block-end: #{$_titleBorderWidth} solid currentColor;
+                        border-block-end: #{$_titleBorderWidth} solid
+                            currentColor;
 
                         font-size: #{var-fs(heading-6)};
                         background: #{var-sys-colour(background)};
 
                         [data-toggle-control] {
-                            @include snippet-support-astro-content--page-width;
+                            @include snippet-support-astro-body-grid--page-width;
 
                             // prettier-ignore
                             $_gridCols_toggle: [content] 1fr #{var-gap-inline(tab)} [icon] minmax(max-content, auto);

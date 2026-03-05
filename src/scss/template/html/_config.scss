@@ -3,19 +3,14 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward '../_content/config' with (
-    $template_name: 'HTML',
+@forward '../global/config' with (
+    $template_name: 'HTML' !default,
 
     $include_html: true !default,
 
-    $isTemplate: true !default,
-
     $mx_extendSelectors_headingsByRole: true !default,
 
-    $template_print_astro: false !default,
-    $template_print_globals: true !default,
     $template_print_normalize: true !default,
-    $template_print_tokens: true !default,
     $template_print_utils: true !default,
     //
      //

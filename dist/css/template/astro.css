@@ -1,10 +1,18 @@
 @charset "UTF-8";
 /**
  * Utility Astro - Template - Astro
- * 
  * @maddimathon/utility-astro/template/astro@0.1.0-beta.0.draft
+ * 
+ * https://maddimathon.github.io/utility-astro
+ */
+/*!
+ * This stylesheet includes css generated using 
+ * @maddimathon/utility-sass@0.1.0-beta.0.draft
+ * 
+ * https://maddimathon.github.io/utility-sass
  */
 /*! START of @maddimathon/utility-astro/template/astro */
+/*! START of @maddimathon/utility-sass/template */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
@@ -438,6 +446,19 @@ pre {
 }
 
 /* #endregion Tokens - System Colours */
+/* #region Tokens - Width */
+html {
+    --width-content: 36rem;
+    --width-sidebar: 18rem;
+    --width-callout: 29.25rem;
+    --width-page: 60rem;
+    --width-page: calc(
+        var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
+            var(--gap-inline-layout, 8vw)
+    );
+}
+
+/* #endregion Tokens - Width */
 /* #region Tokens - Margin */
 html {
     --mrg-firm-100: 0.3125rem;
@@ -583,20 +604,6 @@ html {
 }
 
 /* #endregion Tokens - Misc. */
-/* #region Tokens - Width */
-html {
-    --width-content: 36rem;
-    --width-sidebar: 18rem;
-    --width-callout: 29.25rem;
-    --width-page: 60rem;
-    --width-page: calc(
-        var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
-            var(--gap-inline-layout, 8vw)
-    );
-}
-
-/* #endregion Tokens - Width */
-/*! START of @maddimathon/utility-sass/template */
 /* # GLOBALS - Accessibility
  * ======================================================================== */
 .no-js :focus,
@@ -2092,7 +2099,7 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO COMPONENT - SKIP LINKS
+/* # ASTRO - SKIP LINKS
  * ======================================================================== */
 .skip-link,
 .skip-link[href],
@@ -2129,7 +2136,7 @@ a.skip-link[href]:focus-within {
     padding: 0;
 }
 
-/* # LAYOUT - BASICS
+/* # ASTRO LAYOUT
  * ======================================================================== */
 nav ol,
 nav ul {
@@ -2142,7 +2149,7 @@ nav ul li {
     margin-bottom: 0;
 }
 
-/* # ASTRO LAYOUT - CONTENT SUPPORT
+/* # ASTRO LAYOUT - BODY GRID SUPPORT
  * ======================================================================== */
 body aside {
     grid-column: sidebar-start/sidebar-end;
@@ -2396,7 +2403,7 @@ body aside > :first-child {
     opacity: 0.75;
 }
 
-/* # ASTRO COMPONENT - TOGGLE
+/* # ASTRO SUPPORT - TOGGLE BLOCK
  * ======================================================================== */
 [data-toggle-content] > .container,
 [data-toggle-container] {
@@ -3096,7 +3103,7 @@ body > nav[data-toggle-container] {
     padding-bottom: var(--mrg-soft-400, 0.8125rem);
 }
 
-/* # ASTRO COMPONENT - SETTINGS MENU
+/* # ASTRO SUPPORT - SETTINGS MENU
  * ======================================================================== */
 .website-settings-menu {
     grid-column: page-start/page-end;
