@@ -12,7 +12,7 @@ import type { GenericProps } from '../../ts/00-types/index.js';
 import type { MenuItem } from './MenuList.astro';
 
 /* import - functions */
-import { arrayUnique } from '@maddimathon/utility-typescript/functions';
+import { arrayUnique } from '@maddimathon/utility-typescript';
 
 /* import - values */
 
@@ -36,6 +36,11 @@ export interface LoremIpsum_DisplaySettings {
      * @since 0.1.0-alpha.20
      */
     blockquote?: boolean;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    buttons?: boolean;
 
     /**
      * @since 0.1.0-alpha.20
@@ -286,6 +291,7 @@ export function getLoremIpsumMode( _props: Props ): LoremIpsum_DisplaySettings_P
 
     const parsed =  {
         blockquote: isFancy && !abbreviated,
+        buttons: true,
         buttonTypes: isFancy && !abbreviated,
         buttonVariationsAll: isLibrary && ( isFancy || !abbreviated ),
         code: isLibrary && !abbreviated,
@@ -442,7 +448,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
         <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
     </ul>
     <p>Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
-    <div class="button-span">
+    <Fragment>{ ifDisplay.buttons && <div class="button-span">
         <button type="button">This is a button</button>
         
         { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button>}
@@ -454,7 +460,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                 type="button"
             />
         ) : '' }
-    </div>
+    </div> }</Fragment>
     <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo.</p>
     
     <slot name="two" />
@@ -680,19 +686,21 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
         >Praesent Blandit <a href="#">ex</a></Heading>
         <p>Turpis maximus posuere rhoncus, nunc est aliquam ligula, non ultrices felis turpis in sapien. Proin efficitur rhoncus ex auctor faucibus. Maecenas sed ornare ante, vitae consequat tellus. Aliquam eget facilisis nunc. Mauris in arcu sagittis velit aliquam cursus dignissim at odio.<a id={tableOfContentIds.buttons.id}></a></p>
 
-        <button type="button">This is a button</button>
+        { ifDisplay.buttons && (
+            <button type="button">This is a button</button>
 
-        <div class="button-span">
-            { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button> }
+            <div class="button-span">
+                { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button> }
 
-            { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
-                class={`button-${variant}`}
-                set:text={`This is a ${variant} button`}
-                type="button"
-            /> ) : '' }
-        </div>
+                { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
+                    class={`button-${variant}`}
+                    set:text={`This is a ${variant} button`}
+                    type="button"
+                /> ) : '' }
+            </div>
+        ) }
 
-        { ifDisplay.buttonTypes && <div class="button-span">
+        { ifDisplay.buttons && ifDisplay.buttonTypes && <div class="button-span">
             <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
             <button type="submit" set:text="This is a submit button" />
             <button type="reset" set:text="This is a reset button" />

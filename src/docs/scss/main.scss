@@ -5,17 +5,18 @@
 
 @forward '_header';
 
-@forward '../../scss/template/astro/config';
+// @forward '../../scss/template/astro/config';
 
 @forward '../../scss/template/astro' with (
-    $print_templateDocBlock: false,
+    $template_print_docBlock: false,
     $template_internal_supressCredit: false
 );
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 
 @use '../../scss/template/astro/config';
-@use '../../scss/template/astro' as *;
+
+@use '../../scss/lib' as *;
 
 @include snippet-support-astro-toggle-nav-menu;
 

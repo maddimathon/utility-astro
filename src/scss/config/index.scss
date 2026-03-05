@@ -5,4 +5,10 @@
 
 @forward 'utility-sass';
 
-@forward 'template';
+///
+/// Additional selectors for skip links (since they don't get extended by
+/// default).
+///
+/// @since 0.1.0-alpha.14
+///
+$selectors_skipLinks_extra: () !default;

@@ -1,13 +1,13 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
-@use '../../../config';
+@use '../config';
 
 @use '../../../lib' as *;
 
-@if config.$print_headings {
+@if config.$template_include_cssHeadings {
     /* # LAYOUT - BASICS
      * ======================================================================== */
 }
@@ -23,8 +23,8 @@
     }
 }
 
-@if config.$print_astro_content {
-    @if config.$print_headings {
+@if config.$template_print_astro_content {
+    @if config.$template_include_cssHeadings {
         /* # ASTRO LAYOUT - CONTENT SUPPORT
          * ======================================================================== */
     }

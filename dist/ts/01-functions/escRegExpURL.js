@@ -4,10 +4,10 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.21
+ * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
-import { escRegExp } from '@maddimathon/utility-typescript/functions';
+import { escRegExp } from '@maddimathon/utility-typescript';
 /**
  * Escapes a url string for better, more properly applicable, url matching.
  *

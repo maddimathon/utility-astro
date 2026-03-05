@@ -1,9 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/template/content' with (
-    $print_templateDocBlock: false,
-    $template_internal_supressCredit: true
-);
+@forward 'pkg:@maddimathon/utility-sass/template/content';

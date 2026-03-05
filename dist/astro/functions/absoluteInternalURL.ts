@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.21
+ * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
 
@@ -12,7 +12,7 @@ import {
     base as config_base,
 } from 'astro:config/client';
 
-import { escRegExp } from '@maddimathon/utility-typescript/functions';
+import { escRegExp } from '@maddimathon/utility-typescript';
 
 import { autoTrailingSlash } from './autoTrailingSlash.js';
 

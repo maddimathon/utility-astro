@@ -5,14 +5,18 @@
 
 @use '../config';
 
-@if config.$print_templateDocBlock {
+@if config.$template_print_docBlock {
     @if config.$template_isDefault {
         /**
-         * Utility Astro Template
+         * Utility Astro - Template
+         * 
+         * @maddimathon/utility-astro/template@___CURRENT_VERSION___
          */
     } @else {
         /**
-         * Utility Astro Template - #{config.$template_name}
+         * Utility Astro - Template - #{config.$template_name}
+         * 
+         * @maddimathon/utility-astro/template/#{config.$template_slug}@___CURRENT_VERSION___
          */
     }
 }

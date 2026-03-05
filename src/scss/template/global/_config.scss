@@ -3,16 +3,20 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward '../../config' with (
+@forward '../_content/config' with (
+    $template_name: 'Global',
+
     $include_html: false !default,
 
-    $internal_isTemplate: true !default,
+    $isTemplate: true !default,
 
-    $mx_extendHeadingsByRole: true !default,
+    $mx_extendSelectors_headingsByRole: true !default,
 
-    $print_astro: false !default,
-    $print_globals: true !default,
-    $print_normalize: false !default,
-    $print_tokens: true !default,
-    $print_utils: false !default
+    $template_print_astro: false !default,
+    $template_print_globals: true !default,
+    $template_print_normalize: false !default,
+    $template_print_tokens: true !default,
+    $template_print_utils: false !default,
+    //
+     //
 );

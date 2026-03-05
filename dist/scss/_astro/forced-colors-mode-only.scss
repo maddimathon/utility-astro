@@ -1,9 +1,10 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
 @use 'lib';
+@use 'lib/config';
 
 /* # FORCED COLOURS ONLY ==================================== */
 
@@ -12,4 +13,4 @@
     @include lib.snippet-forced-colors-mode-only;
 }
 
-@include lib.extend-selectors($optional: true);
+@include lib.extend-selectors;

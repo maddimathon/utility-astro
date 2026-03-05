@@ -12,7 +12,7 @@ import {
     base as config_base,
 } from 'astro:config/client';
 
-import { escRegExp } from '@maddimathon/utility-typescript/functions';
+import { escRegExp } from '@maddimathon/utility-typescript';
 
 import { autoTrailingSlash } from './autoTrailingSlash.js';
 

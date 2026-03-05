@@ -15,7 +15,7 @@
 import {
     escRegExpReplace,
     softWrapText,
-} from '@maddimathon/utility-typescript/functions';
+} from '@maddimathon/utility-typescript';
 
 import {
     BuildStage,

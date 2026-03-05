@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import { escRegExp } from '@maddimathon/utility-typescript/functions';
+import { escRegExp } from '@maddimathon/utility-typescript';
 
 /**
  * @since 0.1.0-alpha

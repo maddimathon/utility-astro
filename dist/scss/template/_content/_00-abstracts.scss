@@ -1,19 +1,19 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
-@use '../../config';
+@use 'config';
 // @use '../../tokens';
 
 @use '../../lib' as *;
 
-@if config.$print_normalize {
+@if config.$template_print_normalize {
     @include normalize;
 }
 
-@if config.$print_tokens {
-    @if config.$print_headings {
+@if config.$template_print_tokens {
+    @if config.$template_include_cssHeadings {
         /* # TOKENS & PROPERTIES
          * ======================================================================== */
     }

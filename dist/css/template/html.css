@@ -1,14 +1,10 @@
 @charset "UTF-8";
 /**
- * Utility Astro Template - HTML
+ * Utility Astro - Template - HTML
+ * 
+ * @maddimathon/utility-astro/template/html@0.1.0-beta.0.draft
  */
 /*! START of @maddimathon/utility-astro/template/html */
-/*!
- * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.40
- * 
- * https://maddimathon.github.io/utility-sass
- */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
@@ -590,11 +586,11 @@ html {
 /* #region Tokens - Width */
 html {
     --width-content: 36rem;
-    --width-sidebar: 16rem;
+    --width-sidebar: 18rem;
     --width-callout: 29.25rem;
-    --width-page: 58rem;
+    --width-page: 60rem;
     --width-page: calc(
-        var(--width-content, 36rem) + var(--width-sidebar, 16rem) +
+        var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
             var(--gap-inline-layout, 8vw)
     );
 }
@@ -674,7 +670,7 @@ body {
     margin-right: var(--gap-inline-layout, 8vw);
 }
 :where(body > *) {
-    width: min(var(--width-page, 58rem), 100%);
+    width: min(var(--width-page, 60rem), 100%);
 }
 
 hr {
@@ -2216,7 +2212,7 @@ table {
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
     background: var(--sys-clr-accent-bg, CanvasText);
-    width: min(var(--width-page, 58rem), 100%);
+    width: min(var(--width-page, 60rem), 100%);
 }
 
 table {

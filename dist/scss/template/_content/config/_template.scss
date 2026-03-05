@@ -1,0 +1,40 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use '../../../config' as lib;
+
+@use 'utility-sass' as utils;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro_content to $template_print_astro_content and moved from lib to template config.
+///
+$template_print_astro_content: utils.$template_print_astro !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro_settingsMenu to $template_print_astro_settingsMenu and moved from lib to template config.
+///
+$template_print_astro_settingsMenu: utils.$template_print_astro !default;
+
+///
+/// @since 0.1.0-alpha.14
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro_skipLinks to $template_print_astro_skipLinks and moved from lib to template config.
+///
+$template_print_astro_skipLinks: utils.$template_print_astro or
+    (utils.$template_print_utils and lib.$include_html) !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro_toggle to $template_print_astro_toggle and moved from lib to template config.
+///
+$template_print_astro_toggle: utils.$template_print_astro !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro_toggleNav to $template_print_astro_toggleNav and moved from lib to template config.
+///
+$template_print_astro_toggleNav: utils.$template_print_astro and
+    $template_print_astro_toggle !default;

@@ -3,14 +3,11 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward 'config';
-
 @forward '_header';
 
 @forward '00-abstracts';
 
-@forward 'utility-sass' hide $print_templateDocBlock,
-    $template_internal_supressCredit, $template_isDefault, $template_name;
+@forward 'utility-sass';
 
 @forward '01-globals';
 @forward '02-layouts';
@@ -18,3 +15,15 @@
 @forward '04-components';
 
 @forward '_footer';
+
+/// # EXTENDING SELECTORS
+/// ======================================================================== ///
+
+@use 'pkg:@maddimathon/utility-sass/list';
+
+@use 'config';
+@use 'lib' as *;
+
+@if config.$template_extendSelectors {
+    @include extend-selectors;
+}

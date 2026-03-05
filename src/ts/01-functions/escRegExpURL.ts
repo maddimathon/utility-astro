@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import { escRegExp } from '@maddimathon/utility-typescript/functions';
+import { escRegExp } from '@maddimathon/utility-typescript';
 
 /**
  * Escapes a url string for better, more properly applicable, url matching.

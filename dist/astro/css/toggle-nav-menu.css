@@ -1,10 +1,10 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.40
+ * @maddimathon/utility-sass@0.1.0-beta.0.draft
  * 
  * https://maddimathon.github.io/utility-sass
  */
-/* # TOGGLE BLOCKS ==================================== */
+/* # TOGGLE NAV MENU ==================================== */
 [data-toggle-content] > .container,
 [data-toggle-container] {
     --display: flex;
@@ -599,7 +599,7 @@ body > nav[data-toggle-container] {
     justify-content: center;
     justify-items: stretch;
     /* prettier-ignore */
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, var(--width-page, 58rem)) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, var(--width-page, 60rem)) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;

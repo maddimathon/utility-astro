@@ -85,12 +85,16 @@ const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
         !headlineHTML ? (
             svg ? (
                 <Icon
+                    class='alert-block__icon'
                     slug={slug}
                     svg={svg}
                     svgLabel={svgLabel}
                 />
             ) : (
-                <Icon type={type} />
+                <Icon
+                    class='alert-block__icon'
+                    type={type}
+                />
             )
         ) : heading ? (
             <Heading
@@ -99,12 +103,16 @@ const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
             >
                 {svg ? (
                     <Icon
+                        class='alert-block__icon'
                         slug={slug}
                         svg={svg}
                         svgLabel={svgLabel}
                     />
                 ) : (
-                    <Icon type={type} />
+                    <Icon
+                        class='alert-block__icon'
+                        type={type}
+                    />
                 )}
                 <Fragment set:html={headlineHTML} />
             </Heading>
@@ -112,12 +120,16 @@ const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
             <header class='alert-block__headline'>
                 {svg ? (
                     <Icon
+                        class='alert-block__icon'
                         slug={slug}
                         svg={svg}
                         svgLabel={svgLabel}
                     />
                 ) : (
-                    <Icon type={type} />
+                    <Icon
+                        class='alert-block__icon'
+                        type={type}
+                    />
                 )}
                 <Fragment set:html={headlineHTML} />
             </header>

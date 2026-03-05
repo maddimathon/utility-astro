@@ -3,6 +3,8 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward '../../config' with (
-    $internal_isTemplate: true !default
+@forward '../_content/config' with (
+    $isTemplate: true !default,
+    //
+     //
 );

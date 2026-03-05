@@ -1,0 +1,21 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-alpha
+///
+
+@use '_pre' as pre;
+
+@forward 'pkg:@maddimathon/utility-sass/template/config' with (
+    $template_extendSelectors: false,
+    $template_include_cssHeadings: pre.$template_include_cssHeadings,
+    $template_isDefault: true,
+    $template_name: 'Default',
+    $template_print_docBlock: false,
+    $template_print_globals: pre.$template_print_globals,
+    $template_print_normalize: false,
+    $template_print_tokens: false,
+    $template_print_utils: pre.$template_print_utils,
+    $template_slug: 'default',
+    //
+     //
+);

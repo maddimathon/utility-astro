@@ -1,17 +1,21 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
-/// @since 0.1.0-alpha
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
 ///
+
+@forward 'pkg:@maddimathon/utility-sass/template/lib' hide extend-selectors,
+    extend-selectors-globals, extend-selectors-utils;
 
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
-@use 'pkg:@maddimathon/utility-sass/03-snippets' as lib;
+@use 'pkg:@maddimathon/utility-sass/template/lib' as lib;
 
-@use '../../config';
+@use '../config';
 
-@use '../01-functions' as *;
-// @use '../02-mixins' as *;
+@use '../../../lib' as *;
+
+// $_optionalDefault: if(config.$isTemplate, false, true);
 
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
@@ -26,12 +30,7 @@
     $additional: list.append($additional, (nav));
     $additional: list.append(
         $additional,
-        (
-            (
-                ':where(.js) [data-toggle-control][data-toggle-is-current-target]'
-            ),
-            focus-ring--where
-        )
+        ((':where(.js) [data-toggle-control][data-toggle-is-current-target]'), focus-ring--where)
     );
 
     @include lib.extend-selectors-globals(
@@ -70,10 +69,7 @@
         '.table-of-contents [data-toggle-content] > .container ol',
         '.table-of-contents > ol'
     );
-    $_baseLevelListSelector_lvl2: selector.nest(
-        $_baseLevelListSelector,
-        'ol, ul'
-    );
+    $_baseLevelListSelector_lvl2: selector.nest($_baseLevelListSelector, 'ol, ul');
 
     $additional: list.join(
         $additional,
@@ -85,6 +81,14 @@
         $separator: comma
     );
 
+    @if config.$template_print_astro_settingsMenu {
+        $additional_optional: list.append(
+            $additional_optional,
+            ('.website-settings-menu', 'page-width'),
+            $separator: comma
+        );
+    }
+
     @include lib.extend-selectors-utils(
         $additional: $additional,
         $additional_optional: $additional_optional,
@@ -95,25 +99,25 @@
 
 @mixin extend-selectors(
     $optional: null,
-    $additional_globals: (),
-    $additional_globals_optional: (),
-    $additional_utils: (),
-    $additional_utils_optional: (),
+    $add_globals: (),
+    $add_globals_optional: (),
+    $add_utils: (),
+    $add_utils_optional: (),
     $allHeadingLevels: token-all-heading-levels()
 ) {
-    @if config.$print_globals {
+    @if config.$template_print_globals {
         @include extend-selectors-globals(
-            $additional: $additional_globals,
-            $additional_optional: $additional_globals_optional,
+            $additional: $add_globals,
+            $additional_optional: $add_globals_optional,
             $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );
     }
 
-    @if config.$print_utils {
+    @if config.$template_print_utils {
         @include extend-selectors-utils(
-            $additional: $additional_utils,
-            $additional_optional: $additional_utils_optional,
+            $additional: $add_utils,
+            $additional_optional: $add_utils_optional,
             $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );

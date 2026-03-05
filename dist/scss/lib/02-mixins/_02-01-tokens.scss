@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -8,13 +8,12 @@
 
 @use 'pkg:@maddimathon/utility-sass/02-mixins' as utils;
 
-@use '../../config';
-// @use '../../tokens';
+@use '../../tokens';
 
 @use '../01-functions' as *;
 
 ///
-/// Prints out the width custom property tokens based on breakpoints config.
+/// Prints out the width custom property tokens based on breakpoints tokens.
 ///
 /// @since 0.1.0-alpha
 /// @since 0.1.0-alpha.13 — Added $multiplier param.
@@ -22,7 +21,7 @@
 @mixin tokens-width($multiplier: 1) {
     /* #region Tokens - Width */
     #{selector.parent-or-root()} {
-        @each $slug, $_value in config.$widths {
+        @each $slug, $_value in tokens.$widths {
             @each $value
                 in width-value(
                     $slug,

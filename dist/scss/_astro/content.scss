@@ -1,12 +1,13 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
 @use 'lib';
+@use 'lib/config';
 
-/* # TOGGLE BLOCKS ==================================== */
+/* # BODY GRID ==================================== */
 
 @include lib.snippet-support-astro-content;
 
-@include lib.extend-selectors($optional: true);
+@include lib.extend-selectors;

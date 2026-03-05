@@ -7,7 +7,7 @@
 
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
-import type { Objects } from '@maddimathon/utility-typescript/types';
+import type { Classify } from '@maddimathon/utility-typescript/types';
 import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
@@ -103,7 +103,7 @@ const {
 
 /* FUNCTIONS ===================================== */
 
-export type UnlabelledMenuItem = Omit<Objects.Classify<MenuItem>, 'href'| 'label'>;
+export type UnlabelledMenuItem = Omit<Classify<MenuItem>, 'href'| 'label'>;
 
 export type ParsedMenuItem_NoHref = UnlabelledMenuItem & {
     html:string;

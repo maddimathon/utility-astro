@@ -4,14 +4,14 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-alpha.21
+ * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
 
 import type { HTMLAttributes } from 'astro/types';
 
 import type {
-    Objects,
+    PartialExcept,
 } from '@maddimathon/utility-typescript/types';
 
 import type { NavMenuProps } from '../components/NavMenu.astro';
@@ -182,7 +182,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
+    primaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -192,7 +192,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | Objects.PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
 
     /**
      * Whether to inlcude the settings menu. Optionally this can be an object of

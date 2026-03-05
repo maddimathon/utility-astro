@@ -4,9 +4,10 @@
 ///
 
 @use 'lib';
+@use 'lib/config';
 
-/* # TOGGLE BLOCKS ==================================== */
+/* # BODY GRID ==================================== */
 
 @include lib.snippet-support-astro-content;
 
-@include lib.extend-selectors($optional: true);
+@include lib.extend-selectors;

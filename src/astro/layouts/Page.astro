@@ -9,7 +9,7 @@
 /* import - types */
 
 import type {
-    Objects,
+    PartialExcept,
 } from '@maddimathon/utility-typescript/types';
 
 import type { GenericProps } from '../../ts/index.ts';
@@ -25,8 +25,8 @@ import type { PageProps } from './Page.d.ts';
 
 /* import - functions */
 import { DateTime } from 'luxon';
-import { mergeArgs, slugify } from '@maddimathon/utility-typescript/functions';
-import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
+import { mergeArgs, slugify } from '@maddimathon/utility-typescript';
+import { FeatureCheck } from '@maddimathon/utility-sass';
 
 import { mapToObject } from '../../ts/01-functions/mapToObject.js';
 import { currentPagePath } from '../functions/index.js';
@@ -92,7 +92,7 @@ const menus: {
 
 if ( p.primaryMenu ) {
 
-    let _menu: Objects.PartialExcept<NavMenuProps, "menu">;
+    let _menu: PartialExcept<NavMenuProps, "menu">;
     
     if ( Array.isArray( p.primaryMenu ) ) {
         _menu = {
@@ -112,7 +112,7 @@ if ( p.primaryMenu ) {
 
 if ( p.secondaryMenu ) {
 
-    let _menu: Objects.PartialExcept<NavMenuProps, "menu">;
+    let _menu: PartialExcept<NavMenuProps, "menu">;
     
     if ( Array.isArray( p.secondaryMenu ) ) {
         _menu = {
@@ -422,7 +422,7 @@ const settings = p.settings && {
 </html>
 
 { scripts.featureCheck && <script>
-    import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
+    import { FeatureCheck } from '@maddimathon/utility-sass';
 
     // run the checks and update class names
     new FeatureCheck().check();

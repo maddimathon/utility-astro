@@ -4,9 +4,10 @@
 ///
 
 @use 'lib';
+@use 'lib/config';
 
-/* # TOGGLE BLOCKS ==================================== */
+/* # SETTINGS MENU ==================================== */
 
 @include lib.snippet-support-astro-settings-menu;
 
-@include lib.extend-selectors($optional: true);
+@include lib.extend-selectors;

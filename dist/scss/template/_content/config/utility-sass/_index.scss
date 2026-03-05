@@ -1,0 +1,11 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-alpha
+///
+
+@forward '_pre';
+
+@forward 'lib' hide $template_extendSelectors, $template_include_cssHeadings,
+    $template_isDefault, $template_name, $template_print_docBlock,
+    $template_print_globals, $template_print_normalize, $template_print_tokens,
+    $template_print_utils, $template_slug;

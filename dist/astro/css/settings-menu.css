@@ -1,10 +1,10 @@
 /*!
  * This stylesheet includes css generated using 
- * @maddimathon/utility-sass@0.1.0-alpha.40
+ * @maddimathon/utility-sass@0.1.0-beta.0.draft
  * 
  * https://maddimathon.github.io/utility-sass
  */
-/* # TOGGLE BLOCKS ==================================== */
+/* # SETTINGS MENU ==================================== */
 .website-settings-menu {
     grid-column: page-start/page-end;
     --display: none;

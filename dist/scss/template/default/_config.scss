@@ -1,8 +1,10 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-alpha.21
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
 /// @since 0.1.0-alpha
 ///
 
-@forward '../../config' with (
-    $internal_isTemplate: true !default
+@forward '../_content/config' with (
+    $isTemplate: true !default,
+    //
+     //
 );

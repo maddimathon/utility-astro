@@ -4,6 +4,7 @@
 ///
 
 @use 'lib';
+@use 'lib/config';
 
 /* # FORCED COLOURS ONLY ==================================== */
 
@@ -12,4 +13,4 @@
     @include lib.snippet-forced-colors-mode-only;
 }
 
-@include lib.extend-selectors($optional: true);
+@include lib.extend-selectors;
