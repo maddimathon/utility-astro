@@ -3,6 +3,8 @@
 /// @since ___PKG_VERSION___
 ///
 
+@forward 'utility-sass';
+
 @use '../../../config' as lib;
 
 @use 'utility-sass' as utils;
@@ -36,4 +38,4 @@ $template_print_astro_toggleNav: utils.$template_print_astro and $template_print
 /// @since ___PKG_VERSION___ — Renamed from $print_astro_skipLinks to $template_print_skipLinks and moved from lib to template config.
 ///
 $template_print_skipLinks: utils.$template_print_astro or
-    (utils.$template_print_utils and lib.$include_html) !default;
+    ((utils.$template_print_globals or utils.$template_print_utils) and lib.$include_html) !default;

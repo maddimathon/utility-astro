@@ -15,154 +15,8 @@
 /*! START of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
-/* #region Tokens - Width */
-html {
-    --width-content: 36rem;
-    --width-sidebar: 18rem;
-    --width-callout: 29.25rem;
-    --width-page: 60rem;
-}
-
-/* #endregion Tokens - Width */
-/* #region Tokens - Margin */
-html {
-    --mrg-firm-100: 0.3125rem;
-    --mrg-firm-200: 0.5rem;
-    --mrg-firm-300: 0.8125rem;
-    --mrg-firm-400: 1.25rem;
-    --mrg-firm-500: 1.6875rem;
-    --mrg-firm-600: 2.25rem;
-    --mrg-firm-800: 4rem;
-    --mrg-firm-900: 7.125rem;
-    --pad-firm-100: 0.3125em;
-    --pad-firm-200: 0.5em;
-    --pad-firm-300: 0.8125em;
-    --pad-firm-400: 1.25em;
-    --pad-firm-500: 1.6875em;
-    --pad-firm-600: 2.25em;
-    --pad-firm-800: 4em;
-    --pad-firm-900: 7.125em;
-}
-
-html {
-    --mrg-soft-100: 0.1875rem;
-    --mrg-soft-200: 0.3125rem;
-    --mrg-soft-300: 0.5rem;
-    --mrg-soft-400: 0.8125rem;
-    --mrg-soft-500: 1.1875rem;
-    --mrg-soft-600: 1.625rem;
-    --mrg-soft-800: 3.125rem;
-    --mrg-soft-900: 5.8125rem;
-    --pad-soft-100: 0.1875em;
-    --pad-soft-200: 0.3125em;
-    --pad-soft-300: 0.5em;
-    --pad-soft-400: 0.8125em;
-    --pad-soft-500: 1.1875em;
-    --pad-soft-600: 1.625em;
-    --pad-soft-800: 3.125em;
-    --pad-soft-900: 5.8125em;
-}
-
-html {
-    --mrg-half-100: 0.125rem;
-    --mrg-half-200: 0.1875rem;
-    --mrg-half-300: 0.3125rem;
-    --mrg-half-400: 0.4375rem;
-    --mrg-half-500: 0.5rem;
-    --mrg-half-600: 0.625rem;
-    --mrg-half-800: 0.875rem;
-    --mrg-half-900: 1.3125rem;
-    --pad-half-100: 0.125em;
-    --pad-half-200: 0.1875em;
-    --pad-half-300: 0.3125em;
-    --pad-half-400: 0.4375em;
-    --pad-half-500: 0.5em;
-    --pad-half-600: 0.625em;
-    --pad-half-800: 0.875em;
-    --pad-half-900: 1.3125em;
-}
-
-/* #endregion Tokens - Margin */
-/* #region Tokens - Font Size */
-html {
-    --fs-heading-1: 2.75rem;
-    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
-    --fs-heading-2: 2.0625rem;
-    --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
-    --fs-heading-3: 1.8125rem;
-    --fs-heading-3: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
-    --fs-heading-4: 1.5625rem;
-    --fs-heading-4: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
-    --fs-heading-5: 1.3125rem;
-    --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
-    --fs-heading-6: 1.1875rem;
-    --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
-    --fs-heading-7: 0.9375rem;
-    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
-    --fs-heading-8: 0.8125rem;
-    --fs-heading-8: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
-    --fs-smaller-2: 0.8125rem;
-    --fs-smaller-1: 0.9375rem;
-    --fs-normal: 1rem;
-    --fs-bigger-7: 2.75rem;
-    --fs-bigger-7: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
-    --fs-bigger-8: 3.1875rem;
-    --fs-bigger-8: clamp(2.375rem, 4.1875svw + 1rem, 3.5625rem);
-    --fs-bigger-9: 3.6875rem;
-    --fs-bigger-9: clamp(2.75rem, 4.8125svw + 1rem, 4.125rem);
-}
-
-/* #endregion Tokens - Font Size */
-/* #region Tokens - Line Heights */
-html {
-    --line-height-100: 1.1875;
-    --line-height-200: 1.3125;
-    --line-height-300: 1.4375;
-    --line-height-400: 1.6875;
-    --line-height-500: 1.90625;
-    --line-height-600: 2.1875;
-}
-
-/* #endregion Tokens - Line Heights */
-/* #region Tokens - Gap */
-html {
-    --gap-block-layout: 5vw;
-    --gap-block-layout: clamp(1.625rem, 5svw, 3.125rem);
-    --gap-block-layout-half: 2.5vw;
-    --gap-block-layout-half: clamp(0.8125rem, 2.5svw, 1.5625rem);
-    --gap-inline-indent: 9%;
-    --gap-inline-indent: clamp(0.5rem, 9%, 4rem);
-    --gap-inline-layout: 8vw;
-    --gap-inline-layout: clamp(1.25rem, 8svw, 7.125rem);
-    --gap-inline-layout-half: 4vw;
-    --gap-inline-layout-half: clamp(0.625rem, 4svw, 3.5625rem);
-    --gap-inline-tab: 5%;
-    --gap-inline-tab: clamp(0.3125rem, 5%, 2.25rem);
-}
-
-/* #endregion Tokens - Gap */
-/* #region Tokens - Border Width */
-html {
-    --border-width-100: 0.0625rem;
-    --border-width-200: 0.125rem;
-    --border-width-300: 0.1875rem;
-    --border-width-400: 0.25rem;
-}
-
-/* #endregion Tokens - Border Width */
-/* #region Tokens - Stroke Relative */
-html {
-    --stroke-relative-100: 0.03125em;
-    --stroke-relative-200: 0.0625em;
-    --stroke-relative-400: 0.125em;
-    --stroke-relative-600: 0.1875em;
-    --stroke-relative-800: 0.25em;
-    --stroke-relative-900: 0.375em;
-}
-
-/* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Misc. */
-html {
+:root {
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
@@ -226,10 +80,10 @@ hr {
 }
 hr {
     width: 100%;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: var(--mrg-firm-600, 2.25rem);
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
     border: none;
-    border-bottom: currentColor solid var(--border-width-200, 0.125rem);
+    border-bottom: currentColor solid 0.125rem;
 }
 
 /* # GLOBALS - Typography
@@ -272,12 +126,12 @@ i em em {
 
 a[href] {
     --focus-ring-outline-color: currentColor;
-    --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
+    --focus-ring-outline-offset: 0.0625em;
     display: inline;
     border: none;
-    -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
-    text-decoration: underline var(--stroke-relative-200, 0.0625em);
-    text-underline-offset: var(--stroke-relative-800, 0.25em);
+    -webkit-text-decoration: underline 0.0625em;
+    text-decoration: underline 0.0625em;
+    text-underline-offset: 0.25em;
     color: var(--sys-clr-link, LinkText);
 }
 a[href]:visited {
@@ -309,15 +163,14 @@ a[aria-disabled="true"][href] {
 }
 
 abbr[title] {
-    -webkit-text-decoration: dotted underline
-        var(--stroke-relative-400, 0.125em);
-    text-decoration: dotted underline var(--stroke-relative-400, 0.125em);
+    -webkit-text-decoration: dotted underline 0.125em;
+    text-decoration: dotted underline 0.125em;
     cursor: help;
 }
 
 /* ## Typography - Block ==================================== */
 p {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-top: 0.8125rem;
     margin-bottom: 0;
 }
 hr + p {
@@ -331,19 +184,17 @@ blockquote {
     width: auto;
 }
 blockquote {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-top: 0.8125rem;
     margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+    margin-top: 1.625rem;
+    margin-bottom: 0.8125rem;
+    padding-left: 0.8125rem;
+    border-left: 0.125rem solid currentColor;
 }
 @media (min-width: 36em) {
     blockquote {
-        margin-left: var(--gap-inline-indent, 9%);
-        margin-right: var(--gap-inline-indent, 9%);
+        margin-left: 9%;
+        margin-right: 9%;
     }
 }
 blockquote > p:first-child {
@@ -351,7 +202,7 @@ blockquote > p:first-child {
 }
 blockquote > cite {
     display: block;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-top: 0.8125rem;
     margin-bottom: 0;
     text-align: right;
 }
@@ -395,17 +246,15 @@ pre {
     position: relative;
     margin-left: 0;
     margin-right: 0;
-    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-top: 1.25rem;
     margin-bottom: 0;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: calc(
-        var(--mrg-firm-600, 2.25rem) - var(--mrg-firm-400, 1.25rem)
-    );
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
-    border: var(--border-width-100, 0.0625rem) solid currentColor;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.8125rem;
+    border: 0.0625rem solid currentColor;
     max-width: min(120ch, 100%);
     overflow: auto;
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    font-size: 0.9375rem;
 }
 pre > code {
     display: block;
@@ -429,11 +278,11 @@ pre:where(:has(> code)) > code {
 
 /* ## Typography - Headings ==================================== */
 h1 {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 900;
-    font-size: var(--fs-heading-1, 2.75rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 2.75rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -449,11 +298,11 @@ h1 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="1"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 900;
-    font-size: var(--fs-heading-1, 2.75rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 2.75rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -473,11 +322,11 @@ h1 input[type="submit"] {
 }
 
 h2 {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 800;
-    font-size: var(--fs-heading-2, 2.0625rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 2.0625rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -493,11 +342,11 @@ h2 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="2"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 800;
-    font-size: var(--fs-heading-2, 2.0625rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 2.0625rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -517,11 +366,11 @@ h2 input[type="submit"] {
 }
 
 h3 {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 700;
-    font-size: var(--fs-heading-3, 1.8125rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 1.8125rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -537,11 +386,11 @@ h3 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="3"]) {
-    margin-top: var(--mrg-soft-800, 3.125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 3.125rem;
+    margin-bottom: 0.4375rem;
     font-weight: 700;
-    font-size: var(--fs-heading-3, 1.8125rem);
-    line-height: var(--line-height-200, 1.3125);
+    font-size: 1.8125rem;
+    line-height: 1.3125;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -561,11 +410,11 @@ h3 input[type="submit"] {
 }
 
 h4 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 700;
-    font-size: var(--fs-heading-4, 1.5625rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.5625rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -587,11 +436,11 @@ h4 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="4"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 700;
-    font-size: var(--fs-heading-4, 1.5625rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.5625rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -617,11 +466,11 @@ h4 input[type="submit"] {
 }
 
 h5 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 600;
-    font-size: var(--fs-heading-5, 1.3125rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.3125rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -643,11 +492,11 @@ h5 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="5"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 600;
-    font-size: var(--fs-heading-5, 1.3125rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.3125rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -673,11 +522,11 @@ h5 input[type="submit"] {
 }
 
 h6 {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 500;
-    font-size: var(--fs-heading-6, 1.1875rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.1875rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -699,11 +548,11 @@ h6 input[type="submit"] {
     text-transform: inherit;
 }
 :where([role="heading"][aria-level="6"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 500;
-    font-size: var(--fs-heading-6, 1.1875rem);
-    line-height: var(--line-height-300, 1.4375);
+    font-size: 1.1875rem;
+    line-height: 1.4375;
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
@@ -729,11 +578,11 @@ h6 input[type="submit"] {
 }
 
 :where([role="heading"][aria-level="7"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 500;
-    font-size: var(--fs-heading-7, 0.9375rem);
-    line-height: var(--line-height-400, 1.6875);
+    font-size: 0.9375rem;
+    line-height: 1.6875;
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
@@ -753,11 +602,11 @@ h6 input[type="submit"] {
 }
 
 :where([role="heading"][aria-level="8"]) {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 500;
-    font-size: var(--fs-heading-8, 0.8125rem);
-    line-height: var(--line-height-400, 1.6875);
+    font-size: 0.8125rem;
+    line-height: 1.6875;
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
@@ -806,7 +655,7 @@ ul ol ol,
 ul ol ul,
 ul ul ol,
 ul ul ul {
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    font-size: 0.9375rem;
 }
 
 ol {
@@ -831,22 +680,22 @@ ul ul ul {
 }
 li {
     margin: 0;
-    margin-top: var(--mrg-soft-300, 0.5rem);
+    margin-top: 0.5rem;
     padding: 0;
 }
 li::marker {
     font-weight: 500;
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    font-size: 0.9375rem;
 }
 li > a:only-child {
     display: inline-block;
     vertical-align: top;
 }
 li li li {
-    margin-top: var(--mrg-soft-200, 0.3125rem);
+    margin-top: 0.3125rem;
 }
 li li li::marker {
-    font-size: var(--fs-smaller-2, 0.8125rem);
+    font-size: 0.8125rem;
 }
 li li li li {
     font-style: italic;
@@ -862,9 +711,8 @@ li li li li em em {
  * ======================================================================== */
 fieldset {
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
-        var(--mrg-firm-300, 0.8125rem);
+    margin: 1.25rem 0 0.4375rem;
+    padding: 0.5rem 1.25rem 0.8125rem;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     background-color: var(--sys-clr-background, Canvas);
@@ -886,32 +734,30 @@ fieldset legend {
 }
 fieldset > :first-child {
     margin-top: 0;
-    margin-top: calc(
-        var(--mrg-soft-400, 0.8125rem) - var(--mrg-soft-200, 0.3125rem)
-    );
+    margin-top: calc(0.8125rem - 0.3125rem);
 }
 fieldset > legend + * {
     margin-top: 0;
 }
 
 fieldset legend {
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 1.625rem;
+    margin-bottom: 0.4375rem;
     font-weight: 500;
-    font-size: var(--fs-heading-7, 0.9375rem);
-    line-height: var(--line-height-400, 1.6875);
+    font-size: 0.9375rem;
+    line-height: 1.6875;
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
     font-style: normal;
 }
 fieldset legend {
-    margin-left: calc(var(--mrg-soft-300, 0.5rem) * -1);
-    margin-right: calc(var(--mrg-soft-300, 0.5rem) * -1);
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
     margin-top: 0;
-    margin-bottom: var(--mrg-soft-300, 0.5rem);
-    padding-left: var(--mrg-soft-300, 0.5rem);
-    padding-right: var(--mrg-soft-300, 0.5rem);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     font-style: italic;
 }
 
@@ -920,11 +766,11 @@ select,
 input {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-200, 0.5rem);
+    margin: 1.25rem 0 0.4375rem;
+    padding: 0.3125rem 0.5rem;
     width: 100%;
     font: inherit;
-    line-height: var(--line-height-200, 1.3125);
+    line-height: 1.3125;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
@@ -977,7 +823,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+    margin-top: 0.5rem;
 }
 textarea::-moz-placeholder,
 select::-moz-placeholder,
@@ -1092,11 +938,11 @@ input[type="week"] {
     width: auto;
 }
 input[type="file"] {
-    padding-top: var(--mrg-soft-300, 0.5rem);
-    padding-bottom: var(--mrg-soft-300, 0.5rem);
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    font-size: 0.9375rem;
 }
 input[type="range"] {
     padding: 0;
@@ -1112,12 +958,12 @@ textarea {
 
 label {
     display: block;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-top: 0.8125rem;
+    margin-bottom: 0.4375rem;
     margin-left: 0;
     margin-right: 0;
     font-weight: 600;
-    line-height: var(--line-height-200, 1.3125);
+    line-height: 1.3125;
     text-wrap: balance;
     color: var(--sys-clr-text, CanvasText);
 }
@@ -1127,21 +973,21 @@ label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
-    grid-gap: var(--mrg-soft-300, 0.5rem);
-    gap: var(--mrg-soft-300, 0.5rem);
+    grid-gap: 0.5rem;
+    gap: 0.5rem;
     font-weight: 400;
-    line-height: var(--line-height-400, 1.6875);
+    line-height: 1.6875;
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"]))
     + label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+    margin-top: 0.5rem;
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: var(--mrg-soft-400, 0.8125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: 0.8125rem 0.4375rem;
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
@@ -1156,12 +1002,12 @@ input[type="reset"],
 input[type="submit"] {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    margin: 1.25rem 0 0.4375rem;
+    padding: 0.3125rem 0.8125rem;
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
-    line-height: var(--line-height-100, 1.1875);
+    line-height: 1.1875;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
@@ -1249,7 +1095,7 @@ input[type="submit"] {
     justify-content: start;
     align-content: start;
     align-items: start;
-    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    gap: 0.5rem 0.3125rem;
     text-align: left;
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -1273,12 +1119,12 @@ input[disabled][type="submit"] {
 ::file-selector-button {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    margin: 1.25rem 0 0.4375rem;
+    padding: 0.3125rem 0.8125rem;
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
-    line-height: var(--line-height-100, 1.1875);
+    line-height: 1.1875;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
@@ -1338,7 +1184,7 @@ input[disabled][type="submit"] {
     justify-content: start;
     align-content: start;
     align-items: start;
-    gap: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-100, 0.3125rem);
+    gap: 0.5rem 0.3125rem;
     text-align: left;
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -1353,32 +1199,30 @@ input[disabled][type="submit"] {
 ::file-selector-button {
     display: initial;
     margin: 0;
-    margin-right: var(--mrg-firm-300, 0.8125rem);
-    font-size: var(--fs-normal, 1rem);
+    margin-right: 0.8125rem;
+    font-size: 1rem;
 }
 
 /* # GLOBALS - Tables
  * ======================================================================== */
 table {
     position: relative;
-    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-top: 1.25rem;
     margin-bottom: 0;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
+    margin-top: 2.25rem;
+    margin-bottom: 0.8125rem;
     background: var(--sys-clr-accent-bg, CanvasText);
 }
 
 table {
-    border-spacing: var(--border-width-200, 0.125rem);
-    font-size: var(--fs-smaller-1, 0.9375rem);
+    border-spacing: 0.125rem;
+    font-size: 0.9375rem;
     line-height: inherit;
 }
 
 th,
 td {
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    padding: 0.3125rem 0.8125rem;
     min-width: 10em;
     background: var(--sys-clr-background, Canvas);
     vertical-align: top;
@@ -1394,8 +1238,8 @@ td > :last-child {
 }
 
 th {
-    padding-top: var(--mrg-soft-200, 0.3125rem);
-    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
     background: var(--sys-clr-accent-bg, CanvasText);
     color: var(--sys-clr-accent-text, Canvas);
 }

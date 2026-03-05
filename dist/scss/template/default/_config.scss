@@ -4,7 +4,5 @@
 ///
 
 @forward '../_content/config' with (
-    $isTemplate: true !default,
-    //
-     //
+    $isTemplate: true !default
 );

@@ -6,9 +6,14 @@
 @forward '../html/config' with (
     $template_name: 'Astro' !default,
 
-    $mx_extendSelectors_headingsByRole: false !default,
+    $include_featureCheck: true !default,
+
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default,
 
     $template_print_astro: true !default,
+
+    $mx_extendSelectors_headingsByRole: false !default,
     //
      //
 );

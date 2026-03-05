@@ -7,5 +7,5 @@
 
 @forward 'lib' hide $template_extendSelectors, $template_include_cssHeadings,
     $template_isDefault, $template_name, $template_print_docBlock,
-    $template_print_globals, $template_print_normalize, $template_print_tokens,
-    $template_print_utils, $template_slug;
+    $template_print_globals, $template_print_tokens, $template_print_utils,
+    $template_slug;

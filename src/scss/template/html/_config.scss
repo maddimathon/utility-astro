@@ -8,7 +8,7 @@
 
     $include_html: true !default,
 
-    $mx_extendSelectors_headingsByRole: true !default,
+    $selector_root: 'html' !default,
 
     $template_print_normalize: true !default,
     $template_print_utils: true !default,

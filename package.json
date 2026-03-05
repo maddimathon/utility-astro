@@ -85,14 +85,14 @@
         "./template.scss": "./dist/scss/template/default/index.scss",
 
         "./template/config.scss": "./dist/scss/template/_content/config/_template.scss",
-        "./template/config/utility-sass.scss": "./dist/scss/template/_content/config/utility-sass/_index.scss",
-
         "./template/config/*.scss": [
             "./dist/scss/template/_content/config/template/*.scss",
             "./dist/scss/template/_content/config/template/_*.scss",
             "./dist/scss/template/_content/config/template/*/index.scss",
             "./dist/scss/template/_content/config/template/*/_index.scss"
         ],
+        
+        "./template/lib.scss": "./dist/scss/template/_content/lib/_index.scss",
 
         "./template/content.scss": "./dist/scss/template/_content/_index.scss",
         "./template/content/notice.scss": "./dist/scss/template/_content/_header/_notice.scss",
@@ -160,7 +160,7 @@
 
     "scripts": {
         "unlink": "run-p unlink:*",
-            "unlink:sass": "rm -r node_modules/@maddimathon/utility-sass || echo '' && mkdir -p node_modules/@maddimathon/utility-sass",
+            "unlink:sass": "rm -rf node_modules/@maddimathon/utility-sass || echo '' && mkdir -p node_modules/@maddimathon/utility-sass",
 
         "link": "run-p link:*",
             "link:sass": "npm run unlink:sass && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",

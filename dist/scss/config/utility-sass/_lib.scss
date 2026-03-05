@@ -7,10 +7,11 @@
 
 @forward 'pkg:@maddimathon/utility-sass/config' with (
     $internal_supressCredit: false !default,
-    $mx_extendSelectors_headingsByRole: false !default,
+
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default,
-    $selector_root: 'html' !default,
+
+    $mx_extendSelectors_headingsByRole: false !default,
     //
      //
 );

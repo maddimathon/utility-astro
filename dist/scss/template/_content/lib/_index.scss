@@ -15,8 +15,6 @@
 
 @use '../../../lib' as *;
 
-// $_optionalDefault: if(config.$isTemplate, false, true);
-
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
 ///
