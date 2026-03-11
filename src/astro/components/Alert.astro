@@ -6,43 +6,21 @@
  */
 
 /* import - types */
-import type { HTMLAttributes } from 'astro/types';
-import type { ClassList } from '../../ts/00-types/index.js';
-import type { IconProps } from './Icon.astro';
+import type { ComponentProps } from 'astro/types';
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { AlertIconProps } from './Alert_Icon.astro';
 
 /* import - functions */
 
 /* import - values */
 
 /* import - components */
-import Icon from './Icon.astro';
+import Alert_Icon from './Alert_Icon.astro';
 import Heading from './Heading.astro';
 
 /* import - layouts */
 
 /* TYPES ===================================== */
-
-type AlertProps_Slug = {
-    class?: ClassList;
-    heading?: number;
-
-    type: IconProps['type'];
-
-    slug?: never;
-    svg?: never;
-    svgLabel?: never;
-};
-
-type AlertProps_Svg = {
-    class?: ClassList;
-    heading?: number;
-
-    type?: never;
-
-    slug: string;
-    svg: string;
-    svgLabel: string;
-};
 
 /**
  * Input props for the Alert component.
@@ -50,12 +28,14 @@ type AlertProps_Svg = {
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file and renamed to AlertProps.
  */
-export type AlertProps = AlertProps_Slug | AlertProps_Svg;
+export type AlertProps<T_IconProps extends AlertIconProps> = T_IconProps & {
+    heading?: number;
+};
 
 /* PROPS ===================================== */
 
 // prettier-ignore
-export type Props = AlertProps & Partial<Omit<HTMLAttributes<'section'>, keyof AlertProps|'class'|'class:list'>>;
+export type Props<T_IconProps extends AlertIconProps = AlertIconProps> = GenericElementProps<AlertProps<T_IconProps>, 'section'>;
 
 const {
     heading,
@@ -69,7 +49,16 @@ const {
 
 /* CONSTANTS ===================================== */
 
+const iconProps = {
+    slug,
+    svg,
+    svgLabel,
+    type,
+} as ComponentProps<typeof Alert_Icon>;
+
 const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
+
+const HeadlineTag = heading ? Heading : ('header' as const);
 ---
 
 <section
@@ -83,56 +72,19 @@ const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
 >
     {
         !headlineHTML ? (
-            svg ? (
-                <Icon
-                    class='alert-block__icon'
-                    slug={slug}
-                    svg={svg}
-                    svgLabel={svgLabel}
-                />
-            ) : (
-                <Icon
-                    class='alert-block__icon'
-                    type={type}
-                />
-            )
-        ) : heading ? (
-            <Heading
-                heading={heading}
+            <Alert_Icon {...iconProps}>
+                <slot name='icon' />
+            </Alert_Icon>
+        ) : (
+            <HeadlineTag
+                heading={heading as number}
                 class='alert-block__headline'
             >
-                {svg ? (
-                    <Icon
-                        class='alert-block__icon'
-                        slug={slug}
-                        svg={svg}
-                        svgLabel={svgLabel}
-                    />
-                ) : (
-                    <Icon
-                        class='alert-block__icon'
-                        type={type}
-                    />
-                )}
+                <Alert_Icon {...iconProps}>
+                    <slot name='icon' />
+                </Alert_Icon>
                 <Fragment set:html={headlineHTML} />
-            </Heading>
-        ) : (
-            <header class='alert-block__headline'>
-                {svg ? (
-                    <Icon
-                        class='alert-block__icon'
-                        slug={slug}
-                        svg={svg}
-                        svgLabel={svgLabel}
-                    />
-                ) : (
-                    <Icon
-                        class='alert-block__icon'
-                        type={type}
-                    />
-                )}
-                <Fragment set:html={headlineHTML} />
-            </header>
+            </HeadlineTag>
         )
     }
     <slot />

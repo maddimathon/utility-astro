@@ -160,10 +160,10 @@
 
     "scripts": {
         "unlink": "run-p unlink:*",
-            "unlink:sass": "rm -rf node_modules/@maddimathon/utility-sass || echo '' && mkdir -p node_modules/@maddimathon/utility-sass",
+            "unlink:sass": "rm -rf node_modules/@maddimathon/utility-sass || echo ''",
 
         "link": "run-p link:*",
-            "link:sass": "npm run unlink:sass && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
+            "link:sass": "npm run unlink:sass && mkdir -p node_modules/@maddimathon/utility-sass && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "preinstall": "npm run unlink",
 

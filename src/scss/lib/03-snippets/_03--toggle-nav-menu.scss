@@ -81,6 +81,11 @@ $_titleBorderWidth_half: var-border-width('100');
 
                         font-size: #{var-fs(smaller-1)};
 
+                        %ol,
+                        %ul {
+                            font-size: 1em !important;
+                        }
+
                         > .container {
                             @include snippet-support-astro-body-grid--page-width;
 

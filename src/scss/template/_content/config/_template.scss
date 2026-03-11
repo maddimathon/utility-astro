@@ -16,6 +16,11 @@
 $template_print_astro_bodyGrid: utils.$template_print_astro !default;
 
 ///
+/// @since ___PKG_VERSION___
+///
+$template_print_icons: utils.$template_print_utils or utils.$template_print_astro !default;
+
+///
 /// @since 0.1.0-alpha
 /// @since ___PKG_VERSION___ — Renamed from $print_astro_settingsMenu to $template_print_siteSettingsMenu and moved from lib to template config.
 ///

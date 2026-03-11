@@ -8,26 +8,9 @@
 
 /* # ICONS ==================================== */
 
-.icon,
+%icon,
 .toggle-control > :global(.icon) {
-    $_iconSize: lib.do-var(icon-size, 1.375em);
-
-    @include lib.cx-prop(display, inline-block);
-    display: inline-block;
-
-    height: #{$_iconSize};
-    height: calc($_iconSize * lib.do-var(icon-size--font-multiplier, 1));
-
-    min-width: #{$_iconSize};
-    min-width: calc($_iconSize * lib.do-var(icon-size--font-multiplier, 1));
-
-    vertical-align: middle;
-
-    > svg {
-        @include lib.cx-prop(display, block);
-        display: block;
-        fill: currentColor;
-    }
+    @include lib.snippet-support-icons;
 }
 
 @include lib.extend-selectors;

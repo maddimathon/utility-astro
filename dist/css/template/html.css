@@ -2396,4 +2396,27 @@ a.skip-link[href]:focus-within {
 
 /* # ASTRO LAYOUT
  * ======================================================================== */
+/* # ASTRO SUPPORT - ICONS
+ * ======================================================================== */
+.icon {
+    --display: inline-block;
+    display: inline-block;
+    height: var(--icon-size, 1.375em);
+    height: calc(
+        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
+    );
+    min-width: var(--icon-size, 1.375em);
+    min-width: calc(
+        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
+    );
+    vertical-align: middle;
+}
+.icon > svg {
+    --display: inline-block;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    fill: currentColor;
+}
+
 /*! END of @maddimathon/utility-astro/template/html */

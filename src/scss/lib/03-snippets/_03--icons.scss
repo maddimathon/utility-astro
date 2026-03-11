@@ -1,0 +1,58 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+// @use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@use '../../config';
+
+@use '../01-functions' as *;
+@use '../02-mixins' as *;
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-icons(
+    $display_svg: inline-block,
+    $display: inline-block,
+    $iconSize: do-var(icon-size, 1.375em),
+    $includeMinWidth: config.$include_html,
+    $margin_svg: 0,
+    $padding_svg: 0,
+    $verticalAlign: middle
+) {
+    %icon {
+        @include cx-prop(display, $display);
+        display: #{$display};
+
+        height: #{$iconSize};
+        height: calc($iconSize * do-var(icon-size--font-multiplier, 1));
+
+        @if $includeMinWidth {
+            min-width: #{$iconSize};
+            min-width: calc($iconSize * do-var(icon-size--font-multiplier, 1));
+        }
+
+        vertical-align: #{$verticalAlign};
+
+        @if meta.content-exists() {
+            @content ('root');
+        }
+
+        > svg {
+            @include cx-prop(display, $display_svg);
+            display: #{$display_svg};
+            margin: #{$margin_svg};
+            padding: #{$padding_svg};
+
+            @if meta.content-exists() {
+                @content ('svg');
+            } @else {
+                fill: currentColor;
+            }
+        }
+    }
+}

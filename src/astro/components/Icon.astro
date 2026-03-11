@@ -6,8 +6,10 @@
  */
 
 /* import - types */
-import type { HTMLAttributes } from 'astro/types';
-import type { ClassList } from '../../ts/00-types/index.js';
+import type {
+    ClassList,
+    GenericElementProps,
+} from '../../ts/00-types/index.js';
 
 /* import - functions */
 
@@ -46,8 +48,7 @@ export type IconProps = IconProps_Slug | IconProps_Svg;
 
 /* PROPS ===================================== */
 
-// prettier-ignore
-export type Props = IconProps & Partial<Omit<HTMLAttributes<'span'>, keyof IconProps | 'class' | 'class:list'>>;
+export type Props = GenericElementProps<IconProps, 'span'>;
 
 const {
     slug,

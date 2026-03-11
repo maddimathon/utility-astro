@@ -7,6 +7,15 @@
 
 @use '../../../lib' as *;
 
+@if config.$template_print_icons {
+    @if config.$template_include_cssHeadings {
+        /* # ASTRO SUPPORT - ICONS
+         * ======================================================================== */
+    }
+
+    @include snippet-support-icons;
+}
+
 @if config.$template_print_toggleBlock {
     @if config.$template_include_cssHeadings {
         /* # ASTRO SUPPORT - TOGGLE BLOCK

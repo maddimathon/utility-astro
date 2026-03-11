@@ -50,7 +50,7 @@
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
-    // $additional: list.append($additional, ('.icon', 'icon'));
+    $additional: list.append($additional, ('.icon', 'icon'));
 
     $additional_optional: list.join(
         $additional_optional,

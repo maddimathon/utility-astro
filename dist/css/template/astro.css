@@ -2437,6 +2437,29 @@ body aside > :first-child {
     opacity: 0.75;
 }
 
+/* # ASTRO SUPPORT - ICONS
+ * ======================================================================== */
+.icon {
+    --display: inline-block;
+    display: inline-block;
+    height: var(--icon-size, 1.375em);
+    height: calc(
+        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
+    );
+    min-width: var(--icon-size, 1.375em);
+    min-width: calc(
+        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
+    );
+    vertical-align: middle;
+}
+.icon > svg {
+    --display: inline-block;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    fill: currentColor;
+}
+
 /* # ASTRO SUPPORT - TOGGLE BLOCK
  * ======================================================================== */
 [data-toggle-content] > .container,
@@ -3055,6 +3078,24 @@ body > nav[data-toggle-container] {
     padding: 0;
     border: none;
     font-size: var(--fs-smaller-1, 0.9375rem);
+}
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] ol,
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] ul,
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    .table-of-contents
+    [data-toggle-content]
+    > .container
+    ol,
+.table-of-contents
+    :where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    ol {
+    font-size: 1em !important;
 }
 :where(.js)
     body

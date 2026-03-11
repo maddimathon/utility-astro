@@ -1,0 +1,102 @@
+---
+/**
+ * @since 0.1.0-alpha
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { IconProps } from './Icon.astro';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import Icon from './Icon.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+export type AlertIconProps_Render = {
+    children: any;
+
+    type?: never | undefined;
+
+    slug?: never | undefined;
+    svg?: never | undefined;
+    svgLabel?: never | undefined;
+};
+
+export type AlertIconProps_Slug = {
+    children?: never;
+
+    type: IconProps['type'];
+
+    slug?: never | undefined;
+    svg?: never | undefined;
+    svgLabel?: never | undefined;
+};
+
+export type AlertIconProps_Svg = {
+    children?: never;
+
+    type?: never | undefined;
+
+    slug: string;
+    svg: string;
+    svgLabel: string;
+};
+
+// prettier-ignore
+export type AlertIconProps = AlertIconProps_Render | AlertIconProps_Slug | AlertIconProps_Svg;
+
+/* PROPS ===================================== */
+
+export type Props = GenericElementProps<AlertIconProps, 'span'>;
+
+const {
+    slug,
+    svg,
+    svgLabel,
+    type = 'star',
+    class: classListInput = [],
+    ...attributes
+}: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const svgRender = (await Astro.slots.render('default'))?.trim() || undefined;
+
+const classList = [
+    'alert-block__icon',
+    classListInput ? '||' : '',
+    classListInput,
+];
+---
+
+{
+    svgRender ? (
+        <span
+            {...attributes}
+            class:list={classList}
+            set:html={svgRender}
+        />
+    ) : svg ? (
+        <Icon
+            {...attributes}
+            class:list={classList}
+            slug={slug}
+            svg={svg}
+            svgLabel={svgLabel}
+        />
+    ) : (
+        <Icon
+            {...attributes}
+            class:list={classList}
+            type={type}
+        />
+    )
+}

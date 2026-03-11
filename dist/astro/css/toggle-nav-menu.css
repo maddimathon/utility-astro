@@ -605,6 +605,24 @@ body > nav[data-toggle-container] {
     border: none;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] ol,
+:where(.js)
+    body
+    > nav[data-toggle-container]
+    .table-of-contents
+    [data-toggle-content]
+    > .container
+    ol,
+.table-of-contents
+    :where(.js)
+    body
+    > nav[data-toggle-container]
+    [data-toggle-content]
+    > .container
+    ol,
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] ul {
+    font-size: 1em !important;
+}
 :where(.js)
     body
     > nav[data-toggle-container]
