@@ -542,7 +542,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
         { ifDisplay.textLong && (
             <ul id="example-list-ul">
                 <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
-                <li>uis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
+                <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
                     <ul>
                         <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
                         <li>Morbi tempus rhoncus efficitur.
@@ -551,7 +551,32 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                                 <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
                                 <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
                                     <ul>
-                                        <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.</li>
+                                        <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
+                                            { ifDisplay.listsMedium && <ul>
+                                                <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
+                                                    <ul>
+                                                        <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
+                                                            { ifDisplay.listsLong && <ul>
+                                                                <li>Suspendisse dapibus maximus leo, quis.
+                                                                    <ul>
+                                                                        <li>Proin vel risus finibus.
+                                                                            <ul>
+                                                                                <li>Feugiat odio mollis ut.</li>
+                                                                                <li>Sed ultricies lorem.</li>
+                                                                            </ol>
+                                                                        </li>
+                                                                        <li>Convallis nisl vel.</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li>Nam vitae dolor mi.</li>
+                                                            </ul> }
+                                                        </li>
+                                                        <li>Ut maximus arcu hendrerit in.</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Integer vehicula lacus ac congue ullamcorper.</li>
+                                            </ul> }
+                                        </li>
                                         <li>Duis hendrerit eu lacus at egestas.</li>
                                     </ul>
                                 </li>
@@ -565,47 +590,75 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             </ul>
             <p>Suspendisse potenti. Sed sed hendrerit arcu. Nullam posuere orci vel tellus tempor fringilla a eu lacus. Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
             <ol id="example-list-ol">
-                <li>Etiam ullamcorper commodo risus.
+                <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
+                <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
                     <ol>
-                        <li>Proin gravida aliquam purus, at feugiat odio mollis ut.</li>
-                        <li>In hac habitasse platea dictumst.
+                        <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
+                        <li>Morbi tempus rhoncus efficitur.
                             <ol>
-                                <li>Proin gravida aliquam purus, at feugiat odio mollis ut.</li>
-                                <li>In hac habitasse platea dictumst.
+                                <li>In pulvinar semper velit.</li>
+                                <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
+                                <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
                                     <ol>
-                                        <li>Donec vitae justo vel leo ullamcorper mattis.</li>
-                                        <li>Mauris a tincidunt mauris.</li>
-                                        <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.</li>
+                                        <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
+                                            { ifDisplay.listsMedium && <ol>
+                                                <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
+                                                    <ol>
+                                                        <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
+                                                            { ifDisplay.listsLong && <ol>
+                                                                <li>Suspendisse dapibus maximus leo, quis.
+                                                                    <ol>
+                                                                        <li>Proin vel risus finibus.
+                                                                            <ol>
+                                                                                <li>Feugiat odio mollis ut.</li>
+                                                                                <li>Sed ultricies lorem.</li>
+                                                                            </ol>
+                                                                        </li>
+                                                                        <li>Convallis nisl vel.</li>
+                                                                    </ol>
+                                                                </li>
+                                                                <li>Nam vitae dolor mi.</li>
+                                                            </ol> }
+                                                        </li>
+                                                        <li>Ut maximus arcu hendrerit in.</li>
+                                                    </ol>
+                                                </li>
+                                                <li>Integer vehicula lacus ac congue ullamcorper.</li>
+                                            </ol> }
+                                        </li>
                                         <li>Duis hendrerit eu lacus at egestas.</li>
                                     </ol>
                                 </li>
-                                <li>Proin vel risus finibus, convallis nisl vel, ultricies lorem. Sed hendrerit vel dui in pellentesque. Nunc elementum tortor quis felis pharetra faucibus.</li>
+                                <li>Duis hendrerit eu lacus at egestas.</li>
                             </ol>
                         </li>
-                        <li>Proin vel risus finibus, convallis nisl vel, ultricies lorem. Sed hendrerit vel dui in pellentesque. Nunc elementum tortor quis felis pharetra faucibus.</li>
+                        <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
                     </ol>
                 </li>
-                <li>Fusce mattis, odio at varius pharetra, tellus arcu convallis erat, vel blandit nulla sem nec enim.</li>
-                <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
+                <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
             </ol>
             <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
         ) }
 
         <ol id="example-list-mixed">
-            <li>Etiam ullamcorper commodo risus.
+            <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
+            <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
                 <ul>
-                    <li>In hac habitasse platea dictumst.
+                    <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
+                    <li>Morbi tempus rhoncus efficitur.
                         <ol>
-                            <li>In hac habitasse platea dictumst.
+                            <li>In pulvinar semper velit.</li>
+                            <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
+                            <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
                                 <ul>
-                                    <li>At feugiat odio mollis ut.
+                                    <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
                                         { ifDisplay.listsMedium && <ol>
-                                            <li>Mauris a tincidunt mauris.
-                                                <ol>
-                                                    <li>Aliquam luctus fringilla nunc.
+                                            <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
+                                                <ul>
+                                                    <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
                                                         { ifDisplay.listsLong && <ol>
                                                             <li>Suspendisse dapibus maximus leo, quis.
-                                                                <ol>
+                                                                <ul>
                                                                     <li>Proin vel risus finibus.
                                                                         <ol>
                                                                             <li>Feugiat odio mollis ut.</li>
@@ -613,66 +666,27 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                                                                         </ol>
                                                                     </li>
                                                                     <li>Convallis nisl vel.</li>
-                                                                </ol>
+                                                                </ul>
                                                             </li>
                                                             <li>Nam vitae dolor mi.</li>
                                                         </ol> }
                                                     </li>
                                                     <li>Ut maximus arcu hendrerit in.</li>
-                                                </ol>
+                                                </ul>
                                             </li>
                                             <li>Integer vehicula lacus ac congue ullamcorper.</li>
                                         </ol> }
                                     </li>
-                                    <li>Donec vitae justo vel leo ullamcorper mattis.</li>
-                                </ul>
-                            </li>
-                            <li>Sed hendrerit vel dui in pellentesque.</li>
-                        </ol>
-                    </li>
-                    <li>Nunc elementum tortor quis felis pharetra faucibus.</li>
-                </ul>
-            </li>
-            <li>Fusce mattis, odio at varius pharetra.
-                <ol>
-                    <li>Tellus arcu convallis erat, vel blandit nulla sem nec enim.
-                        <ul>
-                            <li>Proin gravida aliquam purus, at feugiat odio mollis ut.
-                                <ol>
-                                    <li>Convallis nisl vel, ultricies lorem.
-                                        { ifDisplay.listsMedium && <ul>
-                                            <li>Duis hendrerit eu lacus at egestas.
-                                                <ol>
-                                                    <li>Cras consequat id tortor nec dapibus.
-                                                        { ifDisplay.listsLong && <ol>
-                                                            <li>Suspendisse dapibus maximus leo, quis.
-                                                                <ol>
-                                                                    <li>Proin vel risus finibus.
-                                                                        <ol>
-                                                                            <li>Feugiat odio mollis ut.</li>
-                                                                            <li>Sed ultricies lorem.</li>
-                                                                        </ol>
-                                                                    </li>
-                                                                    <li>Convallis nisl vel.</li>
-                                                                </ol>
-                                                            </li>
-                                                            <li>Nam vitae dolor mi.</li>
-                                                        </ol> }
-                                                    </li>
-                                                    <li>Ut maximus arcu hendrerit in.</li>
-                                                </ol>
-                                            </li>
-                                        </ul> }
-                                    </li>
-                                    <li>Proin vel risus finibus.</li>
+                                    <li>Duis hendrerit eu lacus at egestas.</li>
                                 </ol>
                             </li>
-                        </ul>
+                            <li>Duis hendrerit eu lacus at egestas.</li>
+                        </ol>
                     </li>
-                    <li>Proin gravida aliquam purus.</li>
+                    <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
                 </ol>
             </li>
-            <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
+            <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
         </ol>
 
         <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
