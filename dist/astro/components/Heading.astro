@@ -6,6 +6,7 @@
  */
 
 /* import - types */
+import { makeNumber } from '@maddimathon/utility-typescript';
 import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* import - functions */
@@ -60,49 +61,40 @@ const {
 
 const htmlContent = (await Astro.slots.render('default')) || false;
 
-/** is definitely an integer greater than 0 (0 defaults to 7) */
-const heading = Math.round(Number(headingRaw)) || 7;
+const heading = Math.round(Number(headingRaw));
 
-/** is definitely an integer greater than 0 (0 defaults to undefined) */
+const numDisplayHeadingRaw = makeNumber(displayHeadingRaw) ?? displayHeadingRaw;
+
 const displayHeading =
-    displayHeadingRaw && (Math.round(Number(displayHeadingRaw)) || undefined);
+    typeof numDisplayHeadingRaw === 'number'
+        ? Math.round(numDisplayHeadingRaw)
+        : numDisplayHeadingRaw;
 
 const Tag =
     heading >= minimum && heading < 7
         ? (`h${heading as 2 | 3 | 4 | 5 | 6}` as const)
         : ('p' as const);
+
+const headingClasses =
+    typeof displayHeading === 'undefined'
+        ? heading < 1
+            ? 'unstyled-heading'
+            : heading > 6
+              ? `h${heading}`
+              : ''
+        : displayHeading === false
+          ? 'unstyled-heading'
+          : `h${displayHeading}`;
 ---
 
 {
-    htmlContent &&
-        (displayHeading === false ? (
-            <p
-                {...attributes}
-                aria-level={heading > 1 ? heading : undefined}
-                class:list={['unstyled-heading ||', classList]}
-                role={heading > 1 ? 'heading' : undefined}
-                set:html={htmlContent}
-            />
-        ) : Tag !== 'p' ? (
-            <Tag
-                {...attributes}
-                class:list={[
-                    displayHeading && `h${displayHeading} ||`,
-                    classList,
-                ]}
-                set:html={htmlContent}
-            />
-        ) : (
-            <p
-                {...attributes}
-                aria-level={heading > 1 ? heading : undefined}
-                class:list={[
-                    displayHeading ? `h${displayHeading}` : `h${heading}`,
-                    '||',
-                    classList,
-                ]}
-                role={heading > 1 ? 'heading' : undefined}
-                set:html={htmlContent}
-            />
-        ))
+    htmlContent && (
+        <Tag
+            {...attributes}
+            aria-level={heading > 6 ? heading : undefined}
+            class:list={[headingClasses, '||', classList]}
+            role={heading > 6 ? 'heading' : undefined}
+            set:html={htmlContent}
+        />
+    )
 }
