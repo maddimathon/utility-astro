@@ -5,7 +5,7 @@
 
 @use '../config';
 
-@if config.$template_print_docBlock {
+@if config.$template_docBlock {
     @if config.$template_isDefault {
         /**
          * Utility Astro - Template

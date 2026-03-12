@@ -4,6 +4,7 @@
 ///
 
 // @use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+@use 'sass:map';
 @use 'sass:string';
 
 @use '../../../../config' as lib;
@@ -24,55 +25,88 @@ $template_slug: string.to-lower-case($template_name) !default;
 $template_isDefault: $template_slug == default !default;
 
 ///
-/// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_astro to $template_print_astro and moved from lib to template config.
+/// @since 0.1.0-beta.0.draft
 ///
-$template_print_astro: false !default;
+$template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_astro to $template_astro and moved from lib to template config.
+///
+$template_astro: false !default;
 
 ///
 /// Whether to include the global selectors in the output. Otherwise, all
 /// selectors are pseudo selectors.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_globals to $template_print_globals and moved from lib to template config.
+/// @since 0.1.0-beta.0.draft — Renamed from $print_globals to $template_globals and moved from lib to template config.
 ///
-$template_print_globals: $template_print_astro !default;
+$template_globals: $template_astro !default;
 
 ///
 /// Whether to include the utility class selectors in the output.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_utils to $template_print_utils and moved from lib to template config.
+/// @since 0.1.0-beta.0.draft — Renamed from $print_utils to $template_utils and moved from lib to template config.
 ///
-$template_print_utils: lib.$include_html and
-    ($template_print_globals or $template_print_astro) !default;
+$template_utils: lib.$include_html and ($template_globals or $template_astro) !default;
 
 ///
 /// Whether to include the custom property definitions in the output.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_tokens to $template_print_tokens and moved from lib to template config.
+/// @since 0.1.0-beta.0.draft — Renamed from $print_tokens to $template_tokens and moved from lib to template config.
 ///
-$template_print_tokens: $template_print_globals or $template_print_utils !default;
+$template_tokens: $template_globals or $template_utils !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Renamed from $print_headings to $template_cssHeadings and moved from lib to template config.
+///
+$template_cssHeadings: lib.$isTemplate and
+    (
+        $template_astro or $template_globals or $template_tokens or
+            $template_utils
+    ) !default;
 
 ///
 /// Whether to include the extend selectors mixin after the template content.
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-$template_extendSelectors: $template_print_globals or $template_print_utils !default;
+$template_extendSelectors: $template_globals or $template_utils !default;
 
 ///
-/// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_headings to $template_include_cssHeadings and moved from lib to template config.
+/// Whether to print certain styles.
 ///
-$template_include_cssHeadings: lib.$isTemplate and
+/// @since 0.1.0-beta.0.draft — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
+///
+$template_styles: () !default;
+$template_styles: map.deep-merge(
     (
-        $template_print_astro or $template_print_globals or
-            $template_print_tokens or $template_print_utils
-    ) !default;
+        astro: (
+            bodyGrid: $template_astro,
+            toggleNav: $template_astro and
+                if(
+                    map.has-key($template_styles, toggleBlock),
+                    map.get($template_styles, toggleBlock),
+                    true
+                ),
+        ),
 
-///
-/// @since 0.1.0-beta.0.draft
-///
-$template_print_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
+        buttons: $template_globals,
+        headings: $template_globals,
+        icons: $template_utils,
+        normalize: lib.$include_html and lib.$isTemplate,
+
+        skipLinks: (
+            $template_astro or $template_globals or $template_utils,
+        )
+        and lib.$include_html,
+
+        siteSettingsMenu: $template_astro,
+        toggle: $template_astro,
+    ),
+    $template_styles
+);

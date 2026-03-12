@@ -787,7 +787,6 @@ i em em {
 }
 
 a[href] {
-    --focus-ring-outline-color: currentColor;
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     display: inline;
     border: none;
@@ -1227,20 +1226,20 @@ h6 a.button[href],
     font-style: italic;
 }
 
-.h1:where(.unstyled-heading),
-.h2:where(.unstyled-heading),
-.h3:where(.unstyled-heading),
-.h4:where(.unstyled-heading),
-.h5:where(.unstyled-heading),
-.h6:where(.unstyled-heading),
-.h7:where(.unstyled-heading),
-.h8:where(.unstyled-heading),
-h1:where(.unstyled-heading),
-h2:where(.unstyled-heading),
-h3:where(.unstyled-heading),
-h4:where(.unstyled-heading),
-h5:where(.unstyled-heading),
-h6:where(.unstyled-heading) {
+h1:is(.unstyled-heading),
+.h1:is(.unstyled-heading),
+h2:is(.unstyled-heading),
+.h2:is(.unstyled-heading),
+h3:is(.unstyled-heading),
+.h3:is(.unstyled-heading),
+h4:is(.unstyled-heading),
+.h4:is(.unstyled-heading),
+h5:is(.unstyled-heading),
+.h5:is(.unstyled-heading),
+h6:is(.unstyled-heading),
+.h6:is(.unstyled-heading),
+.h7:is(.unstyled-heading),
+.h8:is(.unstyled-heading) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;
@@ -1251,52 +1250,52 @@ h6:where(.unstyled-heading) {
     font-style: normal;
     font-style: normal;
 }
-.h1:where(.unstyled-heading) em,
-.h2:where(.unstyled-heading) em,
-.h3:where(.unstyled-heading) em,
-.h4:where(.unstyled-heading) em,
-.h5:where(.unstyled-heading) em,
-.h6:where(.unstyled-heading) em,
-.h7:where(.unstyled-heading) em,
-.h8:where(.unstyled-heading) em,
-h1:where(.unstyled-heading) em,
-h2:where(.unstyled-heading) em,
-h3:where(.unstyled-heading) em,
-h4:where(.unstyled-heading) em,
-h5:where(.unstyled-heading) em,
-h6:where(.unstyled-heading) em {
+h1:is(.unstyled-heading) em,
+.h1:is(.unstyled-heading) em,
+h2:is(.unstyled-heading) em,
+.h2:is(.unstyled-heading) em,
+h3:is(.unstyled-heading) em,
+.h3:is(.unstyled-heading) em,
+h4:is(.unstyled-heading) em,
+.h4:is(.unstyled-heading) em,
+h5:is(.unstyled-heading) em,
+.h5:is(.unstyled-heading) em,
+h6:is(.unstyled-heading) em,
+.h6:is(.unstyled-heading) em,
+.h7:is(.unstyled-heading) em,
+.h8:is(.unstyled-heading) em {
     font-style: italic;
 }
-.h1:where(.unstyled-heading) em em,
-.h2:where(.unstyled-heading) em em,
-.h3:where(.unstyled-heading) em em,
-.h4:where(.unstyled-heading) em em,
-.h5:where(.unstyled-heading) em em,
-.h6:where(.unstyled-heading) em em,
-.h7:where(.unstyled-heading) em em,
-.h8:where(.unstyled-heading) em em,
-h1:where(.unstyled-heading) em em,
-h2:where(.unstyled-heading) em em,
-h3:where(.unstyled-heading) em em,
-h4:where(.unstyled-heading) em em,
-h5:where(.unstyled-heading) em em,
-h6:where(.unstyled-heading) em em {
+h1:is(.unstyled-heading) em em,
+.h1:is(.unstyled-heading) em em,
+h2:is(.unstyled-heading) em em,
+.h2:is(.unstyled-heading) em em,
+h3:is(.unstyled-heading) em em,
+.h3:is(.unstyled-heading) em em,
+h4:is(.unstyled-heading) em em,
+.h4:is(.unstyled-heading) em em,
+h5:is(.unstyled-heading) em em,
+.h5:is(.unstyled-heading) em em,
+h6:is(.unstyled-heading) em em,
+.h6:is(.unstyled-heading) em em,
+.h7:is(.unstyled-heading) em em,
+.h8:is(.unstyled-heading) em em {
     font-style: normal;
 }
-.h1:where(.unstyled-heading) em em em,
-.h2:where(.unstyled-heading) em em em,
-.h3:where(.unstyled-heading) em em em,
-.h4:where(.unstyled-heading) em em em,
-.h5:where(.unstyled-heading) em em em,
-.h6:where(.unstyled-heading) em em em,
-.h7:where(.unstyled-heading) em em em,
-.h8:where(.unstyled-heading) em em em,
-h1:where(.unstyled-heading) em em em,
-h2:where(.unstyled-heading) em em em,
-h3:where(.unstyled-heading) em em em,
-h4:where(.unstyled-heading) em em em,
-h5:where(.unstyled-heading) em em em,
-h6:where(.unstyled-heading) em em em {
+h1:is(.unstyled-heading) em em em,
+.h1:is(.unstyled-heading) em em em,
+h2:is(.unstyled-heading) em em em,
+.h2:is(.unstyled-heading) em em em,
+h3:is(.unstyled-heading) em em em,
+.h3:is(.unstyled-heading) em em em,
+h4:is(.unstyled-heading) em em em,
+.h4:is(.unstyled-heading) em em em,
+h5:is(.unstyled-heading) em em em,
+.h5:is(.unstyled-heading) em em em,
+h6:is(.unstyled-heading) em em em,
+.h6:is(.unstyled-heading) em em em,
+.h7:is(.unstyled-heading) em em em,
+.h8:is(.unstyled-heading) em em em {
     font-style: italic;
 }
 
@@ -1461,7 +1460,7 @@ fieldset legend {
     text-wrap: balance;
     font-style: normal;
 }
-fieldset legend:where(.unstyled-heading) {
+fieldset legend:is(.unstyled-heading) {
     margin-top: var(--mrg-soft-600, 1.625rem);
     margin-bottom: var(--mrg-half-400, 0.4375rem);
     font-weight: 600;

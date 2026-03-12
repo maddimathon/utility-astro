@@ -3,12 +3,14 @@
 /// @since 0.1.0-alpha
 ///
 
+@use 'sass:map';
+
 @use '../config';
 
 @use '../../../lib' as *;
 
-@if config.$template_print_skipLinks {
-    @if config.$template_include_cssHeadings {
+@if map.get(config.$template_styles, skipLinks) {
+    @if config.$template_cssHeadings {
         /* # ASTRO - SKIP LINKS
          * ======================================================================== */
     }

@@ -3,12 +3,14 @@
 /// @since 0.1.0-alpha
 ///
 
+@use 'sass:map';
+
 @use '../config';
 
 @use '../../../lib' as *;
 
-@if config.$template_print_icons {
-    @if config.$template_include_cssHeadings {
+@if map.get(config.$template_styles, icons) {
+    @if config.$template_cssHeadings {
         /* # ASTRO SUPPORT - ICONS
          * ======================================================================== */
     }
@@ -16,8 +18,8 @@
     @include snippet-support-icons;
 }
 
-@if config.$template_print_toggleBlock {
-    @if config.$template_include_cssHeadings {
+@if map.get(config.$template_styles, toggle) {
+    @if config.$template_cssHeadings {
         /* # ASTRO SUPPORT - TOGGLE BLOCK
          * ======================================================================== */
     }
@@ -25,8 +27,8 @@
     @include snippet-support-toggle-block;
 }
 
-@if config.$template_print_astro_toggleNav {
-    @if config.$template_include_cssHeadings {
+@if map.get(config.$template_styles, astro, toggleNav) {
+    @if config.$template_cssHeadings {
         /* # ASTRO COMPONENT - TOGGLE NAV MENU
          * ======================================================================== */
     }
@@ -34,8 +36,8 @@
     @include snippet-support-astro-toggle-nav-menu;
 }
 
-@if config.$template_print_siteSettingsMenu {
-    @if config.$template_include_cssHeadings {
+@if map.get(config.$template_styles, siteSettingsMenu) {
+    @if config.$template_cssHeadings {
         /* # ASTRO SUPPORT - SETTINGS MENU
          * ======================================================================== */
     }

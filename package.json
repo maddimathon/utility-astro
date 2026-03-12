@@ -84,7 +84,7 @@
         
         "./template.scss": "./dist/scss/template/default/index.scss",
 
-        "./template/config.scss": "./dist/scss/template/_content/config/_template.scss",
+        "./template/config.scss": "./dist/scss/template/_content/config/utility-sass/_index.scss",
         "./template/config/*.scss": [
             "./dist/scss/template/_content/config/template/*.scss",
             "./dist/scss/template/_content/config/template/_*.scss",
@@ -209,7 +209,7 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#0.1.0-beta.0",
+        "@maddimathon/utility-sass": "~0.1.0-beta.0",
         "@maddimathon/utility-typescript": "~2.0.0-beta.2",
         "astro": "^5.17.3",
         "luxon": "^3.7.2",
@@ -217,7 +217,7 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.6",
-        "@maddimathon/build-utilities": "~0.3.0-alpha.17",
+        "@maddimathon/build-utilities": "~0.3.0-alpha.18",
         "@types/jest": "~30.0.0",
         "@types/luxon": "~3.7.1",
         "@types/node": "22.15.30",

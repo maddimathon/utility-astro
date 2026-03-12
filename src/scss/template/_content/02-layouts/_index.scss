@@ -3,16 +3,18 @@
 /// @since 0.1.0-alpha
 ///
 
+@use 'sass:map';
+
 @use '../config';
 
 @use '../../../lib' as *;
 
-@if config.$template_include_cssHeadings {
+@if config.$template_cssHeadings {
     /* # ASTRO LAYOUT
      * ======================================================================== */
 }
 
-@if config.$template_print_astro_bodyGrid {
+@if map.get(config.$template_styles, astro, bodyGrid) {
     %nav {
         ol,
         ul {
@@ -24,7 +26,7 @@
         }
     }
 
-    @if config.$template_include_cssHeadings {
+    @if config.$template_cssHeadings {
         /* # ASTRO LAYOUT - BODY GRID SUPPORT
          * ======================================================================== */
     }

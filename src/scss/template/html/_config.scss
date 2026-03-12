@@ -10,8 +10,24 @@
 
     $selector_root: 'html' !default,
 
-    $template_print_normalize: true !default,
-    $template_print_utils: true !default,
+    $template_utils: true !default,
+
+    $template_styles: (
+        normalize: true,
+    )
+    !default,
+
+    $fn_var_replaceWithValue_borderWidth: false !default,
+    $fn_var_replaceWithValue_fontSize: false !default,
+    $fn_var_replaceWithValue_lineHeight: false !default,
+    $fn_var_replaceWithValue_gap: false !default,
+    $fn_var_replaceWithValue_margin: false !default,
+    $fn_var_replaceWithValue_strokeRelative: false !default,
+    $fn_var_replaceWithValue_width: false !default,
+
+    // $fn_var_replaceWithValue_gap: false !default,
+    // $fn_var_replaceWithValue_margin: false !default,
+    // $fn_var_replaceWithValue_width: false !default
     //
      //
 );

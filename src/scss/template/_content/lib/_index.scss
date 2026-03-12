@@ -7,6 +7,7 @@
     extend-selectors-globals, extend-selectors-utils;
 
 @use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/map';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/template/lib' as lib;
@@ -80,7 +81,7 @@
         $separator: comma
     );
 
-    @if config.$template_print_siteSettingsMenu {
+    @if map.get(config.$template_styles, siteSettingsMenu) {
         $additional_optional: list.append(
             $additional_optional,
             ('.website-settings-menu', 'page-width'),
@@ -104,7 +105,7 @@
     $add_utils_optional: (),
     $allHeadingLevels: token-all-heading-levels()
 ) {
-    @if config.$template_print_globals {
+    @if config.$template_globals {
         @include extend-selectors-globals(
             $additional: $add_globals,
             $additional_optional: $add_globals_optional,
@@ -113,7 +114,7 @@
         );
     }
 
-    @if config.$template_print_utils {
+    @if config.$template_utils {
         @include extend-selectors-utils(
             $additional: $add_utils,
             $additional_optional: $add_utils_optional,

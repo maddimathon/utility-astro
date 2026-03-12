@@ -26,21 +26,21 @@
     max-width: min(var(--width-content, 36rem), 90vw);
 }
 .website-settings__content fieldset,
-.website-settings__content a.button[href],
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content input[type="button"],
 .website-settings__content input[type="reset"],
-.website-settings__content input[type="submit"] {
+.website-settings__content input[type="submit"],
+.website-settings__content a.button[href] {
     margin-top: var(--mrg-firm-300, 0.8125rem);
     margin-bottom: var(--mrg-half-300, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
 }
 .website-settings__content input,
-.website-settings__content a.button[href],
 .website-settings__content button,
-.website-settings__content [role="button"] {
+.website-settings__content [role="button"],
+.website-settings__content a.button[href] {
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
 .website-settings__content fieldset {

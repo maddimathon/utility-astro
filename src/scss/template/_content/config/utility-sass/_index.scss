@@ -5,6 +5,6 @@
 
 @forward '_pre';
 
-@forward 'lib' hide $template_extendSelectors, $template_include_cssHeadings, $template_isDefault,
-    $template_name, $template_print_docBlock, $template_print_globals, $template_print_tokens,
-    $template_print_utils, $template_slug;
+@forward 'lib' hide $template_cssHeadings, $template_docBlock, $template_extendSelectors,
+    $template_globals, $template_isDefault, $template_name, $template_slug, $template_styles,
+    $template_tokens, $template_utils;

@@ -125,12 +125,12 @@ body aside > :first-child {
 }
 
 :where(
-    body > a.button[href],
     body > button,
     body > [role="button"],
     body > input[type="button"],
     body > input[type="reset"],
-    body > input[type="submit"]
+    body > input[type="submit"],
+    body > a.button[href]
 ) {
     width: auto;
     justify-self: start;
