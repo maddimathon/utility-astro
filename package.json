@@ -43,7 +43,7 @@
     "bugs": {
         "url": "https://github.com/maddimathon/utility-astro/issues"
     },
-
+    
     "exports": {
 
         ".": {
@@ -160,10 +160,14 @@
 
     "scripts": {
         "unlink": "run-p unlink:*",
-            "unlink:sass": "rm -rf node_modules/@maddimathon/utility-sass || echo ''",
+            "unlink-ts":    "rm -rf node_modules/@maddimathon/utility-typescript || echo ''",
+            "unlink-build": "rm -rf node_modules/@maddimathon/build-utilities || echo ''",
+            "unlink:sass":  "rm -rf node_modules/@maddimathon/utility-sass || echo ''",
 
         "link": "run-p link:*",
-            "link:sass": "npm run unlink:sass && mkdir -p node_modules/@maddimathon/utility-sass && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
+            "link-ts":    "npm run unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
+            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
+            "link:sass":  "npm run unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "preinstall": "npm run unlink",
 
@@ -209,8 +213,8 @@
     
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
-        "@maddimathon/utility-sass": "~0.1.0-beta.0",
-        "@maddimathon/utility-typescript": "~2.0.0-beta.2",
+        "@maddimathon/utility-sass": "~0.1.0-alpha.41",
+        "@maddimathon/utility-typescript": "~2.0.0-beta.3",
         "astro": "^5.17.3",
         "luxon": "^3.7.2",
         "zod": "^3.25.76"
@@ -233,7 +237,7 @@
     "peerDependencies": {
         "@astrojs/prism": "^3.3.0",
         "@maddimathon/utility-sass": "~0.1.0-beta.0",
-        "@maddimathon/utility-typescript": "~2.0.0-beta.2",
+        "@maddimathon/utility-typescript": "~2.0.0-beta.3",
         "astro": "^5.16.0",
         "zod": "^3.25.76"
     },

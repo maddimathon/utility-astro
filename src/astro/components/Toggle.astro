@@ -9,7 +9,7 @@
  */
 
 /* import - types */
-import type { ElementProps } from '../../ts/00-types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -71,12 +71,11 @@ export interface ToggleProps {
     headerTag?: undefined | 'div' | 'header';
 }
 
-export interface Props
-    extends ElementProps<
-        ToggleProps,
-        'div',
-        'aria-label' | 'aria-labelledby' | 'class' | 'class:list'
-    > {}
+export interface Props extends ElementProps<
+    ToggleProps,
+    'div',
+    'aria-label' | 'aria-labelledby' | 'class' | 'class:list'
+> {}
 
 const {
     defaultOpen,
@@ -112,10 +111,9 @@ const ContainerHeader =
     headerTag ?? (Container === 'section' ? 'header' : 'div');
 ---
 
-<Container
+<div
     id={id}
     {...attributes}
-    aria-labelledby={titleID}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
 >
     <ContainerHeader
@@ -147,10 +145,11 @@ const ContainerHeader =
         }
     </ContainerHeader>
 
-    <div
+    <Container
+        aria-labelledby={titleID}
         data-toggle-content={id}
         id={contentID}
     >
         <div class='container'><slot /></div>
-    </div>
-</Container>
+    </Container>
+</div>

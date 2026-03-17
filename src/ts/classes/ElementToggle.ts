@@ -8,8 +8,6 @@
  * @license MIT
  */
 
-// import { VariableInspector } from '../../../node_modules/@maddimathon/utility-typescript/dist/classes/VariableInspector.js';
-
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
  * 
@@ -36,14 +34,26 @@ export class ElementToggle {
      * 
      * @since 0.1.0-alpha.7
      */
-    public static async init( opts?: Partial<ElementToggle.Opts> ) {
+    public static async init( opts: Partial<ElementToggle.Opts> = {} ) {
 
         window.addEventListener(
             'load',
             () => document.querySelectorAll(
                 '[data-toggle-container]'
             ).forEach(
-                ( con ) => con.id && ElementToggle.new( con as HTMLElement, opts )
+                async ( con ) => {
+
+                    if ( opts.debug ) {
+                        console.debug( 'ElementToggle.init()', { con } );
+                    }
+
+                    // returns 
+                    if ( con.id ) {
+                        return ElementToggle.new( con as HTMLElement, opts );
+                    }
+
+                    return null;
+                }
             ),
         );
     }
@@ -55,13 +65,17 @@ export class ElementToggle {
      */
     public static async new(
         container: HTMLElement | null,
-        opts?: Partial<ElementToggle.Opts>,
+        opts: Partial<ElementToggle.Opts> = {},
     ) {
         const containerID = container?.id;
 
         // returns
         if ( !container || !containerID ) {
             ElementToggle.abortNew( container );
+
+            if ( opts.debug ) {
+                console.debug( 'ElementToggle.new() - aborting; no container id', { container } );
+            }
             return null;
         }
 
@@ -72,12 +86,26 @@ export class ElementToggle {
         // returns
         if ( !allButtons.length ) {
             ElementToggle.abortNew( container );
+
+            if ( opts.debug ) {
+                console.debug( 'ElementToggle.new() - aborting; no buttons', { container, allButtons } );
+            }
             return null;
         }
 
         const primaryButton = document.querySelector(
             `[data-toggle-primary-control=${ containerID }]`
         ) as HTMLElement ?? allButtons[ 0 ];
+
+        // returns - invalid setup that won't work
+        if ( !primaryButton ) {
+            ElementToggle.abortNew( container );
+
+            if ( opts.debug ) {
+                console.debug( 'ElementToggle.new() - aborting; no primary button', { container, primaryButton, allButtons } );
+            }
+            return null;
+        }
 
         const content: HTMLElement | null = container.querySelector(
             `[data-toggle-content=${ containerID }]`
@@ -86,7 +114,15 @@ export class ElementToggle {
         // returns - invalid setup that won't work
         if ( !content ) {
             ElementToggle.abortNew( container );
+
+            if ( opts.debug ) {
+                console.debug( 'ElementToggle.new() - aborting; no content element', { container, primaryButton, allButtons, content } );
+            }
             return null;
+        }
+
+        if ( opts.debug ) {
+            console.debug( 'ElementToggle.new() - constructing', { container, primaryButton, allButtons, content } );
         }
 
         return new ElementToggle(
@@ -182,6 +218,7 @@ export class ElementToggle {
         this.opts = {
             closeWhenUntargetted: false,
             closingTime: 1800,
+            debug: false,
             openWhenTargetted: true,
             ...partialOpts,
         };
@@ -476,6 +513,13 @@ export namespace ElementToggle {
          * @default 1800
          */
         closingTime: number;
+
+        /**
+         * Outputs information to the console.
+         * 
+         * @since ___PKG_VERSION___
+         */
+        debug: boolean;
 
         /**
          * Whether toggles should open when they are the target of the url's

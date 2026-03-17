@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/00-types/index.js';
+import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -20,8 +20,8 @@ import type { GenericElementProps } from '../../ts/00-types/index.js';
 
 /* PROPS ===================================== */
 
-export interface Props
-    extends Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> {
+// prettier-ignore
+export interface Props extends Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> {
     id: string;
     buttonID: string;
 

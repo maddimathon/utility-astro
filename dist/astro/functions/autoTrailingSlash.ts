@@ -14,7 +14,7 @@ import {
 
 import {
     trailingSlash,
-} from '../../ts/01-functions/index.js';
+} from '../../ts/functions/index.js';
 
 /**
  * Auto-applies or removes a trailing slash for the given path depending on the

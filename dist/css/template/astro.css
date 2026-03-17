@@ -1322,25 +1322,6 @@ ul ul,
 .table-of-contents > ol ul {
     margin-top: 0;
 }
-ol ol ol,
-ol ol ul,
-ol ul ol,
-ol ul ul,
-ul ol ol,
-.table-of-contents [data-toggle-content] > .container ol ol ol,
-.table-of-contents > ol ol ol,
-ul ol ul,
-.table-of-contents [data-toggle-content] > .container ol ol ul,
-.table-of-contents > ol ol ul,
-ul ul ol,
-.table-of-contents [data-toggle-content] > .container ol ul ol,
-.table-of-contents > ol ul ol,
-ul ul ul,
-.table-of-contents [data-toggle-content] > .container ol ul ul,
-.table-of-contents > ol ul ul {
-    font-size: var(--fs-smaller-1, 0.9375rem);
-}
-
 ol {
     list-style-type: decimal;
 }

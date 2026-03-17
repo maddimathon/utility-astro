@@ -20,7 +20,7 @@
  * @license MIT
  */
 
-export * from './00-types/index.js';
+export * from './types/index.js';
 
-export * from './01-functions/index.js';
-export * from './02-classes/index.js';
+export * from './functions/index.js';
+export * from './classes/index.js';

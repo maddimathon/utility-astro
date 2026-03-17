@@ -7,7 +7,6 @@
  * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
-// import { VariableInspector } from '../../../node_modules/@maddimathon/utility-typescript/dist/classes/VariableInspector.js';
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
  *
@@ -31,33 +30,62 @@ export class ElementToggle {
      *
      * @since 0.1.0-alpha.7
      */
-    static async init(opts) {
-        window.addEventListener('load', () => document.querySelectorAll('[data-toggle-container]').forEach((con) => con.id && ElementToggle.new(con, opts)));
+    static async init(opts = {}) {
+        window.addEventListener('load', () => document.querySelectorAll('[data-toggle-container]').forEach(async (con) => {
+            if (opts.debug) {
+                console.debug('ElementToggle.init()', { con });
+            }
+            // returns 
+            if (con.id) {
+                return ElementToggle.new(con, opts);
+            }
+            return null;
+        }));
     }
     /**
      * Initiates a single instance asynchronously.
      *
      * @since 0.1.0-alpha.7
      */
-    static async new(container, opts) {
+    static async new(container, opts = {}) {
         const containerID = container?.id;
         // returns
         if (!container || !containerID) {
             ElementToggle.abortNew(container);
+            if (opts.debug) {
+                console.debug('ElementToggle.new() - aborting; no container id', { container });
+            }
             return null;
         }
         const allButtons = document.querySelectorAll(`[data-toggle-primary-control=${containerID}], [data-toggle-control=${containerID}]`);
         // returns
         if (!allButtons.length) {
             ElementToggle.abortNew(container);
+            if (opts.debug) {
+                console.debug('ElementToggle.new() - aborting; no buttons', { container, allButtons });
+            }
             return null;
         }
         const primaryButton = document.querySelector(`[data-toggle-primary-control=${containerID}]`) ?? allButtons[0];
+        // returns - invalid setup that won't work
+        if (!primaryButton) {
+            ElementToggle.abortNew(container);
+            if (opts.debug) {
+                console.debug('ElementToggle.new() - aborting; no primary button', { container, primaryButton, allButtons });
+            }
+            return null;
+        }
         const content = container.querySelector(`[data-toggle-content=${containerID}]`);
         // returns - invalid setup that won't work
         if (!content) {
             ElementToggle.abortNew(container);
+            if (opts.debug) {
+                console.debug('ElementToggle.new() - aborting; no content element', { container, primaryButton, allButtons, content });
+            }
             return null;
+        }
+        if (opts.debug) {
+            console.debug('ElementToggle.new() - constructing', { container, primaryButton, allButtons, content });
         }
         return new ElementToggle({
             container,
@@ -119,6 +147,7 @@ export class ElementToggle {
         this.opts = {
             closeWhenUntargetted: false,
             closingTime: 1800,
+            debug: false,
             openWhenTargetted: true,
             ...partialOpts,
         };

@@ -660,17 +660,6 @@ ul ol,
 ul ul {
     margin-top: 0;
 }
-ol ol ol,
-ol ol ul,
-ol ul ol,
-ol ul ul,
-ul ol ol,
-ul ol ul,
-ul ul ol,
-ul ul ul {
-    font-size: 0.9375rem;
-}
-
 ol {
     list-style-type: decimal;
 }

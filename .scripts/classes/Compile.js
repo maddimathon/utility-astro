@@ -74,13 +74,6 @@ export class Compile extends CompileStage {
     }
 
     /**
-     * @type {( ( ...params: Parameters<typeof this.fs.write> ) => Promise<ReturnType<typeof this.fs.write>> )}
-     * @protected
-     */
-    // @ts-expect-error
-    writeAsync = this.fs.write;
-
-    /**
      * @protected
      */
     async templates() {
@@ -94,4 +87,11 @@ export class Compile extends CompileStage {
             },
         );
     }
+
+    /**
+     * @type {( ( ...params: Parameters<typeof this.fs.write> ) => Promise<ReturnType<typeof this.fs.write>> )}
+     * @protected
+     */
+    // @ts-expect-error
+    writeAsync = this.fs.write;
 }

@@ -28,7 +28,7 @@ import { DateTime } from 'luxon';
 import { mergeArgs, slugify } from '@maddimathon/utility-typescript';
 import { FeatureCheck } from '@maddimathon/utility-sass';
 
-import { mapToObject } from '../../ts/01-functions/mapToObject.js';
+import { mapToObject } from '../../ts/functions/mapToObject.js';
 import { currentPagePath } from '../functions/index.js';
 import Toggle_Scripts from '../support/Toggle_Scripts.astro';
 
@@ -383,7 +383,7 @@ const settings = p.settings && {
                 ) : <!-- SLOT: "footer" (empty) / --> }
 
                 { ( p.footer.designedBy || p.footer.copyright ) && (
-                    <p class="disclaimer">
+                    <p class="site-footer__disclaimer">
                         
                         { p.footer.copyright && (
                             <span class="copyright"><span class="copyright__copy">&copy;</span> <Fragment set:text={formatted.footer.year} /> {

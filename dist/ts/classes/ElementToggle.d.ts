@@ -142,6 +142,12 @@ export declare namespace ElementToggle {
          */
         closingTime: number;
         /**
+         * Outputs information to the console.
+         *
+         * @since 0.1.0-beta.0.draft
+         */
+        debug: boolean;
+        /**
          * Whether toggles should open when they are the target of the url's
          * anchor.
          *
