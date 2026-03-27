@@ -3,5 +3,5 @@
 /// @since 0.1.0-alpha
 ///
 
-// @forward '_pre';
-@forward 'lib';
+@forward '_pre';
+@forward 'lib' hide $mx_tokens_atProperty_additional;

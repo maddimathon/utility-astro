@@ -22,20 +22,17 @@
         ('.layout_sidebar-left', 'layout-sidebar-left'),
         ('.layout_sidebar-right', 'layout-sidebar-right'),
         ('.content-header', 'content-header'),
-        ('.page-subtitle', 'page-subtitle'),
-        ((pre, table), 'callout-width')
+        ('.page-subtitle', 'page-subtitle')
     );
 
     $sels: list.join(
         $sels,
         (
-            (('.subgrid', '.body-subgrid'), 'body-subgrid'),
-            // (('.subgrid', '.main-subgrid'), 'main-subgrid'),
+            (('.body-subgrid'), 'body-subgrid'),
             ('.site-width', 'site-width'),
             ('.page-width', 'page-width'),
             ('.content-width', 'content-width'),
-            ('.sidebar-width', 'sidebar-width'),
-            ('.callout-width', 'callout-width')
+            ('.sidebar-width', 'sidebar-width')
         ),
         $separator: comma
     );

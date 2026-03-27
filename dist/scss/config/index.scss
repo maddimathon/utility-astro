@@ -5,6 +5,8 @@
 
 @forward 'utility-sass';
 
+@use 'utility-sass' as utils;
+
 ///
 /// Additional selectors for skip links (since they don't get extended by
 /// default).
@@ -12,3 +14,8 @@
 /// @since 0.1.0-alpha.14
 ///
 $selectors_skipLinks_extra: () !default;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$mx_prop_useCustom_gridColumn: utils.$include_html !default;

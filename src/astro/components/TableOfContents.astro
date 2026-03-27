@@ -60,9 +60,9 @@ export interface TableOfContents_Props extends NavMenu_SemiProps {
     /**
      * The base display heading level for this TOC, if any.
      * 
-     * @default false
+     * @default undefined
      */
-    displayHeading?: false | number | undefined;
+    displayHeading?: number | undefined;
 
     /**
      * Type of list tag used for display (tables of content should always be
@@ -83,7 +83,7 @@ const {
     class: classList = [],
     convertHrefStringsToAbsolute = null,
     defaultOpen,
-    displayHeading = false,
+    displayHeading,
     heading,
     id = 'toc',
     listTag,

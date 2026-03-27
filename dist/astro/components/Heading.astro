@@ -70,8 +70,10 @@ const displayHeading =
         ? Math.round(numDisplayHeadingRaw)
         : numDisplayHeadingRaw;
 
+const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
+
 const Tag =
-    heading >= minimum && heading < 7
+    headingIsMoreThanMinimum && heading < 7
         ? (`h${heading as 2 | 3 | 4 | 5 | 6}` as const)
         : ('p' as const);
 
@@ -81,7 +83,9 @@ const headingClasses =
             ? 'unstyled-heading'
             : heading > 6
               ? `h${heading}`
-              : ''
+              : headingIsMoreThanMinimum
+                ? ''
+                : 'unstyled-heading'
         : displayHeading === false
           ? 'unstyled-heading'
           : `h${displayHeading}`;

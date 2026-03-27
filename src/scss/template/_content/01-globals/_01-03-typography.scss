@@ -1,0 +1,33 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'pkg:@maddimathon/utility-sass/map';
+
+@use '../config';
+
+@use '../../../lib' as *;
+
+@if config.$template_cssHeadings {
+    /* # ASTRO GLOBALS - Typography
+     * ======================================================================== */
+}
+
+@if map.get(config.$template_styles, blockquote) {
+    %blockquote {
+        @include snippet-blockquote(
+            $display: if(
+                    map.get(config.$template_styles, astro, bodyGrid),
+                    flex,
+                    if(map.get(config.$template_styles, bodyFlow), flex, block)
+                )
+        );
+    }
+}
+
+@if map.get(config.$template_styles, pre) {
+    %pre {
+        @include snippet-pre;
+    }
+}

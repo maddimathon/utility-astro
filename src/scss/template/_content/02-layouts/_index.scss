@@ -9,12 +9,12 @@
 
 @use '../../../lib' as *;
 
-@if config.$template_cssHeadings {
-    /* # ASTRO LAYOUT
-     * ======================================================================== */
-}
-
 @if map.get(config.$template_styles, astro, bodyGrid) {
+    @if config.$template_cssHeadings {
+        /* # ASTRO LAYOUT
+         * ======================================================================== */
+    }
+
     %nav {
         ol,
         ul {

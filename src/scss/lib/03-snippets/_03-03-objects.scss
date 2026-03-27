@@ -25,8 +25,7 @@
     $verticalAlign: middle
 ) {
     %icon {
-        @include cx-prop(display, $display);
-        display: #{$display};
+        @include prop-display($display);
 
         height: #{$iconSize};
         height: calc($iconSize * do-var(icon-size--font-multiplier, 1));
@@ -43,8 +42,7 @@
         }
 
         > svg {
-            @include cx-prop(display, $display_svg);
-            display: #{$display_svg};
+            @include prop-display($display_svg);
             margin: #{$margin_svg};
             padding: #{$padding_svg};
 

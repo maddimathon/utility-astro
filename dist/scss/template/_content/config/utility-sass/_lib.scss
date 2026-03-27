@@ -3,6 +3,8 @@
 /// @since 0.1.0-alpha
 ///
 
+@use 'sass:map';
+
 @use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/template/config' with (
@@ -12,7 +14,13 @@
     $template_globals: pre.$template_globals,
     $template_isDefault: true,
     $template_name: 'Default',
-    $template_styles: pre.$template_styles,
+    $template_styles: map.merge(
+            pre.$template_styles,
+            (
+                blockquote: false,
+                pre: false,
+            )
+        ),
     $template_slug: 'default',
     $template_tokens: pre.$template_tokens,
     $template_utils: pre.$template_utils,

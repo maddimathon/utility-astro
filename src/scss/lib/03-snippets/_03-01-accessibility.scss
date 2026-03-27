@@ -1,6 +1,8 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+///
 /// @since 0.1.0-alpha.14
+/// @since ___PKG_VERSION___ — Renamed from 03--skip-links to 03-01-accessibility.
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
@@ -13,7 +15,21 @@
 // @use '../../tokens';
 
 @use '../01-functions' as *;
-// @use '../02-mixins' as *;
+@use '../02-mixins' as *;
+
+///
+/// Utility class support.
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Moved from own file to 03-01-accessibility.
+///
+@mixin snippet-forced-colors-mode-only {
+    display: none !important;
+
+    @include forced-colors {
+        display: #{do-var(display, block)} !important;
+    }
+}
 
 ///
 /// @since 0.1.0-alpha.14
@@ -34,7 +50,7 @@
     }
 
     #{$skipSelectors} {
-        display: block;
+        @include prop-display(block);
         position: fixed;
         margin: 0;
 

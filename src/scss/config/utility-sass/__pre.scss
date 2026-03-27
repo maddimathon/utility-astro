@@ -1,0 +1,22 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'sass:map';
+@use 'sass:string';
+
+///
+/// @since ___PKG_VERSION___
+///
+$mx_tokens_atProperty_additional: () !default;
+$mx_tokens_atProperty_additional: map.merge(
+    (
+        grid-column: (
+            syntax: '*',
+            inherits: true,
+            initial-value: string.unquote('1 / 1'),
+        ),
+    ),
+    $mx_tokens_atProperty_additional
+);

@@ -1,0 +1,19 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use 'pkg:@maddimathon/utility-sass/map';
+
+@use '../config';
+
+@use '../../../lib' as *;
+
+@if map.get(config.$template_styles, skipLinks) {
+    @if config.$template_cssHeadings {
+        /* # ASTRO - SKIP LINKS
+         * ======================================================================== */
+    }
+
+    @include snippet-support-skip-links;
+}

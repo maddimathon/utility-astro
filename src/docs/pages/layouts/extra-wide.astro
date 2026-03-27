@@ -28,5 +28,5 @@ import DocsPage from '../../layouts/DocsPage.astro';
     layout='extra-wide'
 >
     <!-- <LoremIpsum /> -->
-    <LoremIpsum mode='library' />
+    <LoremIpsum mode={import.meta.env.DEV ? 'fancy' : 'library'} />
 </DocsPage>

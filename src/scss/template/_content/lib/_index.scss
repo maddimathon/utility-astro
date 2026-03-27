@@ -26,7 +26,7 @@
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
-    $additional_optional: list.append($additional_optional, (nav));
+    $additional_optional: list.join($additional_optional, (dl, form, nav));
 
     $additional: list.append(
         $additional,
@@ -52,6 +52,11 @@
 ) {
     //
     $additional: list.append($additional, ('.icon', 'icon'));
+
+    $additional_optional: list.append(
+        $additional_optional,
+        (('.display-contents'), 'display-contents')
+    );
 
     $additional_optional: list.join(
         $additional_optional,

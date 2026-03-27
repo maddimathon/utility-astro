@@ -17,6 +17,7 @@ import { arrayUnique } from '@maddimathon/utility-typescript';
 /* import - values */
 
 /* import - components */
+import Table from './Table.astro';
 import TableOfContents from './TableOfContents.astro';
 import CodeBlock from './CodeBlock.astro';
 import Heading from './Heading.astro';
@@ -67,6 +68,11 @@ export interface LoremIpsum_DisplaySettings {
      */
     code?: boolean;
 
+/**
+ * @since ___PKG_VERSION___
+ */
+codeLong?: boolean;
+
     /**
      * @since 0.1.0-alpha.20
      */
@@ -108,6 +114,11 @@ export interface LoremIpsum_DisplaySettings {
      * @since 0.1.0-alpha.20
      */
     table?: boolean;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+     tableLong?: boolean;
 
     /**
      * @since 0.1.0-alpha.20
@@ -295,6 +306,7 @@ export function getLoremIpsumMode( _props: Props ): LoremIpsum_DisplaySettings_P
         buttonTypes: isFancy && !abbreviated,
         buttonVariationsAll: isLibrary && ( isFancy || !abbreviated ),
         code: isLibrary && !abbreviated,
+        codeLong: isFancy && !abbreviated,
         disabledButton: isLibrary && !abbreviated,
         forms: isFancy && !abbreviated,
         formsLong: isFancy && !abbreviated,
@@ -302,6 +314,7 @@ export function getLoremIpsumMode( _props: Props ): LoremIpsum_DisplaySettings_P
         listsMedium: isLibrary,
         listsLong: isFancy && !abbreviated,
         table: isFancy && !abbreviated,
+        tableLong: isFancy && !abbreviated,
         textMedium: isLibrary && ( isFancy || !abbreviated ),
         textLong: isFancy && !abbreviated,
         textPage: !abbreviated,
@@ -371,9 +384,29 @@ export const tableOfContentIds = getLoremIpsumIds();
 
 const code = {
 
+    css: [
+        'body {',
+        '    display: grid;',
+        '    position: relative;',
+        '',
+        '    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);',
+        '    grid-auto-rows: auto;',
+        '    grid-auto-flow: column;',
+        '',
+        '    justify-content: center;',
+        '    justify-items: stretch;',
+        '    align-content: start;',
+        '    align-items: start;',
+        '',
+        '    gap: 0;',
+        '',
+        '    margin-inline: 0;',
+        '}',
+    ].join('\n'),
+
     html: [
         '<p class="title">Title Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
-        // '<p class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
+        '<p class="h1">Heading 1 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
         '<p class="h2">Heading 2 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
         '<p class="h3">Heading 3 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
         '<p class="h4">Heading 4 Maecenas Facilisis Sollicitudin Nisi, Eget Pellentesque Dui Rhoncus Condimentum</p>',
@@ -491,12 +524,20 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
 
         { ifDisplay.headingsList && (
             <hr />
-            <p class="page-title | loremipsum-heading-sample" id={tableOfContentIds.headings.id}>Title (.page-title) Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
+            <Heading
+                class="page-title | loremipsum-heading-sample"
+                displayHeading={1}
+                heading={0}
+                id={tableOfContentIds.headings.id}
+            >Title (.page-title) Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
+
             <Fragment>
-                { ifDisplay.headingLevels.map( (num) => ( num > 1 ) && (
-                    <p
-                        class:list={`h${num} | loremipsum-heading-sample`}
-                    >Heading {num} Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</p>
+                { ifDisplay.headingLevels.map( (num) => (
+                    <Heading
+                        class="loremipsum-heading-sample"
+                        displayHeading={num}
+                        heading={0}
+                    >Heading {num} Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
                 ) ) }
             </Fragment>
         ) }
@@ -508,16 +549,13 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
         { ifDisplay.toggleBlocks ? (
             <hr />
             
-            <Toggle
-                id={tableOfContentIds.toggles.id}
-                heading={false}
-            >
+            <Toggle id={tableOfContentIds.toggles.id}>
                 <p>Boo!</p>
                 <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
             </Toggle>
+            
             <Toggle
                 id={`${tableOfContentIds.toggles.id}-open-default`}
-                heading={false}
                 defaultOpen={true}
             >
                 <Fragment slot='button'>I am open by default</Fragment>
@@ -525,8 +563,9 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             </Toggle>
 
             <Fragment>{ ifDisplay.headingLevels.map( heading => <Toggle
+                displayHeading={heading}
+                heading={0}
                 id={`${tableOfContentIds.toggles.id}-heading${heading}`}
-                heading={heading}
             >
                 <Fragment
                     slot='button'
@@ -640,17 +679,17 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
         ) }
 
-        <ol id="example-list-mixed">
+        <ul id="example-list-mixed">
             <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
             <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
-                <ul>
+                <ol>
                     <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
                     <li>Morbi tempus rhoncus efficitur.
-                        <ol>
+                        <ul>
                             <li>In pulvinar semper velit.</li>
                             <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
                             <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
-                                <ul>
+                                <ol>
                                     <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
                                         { ifDisplay.listsMedium && <ol>
                                             <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
@@ -681,13 +720,13 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                                 </ol>
                             </li>
                             <li>Duis hendrerit eu lacus at egestas.</li>
-                        </ol>
+                        </ul>
                     </li>
                     <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
                 </ol>
             </li>
             <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
-        </ol>
+        </ul>
 
         <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
 
@@ -747,12 +786,23 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                 <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
                 <cite>This is the citation (cite) for this quote.</cite>
             </blockquote>
-            <p>Look!  It's <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
         ) }
 
         { ifDisplay.code ? (
-            <CodeBlock lang="php" children={code.php} />
-            <CodeBlock lang="html" children={code.html} />
+            <p>Look!  It’s <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
+           <Fragment>
+                <CodeBlock lang="php" children={code.php} />
+                { ifDisplay.codeLong && (
+                    <CodeBlock lang="plaintext" children={'this block has plaintext language applied!\n\nLook!  It’s `some code`!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.'} />
+                    <CodeBlock lang="php" class="content-width" children={'// this should be content-width\n\n' + code.php} />
+                    <CodeBlock lang="php" class="page-width" children={'// this should be page-width\n\n' + code.php} />
+                ) }
+                <CodeBlock lang="html" children={code.html} />
+                { ifDisplay.codeLong && (
+                    <CodeBlock lang="css" class="page-width" children={'/* this should be page-width */\n\n' + code.css} />
+                    <CodeBlock lang="css" class="site-width" children={'/* this should be site-width */\n\n' + code.css} />
+                ) }
+           </Fragment>
         ) : '' }
 
         { ifDisplay.textPage && <p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p> }
@@ -765,23 +815,45 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
         <p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p> }
 
         { ifDisplay.table && (
-            <div class="table-wrapper"><table>
+            <Table>
                 <tr>
                     <th>Table Heading 1</th>
                     <th>Table Heading 2</th>
-                    <th>Table Heading 3</th>
+                    {/* <th>Table Heading 3</th> */}
                 </tr>
                 <tr>
-                    <td>Pellentesque in mauris neque. Vivamus rutrum sodales eros, quis cursus leo ultrices eget.</td>
-                    <td>Sed ullamcorper eu sapien vitae elementum. </td>
-                    <td>Praesent mollis efficitur odio vitae pretium.</td>
+                    <td>Pellentesque in mauris.</td>
+                    <td>Sed ullamcorper eu </td>
+                    {/* <td>Praesent mollis pretium.</td> */}
                 </tr>
                 <tr>
-                    <td>Quisque venenatis ac velit venenatis scelerisque.</td>
-                    <td>Ut eros lacus, mattis sit amet pretium a, fermentum et dolor. Cras eu semper massa.</td>
-                    <td>Nam congue sagittis scelerisque. Etiam et diam pharetra, tempor ex sit amet, scelerisque est.</td>
+                    <td>Quisque venenatis ac.</td>
+                    <td>Ut eros lacus, mattis sit.</td>
+                    {/* <td>Nam congue sagittis.</td> */}
                 </tr>
-            </table></div>
+            </Table>
+
+            <Fragment>
+                { ifDisplay.tableLong && (
+                    <Table>
+                        <tr>
+                            <th>Table Heading 1</th>
+                            <th>Table Heading 2</th>
+                            <th>Table Heading 3</th>
+                        </tr>
+                        <tr>
+                            <td>Pellentesque in mauris neque. Vivamus rutrum sodales eros, quis cursus leo ultrices eget.</td>
+                            <td>Sed ullamcorper eu sapien vitae elementum. </td>
+                            <td>Praesent mollis efficitur odio vitae pretium.</td>
+                        </tr>
+                        <tr>
+                            <td>Quisque venenatis ac velit venenatis scelerisque.</td>
+                            <td>Ut eros lacus, mattis sit amet pretium a, fermentum et dolor. Cras eu semper massa.</td>
+                            <td>Nam congue sagittis scelerisque. Etiam et diam pharetra, tempor ex sit amet, scelerisque est.</td>
+                        </tr>
+                    </Table>
+                ) }
+            </Fragment>
         ) }
 
         { ifDisplay.textPage && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }

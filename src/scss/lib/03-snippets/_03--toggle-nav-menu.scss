@@ -13,7 +13,7 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
-@use '03--content' as *;
+@use '03-02-layouts' as *;
 
 // prettier-ignore
 $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
@@ -60,13 +60,13 @@ $_titleBorderWidth_half: var-border-width('100');
 
                     .toggle-title,
                     [data-toggle-content] {
-                        grid-column: 1 / -1;
+                        @include prop-grid-column('1 / -1');
 
                         gap: 0;
                     }
 
                     [data-toggle-content] {
-                        grid-column: page-start / page-end;
+                        @include prop-grid-column(page-start / page-end);
                         position: absolute;
                         top: 0;
                         justify-content: center;

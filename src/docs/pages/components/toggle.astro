@@ -37,7 +37,7 @@ const exampleMenuIds_entries = [
                     label: `Example Heading ${num}`,
                     id: `toggle-ex-heading-${num}`,
                 },
-            ] as const
+            ] as const,
     ),
 ] as const;
 
@@ -74,15 +74,12 @@ const tocMenu: ComponentProps<typeof TableOfContents>['menu'] = [
 
     <hr />
 
-    <ToggleComponent
-        id={exampleMenuIds.one.id}
-        heading={false}
-    >
+    <ToggleComponent id={exampleMenuIds.one.id}>
         <p>Boo!</p>
     </ToggleComponent>
+
     <ToggleComponent
         id={exampleMenuIds.two.id}
-        heading={false}
         defaultOpen={true}
     >
         <Fragment slot='button'>I am open by default</Fragment>
@@ -92,8 +89,9 @@ const tocMenu: ComponentProps<typeof TableOfContents>['menu'] = [
     {
         headingLevels.map((heading) => (
             <ToggleComponent
+                displayHeading={heading}
+                heading={0}
                 id={exampleMenuIds[`heading-${heading}`].id}
-                heading={heading}
             >
                 <Fragment
                     slot='button'

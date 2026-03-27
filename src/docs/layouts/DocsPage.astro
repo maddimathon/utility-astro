@@ -40,12 +40,14 @@ const _defaultProps = {
     footer: {
         copyright: {
             html:
-                '<a href="https://www.maddimathon.com">Maddi Mathon</a>' +
+                'by <a href="https://www.maddimathon.com/web" target="_blank">Maddi Mathon</a>' +
                 ' | ' +
                 '<a href="' +
                 absoluteInternalURL(Astro.url, 'license') +
-                '">MIT license</a>',
-            // owner: 'Maddi Mathon',
+                '">MIT license</a>' +
+                ' | ' +
+                'Human-built without the use of generative AI.',
+
             year: 2025,
         },
     },

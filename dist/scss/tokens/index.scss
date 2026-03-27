@@ -4,3 +4,19 @@
 ///
 
 @forward 'utility-sass';
+
+@use 'pkg:@maddimathon/utility-sass/map';
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$contentGridAlignment: () !default;
+$contentGridAlignment: map.merge(
+    (
+        justify-content: center,
+        justify-items: stretch,
+        align-content: start,
+        align-items: start,
+    ),
+    map.flatten($contentGridAlignment)
+);

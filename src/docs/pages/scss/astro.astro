@@ -26,5 +26,10 @@ import DocsPage from '../../layouts/DocsPage.astro';
     title={['Astro', 'Sass Templates']}
     subtitle='This page demonstrates the styles included with the `astro` scss template.'
 >
-    <LoremIpsum mode='library' />
+    <LoremIpsum
+        mode='fancy'
+        displaySettings={{
+            formsLong: true,
+        }}
+    />
 </DocsPage>

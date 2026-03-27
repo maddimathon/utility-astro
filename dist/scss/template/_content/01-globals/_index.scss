@@ -1,19 +1,11 @@
 ///
 /// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft
 ///
 
-@use 'sass:map';
-
-@use '../config';
-
-@use '../../../lib' as *;
-
-@if map.get(config.$template_styles, skipLinks) {
-    @if config.$template_cssHeadings {
-        /* # ASTRO - SKIP LINKS
-         * ======================================================================== */
-    }
-
-    @include snippet-support-skip-links;
-}
+@forward '01-01-accessibility';
+// @forward '01-02-objects';
+@forward '01-03-typography';
+// @forward '01-04-lists';
+@forward '01-05-forms';
+@forward '01-06-tables';

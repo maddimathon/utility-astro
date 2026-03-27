@@ -4,3 +4,23 @@
 ///
 
 @forward 'pkg:@maddimathon/utility-sass/02-mixins';
+
+@use '../../config';
+
+@use 'pkg:@maddimathon/utility-sass/02-mixins' as utils;
+
+///
+/// Sets grid-column custom and normal properties.
+///
+/// @param {any} $value
+///
+/// @since ___PKG_VERSION___
+///
+@mixin prop-grid-column($value, $args...) {
+    @include utils.prop(
+        grid-column,
+        $value,
+        $useCustom: config.$mx_prop_useCustom_gridColumn,
+        $args...
+    );
+}

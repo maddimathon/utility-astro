@@ -8,7 +8,7 @@
 [data-toggle-content] > .container,
 [data-toggle-container] {
     --display: flex;
-    display: flex;
+    display: var(--display, flex);
     position: relative;
     flex-direction: column;
     justify-content: start;
@@ -151,7 +151,8 @@
 
 .toggle-icon {
     --icon-size: 1.125em;
-    display: inline-block;
+    --display: inline-block;
+    display: var(--display, inline-block);
     vertical-align: sub;
     padding-bottom: var(--stroke-relative-100, 0.03125em);
     padding-right: var(--border-width-200, 0.125rem);
@@ -167,7 +168,8 @@
 }
 
 [data-toggle-content] {
-    display: grid;
+    --display: grid;
+    display: var(--display, grid);
     position: relative;
     justify-content: stretch;
     justify-items: stretch;
@@ -196,7 +198,7 @@
 :where(.js) .toggle-title > .page-title,
 :where(.js) [data-toggle-container] {
     --display: grid;
-    display: grid;
+    display: var(--display, grid);
     --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
         1fr;
     grid-template-columns: var(--grid-template-columns--toggle);
@@ -206,7 +208,6 @@
     justify-items: stretch;
     align-content: start;
     align-items: start;
-    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
     gap: 0 var(--mrg-firm-200, 0.5rem);
 }
 
@@ -342,7 +343,8 @@
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
     content: "";
     content: ""/"";
-    display: block;
+    --display: block;
+    display: var(--display, block);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -404,11 +406,13 @@
 }
 
 :where(.js) [data-toggle-control] .toggle-icon {
-    grid-column: icon;
+    --grid-column: icon;
+    grid-column: var(--grid-column, icon);
 }
 :where(.js) [data-toggle-control] .toggle-icon,
 :where(.js) [data-toggle-control] .toggle-icon svg {
-    display: block;
+    --display: block;
+    display: var(--display, block);
 }
 :where(.js) [data-toggle-control] .toggle-icon svg #a,
 :where(.js) [data-toggle-control] .toggle-icon svg #b {
@@ -436,10 +440,12 @@
     padding-bottom: 0;
 }
 :where(.js) .toggle-control-inner {
-    grid-column: content;
+    --grid-column: content;
+    grid-column: var(--grid-column, content);
 }
 :where(.js) [data-toggle-content] {
-    grid-column: 1/-1;
+    --grid-column: 1 / -1;
+    grid-column: var(--grid-column, 1 / -1);
     grid-row: 2/2;
     grid-template-rows: 0fr;
     margin: 0;
@@ -451,8 +457,9 @@
 }
 :where(.js) [data-toggle-content] > .container {
     --display: flex;
-    display: flex;
-    grid-column: 1/-1;
+    display: var(--display, flex);
+    --grid-column: 1 / -1;
+    grid-column: var(--grid-column, 1 / -1);
     padding: 0 var(--mrg-firm-300, 0.8125rem);
     overflow: auto;
     max-height: 100%;
@@ -484,7 +491,8 @@
 :where(.js)
     [data-toggle-container="closing"]
     [data-toggle-control][data-toggle-control-backdrop] {
-    display: var(--display, block);
+    --display: var(--display, block);
+    display: var(--display, var(--display, block));
 }
 :where(.js)
     [data-toggle-container="open"]

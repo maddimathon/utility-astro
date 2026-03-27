@@ -43,8 +43,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
 ) {
     @at-root %_flex-contents-container {
-        @include cx-prop(display, flex);
-        display: flex;
+        @include prop-display(flex);
         position: relative;
         flex-direction: column;
 
@@ -130,7 +129,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     .toggle-icon {
         @include cx-prop(icon-size, 1.125em);
-        display: inline-block;
+        @include prop-display(inline-block);
 
         vertical-align: sub;
         padding-bottom: #{var-stroke-relative('100')};
@@ -151,7 +150,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
     }
 
     [data-toggle-content] {
-        display: grid;
+        @include prop-display(grid);
         position: relative;
 
         justify-content: stretch;
@@ -170,8 +169,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     @include feature-check.js {
         @at-root %_toggle-container-grid-basics {
-            @include cx-prop(display, grid);
-            display: grid;
+            @include prop-display(grid);
 
             @include cx-prop(
                 grid-template-columns--toggle,
@@ -292,7 +290,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 &::after {
                     content: '';
                     content: '' / '';
-                    display: block;
+                    @include prop-display(block);
                     position: absolute;
 
                     top: 0;
@@ -325,11 +323,11 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
 
             .toggle-icon {
-                grid-column: icon;
+                @include prop-grid-column(icon);
 
                 &,
                 svg {
-                    display: block;
+                    @include prop-display(block);
                 }
 
                 svg #a,
@@ -348,13 +346,13 @@ $_defaultHeadingSelectors_greaterThan6: ();
         }
 
         .toggle-control-inner {
-            grid-column: content;
+            @include prop-grid-column(content);
         }
 
         [data-toggle-content] {
             @extend %toggle-container-subgrid;
 
-            grid-column: 1 / -1;
+            @include prop-grid-column('1 / -1');
             grid-row: 2 / 2;
 
             grid-template-rows: 0fr;
@@ -371,9 +369,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
             /// BLOCK ///
 
             > .container {
-                @include cx-prop(display, flex);
-                display: flex;
-                grid-column: 1 / -1;
+                @include prop-display(flex);
+                @include prop-grid-column('1 / -1');
 
                 padding: 0 #{var-mrg-firm('300')};
 
@@ -421,7 +418,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             [data-toggle-control] {
                 &[data-toggle-control-backdrop] {
-                    display: #{do-var(display, block)};
+                    @include prop-display(do-var(display, block));
                 }
             }
         }

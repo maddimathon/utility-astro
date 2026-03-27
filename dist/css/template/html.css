@@ -205,7 +205,8 @@ Interactive
 Add the correct display in Chrome and Safari.
 */
 summary {
-    display: list-item;
+    --display: list-item;
+    display: var(--display, list-item);
 }
 
 /*! end of modern-normalize */
@@ -262,6 +263,15 @@ pre {
 /* #endregion Normalize */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+@property --display {
+    syntax: "*";
+    inherits: false;
+}
+@property --grid-column {
+    syntax: "*";
+    inherits: true;
+    initial-value: 1 / 1;
+}
 /* #region Tokens - System Colours */
 :where(html) {
     --sys-clr-background: Canvas;
@@ -450,7 +460,7 @@ pre {
 html {
     --width-content: 36rem;
     --width-sidebar: 18rem;
-    --width-callout: 29.25rem;
+    --width-callout: 26.25rem;
     --width-page: 60rem;
     --width-page: calc(
         var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
@@ -700,7 +710,8 @@ body {
 }
 
 body {
-    display: flex;
+    --display: flex;
+    display: var(--display, flex);
     flex-direction: column;
     justify-content: start;
     align-items: center;
@@ -710,29 +721,19 @@ body {
     margin-left: var(--gap-inline-layout, 8vw);
     margin-right: var(--gap-inline-layout, 8vw);
 }
-:where(body > *) {
+:where(body) > :where(*) {
     width: min(var(--width-page, 60rem), 100%);
 }
 
 hr {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    margin-left: var(--gap-inline-indent, 9%);
-    margin-right: var(--gap-inline-indent, 9%);
-}
-@media (min-width: 25em) {
-    hr {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: min(var(--width-callout, 29.25rem), 80%);
-    }
-}
-hr {
-    width: 100%;
+    --display: block;
+    display: var(--display, block);
     margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: var(--mrg-firm-600, 2.25rem);
+    margin-left: var(--gap-inline-indent, 9%);
+    margin-right: var(--gap-inline-indent, 9%);
+    width: 72.92%;
+    max-width: var(--width-callout, 26.25rem);
     border: none;
     border-bottom: currentColor solid var(--border-width-200, 0.125rem);
 }
@@ -753,6 +754,11 @@ html {
     line-height: var(--line-height-400, 1.6875);
     background: var(--sys-clr-background, Canvas);
     color: var(--sys-clr-text, CanvasText);
+}
+@media (max-width: 24.99em) {
+    html {
+        hyphens: auto;
+    }
 }
 
 body {
@@ -788,7 +794,8 @@ i em em {
 
 a[href] {
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
-    display: inline;
+    --display: inline;
+    display: var(--display, inline);
     border: none;
     -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
@@ -850,111 +857,11 @@ hr + p {
     margin-top: 0;
 }
 
-blockquote {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    margin-left: var(--gap-inline-indent, 9%);
-    margin-right: var(--gap-inline-indent, 9%);
-}
-blockquote {
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-soft-600, 1.625rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
-    );
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    border-left: var(--border-width-200, 0.125rem) solid currentColor;
-}
-@media (min-width: 36em) {
-    blockquote {
-        margin-left: var(--gap-inline-indent, 9%);
-        margin-right: var(--gap-inline-indent, 9%);
-    }
-}
-blockquote > p:first-child {
-    margin-top: 0;
-}
-blockquote > cite {
-    display: block;
-    margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: 0;
-    text-align: right;
-}
-blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
-    color: currentColor;
-}
-@media (prefers-contrast: less) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
-}
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
-@media (prefers-contrast: more) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
-}
-
 code,
 kbd,
 pre,
 samp {
     position: relative;
-}
-
-pre {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-    margin-left: var(--gap-inline-indent, 9%);
-    margin-right: var(--gap-inline-indent, 9%);
-}
-pre {
-    position: relative;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: calc(
-        var(--mrg-firm-600, 2.25rem) - var(--mrg-firm-400, 1.25rem)
-    );
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
-    border: var(--border-width-100, 0.0625rem) solid currentColor;
-    max-width: min(120ch, 100%);
-    overflow: auto;
-    font-size: var(--fs-smaller-1, 0.9375rem);
-}
-pre > code {
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    width: auto;
-    max-width: 100%;
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:where(:has(> code)) {
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:where(:has(> code)) > code {
-    white-space: pre;
-    text-wrap: nowrap;
-    overflow: visible;
 }
 
 /* ## Typography - Headings ==================================== */
@@ -1594,7 +1501,9 @@ ul ul,
 .table-of-contents [data-toggle-content] > .container ol ul,
 .table-of-contents > ol ul {
     margin-top: 0;
+    margin-bottom: 0;
 }
+
 ol {
     list-style-type: decimal;
 }
@@ -1639,7 +1548,8 @@ li::marker {
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 li > a:only-child {
-    display: inline-block;
+    --display: inline-block;
+    display: var(--display, inline-block);
     vertical-align: top;
 }
 li li li {
@@ -1661,7 +1571,8 @@ li li li li em em {
 /* # GLOBALS - Forms
  * ======================================================================== */
 fieldset {
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
         var(--mrg-firm-300, 0.8125rem);
@@ -1691,7 +1602,8 @@ fieldset:active {
     border-color: var(--sys-clr-input-border-active, FieldText);
 }
 fieldset legend {
-    display: block;
+    --display: block;
+    display: var(--display, block);
 }
 fieldset > :first-child {
     margin-top: 0;
@@ -1738,7 +1650,8 @@ textarea,
 select,
 input {
     --focus-ring-outline-offset: 0.125rem;
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-200, 0.5rem);
     width: 100%;
@@ -1819,7 +1732,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-top: var(--mrg-firm-200, 0.5rem);
+    margin-top: var(--mrg-half-400, 0.4375rem);
 }
 textarea::-moz-placeholder,
 select::-moz-placeholder,
@@ -1916,7 +1829,8 @@ input[type="week"] {
 }
 input[type="checkbox"],
 input[type="radio"] {
-    display: inline-block;
+    --display: inline-block;
+    display: var(--display, inline-block);
     padding: 0;
     width: auto;
 }
@@ -1927,12 +1841,12 @@ input[type="color"] {
 }
 input[type="date"],
 input[type="datetime-local"],
-input[type="file"],
 input[type="month"],
 input[type="time"],
 input[type="week"] {
     width: auto;
 }
+
 input[type="file"] {
     padding-top: var(--mrg-soft-300, 0.5rem);
     padding-bottom: var(--mrg-soft-300, 0.5rem);
@@ -1940,6 +1854,7 @@ input[type="file"] {
     padding-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
+
 input[type="range"] {
     padding: 0;
 }
@@ -1953,9 +1868,10 @@ textarea {
 }
 
 label {
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin-top: var(--mrg-soft-400, 0.8125rem);
-    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
     font-weight: 600;
@@ -1965,11 +1881,10 @@ label {
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) {
     --display: grid;
-    display: grid;
+    display: var(--display, grid);
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
-    grid-gap: var(--mrg-soft-300, 0.5rem);
     gap: var(--mrg-soft-300, 0.5rem);
     font-weight: 400;
     line-height: var(--line-height-400, 1.6875);
@@ -1983,7 +1898,7 @@ label:has(> :where(input[type="checkbox"], input[type="radio"]))
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: var(--mrg-soft-400, 0.8125rem) var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
@@ -1998,7 +1913,8 @@ input[type="reset"],
 input[type="submit"],
 a.button[href] {
     --focus-ring-outline-offset: 0.125rem;
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
@@ -2131,7 +2047,7 @@ input[type="reset"],
 input[type="submit"],
 a.button[href] {
     --display: flex;
-    display: flex;
+    display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
@@ -2162,7 +2078,8 @@ a[disabled].button[href] {
 
 ::file-selector-button {
     --focus-ring-outline-offset: 0.125rem;
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
     padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
@@ -2245,7 +2162,7 @@ a[disabled].button[href] {
 }
 ::file-selector-button {
     --display: flex;
-    display: flex;
+    display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
@@ -2264,7 +2181,8 @@ a[disabled].button[href] {
     cursor: not-allowed;
 }
 ::file-selector-button {
-    display: initial;
+    --display: initial;
+    display: var(--display, initial);
     margin: 0;
     margin-right: var(--mrg-firm-300, 0.8125rem);
     font-size: var(--fs-normal, 1rem);
@@ -2282,7 +2200,6 @@ table {
         var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
     );
     background: var(--sys-clr-accent-bg, CanvasText);
-    width: min(var(--width-page, 60rem), 100%);
 }
 
 table {
@@ -2292,7 +2209,8 @@ table {
 }
 
 .table-wrapper {
-    display: block;
+    --display: block;
+    display: var(--display, block);
     overflow-x: auto;
     overscroll-behavior-x: none;
 }
@@ -2391,7 +2309,8 @@ th {
 .skip-link,
 .skip-link[href],
 a.skip-link[href] {
-    display: block;
+    --display: block;
+    display: var(--display, block);
     position: fixed;
     margin: 0;
     top: -100%;
@@ -2423,13 +2342,152 @@ a.skip-link[href]:focus-within {
     padding: 0;
 }
 
-/* # ASTRO LAYOUT
+/* # ASTRO GLOBALS - Typography
  * ======================================================================== */
+blockquote {
+    --display: flex;
+    display: var(--display, flex);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-soft-600, 1.625rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.625rem) - var(--mrg-soft-400, 0.8125rem)
+    );
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+    width: auto;
+    max-width: var(--width-callout, 26.25rem);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    justify-content: center;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+    justify-self: center;
+}
+blockquote > :first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    --display: block;
+    display: var(--display, block);
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    text-align: right;
+    align-self: end;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+pre {
+    --display: block;
+    display: var(--display, block);
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: 0;
+    margin-top: var(--mrg-firm-600, 2.25rem);
+    margin-bottom: calc(
+        var(--mrg-firm-600, 2.25rem) - var(--mrg-firm-400, 1.25rem)
+    );
+    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
+    border: var(--border-width-100, 0.0625rem) solid currentColor;
+    width: auto;
+    max-width: 100%;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+    overflow: auto;
+    justify-self: center;
+}
+pre > code {
+    --display: block;
+    display: var(--display, block);
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> code) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> code) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+}
+pre.language-wiki:has(> code),
+pre.language-context:has(> code),
+pre.language-tex:has(> code),
+pre.language-latex:has(> code),
+pre.language-text:has(> code),
+pre.language-md:has(> code),
+pre.language-markdown:has(> code),
+pre.language-hbs:has(> code),
+pre.language-mustache:has(> code),
+pre.language-handlebars:has(> code),
+pre.language-plaintext:has(> code) {
+    white-space: normal;
+    text-wrap: auto;
+    max-width: var(--width-callout, 26.25rem);
+}
+pre.language-wiki:has(> code) > code,
+pre.language-context:has(> code) > code,
+pre.language-tex:has(> code) > code,
+pre.language-latex:has(> code) > code,
+pre.language-text:has(> code) > code,
+pre.language-md:has(> code) > code,
+pre.language-markdown:has(> code) > code,
+pre.language-hbs:has(> code) > code,
+pre.language-mustache:has(> code) > code,
+pre.language-handlebars:has(> code) > code,
+pre.language-plaintext:has(> code) > code {
+    white-space: pre-wrap;
+    text-wrap: auto;
+}
+
+/* # ASTRO GLOBALS - Tables
+ * ======================================================================== */
+table,
+.table-wrapper {
+    justify-self: center;
+}
+
+.table-wrapper > table {
+    justify-self: start;
+}
+
 /* # ASTRO SUPPORT - ICONS
  * ======================================================================== */
 .icon {
     --display: inline-block;
-    display: inline-block;
+    display: var(--display, inline-block);
     height: var(--icon-size, 1.375em);
     height: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
@@ -2442,7 +2500,7 @@ a.skip-link[href]:focus-within {
 }
 .icon > svg {
     --display: inline-block;
-    display: inline-block;
+    display: var(--display, inline-block);
     margin: 0;
     padding: 0;
     fill: currentColor;

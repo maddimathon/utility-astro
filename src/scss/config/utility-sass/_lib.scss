@@ -3,7 +3,7 @@
 /// @since 0.1.0-alpha
 ///
 
-// @use '_pre' as pre;
+@use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/config' with (
     $internal_supressCredit: false !default,
@@ -12,6 +12,7 @@
     $selectorType_motion: 'attribute' !default,
 
     $mx_extendSelectors_headingsByRole: false !default,
+    $mx_tokens_atProperty_additional: pre.$mx_tokens_atProperty_additional,
     //
      //
 );

@@ -28,6 +28,27 @@ import DocsPage from '../../layouts/DocsPage.astro';
     layout='sidebar-left'
 >
     <!-- <LoremIpsum /> -->
-    <LoremIpsum mode='library' />
+    <LoremIpsum
+        mode={import.meta.env.DEV ? 'fancy' : 'library'}
+        displaySettings={{
+            blockquote: true,
+            buttons: true,
+            buttonTypes: true,
+            buttonVariationsAll: true,
+            code: true,
+            codeLong: true,
+            disabledButton: false,
+            forms: false,
+            formsLong: false,
+            headingsList: false,
+            listsMedium: false,
+            listsLong: false,
+            table: false,
+            textMedium: false,
+            textLong: false,
+            textPage: false,
+            toggleBlocks: false,
+        }}
+    />
     <p slot='sidebar'>I am a pretend sidebar content.</p>
 </DocsPage>

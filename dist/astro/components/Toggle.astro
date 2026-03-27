@@ -44,14 +44,30 @@ export interface ToggleProps {
      * If any, the heading display level override for this heading (otherwise
      * the `heading` value is used).
      *
+     * @default undefined
+     *
      * @since 0.1.0-alpha.7 — Added false and undefined options.
+     * @since 0.1.0-beta.0.draft — Removed false as an option. Use 0 instead.
      */
-    displayHeading?: number | false | undefined;
+    displayHeading?: number | undefined;
 
     /**
      * If any, the heading level used to wrap the toggle button.
+     *
+     * @default 0
+     *
+     * @since 0.1.0-beta.0.draft — Removed false as an option. Use 0 instead.
      */
-    heading?: number | false;
+    heading?: number;
+
+    /**
+     * Minimum allowed heading level.
+     *
+     * @default 2
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    minimumHeading?: number;
 
     /**
      * The HTML tag used for the container element.
@@ -79,11 +95,12 @@ export interface Props extends ElementProps<
 
 const {
     defaultOpen,
-    displayHeading,
-    heading,
     id,
     // optional
+    displayHeading,
+    heading = 0,
     headerTag,
+    minimumHeading = 2,
     tag: Container = 'section',
     ...attributes
 }: Props = Astro.props;
@@ -120,29 +137,18 @@ const ContainerHeader =
         id={titleID}
         class='toggle-title'
     >
-        {
-            heading ? (
-                <Heading
-                    heading={heading}
-                    displayHeading={displayHeading}
-                >
-                    <Toggle_Control
-                        {...{ id, buttonID }}
-                        data-toggle-primary-control={id}
-                    >
-                        <slot name='button' />
-                    </Toggle_Control>
-                </Heading>
-            ) : (
-                <Toggle_Control
-                    class:list={`h${displayHeading ?? 7}`}
-                    {...{ id, buttonID }}
-                    data-toggle-primary-control={id}
-                >
-                    <slot name='button' />
-                </Toggle_Control>
-            )
-        }
+        <Heading
+            displayHeading={displayHeading}
+            heading={heading}
+            minimum={minimumHeading}
+        >
+            <Toggle_Control
+                {...{ id, buttonID }}
+                data-toggle-primary-control={id}
+            >
+                <slot name='button' />
+            </Toggle_Control>
+        </Heading>
     </ContainerHeader>
 
     <Container

@@ -1,0 +1,98 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/selector';
+
+@use '../../tokens';
+
+@use '../01-functions' as *;
+// @use '../02-mixins' as *;
+
+@use '03-02-layouts' as *;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin snippet-blockquote(
+    $display: block,
+    $flex_gap: 0,
+    $flex_alignment: tokens.$contentGridAlignment,
+    $marginInline: 0,
+    //
+    $includeCite: true,
+    //
+    $args...
+) {
+    @include utils.snippet-blockquote(
+            $display: $display,
+            $marginInline: $marginInline,
+            $includeCite: $includeCite,
+            $args...
+        )
+        using ($location) {
+        @if $location == root {
+            @if $display == flex {
+                flex-direction: column;
+                flex-wrap: nowrap;
+                gap: #{$flex_gap};
+
+                justify-content: #{map.get($flex_alignment, justify-content)};
+                justify-items: #{map.get($flex_alignment, justify-items)};
+                align-content: #{map.get($flex_alignment, align-content)};
+                align-items: #{map.get($flex_alignment, align-items)};
+
+                justify-self: center;
+            }
+        }
+        @if $includeCite and $location == cite {
+            align-self: end;
+        }
+        @content ($location);
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin snippet-pre($marginInline: 0, $args...) {
+    @include utils.snippet-pre($marginInline: $marginInline, $args...) using
+        ($location) {
+        @if $location == root {
+            justify-self: center;
+        }
+
+        @if $location == pre-has-code {
+            $_plaintext_selectors: (
+                '.language-wiki',
+                '.language-context',
+                '.language-tex',
+                '.language-latex',
+                '.language-text',
+                '.language-md',
+                '.language-markdown',
+                '.language-hbs',
+                '.language-mustache',
+                '.language-handlebars',
+                '.language-plaintext'
+            );
+
+            @at-root #{selector.unify(&, $_plaintext_selectors)} {
+                white-space: normal;
+                text-wrap: auto;
+                max-width: #{var-width(callout)};
+
+                > %code {
+                    white-space: pre-wrap;
+                    text-wrap: auto;
+                }
+            }
+        }
+
+        @content ($location);
+    }
+}

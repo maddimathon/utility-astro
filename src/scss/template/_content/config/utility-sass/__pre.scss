@@ -80,22 +80,31 @@ $template_extendSelectors: $template_globals or $template_utils !default;
 /// @since ___PKG_VERSION___ — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
 ///
 $template_styles: () !default;
+
+$_styles_astro: map.deep-merge(
+    (
+        bodyGrid: $template_astro,
+        toggleNav: $template_astro and
+            if(
+                map.has-key($template_styles, toggleBlock),
+                map.get($template_styles, toggleBlock),
+                true
+            ),
+    ),
+    if(map.has-key($template_styles, astro), map.get($template_styles, astro), ())
+);
+
 $template_styles: map.deep-merge(
     (
-        astro: (
-            bodyGrid: $template_astro,
-            toggleNav: $template_astro and
-                if(
-                    map.has-key($template_styles, toggleBlock),
-                    map.get($template_styles, toggleBlock),
-                    true
-                ),
-        ),
+        astro: $_styles_astro,
 
+        blockquote: $template_globals,
+        bodyFlow: not map.get($_styles_astro, bodyGrid),
         buttons: $template_globals,
         headings: $template_globals,
         icons: $template_utils,
         normalize: lib.$include_html and lib.$isTemplate,
+        pre: $template_globals,
 
         skipLinks: (
             $template_astro or $template_globals or $template_utils,

@@ -3,12 +3,16 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/03-snippets';
+@forward 'pkg:@maddimathon/utility-sass/03-snippets' hide snippet-blockquote, snippet-pre;
 
-@forward '03--content';
-@forward '03--forced-colors-mode-only';
-@forward '03--icons';
+@forward '03-01-accessibility';
+@forward '03-02-layouts';
+@forward '03-03-objects';
+@forward '03-04-typography';
+// @forward '03-05-lists';
+// @forward '03-06-forms';
+// @forward '03-07-tables';
+
 @forward '03--settings-menu';
-@forward '03--skip-links';
 @forward '03--toggle';
 @forward '03--toggle-nav-menu';

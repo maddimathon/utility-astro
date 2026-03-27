@@ -15,6 +15,15 @@
 /*! START of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+@property --display {
+    syntax: "*";
+    inherits: false;
+}
+@property --grid-column {
+    syntax: "*";
+    inherits: true;
+    initial-value: 1 / 1;
+}
 /* #region Tokens - Misc. */
 :root {
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
@@ -74,14 +83,12 @@
  * ======================================================================== */
 hr {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-}
-hr {
-    width: 100%;
     margin-top: 2.25rem;
     margin-bottom: 2.25rem;
+    margin-left: 9%;
+    margin-right: 9%;
+    width: 72.92%;
+    max-width: 26.25rem;
     border: none;
     border-bottom: currentColor solid 0.125rem;
 }
@@ -176,103 +183,11 @@ hr + p {
     margin-top: 0;
 }
 
-blockquote {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-}
-blockquote {
-    margin-top: 0.8125rem;
-    margin-bottom: 0;
-    margin-top: 1.625rem;
-    margin-bottom: 0.8125rem;
-    padding-left: 0.8125rem;
-    border-left: 0.125rem solid currentColor;
-}
-@media (min-width: 36em) {
-    blockquote {
-        margin-left: 9%;
-        margin-right: 9%;
-    }
-}
-blockquote > p:first-child {
-    margin-top: 0;
-}
-blockquote > cite {
-    display: block;
-    margin-top: 0.8125rem;
-    margin-bottom: 0;
-    text-align: right;
-}
-blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
-    color: currentColor;
-}
-@media (prefers-contrast: less) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
-}
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
-@media (prefers-contrast: more) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
-}
-
 code,
 kbd,
 pre,
 samp {
     position: relative;
-}
-
-pre {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-}
-pre {
-    position: relative;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 1.25rem;
-    margin-bottom: 0;
-    margin-top: 2.25rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem 0.8125rem;
-    border: 0.0625rem solid currentColor;
-    max-width: min(120ch, 100%);
-    overflow: auto;
-    font-size: 0.9375rem;
-}
-pre > code {
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    width: auto;
-    max-width: 100%;
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:where(:has(> code)) {
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:where(:has(> code)) > code {
-    white-space: pre;
-    text-wrap: nowrap;
-    overflow: visible;
 }
 
 /* ## Typography - Headings ==================================== */
@@ -659,7 +574,9 @@ ol ul,
 ul ol,
 ul ul {
     margin-top: 0;
+    margin-bottom: 0;
 }
+
 ol {
     list-style-type: decimal;
 }
@@ -825,7 +742,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-top: 0.5rem;
+    margin-top: 0.4375rem;
 }
 textarea::-moz-placeholder,
 select::-moz-placeholder,
@@ -933,12 +850,12 @@ input[type="color"] {
 }
 input[type="date"],
 input[type="datetime-local"],
-input[type="file"],
 input[type="month"],
 input[type="time"],
 input[type="week"] {
     width: auto;
 }
+
 input[type="file"] {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -946,6 +863,7 @@ input[type="file"] {
     padding-right: 0.8125rem;
     font-size: 0.9375rem;
 }
+
 input[type="range"] {
     padding: 0;
 }
@@ -961,7 +879,7 @@ textarea {
 label {
     display: block;
     margin-top: 0.8125rem;
-    margin-bottom: 0.4375rem;
+    margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
     font-weight: 600;
@@ -970,7 +888,6 @@ label {
     color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where(input[type="checkbox"], input[type="radio"])) {
-    --display: grid;
     display: grid;
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
@@ -989,7 +906,7 @@ label:has(> :where(input[type="checkbox"], input[type="radio"]))
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + input,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + select,
 label:has(> :where(input[type="checkbox"], input[type="radio"])) + textarea {
-    margin-top: 0.8125rem 0.4375rem;
+    margin-top: 1.25rem;
 }
 label > input[type="checkbox"],
 label > input[type="radio"] {
@@ -1098,7 +1015,6 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 a.button[href] {
-    --display: flex;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -1189,7 +1105,6 @@ a[disabled].button[href] {
     cursor: not-allowed;
 }
 ::file-selector-button {
-    --display: flex;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -1260,6 +1175,132 @@ th {
  * ======================================================================== */
 /* ## Font Sizes ==================================== */
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO LAYOUT
+/* # ASTRO GLOBALS - Typography
  * ======================================================================== */
+blockquote {
+    display: flex;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0.8125rem;
+    margin-bottom: 0;
+    margin-top: 1.625rem;
+    margin-bottom: 0.8125rem;
+    padding-left: 0.8125rem;
+    border-left: 0.125rem solid currentColor;
+    width: auto;
+    max-width: 26.25rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    justify-content: center;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
+    justify-self: center;
+}
+blockquote > :first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    display: block;
+    margin-top: 0.8125rem;
+    margin-bottom: 0;
+    text-align: right;
+    align-self: end;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+pre {
+    display: block;
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.8125rem;
+    border: 0.0625rem solid currentColor;
+    width: auto;
+    max-width: 100%;
+    font-size: 0.9375rem;
+    overflow: auto;
+    justify-self: center;
+}
+pre > code {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> code) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> code) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+}
+pre.language-wiki:has(> code),
+pre.language-context:has(> code),
+pre.language-tex:has(> code),
+pre.language-latex:has(> code),
+pre.language-text:has(> code),
+pre.language-md:has(> code),
+pre.language-markdown:has(> code),
+pre.language-hbs:has(> code),
+pre.language-mustache:has(> code),
+pre.language-handlebars:has(> code),
+pre.language-plaintext:has(> code) {
+    white-space: normal;
+    text-wrap: auto;
+    max-width: 26.25rem;
+}
+pre.language-wiki:has(> code) > code,
+pre.language-context:has(> code) > code,
+pre.language-tex:has(> code) > code,
+pre.language-latex:has(> code) > code,
+pre.language-text:has(> code) > code,
+pre.language-md:has(> code) > code,
+pre.language-markdown:has(> code) > code,
+pre.language-hbs:has(> code) > code,
+pre.language-mustache:has(> code) > code,
+pre.language-handlebars:has(> code) > code,
+pre.language-plaintext:has(> code) > code {
+    white-space: pre-wrap;
+    text-wrap: auto;
+}
+
+/* # ASTRO GLOBALS - Tables
+ * ======================================================================== */
+table {
+    justify-self: center;
+}
+
 /*! END of @maddimathon/utility-astro/template/global */

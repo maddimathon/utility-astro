@@ -6,7 +6,8 @@
  */
 /* # SETTINGS MENU ==================================== */
 .website-settings-menu {
-    grid-column: page-start/page-end;
+    --grid-column: page-start/page-end;
+    grid-column: var(--grid-column, page-start/page-end);
     --display: none;
     display: var(--display, none);
     margin: 0;
@@ -68,7 +69,8 @@
     padding-right: var(--mrg-soft-200, 0.3125rem);
 }
 .website-settings__content fieldset > .container {
-    display: flex;
+    --display: flex;
+    display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
@@ -97,6 +99,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 
 :where(.js) .website-settings-menu {
     --display: flex;
+    display: var(--display, flex);
 }
 :where(.js) .website-settings-menu .toggle-title {
     margin: 0;
@@ -104,7 +107,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     --focus-ring-outline-offset: 0.125rem;
-    display: block;
+    --display: block;
+    display: var(--display, block);
     margin: 0;
     padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
     width: -moz-fit-content;
@@ -193,7 +197,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     --display: flex;
-    display: flex;
+    display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
@@ -299,7 +303,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu[data-toggle-container="closing"]
     [data-toggle-control-backdrop] {
-    display: var(--display, block);
+    --display: var(--display, block);
+    display: var(--display, var(--display, block));
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]

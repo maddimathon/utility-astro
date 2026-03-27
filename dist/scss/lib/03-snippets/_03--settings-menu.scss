@@ -19,10 +19,9 @@
 ///
 @mixin snippet-support-site-settings-menu {
     .website-settings-menu {
-        grid-column: page-start / page-end;
+        @include prop-grid-column(page-start / page-end);
 
-        @include cx-prop(display, none);
-        display: #{do-var(display, none)};
+        @include prop-display(none);
         margin: 0;
         padding: 0;
 
@@ -72,7 +71,7 @@
             }
 
             > .container {
-                display: flex;
+                @include prop-display(flex);
                 flex-direction: row;
                 flex-wrap: wrap;
 
@@ -110,7 +109,7 @@
 
     @include feature-check.js {
         .website-settings-menu {
-            @include cx-prop(display, flex);
+            @include prop-display(flex);
 
             .toggle-title {
                 margin: 0;
@@ -170,7 +169,7 @@
                 z-index: 999999;
 
                 [data-toggle-control-backdrop] {
-                    display: #{do-var(display, block)};
+                    @include prop-display(do-var(display, block));
                 }
             }
 
