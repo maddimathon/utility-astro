@@ -383,20 +383,17 @@ const settings = p.settings && {
                 ) : <!-- SLOT: "footer" (empty) / --> }
 
                 { ( p.footer.designedBy || p.footer.copyright ) && (
-                    <p class="site-footer__disclaimer">
-                        
+                    <div class="site-footer__disclaimer">
                         { p.footer.copyright && (
-                            <span class="copyright"><span class="copyright__copy">&copy;</span> <Fragment set:text={formatted.footer.year} /> {
+                            <p class="copyright"><span class="copyright__copy">&copy;</span> <Fragment set:text={formatted.footer.year} /> {
                                 p.footer.copyright.owner
                                 ? <Fragment set:text={p.footer.copyright.owner} />
                                 : <Fragment set:html={p.footer.copyright.html} />
-                            }</span>
+                            }</p>
                         ) }
 
-                        { ( p.footer.designedBy && p.footer.copyright ) && <br class="disclaimer__divider" /> }
-
                         { p.footer.designedBy && <Fragment set:html={p.footer.designedBy} /> }
-                    </p>
+                    </div>
                 ) }
             </footer>
         ) }

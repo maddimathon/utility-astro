@@ -303,8 +303,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu[data-toggle-container="closing"]
     [data-toggle-control-backdrop] {
-    --display: var(--display, block);
-    display: var(--display, var(--display, block));
+    display: var(--display, block);
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]

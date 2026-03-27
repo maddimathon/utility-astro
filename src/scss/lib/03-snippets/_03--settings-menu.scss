@@ -165,7 +165,7 @@
                 z-index: 999999;
 
                 [data-toggle-control-backdrop] {
-                    @include prop-display(do-var(display, block));
+                    display: #{do-var(display, block)};
                 }
             }
 

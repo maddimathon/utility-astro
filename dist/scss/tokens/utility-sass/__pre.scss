@@ -1,0 +1,32 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use 'sass:map';
+@use 'sass:string';
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$atProperties: () !default;
+$atProperties: map.merge(
+    (
+        grid-column: (
+            syntax: '*',
+            inherits: true,
+            initial-value: string.unquote('1 / 1'),
+        ),
+        icon-color: (
+            syntax: '<color>',
+            inherits: true,
+            initial-value: currentColor,
+        ),
+        icon-size: (
+            syntax: '<length-percentage> | <number>',
+            inherits: true,
+            initial-value: 1.375em,
+        ),
+    ),
+    $atProperties
+);

@@ -1,0 +1,10 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use '_pre' as pre;
+
+@forward 'pkg:@maddimathon/utility-sass/tokens' with (
+    $atProperties: pre.$atProperties
+);

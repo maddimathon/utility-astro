@@ -1,15 +1,15 @@
 @charset "UTF-8";
-/**
- * Utility Astro - Template - HTML
- * @maddimathon/utility-astro/template/html@0.1.0-beta.0.draft
- * 
- * https://maddimathon.github.io/utility-astro
- */
 /*!
  * This stylesheet includes css generated using 
  * @maddimathon/utility-sass@0.1.0-beta.0.draft
  * 
  * https://maddimathon.github.io/utility-sass
+ */
+/**
+ * Utility Astro - Template - HTML
+ * @maddimathon/utility-astro/template/html@0.1.0-beta.0.draft
+ * 
+ * https://maddimathon.github.io/utility-astro
  */
 /*! START of @maddimathon/utility-astro/template/html */
 /*! START of @maddimathon/utility-sass/template */
@@ -267,10 +267,35 @@ pre {
     syntax: "*";
     inherits: false;
 }
+@property --focus-ring-outline-color {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: currentColor;
+}
+@property --height-nav-primary {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
+}
+@property --scroll-padding-top {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
+}
 @property --grid-column {
     syntax: "*";
     inherits: true;
     initial-value: 1 / 1;
+}
+@property --icon-color {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: currentColor;
+}
+@property --icon-size {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 1.375em;
 }
 /* #region Tokens - System Colours */
 :where(html) {
