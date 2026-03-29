@@ -3,6 +3,7 @@
 /// @since 0.1.0-alpha
 ///
 
+@forward 'functions';
 @forward 'utility-sass';
 
 @use 'utility-sass' as utils;

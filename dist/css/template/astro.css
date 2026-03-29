@@ -263,6 +263,7 @@ pre {
 /* #endregion Normalize */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+/* #region Tokens - @property */
 @property --display {
     syntax: "*";
     inherits: false;
@@ -272,20 +273,15 @@ pre {
     inherits: true;
     initial-value: currentColor;
 }
-@property --height-nav-primary {
-    syntax: "<length-percentage> | <number>";
-    inherits: true;
-    initial-value: 0;
-}
-@property --scroll-padding-top {
-    syntax: "<length-percentage> | <number>";
-    inherits: true;
-    initial-value: 0;
-}
 @property --grid-column {
     syntax: "*";
     inherits: true;
     initial-value: 1 / 1;
+}
+@property --height-nav-primary {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
 }
 @property --icon-color {
     syntax: "<color>";
@@ -297,6 +293,12 @@ pre {
     inherits: true;
     initial-value: 1.375em;
 }
+@property --scroll-padding-top {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
+}
+/* #endregion Tokens - @property */
 /* #region Tokens - System Colours */
 :where(html) {
     --sys-clr-background: Canvas;

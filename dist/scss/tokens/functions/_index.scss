@@ -1,0 +1,42 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide
+    tokens-get-at-properties;
+
+@use 'pkg:@maddimathon/utility-sass/tokens/functions' as fns;
+
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/string';
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@function tokens-get-at-properties($inputs) {
+    @return fns.tokens-get-at-properties(
+        $inputs: map.merge(
+                (
+                    grid-column: (
+                        syntax: '*',
+                        inherits: true,
+                        initial-value: string.unquote('1 / 1'),
+                    ),
+                    icon-color: (
+                        syntax: '<color>',
+                        inherits: true,
+                        initial-value: currentColor,
+                    ),
+                    icon-size: (
+                        syntax: '<length-percentage> | <number>',
+                        inherits: true,
+                        initial-value: 1.375em,
+                    ),
+                ),
+                $inputs,
+                $recursive: true,
+                $respectUNDEFINED: true
+            )
+    );
+}

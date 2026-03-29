@@ -7,7 +7,7 @@
 @use 'sass:map';
 @use 'sass:string';
 
-@use '../../../../config' as lib;
+@use '../../../../config';
 
 ///
 /// @since 0.1.0-alpha
@@ -27,7 +27,7 @@ $template_isDefault: $template_slug == default !default;
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-$template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
+$template_docBlock: not config.$internal_supressCredit or config.$isTemplate !default;
 
 ///
 /// @since 0.1.0-alpha
@@ -50,7 +50,7 @@ $template_globals: $template_astro !default;
 /// @since 0.1.0-alpha
 /// @since 0.1.0-beta.0.draft — Renamed from $print_utils to $template_utils and moved from lib to template config.
 ///
-$template_utils: lib.$include_html and ($template_globals or $template_astro) !default;
+$template_utils: config.$include_html and ($template_globals or $template_astro) !default;
 
 ///
 /// Whether to include the custom property definitions in the output.
@@ -64,7 +64,7 @@ $template_tokens: $template_globals or $template_utils !default;
 /// @since 0.1.0-alpha
 /// @since 0.1.0-beta.0.draft — Renamed from $print_headings to $template_cssHeadings and moved from lib to template config.
 ///
-$template_cssHeadings: lib.$isTemplate and
+$template_cssHeadings: config.$isTemplate and
     (
         $template_astro or $template_globals or $template_tokens or
             $template_utils
@@ -83,43 +83,12 @@ $template_extendSelectors: $template_globals or $template_utils !default;
 /// @since 0.1.0-beta.0.draft — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
 ///
 $template_styles: () !default;
-
-$_styles_astro: map.deep-merge(
-    (
-        bodyGrid: $template_astro,
-        toggleNav: $template_astro and
-            if(
-                map.has-key($template_styles, toggleBlock),
-                map.get($template_styles, toggleBlock),
-                true
-            ),
-    ),
-    if(
-        map.has-key($template_styles, astro),
-        map.get($template_styles, astro),
-        ()
-    )
-);
-
-$template_styles: map.deep-merge(
-    (
-        astro: $_styles_astro,
-
-        blockquote: $template_globals,
-        bodyFlow: not map.get($_styles_astro, bodyGrid),
-        buttons: $template_globals,
-        headings: $template_globals,
-        icons: $template_utils,
-        normalize: lib.$include_html and lib.$isTemplate,
-        pre: $template_globals,
-
-        skipLinks: (
-            $template_astro or $template_globals or $template_utils,
-        )
-        and lib.$include_html,
-
-        siteSettingsMenu: $template_astro,
-        toggle: $template_astro,
-    ),
-    $template_styles
+$template_styles: config.config-get-template-styles(
+    $inputs: $template_styles,
+    $include_html: config.$include_html,
+    $isTemplate: config.$isTemplate,
+    $template_tokens: $template_tokens,
+    $template_globals: $template_globals,
+    $template_utils: $template_utils,
+    $template_astro: $template_astro,
 );

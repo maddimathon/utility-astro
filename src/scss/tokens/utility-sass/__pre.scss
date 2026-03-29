@@ -3,30 +3,15 @@
 /// @since ___PKG_VERSION___
 ///
 
-@use 'sass:map';
-@use 'sass:string';
+@forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide tokens-get-at-properties;
+
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/string';
+
+@use '../functions' as fns;
 
 ///
 /// @since ___PKG_VERSION___
 ///
 $atProperties: () !default;
-$atProperties: map.merge(
-    (
-        grid-column: (
-            syntax: '*',
-            inherits: true,
-            initial-value: string.unquote('1 / 1'),
-        ),
-        icon-color: (
-            syntax: '<color>',
-            inherits: true,
-            initial-value: currentColor,
-        ),
-        icon-size: (
-            syntax: '<length-percentage> | <number>',
-            inherits: true,
-            initial-value: 1.375em,
-        ),
-    ),
-    $atProperties
-);
+$atProperties: fns.tokens-get-at-properties($atProperties);

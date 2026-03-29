@@ -15,6 +15,7 @@
 /*! START of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+/* #region Tokens - @property */
 @property --display {
     syntax: "*";
     inherits: false;
@@ -24,20 +25,15 @@
     inherits: true;
     initial-value: currentColor;
 }
-@property --height-nav-primary {
-    syntax: "<length-percentage> | <number>";
-    inherits: true;
-    initial-value: 0;
-}
-@property --scroll-padding-top {
-    syntax: "<length-percentage> | <number>";
-    inherits: true;
-    initial-value: 0;
-}
 @property --grid-column {
     syntax: "*";
     inherits: true;
     initial-value: 1 / 1;
+}
+@property --height-nav-primary {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
 }
 @property --icon-color {
     syntax: "<color>";
@@ -49,6 +45,12 @@
     inherits: true;
     initial-value: 1.375em;
 }
+@property --scroll-padding-top {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0;
+}
+/* #endregion Tokens - @property */
 /* #region Tokens - Misc. */
 :root {
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);

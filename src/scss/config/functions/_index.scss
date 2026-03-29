@@ -1,0 +1,61 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward 'pkg:@maddimathon/utility-sass/config/functions' hide config-get-template-styles;
+
+@use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+@use 'sass:map';
+
+///
+/// @since ___PKG_VERSION___
+///
+@function config-get-template-styles(
+    $inputs,
+    $include_html,
+    $isTemplate,
+    $template_tokens,
+    $template_globals,
+    $template_utils,
+    $template_astro
+) {
+    $_styles_astro: map.deep-merge(
+        (
+            bodyGrid: $template_astro,
+            toggleNav: $template_astro and
+                if(map.has-key($inputs, toggleBlock), map.get($inputs, toggleBlock), true),
+        ),
+        if(map.has-key($inputs, astro), map.get($inputs, astro), ())
+    );
+
+    @return fns.config-get-template-styles(
+        $inputs: map.deep-merge(
+                (
+                    astro: $_styles_astro,
+
+                    blockquote: $template_globals,
+                    bodyFlow: not map.get($_styles_astro, bodyGrid),
+                    buttons: $template_globals,
+                    headings: $template_globals,
+                    icons: $template_utils,
+                    normalize: $include_html and $isTemplate,
+                    pre: $template_globals,
+
+                    skipLinks: (
+                        $template_astro or $template_globals or $template_utils,
+                    )
+                    and $include_html,
+
+                    siteSettingsMenu: $template_astro,
+                    toggle: $template_astro,
+                ),
+                $inputs
+            ),
+        $include_html: $include_html,
+        $isTemplate: $isTemplate,
+        $template_tokens: $template_tokens,
+        $template_globals: $template_globals,
+        $template_utils: $template_utils
+    );
+}

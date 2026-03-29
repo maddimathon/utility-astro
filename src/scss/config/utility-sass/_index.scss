@@ -4,4 +4,4 @@
 ///
 
 // @forward '_pre';
-@forward 'lib';
+@forward 'lib' hide config-get-template-styles;
