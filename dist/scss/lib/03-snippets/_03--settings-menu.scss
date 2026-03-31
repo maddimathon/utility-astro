@@ -124,7 +124,7 @@
                 );
 
                 & {
-                    @include cx-prop(icon-size, 1.75rem);
+                    @include cx-prop(icon-size, do-var(icon-size-large));
                     justify-self: end;
                 }
 

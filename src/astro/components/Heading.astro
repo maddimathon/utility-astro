@@ -8,6 +8,7 @@
 /* import - types */
 import { makeNumber } from '@maddimathon/utility-typescript';
 import type { GenericElementProps } from '../../ts/types/index.js';
+import type { HTMLTag } from 'astro/types';
 
 /* import - functions */
 
@@ -28,11 +29,6 @@ import type { GenericElementProps } from '../../ts/types/index.js';
  */
 export interface HeadingProps {
     /**
-     * Logical heading order value for this heading.
-     */
-    heading: number;
-
-    /**
      * If any, the heading display level override for this heading (otherwise
      * the `heading` value is used).  If false, a 'unstyled-heading' utility
      * class is adding to the heading.
@@ -40,6 +36,16 @@ export interface HeadingProps {
      * @since 0.1.0-alpha.7 — Added false and undefined options.
      */
     displayHeading?: number | false | undefined;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    fallbackTag?: HTMLTag;
+
+    /**
+     * Logical heading order value for this heading.
+     */
+    heading?: number;
 
     /**
      * The minimum allowed value for this heading.
@@ -52,7 +58,8 @@ export interface Props extends GenericElementProps<HeadingProps, 'div'> {}
 const {
     class: classList = [],
     displayHeading: displayHeadingRaw,
-    heading: headingRaw,
+    fallbackTag = 'p',
+    heading: headingRaw = 0,
     minimum = 2,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
@@ -75,7 +82,7 @@ const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
 const Tag =
     headingIsMoreThanMinimum && heading < 7
         ? (`h${heading as 2 | 3 | 4 | 5 | 6}` as const)
-        : ('p' as const);
+        : fallbackTag;
 
 const headingClasses =
     typeof displayHeading === 'undefined'
@@ -86,7 +93,7 @@ const headingClasses =
               : headingIsMoreThanMinimum
                 ? ''
                 : 'unstyled-heading'
-        : displayHeading === false
+        : displayHeading === false || displayHeading < 1
           ? 'unstyled-heading'
           : `h${displayHeading}`;
 ---

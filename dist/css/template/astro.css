@@ -293,10 +293,20 @@ pre {
     inherits: true;
     initial-value: 1.375em;
 }
+@property --icon-size--font-multiplier {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+@property --icon-size-large {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 2em;
+}
 @property --scroll-padding-top {
     syntax: "<length-percentage> | <number>";
     inherits: true;
-    initial-value: 0;
+    initial-value: 0px;
 }
 /* #endregion Tokens - @property */
 /* #region Tokens - System Colours */
@@ -1590,7 +1600,6 @@ input[type="file"] {
     padding-bottom: var(--mrg-soft-300, 0.5rem);
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
-    font-size: var(--fs-smaller-1, 0.9375rem);
 }
 
 input[type="range"] {
@@ -1945,6 +1954,48 @@ table {
     font-size: var(--fs-smaller-1, 0.9375rem);
     line-height: inherit;
 }
+@media (forced-colors: active), (prefers-contrast: custom) {
+    table {
+        border-spacing: 0;
+    }
+    table th,
+    table td {
+        border-bottom: var(--border-width-200, 0.125rem) solid
+            var(--sys-clr-text, CanvasText);
+        border-right: var(--border-width-200, 0.125rem) solid
+            var(--sys-clr-text, CanvasText);
+    }
+    table th:first-child,
+    table td:first-child {
+        border-left: var(--border-width-200, 0.125rem) solid
+            var(--sys-clr-text, CanvasText);
+    }
+    table tr:first-child th,
+    table tr:first-child td {
+        border-top: var(--border-width-200, 0.125rem) solid
+            var(--sys-clr-text, CanvasText);
+    }
+}
+[data-contrast-mode="forced-colors"] table {
+    border-spacing: 0;
+}
+[data-contrast-mode="forced-colors"] table th,
+[data-contrast-mode="forced-colors"] table td {
+    border-bottom: var(--border-width-200, 0.125rem) solid
+        var(--sys-clr-text, CanvasText);
+    border-right: var(--border-width-200, 0.125rem) solid
+        var(--sys-clr-text, CanvasText);
+}
+[data-contrast-mode="forced-colors"] table th:first-child,
+[data-contrast-mode="forced-colors"] table td:first-child {
+    border-left: var(--border-width-200, 0.125rem) solid
+        var(--sys-clr-text, CanvasText);
+}
+[data-contrast-mode="forced-colors"] table tr:first-child th,
+[data-contrast-mode="forced-colors"] table tr:first-child td {
+    border-top: var(--border-width-200, 0.125rem) solid
+        var(--sys-clr-text, CanvasText);
+}
 
 .table-wrapper {
     --display: block;
@@ -1978,6 +2029,7 @@ td > :last-child {
 th {
     padding-top: var(--mrg-soft-200, 0.3125rem);
     padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    text-wrap: balance;
     background: var(--sys-clr-accent-bg, CanvasText);
     color: var(--sys-clr-accent-text, Canvas);
 }
@@ -3478,7 +3530,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    --icon-size: 1.75rem;
+    --icon-size: var(--icon-size-large, 2em);
     justify-self: end;
 }
 :where(.js)

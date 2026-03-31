@@ -45,10 +45,20 @@
     inherits: true;
     initial-value: 1.375em;
 }
+@property --icon-size--font-multiplier {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 1;
+}
+@property --icon-size-large {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 2em;
+}
 @property --scroll-padding-top {
     syntax: "<length-percentage> | <number>";
     inherits: true;
-    initial-value: 0;
+    initial-value: 0px;
 }
 /* #endregion Tokens - @property */
 /* #region Tokens - Misc. */
@@ -888,7 +898,6 @@ input[type="file"] {
     padding-bottom: 0.5rem;
     padding-left: 0.8125rem;
     padding-right: 0.8125rem;
-    font-size: 0.9375rem;
 }
 
 input[type="range"] {
@@ -1173,6 +1182,40 @@ table {
     font-size: 0.9375rem;
     line-height: inherit;
 }
+@media (forced-colors: active), (prefers-contrast: custom) {
+    table {
+        border-spacing: 0;
+    }
+    table th,
+    table td {
+        border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
+    }
+    table th:first-child,
+    table td:first-child {
+        border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
+    }
+    table tr:first-child th,
+    table tr:first-child td {
+        border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
+    }
+}
+[data-contrast-mode="forced-colors"] table {
+    border-spacing: 0;
+}
+[data-contrast-mode="forced-colors"] table th,
+[data-contrast-mode="forced-colors"] table td {
+    border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
+    border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
+}
+[data-contrast-mode="forced-colors"] table th:first-child,
+[data-contrast-mode="forced-colors"] table td:first-child {
+    border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
+}
+[data-contrast-mode="forced-colors"] table tr:first-child th,
+[data-contrast-mode="forced-colors"] table tr:first-child td {
+    border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
+}
 
 th,
 td {
@@ -1194,6 +1237,7 @@ td > :last-child {
 th {
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
+    text-wrap: balance;
     background: var(--sys-clr-accent-bg, CanvasText);
     color: var(--sys-clr-accent-text, Canvas);
 }

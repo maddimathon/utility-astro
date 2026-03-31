@@ -32,6 +32,16 @@
                         inherits: true,
                         initial-value: 1.375em,
                     ),
+                    icon-size-large: (
+                        syntax: '<length-percentage> | <number>',
+                        inherits: true,
+                        initial-value: 2em,
+                    ),
+                    icon-size--font-multiplier: (
+                        syntax: '<number>',
+                        inherits: true,
+                        initial-value: 1,
+                    ),
                 ),
                 $inputs,
                 $recursive: true,

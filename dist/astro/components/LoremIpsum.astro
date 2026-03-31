@@ -436,7 +436,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
 ---
 
 { superAbbreviated ? (
-    <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ ifDisplay.textMedium && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ ifDisplay.textLong && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
+    <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ ifDisplay.textMedium && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ ifDisplay.textLong && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
     <ul>
         <li>Etiam ullamcorper commodo risus.</li>
         { ifDisplay.listsMedium && <li>Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
@@ -511,7 +511,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             <hr />
         ) }
 
-        <p>Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
+        <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
 
 
         { ifDisplay.textPage && <Heading

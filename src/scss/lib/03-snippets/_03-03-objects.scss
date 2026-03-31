@@ -28,11 +28,11 @@
         @include prop-display($display);
 
         height: #{$iconSize};
-        height: calc($iconSize * do-var(icon-size--font-multiplier, 1));
+        height: calc($iconSize * do-var(icon-size--font-multiplier));
 
         @if $includeMinWidth {
             min-width: #{$iconSize};
-            min-width: calc($iconSize * do-var(icon-size--font-multiplier, 1));
+            min-width: calc($iconSize * do-var(icon-size--font-multiplier));
         }
 
         vertical-align: #{$verticalAlign};

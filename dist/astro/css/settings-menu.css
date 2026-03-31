@@ -216,7 +216,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     cursor: not-allowed;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
-    --icon-size: 1.75rem;
+    --icon-size: var(--icon-size-large, 2em);
     justify-self: end;
 }
 :where(.js)
