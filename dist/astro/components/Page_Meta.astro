@@ -58,7 +58,7 @@ export interface Page_MetaProps {
 
 /* PROPS ===================================== */
 
-export type Props = GenericProps<Page_MetaProps>;
+type Props = GenericProps<Page_MetaProps>;
 
 const meta: Props = Astro.props.frontmatter ?? Astro.props;
 

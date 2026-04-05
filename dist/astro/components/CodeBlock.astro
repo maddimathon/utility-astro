@@ -14,6 +14,7 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - components */
 import { Prism } from '@astrojs/prism';
+import CopyToClipboardButton from './CopyToClipboardButton.astro';
 
 /* import - layouts */
 
@@ -31,16 +32,19 @@ export interface CodeBlockProps {
 
     children?: any;
 
+    copyToClipboard?: boolean;
+
     /**
      * Code language, if any.
      */
     lang?: string;
 }
 
-export interface Props extends GenericElementProps<CodeBlockProps, 'div'> {}
+type Props = GenericElementProps<CodeBlockProps, 'div'>;
 
 const {
     children,
+    copyToClipboard = false,
     lang,
     class: classList = [],
     ...attributes
@@ -51,23 +55,27 @@ const {
 const codeHTML: string =
     typeof children === 'string'
         ? children
-        : (await Astro.slots.render('default')).trim() || '';
+        : (await Astro.slots.render('default'))?.trim() ?? '';
 ---
 
-{
-    codeHTML &&
-        (lang ? (
-            <Prism
-                code={codeHTML}
-                lang={lang}
-                class:list={classList}
-                {...attributes}
-            />
-        ) : (
-            <!-- prettier-ignore -->
-            <pre
-                class:list={classList}
-                {...attributes}
-            ><code><Fragment set:text={codeHTML} /></code></pre>
-        ))
-}
+{lang ? (
+    <Prism
+        code={codeHTML}
+        lang={lang}
+        class:list={classList}
+        {...attributes}
+    />
+) : (
+    <!-- prettier-ignore -->
+    <pre
+        class:list={classList}
+        {...attributes}
+    ><code><Fragment set:text={codeHTML} /></code></pre>
+)}
+
+{ copyToClipboard && <CopyToClipboardButton
+    class:list='button--inline button--copy-code'
+    toClipboard={codeHTML}
+    successMessage='copied!'
+    set:text='copy'
+/> }

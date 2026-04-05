@@ -57,12 +57,18 @@
         "./tsconfig.json": "./tsconfig.json",
 
         
+        "./components": "./dist/astro/components.ts",
         "./components/*": "./dist/astro/components/*.astro",
+
         "./css/*": "./dist/astro/css/*.css",
+        
+        "./layouts": "./dist/astro/layouts.ts",
         "./layouts/*": "./dist/astro/layouts/*.astro",
+        
+        "./support": "./dist/astro/support.ts",
         "./support/*": "./dist/astro/support/*.astro",
 
-        "./astro/functions": "./dist/astro/functions/index.ts",
+        "./functions": "./dist/astro/functions/index.ts",
 
         "./astro/*": [
             "./dist/astro/*.astro",

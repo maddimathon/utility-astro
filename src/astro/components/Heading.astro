@@ -53,7 +53,7 @@ export interface HeadingProps {
     minimum?: number;
 }
 
-export interface Props extends GenericElementProps<HeadingProps, 'div'> {}
+type Props = GenericElementProps<HeadingProps, 'div'>;
 
 const {
     class: classList = [],
@@ -66,7 +66,7 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const htmlContent = (await Astro.slots.render('default')) || false;
+const htmlContent = (await Astro.slots.render('default'))?.trim();
 
 const heading = Math.round(Number(headingRaw));
 

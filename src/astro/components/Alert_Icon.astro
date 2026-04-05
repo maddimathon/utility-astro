@@ -55,7 +55,7 @@ export type AlertIconProps = AlertIconProps_Render | AlertIconProps_Slug | Alert
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<AlertIconProps, 'span'>;
+type Props = GenericElementProps<AlertIconProps, 'span'>;
 
 const {
     slug,
@@ -72,7 +72,7 @@ const svgRender = (await Astro.slots.render('default'))?.trim() || undefined;
 
 const classList = [
     'alert-block__icon',
-    classListInput ? '||' : '',
+    { '||': classListInput },
     classListInput,
 ];
 ---

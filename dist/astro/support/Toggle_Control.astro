@@ -20,13 +20,12 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* PROPS ===================================== */
 
-// prettier-ignore
-export interface Props extends Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> {
+type Props = Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> & {
     id: string;
     buttonID: string;
 
     icon?: boolean;
-}
+};
 
 const {
     buttonID,
@@ -38,10 +37,10 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const buttonHTML = (await Astro.slots.render('default')).trim() || 'Toggle me';
+const buttonHTML = (await Astro.slots.render('default'))?.trim() || 'Toggle me';
 
 const iconHTML =
-    (await Astro.slots.render('icon')) ||
+    (await Astro.slots.render('icon'))?.trim() ||
     `<span class='icon | toggle-icon'>
         <svg
             aria-ignore='true'

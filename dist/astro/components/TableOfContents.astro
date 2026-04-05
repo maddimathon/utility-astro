@@ -39,8 +39,9 @@ type NavMenu_SemiProps = Omit<
  * Input props for the TableOfContents component.
  *
  * @since 0.1.0-alpha.7
+ * @since 0.1.0-beta.0.draft — Renamed from TableOfContents_Props to TableOfContentsProps.
  */
-export interface TableOfContents_Props extends NavMenu_SemiProps {
+export interface TableOfContentsProps extends NavMenu_SemiProps {
     /**
      * The base heading level for this TOC.
      */
@@ -71,12 +72,7 @@ export interface TableOfContents_Props extends NavMenu_SemiProps {
     listTag?: 'ol' | 'ul';
 }
 
-export interface Props
-    extends GenericElementProps<
-        TableOfContents_Props,
-        'div',
-        'aria-label' | 'aria-labelledby'
-    > {}
+type Props = GenericElementProps<TableOfContentsProps, 'div', 'aria-label' | 'aria-labelledby'>;
 
 const {
     asToggle = true,
@@ -95,7 +91,7 @@ const {
 
 export function parseTableOfContents(
     currentURL: URL,
-    item: TableOfContents_Props['menu'][number],
+    item: TableOfContentsProps['menu'][number],
     convertHrefStringsToAbsolutePath: boolean | null = null,
 ): NestedListItem {
 
@@ -130,8 +126,7 @@ const headingID = `${id}---heading-element`;
 
 const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item, convertHrefStringsToAbsolute));
 
-const headingHTML =
-    (await Astro.slots.render('button'))?.trim() || 'Table of Contents';
+const headingHTML = (await Astro.slots.render('button'))?.trim() || 'Table of Contents';
 
 const fullClassList = [
     'table-of-contents',

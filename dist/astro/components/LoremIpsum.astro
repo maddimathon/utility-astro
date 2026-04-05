@@ -214,7 +214,7 @@ export interface LoremIpsumProps {
 
 /* PROPS ===================================== */
 
-export type Props = GenericProps<LoremIpsumProps>;
+type Props = GenericProps<LoremIpsumProps>;
 
 const {
     // abbreviated = false,
@@ -435,171 +435,275 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
 
 ---
 
-{ superAbbreviated ? (
-    <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ ifDisplay.textMedium && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ ifDisplay.textLong && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
-    <ul>
-        <li>Etiam ullamcorper commodo risus.</li>
-        { ifDisplay.listsMedium && <li>Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
-            <ol>
-                <li>Tellus arcu convallis erat, vel blandit nulla sem nec enim. Sed ultricies lorem.
-                    <ul>
-                        <li>Proin gravida aliquam purus, at feugiat odio mollis ut.
-                            <ol>
-                                <li>Convallis nisl vel, ultricies lorem.
-                                    <ul>
-                                        <li>Duis hendrerit eu lacus at egestas.
-                                            { ifDisplay.listsLong && <ol>
-                                                <li>Cras consequat id tortor nec dapibus.
-                                                    <ol>
-                                                        <li>Suspendisse dapibus maximus leo, quis.
-                                                            <ol>
-                                                                <li>Proin vel risus finibus.
-                                                                    <ol>
-                                                                        <li>Feugiat odio mollis ut.</li>
-                                                                        <li>Sed ultricies lorem.</li>
-                                                                    </ol>
-                                                                </li>
-                                                                <li>Convallis nisl vel.</li>
-                                                            </ol>
-                                                        </li>
-                                                        <li>Nam vitae dolor mi.</li>
-                                                    </ol>
-                                                </li>
-                                                <li>Ut maximus arcu hendrerit in.</li>
-                                            </ol> }
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>Proin vel risus finibus.</li>
-                            </ol>
-                        </li>
-                    </ul>
-                </li>
-                <li>Proin gravida aliquam purus.</li>
-            </ol>
-        </li> }
-        <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
-    </ul>
-    <p>Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
-    <Fragment>{ ifDisplay.buttons && <div class="button-span">
-        <button type="button">This is a button</button>
-        
-        { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button>}
-        
-        { ifDisplay.buttonVariations ? ifDisplay.buttonVariations.map(
-            variant => ( ifDisplay.buttonVariationsAll || variant === 'secondary' || variant === 'tertiary' ) && <button
-                class={`button-${variant}`}
-                set:text={`This is a ${variant} button`}
-                type="button"
-            />
-        ) : '' }
-    </div> }</Fragment>
-    <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo.</p>
-    
-    <slot name="two" />
-    <slot name="three" />
-    <slot name="four" />
-) : (
-    <Fragment>
-        { tocMenu && (
-            <TableOfContents
-                class="sidebar-width"
-                defaultOpen={ifDisplay.tocDefaultOpen}
-                heading={2}
-                menu={tocMenu} 
-            />
-            <hr />
-        ) }
-
-        <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
-
-
-        { ifDisplay.textPage && <Heading
-            displayHeading={displayHeading}
-            heading={heading}
-        >Suspendisse Potenti <a href="#">ex</a></Heading>
-        <p>Proin leo mauris, iaculis et est eget, egestas tincidunt metus. Quisque mattis semper semper. Suspendisse dapibus maximus leo, quis facilisis risus auctor et. Nam vitae dolor mi. Morbi vestibulum dictum ipsum vel fermentum. Donec tincidunt fermentum ante eu faucibus.</p> }
-
-        { ifDisplay.textPage && <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p> }
-
-        { ifDisplay.headingsList && (
-            <hr />
-            <Heading
-                class="page-title | loremipsum-heading-sample"
-                displayHeading={1}
-                heading={0}
-                id={tableOfContentIds.headings.id}
-            >Title (.page-title) Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
-
-            <Fragment>
-                { ifDisplay.headingLevels.map( (num) => (
-                    <Heading
-                        class="loremipsum-heading-sample"
-                        displayHeading={num}
-                        heading={0}
-                    >Heading {num} Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
-                ) ) }
-            </Fragment>
-        ) }
-
-        { ifDisplay.textPage && <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p> }
-
-        <slot />
-
-        { ifDisplay.toggleBlocks ? (
-            <hr />
+<Fragment>
+    { superAbbreviated ? (
+        <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>.{ ifDisplay.textMedium && <Fragment set:html={' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'} />}{ ifDisplay.textLong && <Fragment set:html={' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'} /> }</p>
+        <ul>
+            <li>Etiam ullamcorper commodo risus.</li>
+            { ifDisplay.listsMedium && <li>Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
+                <ol>
+                    <li>Tellus arcu convallis erat, vel blandit nulla sem nec enim. Sed ultricies lorem.
+                        <ul>
+                            <li>Proin gravida aliquam purus, at feugiat odio mollis ut.
+                                <ol>
+                                    <li>Convallis nisl vel, ultricies lorem.
+                                        <ul>
+                                            <li>Duis hendrerit eu lacus at egestas.
+                                                { ifDisplay.listsLong && <ol>
+                                                    <li>Cras consequat id tortor nec dapibus.
+                                                        <ol>
+                                                            <li>Suspendisse dapibus maximus leo, quis.
+                                                                <ol>
+                                                                    <li>Proin vel risus finibus.
+                                                                        <ol>
+                                                                            <li>Feugiat odio mollis ut.</li>
+                                                                            <li>Sed ultricies lorem.</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>Convallis nisl vel.</li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>Nam vitae dolor mi.</li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>Ut maximus arcu hendrerit in.</li>
+                                                </ol> }
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Proin vel risus finibus.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Proin gravida aliquam purus.</li>
+                </ol>
+            </li> }
+            <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
+        </ul>
+        <p>Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
+        <Fragment>{ ifDisplay.buttons && <div class="button-span">
+            <button type="button">This is a button</button>
             
-            <Toggle id={tableOfContentIds.toggles.id}>
-                <p>Boo!</p>
-                <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-            </Toggle>
+            { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button>}
             
-            <Toggle
-                id={`${tableOfContentIds.toggles.id}-open-default`}
-                defaultOpen={true}
-            >
-                <Fragment slot='button'>I am open by default</Fragment>
-                <p>Boo!</p>
-            </Toggle>
-
-            <Fragment>{ ifDisplay.headingLevels.map( heading => <Toggle
-                displayHeading={heading}
-                heading={0}
-                id={`${tableOfContentIds.toggles.id}-heading${heading}`}
-            >
-                <Fragment
-                    slot='button'
-                    set:text={`Toggle Heading ${heading}`}
+            { ifDisplay.buttonVariations ? ifDisplay.buttonVariations.map(
+                variant => ( ifDisplay.buttonVariationsAll || variant === 'secondary' || variant === 'tertiary' ) && <button
+                    class={`button-${variant}`}
+                    set:text={`This is a ${variant} button`}
+                    type="button"
                 />
-                <p>Boo!</p>
-                <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-            </Toggle> ) }</Fragment>
-        ) : '' }
-
-        <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ ifDisplay.textPage && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentIds.lists.id}></a></p>
-
-        { ifDisplay.textLong && (
-            <ul id="example-list-ul">
+            ) : '' }
+        </div> }</Fragment>
+        <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo.</p>
+        
+        <slot name="two" />
+        <slot name="three" />
+        <slot name="four" />
+    ) : (
+        <Fragment>
+            { tocMenu && (
+                <TableOfContents
+                    class="sidebar-width"
+                    defaultOpen={ifDisplay.tocDefaultOpen}
+                    heading={2}
+                    menu={tocMenu} 
+                />
+                <hr />
+            ) }
+    
+            <p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
+    
+    
+            { ifDisplay.textPage && (
+                <Heading
+                    displayHeading={displayHeading}
+                    heading={heading}
+                >Suspendisse Potenti <a href="#">ex</a></Heading>
+                <p>Proin leo mauris, iaculis et est eget, egestas tincidunt metus. Quisque mattis semper semper. Suspendisse dapibus maximus leo, quis facilisis risus auctor et. Nam vitae dolor mi. Morbi vestibulum dictum ipsum vel fermentum. Donec tincidunt fermentum ante eu faucibus.</p>
+                <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p>
+            ) }
+    
+            { ifDisplay.headingsList && (
+                <hr />
+                <Heading
+                    class="page-title | loremipsum-heading-sample"
+                    displayHeading={1}
+                    heading={0}
+                    id={tableOfContentIds.headings.id}
+                >Title (.page-title) Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
+    
+                <Fragment>
+                    { ifDisplay.headingLevels.map( (num) => (
+                        <Heading
+                            class="loremipsum-heading-sample"
+                            displayHeading={num}
+                            heading={0}
+                        >Heading {num} Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
+                    ) ) }
+                </Fragment>
+            ) }
+    
+            { ifDisplay.textPage && (
+                <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
+            ) }
+    
+            <slot />
+    
+            { ifDisplay.toggleBlocks && (
+                <hr />
+                
+                <Toggle id={tableOfContentIds.toggles.id}>
+                    <p>Boo!</p>
+                    <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
+                </Toggle>
+                
+                <Toggle
+                    id={`${tableOfContentIds.toggles.id}-open-default`}
+                    defaultOpen={true}
+                >
+                    <Fragment slot='button'>I am open by default</Fragment>
+                    <p>Boo!</p>
+                </Toggle>
+    
+                <Fragment>{ ifDisplay.headingLevels.map( heading => <Toggle
+                    displayHeading={heading}
+                    heading={0}
+                    id={`${tableOfContentIds.toggles.id}-heading${heading}`}
+                >
+                    <Fragment
+                        slot='button'
+                        set:text={`Toggle Heading ${heading}`}
+                    />
+                    <p>Boo!</p>
+                    <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
+                </Toggle> ) }</Fragment>
+            ) }
+    
+            <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ ifDisplay.textPage && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentIds.lists.id}></a></p>
+    
+            { ifDisplay.textLong && (
+                <ul id="example-list-ul">
+                    <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
+                    <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
+                        <ul>
+                            <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
+                            <li>Morbi tempus rhoncus efficitur.
+                                <ul>
+                                    <li>In pulvinar semper velit.</li>
+                                    <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
+                                    <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
+                                        <ul>
+                                            <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
+                                                { ifDisplay.listsMedium && <ul>
+                                                    <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
+                                                        <ul>
+                                                            <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
+                                                                { ifDisplay.listsLong && <ul>
+                                                                    <li>Suspendisse dapibus maximus leo, quis.
+                                                                        <ul>
+                                                                            <li>Proin vel risus finibus.
+                                                                                <ul>
+                                                                                    <li>Feugiat odio mollis ut.</li>
+                                                                                    <li>Sed ultricies lorem.</li>
+                                                                                </ol>
+                                                                            </li>
+                                                                            <li>Convallis nisl vel.</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>Nam vitae dolor mi.</li>
+                                                                </ul> }
+                                                            </li>
+                                                            <li>Ut maximus arcu hendrerit in.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Integer vehicula lacus ac congue ullamcorper.</li>
+                                                </ul> }
+                                            </li>
+                                            <li>Duis hendrerit eu lacus at egestas.</li>
+                                        </ul>
+                                    </li>
+                                    <li>Duis hendrerit eu lacus at egestas.</li>
+                                </ul>
+                            </li>
+                            <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
+                        </ul>
+                    </li>
+                    <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
+                </ul>
+                <p>Suspendisse potenti. Sed sed hendrerit arcu. Nullam posuere orci vel tellus tempor fringilla a eu lacus. Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
+                <ol id="example-list-ol">
+                    <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
+                    <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
+                        <ol>
+                            <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
+                            <li>Morbi tempus rhoncus efficitur.
+                                <ol>
+                                    <li>In pulvinar semper velit.</li>
+                                    <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
+                                    <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
+                                        <ol>
+                                            <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
+                                                { ifDisplay.listsMedium && <ol>
+                                                    <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
+                                                        <ol>
+                                                            <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
+                                                                { ifDisplay.listsLong && <ol>
+                                                                    <li>Suspendisse dapibus maximus leo, quis.
+                                                                        <ol>
+                                                                            <li>Proin vel risus finibus.
+                                                                                <ol>
+                                                                                    <li>Feugiat odio mollis ut.</li>
+                                                                                    <li>Sed ultricies lorem.</li>
+                                                                                </ol>
+                                                                            </li>
+                                                                            <li>Convallis nisl vel.</li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>Nam vitae dolor mi.</li>
+                                                                </ol> }
+                                                            </li>
+                                                            <li>Ut maximus arcu hendrerit in.</li>
+                                                        </ol>
+                                                    </li>
+                                                    <li>Integer vehicula lacus ac congue ullamcorper.</li>
+                                                </ol> }
+                                            </li>
+                                            <li>Duis hendrerit eu lacus at egestas.</li>
+                                        </ol>
+                                    </li>
+                                    <li>Duis hendrerit eu lacus at egestas.</li>
+                                </ol>
+                            </li>
+                            <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
+                        </ol>
+                    </li>
+                    <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
+                </ol>
+                <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
+            ) }
+    
+            <ul id="example-list-mixed">
                 <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
                 <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
-                    <ul>
+                    <ol>
                         <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
                         <li>Morbi tempus rhoncus efficitur.
                             <ul>
                                 <li>In pulvinar semper velit.</li>
                                 <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
                                 <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
-                                    <ul>
+                                    <ol>
                                         <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
-                                            { ifDisplay.listsMedium && <ul>
+                                            { ifDisplay.listsMedium && <ol>
                                                 <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
                                                     <ul>
                                                         <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
-                                                            { ifDisplay.listsLong && <ul>
+                                                            { ifDisplay.listsLong && <ol>
                                                                 <li>Suspendisse dapibus maximus leo, quis.
                                                                     <ul>
                                                                         <li>Proin vel risus finibus.
-                                                                            <ul>
+                                                                            <ol>
                                                                                 <li>Feugiat odio mollis ut.</li>
                                                                                 <li>Sed ultricies lorem.</li>
                                                                             </ol>
@@ -608,59 +712,10 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                                                                     </ul>
                                                                 </li>
                                                                 <li>Nam vitae dolor mi.</li>
-                                                            </ul> }
-                                                        </li>
-                                                        <li>Ut maximus arcu hendrerit in.</li>
-                                                    </ul>
-                                                </li>
-                                                <li>Integer vehicula lacus ac congue ullamcorper.</li>
-                                            </ul> }
-                                        </li>
-                                        <li>Duis hendrerit eu lacus at egestas.</li>
-                                    </ul>
-                                </li>
-                                <li>Duis hendrerit eu lacus at egestas.</li>
-                            </ul>
-                        </li>
-                        <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
-                    </ul>
-                </li>
-                <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
-            </ul>
-            <p>Suspendisse potenti. Sed sed hendrerit arcu. Nullam posuere orci vel tellus tempor fringilla a eu lacus. Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus eros magna, ac sagittis nibh sodales eget.</p>
-            <ol id="example-list-ol">
-                <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
-                <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
-                    <ol>
-                        <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
-                        <li>Morbi tempus rhoncus efficitur.
-                            <ol>
-                                <li>In pulvinar semper velit.</li>
-                                <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
-                                <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
-                                    <ol>
-                                        <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
-                                            { ifDisplay.listsMedium && <ol>
-                                                <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
-                                                    <ol>
-                                                        <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
-                                                            { ifDisplay.listsLong && <ol>
-                                                                <li>Suspendisse dapibus maximus leo, quis.
-                                                                    <ol>
-                                                                        <li>Proin vel risus finibus.
-                                                                            <ol>
-                                                                                <li>Feugiat odio mollis ut.</li>
-                                                                                <li>Sed ultricies lorem.</li>
-                                                                            </ol>
-                                                                        </li>
-                                                                        <li>Convallis nisl vel.</li>
-                                                                    </ol>
-                                                                </li>
-                                                                <li>Nam vitae dolor mi.</li>
                                                             </ol> }
                                                         </li>
                                                         <li>Ut maximus arcu hendrerit in.</li>
-                                                    </ol>
+                                                    </ul>
                                                 </li>
                                                 <li>Integer vehicula lacus ac congue ullamcorper.</li>
                                             </ol> }
@@ -669,345 +724,294 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                                     </ol>
                                 </li>
                                 <li>Duis hendrerit eu lacus at egestas.</li>
-                            </ol>
+                            </ul>
                         </li>
                         <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
                     </ol>
                 </li>
                 <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
-            </ol>
-            <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-        ) }
-
-        <ul id="example-list-mixed">
-            <li>Cras eleifend lacus ac lacus ullamcorper, quis hendrerit velit tincidunt. Etiam laoreet arcu at condimentum lacinia. Nullam dictum vestibulum erat vitae feugiat.</li>
-            <li>Quis consequat leo in lacinia aliquam. Praesent justo tellus, viverra non ex et, venenatis gravida tortor. Curabitur sodales dolor elit, eget lacinia risus eleifend et.
-                <ol>
-                    <li>Mauris porttitor viverra sem vitae interdum. Donec sed vulputate velit. Sed hendrerit quam ac erat venenatis lobortis.</li>
-                    <li>Morbi tempus rhoncus efficitur.
-                        <ul>
-                            <li>In pulvinar semper velit.</li>
-                            <li>Proin pellentesque libero nibh, non placerat lorem feugiat eu. Nulla ultricies diam urna.</li>
-                            <li>Integer vehicula lacus ac congue ullamcorper. Aliquam luctus fringilla nunc, ut maximus arcu hendrerit in. Cras consequat id tortor nec dapibus.
-                                <ol>
-                                    <li>Praesent consectetur lorem ut ex elementum congue. Nunc vel cursus quam.
-                                        { ifDisplay.listsMedium && <ol>
-                                            <li>Mauris a tincidunt mauris.Nunc non quam quis massa volutpat.
-                                                <ul>
-                                                    <li>Aliquam luctus fringilla nunc lacinia nec at ipsum.
-                                                        { ifDisplay.listsLong && <ol>
-                                                            <li>Suspendisse dapibus maximus leo, quis.
-                                                                <ul>
-                                                                    <li>Proin vel risus finibus.
-                                                                        <ol>
-                                                                            <li>Feugiat odio mollis ut.</li>
-                                                                            <li>Sed ultricies lorem.</li>
-                                                                        </ol>
-                                                                    </li>
-                                                                    <li>Convallis nisl vel.</li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>Nam vitae dolor mi.</li>
-                                                        </ol> }
-                                                    </li>
-                                                    <li>Ut maximus arcu hendrerit in.</li>
-                                                </ul>
-                                            </li>
-                                            <li>Integer vehicula lacus ac congue ullamcorper.</li>
-                                        </ol> }
-                                    </li>
-                                    <li>Duis hendrerit eu lacus at egestas.</li>
-                                </ol>
-                            </li>
-                            <li>Duis hendrerit eu lacus at egestas.</li>
-                        </ul>
-                    </li>
-                    <li>Fusce eu tincidunt dui. Nam vulputate tincidunt eleifend. Nunc non quam quis massa volutpat lacinia nec at ipsum.</li>
-                </ol>
-            </li>
-            <li>Curabitur neque risus, consectetur in semper non, fringilla in justo.</li>
-        </ul>
-
-        <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
-
-        <slot name="two" />
-
-
-        <Heading
-            displayHeading={1 + displayHeading}
-            heading={ 1 + heading }
-        >Praesent Blandit <a href="#">ex</a></Heading>
-        <p>Turpis maximus posuere rhoncus, nunc est aliquam ligula, non ultrices felis turpis in sapien. Proin efficitur rhoncus ex auctor faucibus. Maecenas sed ornare ante, vitae consequat tellus. Aliquam eget facilisis nunc. Mauris in arcu sagittis velit aliquam cursus dignissim at odio.<a id={tableOfContentIds.buttons.id}></a></p>
-
-        { ifDisplay.buttons && (
-            <button type="button">This is a button</button>
-
-            <div class="button-span">
-                { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button> }
-
-                { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
-                    class={`button-${variant}`}
-                    set:text={`This is a ${variant} button`}
-                    type="button"
-                /> ) : '' }
-            </div>
-        ) }
-
-        { ifDisplay.buttons && ifDisplay.buttonTypes && <div class="button-span">
-            <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
-            <button type="submit" set:text="This is a submit button" />
-            <button type="reset" set:text="This is a reset button" />
-        </div> }
-
-        <slot name="three" />
-
-        <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue.{ ifDisplay.textPage && ' Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.' }</p>
-
-
-        <Heading
-            displayHeading={2 + displayHeading}
-            heading={ 2 + heading }
-        >Nulla Facilisi <a href="#">ex</a></Heading>
-
-        <p>Nullam malesuada tincidunt turpis. Nam blandit facilisis efficitur. Vivamus scelerisque, eros sed iaculis elementum, eros leo viverra magna, vitae interdum quam sem id sapien.</p>
-
-        <slot name="four" />
-
-        { ifDisplay.textPage && <p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p> }
-
-        { ifDisplay.blockquote && (
-            <blockquote id={tableOfContentIds.blockquotes.id}>
-                <p>This is a blockquote. Suspendisse euismod, felis ut malesuada pulvinar, mi diam elementum neque, sit amet maximus est urna sed ipsum. Suspendisse venenatis interdum massa ac tincidunt.</p>
-                <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
-                <cite>This is the citation (cite) for this quote.</cite>
-            </blockquote>
-            <blockquote class="pull-quote">
-                <p>This is a blockquote (with a <code>pull-quote</code> class). Suspendisse euismod, felis ut malesuada pulvinar, mi diam elementum neque, sit amet maximus est urna sed ipsum. Suspendisse venenatis interdum massa ac tincidunt.</p>
-                <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
-                <cite>This is the citation (cite) for this quote.</cite>
-            </blockquote>
-        ) }
-
-        { ifDisplay.code ? (
-            <p>Look!  It’s <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
-           <Fragment>
-                <CodeBlock lang="php" children={code.php} />
-                { ifDisplay.codeLong && (
-                    <CodeBlock lang="plaintext" children={'this block has plaintext language applied!\n\nLook!  It’s `some code`!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.'} />
-                    <CodeBlock lang="php" class="content-width" children={'// this should be content-width\n\n' + code.php} />
-                    <CodeBlock lang="php" class="page-width" children={'// this should be page-width\n\n' + code.php} />
-                ) }
-                <CodeBlock lang="html" children={code.html} />
-                { ifDisplay.codeLong && (
-                    <CodeBlock lang="css" class="page-width" children={'/* this should be page-width */\n\n' + code.css} />
-                    <CodeBlock lang="css" class="site-width" children={'/* this should be site-width */\n\n' + code.css} />
-                ) }
-           </Fragment>
-        ) : '' }
-
-        { ifDisplay.textPage && <p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p> }
-
-
-        { ifDisplay.textPage && <Heading
-            displayHeading={3 + displayHeading}
-            heading={ 3 + heading }
-        >Pretium Purus <a href="#">ex</a></Heading>
-        <p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p> }
-
-        { ifDisplay.table && (
-            <Table>
-                <tr>
-                    <th>Table Heading 1</th>
-                    <th>Table Heading 2</th>
-                    {/* <th>Table Heading 3</th> */}
-                </tr>
-                <tr>
-                    <td>Pellentesque in mauris.</td>
-                    <td>Sed ullamcorper eu </td>
-                    {/* <td>Praesent mollis pretium.</td> */}
-                </tr>
-                <tr>
-                    <td>Quisque venenatis ac.</td>
-                    <td>Ut eros lacus, mattis sit.</td>
-                    {/* <td>Nam congue sagittis.</td> */}
-                </tr>
-            </Table>
-
-            <Fragment>
-                { ifDisplay.tableLong && (
-                    <Table>
-                        <tr>
-                            <th>Table Heading 1</th>
-                            <th>Table Heading 2</th>
-                            <th>Table Heading 3</th>
-                        </tr>
-                        <tr>
-                            <td>Pellentesque in mauris neque. Vivamus rutrum sodales eros, quis cursus leo ultrices eget.</td>
-                            <td>Sed ullamcorper eu sapien vitae elementum. </td>
-                            <td>Praesent mollis efficitur odio vitae pretium.</td>
-                        </tr>
-                        <tr>
-                            <td>Quisque venenatis ac velit venenatis scelerisque.</td>
-                            <td>Ut eros lacus, mattis sit amet pretium a, fermentum et dolor. Cras eu semper massa.</td>
-                            <td>Nam congue sagittis scelerisque. Etiam et diam pharetra, tempor ex sit amet, scelerisque est.</td>
-                        </tr>
-                    </Table>
-                ) }
-            </Fragment>
-        ) }
-
-        { ifDisplay.textPage && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }
-
-        { ifDisplay.textLong ? <Heading
-            displayHeading={4 + displayHeading}
-            heading={ 4 + heading }
-        >Cras Volutpat <a href="#">ex</a></Heading>
-        <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p> : '' }
-
-        { ifDisplay.forms && (
-            <hr />
-
+            </ul>
+    
+            <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
+    
+            <slot name="two" />
+    
+    
             <Heading
-                displayHeading={displayHeading}
-                heading={heading}
-                id={tableOfContentIds.form.id}
-            >Simple Form</Heading>
-
-            <form>
-
-                <label>Your Name</label>
-                <input type="text" name="your-name" placeholder="What should we call you?" autocomplete="off" />
-                
-                <label>Your Email</label>
-                <input type="email" name="your-email" placeholder="How should we reply?" autocomplete="off" />
-                
-                <label>Your Message</label>
-                <textarea
-                    name="your-message"
-                    placeholder="What would you like to tell us?"
-                    rows="4"
-                ></textarea>
-                
-                <input type="submit" value="Send Message" autocomplete="off" />
-                
-            </form>
-        ) }
-
-        { ifDisplay.formsLong && (
-            <hr/>
-
+                displayHeading={1 + displayHeading}
+                heading={ 1 + heading }
+            >Praesent Blandit <a href="#">ex</a></Heading>
+            <p>Turpis maximus posuere rhoncus, nunc est aliquam ligula, non ultrices felis turpis in sapien. Proin efficitur rhoncus ex auctor faucibus. Maecenas sed ornare ante, vitae consequat tellus. Aliquam eget facilisis nunc. Mauris in arcu sagittis velit aliquam cursus dignissim at odio.<a id={tableOfContentIds.buttons.id}></a></p>
+    
+            { ifDisplay.buttons && (
+                <button type="button">This is a button</button>
+    
+                <div class="button-span">
+                    { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button> }
+    
+                    { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
+                        class={`button-${variant}`}
+                        set:text={`This is a ${variant} button`}
+                        type="button"
+                    /> ) : '' }
+                </div>
+            ) }
+    
+            { ifDisplay.buttons && ifDisplay.buttonTypes && <div class="button-span">
+                <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
+                <button type="submit" set:text="This is a submit button" />
+                <button type="reset" set:text="This is a reset button" />
+            </div> }
+    
+            <slot name="three" />
+    
+            <p>Cras neque arcu, fermentum non elementum ac, tincidunt ut nibh. Proin blandit, nisl at volutpat pulvinar, massa nisl vulputate risus, eget porttitor neque mi id augue.{ ifDisplay.textPage && ' Integer porttitor egestas facilisis. Quisque eget nibh hendrerit, ornare nisl sit amet, faucibus enim. Vivamus venenatis, libero et laoreet laoreet, purus dolor fringilla massa, sit amet luctus dolor ligula nec metus. Suspendisse ut justo vel nisi porta tincidunt.' }</p>
+    
+    
             <Heading
-                displayHeading={displayHeading}
-                heading={heading}
-            >Fancy Forms</Heading>
-            <form>
-
-                <label for="input1">Text Input</label>
-                <input type="text" id="input1" name="input1" autocomplete="off" />
-
-                <label for="input2a">Telephone Input</label>
-                <input type="tel" id="input2a" name="input2a" autocomplete="off" />
-
-                <label for="input2b">Telephone Input with Pattern</label>
-                <input type="tel" id="input2b" name="input2b" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" autocomplete="off" />
-
-                <label for="input3">Email Input</label>
-                <input type="email" id="input3" name="input3" autocomplete="off" />
-
-                <label for="input4">URL Input</label>
-                <input type="url" id="input4" name="input4" autocomplete="off" />
-
-                <label for="input5">Password Input</label>
-                <input type="password" id="input5" name="input5" autocomplete="off" />
-                
-                <label for="textarea">Textarea Element</label>
-                <textarea id="textarea" name="textarea" rows="5"></textarea>
-
-                <fieldset>
-
-                    <legend>Numerical Elements</legend>
-                
-                    <label for="input6">Number Input</label>
-                    <input type="number" id="input6" name="input6" min="" max="" step="1" autocomplete="off" />
-                        
-                    <label for="input7">Range Input</label>
-                    <input type="range" id="input7" name="input7" min="0" max="100" step="1" autocomplete="off" />
-
-                </fieldset>
-
-                <fieldset aria-label="Multi-Choice Elements">
-
-                    <label class="checkbox-label" for="input8-1"><input type="checkbox" id="input8-1" name="input8" value="input8-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores rem labore assumenda quod?</label>
-                    <label class="checkbox-label" for="input8-2"><input type="checkbox" id="input8-2" name="input8" value="input8-2">Qui commodi odio, rem assumenda laboriosam quidem, nesciunt magni provident, animi autem iusto.</label>
-                    <label class="checkbox-label" for="input8-3"><input type="checkbox" id="input8-3" name="input8" value="input8-3">Error, delectus! Vel similique quidem nam culpa ipsum repudiandae assumenda suscipit reprehenderit nihil. Placeat labore fuga excepturi?</label>
-                    <label class="checkbox-label" for="input8-4"><input type="checkbox" id="input8-4" name="input8" value="input8-4">Odio atque explicabo deleniti praesentium, illo dolorem tempora.</label>
-                    <label class="checkbox-label" for="input8-5"><input type="checkbox" id="input8-5" name="input8" value="input8-5">Numquam veniam quod minima nisi ratione! Minima nemo aliquid eaque ducimus cupiditate cumque quibusdam a aspernatur accusantium excepturi?</label>
-                    <label class="checkbox-label" for="input8-6"><input type="checkbox" id="input8-6" name="input8" value="input8-6">Ab hic perferendis nesciunt asperiores animi maxime dolore. Sint dolores sed magnam ab dolorum vel eius unde labore quae autem.</label>
-
-                    <label class="checkbox-label" for="input9-1"><input type="radio" id="input9-1" name="input9" value="input9-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit esse voluptates architecto asperiores rerum sed nobis nulla, sequi beatae?</label>
-                    <label class="checkbox-label" for="input9-2"><input type="radio" id="input9-2" name="input9" value="input9-2">Quam atque cupiditate, quia labore ut asperiores corporis perferendis vero odio ratione!</label>
-                    <label class="checkbox-label" for="input9-3"><input type="radio" id="input9-3" name="input9" value="input9-3">Aut doloremque ullam deleniti, obcaecati architecto maiores temporibus ipsam sapiente dolore! Eveniet dignissimos eum ex sequi sit nobis ipsa soluta minima.</label>
-                    <label class="checkbox-label" for="input9-4"><input type="radio" id="input9-4" name="input9" value="input9-4">Deleniti iste a distinctio exercitationem animi optio quas placeat id omnis enim, error ad corrupti necessitatibus odio.</label>
-                    <label class="checkbox-label" for="input9-5"><input type="radio" id="input9-5" name="input9" value="input9-5">Provident totam impedit laborum autem, accusamus perspiciatis fugiat molestiae eius commodi, ullam, assumenda rem placeat magnam ratione sequi?</label>
-                    <label class="checkbox-label" for="input9-6"><input type="radio" id="input9-6" name="input9" value="input9-6">Repellendus a dolorem voluptatum, fugiat quas harum nesciunt iure doloribus nostrum cumque reprehenderit iusto. Non, ipsa? Veritatis?</label>
-                
-                    <select class="no-label" id="select1" name="select1">
-                        <option value="opt1">Lorem, ipsum dolor.</option>
-                        <option value="opt2">Tenetur, amet sunt.</option>
-                        <option value="opt3">Iusto et mollitia sunt!</option>
-                        <option value="opt4">Provident at consectetur quisquam?</option>
-                        <option value="opt5">Aperiam, nemo.</option>
-                        <option value="opt6">Ipsam iste eos suscipit.</option>
-                    </select>
-                
-                    <select class="no-label" id="select2" name="select2" size="3" multiple>
-                        <option value="opt1">Lorem, ipsum dolor.</option>
-                        <option value="opt2">Tenetur, amet sunt.</option>
-                        <option value="opt3">Iusto et mollitia sunt!</option>
-                        <option value="opt4">Provident at consectetur quisquam?</option>
-                        <option value="opt5">Aperiam, nemo.</option>
-                        <option value="opt6">Ipsam iste eos suscipit.</option>
-                    </select>
-
-                </fieldset>
-
-                <label for="input10">Date Input</label>
-                <input type="date" id="input10" name="input10" min="" max="" autocomplete="off" />
-
-                <label for="input11">Time Input</label>
-                <input type="time" id="input11" name="input11" autocomplete="off" />
-
-                <label for="input12">Datetime-Local Input</label>
-                <input type="datetime-local" id="input12" name="input12" autocomplete="off" />
-
-                <label for="input13">Week Input</label>
-                <input type="week" id="input13" name="input13" autocomplete="off" />
-
-                <label for="input14">Month Input</label>
-                <input type="month" id="input14" name="input14" autocomplete="off" />
-
-                <label for="input15">File Input</label>
-                <input type="file" id="input15" name="input15" autocomplete="off" />
-
-                <label for="input16">Colour Input</label>
-                <input type="color" id="input16" name="input16" autocomplete="off" />
-
-                <label for="input17">Hidden Field</label>
-                <input type="hidden" id="input17" name="input17" value="hidden" autocomplete="off" />
-
-                <label for="input18">Search Field</label>
-                <input type="search" id="input18" name="input18" autocomplete="off" />
-
-                <button type="button" id="button" name="button" onclick="alert('Hello!')" set:text="Say Hello!" />
-
-                <button type="reset" id="input20" name="input20" set:text="Reset Button" />
-                
-                <button type="submit" id="input21" name="input21" set:text="Submit Button" />
-            </form>
-        ) }
-    </Fragment>
-) }
-
+                displayHeading={2 + displayHeading}
+                heading={ 2 + heading }
+            >Nulla Facilisi <a href="#">ex</a></Heading>
+    
+            <p>Nullam malesuada tincidunt turpis. Nam blandit facilisis efficitur. Vivamus scelerisque, eros sed iaculis elementum, eros leo viverra magna, vitae interdum quam sem id sapien.</p>
+    
+            <slot name="four" />
+    
+            { ifDisplay.textPage && <p>Proin sollicitudin et nibh vitae egestas. Ut ut sapien vitae massa mollis viverra vitae sit amet ante. Donec ultrices ullamcorper facilisis. Vivamus id tincidunt libero, ac ultrices est.</p> }
+    
+            { ifDisplay.blockquote && (
+                <blockquote id={tableOfContentIds.blockquotes.id}>
+                    <p>This is a blockquote. Suspendisse euismod, felis ut malesuada pulvinar, mi diam elementum neque, sit amet maximus est urna sed ipsum. Suspendisse venenatis interdum massa ac tincidunt.</p>
+                    <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
+                    <cite>This is the citation (cite) for this quote.</cite>
+                </blockquote>
+                <blockquote class="pull-quote">
+                    <p>This is a blockquote (with a <code>pull-quote</code> class). Suspendisse euismod, felis ut malesuada pulvinar, mi diam elementum neque, sit amet maximus est urna sed ipsum. Suspendisse venenatis interdum massa ac tincidunt.</p>
+                    <p>In eget fringilla justo. Proin venenatis in sem vitae fringilla. Morbi elementum nisi et risus hendrerit, et tincidunt mi euismod. Vestibulum faucibus elementum diam id placerat.</p>
+                    <cite>This is the citation (cite) for this quote.</cite>
+                </blockquote>
+            ) }
+    
+            { ifDisplay.code ? (
+                <p>Look!  It’s <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
+               <Fragment>
+                    <CodeBlock lang="php" children={code.php} />
+                    { ifDisplay.codeLong && (
+                        <CodeBlock lang="plaintext" children={'this block has plaintext language applied!\n\nLook!  It’s `some code`!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.'} />
+                        <CodeBlock lang="php" class="content-width" children={'// this should be content-width\n\n' + code.php} />
+                        <CodeBlock lang="php" class="page-width" children={'// this should be page-width\n\n' + code.php} />
+                    ) }
+                    <CodeBlock lang="html" children={code.html} />
+                    { ifDisplay.codeLong && (
+                        <CodeBlock lang="css" class="page-width" children={'/* this should be page-width */\n\n' + code.css} />
+                        <CodeBlock lang="css" class="site-width" children={'/* this should be site-width */\n\n' + code.css} />
+                    ) }
+               </Fragment>
+            ) : '' }
+    
+            { ifDisplay.textPage && <p>Vestibulum quis erat lorem. Donec ultrices maximus mauris, vel aliquam orci laoreet posuere. Proin aliquam rhoncus eros et congue. In ut accumsan diam. Morbi eleifend arcu in molestie lacinia. Nunc dolor erat, cursus quis dolor id, imperdiet lacinia tortor. Nulla accumsan feugiat elementum. Quisque id sodales velit, ut.</p> }
+    
+    
+            { ifDisplay.textPage && <Heading
+                displayHeading={3 + displayHeading}
+                heading={ 3 + heading }
+            >Pretium Purus <a href="#">ex</a></Heading>
+            <p>Nulla finibus diam a mauris euismod, eget maximus nisl semper. Praesent placerat ipsum eget libero tempor, id cursus sapien aliquam. Morbi eleifend laoreet maximus. Suspendisse porta a lorem nec fringilla. Vivamus malesuada, mi eu tincidunt interdum, turpis eros hendrerit eros, quis ornare urna tellus ut felis.</p> }
+    
+            { ifDisplay.table && (
+                <Table>
+                    <tr>
+                        <th>Table Heading 1</th>
+                        <th>Table Heading 2</th>
+                        {/* <th>Table Heading 3</th> */}
+                    </tr>
+                    <tr>
+                        <td>Pellentesque in mauris.</td>
+                        <td>Sed ullamcorper eu </td>
+                        {/* <td>Praesent mollis pretium.</td> */}
+                    </tr>
+                    <tr>
+                        <td>Quisque venenatis ac.</td>
+                        <td>Ut eros lacus, mattis sit.</td>
+                        {/* <td>Nam congue sagittis.</td> */}
+                    </tr>
+                </Table>
+    
+                <Fragment>
+                    { ifDisplay.tableLong && (
+                        <Table>
+                            <tr>
+                                <th>Table Heading 1</th>
+                                <th>Table Heading 2</th>
+                                <th>Table Heading 3</th>
+                            </tr>
+                            <tr>
+                                <td>Pellentesque in mauris neque. Vivamus rutrum sodales eros, quis cursus leo ultrices eget.</td>
+                                <td>Sed ullamcorper eu sapien vitae elementum. </td>
+                                <td>Praesent mollis efficitur odio vitae pretium.</td>
+                            </tr>
+                            <tr>
+                                <td>Quisque venenatis ac velit venenatis scelerisque.</td>
+                                <td>Ut eros lacus, mattis sit amet pretium a, fermentum et dolor. Cras eu semper massa.</td>
+                                <td>Nam congue sagittis scelerisque. Etiam et diam pharetra, tempor ex sit amet, scelerisque est.</td>
+                            </tr>
+                        </Table>
+                    ) }
+                </Fragment>
+            ) }
+    
+            { ifDisplay.textPage && <p>Dolor sit amet consectetur adipisicing elit. Ipsa aperiam tempora ex accusamus voluptatem tenetur esse, illo officia repellat. Sapiente exercitationem rerum tenetur! Beatae quasi, nobis cumque animi, cum laudantium explicabo corporis impedit et labore tempora aliquam a?</p> }
+    
+            { ifDisplay.textLong ? <Heading
+                displayHeading={4 + displayHeading}
+                heading={ 4 + heading }
+            >Cras Volutpat <a href="#">ex</a></Heading>
+            <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p> : '' }
+    
+            { ifDisplay.forms && (
+                <hr />
+    
+                <Heading
+                    displayHeading={displayHeading}
+                    heading={heading}
+                    id={tableOfContentIds.form.id}
+                >Simple Form</Heading>
+    
+                <form>
+    
+                    <label>Your Name</label>
+                    <input type="text" name="your-name" placeholder="What should we call you?" autocomplete="off" />
+                    
+                    <label>Your Email</label>
+                    <input type="email" name="your-email" placeholder="How should we reply?" autocomplete="off" />
+                    
+                    <label>Your Message</label>
+                    <textarea
+                        name="your-message"
+                        placeholder="What would you like to tell us?"
+                        rows="4"
+                    ></textarea>
+                    
+                    <input type="submit" value="Send Message" autocomplete="off" />
+                    
+                </form>
+            ) }
+    
+            { ifDisplay.formsLong && (
+                <hr/>
+    
+                <Heading
+                    displayHeading={displayHeading}
+                    heading={heading}
+                >Fancy Forms</Heading>
+                <form>
+    
+                    <label for="input1">Text Input</label>
+                    <input type="text" id="input1" name="input1" autocomplete="off" />
+    
+                    <label for="input2a">Telephone Input</label>
+                    <input type="tel" id="input2a" name="input2a" autocomplete="off" />
+    
+                    <label for="input2b">Telephone Input with Pattern</label>
+                    <input type="tel" id="input2b" name="input2b" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" autocomplete="off" />
+    
+                    <label for="input3">Email Input</label>
+                    <input type="email" id="input3" name="input3" autocomplete="off" />
+    
+                    <label for="input4">URL Input</label>
+                    <input type="url" id="input4" name="input4" autocomplete="off" />
+    
+                    <label for="input5">Password Input</label>
+                    <input type="password" id="input5" name="input5" autocomplete="off" />
+                    
+                    <label for="textarea">Textarea Element</label>
+                    <textarea id="textarea" name="textarea" rows="5"></textarea>
+    
+                    <fieldset>
+    
+                        <legend>Numerical Elements</legend>
+                    
+                        <label for="input6">Number Input</label>
+                        <input type="number" id="input6" name="input6" min="" max="" step="1" autocomplete="off" />
+                            
+                        <label for="input7">Range Input</label>
+                        <input type="range" id="input7" name="input7" min="0" max="100" step="1" autocomplete="off" />
+    
+                    </fieldset>
+    
+                    <fieldset aria-label="Multi-Choice Elements">
+    
+                        <label class="checkbox-label" for="input8-1"><input type="checkbox" id="input8-1" name="input8" value="input8-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores rem labore assumenda quod?</label>
+                        <label class="checkbox-label" for="input8-2"><input type="checkbox" id="input8-2" name="input8" value="input8-2">Qui commodi odio, rem assumenda laboriosam quidem, nesciunt magni provident, animi autem iusto.</label>
+                        <label class="checkbox-label" for="input8-3"><input type="checkbox" id="input8-3" name="input8" value="input8-3">Error, delectus! Vel similique quidem nam culpa ipsum repudiandae assumenda suscipit reprehenderit nihil. Placeat labore fuga excepturi?</label>
+                        <label class="checkbox-label" for="input8-4"><input type="checkbox" id="input8-4" name="input8" value="input8-4">Odio atque explicabo deleniti praesentium, illo dolorem tempora.</label>
+                        <label class="checkbox-label" for="input8-5"><input type="checkbox" id="input8-5" name="input8" value="input8-5">Numquam veniam quod minima nisi ratione! Minima nemo aliquid eaque ducimus cupiditate cumque quibusdam a aspernatur accusantium excepturi?</label>
+                        <label class="checkbox-label" for="input8-6"><input type="checkbox" id="input8-6" name="input8" value="input8-6">Ab hic perferendis nesciunt asperiores animi maxime dolore. Sint dolores sed magnam ab dolorum vel eius unde labore quae autem.</label>
+    
+                        <label class="checkbox-label" for="input9-1"><input type="radio" id="input9-1" name="input9" value="input9-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit esse voluptates architecto asperiores rerum sed nobis nulla, sequi beatae?</label>
+                        <label class="checkbox-label" for="input9-2"><input type="radio" id="input9-2" name="input9" value="input9-2">Quam atque cupiditate, quia labore ut asperiores corporis perferendis vero odio ratione!</label>
+                        <label class="checkbox-label" for="input9-3"><input type="radio" id="input9-3" name="input9" value="input9-3">Aut doloremque ullam deleniti, obcaecati architecto maiores temporibus ipsam sapiente dolore! Eveniet dignissimos eum ex sequi sit nobis ipsa soluta minima.</label>
+                        <label class="checkbox-label" for="input9-4"><input type="radio" id="input9-4" name="input9" value="input9-4">Deleniti iste a distinctio exercitationem animi optio quas placeat id omnis enim, error ad corrupti necessitatibus odio.</label>
+                        <label class="checkbox-label" for="input9-5"><input type="radio" id="input9-5" name="input9" value="input9-5">Provident totam impedit laborum autem, accusamus perspiciatis fugiat molestiae eius commodi, ullam, assumenda rem placeat magnam ratione sequi?</label>
+                        <label class="checkbox-label" for="input9-6"><input type="radio" id="input9-6" name="input9" value="input9-6">Repellendus a dolorem voluptatum, fugiat quas harum nesciunt iure doloribus nostrum cumque reprehenderit iusto. Non, ipsa? Veritatis?</label>
+                    
+                        <select class="no-label" id="select1" name="select1">
+                            <option value="opt1">Lorem, ipsum dolor.</option>
+                            <option value="opt2">Tenetur, amet sunt.</option>
+                            <option value="opt3">Iusto et mollitia sunt!</option>
+                            <option value="opt4">Provident at consectetur quisquam?</option>
+                            <option value="opt5">Aperiam, nemo.</option>
+                            <option value="opt6">Ipsam iste eos suscipit.</option>
+                        </select>
+                    
+                        <select class="no-label" id="select2" name="select2" size="3" multiple>
+                            <option value="opt1">Lorem, ipsum dolor.</option>
+                            <option value="opt2">Tenetur, amet sunt.</option>
+                            <option value="opt3">Iusto et mollitia sunt!</option>
+                            <option value="opt4">Provident at consectetur quisquam?</option>
+                            <option value="opt5">Aperiam, nemo.</option>
+                            <option value="opt6">Ipsam iste eos suscipit.</option>
+                        </select>
+    
+                    </fieldset>
+    
+                    <label for="input10">Date Input</label>
+                    <input type="date" id="input10" name="input10" min="" max="" autocomplete="off" />
+    
+                    <label for="input11">Time Input</label>
+                    <input type="time" id="input11" name="input11" autocomplete="off" />
+    
+                    <label for="input12">Datetime-Local Input</label>
+                    <input type="datetime-local" id="input12" name="input12" autocomplete="off" />
+    
+                    <label for="input13">Week Input</label>
+                    <input type="week" id="input13" name="input13" autocomplete="off" />
+    
+                    <label for="input14">Month Input</label>
+                    <input type="month" id="input14" name="input14" autocomplete="off" />
+    
+                    <label for="input15">File Input</label>
+                    <input type="file" id="input15" name="input15" autocomplete="off" />
+    
+                    <label for="input16">Colour Input</label>
+                    <input type="color" id="input16" name="input16" autocomplete="off" />
+    
+                    <label for="input17">Hidden Field</label>
+                    <input type="hidden" id="input17" name="input17" value="hidden" autocomplete="off" />
+    
+                    <label for="input18">Search Field</label>
+                    <input type="search" id="input18" name="input18" autocomplete="off" />
+    
+                    <button type="button" id="button" name="button" onclick="alert('Hello!')" set:text="Say Hello!" />
+    
+                    <button type="reset" id="input20" name="input20" set:text="Reset Button" />
+                    
+                    <button type="submit" id="input21" name="input21" set:text="Submit Button" />
+                </form>
+            ) }
+        </Fragment>
+    ) }
+</Fragment>
 
 <style lang="scss">
     .loremipsum-heading-sample {

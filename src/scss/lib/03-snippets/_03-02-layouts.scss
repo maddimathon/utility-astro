@@ -34,14 +34,44 @@ $_contentCol_default: minmax(auto, $_width_content);
 
 $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 
+$_flex_container_alignment: tokens.$contentGridAlignment;
+
+///
+/// Does not set the display property for more flexibility.
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-content-grid-alignment {
-    justify-content: map.get(tokens.$contentGridAlignment, justify-content);
-    justify-items: map.get(tokens.$contentGridAlignment, justify-items);
-    align-content: map.get(tokens.$contentGridAlignment, align-content);
-    align-items: map.get(tokens.$contentGridAlignment, align-items);
+@mixin snippet-content-flex-container(
+    $alignment: (),
+    $gap: 0,
+    $direction: column,
+    $wrap: nowrap,
+    $position: relative
+) {
+    $alignment: map.merge($_flex_container_alignment, $alignment);
+
+    position: #{$position};
+
+    flex-direction: #{$direction};
+    flex-wrap: #{$wrap};
+    gap: #{$gap};
+
+    justify-content: #{map.get($alignment, justify-content)};
+    justify-items: #{map.get($alignment, justify-items)};
+    align-content: #{map.get($alignment, align-content)};
+    align-items: #{map.get($alignment, align-items)};
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-content-grid-alignment($alignment: ()) {
+    $alignment: map.merge(tokens.$contentGridAlignment, $alignment);
+
+    justify-content: #{map.get($alignment, justify-content)};
+    justify-items: #{map.get($alignment, justify-items)};
+    align-content: #{map.get($alignment, align-content)};
+    align-items: #{map.get($alignment, align-items)};
 }
 
 ///
@@ -135,6 +165,20 @@ $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
             @include snippet-support-astro-body-grid--content-width;
         }
 
+        > :where(%_display-contents),
+        > %display-contents {
+            display: contents;
+
+            @include feature-check.supports(displayContents) {
+                > :where(*) {
+                    @include snippet-support-astro-body-grid--content-width(
+                        $setCxProp: false,
+                        $includeDisplayContentUtility: false
+                    );
+                }
+            }
+        }
+
         > :where(%table) {
             @include snippet-support-astro-body-grid--page-width($width: fit-content);
         }
@@ -159,20 +203,6 @@ $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 @mixin snippet-support-astro-body-grid--body-children(
     $flex_alignment: tokens.$contentGridAlignment
 ) {
-    @at-root :where(& %_display-contents),
-        :where(&) %display-contents {
-        display: contents;
-
-        @include feature-check.supports(displayContents) {
-            > :where(*) {
-                @include snippet-support-astro-body-grid--content-width(
-                    $setCxProp: false,
-                    $includeDisplayContentUtility: false
-                );
-            }
-        }
-    }
-
     @at-root :where(&) {
         > :where(*) + :where(*) {
             margin-block: #{var-gap-block(layout)} 0;
@@ -183,16 +213,19 @@ $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
         }
     }
 
-    > :where(%main-content, %main-nav, %site-header, %site-footer),
-    > :is(%body-subgrid) {
-        @extend %_body-subgrid;
-        grid-column: 1 / -1;
+    & > %body-subgrid,
+    & > :where(%main-content, %main-nav, %site-header, %site-footer) {
+        &,
+        & > %body-subgrid {
+            @extend %_body-subgrid;
+            grid-column: 1 / -1;
 
-        grid-template-columns: subgrid;
+            grid-template-columns: subgrid;
 
-        margin-inline: 0;
+            margin-inline: 0;
 
-        @content ('body--subgrid-children');
+            @content ('body--subgrid-children');
+        }
     }
 
     @at-root :where(&) > :where(%main-nav, %site-header, %site-footer) > :where(*) {

@@ -17,7 +17,7 @@ import type { GenericProps } from '../../ts/index.ts';
 import type { NavMenuProps } from '../components/NavMenu.astro';
 
 import type {
-    Props as ContentProps, 
+    ContentProps, 
     ContentType, 
 } from './Content.astro';
 
@@ -30,6 +30,7 @@ import { FeatureCheck } from '@maddimathon/utility-sass';
 
 import { mapToObject } from '../../ts/functions/mapToObject.js';
 import { currentPagePath } from '../functions/index.js';
+
 import Toggle_Scripts from '../support/Toggle_Scripts.astro';
 
 /* import - values */
@@ -52,7 +53,7 @@ export type * from './Page.d.ts';
 
 /** ## PROPS ==================================== **/
 
-export type Props<T_ContentType extends ContentType = ContentType> = GenericProps<PageProps<T_ContentType>>;
+type Props<T_ContentType extends ContentType = ContentType> = GenericProps<PageProps<T_ContentType>>;
 
 const p = Astro.props.frontmatter ?? Astro.props;
 
@@ -135,7 +136,7 @@ if ( p.secondaryMenu ) {
 
 const scripts = mergeArgs(
     {
-        elementToggle: true,
+        elementToggle: false,
         featureCheck: true,
         settings: true,
     },
@@ -175,8 +176,8 @@ const slots_render = mapToObject(
 
             return [
                 _key,
-                Astro.slots.has( _kebab ) && await Astro.slots.render( _kebab ) || false
-            ] as const
+                Astro.slots.has( _kebab ) && (await Astro.slots.render( _kebab ))?.trim(),
+            ] as const;
         } )
     )
 );
@@ -263,7 +264,7 @@ const settings = p.settings && {
 
         { slots_render.headOpen ? (
             <!-- SLOT: "head-open" -->
-            <slot name="head-open" />
+            <Fragment set:html={slots_render.headOpen} />
             <!-- /SLOT: "head-open" -->
         ) : <!-- SLOT: "head-open" (empty) / --> }
 
@@ -271,7 +272,7 @@ const settings = p.settings && {
 
         { slots_render.headClose ? (
             <!-- SLOT: "head-close" -->
-            <slot name="head-close" />
+            <Fragment set:html={slots_render.headClose} />
             <!-- /SLOT: "head-close" -->
         ) : <!-- SLOT: "head-close" (empty) / --> }
     </head>
@@ -289,7 +290,7 @@ const settings = p.settings && {
 
         { slots_render.bodyOpen ? (
             <!-- SLOT: "body-open" -->
-            <slot name="body-open" />
+            <Fragment set:html={slots_render.bodyOpen} />
             <!-- /SLOT: "body-open" -->
         ) : <!-- SLOT: "body-open" (empty) / --> }
 
@@ -301,7 +302,7 @@ const settings = p.settings && {
 
         { slots_render.beforeHeader ? (
             <!-- SLOT: "before-header" -->
-            <slot name="before-header" />
+            <Fragment set:html={slots_render.beforeHeader} />
             <!-- /SLOT: "before-header" -->
         ) : <!-- SLOT: "before-header" (empty) / --> }
         
@@ -312,7 +313,7 @@ const settings = p.settings && {
 
                 { slots_render.header ? (
                     <!-- SLOT: "header" -->
-                    <slot name="header" />
+                    <Fragment set:html={slots_render.header} />
                     <!-- /SLOT: "header" -->
                 ) : <!-- SLOT: "header" (empty) / --> }
             </header>
@@ -322,7 +323,7 @@ const settings = p.settings && {
             <Fragment>
                 { slots_render.beforePrimaryNav ? (
                     <!-- SLOT: "before-primary-nav" -->
-                    <slot name="before-primary-nav" />
+                    <Fragment set:html={slots_render.beforePrimaryNav} />
                     <!-- /SLOT: "before-primary-nav" -->
                 ) : <!-- SLOT: "before-primary-nav" (empty) / --> }
 
@@ -330,7 +331,7 @@ const settings = p.settings && {
 
                 { slots_render.afterPrimaryNav ? (
                     <!-- SLOT: "after-primary-nav" -->
-                    <slot name="after-primary-nav" />
+                    <Fragment set:html={slots_render.afterPrimaryNav} />
                     <!-- /SLOT: "after-primary-nav" -->
                 ) : <!-- SLOT: "after-primary-nav" (empty) / --> }
             </Fragment>
@@ -338,7 +339,7 @@ const settings = p.settings && {
 
         { slots_render.afterHeader ? (
             <!-- SLOT: "after-header" -->
-            <slot name="after-header" />
+            <Fragment set:html={slots_render.afterHeader} />
             <!-- /SLOT: "after-header" -->
         ) : <!-- SLOT: "after-header" (empty) / --> }
          
@@ -354,7 +355,7 @@ const settings = p.settings && {
              <Fragment>
                  { slots_render.beforeSecondaryNav ? (
                      <!-- SLOT: "before-secondary-nav" -->
-                     <slot name="before-secondary-nav" />
+                    <Fragment set:html={slots_render.beforeSecondaryNav} />
                      <!-- /SLOT: "before-secondary-nav" -->
                  ) : <!-- SLOT: "before-secondary-nav" (empty) / --> }
 
@@ -362,7 +363,7 @@ const settings = p.settings && {
 
                  { slots_render.afterSecondaryNav ? (
                      <!-- SLOT: "after-secondary-nav" -->
-                     <slot name="after-secondary-nav" />
+                    <Fragment set:html={slots_render.afterSecondaryNav} />
                      <!-- /SLOT: "after-secondary-nav" -->
                  ) : <!-- SLOT: "after-secondary-nav" (empty) / --> }
              </Fragment>
@@ -370,7 +371,7 @@ const settings = p.settings && {
 
         { slots_render.beforeFooter ? (
             <!-- SLOT: "before-footer" -->
-            <slot name="before-footer" />
+            <Fragment set:html={slots_render.beforeFooter} />
             <!-- /SLOT: "before-footer" -->
         ) : <!-- SLOT: "before-footer" (empty) / --> }
         
@@ -378,7 +379,7 @@ const settings = p.settings && {
             <footer class="site-footer">
                 { slots_render.footer ? (
                     <!-- SLOT: "footer" -->
-                    <slot name="footer" />
+                    <Fragment set:html={slots_render.footer} />
                     <!-- /SLOT: "footer" -->
                 ) : <!-- SLOT: "footer" (empty) / --> }
 
@@ -400,19 +401,19 @@ const settings = p.settings && {
 
         { slots_render.afterFooter ? (
             <!-- SLOT: "after-footer" -->
-            <slot name="after-footer" />
+            <Fragment set:html={slots_render.afterFooter} />
             <!-- /SLOT: "after-footer" -->
         ) : <!-- SLOT: "after-footer" (empty) / --> }
 
         { slots_render.bodyClose ? (
             <!-- SLOT: "body-close" -->
-            <slot name="body-close" />
+            <Fragment set:html={slots_render.bodyClose} />
             <!-- /SLOT: "body-close" -->
         ) : <!-- SLOT: "body-close" (empty) / --> }
 
         { slots_render.footerScripts ? (
             <!-- SLOT: "footer-scripts" -->
-            <slot name="footer-scripts" />
+            <Fragment set:html={slots_render.footerScripts} />
             <!-- /SLOT: "footer-scripts" -->
         ) : <!-- SLOT: "footer-scripts" (empty) / --> }
     </body>

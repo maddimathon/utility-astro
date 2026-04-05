@@ -30,7 +30,7 @@ export interface MainProps {
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<MainProps, 'main'> {}
+type Props = GenericElementProps<MainProps, 'main'>;
 
 const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;
@@ -57,9 +57,7 @@ const slots_render = mapToObject(
 
             return [
                 _key,
-                (Astro.slots.has(_kebab) &&
-                    (await Astro.slots.render(_kebab))) ||
-                    false,
+                Astro.slots.has(_kebab) && (await Astro.slots.render(_kebab))?.trim(),
             ] as const;
         })
     )
@@ -76,7 +74,7 @@ const slots_render = mapToObject(
     { slots_render.contentHeader ? (
         <header class='content-header'>
             <!-- SLOT: "content-header" -->
-            <slot name="content-header" />
+            <Fragment set:html={slots_render.contentHeader} />
             <!-- /SLOT: "content-header" -->
         </header>
     ) : (
@@ -86,13 +84,13 @@ const slots_render = mapToObject(
 
     { slots_render.beforeSiteContent ? (
         <!-- SLOT: "before-site-content" -->
-        <slot name="before-site-content" />
+        <Fragment set:html={slots_render.beforeSiteContent} />
         <!-- /SLOT: "before-site-content" -->
     ) : <!-- SLOT: "before-site-content" (empty) / --> }
 
     { slots_render.default ? (
         <!-- SLOT (MAIN) -->
-        <slot />
+        <Fragment set:html={slots_render.default} />
         <!-- /SLOT (MAIN) -->
     ) : (
         <p class="aside">Content coming soon!</p>
@@ -101,7 +99,7 @@ const slots_render = mapToObject(
 
     { slots_render.afterSiteContent ? (
         <!-- SLOT: "after-site-content" -->
-        <slot name="after-site-content" />
+        <Fragment set:html={slots_render.afterSiteContent} />
         <!-- /SLOT: "after-site-content" -->
     ) : (
         <p class="screen-reader-text">Sidebar is empty, sorry!</p>

@@ -88,8 +88,8 @@ export interface MenuListProps {
 
 
 /* PROPS ===================================== */
-
-export interface Props extends Omit<GenericElementProps<MenuListProps, "div">, 'role'> {}
+    
+type Props = Omit<GenericElementProps<MenuListProps, "div">, 'role'>;
 
 const {
     menu,

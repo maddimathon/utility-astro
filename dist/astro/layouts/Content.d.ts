@@ -49,6 +49,8 @@ export interface ContentProps<T_Type extends ContentType = DefaultContentType> {
      */
     title: string | string[] | null;
 
+    type?: T_Type | undefined;
+
     subtitle?: string | null;
 }
 

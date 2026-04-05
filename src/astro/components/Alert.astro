@@ -37,7 +37,7 @@ export type AlertProps<T_IconProps extends AlertIconProps> = T_IconProps & {
 /* PROPS ===================================== */
 
 // prettier-ignore
-export type Props<T_IconProps extends AlertIconProps = AlertIconProps> = GenericElementProps<AlertProps<T_IconProps>, 'section'>;
+type Props<T_IconProps extends AlertIconProps = AlertIconProps> = GenericElementProps<AlertProps<T_IconProps>, 'section'>;
 
 const {
     displayHeading,
@@ -60,7 +60,9 @@ const iconProps = {
     type,
 } as ComponentProps<typeof Alert_Icon>;
 
-const headlineHTML = (await Astro.slots.render('headline'))?.trim() || false;
+const headlineHTML =
+    Astro.slots.has('headline') &&
+    (await Astro.slots.render('headline'))?.trim();
 ---
 
 <section

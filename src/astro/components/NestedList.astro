@@ -64,10 +64,7 @@ export interface NestedListProps<T_Item extends NestedListItem = NestedListItem>
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<
-    NestedListProps,
-    'ul' | 'ol'
-> {}
+type Props = GenericElementProps<NestedListProps, 'ul' | 'ol'>;
 
 const {
     list,

@@ -45,7 +45,7 @@ export type IconProps = IconProps_Slug | IconProps_Svg;
 
 /* PROPS ===================================== */
 
-export type Props = GenericElementProps<IconProps, 'span'>;
+type Props = GenericElementProps<IconProps, 'span'>;
 
 const {
     slug,
@@ -65,10 +65,9 @@ const label = `${svgLabel ?? SVG_Label[type]} icon`;
     {...attributes}
     class:list={['icon', `icon--${slug ?? type}`, '||', classList]}
     aria-label={label}
+    set:html={svg ? svg.trim() : SVG[type].trim()}
     title={label}
->
-    {svg ? <Fragment set:html={svg} /> : <Fragment set:html={SVG[type]} />}
-</span>
+/>
 
 <style lang='scss'>
     @forward '../css/icon.css';

@@ -20,14 +20,14 @@ import Toggle_Styles from './Toggle_Styles.astro';
 
 /* PROPS ===================================== */
 
-export interface Props {
+type Props = {
     /**
      * Whether to include the toggle styles as well.
      *
      * @default true
      */
     toggle?: boolean;
-}
+};
 
 const { toggle = true }: Props = Astro.props;
 

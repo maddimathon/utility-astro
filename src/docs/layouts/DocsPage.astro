@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { Props as LibPageProps } from '../../astro/layouts/Page.astro';
+import type { ComponentProps } from 'astro/types';
 import type { ContentType } from '../../astro/layouts/Content.astro';
 
 /* import - functions */
@@ -24,12 +24,15 @@ import LibPage from '../../astro/layouts/Page.astro';
 
 /* TYPES ===================================== */
 
+type LibPageProps<T_ContentType extends ContentType = ContentType> =
+    ComponentProps<typeof LibPage<T_ContentType>>;
+
 /* PROPS ===================================== */
 
 type Partial_LibProps = Partial<LibPageProps<ContentType>> &
     Pick<LibPageProps<ContentType>, 'title'>;
 
-export interface Props extends Partial_LibProps {}
+interface Props extends Partial_LibProps {}
 
 const _defaultProps = {
     title: [],

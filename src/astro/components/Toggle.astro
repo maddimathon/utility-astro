@@ -1,8 +1,5 @@
 ---
 /**
- * To use this component, your page MUST include the Toggle_Scripts components
- * and sass styles snippet (or replacements), otherwise this will not work.
- *
  * @since 0.1.0-alpha
  *
  * @packageDocumentation
@@ -12,6 +9,7 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import Toggle_Scripts from '../support/Toggle_Scripts.astro';
 
 /* import - values */
 
@@ -87,11 +85,11 @@ export interface ToggleProps {
     headerTag?: undefined | 'div' | 'header';
 }
 
-export interface Props extends ElementProps<
+type Props = ElementProps<
     ToggleProps,
     'div',
     'aria-label' | 'aria-labelledby' | 'class' | 'class:list'
-> {}
+>;
 
 const {
     defaultOpen,
@@ -159,3 +157,5 @@ const ContainerHeader =
         <div class='container'><slot /></div>
     </Container>
 </div>
+
+<Toggle_Scripts />

@@ -225,13 +225,6 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
         featureCheck?: boolean;
 
         /**
-         * Includes the SettingsMenu_Scripts component.
-         * 
-         * @default true
-         */
-        settingsMenu?: boolean;
-
-        /**
          * Includes the Toggle_Scripts component.
          * 
          * @default true

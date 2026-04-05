@@ -21,7 +21,7 @@
 @mixin snippet-blockquote(
     $display: block,
     $flex_gap: 0,
-    $flex_alignment: tokens.$contentGridAlignment,
+    $flex_alignment: (),
     $marginInline: 0,
     //
     $includeCite: true,
@@ -37,14 +37,10 @@
         using ($location) {
         @if $location == root {
             @if $display == flex {
-                flex-direction: column;
-                flex-wrap: nowrap;
-                gap: #{$flex_gap};
-
-                justify-content: #{map.get($flex_alignment, justify-content)};
-                justify-items: #{map.get($flex_alignment, justify-items)};
-                align-content: #{map.get($flex_alignment, align-content)};
-                align-items: #{map.get($flex_alignment, align-items)};
+                @include snippet-content-flex-container(
+                    $alignment: $flex_alignment,
+                    $gap: $flex_gap
+                );
 
                 justify-self: center;
             }

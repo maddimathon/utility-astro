@@ -35,10 +35,8 @@ export type * from './Content.d.ts';
 
 /* PROPS ===================================== */
 
-export type Props<T_Type extends ContentType = DefaultContentType> =
-    GenericProps<ContentProps<T_Type>> & {
-        type?: T_Type | undefined;
-    };
+// prettier-ignore
+type Props<T_Type extends ContentType = DefaultContentType> = GenericProps<ContentProps<T_Type>>;
 
 const _defProps: ContentProps_Full<ContentType> &
     Pick<Required<Props>, 'type'> = {

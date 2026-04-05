@@ -7,12 +7,11 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/index.js';
-import type { Props as ScriptsProps } from '../support/SettingsMenu_Scripts.astro';
-// import type { Props as StylesProps } from '../support/SettingsMenu_Styles.astro';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions/index.js';
 import { mapToObject } from '../../ts/index.js';
+
 import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 
 /* import - values */
@@ -20,6 +19,7 @@ import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 /* import - components */
 import Icon from './Icon.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
+import type { ComponentProps } from 'astro/types';
 
 /* import - layouts */
 
@@ -115,12 +115,12 @@ export interface SettingsMenuProps {
      * 
      * @default true
      */
-    scripts?: boolean | ScriptsProps;
+    scripts?: boolean | ComponentProps<typeof SettingsMenu_Scripts>;
 }
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<SettingsMenuProps, 'div'> {}
+type Props = GenericElementProps<SettingsMenuProps, 'div'>;
 
 const {
     accessibilityReportEmail,
@@ -197,9 +197,7 @@ const slots_render = mapToObject(
 
             return [
                 _key,
-                (Astro.slots.has(_kebab) &&
-                    (await Astro.slots.render(_kebab))) ||
-                    false,
+                Astro.slots.has(_kebab) && (await Astro.slots.render(_kebab))?.trim(),
             ] as const;
         })
     )
@@ -218,7 +216,7 @@ const slots_render = mapToObject(
 >
     { slots_render.default ? (
         <!-- SLOT: "settings-menu" -->
-        <slot name="settings-menu" />
+        <Fragment set:html={slots_render.default} />
         <!-- /SLOT: "settings-menu" -->
     ) : <!-- SLOT: "settings-menu" (empty) / --> }
 
@@ -231,14 +229,14 @@ const slots_render = mapToObject(
             {...{ id, buttonID }}
             class:list='website-settings__toggle'
             data-toggle-primary-control={id}
-        >
-            <Icon 
-                slot='icon'
-                type='settings'
-                class:list={'settings-menu-icon'}
-            />
-            <span class="screen-reader-text">Toggle settings menu</span>
-        </Toggle_Control>
+        ><Icon 
+            slot='icon'
+            type='settings'
+            class:list={'settings-menu-icon'}
+        /><span
+            class="screen-reader-text"
+            set:text="Toggle settings menu"
+        /></Toggle_Control>
     </div>
 
     <section
@@ -250,7 +248,7 @@ const slots_render = mapToObject(
         <form class='container'>
             { slots_render.settingsMenuOpen ? (
                 <!-- SLOT: "settings-menu-open" --> 
-                <slot name="settings-menu-open" />
+                <Fragment set:html={slots_render.settingsMenuOpen} />
                 <!-- /SLOT: "settings-menu-open" -->
             ) : <!-- SLOT: "settings-menu-open" (empty) / --> }
 
@@ -402,7 +400,7 @@ const slots_render = mapToObject(
             
             { slots_render.settingsMenuClose ? (
                 <!-- SLOT: "settings-menu-close" -->
-                <slot name="settings-menu-close" />
+                <Fragment set:html={slots_render.settingsMenuClose} />
                 <!-- /SLOT: "settings-menu-close" -->
             ) : <!-- SLOT: "settings-menu-close" (empty) / --> }
         </form>

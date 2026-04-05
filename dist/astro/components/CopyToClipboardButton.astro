@@ -1,0 +1,140 @@
+---
+/**
+ * @since 0.1.0-beta.0.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { GenericElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+// prettier-ignore
+export type CopyToClipboardButtonProps = CopyToClipboardButtonProps.WithChildren | CopyToClipboardButtonProps.WithSetHtml | CopyToClipboardButtonProps.WithSetText;
+
+export namespace CopyToClipboardButtonProps {
+    type Base = {
+        /**
+         * Content to copy to clipboard.
+         */
+        toClipboard: string;
+
+        /**
+         * Success message to display when copied.
+         */
+        successMessage?: string;
+    };
+
+    export type WithChildren = Base & {
+        /**
+         * Must have content to label the button (or intentionally leave it blank).
+         */
+        children: any;
+    };
+
+    export type WithSetHtml = Base & {
+        'set:html': string;
+    };
+
+    export type WithSetText = Base & {
+        'set:text': string;
+    };
+}
+
+/* PROPS ===================================== */
+
+// prettier-ignore
+type Props = GenericElementProps<CopyToClipboardButtonProps.WithChildren, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetHtml, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetText, 'div'>;
+
+const {
+    successMessage,
+    toClipboard,
+    class: classListInput = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const classList = [
+    'button--copy-to-clipboard',
+    { '||': classListInput },
+    classListInput,
+];
+---
+
+<button
+    {...attributes}
+    class:list={classList}
+    data-copy-to-clipboard={toClipboard}
+    data-copy-to-clipboard-success={successMessage}
+    ><slot /></button
+>
+
+<script>
+    class CopyToClipboard {
+        protected ogInnerHTML: string;
+        protected readonly successMessage: string;
+        protected textChangeTimeout?: NodeJS.Timeout;
+
+        public constructor(public readonly button: HTMLButtonElement) {
+            this.clicked = this.clicked.bind(this);
+
+            this.ogInnerHTML = this.button.innerHTML;
+            this.successMessage =
+                this.button.dataset['copyToClipboardSuccess'] || 'Copied!';
+
+            button.addEventListener('click', this.clicked);
+        }
+
+        protected changeText(msg: string, timeoutMS: number) {
+            this.ogInnerHTML = this.button.innerHTML;
+            console.log({ ogInnerHTML: this.ogInnerHTML });
+            console.log({ msg });
+            console.log({ timeoutMS });
+
+            this.button.innerText = this.successMessage;
+
+            this.textChangeTimeout = setTimeout(() => {
+                this.button.innerHTML = this.ogInnerHTML;
+            }, timeoutMS);
+        }
+
+        public clicked(event: Event) {
+            console.log({ '[copyToClipboard] event': event });
+
+            if (this.textChangeTimeout) {
+                this.button.innerHTML = this.ogInnerHTML;
+            }
+            // in case someone is clicking super-fast
+            clearTimeout(this.textChangeTimeout);
+
+            const target = event.target as undefined | HTMLButtonElement;
+            console.log({ '[copyToClipboard] target': target });
+
+            const toCopy = target?.dataset['copyToClipboard'];
+            console.log({ '[copyToClipboard] toCopy': toCopy });
+
+            if (toCopy) {
+                navigator.clipboard.writeText(toCopy);
+                this.changeText(this.successMessage, 2000);
+            }
+        }
+    }
+
+    const buttons = document.querySelectorAll('button[data-copy-to-clipboard]');
+
+    console.log({ '[copyToClipboard] buttons': buttons });
+
+    buttons.forEach(
+        (button) => new CopyToClipboard(button as HTMLButtonElement),
+    );
+</script>

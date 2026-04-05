@@ -28,14 +28,14 @@ export interface SidebarProps {
 
 /* PROPS ===================================== */
 
-export interface Props extends GenericElementProps<SidebarProps, 'aside'> {}
+type Props = GenericElementProps<SidebarProps, 'aside'>;
 
 const { class: classList = [], ...attributes }: Props =
     Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
-const rendered = Astro.slots.has('default') && Astro.slots.render('default') || null;
+const rendered = Astro.slots.has('default') && (await Astro.slots.render('default'))?.trim();
 ---
 
 <aside
@@ -46,7 +46,7 @@ const rendered = Astro.slots.has('default') && Astro.slots.render('default') || 
 >
     { rendered ? (
         <!-- SLOT: "sidebar" -->
-        <slot />
+        <Fragment set:html={rendered} />
         <!-- /SLOT: "sidebar" -->
     ) : (
         <p class="screen-reader-text">This sidebar is empty.</p>
