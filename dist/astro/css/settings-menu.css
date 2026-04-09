@@ -109,8 +109,14 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
     display: var(--display, block);
-    margin: 0;
-    padding: var(--mrg-firm-100, 0.3125rem) var(--mrg-firm-100, 0.3125rem);
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: var(--mrg-firm-100, 0.3125rem);
+    padding-bottom: var(--mrg-firm-100, 0.3125rem);
+    padding-left: var(--mrg-firm-100, 0.3125rem);
+    padding-right: var(--mrg-firm-100, 0.3125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;

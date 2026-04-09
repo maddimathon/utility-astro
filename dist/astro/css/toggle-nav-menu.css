@@ -96,7 +96,10 @@
     color: inherit;
 }
 [data-toggle-control][aria-disabled] {
-    margin: var(--mrg-soft-400, 0.8125rem) 0 0;
+    margin-top: var(--mrg-soft-400, 0.8125rem);
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
     padding: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -212,7 +215,10 @@
 }
 
 :where(.js) [data-toggle-container] {
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
     z-index: 1;
 }
 :where(.js) [data-toggle-container]:has(.toggle-title > .page-title) {

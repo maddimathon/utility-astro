@@ -119,8 +119,10 @@
             [data-toggle-control] {
                 @include utils.snippet-button(
                     $gap: 0,
-                    $margin: 0,
-                    $padding: var-mrg-firm('100') var-mrg-firm('100')
+                    $marginBlock: 0,
+                    $marginInline: 0,
+                    $paddingBlock: var-mrg-firm('100'),
+                    $paddingInline: var-mrg-firm('100')
                 );
 
                 & {

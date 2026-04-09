@@ -1613,9 +1613,14 @@ li li li li em em {
 fieldset {
     --display: block;
     display: var(--display, block);
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-400, 1.25rem)
-        var(--mrg-firm-300, 0.8125rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-firm-300, 0.8125rem);
+    padding-left: var(--mrg-firm-400, 1.25rem);
+    padding-right: var(--mrg-firm-400, 1.25rem);
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     background-color: var(--sys-clr-background, Canvas);
@@ -1692,8 +1697,14 @@ input {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
     display: var(--display, block);
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-200, 0.5rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    padding-left: var(--mrg-firm-200, 0.5rem);
+    padding-right: var(--mrg-firm-200, 0.5rem);
     width: 100%;
     font: inherit;
     line-height: var(--line-height-200, 1.3125);
@@ -1887,13 +1898,6 @@ input[type="week"] {
     width: auto;
 }
 
-input[type="file"] {
-    padding-top: var(--mrg-soft-300, 0.5rem);
-    padding-bottom: var(--mrg-soft-300, 0.5rem);
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
-}
-
 input[type="range"] {
     padding: 0;
 }
@@ -1954,8 +1958,14 @@ a.button[href] {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
     display: var(--display, block);
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
@@ -2119,8 +2129,14 @@ a[disabled].button[href] {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
     display: var(--display, block);
-    margin: var(--mrg-firm-400, 1.25rem) 0 var(--mrg-half-400, 0.4375rem);
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
@@ -2303,7 +2319,10 @@ table {
 
 th,
 td {
-    padding: var(--mrg-soft-200, 0.3125rem) var(--mrg-firm-300, 0.8125rem);
+    padding-top: var(--mrg-soft-200, 0.3125rem);
+    padding-bottom: var(--mrg-soft-200, 0.3125rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     min-width: 10em;
     background: var(--sys-clr-background, Canvas);
     vertical-align: top;
@@ -2429,15 +2448,14 @@ pre {
     --display: block;
     display: var(--display, block);
     position: relative;
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.4375rem);
     margin-left: 0;
     margin-right: 0;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-    margin-bottom: 0;
-    margin-top: var(--mrg-firm-600, 2.25rem);
-    margin-bottom: calc(
-        var(--mrg-firm-600, 2.25rem) - var(--mrg-firm-400, 1.25rem)
-    );
-    padding: var(--mrg-soft-300, 0.5rem) var(--mrg-firm-300, 0.8125rem);
+    padding-top: var(--mrg-soft-300, 0.5rem);
+    padding-bottom: var(--mrg-soft-300, 0.5rem);
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     border: var(--border-width-100, 0.0625rem) solid currentColor;
     width: auto;
     max-width: 100%;
