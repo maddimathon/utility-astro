@@ -55,7 +55,9 @@
             margin-block-start: #{var-mrg-soft('600')};
         }
     }
+}
 
+@if map.get(config.$template_styles, pageSubtitle) {
     %page-subtitle {
         margin-block: #{var-mrg-soft('200')} 0;
 

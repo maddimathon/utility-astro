@@ -11,7 +11,7 @@
 
 @if map.get(config.$template_styles, icons) {
     @if config.$template_cssHeadings {
-        /* # ASTRO SUPPORT - ICONS
+        /* # BLOCKS - ICONS
          * ======================================================================== */
     }
 
@@ -29,7 +29,7 @@
 
 @if map.get(config.$template_styles, astro, toggleNav) {
     @if config.$template_cssHeadings {
-        /* # ASTRO COMPONENT - TOGGLE NAV MENU
+        /* # ASTRO SUPPORT - TOGGLE NAV MENU
          * ======================================================================== */
     }
 

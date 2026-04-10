@@ -9,12 +9,15 @@
 
 @use '../../../lib' as *;
 
-@if config.$template_cssHeadings {
+$_print_blockquote: map.get(config.$template_styles, blockquote);
+$_print_pre: map.get(config.$template_styles, pre);
+
+@if config.$template_cssHeadings and ($_print_blockquote or $_print_pre) {
     /* # ASTRO GLOBALS - Typography
      * ======================================================================== */
 }
 
-@if map.get(config.$template_styles, blockquote) {
+@if $_print_blockquote {
     %blockquote {
         @include snippet-blockquote(
             $display: if(
@@ -26,7 +29,7 @@
     }
 }
 
-@if map.get(config.$template_styles, pre) {
+@if $_print_pre {
     %pre {
         @include snippet-pre;
     }

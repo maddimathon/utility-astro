@@ -55,28 +55,33 @@
 ///
 /// @since ___PKG_VERSION___
 ///
+@function snippet-pre-plaintext-selectors() {
+    @return (
+        '.language-wiki',
+        '.language-context',
+        '.language-tex',
+        '.language-latex',
+        '.language-text',
+        '.language-md',
+        '.language-markdown',
+        '.language-hbs',
+        '.language-mustache',
+        '.language-handlebars',
+        '.language-plaintext'
+    );
+}
+
+///
+/// @since ___PKG_VERSION___
+///
 @mixin snippet-pre($marginInline: 0, $args...) {
     @include utils.snippet-pre($marginInline: $marginInline, $args...) using ($location) {
         @if $location == root {
             justify-self: center;
         }
 
-        @if $location == pre-has-code {
-            $_plaintext_selectors: (
-                '.language-wiki',
-                '.language-context',
-                '.language-tex',
-                '.language-latex',
-                '.language-text',
-                '.language-md',
-                '.language-markdown',
-                '.language-hbs',
-                '.language-mustache',
-                '.language-handlebars',
-                '.language-plaintext'
-            );
-
-            @at-root #{selector.unify(&, $_plaintext_selectors)} {
+        @if $location == has-code {
+            &:is(#{snippet-pre-plaintext-selectors()}) {
                 white-space: normal;
                 text-wrap: auto;
                 max-width: #{var-width(callout)};

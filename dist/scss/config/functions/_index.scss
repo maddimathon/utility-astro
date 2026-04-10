@@ -34,25 +34,21 @@
         if(map.has-key($inputs, astro), map.get($inputs, astro), ())
     );
 
+    // prettier-ignore
     @return fns.config-get-template-styles(
         $inputs: map.deep-merge(
                 (
                     astro: $_styles_astro,
-
                     blockquote: $template_globals,
-                    bodyFlow: not map.get($_styles_astro, bodyGrid),
+                    bodyFlow: $include_html and $template_globals and not map.get($_styles_astro, bodyGrid),
                     buttons: $template_globals,
                     headings: $template_globals,
                     icons: $template_utils,
                     normalize: $include_html and $isTemplate,
+                    pageSubtitle: $template_utils,
                     pre: $template_globals,
-
-                    skipLinks: (
-                        $template_astro or $template_globals or $template_utils,
-                    )
-                    and $include_html,
-
                     siteSettingsMenu: $template_astro,
+                    skipLinks: ( $template_astro or $template_globals or $template_utils ) and $include_html,
                     toggle: $template_astro,
                 ),
                 $inputs

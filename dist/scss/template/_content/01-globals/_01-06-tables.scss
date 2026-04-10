@@ -9,18 +9,20 @@
 
 @use '../../../lib' as *;
 
-@if config.$template_cssHeadings {
-    /* # ASTRO GLOBALS - Tables
-     * ======================================================================== */
-}
+@if map.get(config.$template_styles, table) {
+    @if config.$template_cssHeadings {
+        /* # ASTRO GLOBALS - Tables
+         * ======================================================================== */
+    }
 
-%table,
-%table-wrapper {
-    justify-self: center;
-}
+    %table,
+    %table-wrapper {
+        justify-self: center;
+    }
 
-%table-wrapper {
-    > %table {
-        justify-self: start;
+    %table-wrapper {
+        > %table {
+            justify-self: start;
+        }
     }
 }

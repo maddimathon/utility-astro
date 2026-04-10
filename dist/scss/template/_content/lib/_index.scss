@@ -18,15 +18,14 @@
 
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
+/// @since 0.1.0-beta.0.draft — Removed $additional_optional and $optional params (from utility-sass change).
 ///
 @mixin extend-selectors-globals(
     $additional: (),
-    $additional_optional: (),
-    $optional: null,
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
-    $additional_optional: list.join($additional_optional, (dl, form, nav));
+    $additional: list.join($additional, (dl, form, nav));
 
     $additional: list.append(
         $additional,
@@ -40,37 +39,34 @@
 
     @include lib.extend-selectors-globals(
         $additional: $additional,
-        $additional_optional: $additional_optional,
-        $optional: $optional,
         $allHeadingLevels: $allHeadingLevels
     );
 }
 
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
+/// @since 0.1.0-beta.0.draft — Removed $additional_optional and $optional params (from utility-sass change).
 ///
 @mixin extend-selectors-utils(
     $additional: (),
-    $additional_optional: (),
-    $optional: null,
     $allHeadingLevels: token-all-heading-levels()
 ) {
     //
     $additional: list.append($additional, ('.icon', 'icon'));
 
-    $additional_optional: list.append(
-        $additional_optional,
+    $additional: list.append(
+        $additional,
         (('.display-contents'), 'display-contents')
     );
 
-    $additional_optional: list.join(
-        $additional_optional,
+    $additional: list.join(
+        $additional,
         to-extend-selectors-body-grid(),
         $separator: comma
     );
 
-    $additional_optional: list.append(
-        $additional_optional,
+    $additional: list.append(
+        $additional,
         ('.skip-link-list', 'skip-link-list'),
         $separator: comma
     );
@@ -95,8 +91,8 @@
     );
 
     @if map.get(config.$template_styles, siteSettingsMenu) {
-        $additional_optional: list.append(
-            $additional_optional,
+        $additional: list.append(
+            $additional,
             ('.website-settings-menu', 'page-width'),
             $separator: comma
         );
@@ -104,25 +100,21 @@
 
     @include lib.extend-selectors-utils(
         $additional: $additional,
-        $additional_optional: $additional_optional,
-        $optional: $optional,
         $allHeadingLevels: $allHeadingLevels
     );
 }
 
+///
+/// @since 0.1.0-beta.0.draft — Removed $add_globals_optional, $add_utils_optional, and $optional params (from utility-sass change).
+///
 @mixin extend-selectors(
-    $optional: null,
     $add_globals: (),
-    $add_globals_optional: (),
     $add_utils: (),
-    $add_utils_optional: (),
     $allHeadingLevels: token-all-heading-levels()
 ) {
     @if config.$template_globals {
         @include extend-selectors-globals(
             $additional: $add_globals,
-            $additional_optional: $add_globals_optional,
-            $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );
     }
@@ -130,8 +122,6 @@
     @if config.$template_utils {
         @include extend-selectors-utils(
             $additional: $add_utils,
-            $additional_optional: $add_utils_optional,
-            $optional: $optional,
             $allHeadingLevels: $allHeadingLevels
         );
     }
