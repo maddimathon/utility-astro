@@ -29,15 +29,17 @@ import CopyToClipboardButton from './CopyToClipboardButton.astro';
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export interface CodeBlockProps {
-
+    /**
+     * Can be <slot /> contents to render or a string.
+     */
     children?: any;
 
-    copyToClipboard?: boolean;
+    copyToClipboard?: boolean|undefined;
 
     /**
      * Code language, if any.
      */
-    lang?: string;
+    lang?: string|undefined;
 }
 
 type Props = GenericElementProps<CodeBlockProps, 'div'>;

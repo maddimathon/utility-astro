@@ -89,9 +89,64 @@ export class Compile extends CompileStage {
     }
 
     /**
-     * @type {( ( ...params: Parameters<typeof this.fs.write> ) => Promise<ReturnType<typeof this.fs.write>> )}
+     * Write tsconfig files and compiles ts files to be included in the package.
+     * 
      * @protected
+     * @override
      */
-    // @ts-expect-error
-    writeAsync = this.fs.write;
+    async ts() {
+        this.console.progress( 'writing tsconfig files...', 1 );
+
+        const writeArgs = { force: true, rename: false };
+
+        const buildUtilsConfig = await this.compiler.resolveTsConfig( 'node_modules/@maddimathon/build-utilities/tsconfig.base.json', 2 );
+
+        const baseConfigPath = await this.writeTsConfig(
+            'tsconfig.base.json',
+            2,
+            {
+                extends: [
+                    '@maddimathon/build-utilities/tsconfig',
+                    'astro/tsconfigs/strictest',
+                ],
+
+                compilerOptions: {
+                    isolatedDeclarations: false,
+                },
+            },
+            writeArgs,
+        );
+
+        const basePath_relative = baseConfigPath ? this.fs.pathRelative( baseConfigPath ) : baseConfigPath;
+
+        await this.writeTsConfig(
+            'src/ts/tsconfig.json',
+            2,
+            {
+                extends: basePath_relative ? basePath_relative : '../../tsconfig.base.json',
+
+                include: [
+                    '../../src/ts/**/*',
+                    './src/ts/**/*',
+                ],
+                exclude: [
+                    '**/node_modules/**/*'
+                ],
+
+                compilerOptions: {
+                    allowImportingTsExtensions: undefined,
+                    allowJs: undefined,
+                    declaration: true,
+                    declarationMap: false,
+                    isolatedDeclarations: true,
+                    noEmit: undefined,
+                    outDir: '../../dist/ts/',
+                    target: buildUtilsConfig.compilerOptions.target,
+                },
+            },
+            writeArgs,
+        );
+
+        return super.ts();
+    }
 }

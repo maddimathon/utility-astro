@@ -45,7 +45,7 @@ type Copyright_HTML = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    year?: number;
+    year?: number | undefined;
 };
 
 type Copyright_PlainOwner = {
@@ -64,7 +64,7 @@ type Copyright_PlainOwner = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    year?: number;
+    year?: number | undefined;
 };
 
 type Copyright_PlainYear = {
@@ -75,7 +75,7 @@ type Copyright_PlainYear = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    owner?: string;
+    owner?: string | undefined;
 
     /**
      * If undefined, this defaults to the current year. If it is greater
@@ -106,31 +106,31 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
      */
     meta: Page_MetaProps;
 
-    dir?: "ltr" | "rtl" | "auto";
+    dir?: "ltr" | "rtl" | "auto" | undefined;
     lang: string;
 
     /**
      * Email used for focus links to report accessibility issues.
      */
-    accessibilityReportEmail?: string;
+    accessibilityReportEmail?: string | undefined;
 
     /**
      * Attributes for elements on the page.
      */
     attrs?: {
-        html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes>;
-        body?: HTMLAttributes<"body">;
-    };
+        html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes> | undefined;
+        body?: HTMLAttributes<"body"> | undefined;
+    } | undefined;
 
     /**
      * Configuration for the child Content component.
      */
-    content?: Omit<ContentProps<T_ContentType>, "subtitle" | "title" | "type">;
+    content?: Omit<ContentProps<T_ContentType>, "subtitle" | "title" | "type"> | undefined;
 
     /**
      * Used for NavMenu, ToggleNavMenu, and TableOfContents components.
      */
-    convertHrefStringsToAbsolute?: boolean | null;
+    convertHrefStringsToAbsolute?: boolean | undefined;
 
     /**
      * The content to include in the page footer, if any.
@@ -145,14 +145,17 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
          * Content for the copyright section of the footer.
          * 
          * An empty object can also be passed to enable the default output.
+         * 
+         * @since ___PKG_VERSION___ — Changed `false` option to `undefined`.
          */
-        copyright?: false | Copyright_HTML | Copyright_PlainOwner | Copyright_PlainYear;
+        copyright?: Copyright_HTML | Copyright_PlainOwner | Copyright_PlainYear | undefined;
 
         /**
          * Escaped HTML to include.
          */
-        designedBy?: string;
-    };
+        designedBy?: string | undefined;
+
+    } | undefined;
 
     /**
      * The content to include in the page header, if any.
@@ -166,33 +169,34 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
         /**
          * Text to be escaped, NOT html.
          */
-        tagline?: string;
+        tagline?: string | undefined;
 
         /**
          * Text to be escaped, NOT html.
          */
-        title?: string;
-    };
+        title?: string | undefined;
+
+    } | undefined;
 
     /**
      * Content layout type.
      */
-    layout?: T_ContentType;
+    layout?: T_ContentType | undefined;
 
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
+    primaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu"> | undefined;
 
     /**
      * A complete URL to the privacy policy page for this site.
      */
-    privacyPolicy?: URL | string;
+    privacyPolicy?: URL | string | undefined;
 
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu">;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu"> | undefined;
 
     /**
      * Whether to inlcude the settings menu. Optionally this can be an object of
@@ -200,17 +204,17 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
      * 
      * @default true
      */
-    settings?: boolean | Omit<SettingsMenuProps, "accessibilityReportEmail" | "privacyPolicy">,
+    settings?: boolean | Omit<SettingsMenuProps, "accessibilityReportEmail" | "privacyPolicy"> | undefined;
 
     /**
      * Skip links for this page.
      */
-    skipLinks?: SkipLinksProps[ 'links' ];
+    skipLinks?: SkipLinksProps[ 'links' ] | undefined;
 
     /**
      * Page subtitle. Passed to the Content component.
      */
-    subtitle?: string | null;
+    subtitle?: string | undefined;
 
     /**
      * Whether to include scripts scripts for these components
@@ -222,13 +226,14 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
          * 
          * @default true
          */
-        featureCheck?: boolean;
+        featureCheck?: boolean | undefined;
 
         /**
          * Includes the Toggle_Scripts component.
          * 
          * @default true
          */
-        toggle?: boolean;
-    };
+        toggle?: boolean | undefined;
+
+    } | undefined;
 };

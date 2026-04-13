@@ -35,23 +35,24 @@ export type DefaultContentType = 'content-only' & ContentType;
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export interface ContentProps<T_Type extends ContentType = DefaultContentType> {
+
     attrs?: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
-        main?: MainProps;
-        sidebar?: HTMLAttributes<'aside'>;
+        main?: MainProps | undefined;
+        sidebar?: HTMLAttributes<'aside'> | undefined;
     }
     : {
-        main?: MainProps;
+        main?: MainProps | undefined;
     };
 
     /**
      * To display (in a h1).
      */
-    title: string | string[] | null;
+    title: string | string[] | undefined;
 
     type?: T_Type | undefined;
 
-    subtitle?: string | null;
+    subtitle?: string | undefined;
 }
 
 /**

@@ -55,6 +55,10 @@ const config = {
             benchmarkCompileTime: true,
             // pathToSassLoggingRoot: 'node_modules/@maddimathon/build-utilities/node_modules',
         } ),
+
+        ts: {
+            tidyGlobs: '**/tsconfig.tsbuildinfo',
+        },
     },
 
     stages: {

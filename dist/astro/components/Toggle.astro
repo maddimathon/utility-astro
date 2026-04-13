@@ -34,9 +34,9 @@ export interface ToggleProps {
      */
     id: string;
 
-    class?: string;
+    class?: string | undefined;
 
-    defaultOpen?: boolean;
+    defaultOpen?: boolean | undefined;
 
     /**
      * If any, the heading display level override for this heading (otherwise
@@ -56,7 +56,7 @@ export interface ToggleProps {
      *
      * @since 0.1.0-beta.0.draft — Removed false as an option. Use 0 instead.
      */
-    heading?: number;
+    heading?: number | undefined;
 
     /**
      * Minimum allowed heading level.
@@ -65,7 +65,7 @@ export interface ToggleProps {
      *
      * @since 0.1.0-beta.0.draft
      */
-    minimumHeading?: number;
+    minimumHeading?: number | undefined;
 
     /**
      * The HTML tag used for the container element.
@@ -74,7 +74,7 @@ export interface ToggleProps {
      *
      * @since 0.1.0-alpha.7
      */
-    tag?: undefined | 'div' | 'li' | 'nav' | 'section';
+    tag?: 'div' | 'li' | 'nav' | 'section' | undefined;
 
     /**
      * The HTML tag used for the container's header element. If tag is
@@ -82,7 +82,7 @@ export interface ToggleProps {
      *
      * @since 0.1.0-alpha.7
      */
-    headerTag?: undefined | 'div' | 'header';
+    headerTag?: 'div' | 'header' | undefined;
 }
 
 type Props = ElementProps<

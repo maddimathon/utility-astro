@@ -1,20 +1,21 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
+        "allowImportingTsExtensions": true,
+        "allowJs": true,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
         "alwaysStrict": true,
         "composite": true,
-        "declaration": true,
-        "declarationMap": false,
         "esModuleInterop": true,
         "exactOptionalPropertyTypes": true,
         "forceConsistentCasingInFileNames": true,
-        "isolatedDeclarations": true,
+        "isolatedDeclarations": false,
         "isolatedModules": true,
         "jsx": "preserve",
         "module": "ESNext",
         "moduleResolution": "Bundler",
+        "noEmit": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitOverride": true,
@@ -24,7 +25,6 @@
         "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "outDir": "../../dist/ts/",
         "preserveSymlinks": true,
         "pretty": true,
         "removeComments": false,
@@ -38,15 +38,8 @@
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "target": "ES2022",
+        "target": "ESNext",
         "useUnknownInCatchVariables": true,
         "verbatimModuleSyntax": true
-    },
-    "exclude": [
-        "**/node_modules/**/*"
-    ],
-    "include": [
-        "../../src/ts/**/*",
-        "./src/ts/**/*"
-    ]
+    }
 }

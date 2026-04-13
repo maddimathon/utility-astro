@@ -33,12 +33,12 @@ export type NestedListItem = {
     /**
      * Items for a sublist of this item.
      */
-    children?: NestedListItem[];
+    children?: NestedListItem[] | undefined;
 
     /**
      * Type of list to print for children, else inherits from parent list.
      */
-    childrenTag?: 'ol' | 'ul';
+    childrenTag?: 'ol' | 'ul' | undefined;
 };
 
 /**
@@ -59,7 +59,7 @@ export interface NestedListProps<T_Item extends NestedListItem = NestedListItem>
      *
      * @default "ul"
      */
-    tag?: 'ol' | 'ul';
+    tag?: 'ol' | 'ul'|undefined;
 }
 
 /* PROPS ===================================== */

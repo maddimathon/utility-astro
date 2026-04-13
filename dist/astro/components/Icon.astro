@@ -20,16 +20,16 @@ import { SVG, SVG_Label } from '../../ts/svg.js';
 /* TYPES ===================================== */
 
 type IconProps_Slug = {
-    class?: ClassList;
+    class?: ClassList | undefined;
     type: keyof typeof SVG;
-    slug?: never;
-    svg?: never;
-    svgLabel?: never;
+    slug?: never | undefined;
+    svg?: never | undefined;
+    svgLabel?: never | undefined;
 };
 
 type IconProps_Svg = {
-    class?: ClassList;
-    type?: never;
+    class?: ClassList | undefined;
+    type?: never | undefined;
     slug: string;
     svg: string;
     svgLabel: string;

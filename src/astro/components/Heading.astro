@@ -40,17 +40,17 @@ export interface HeadingProps {
     /**
      * @since ___PKG_VERSION___
      */
-    fallbackTag?: HTMLTag;
+    fallbackTag?: HTMLTag | undefined;
 
     /**
      * Logical heading order value for this heading.
      */
-    heading?: number;
+    heading?: number | undefined;
 
     /**
      * The minimum allowed value for this heading.
      */
-    minimum?: number;
+    minimum?: number | undefined;
 }
 
 type Props = GenericElementProps<HeadingProps, 'div'>;

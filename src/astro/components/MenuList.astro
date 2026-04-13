@@ -38,23 +38,27 @@ export interface MenuItem {
     /**
      * If false, the link prints without href and with aria-disabled.  If null
      * or undefined, the list item is not printed at all.
+     * 
+     * @since ___PKG_VERSION___ — Removed `false` in favour of `undefined`.
      */
-    href?: string | false;
+    href?: string |  undefined;
 
     /**
      * Child menu items, if any.
      */
-    child?: MenuItem[];
+    child?: MenuItem[] | undefined;
 
     /**
      * Whether this item should be marked as the current page.
      */
-    current?: true | null;
+    current?: true | undefined;
 
     /**
      * Whether this item should be opened in a new window.
+     * 
+     * @since ___PKG_VERSION___ — Removed `false` in favour of `undefined`.
      */
-    external?: boolean;
+    external?: true | undefined;
 }
 
 /**
@@ -115,7 +119,6 @@ export type ParsedMenuItem_WithHref = UnlabelledMenuItem & {
     href: string;
 
     'aria-current': HTMLAttributes<'a'>['aria-current'];
-    'aria-disabled': HTMLAttributes<'a'>['aria-disabled'];
     target: HTMLAttributes<'a'>['target'];
 };
 
@@ -147,7 +150,6 @@ export function parseItemAttributes(item: MenuItem): ParsedMenuItem {
 
         target: ( item.href && item.external ) ? '_blank' : undefined,
         'aria-current': ( item.href && item.current ) ? 'page' : undefined,
-        'aria-disabled': item.href === false || undefined,
     } as const;
 }
 
@@ -172,7 +174,6 @@ const parsedMenu = menu.map(parseItemAttributes);
                         href={ item.href }
                         target={ item.target }
                         aria-current={ item['aria-current'] }
-                        aria-disabled={ item['aria-disabled'] }
                         set:html={ item.html }
                     /> 
                 ) : item.child?.length && (

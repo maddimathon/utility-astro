@@ -42,8 +42,8 @@ const _defProps: ContentProps_Full<ContentType> &
     Pick<Required<Props>, 'type'> = {
     type: 'content-only',
 
-    title: null,
-    subtitle: null,
+    title: undefined,
+    subtitle: undefined,
 
     attrs: {
         main: {},
@@ -51,7 +51,11 @@ const _defProps: ContentProps_Full<ContentType> &
     },
 };
 
-const p = mergeArgs(_defProps, Astro.props.frontmatter ?? Astro.props, true);
+const { type = 'content-only', ...p } = mergeArgs(
+    _defProps,
+    Astro.props.frontmatter ?? Astro.props,
+    true,
+);
 
 /* CONSTANTS ===================================== */
 
@@ -65,6 +69,9 @@ const title = Array.isArray(p.title)
 
 const titleString = title.reverse().join(' / ');
 
+/**
+ * @since ___PKG_VERSION___ — Added to exports.
+ */
 const contentTypes: {
     [K in ContentType]: (
         result: any,
@@ -79,7 +86,7 @@ const contentTypes: {
     'sidebar-right': Content_SidebarRight,
 } as const;
 
-const ContentComponent = contentTypes[p.type];
+const ContentComponent = contentTypes[type];
 ---
 
 <ContentComponent {...p}>

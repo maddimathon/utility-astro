@@ -52,11 +52,11 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
      *
      * @default true
      */
-    asToggle?: boolean;
+    asToggle?: boolean|undefined;
 
-    convertHrefStringsToAbsolute?: boolean | null;
+    convertHrefStringsToAbsolute?: boolean | undefined;
 
-    defaultOpen?: boolean;
+    defaultOpen?: boolean|undefined;
 
     /**
      * The base display heading level for this TOC, if any.
@@ -69,7 +69,7 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
      * Type of list tag used for display (tables of content should always be
      * ordered lists) via utility class.
      */
-    listTag?: 'ol' | 'ul';
+    listTag?: 'ol' | 'ul'|undefined;
 }
 
 type Props = GenericElementProps<TableOfContentsProps, 'div', 'aria-label' | 'aria-labelledby'>;
@@ -77,7 +77,7 @@ type Props = GenericElementProps<TableOfContentsProps, 'div', 'aria-label' | 'ar
 const {
     asToggle = true,
     class: classList = [],
-    convertHrefStringsToAbsolute = null,
+    convertHrefStringsToAbsolute,
     defaultOpen,
     displayHeading,
     heading,

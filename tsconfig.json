@@ -1,8 +1,5 @@
 {
-    "extends": [
-        "@maddimathon/build-utilities/tsconfig",
-        "astro/tsconfigs/strictest"
-    ],
+    "extends": "./tsconfig.base.json",
     "include": [
         "./src/**/*"
     ],
@@ -11,20 +8,12 @@
         "./node_modules/**/*"
     ],
     "compilerOptions": {
-        "allowJs": false,
-        "allowImportingTsExtensions": false,
-        "exactOptionalPropertyTypes": false,
         "isolatedDeclarations": false,
 
         "plugins": [
             {
               "name": "@astrojs/ts-plugin"
             }
-        ],
-
-        "resolvePackageJsonExports": true,
-        "skipLibCheck": true,
-        "strictNullChecks": true,
-        "verbatimModuleSyntax": true
+        ]
     }
 }

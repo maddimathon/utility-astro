@@ -10,6 +10,9 @@
 
         "src/astro/css/**/*": true,
         "src/docs/css/**/*": true,
+
+        "src/ts/tsconfig.json": true,
+        "tsconfig.base.json": true,
     },
     "search.exclude": {
         ".snapshots": true,

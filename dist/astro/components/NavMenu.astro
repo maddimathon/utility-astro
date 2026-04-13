@@ -37,7 +37,7 @@ export interface NavMenuProps {
      */
     'aria-label': string;
 
-    'convertHrefStringsToAbsolute'?: boolean | null;
+    'convertHrefStringsToAbsolute'?: boolean | undefined;
 
     /**
      * Unique id attr.
@@ -56,12 +56,12 @@ export interface NavMenuProps {
          *
          * If a string, this is assumed to be a path relative to the home page.
          */
-        href?: URL | string | false;
+        href?: URL | string | undefined;
 
         /**
          * Child menu items, if any.
          */
-        child?: Props['menu'];
+        child?: Props['menu'] | undefined;
     })[];
 }
 
@@ -71,7 +71,7 @@ type Props = GenericElementProps<NavMenuProps, 'nav'>;
 
 const {
     class: classList = [],
-    convertHrefStringsToAbsolute = null,
+    convertHrefStringsToAbsolute,
     id,
     menu,
     ...attributes
@@ -166,7 +166,7 @@ export function parseMenuItem(
     return {
         ...item,
         href,
-        current: isCurrentPage || null,
+        current: isCurrentPage || undefined,
         child,
     };
 }

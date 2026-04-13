@@ -57,7 +57,6 @@ const tocMenu: ComponentProps<typeof TableOfContents>['menu'] = [
 
     {
         label: 'Headings',
-        href: false,
         child: headingLevels.map((num) => ({
             label: exampleMenuIds[`heading-${num}`].label,
             href: `#${exampleMenuIds[`heading-${num}`].id}`,
