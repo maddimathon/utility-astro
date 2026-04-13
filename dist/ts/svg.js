@@ -115,4 +115,3 @@ export const SVG_Label = {
     up: 'up arrow',
     warning: 'warning',
 };
-//# sourceMappingURL=svg.js.map

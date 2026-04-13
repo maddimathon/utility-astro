@@ -1,9 +1,12 @@
 /**
- * Exports all the astro components and their types.
+ * Exports all the astro support components and their types.
  * 
- * @module components
+ * @module support
+ * @category Exports
  * 
  * @since ___PKG_VERSION___
+ * 
+ * @packageDocumentation
  */
 /*!
  * @maddimathon/utility-astro@___CURRENT_VERSION___

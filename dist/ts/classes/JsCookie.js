@@ -73,4 +73,3 @@ export class JsCookie {
         document.cookie = cookieString.join(';');
     }
 }
-//# sourceMappingURL=JsCookie.js.map

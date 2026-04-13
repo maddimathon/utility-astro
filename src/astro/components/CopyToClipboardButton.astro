@@ -97,11 +97,8 @@ const classList = [
 
         protected changeText(msg: string, timeoutMS: number) {
             this.ogInnerHTML = this.button.innerHTML;
-            console.log({ ogInnerHTML: this.ogInnerHTML });
-            console.log({ msg });
-            console.log({ timeoutMS });
 
-            this.button.innerText = this.successMessage;
+            this.button.innerText = msg;
 
             this.textChangeTimeout = setTimeout(() => {
                 this.button.innerHTML = this.ogInnerHTML;
@@ -109,8 +106,6 @@ const classList = [
         }
 
         public clicked(event: Event) {
-            console.log({ '[copyToClipboard] event': event });
-
             if (this.textChangeTimeout) {
                 this.button.innerHTML = this.ogInnerHTML;
             }
@@ -118,10 +113,8 @@ const classList = [
             clearTimeout(this.textChangeTimeout);
 
             const target = event.target as undefined | HTMLButtonElement;
-            console.log({ '[copyToClipboard] target': target });
 
             const toCopy = target?.dataset['copyToClipboard'];
-            console.log({ '[copyToClipboard] toCopy': toCopy });
 
             if (toCopy) {
                 navigator.clipboard.writeText(toCopy);
@@ -131,8 +124,6 @@ const classList = [
     }
 
     const buttons = document.querySelectorAll('button[data-copy-to-clipboard]');
-
-    console.log({ '[copyToClipboard] buttons': buttons });
 
     buttons.forEach(
         (button) => new CopyToClipboard(button as HTMLButtonElement),

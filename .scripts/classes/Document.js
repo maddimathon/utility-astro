@@ -39,7 +39,7 @@ export class Document extends DocumentStage {
      * @override
      */
     subStages = [
-        // 'typeDoc',
+        'typeDoc',
         // @ts-expect-error
         'scss',
         // @ts-expect-error
@@ -48,40 +48,40 @@ export class Document extends DocumentStage {
     ];
 
 
-    /**
-     * @protected
-     * @override
-     */
-    async typeDoc() {
-        this.fs.delete( [
-            Document.typeDoc_paths.json,
-            Document.typeDoc_paths.md,
-        ], 1 );
+    // /**
+    //  * @protected
+    //  * @override
+    //  */
+    // async typeDoc() {
+    //     this.fs.delete( [
+    //         Document.typeDoc_paths.json,
+    //         Document.typeDoc_paths.md,
+    //     ], 1 );
 
-        await super.typeDoc();
-
-
-        this.console.verbose( 'making replacements in markdown...', 2 );
-        const replacePaths = [
-            Document.typeDoc_paths.json,
-            Document.typeDoc_paths.md + '/**/*',
-        ];
-
-        this.replaceInFiles( replacePaths, 'current', this.params.verbose ? 3 : 2 );
-        this.replaceInFiles( replacePaths, 'package', this.params.verbose ? 3 : 2 );
-
-        this.console.verbose( 'replacing markdown paths...', 2 );
-        this.fs.replaceInFiles( replacePaths, [
-            [ /(?<=\[[^\]]+\]\([^\)]+)\.md\)/gi, '.html)' ],
-        ], this.params.verbose ? 3 : 2 );
+    //     await super.typeDoc();
 
 
-        this.console.verbose( 'tidying up...', 2 );
-        this.fs.delete( [
-            Document.typeDoc_paths.md + '/.nojekyll',
-            Document.typeDoc_paths.md + '/index.md',
-        ], 1 );
-    }
+    //     this.console.verbose( 'making replacements in markdown...', 2 );
+    //     const replacePaths = [
+    //         Document.typeDoc_paths.json,
+    //         Document.typeDoc_paths.md + '/**/*',
+    //     ];
+
+    //     this.replaceInFiles( replacePaths, 'current', this.params.verbose ? 3 : 2 );
+    //     this.replaceInFiles( replacePaths, 'package', this.params.verbose ? 3 : 2 );
+
+    //     this.console.verbose( 'replacing markdown paths...', 2 );
+    //     this.fs.replaceInFiles( replacePaths, [
+    //         [ /(?<=\[[^\]]+\]\([^\)]+)\.md\)/gi, '.html)' ],
+    //     ], this.params.verbose ? 3 : 2 );
+
+
+    //     this.console.verbose( 'tidying up...', 2 );
+    //     this.fs.delete( [
+    //         Document.typeDoc_paths.md + '/.nojekyll',
+    //         Document.typeDoc_paths.md + '/index.md',
+    //     ], 1 );
+    // }
 
 
     /**

@@ -2,19 +2,22 @@
  * Exports all the astro components and their types.
  * 
  * @module components
+ * @category Exports
  * 
  * @since 0.1.0-beta.0.draft
+ * 
+ * @packageDocumentation
  */
 /*!
  * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
 
-import Alert_Icon from './components/Alert_Icon.astro';
-export type * from './components/Alert_Icon.astro';
+import Alert_Icon from './components/alert/Alert_Icon.astro';
+export type * from './components/alert/Alert_Icon.astro';
 
-import Alert from './components/Alert.astro';
-export type * from './components/Alert.astro';
+import Alert from './components/alert/Alert.astro';
+export type * from './components/alert/Alert.astro';
 
 import CodeBlock from './components/CodeBlock.astro';
 export type * from './components/CodeBlock.astro';

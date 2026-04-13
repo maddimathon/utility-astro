@@ -74,35 +74,44 @@
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :where(.js__no-focusVisible) :focus,
 :where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :focus-visible {
     /* %focus-ring--visible */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
@@ -120,6 +129,8 @@
  * ======================================================================== */
 hr {
     display: block;
+    justify-self: center;
+    align-self: center;
     margin-top: 2.25rem;
     margin-bottom: 2.25rem;
     margin-left: 9%;
@@ -133,11 +144,15 @@ hr {
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
 ::-moz-selection {
+    background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
+    color: HighlightText;
     color: var(--sys-clr-selection-text, HighlightText);
 }
 ::selection {
+    background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
+    color: HighlightText;
     color: var(--sys-clr-selection-text, HighlightText);
 }
 
@@ -175,22 +190,27 @@ a[href] {
     -webkit-text-decoration: underline 0.0625em;
     text-decoration: underline 0.0625em;
     text-underline-offset: 0.25em;
+    color: LinkText;
     color: var(--sys-clr-link, LinkText);
 }
 a[href]:visited {
+    color: VisitedText;
     color: var(--sys-clr-link-visited, VisitedText);
 }
 a[href]:focus {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:hover {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:active {
+    color: ActiveText;
     color: var(--sys-clr-link-active, ActiveText);
 }
 a.no-style[href] {
@@ -200,6 +220,7 @@ a.no-style[href] {
 }
 a[aria-disabled="true"][href] {
     text-decoration-line: line-through;
+    color: GrayText;
     color: var(--sys-clr-text-disabled, GrayText);
     opacity: 1;
     cursor: not-allowed;
@@ -675,20 +696,26 @@ fieldset {
     padding-bottom: 0.8125rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+    border: 0.0625rem solid FieldText;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
+    background-color: Canvas;
     background-color: var(--sys-clr-background, Canvas);
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 fieldset:focus {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:focus-within {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:active {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
 }
 fieldset legend {
@@ -739,20 +766,28 @@ input {
     width: 100%;
     font: inherit;
     line-height: 1.3125;
+    border: 0.0625rem solid FieldText;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg, Field);
+    color: FieldText;
     color: var(--sys-clr-input-text, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 textarea:focus,
 select:focus,
 input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -760,9 +795,13 @@ textarea:hover,
 select:hover,
 input:hover {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -770,9 +809,13 @@ textarea:focus-within,
 select:focus-within,
 input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -780,9 +823,13 @@ textarea:active,
 select:active,
 input:active {
     --focus-ring-outline-color: var(--sys-clr-text-active, ActiveText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-active, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-active, FieldText);
+    accent-color: ActiveText;
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
 label + textarea,
@@ -974,6 +1021,7 @@ label {
     font-weight: 600;
     line-height: 1.3125;
     text-wrap: balance;
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where([type="checkbox"], [type="radio"])) {
@@ -985,6 +1033,7 @@ label:has(> :where([type="checkbox"], [type="radio"])) {
     gap: 0.625rem;
     font-weight: 400;
     line-height: 1.6875;
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
@@ -1028,11 +1077,15 @@ a.button[href] {
     width: fit-content;
     font: inherit;
     line-height: 1.1875;
+    border: 0.125rem solid ButtonFace;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 button:focus,
@@ -1045,9 +1098,13 @@ a.button[href]:focus {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1061,9 +1118,13 @@ a.button[href]:hover {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1077,9 +1138,13 @@ a.button[href]:focus-within {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1090,9 +1155,13 @@ input[type="reset"]:active,
 input[type="submit"]:active,
 a.button[href]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 button[aria-disabled="true"],
@@ -1159,11 +1228,15 @@ a[disabled].button[href] {
     width: fit-content;
     font: inherit;
     line-height: 1.1875;
+    border: 0.125rem solid ButtonFace;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 :focus::file-selector-button {
@@ -1171,9 +1244,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1182,9 +1259,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1193,17 +1274,25 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :active::file-selector-button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 [aria-disabled="true"]::file-selector-button,
@@ -1244,6 +1333,7 @@ table {
     margin-bottom: 0;
     margin-top: 2.25rem;
     margin-bottom: 0.9375rem;
+    background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
 }
 
@@ -1258,15 +1348,19 @@ table {
     }
     table th,
     table td {
+        border-bottom: 0.125rem solid CanvasText;
         border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-right: 0.125rem solid CanvasText;
         border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
     table th:first-child,
     table td:first-child {
+        border-left: 0.125rem solid CanvasText;
         border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
     table tr:first-child th,
     table tr:first-child td {
+        border-top: 0.125rem solid CanvasText;
         border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
 }
@@ -1275,15 +1369,19 @@ table {
 }
 [data-contrast-mode="forced-colors"] table th,
 [data-contrast-mode="forced-colors"] table td {
+    border-bottom: 0.125rem solid CanvasText;
     border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
+    border-right: 0.125rem solid CanvasText;
     border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
 [data-contrast-mode="forced-colors"] table th:first-child,
 [data-contrast-mode="forced-colors"] table td:first-child {
+    border-left: 0.125rem solid CanvasText;
     border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
 [data-contrast-mode="forced-colors"] table tr:first-child th,
 [data-contrast-mode="forced-colors"] table tr:first-child td {
+    border-top: 0.125rem solid CanvasText;
     border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
 
@@ -1294,6 +1392,7 @@ td {
     padding-left: 0.8125rem;
     padding-right: 0.8125rem;
     min-width: 10em;
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     vertical-align: top;
     text-align: left;
@@ -1311,7 +1410,9 @@ th {
     padding-top: 0.375rem;
     padding-bottom: 0.375rem;
     text-wrap: balance;
+    background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
+    color: Canvas;
     color: var(--sys-clr-accent-text, Canvas);
 }
 

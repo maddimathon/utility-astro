@@ -40,7 +40,7 @@ const config = {
                 features: {
                     clamp: false,
 
-                    "custom-properties": false,
+                    // "custom-properties": { },
 
                     // "logical-overflow": false,
                     // "logical-overscroll-behavior": false,
@@ -92,7 +92,40 @@ const config = {
 
         compile: Compile,
 
-        document: Document,
+        document: [ Document, {
+            entryPoints: [
+                'src/ts/index.ts',
+
+                // 'src/astro/components.ts',
+                // 'src/astro/functions.ts',
+                // 'src/astro/layouts.ts',
+                // 'src/astro/support.ts',
+            ],
+
+            typeDoc: {
+                out: 'src/docs/_public/typedoc',
+
+                // compilerOptions: {
+                //     allowArbitraryExtensions: true,
+                //     allowImportingTsExtensions: true,
+                //     skipLibCheck: true,
+                //     strictNullChecks: false,
+                // },
+
+                projectDocuments: [
+                    'README.md',
+                ],
+
+                tsconfig: 'src/ts/tsconfig.json',
+
+                // plugin: [],
+
+                navigation: {
+                    // includeGroups: true,
+                    includeFolders: true,
+                },
+            },
+        } ],
 
         test: false,
     },

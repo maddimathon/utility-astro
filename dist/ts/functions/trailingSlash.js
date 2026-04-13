@@ -35,4 +35,3 @@ export var trailingSlash;
     trailingSlash.remove = remove;
     ;
 })(trailingSlash || (trailingSlash = {}));
-//# sourceMappingURL=trailingSlash.js.map

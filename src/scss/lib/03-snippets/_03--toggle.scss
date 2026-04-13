@@ -14,6 +14,8 @@
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
 
+@use '03-02-layouts' as *;
+
 $_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title'));
 
 $_defaultHeadingSelectors_bigOnly: ('%title');
@@ -40,112 +42,186 @@ $_defaultHeadingSelectors_greaterThan6: ();
 ///
 @mixin snippet-support-toggle-block(
     $headingSelectors: $_defaultHeadingSelectors,
-    $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly
+    $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly,
+    //
+    $content_container_paddingBlock: var-mrg-soft('300'),
+    $content_container_paddingInline: var-mrg-firm('300'),
+    $control_heading_paddingBlockEnd: var-stroke-relative('400'),
+    $control_heading_unstyled_paddingBlockEnd: 0,
+    $control_paddingBlockEnd: var-mrg-soft('200'),
+    //
+    $svg_sel_static: '#a',
+    $svg_sel_moving: '#b',
+    //
+    $includeBackdropControlStyles: true,
+    $includeBaseStyles: true,
+    $includeMarginBlock: true
 ) {
     @at-root %_flex-contents-container {
         @include prop-display(flex);
-        position: relative;
-        flex-direction: column;
+        @include snippet-content-flex-container;
 
-        justify-content: start;
-        align-content: start;
-        align-items: stretch;
+        @content (flex-contents-container);
     }
 
+    ///
+    /// CONTAINER
+    ///
     [data-toggle-container] {
         @extend %_flex-contents-container;
         z-index: 999;
+
+        @content (toggle-container);
     }
 
-    .toggle-title,
-    #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
-        margin: 0;
-        padding: 0;
-    }
-
-    .toggle-title {
-        font-weight: 600;
-
-        &:has(#{selector.nest('>', ($headingSelectors))}) {
-        }
-
-        #{selector.nest('>', ($headingSelectors))} {
-            .toggle-icon {
-                @include cx-prop(icon-size, 1em);
-                padding-bottom: 0;
-            }
-
-            [data-toggle-control] {
-                font: inherit;
-                line-height: inherit;
-                letter-spacing: inherit;
-                text-transform: inherit;
-            }
-        }
-    }
-
+    ///
+    /// CONTROL
+    ///
     [data-toggle-control] {
-        @include cx-prop(icon-color, currentColor);
+        @if $includeBaseStyles {
+            @include cx-prop(icon-color, currentColor);
 
-        margin: 0;
-        width: auto;
+            margin: 0;
+            width: auto;
 
-        font: inherit;
-        text-align: inherit;
+            font: inherit;
+            text-align: inherit;
 
-        border: none;
-        background: none;
-        color: inherit;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        @content (toggle-control);
 
         &[aria-disabled] {
-            margin-block: #{var-mrg-soft('400')} 0;
-            margin-inline: 0;
-            padding: 0;
+            @if $includeBaseStyles {
+                margin-block: #{var-mrg-soft('400')} 0;
+                margin-inline: 0;
+                padding: 0;
 
-            appearance: none;
-            cursor: text;
+                appearance: none;
+                cursor: text;
+            }
+
+            @content (toggle-control--disabled);
 
             .toggle-icon {
                 display: none;
+
+                @content (toggle-control--disabled--icon);
             }
         }
 
-        @include hover-focus-visible-or-within(
-            $addSelectors: (
-                '&:active',
-            )
-        ) {
-            border: none;
-            background: none;
-            opacity: 1;
-            color: inherit;
+        @include hover-focus-visible-or-within('&:active') {
+            @if $includeBaseStyles {
+                border: none;
+                background: none;
+                opacity: 1;
+                color: inherit;
+            }
+
+            @content (toggle-control--hover-focus);
         }
     }
 
+    ///
+    /// CONTROL - BACKDROP
+    ///
     [data-toggle-control-backdrop] {
         display: none;
         position: fixed;
         opacity: 0;
+
+        @content (toggle-control-backdrop);
     }
 
-    .toggle-icon {
-        @include cx-prop(icon-size, 1.125em);
-        @include prop-display(inline-block);
+    ///
+    /// TITLE & HEADINGS
+    ///
+    .toggle-title,
+    #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
+        margin: 0;
+        padding: 0;
 
-        vertical-align: sub;
-        padding-bottom: #{var-stroke-relative('100')};
-        padding-inline-end: #{var-border-width('200')};
+        @content (toggle-title-and-headings);
+    }
 
-        > svg {
-            stroke: currentColor;
-            stroke-width: clamp(1px, #{var-stroke-relative('600')}, #{var-border-width('400')});
-            fill: none;
+    ///
+    /// TITLE
+    ///
+    .toggle-title {
+        @if $includeBaseStyles {
+            font-weight: 600;
+        }
+
+        @content (toggle-title);
+
+        &:has(#{selector.nest('>', ($headingSelectors))}) {
+            @content (toggle-title--has-heading);
+        }
+
+        #{selector.nest('>', ($headingSelectors))} {
+            @content (toggle-title--heading);
+
+            .toggle-icon {
+                @if $includeBaseStyles {
+                    @include cx-prop(icon-size, 1em);
+                    padding-bottom: 0;
+                }
+
+                @content (toggle-title--heading--icon);
+            }
+
+            [data-toggle-control] {
+                @if $includeBaseStyles {
+                    font: inherit;
+                    line-height: inherit;
+                    letter-spacing: inherit;
+                    text-transform: inherit;
+                }
+
+                @content (toggle-title--heading--toggle-control);
+            }
         }
     }
 
-    .toggle-control-inner {
+    ///
+    /// ICON
+    ///
+    .toggle-icon {
+        @if $includeBaseStyles {
+            @include cx-prop(icon-size, 1.125em);
+            @include prop-display(inline-block);
+
+            vertical-align: sub;
+            padding-bottom: #{var-stroke-relative('100')};
+            padding-inline-end: #{var-border-width('200')};
+        }
+
+        @content (toggle-icon);
+
+        > svg {
+            @if $includeBaseStyles {
+                stroke: currentColor;
+                stroke-width: clamp(1px, #{var-stroke-relative('600')}, #{var-border-width('400')});
+                fill: none;
+            }
+
+            @content (toggle-icon--svg);
+        }
     }
 
+    ///
+    /// CONTROL INNER
+    ///
+    .toggle-control-inner {
+        @content (toggle-control-inner);
+    }
+
+    ///
+    /// CONTENT
+    ///
     [data-toggle-content] {
         @include prop-display(grid);
         position: relative;
@@ -155,109 +231,120 @@ $_defaultHeadingSelectors_greaterThan6: ();
         align-content: start;
         align-items: start;
 
+        @content (toggle-content);
+
         /// BLOCK ///
 
         > .container {
             @extend %_flex-contents-container;
+
+            @content (toggle-content--container);
         }
     }
 
-    /* With Javascript ==================================== */
+    /* Javascript Enabled ==================================== */
 
-    @include feature-check.js {
-        @at-root %_toggle-container-grid-basics {
-            @include prop-display(grid);
+    @at-root %_toggle-container-grid-basics {
+        @include prop-display(grid);
 
-            @include cx-prop(
-                grid-template-columns--toggle,
-                [icon] minmax(max-content, auto) [content] 1fr
-            );
-            grid-template-columns: #{do-var(grid-template-columns--toggle)};
+        @include cx-prop(
+            grid-template-columns--toggle,
+            [icon] minmax(max-content, auto) [content] 1fr
+        );
+        grid-template-columns: #{do-var(grid-template-columns--toggle)};
 
-            grid-auto-rows: auto;
-            grid-auto-flow: column;
+        grid-auto-rows: auto;
+        grid-auto-flow: column;
 
-            justify-content: stretch;
-            justify-items: stretch;
-            align-content: start;
-            align-items: start;
+        justify-content: stretch;
+        justify-items: stretch;
+        align-content: start;
+        align-items: start;
 
+        @if $includeBaseStyles {
             gap: 0 #{var-mrg-firm('200')};
         }
 
+        @content (js--container-grid);
+    }
+
+    ///
+    /// TOGGLE SUBGRID
+    ///
+    @at-root %toggle-container-subgrid {
+        @extend %_toggle-container-grid-basics;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
+
+        margin: 0;
+        padding: 0;
+
+        @content (js--toggle-container-subgrid);
+    }
+
+    @include feature-check.js {
+        ///
+        /// CONTAINER
+        ///
         [data-toggle-container] {
             @extend %_toggle-container-grid-basics;
 
-            margin-block: #{var-mrg-firm('400')} #{var-mrg-half('400')};
+            @if $includeMarginBlock {
+                margin-block: #{var-mrg-firm('400')} #{var-mrg-half('400')};
+            }
+
             margin-inline: 0;
 
             z-index: 1;
 
-            &:has(#{selector.nest( '.toggle-title', '>','%title' )}) {
-                margin-block-start: 0;
-            }
+            @content (js--toggle-container);
 
-            &:has(#{selector.nest( '.toggle-title', '>', '%h1' )}),
-            &:has(#{selector.nest( '.toggle-title', '>', '%h2' )}),
-            &:has(#{selector.nest( '.toggle-title', '>', '%h3' )}) {
-                margin-block-start: #{var-mrg-soft('800')};
-            }
+            @if $includeMarginBlock {
+                &:has(#{selector.nest( '.toggle-title', '>','%title' )}) {
+                    margin-block-start: 0;
+                }
 
-            &:has(#{selector.nest( '.toggle-title', '>', '%h4' )}),
-            &:has(#{selector.nest( '.toggle-title', '>', '%h5' )}),
-            &:has(#{selector.nest( '.toggle-title', '>', '%h6' )}) {
-                margin-block-start: #{var-mrg-soft('600')};
-            }
+                &:has(#{selector.nest( '.toggle-title', '>', '%h1' )}),
+                &:has(#{selector.nest( '.toggle-title', '>', '%h2' )}),
+                &:has(#{selector.nest( '.toggle-title', '>', '%h3' )}) {
+                    margin-block-start: #{var-mrg-soft('800')};
+                }
 
-            &:has(
-                #{selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 )}
-            ) {
-                margin-block-start: #{var-mrg-soft('600')};
-            }
-        }
+                &:has(#{selector.nest( '.toggle-title', '>', '%h4' )}),
+                &:has(#{selector.nest( '.toggle-title', '>', '%h5' )}),
+                &:has(#{selector.nest( '.toggle-title', '>', '%h6' )}) {
+                    margin-block-start: #{var-mrg-soft('600')};
+                }
 
-        @at-root %toggle-container-subgrid {
-            @extend %_toggle-container-grid-basics;
-            grid-template-columns: subgrid;
-            grid-column: 1 / -1;
-
-            margin: 0;
-            padding: 0;
-        }
-
-        .toggle-title,
-        #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
-            @extend %toggle-container-subgrid;
-            align-content: center;
-            align-items: center;
-
-            grid-row: 1 / 1;
-        }
-
-        .toggle-title {
-            z-index: 2;
-
-            &:has(#{selector.nest('>', ($headingSelectors))}) {
-            }
-
-            #{selector.nest('>', ($headingSelectors))} {
-                margin-block: 0;
+                &:has(
+                    #{selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 )}
+                ) {
+                    margin-block-start: #{var-mrg-soft('600')};
+                }
             }
         }
 
+        ///
+        /// CONTROL
+        ///
         [data-toggle-control] {
             @extend %toggle-container-subgrid;
             align-content: center;
             align-items: center;
 
             margin: 0;
-            padding: 0;
-            padding-block-end: #{var-mrg-soft('200')};
 
-            font-weight: 600;
-            appearance: button;
+            @if $includeBaseStyles {
+                padding: 0;
+                padding-block-end: #{$control_paddingBlockEnd};
 
-            cursor: pointer;
+                font-weight: 600;
+
+                appearance: button;
+                cursor: pointer;
+            }
+
+            @content (js--toggle-control);
 
             &[data-toggle-control-backdrop] {
                 @include cx-prop(display, block);
@@ -275,78 +362,129 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 width: auto;
                 height: auto;
 
-                backdrop-filter: blur(1rem);
-                background: none;
-                border: none;
                 border-radius: 0;
 
-                opacity: 1;
                 z-index: -2;
-                cursor: pointer;
 
-                &::before,
-                &::after {
-                    content: '';
-                    content: '' / '';
-                    @include prop-display(block);
-                    position: absolute;
+                @content (js--toggle-control-backdrop);
 
-                    top: 0;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                }
-
-                &::before {
-                    background: #{var-sys-colour(background)};
-                    opacity: 0.625;
-                }
-
-                &::after {
-                    background: #{var-sys-colour(link)};
-                    opacity: 0.1875;
-                }
-
-                @include hover-focus-visible-or-within(
-                    $addSelectors: (
-                        '&:active',
-                    )
-                ) {
-                    border: none;
+                @if $includeBackdropControlStyles {
+                    backdrop-filter: blur(1rem);
                     background: none;
-                    color: inherit;
-                    outline: none;
+                    border: none;
                     opacity: 1;
+
+                    cursor: pointer;
+
+                    &::before,
+                    &::after {
+                        content: '';
+                        content: '' / '';
+                        @include prop-display(block);
+                        position: absolute;
+
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                    }
+
+                    &::before {
+                        background: #{var-sys-colour(background)};
+                        opacity: 0.625;
+                    }
+
+                    &::after {
+                        background: #{var-sys-colour(link)};
+                        opacity: 0.1875;
+                    }
+
+                    @include hover-focus-visible-or-within(('&:active')) {
+                        border: none;
+                        background: none;
+                        color: inherit;
+                        outline: none;
+                        opacity: 1;
+                    }
                 }
             }
 
             .toggle-icon {
                 @include prop-grid-column(icon);
 
+                @content (js--toggle-icon);
+
                 &,
                 svg {
                     @include prop-display(block);
+
+                    @content (js--toggle-icon-and-svg);
                 }
 
-                svg #a,
-                svg #b {
+                svg #{$svg_sel_static},
+                svg #{$svg_sel_moving} {
                     transform-origin: center;
                 }
             }
         }
 
-        #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
-            padding-block-end: #{var-stroke-relative('400')};
+        ///
+        /// CONTROL INNER
+        ///
+        .toggle-control-inner {
+            @include prop-grid-column(content);
 
-            &:where(%unstyled-heading) {
-                padding-block-end: 0;
+            @content (js--toggle-control-inner);
+        }
+
+        ///
+        /// TITLE & HEADINGS
+        ///
+        .toggle-title,
+        #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
+            @extend %toggle-container-subgrid;
+            align-content: center;
+            align-items: center;
+
+            grid-row: 1 / 1;
+
+            @content (js--toggle-title-and-headings);
+        }
+
+        ///
+        /// TITLE
+        ///
+        .toggle-title {
+            z-index: 2;
+
+            @content (js--toggle-title);
+
+            &:has(#{selector.nest('>', ($headingSelectors))}) {
+                @content (js--toggle-title--has-heading);
+            }
+
+            #{selector.nest('>', ($headingSelectors))} {
+                margin-block: 0;
+
+                @if $includeBaseStyles {
+                    padding-block-end: #{$control_heading_paddingBlockEnd};
+                }
+
+                @content (js--toggle-title--heading);
+
+                &:where(%unstyled-heading) {
+                    @if $includeBaseStyles {
+                        padding-block-end: #{$control_heading_unstyled_paddingBlockEnd};
+                    }
+
+                    @content (js--toggle-title--heading--unstyled);
+                }
             }
         }
 
-        .toggle-control-inner {
-            @include prop-grid-column(content);
-        }
-
+        ///
+        /// CONTENT
+        ///
         [data-toggle-content] {
             @extend %toggle-container-subgrid;
 
@@ -358,11 +496,15 @@ $_defaultHeadingSelectors_greaterThan6: ();
             margin: 0;
             padding: 0;
 
-            border: 0 dotted currentColor;
-            border-block-start-width: #{var-border-width('200')};
-            border-block-start-style: solid;
+            @if $includeBaseStyles {
+                border: 0 dotted currentColor;
+                border-block-start-width: #{var-border-width('200')};
+                border-block-start-style: solid;
+            }
 
             overflow: hidden;
+
+            @content (js--toggle-content);
 
             /// BLOCK ///
 
@@ -370,87 +512,150 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @include prop-display(flex);
                 @include prop-grid-column('1 / -1');
 
-                padding: 0 #{var-mrg-firm('300')};
+                padding: 0 #{$content_container_paddingInline};
 
-                // overflow-block: hidden;
-                // overflow-inline: auto;
                 overflow: auto;
                 max-height: 100%;
 
                 visibility: hidden;
                 opacity: 0;
 
-                > :first-child {
-                    margin-block-start: 0;
-                }
-                > :last-child {
-                    margin-block-end: 0;
-                }
+                @content (js--toggle-content--container);
 
-                > %ol,
-                > %ul {
-                    &:only-child {
-                        margin-inline: 0;
+                @if $includeBaseStyles {
+                    > :first-child {
+                        margin-block-start: 0;
+                    }
+                    > :last-child {
+                        margin-block-end: 0;
+                    }
+
+                    > %ol,
+                    > %ul {
+                        width: 100%;
+
+                        &:only-child {
+                            margin-inline: 0;
+                        }
                     }
                 }
             }
         }
+    }
 
-        @at-root {
-            /** Opening & Closing ------------------ **/
+    /* Opening & Closing ==================================== */
+
+    [data-toggle-control] {
+        [data-toggle-container='open'] &,
+        & {
+            @include feature-check.js {
+                @include hover-focus-visible {
+                    @if $includeBaseStyles {
+                        text-decoration-color: transparent;
+                        color: #{var-sys-colour(link)};
+                    }
+
+                    @content (js--toggle-container--default-or-open--control--hover-focus);
+                }
+            }
         }
+    }
 
+    @include feature-check.js {
+        ///
+        /// CLOSED
+        ///
         [data-toggle-container='closed'] {
+            @content (js--toggle-container--closed);
         }
 
+        ///
+        /// OPEN & CLOSING
+        ///
         [data-toggle-container='open'],
         [data-toggle-container='closing'] {
+            @content (js--toggle-container--open-or-closing);
+
             > [data-toggle-content] {
-                // border: #{var-border-width('200')} dotted currentColor;
-                // border-block-start-style: solid;
+                @content (js--toggle-container--open-or-closing--content);
 
                 > .container {
                     visibility: visible;
+                    @content (js--toggle-container--open-or-closing--content--container);
                 }
             }
 
             [data-toggle-control] {
+                @content (js--toggle-container--open-or-closing--control);
+
                 &[data-toggle-control-backdrop] {
-                    @include prop-display(do-var(display, block));
+                    display: do-var(display, block);
+
+                    @content (js--toggle-container--open-or-closing--control-backdrop);
                 }
             }
         }
 
+        ///
+        /// OPEN
+        ///
         [data-toggle-container='open'] {
+            @content (js--toggle-container--open);
+
             [data-toggle-control] {
+                @if $includeBaseStyles {
+                    color: #{var-sys-colour(text-active)};
+                }
+
+                @content (js--toggle-container--open--control);
+
                 .toggle-icon {
-                    > svg #b {
+                    @content (js--toggle-container--open--control--icon);
+
+                    > svg #{$svg_sel_moving} {
                         transform: rotate(270deg);
                     }
                 }
 
                 &[data-toggle-control-backdrop] {
                     opacity: 1;
+
+                    @content (js--toggle-container--open--control-background);
                 }
             }
 
             > [data-toggle-content] {
-                border-inline-width: #{var-border-width('200')};
-                border-block-end-width: #{var-border-width('200')};
+                @if $includeBaseStyles {
+                    border-inline-width: #{var-border-width('200')};
+                    border-block-end-width: #{var-border-width('200')};
+                }
 
                 grid-template-rows: 1fr;
 
+                @content (js--toggle-container--open--content);
+
                 > .container {
-                    padding-block: #{var-mrg-soft('300')};
+                    padding-block: #{$content_container_paddingBlock};
                     opacity: 1;
+
+                    @content (js--toggle-container--open--content--container);
                 }
             }
         }
 
+        ///
+        /// CLOSING
+        ///
         [data-toggle-container='closing'] {
+            @content (js--toggle-container--closing);
+
             [data-toggle-control] {
+                @content (js--toggle-container--closing--control);
+
                 .toggle-icon {
-                    > svg #b {
+                    @content (js--toggle-container--closing--control--icon);
+
+                    > svg #{$svg_sel_moving} {
                         transform: rotate(540deg);
                     }
                 }
@@ -459,26 +664,14 @@ $_defaultHeadingSelectors_greaterThan6: ();
             > [data-toggle-content] {
                 grid-template-rows: 0fr;
 
+                @content (js--toggle-container--closing--content);
+
                 > .container {
                     opacity: 0;
                     visibility: visible;
+
+                    @content (js--toggle-container--closing--content--container);
                 }
-            }
-        }
-    }
-
-    [data-toggle-control] {
-        [data-toggle-container='open'] & {
-            @include feature-check.js {
-                color: #{var-sys-colour(text-active)};
-            }
-        }
-
-        [data-toggle-container='open'] &,
-        & {
-            @include hover-focus-visible {
-                text-decoration-color: transparent;
-                color: #{var-sys-colour(link)};
             }
         }
     }

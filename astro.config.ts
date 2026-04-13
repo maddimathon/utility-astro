@@ -45,7 +45,7 @@ export default defineConfig( {
     },
 
     outDir,
-    publicDir: srcDir + '/public',
+    publicDir: srcDir + '/_public',
     srcDir,
 
     trailingSlash: 'never',

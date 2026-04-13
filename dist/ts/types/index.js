@@ -10,4 +10,3 @@
  * @license MIT
  */
 export {};
-//# sourceMappingURL=index.js.map

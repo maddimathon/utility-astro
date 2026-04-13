@@ -33,7 +33,7 @@ export class SettingsMenu {
     readonly #path: string;
     readonly #resetButton: HTMLButtonElement | null;
 
-    #timeout: NodeJS.Timeout | null = null;
+    #timeout: ReturnType<typeof setTimeout> | null = null;
 
     /**
      * @param menu  The website settings menu wrapper to set up.
@@ -179,7 +179,7 @@ export class SettingsMenu {
     /**
      * Triggered by a click lisetener.
      */
-    public resetButtonClicked() {
+    public resetButtonClicked(): void {
         this.#attributeKeys.forEach( ( attr: string ) => {
             this.#rootElement.removeAttribute( attr );
             this.#cookies[ attr ]?.delete();
@@ -281,9 +281,9 @@ export namespace SettingsMenu {
              */
             toggle?: string | ( ( menuID?: string ) => string );
         },
-    ) {
+    ): Promise<void[]> {
 
-        const mapper = async ( menu: HTMLElement ) => {
+        const mapper = async ( menu: HTMLElement ): Promise<void> => {
             new SettingsMenu( menu );
 
             const scrollToMenu = () =>
@@ -299,6 +299,7 @@ export namespace SettingsMenu {
             // trap the focus order in the menu
 
             const menuID: string = menu.id;
+
             if ( !menuID ) {
                 return;
             }

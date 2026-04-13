@@ -37,4 +37,3 @@ export declare class JsCookie {
      */
     set(value: string, expireDays?: number | null): void;
 }
-//# sourceMappingURL=JsCookie.d.ts.map

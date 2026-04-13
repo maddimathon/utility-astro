@@ -1,5 +1,5 @@
 {
-    "extends": "../../tsconfig.json",
+    "extends": "@maddimathon/build-utilities/tsconfig",
     "include": [
         "../../src/ts/**/*",
         "./src/ts/**/*"
@@ -8,21 +8,12 @@
         "./node_modules/**/*"
     ],
     "compilerOptions": {
-        "module": "Node18",
-        "moduleResolution": "Node16",
-        "lib": [ 
-            "DOM",
-            "ES2022"
-        ],
-
-        "baseUrl": "../../",
         "declaration": true,
-        "declarationMap": true,
-        "noEmit": false,
+        "declarationMap": false,
+        "isolatedModules": false,
         "outDir": "../../dist/ts/",
         "rootDir": "./",
-        "skipLibCheck": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "verbatimModuleSyntax": true
     }
 }

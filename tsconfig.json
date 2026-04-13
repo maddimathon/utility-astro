@@ -11,10 +11,18 @@
         "./node_modules/**/*"
     ],
     "compilerOptions": {
+        "allowJs": false,
         "allowImportingTsExtensions": false,
-        "baseUrl": "./",
         "exactOptionalPropertyTypes": false,
-        "noImplicitAny": true,
+        "isolatedDeclarations": false,
+
+        "plugins": [
+            {
+              "name": "@astrojs/ts-plugin"
+            }
+        ],
+
+        "resolvePackageJsonExports": true,
         "skipLibCheck": true,
         "strictNullChecks": true,
         "verbatimModuleSyntax": true

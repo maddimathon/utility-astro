@@ -251,4 +251,3 @@ export class SettingsMenu {
     }
     SettingsMenu.init = init;
 })(SettingsMenu || (SettingsMenu = {}));
-//# sourceMappingURL=SettingsMenu.js.map

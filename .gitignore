@@ -28,6 +28,7 @@ dist/**/*.test.js
 # SRC
 # === #
 src/astro/css
+src/docs/_public/typedoc
 src/docs/content/api
 src/docs/css
 src/tmp

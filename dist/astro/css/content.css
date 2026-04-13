@@ -7,6 +7,7 @@
 /* # BODY GRID ==================================== */
 .content-width {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -14,24 +15,28 @@
 .website-settings-menu,
 .page-width {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 .sidebar-width {
     --grid-column: sidebar-start/sidebar-end;
+    grid-column: sidebar-start/sidebar-end;
     grid-column: var(--grid-column, sidebar-start/sidebar-end);
     width: auto;
 }
 
 .site-width {
     --grid-column: site-start/site-end;
+    grid-column: site-start/site-end;
     grid-column: var(--grid-column, site-start/site-end);
     width: auto;
 }
 
 html {
     --display: block;
+    display: block;
     display: var(--display, block);
     position: relative;
 }
@@ -42,6 +47,7 @@ body > .body-subgrid > .body-subgrid,
 body > :where(main, nav, header, footer),
 body > :where(main, nav, header, footer) > .body-subgrid {
     --display: grid;
+    display: grid;
     display: var(--display, grid);
     position: relative;
     justify-content: center;
@@ -50,11 +56,22 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     align-items: start;
     grid-auto-rows: auto;
     grid-auto-flow: column;
+    grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
     --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
     /* prettier-ignore */
-    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
+    grid-template-columns: 4vw [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] 4vw;
+    grid-template-columns: var(
+            --gap-inline-layout-half,
+            4vw
+        ) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(
+            auto,
+            var(--width-content, 36rem)
+        ) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(
+            --gap-inline-layout-half,
+            4vw
+        );
     margin-left: 0;
     margin-right: 0;
 }
@@ -67,6 +84,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > :where(*) {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -108,6 +126,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > .display-contents
     > :where(*) {
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -121,6 +140,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > :where(table) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: -moz-fit-content;
     width: fit-content;
@@ -155,7 +175,26 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: 4vw [site-start] 1fr 0 [page-start] minmax(auto, calc(18rem / 2)) 4vw [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 4vw minmax(auto, calc(18rem / 2)) [page-end] 0 1fr [site-end] 4vw;
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] minmax(
+                auto,
+                calc(var(--width-sidebar, 18rem) / 2)
+            ) var(
+                --gap-inline-layout-half,
+                4vw
+            ) [sidebar-start] 0 [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] 0 [sidebar-end] var(
+                --gap-inline-layout-half,
+                4vw
+            ) minmax(
+                auto,
+                calc(var(--width-sidebar, 18rem) / 2)
+            ) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
@@ -165,10 +204,13 @@ body {
     z-index: 1;
 }
 :where(body) > :where(*) + :where(*) {
+    margin-top: 5vw;
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: 0;
 }
 :where(body) > :where(footer) {
+    margin-top: 5vw;
+    margin-bottom: 5vw;
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: var(--gap-block-layout, 5vw);
 }
@@ -184,12 +226,14 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(body) > :where(nav, header, footer) > :where(*) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 body > :where(aside) {
     --grid-column: sidebar-start/sidebar-end;
+    grid-column: sidebar-start/sidebar-end;
     grid-column: var(--grid-column, sidebar-start/sidebar-end);
     width: auto;
 }
@@ -209,18 +253,21 @@ body > :where(aside) > :first-child {
 
 :where(.layout_content-only) > :where(header) > :where(*) {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
 
 :where(.layout_full-width) > :where(main) > :where(*) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 :where(.layout_extra-wide) > :where(main) > :where(*) {
     --grid-column: site-start/site-end;
+    grid-column: site-start/site-end;
     grid-column: var(--grid-column, site-start/site-end);
     width: auto;
 }
@@ -238,6 +285,7 @@ body > :where(aside) > :first-child {
     .layout_sidebar-left > :where(main),
     .layout_sidebar-right > :where(main) {
         --grid-column: content-start/content-end;
+        grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
     }
 }
@@ -247,7 +295,23 @@ body > :where(aside) > :first-child {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: 4vw [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, 18rem) [sidebar-end] 8vw [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0 1fr [site-end] 4vw;
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(
+                auto,
+                var(--width-sidebar, 18rem)
+            ) [sidebar-end] var(
+                --gap-inline-layout,
+                8vw
+            ) [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] 0 [page-end] 0 1fr [site-end] var(
+                --gap-inline-layout-half,
+                4vw
+            );
     }
 }
 
@@ -256,6 +320,22 @@ body > :where(aside) > :first-child {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: 4vw [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] 8vw [sidebar-start] minmax(auto, 18rem) [sidebar-end] 0 [page-end] 0 1fr [site-end] 4vw;
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] var(
+                --gap-inline-layout,
+                8vw
+            ) [sidebar-start] minmax(
+                auto,
+                var(--width-sidebar, 18rem)
+            ) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(
+                --gap-inline-layout-half,
+                4vw
+            );
     }
 }

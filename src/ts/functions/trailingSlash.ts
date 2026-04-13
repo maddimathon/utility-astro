@@ -18,7 +18,7 @@ export namespace trailingSlash {
     /**
      * @since 0.1.0-alpha
      */
-    export function add( str: string ) {
+    export function add( str: string ): string {
 
         // returns
         if ( !str.match( /\.[a-z][a-z0-9\-]*$/ ) ) {
@@ -31,7 +31,7 @@ export namespace trailingSlash {
     /**
      * @since 0.1.0-alpha
      */
-    export function remove( str: string ) {
+    export function remove( str: string ): string {
         return str.replace( /\/$/gi, '' );
     };
 }

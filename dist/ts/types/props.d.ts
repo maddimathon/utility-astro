@@ -51,4 +51,3 @@ export type GenericElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys e
 }> & Partial<Omit<HTMLAttributes<T_HtmlTag>, T_OmitKeys | "class" | "class:list">> & {
     'aria-description'?: string;
 };
-//# sourceMappingURL=props.d.ts.map

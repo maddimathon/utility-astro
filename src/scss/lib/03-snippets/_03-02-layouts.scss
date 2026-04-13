@@ -36,6 +36,12 @@ $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 
 $_flex_container_alignment: tokens.$contentGridAlignment;
 
+$_flex_container_alignment: map.set(
+    $_flex_container_alignment,
+    align-items,
+    map.get(tokens.$contentGridAlignment, justify-items)
+);
+
 ///
 /// Does not set the display property for more flexibility.
 ///
@@ -54,7 +60,10 @@ $_flex_container_alignment: tokens.$contentGridAlignment;
 
     flex-direction: #{$direction};
     flex-wrap: #{$wrap};
-    gap: #{$gap};
+
+    @if $gap != false {
+        gap: #{$gap};
+    }
 
     justify-content: #{map.get($alignment, justify-content)};
     justify-items: #{map.get($alignment, justify-items)};
@@ -120,6 +129,17 @@ $_flex_container_alignment: tokens.$contentGridAlignment;
                     @include prop-grid-column($cols, $setCxProp: false, $args...);
                 }
             }
+        }
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin snippet-support-astro-body-grid--display-contents($cols: content-start/content-end) {
+    @include feature-check.supports(displayContents) {
+        > :where(*) {
+            @include prop-grid-column($cols, $setCxProp: false);
         }
     }
 }

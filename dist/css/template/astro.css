@@ -209,6 +209,7 @@ Add the correct display in Chrome and Safari.
 */
 summary {
     --display: list-item;
+    display: list-item;
     display: var(--display, list-item);
 }
 
@@ -604,7 +605,7 @@ html {
     --line-height-200: 1.3125;
     --line-height-300: 1.4375;
     --line-height-400: 1.6875;
-    --line-height-500: 1.90625;
+    --line-height-500: 1.9375;
     --line-height-600: 2.1875;
 }
 
@@ -663,6 +664,7 @@ html {
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(
             --focus-ring-outline-width,
             clamp(
@@ -672,10 +674,12 @@ html {
             )
         )
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(
         --focus-ring-outline-offset,
         var(--stroke-relative-400, 0.125em)
@@ -685,6 +689,7 @@ html {
 :where(.js__no-focusVisible) :focus,
 :where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(
             --focus-ring-outline-width,
             clamp(
@@ -694,10 +699,12 @@ html {
             )
         )
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(
         --focus-ring-outline-offset,
         var(--stroke-relative-400, 0.125em)
@@ -706,6 +713,7 @@ html {
 
 :focus-visible {
     /* %focus-ring--visible */
+    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
     outline: var(
             --focus-ring-outline-width,
             clamp(
@@ -715,10 +723,12 @@ html {
             )
         )
         dashed currentColor;
+    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
+    outline-offset: 0.125em;
     outline-offset: var(
         --focus-ring-outline-offset,
         var(--stroke-relative-400, 0.125em)
@@ -746,37 +756,54 @@ html {
 
 html,
 body {
+    scroll-padding-top: calc(0 + clamp(1.875rem, 5svw, 3.5rem));
     scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
 }
 
 hr {
     --display: block;
+    display: block;
     display: var(--display, block);
+    justify-self: center;
+    align-self: center;
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
     margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: var(--mrg-firm-600, 2.25rem);
+    margin-left: clamp(0.5rem, 9%, 4rem);
+    margin-right: clamp(0.5rem, 9%, 4rem);
     margin-left: var(--gap-inline-indent, 9%);
     margin-right: var(--gap-inline-indent, 9%);
     width: 72.92%;
+    max-width: 26.25rem;
     max-width: var(--width-callout, 26.25rem);
     border: none;
+    border-bottom: currentColor solid 0.125rem;
     border-bottom: currentColor solid var(--border-width-200, 0.125rem);
 }
 
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
 ::-moz-selection {
+    background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
+    color: HighlightText;
     color: var(--sys-clr-selection-text, HighlightText);
 }
 ::selection {
+    background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
+    color: HighlightText;
     color: var(--sys-clr-selection-text, HighlightText);
 }
 
 html {
     font-weight: 400;
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 @media (max-width: 24.99em) {
@@ -786,6 +813,7 @@ html {
 }
 
 body {
+    font-size: 1rem;
     font-size: var(--fs-normal, 1rem);
 }
 
@@ -819,38 +847,49 @@ i em em {
 a[href] {
     --focus-ring-outline-offset: var(--stroke-relative-200, 0.0625em);
     --display: inline;
+    display: inline;
     display: var(--display, inline);
     border: none;
+    -webkit-text-decoration: underline 0.0625em;
+    text-decoration: underline 0.0625em;
     -webkit-text-decoration: underline var(--stroke-relative-200, 0.0625em);
     text-decoration: underline var(--stroke-relative-200, 0.0625em);
+    text-underline-offset: 0.25em;
     text-underline-offset: var(--stroke-relative-800, 0.25em);
+    color: LinkText;
     color: var(--sys-clr-link, LinkText);
 }
 a[href]:visited {
+    color: VisitedText;
     color: var(--sys-clr-link-visited, VisitedText);
 }
 .no-js a[href]:focus,
 .js__no-whereSelector a[href]:focus {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 :where(.js__no-focusVisible) a[href]:focus {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:hover {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:focus-visible {
     text-decoration-color: transparent;
+    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:active {
+    color: ActiveText;
     color: var(--sys-clr-link-active, ActiveText);
 }
 a.no-style[href] {
@@ -860,12 +899,15 @@ a.no-style[href] {
 }
 a[aria-disabled="true"][href] {
     text-decoration-line: line-through;
+    color: GrayText;
     color: var(--sys-clr-text-disabled, GrayText);
     opacity: 1;
     cursor: not-allowed;
 }
 
 abbr[title] {
+    -webkit-text-decoration: dotted underline 0.125em;
+    text-decoration: dotted underline 0.125em;
     -webkit-text-decoration: dotted underline
         var(--stroke-relative-400, 0.125em);
     text-decoration: dotted underline var(--stroke-relative-400, 0.125em);
@@ -874,6 +916,7 @@ abbr[title] {
 
 /* ## Typography - Block ==================================== */
 p {
+    margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
     margin-bottom: 0;
 }
@@ -892,10 +935,14 @@ samp {
 h1,
 .h1,
 .page-title {
+    margin-top: 3.5rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 900;
+    font-size: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
     font-size: var(--fs-heading-1, 2.75rem);
+    line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
     letter-spacing: normal;
     text-transform: none;
@@ -926,10 +973,14 @@ h1 a.button[href],
 }
 h2,
 .h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 800;
+    font-size: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
     font-size: var(--fs-heading-2, 2.0625rem);
+    line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
     letter-spacing: normal;
     text-transform: none;
@@ -954,10 +1005,14 @@ h2 a.button[href],
 }
 h3,
 .h3 {
+    margin-top: 3.5rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 700;
+    font-size: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
     font-size: var(--fs-heading-3, 1.8125rem);
+    line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
     letter-spacing: normal;
     text-transform: none;
@@ -982,10 +1037,14 @@ h3 a.button[href],
 }
 h4,
 .h4 {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 700;
+    font-size: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
     font-size: var(--fs-heading-4, 1.5625rem);
+    line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
     letter-spacing: normal;
     text-transform: none;
@@ -1018,10 +1077,14 @@ h4 a.button[href],
 }
 h5,
 .h5 {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 600;
+    font-size: clamp(1rem, 1.75svw + 1rem, 1.5rem);
     font-size: var(--fs-heading-5, 1.3125rem);
+    line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
     letter-spacing: normal;
     text-transform: none;
@@ -1054,10 +1117,14 @@ h5 a.button[href],
 }
 h6,
 .h6 {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
+    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
     font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
     letter-spacing: normal;
     text-transform: none;
@@ -1089,10 +1156,14 @@ h6 a.button[href],
     text-transform: inherit;
 }
 .h7 {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
+    font-size: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
     font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
     text-transform: uppercase;
@@ -1110,10 +1181,14 @@ h6 a.button[href],
     text-transform: inherit;
 }
 .h8 {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
+    font-size: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
     font-size: var(--fs-heading-8, 0.8125rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
     text-transform: uppercase;
@@ -1137,10 +1212,14 @@ h6 a.button[href],
     text-transform: inherit;
 }
 .unstyled-heading {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 600;
+    font-size: 1rem;
     font-size: var(--fs-normal, 1rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: normal;
     text-transform: none;
@@ -1171,10 +1250,14 @@ h6:is(.unstyled-heading),
 .h6:is(.unstyled-heading),
 .h7:is(.unstyled-heading),
 .h8:is(.unstyled-heading) {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 600;
+    font-size: 1rem;
     font-size: var(--fs-normal, 1rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: normal;
     text-transform: none;
@@ -1240,6 +1323,7 @@ ul,
     margin-left: 20%;
     padding: 0;
     padding-left: 1em;
+    margin-left: clamp(0.3125rem, 5%, 2.25rem);
     margin-left: var(--gap-inline-tab, 5%);
     line-height: inherit;
 }
@@ -1291,22 +1375,27 @@ ul ul ul {
 }
 li {
     margin: 0;
+    margin-top: 0.625rem;
     margin-top: var(--mrg-soft-300, 0.625rem);
     padding: 0;
 }
 li::marker {
     font-weight: 500;
+    font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 li > a:only-child {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
     vertical-align: top;
 }
 li li li {
+    margin-top: 0.375rem;
     margin-top: var(--mrg-soft-200, 0.375rem);
 }
 li li li::marker {
+    font-size: 0.8125rem;
     font-size: var(--fs-smaller-2, 0.8125rem);
 }
 li li li li {
@@ -1323,46 +1412,63 @@ li li li li em em {
  * ======================================================================== */
 fieldset {
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.8125rem;
     padding-top: var(--mrg-soft-300, 0.625rem);
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     padding-left: var(--mrg-firm-400, 1.25rem);
     padding-right: var(--mrg-firm-400, 1.25rem);
+    border: 0.0625rem solid FieldText;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
+    background-color: Canvas;
     background-color: var(--sys-clr-background, Canvas);
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 .no-js fieldset:focus,
 .js__no-whereSelector fieldset:focus {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 :where(.js__no-focusVisible) fieldset:focus {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:focus-visible {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:focus-within {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
 }
 
 fieldset:active {
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
 }
 fieldset legend {
     --display: block;
+    display: block;
     display: var(--display, block);
 }
 fieldset > :first-child {
     margin-top: 0;
+    margin-top: calc(0.9375rem - 0.375rem);
     margin-top: calc(
         var(--mrg-soft-400, 0.9375rem) - var(--mrg-soft-200, 0.375rem)
     );
@@ -1372,10 +1478,14 @@ fieldset > legend + * {
 }
 
 fieldset legend {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
+    font-size: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
     font-size: var(--fs-heading-7, 0.9375rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: 0.0625em;
     text-transform: uppercase;
@@ -1383,20 +1493,29 @@ fieldset legend {
     font-style: normal;
 }
 fieldset legend:is(.unstyled-heading) {
+    margin-top: 1.875rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 600;
+    font-size: 1rem;
     font-size: var(--fs-normal, 1rem);
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
     letter-spacing: normal;
     text-transform: none;
     font-style: normal;
 }
 fieldset legend {
+    margin-left: calc(0.625rem * -1);
+    margin-right: calc(0.625rem * -1);
     margin-left: calc(var(--mrg-soft-300, 0.625rem) * -1);
     margin-right: calc(var(--mrg-soft-300, 0.625rem) * -1);
+    margin-bottom: 0.625rem;
     margin-top: 0;
     margin-bottom: var(--mrg-soft-300, 0.625rem);
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
     padding-left: var(--mrg-soft-300, 0.625rem);
     padding-right: var(--mrg-soft-300, 0.625rem);
     font-style: italic;
@@ -1407,23 +1526,35 @@ select,
 input {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
     padding-top: var(--mrg-soft-200, 0.375rem);
     padding-bottom: var(--mrg-soft-200, 0.375rem);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     padding-left: var(--mrg-firm-200, 0.5rem);
     padding-right: var(--mrg-firm-200, 0.5rem);
     width: 100%;
     font: inherit;
+    line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
+    border: 0.0625rem solid FieldText;
     border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg, Field);
+    color: FieldText;
     color: var(--sys-clr-input-text, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 .no-js textarea:focus,
@@ -1433,9 +1564,13 @@ input {
 .js__no-whereSelector select:focus,
 .js__no-whereSelector input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1443,9 +1578,13 @@ input {
 :where(.js__no-focusVisible) select:focus,
 :where(.js__no-focusVisible) input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1453,9 +1592,13 @@ textarea:hover,
 select:hover,
 input:hover {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1463,9 +1606,13 @@ textarea:focus-visible,
 select:focus-visible,
 input:focus-visible {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1473,9 +1620,13 @@ textarea:focus-within,
 select:focus-within,
 input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1483,9 +1634,13 @@ textarea:active,
 select:active,
 input:active {
     --focus-ring-outline-color: var(--sys-clr-text-active, ActiveText);
+    background-color: Field;
     background-color: var(--sys-clr-input-bg-active, Field);
+    border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
+    color: FieldText;
     color: var(--sys-clr-input-text-active, FieldText);
+    accent-color: ActiveText;
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
 label + textarea,
@@ -1494,6 +1649,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
+    margin-top: 0.3125rem;
     margin-top: var(--mrg-half-400, 0.3125rem);
 }
 textarea::-moz-placeholder,
@@ -1640,6 +1796,7 @@ input[type="week"][disabled] {
 input[type="checkbox"],
 input[type="radio"] {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
     padding: 0;
     width: auto;
@@ -1671,25 +1828,35 @@ textarea {
 
 label {
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
     font-weight: 600;
+    line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 label:has(> :where([type="checkbox"], [type="radio"])) {
     --display: grid;
+    display: grid;
     display: var(--display, grid);
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
+    grid-gap: 0.625rem;
+    grid-gap: var(--mrg-soft-300, 0.625rem);
+    gap: 0.625rem;
     gap: var(--mrg-soft-300, 0.625rem);
     font-weight: 400;
+    line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
+    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
@@ -1700,11 +1867,13 @@ label[disabled]:has(> :where([type="checkbox"], [type="radio"])) {
 
 label:has(> :where([type="checkbox"], [type="radio"]))
     + label:has(> :where([type="checkbox"], [type="radio"])) {
+    margin-top: 0.5rem;
     margin-top: var(--mrg-firm-200, 0.5rem);
 }
 label:has(> :where([type="checkbox"], [type="radio"])) + input,
 label:has(> :where([type="checkbox"], [type="radio"])) + select,
 label:has(> :where([type="checkbox"], [type="radio"])) + textarea {
+    margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
 label > input[type="checkbox"],
@@ -1721,24 +1890,36 @@ input[type="submit"],
 a.button[href] {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
     padding-top: var(--mrg-soft-200, 0.375rem);
     padding-bottom: var(--mrg-soft-200, 0.375rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
+    line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid ButtonFace;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 .no-js button:focus,
@@ -1757,9 +1938,13 @@ a.button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1773,9 +1958,13 @@ a.button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1789,9 +1978,13 @@ a.button[href]:hover {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1805,9 +1998,13 @@ a.button[href]:focus-visible {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1821,9 +2018,13 @@ a.button[href]:focus-within {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1834,9 +2035,13 @@ input[type="reset"]:active,
 input[type="submit"]:active,
 a.button[href]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 button[aria-disabled="true"],
@@ -1860,12 +2065,14 @@ input[type="reset"],
 input[type="submit"],
 a.button[href] {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
     align-content: start;
     align-items: start;
+    gap: 0.625rem 0.3125rem;
     gap: var(--mrg-soft-300, 0.625rem) var(--mrg-firm-100, 0.3125rem);
     text-align: left;
     -webkit-appearance: button;
@@ -1892,24 +2099,36 @@ a[disabled].button[href] {
 ::file-selector-button {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
     padding-top: var(--mrg-soft-200, 0.375rem);
     padding-bottom: var(--mrg-soft-200, 0.375rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
+    line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid ButtonFace;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 .no-js :focus::file-selector-button,
@@ -1918,9 +2137,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1929,9 +2152,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1940,9 +2167,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1951,9 +2182,13 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1962,17 +2197,25 @@ a[disabled].button[href] {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :active::file-selector-button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 [aria-disabled="true"]::file-selector-button,
@@ -1981,12 +2224,14 @@ a[disabled].button[href] {
 }
 ::file-selector-button {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
     align-content: start;
     align-items: start;
+    gap: 0.625rem 0.3125rem;
     gap: var(--mrg-soft-300, 0.625rem) var(--mrg-firm-100, 0.3125rem);
     text-align: left;
     -webkit-appearance: button;
@@ -2001,9 +2246,12 @@ a[disabled].button[href] {
 }
 ::file-selector-button {
     --display: initial;
+    display: initial;
     display: var(--display, initial);
     margin: 0;
+    margin-right: 0.8125rem;
     margin-right: var(--mrg-firm-300, 0.8125rem);
+    font-size: 1rem;
     font-size: var(--fs-normal, 1rem);
 }
 
@@ -2012,17 +2260,23 @@ a[disabled].button[href] {
 .table-wrapper,
 table {
     position: relative;
+    margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: 0;
+    margin-top: 2.25rem;
+    margin-bottom: calc(1.875rem - 0.9375rem);
     margin-top: var(--mrg-firm-600, 2.25rem);
     margin-bottom: calc(
         var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
     );
+    background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
 }
 
 table {
+    border-spacing: 0.125rem;
     border-spacing: var(--border-width-200, 0.125rem);
+    font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
     line-height: inherit;
 }
@@ -2032,18 +2286,22 @@ table {
     }
     table th,
     table td {
+        border-bottom: 0.125rem solid CanvasText;
         border-bottom: var(--border-width-200, 0.125rem) solid
             var(--sys-clr-text, CanvasText);
+        border-right: 0.125rem solid CanvasText;
         border-right: var(--border-width-200, 0.125rem) solid
             var(--sys-clr-text, CanvasText);
     }
     table th:first-child,
     table td:first-child {
+        border-left: 0.125rem solid CanvasText;
         border-left: var(--border-width-200, 0.125rem) solid
             var(--sys-clr-text, CanvasText);
     }
     table tr:first-child th,
     table tr:first-child td {
+        border-top: 0.125rem solid CanvasText;
         border-top: var(--border-width-200, 0.125rem) solid
             var(--sys-clr-text, CanvasText);
     }
@@ -2053,24 +2311,29 @@ table {
 }
 [data-contrast-mode="forced-colors"] table th,
 [data-contrast-mode="forced-colors"] table td {
+    border-bottom: 0.125rem solid CanvasText;
     border-bottom: var(--border-width-200, 0.125rem) solid
         var(--sys-clr-text, CanvasText);
+    border-right: 0.125rem solid CanvasText;
     border-right: var(--border-width-200, 0.125rem) solid
         var(--sys-clr-text, CanvasText);
 }
 [data-contrast-mode="forced-colors"] table th:first-child,
 [data-contrast-mode="forced-colors"] table td:first-child {
+    border-left: 0.125rem solid CanvasText;
     border-left: var(--border-width-200, 0.125rem) solid
         var(--sys-clr-text, CanvasText);
 }
 [data-contrast-mode="forced-colors"] table tr:first-child th,
 [data-contrast-mode="forced-colors"] table tr:first-child td {
+    border-top: 0.125rem solid CanvasText;
     border-top: var(--border-width-200, 0.125rem) solid
         var(--sys-clr-text, CanvasText);
 }
 
 .table-wrapper {
     --display: block;
+    display: block;
     display: var(--display, block);
     overflow-x: auto;
     overscroll-behavior-x: none;
@@ -2083,11 +2346,16 @@ table {
 
 th,
 td {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
     padding-top: var(--mrg-soft-200, 0.375rem);
     padding-bottom: var(--mrg-soft-200, 0.375rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     min-width: 10em;
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     vertical-align: top;
     text-align: left;
@@ -2102,10 +2370,14 @@ td > :last-child {
 }
 
 th {
+    padding-top: 0.375rem;
     padding-top: var(--mrg-soft-200, 0.375rem);
+    padding-bottom: 0.375rem;
     padding-bottom: var(--mrg-soft-200, 0.375rem);
     text-wrap: balance;
+    background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
+    color: Canvas;
     color: var(--sys-clr-accent-text, Canvas);
 }
 
@@ -2116,6 +2388,7 @@ th {
 .skip-link[href],
 a.skip-link[href] {
     --display: block;
+    display: block;
     display: var(--display, block);
     position: fixed;
     margin: 0;
@@ -2127,12 +2400,14 @@ a.skip-link[href] {
 .skip-link:focus,
 .skip-link[href]:focus,
 a.skip-link[href]:focus {
+    top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
 .skip-link:focus-within,
 .skip-link[href]:focus-within,
 a.skip-link[href]:focus-within {
+    top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
@@ -2152,18 +2427,25 @@ a.skip-link[href]:focus-within {
  * ======================================================================== */
 blockquote {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     margin-left: 0;
     margin-right: 0;
+    margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
     margin-bottom: 0;
+    margin-top: 1.875rem;
+    margin-bottom: calc(1.875rem - 0.9375rem);
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: calc(
         var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
     );
+    padding-left: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: 0.125rem solid currentColor;
     border-left: var(--border-width-200, 0.125rem) solid currentColor;
     width: auto;
+    max-width: 26.25rem;
     max-width: var(--width-callout, 26.25rem);
     position: relative;
     flex-direction: column;
@@ -2172,7 +2454,7 @@ blockquote {
     justify-content: center;
     justify-items: stretch;
     align-content: start;
-    align-items: start;
+    align-items: stretch;
     justify-self: center;
 }
 blockquote > :first-child {
@@ -2180,7 +2462,9 @@ blockquote > :first-child {
 }
 blockquote > cite {
     --display: block;
+    display: block;
     display: var(--display, block);
+    margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
     margin-bottom: 0;
     text-align: right;
@@ -2210,19 +2494,28 @@ blockquote > cite {
 
 pre {
     --display: block;
+    display: block;
     display: var(--display, block);
     position: relative;
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
     padding-top: var(--mrg-soft-300, 0.625rem);
     padding-bottom: var(--mrg-soft-300, 0.625rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
+    border: 0.0625rem solid currentColor;
     border: var(--border-width-100, 0.0625rem) solid currentColor;
     width: auto;
     max-width: 100%;
+    font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
     overflow: auto;
     justify-self: center;
@@ -2231,6 +2524,7 @@ pre > code,
 pre > kbd,
 pre > samp {
     --display: block;
+    display: block;
     display: var(--display, block);
     margin: 0;
     padding: 0;
@@ -2265,6 +2559,7 @@ pre:has(> :is(code, kbd, samp)):is(
     ) {
     white-space: normal;
     text-wrap: auto;
+    max-width: 26.25rem;
     max-width: var(--width-callout, 26.25rem);
 }
 pre:has(> :is(code, kbd, samp)):is(
@@ -2313,6 +2608,7 @@ nav ul li {
  * ======================================================================== */
 .content-width {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -2320,24 +2616,28 @@ nav ul li {
 .page-width,
 .website-settings-menu {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 .sidebar-width {
     --grid-column: sidebar-start/sidebar-end;
+    grid-column: sidebar-start/sidebar-end;
     grid-column: var(--grid-column, sidebar-start/sidebar-end);
     width: auto;
 }
 
 .site-width {
     --grid-column: site-start/site-end;
+    grid-column: site-start/site-end;
     grid-column: var(--grid-column, site-start/site-end);
     width: auto;
 }
 
 html {
     --display: block;
+    display: block;
     display: var(--display, block);
     position: relative;
 }
@@ -2348,6 +2648,7 @@ body > .body-subgrid > .body-subgrid,
 body > :where(main, nav, header, footer),
 body > :where(main, nav, header, footer) > .body-subgrid {
     --display: grid;
+    display: grid;
     display: var(--display, grid);
     position: relative;
     justify-content: center;
@@ -2356,11 +2657,22 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     align-items: start;
     grid-auto-rows: auto;
     grid-auto-flow: column;
+    grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
     --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
     /* prettier-ignore */
-    grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
+    grid-template-columns: clamp(0.625rem, 4svw, 3.5625rem) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] clamp(0.625rem, 4svw, 3.5625rem);
+    grid-template-columns: var(
+            --gap-inline-layout-half,
+            4vw
+        ) [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(
+            auto,
+            var(--width-content, 36rem)
+        ) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] var(
+            --gap-inline-layout-half,
+            4vw
+        );
     margin-left: 0;
     margin-right: 0;
 }
@@ -2373,6 +2685,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > :where(*) {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -2414,6 +2727,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > .display-contents
     > :where(*) {
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
@@ -2427,6 +2741,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     )
     > :where(table) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: -moz-fit-content;
     width: fit-content;
@@ -2461,7 +2776,26 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: clamp(0.625rem, 4svw, 3.5625rem) [site-start] 1fr 0 [page-start] minmax(auto, calc(18rem / 2)) clamp(0.625rem, 4svw, 3.5625rem) [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] clamp(0.625rem, 4svw, 3.5625rem) minmax(auto, calc(18rem / 2)) [page-end] 0 1fr [site-end] clamp(0.625rem, 4svw, 3.5625rem);
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] minmax(
+                auto,
+                calc(var(--width-sidebar, 18rem) / 2)
+            ) var(
+                --gap-inline-layout-half,
+                4vw
+            ) [sidebar-start] 0 [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] 0 [sidebar-end] var(
+                --gap-inline-layout-half,
+                4vw
+            ) minmax(
+                auto,
+                calc(var(--width-sidebar, 18rem) / 2)
+            ) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
 
@@ -2471,10 +2805,13 @@ body {
     z-index: 1;
 }
 :where(body) > :where(*) + :where(*) {
+    margin-top: clamp(1.875rem, 5svw, 3.5rem);
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: 0;
 }
 :where(body) > :where(footer) {
+    margin-top: clamp(1.875rem, 5svw, 3.5rem);
+    margin-bottom: clamp(1.875rem, 5svw, 3.5rem);
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: var(--gap-block-layout, 5vw);
 }
@@ -2490,12 +2827,14 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(body) > :where(nav, header, footer) > :where(*) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 body > :where(aside) {
     --grid-column: sidebar-start/sidebar-end;
+    grid-column: sidebar-start/sidebar-end;
     grid-column: var(--grid-column, sidebar-start/sidebar-end);
     width: auto;
 }
@@ -2515,18 +2854,21 @@ body > :where(aside) > :first-child {
 
 :where(.layout_content-only) > :where(header) > :where(*) {
     --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
 
 :where(.layout_full-width) > :where(main) > :where(*) {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
 
 :where(.layout_extra-wide) > :where(main) > :where(*) {
     --grid-column: site-start/site-end;
+    grid-column: site-start/site-end;
     grid-column: var(--grid-column, site-start/site-end);
     width: auto;
 }
@@ -2544,6 +2886,7 @@ body > :where(aside) > :first-child {
     .layout_sidebar-left > :where(main),
     .layout_sidebar-right > :where(main) {
         --grid-column: content-start/content-end;
+        grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
     }
 }
@@ -2553,7 +2896,23 @@ body > :where(aside) > :first-child {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: clamp(0.625rem, 4svw, 3.5625rem) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(auto, 18rem) [sidebar-end] clamp(1.25rem, 8svw, 7.125rem) [content-start] minmax(auto, 36rem) [content-end] 0 [page-end] 0 1fr [site-end] clamp(0.625rem, 4svw, 3.5625rem);
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] 0 [sidebar-start] minmax(
+                auto,
+                var(--width-sidebar, 18rem)
+            ) [sidebar-end] var(
+                --gap-inline-layout,
+                8vw
+            ) [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] 0 [page-end] 0 1fr [site-end] var(
+                --gap-inline-layout-half,
+                4vw
+            );
     }
 }
 
@@ -2562,7 +2921,23 @@ body > :where(aside) > :first-child {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
-        grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
+        grid-template-columns: clamp(0.625rem, 4svw, 3.5625rem) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(auto, 36rem) [content-end] clamp(1.25rem, 8svw, 7.125rem) [sidebar-start] minmax(auto, 18rem) [sidebar-end] 0 [page-end] 0 1fr [site-end] clamp(0.625rem, 4svw, 3.5625rem);
+        grid-template-columns: var(
+                --gap-inline-layout-half,
+                4vw
+            ) [site-start] 1fr 0 [page-start] 0 [content-start] minmax(
+                auto,
+                var(--width-content, 36rem)
+            ) [content-end] var(
+                --gap-inline-layout,
+                8vw
+            ) [sidebar-start] minmax(
+                auto,
+                var(--width-sidebar, 18rem)
+            ) [sidebar-end] 0 [page-end] 0 1fr [site-end] var(
+                --gap-inline-layout-half,
+                4vw
+            );
     }
 }
 
@@ -2610,14 +2985,18 @@ body > :where(aside) > :first-child {
     margin-top: 0;
 }
 .content-header + :where(*) {
+    margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
 
 .page-subtitle {
+    margin-top: 0.375rem;
     margin-top: var(--mrg-soft-200, 0.375rem);
     margin-bottom: 0;
     font-weight: 500;
+    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
     font-size: var(--fs-heading-6, 1.1875rem);
+    line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
 }
@@ -2634,12 +3013,17 @@ body > :where(aside) > :first-child {
  * ======================================================================== */
 .icon {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
+    height: 1.375em;
     height: var(--icon-size, 1.375em);
+    height: calc(1.375em * 1);
     height: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
     );
+    min-width: 1.375em;
     min-width: var(--icon-size, 1.375em);
+    min-width: calc(1.375em * 1);
     min-width: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
     );
@@ -2647,6 +3031,7 @@ body > :where(aside) > :first-child {
 }
 .icon > svg {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
     margin: 0;
     padding: 0;
@@ -2658,16 +3043,88 @@ body > :where(aside) > :first-child {
 [data-toggle-content] > .container,
 [data-toggle-container] {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     position: relative;
     flex-direction: column;
-    justify-content: start;
+    flex-wrap: nowrap;
+    gap: 0;
+    justify-content: center;
+    justify-items: stretch;
     align-content: start;
     align-items: stretch;
 }
 
 [data-toggle-container] {
     z-index: 999;
+}
+
+[data-toggle-control] {
+    --icon-color: currentColor;
+    margin: 0;
+    width: auto;
+    font: inherit;
+    text-align: inherit;
+    border: none;
+    background: none;
+    color: inherit;
+}
+[data-toggle-control][aria-disabled] {
+    margin-top: 0.9375rem;
+    margin-top: var(--mrg-soft-400, 0.9375rem);
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: text;
+}
+[data-toggle-control][aria-disabled] .toggle-icon {
+    display: none;
+}
+.no-js [data-toggle-control]:focus,
+.js__no-whereSelector [data-toggle-control]:focus {
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+:where(.js__no-focusVisible) [data-toggle-control]:focus {
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:hover,
+[data-toggle-control]:active {
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:focus-visible {
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:focus-within {
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control-backdrop] {
+    display: none;
+    position: fixed;
+    opacity: 0;
 }
 
 .toggle-title,
@@ -2735,83 +3192,20 @@ body > :where(aside) > :first-child {
     text-transform: inherit;
 }
 
-[data-toggle-control] {
-    --icon-color: currentColor;
-    margin: 0;
-    width: auto;
-    font: inherit;
-    text-align: inherit;
-    border: none;
-    background: none;
-    color: inherit;
-}
-[data-toggle-control][aria-disabled] {
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    cursor: text;
-}
-[data-toggle-control][aria-disabled] .toggle-icon {
-    display: none;
-}
-.no-js [data-toggle-control]:focus,
-.js__no-whereSelector [data-toggle-control]:focus {
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-:where(.js__no-focusVisible) [data-toggle-control]:focus {
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control]:hover,
-[data-toggle-control]:active {
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control]:focus-visible {
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control]:focus-within {
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control-backdrop] {
-    display: none;
-    position: fixed;
-    opacity: 0;
-}
-
 .toggle-icon {
     --icon-size: 1.125em;
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
     vertical-align: sub;
+    padding-bottom: 0.03125em;
     padding-bottom: var(--stroke-relative-100, 0.03125em);
+    padding-right: 0.125rem;
     padding-right: var(--border-width-200, 0.125rem);
 }
 .toggle-icon > svg {
     stroke: currentColor;
+    stroke-width: clamp(1px, 0.1875em, 0.25rem);
     stroke-width: clamp(
         1px,
         var(--stroke-relative-600, 0.1875em),
@@ -2822,6 +3216,7 @@ body > :where(aside) > :first-child {
 
 [data-toggle-content] {
     --display: grid;
+    display: grid;
     display: var(--display, grid);
     position: relative;
     justify-content: stretch;
@@ -2829,9 +3224,9 @@ body > :where(aside) > :first-child {
     align-content: start;
     align-items: start;
 }
-/* With Javascript ==================================== */
+/* Javascript Enabled ==================================== */
+:where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
-:where(.js) [data-toggle-control],
 :where(.js) .toggle-title,
 :where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > h1,
@@ -2849,11 +3244,13 @@ body > :where(aside) > :first-child {
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
 :where(.js) .toggle-title > .page-title,
-:where(.js) [data-toggle-container] {
+:where(.js) [data-toggle-control] {
     --display: grid;
+    display: grid;
     display: var(--display, grid);
     --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
         1fr;
+    grid-template-columns: [icon] minmax(max-content, auto) [content] 1fr;
     grid-template-columns: var(--grid-template-columns--toggle);
     grid-auto-rows: auto;
     grid-auto-flow: column;
@@ -2861,10 +3258,40 @@ body > :where(aside) > :first-child {
     justify-items: stretch;
     align-content: start;
     align-items: start;
+    grid-gap: 0 0.5rem;
+    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
+    gap: 0 0.5rem;
     gap: 0 var(--mrg-firm-200, 0.5rem);
 }
 
+:where(.js) [data-toggle-content],
+:where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title,
+:where(.js) [data-toggle-control] {
+    grid-template-columns: subgrid;
+    grid-column: 1/-1;
+    margin: 0;
+    padding: 0;
+}
+
 :where(.js) [data-toggle-container] {
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
@@ -2880,6 +3307,7 @@ body > :where(aside) > :first-child {
     [data-toggle-container]:has(.toggle-title > h2, .toggle-title > .h2),
 :where(.js)
     [data-toggle-container]:has(.toggle-title > h3, .toggle-title > .h3) {
+    margin-top: 3.5rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
 }
 :where(.js)
@@ -2888,84 +3316,19 @@ body > :where(aside) > :first-child {
     [data-toggle-container]:has(.toggle-title > h5, .toggle-title > .h5),
 :where(.js)
     [data-toggle-container]:has(.toggle-title > h6, .toggle-title > .h6) {
+    margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
 :where(.js) [data-toggle-container]:has(.toggle-title > .h7 .h8) {
+    margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
-}
-:where(.js) [data-toggle-content],
-:where(.js) [data-toggle-control],
-:where(.js) .toggle-title,
-:where(.js) .toggle-title > .unstyled-heading,
-:where(.js) .toggle-title > h1,
-:where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
-:where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
-:where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
-:where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
-:where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
-:where(.js) .toggle-title > .h6,
-:where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .page-title {
-    grid-template-columns: subgrid;
-    grid-column: 1/-1;
-    margin: 0;
-    padding: 0;
-}
-
-:where(.js) .toggle-title,
-:where(.js) .toggle-title > .unstyled-heading,
-:where(.js) .toggle-title > h1,
-:where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
-:where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
-:where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
-:where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
-:where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
-:where(.js) .toggle-title > .h6,
-:where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .page-title {
-    align-content: center;
-    align-items: center;
-    grid-row: 1/1;
-}
-:where(.js) .toggle-title {
-    z-index: 2;
-}
-:where(.js) .toggle-title > .unstyled-heading,
-:where(.js) .toggle-title > h1,
-:where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
-:where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
-:where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
-:where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
-:where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
-:where(.js) .toggle-title > .h6,
-:where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .page-title {
-    margin-top: 0;
-    margin-bottom: 0;
 }
 :where(.js) [data-toggle-control] {
     align-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
+    padding-bottom: 0.375rem;
     padding-bottom: var(--mrg-soft-200, 0.375rem);
     font-weight: 600;
     -webkit-appearance: button;
@@ -2986,13 +3349,13 @@ body > :where(aside) > :first-child {
     padding: 0;
     width: auto;
     height: auto;
+    border-radius: 0;
+    z-index: -2;
     -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
     background: none;
     border: none;
-    border-radius: 0;
     opacity: 1;
-    z-index: -2;
     cursor: pointer;
 }
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::before,
@@ -3000,6 +3363,7 @@ body > :where(aside) > :first-child {
     content: "";
     content: ""/"";
     --display: block;
+    display: block;
     display: var(--display, block);
     position: absolute;
     top: 0;
@@ -3008,10 +3372,12 @@ body > :where(aside) > :first-child {
     right: 0;
 }
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::before {
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     opacity: 0.625;
 }
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
+    background: LinkText;
     background: var(--sys-clr-link, LinkText);
     opacity: 0.1875;
 }
@@ -3063,16 +3429,47 @@ body > :where(aside) > :first-child {
 
 :where(.js) [data-toggle-control] .toggle-icon {
     --grid-column: icon;
+    grid-column: icon;
     grid-column: var(--grid-column, icon);
 }
 :where(.js) [data-toggle-control] .toggle-icon,
 :where(.js) [data-toggle-control] .toggle-icon svg {
     --display: block;
+    display: block;
     display: var(--display, block);
 }
 :where(.js) [data-toggle-control] .toggle-icon svg #a,
 :where(.js) [data-toggle-control] .toggle-icon svg #b {
     transform-origin: center;
+}
+:where(.js) .toggle-control-inner {
+    --grid-column: content;
+    grid-column: content;
+    grid-column: var(--grid-column, content);
+}
+:where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
+:where(.js) .toggle-title > h1,
+:where(.js) .toggle-title > .h1,
+:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > .h2,
+:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > .h3,
+:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > .h4,
+:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > .h5,
+:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > .h7,
+:where(.js) .toggle-title > .h8,
+:where(.js) .toggle-title > .page-title {
+    align-content: center;
+    align-items: center;
+    grid-row: 1/1;
+}
+:where(.js) .toggle-title {
+    z-index: 2;
 }
 :where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > h1,
@@ -3090,6 +3487,9 @@ body > :where(aside) > :first-child {
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
 :where(.js) .toggle-title > .page-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0.125em;
     padding-bottom: var(--stroke-relative-400, 0.125em);
 }
 :where(.js) .toggle-title > .unstyled-heading:where(.unstyled-heading),
@@ -3110,27 +3510,28 @@ body > :where(aside) > :first-child {
 :where(.js) .toggle-title > .page-title:where(.unstyled-heading) {
     padding-bottom: 0;
 }
-:where(.js) .toggle-control-inner {
-    --grid-column: content;
-    grid-column: var(--grid-column, content);
-}
 :where(.js) [data-toggle-content] {
     --grid-column: 1 / -1;
+    grid-column: 1 / -1;
     grid-column: var(--grid-column, 1 / -1);
     grid-row: 2/2;
     grid-template-rows: 0fr;
     margin: 0;
     padding: 0;
     border: 0 dotted currentColor;
+    border-top-width: 0.125rem;
     border-top-width: var(--border-width-200, 0.125rem);
     border-top-style: solid;
     overflow: hidden;
 }
 :where(.js) [data-toggle-content] > .container {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     --grid-column: 1 / -1;
+    grid-column: 1 / -1;
     grid-column: var(--grid-column, 1 / -1);
+    padding: 0 0.8125rem;
     padding: 0 var(--mrg-firm-300, 0.8125rem);
     overflow: auto;
     max-height: 100%;
@@ -3143,12 +3544,55 @@ body > :where(aside) > :first-child {
 :where(.js) [data-toggle-content] > .container > :last-child {
     margin-bottom: 0;
 }
+:where(.js) [data-toggle-content] > .container > ol,
+:where(.js) [data-toggle-content] > .container > ul,
+:where(.js) .table-of-contents [data-toggle-content] > .container > ol,
+.table-of-contents :where(.js) [data-toggle-content] > .container > ol {
+    width: 100%;
+}
 :where(.js) [data-toggle-content] > .container > ol:only-child,
 :where(.js) [data-toggle-content] > .container > ul:only-child {
     margin-left: 0;
     margin-right: 0;
 }
-/** Opening & Closing ------------------ **/
+
+/* Opening & Closing ==================================== */
+.no-js :where(.js) [data-toggle-container="open"] [data-toggle-control]:focus,
+.no-js :where(.js) [data-toggle-control]:focus,
+.js__no-whereSelector
+    :where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control]:focus,
+.js__no-whereSelector :where(.js) [data-toggle-control]:focus {
+    text-decoration-color: transparent;
+    color: LinkText;
+    color: var(--sys-clr-link, LinkText);
+}
+
+:where(.js__no-focusVisible)
+    :where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control]:focus,
+:where(.js__no-focusVisible) :where(.js) [data-toggle-control]:focus {
+    text-decoration-color: transparent;
+    color: LinkText;
+    color: var(--sys-clr-link, LinkText);
+}
+
+:where(.js) [data-toggle-container="open"] [data-toggle-control]:hover,
+:where(.js) [data-toggle-control]:hover {
+    text-decoration-color: transparent;
+    color: LinkText;
+    color: var(--sys-clr-link, LinkText);
+}
+
+:where(.js) [data-toggle-container="open"] [data-toggle-control]:focus-visible,
+:where(.js) [data-toggle-control]:focus-visible {
+    text-decoration-color: transparent;
+    color: LinkText;
+    color: var(--sys-clr-link, LinkText);
+}
+
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] > .container,
 :where(.js)
     [data-toggle-container="closing"]
@@ -3162,8 +3606,12 @@ body > :where(aside) > :first-child {
 :where(.js)
     [data-toggle-container="closing"]
     [data-toggle-control][data-toggle-control-backdrop] {
-    --display: var(--display, block);
-    display: var(--display, var(--display, block));
+    display: block;
+    display: var(--display, block);
+}
+:where(.js) [data-toggle-container="open"] [data-toggle-control] {
+    color: ActiveText;
+    color: var(--sys-clr-text-active, ActiveText);
 }
 :where(.js)
     [data-toggle-container="open"]
@@ -3179,8 +3627,11 @@ body > :where(aside) > :first-child {
     opacity: 1;
 }
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] {
+    border-left-width: 0.125rem;
+    border-right-width: 0.125rem;
     border-left-width: var(--border-width-200, 0.125rem);
     border-right-width: var(--border-width-200, 0.125rem);
+    border-bottom-width: 0.125rem;
     border-bottom-width: var(--border-width-200, 0.125rem);
     grid-template-rows: 1fr;
 }
@@ -3188,6 +3639,8 @@ body > :where(aside) > :first-child {
     [data-toggle-container="open"]
     > [data-toggle-content]
     > .container {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
     padding-top: var(--mrg-soft-300, 0.625rem);
     padding-bottom: var(--mrg-soft-300, 0.625rem);
     opacity: 1;
@@ -3211,40 +3664,6 @@ body > :where(aside) > :first-child {
     visibility: visible;
 }
 
-:where(.js) [data-toggle-container="open"] [data-toggle-control] {
-    color: var(--sys-clr-text-active, ActiveText);
-}
-
-.no-js [data-toggle-container="open"] [data-toggle-control]:focus,
-.no-js [data-toggle-control]:focus,
-.js__no-whereSelector
-    [data-toggle-container="open"]
-    [data-toggle-control]:focus,
-.js__no-whereSelector [data-toggle-control]:focus {
-    text-decoration-color: transparent;
-    color: var(--sys-clr-link, LinkText);
-}
-
-:where(.js__no-focusVisible)
-    [data-toggle-container="open"]
-    [data-toggle-control]:focus,
-:where(.js__no-focusVisible) [data-toggle-control]:focus {
-    text-decoration-color: transparent;
-    color: var(--sys-clr-link, LinkText);
-}
-
-[data-toggle-container="open"] [data-toggle-control]:hover,
-[data-toggle-control]:hover {
-    text-decoration-color: transparent;
-    color: var(--sys-clr-link, LinkText);
-}
-
-[data-toggle-container="open"] [data-toggle-control]:focus-visible,
-[data-toggle-control]:focus-visible {
-    text-decoration-color: transparent;
-    color: var(--sys-clr-link, LinkText);
-}
-
 /* # ASTRO SUPPORT - TOGGLE NAV MENU
  * ======================================================================== */
 body:has(> nav[data-toggle-container="open"]) {
@@ -3252,6 +3671,7 @@ body:has(> nav[data-toggle-container="open"]) {
 }
 body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
 }
@@ -3260,7 +3680,13 @@ body > nav[data-toggle-container] {
     /* prettier-ignore */
     --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
     /* prettier-ignore */
-    grid-template-columns: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
+    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+    grid-template-columns: var(
+        --grid-template-columns--page,
+        0 [page-start] 1fr [sidebar-start] 0 [content-start]
+            minmax(auto, var(--width-content, 36rem)) [content-end] 0
+            [sidebar-end] 1fr [page-end] 0
+    );
     grid-template-columns: subgrid;
     justify-content: center;
     justify-items: center;
@@ -3272,21 +3698,29 @@ body > nav[data-toggle-container] {
 :where(.js) body > nav[data-toggle-container] .toggle-title,
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
     --grid-column: 1 / -1;
+    grid-column: 1 / -1;
     grid-column: var(--grid-column, 1 / -1);
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     position: absolute;
     top: 0;
     justify-content: center;
     justify-items: stretch;
     /* prettier-ignore */
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, var(--width-page, 60rem)) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem))) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(
+            auto,
+            var(--width-page, 60rem)
+        ) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+    margin-bottom: 0.0625rem;
     margin-bottom: var(--border-width-100, 0.0625rem);
     padding: 0;
     border: none;
+    font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] ol,
@@ -3313,10 +3747,14 @@ body > nav[data-toggle-container] {
     [data-toggle-content]
     > .container {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     padding-left: var(--mrg-firm-400, 1.25rem);
     padding-right: var(--mrg-firm-400, 1.25rem);
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     max-height: 80svh;
     overflow: auto;
@@ -3334,16 +3772,30 @@ body > nav[data-toggle-container] {
     > .container
     > ul {
     margin-left: 0;
+    width: 100%;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
-    grid-template-columns: var(--grid-template-columns--toggle, var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0));
+    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+    grid-template-columns: var(
+        --grid-template-columns--toggle,
+        var(
+            --grid-template-columns--page,
+            0 [page-start] 1fr [sidebar-start] 0 [content-start]
+                minmax(auto, var(--width-content, 36rem)) [content-end] 0
+                [sidebar-end] 1fr [page-end] 0
+        )
+    );
     grid-template-columns: subgrid;
     align-content: stretch;
     align-items: center;
+    margin-bottom: calc(0.125rem * -1);
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
+    border-bottom: 0.125rem solid currentColor;
     border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
+    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
     font-size: var(--fs-heading-6, 1.1875rem);
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
 }
 :where(.js)
@@ -3352,12 +3804,17 @@ body > nav[data-toggle-container] {
     .toggle-title
     [data-toggle-control] {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
     /* prettier-ignore */
     --grid-template-columns--toggle: [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto);
     /* prettier-ignore */
-    grid-template-columns: var(--grid-template-columns--toggle, [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto));
+    grid-template-columns: [content] 1fr clamp(0.3125rem, 5%, 2.25rem) [icon] minmax(max-content, auto);
+    grid-template-columns: var(
+        --grid-template-columns--toggle,
+        [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto)
+    );
     justify-content: space-between;
     justify-items: start;
     align-items: center;
@@ -3374,11 +3831,13 @@ body > nav[data-toggle-container] {
     > nav[data-toggle-container="closing"]
     > [data-toggle-content]
     > .container {
+    border: 0.125rem dotted currentColor;
     border: var(--border-width-200, 0.125rem) dotted currentColor;
     border-top: none;
 }
 
 :where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
+    margin-bottom: 1.25rem;
     margin-bottom: var(--mrg-firm-400, 1.25rem);
 }
 :where(.js)
@@ -3386,6 +3845,8 @@ body > nav[data-toggle-container] {
     > nav[data-toggle-container="open"]
     > [data-toggle-content]
     > .container {
+    padding-top: 0.9375rem;
+    padding-bottom: 0.9375rem;
     padding-top: var(--mrg-soft-400, 0.9375rem);
     padding-bottom: var(--mrg-soft-400, 0.9375rem);
 }
@@ -3394,8 +3855,10 @@ body > nav[data-toggle-container] {
  * ======================================================================== */
 .website-settings-menu {
     --grid-column: page-start/page-end;
+    grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     --display: none;
+    display: none;
     display: var(--display, none);
     margin: 0;
     padding: 0;
@@ -3409,8 +3872,10 @@ body > nav[data-toggle-container] {
 }
 
 .website-settings__content {
+    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     width: 100%;
+    max-width: min(36rem, 90vw);
     max-width: min(var(--width-content, 36rem), 90vw);
 }
 .website-settings__content fieldset,
@@ -3420,6 +3885,8 @@ body > nav[data-toggle-container] {
 .website-settings__content input[type="reset"],
 .website-settings__content input[type="submit"],
 .website-settings__content a.button[href] {
+    margin-top: 0.8125rem;
+    margin-bottom: 0.1875rem;
     margin-top: var(--mrg-firm-300, 0.8125rem);
     margin-bottom: var(--mrg-half-300, 0.1875rem);
     margin-left: 0;
@@ -3429,11 +3896,16 @@ body > nav[data-toggle-container] {
 .website-settings__content button,
 .website-settings__content [role="button"],
 .website-settings__content a.button[href] {
+    margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
 .website-settings__content fieldset {
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
     padding-top: var(--mrg-firm-100, 0.3125rem);
     padding-bottom: var(--mrg-firm-100, 0.3125rem);
+    padding-left: clamp(0.5rem, 3vw, 0.8125rem);
+    padding-right: clamp(0.5rem, 3vw, 0.8125rem);
     padding-left: clamp(
         var(--mrg-firm-200, 0.5rem),
         3vw,
@@ -3450,13 +3922,18 @@ body > nav[data-toggle-container] {
 .website-settings__content fieldset > legend:first-child {
     margin-top: 0;
     margin-bottom: 0;
+    margin-left: calc(0.375rem * -1);
+    margin-right: calc(0.375rem * -1);
     margin-left: calc(var(--mrg-soft-200, 0.375rem) * -1);
     margin-right: calc(var(--mrg-soft-200, 0.375rem) * -1);
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
     padding-left: var(--mrg-soft-200, 0.375rem);
     padding-right: var(--mrg-soft-200, 0.375rem);
 }
 .website-settings__content fieldset > .container {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
@@ -3464,6 +3941,7 @@ body > nav[data-toggle-container] {
     justify-items: start;
     align-content: start;
     align-items: start;
+    gap: 0.5rem clamp(1.25rem, 5vw, 2.25rem);
     gap: var(--mrg-firm-200, 0.5rem)
         clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
     margin: 0;
@@ -3476,6 +3954,7 @@ body > nav[data-toggle-container] {
 
 .website-settings__disclaimer {
     font-style: italic;
+    font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 
@@ -3486,6 +3965,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 
 :where(.js) .website-settings-menu {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
 }
 :where(.js) .website-settings-menu .toggle-title {
@@ -3495,24 +3975,34 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js) .website-settings-menu [data-toggle-control] {
     --focus-ring-outline-offset: 0.125rem;
     --display: block;
+    display: block;
     display: var(--display, block);
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
     padding-top: var(--mrg-firm-100, 0.3125rem);
     padding-bottom: var(--mrg-firm-100, 0.3125rem);
+    padding-left: 0.3125rem;
+    padding-right: 0.3125rem;
     padding-left: var(--mrg-firm-100, 0.3125rem);
     padding-right: var(--mrg-firm-100, 0.3125rem);
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
+    line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
+    border: 0.125rem solid ButtonFace;
     border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
@@ -3524,9 +4014,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -3538,9 +4032,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -3549,9 +4047,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -3560,9 +4062,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -3571,17 +4077,25 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
+    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:active {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 :where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
@@ -3590,6 +4104,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     --display: flex;
+    display: flex;
     display: var(--display, flex);
     flex-direction: row;
     flex-wrap: wrap;
@@ -3696,6 +4211,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js)
     .website-settings-menu[data-toggle-container="closing"]
     [data-toggle-control-backdrop] {
+    display: block;
     display: var(--display, block);
 }
 :where(.js)
@@ -3707,6 +4223,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     .website-settings-menu[data-toggle-container="open"]
     > [data-toggle-content] {
     max-height: 80svh;
+    max-height: calc(95svh - calc(0 + clamp(1.875rem, 5svw, 3.5rem)));
     max-height: calc(
         95svh -
             var(
@@ -3719,6 +4236,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     .website-settings-menu[data-toggle-container="open"]
     > [data-toggle-content]
     > .container {
+    padding-top: 0.9375rem;
+    padding-bottom: 0.8125rem;
     padding-top: var(--mrg-soft-400, 0.9375rem);
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }

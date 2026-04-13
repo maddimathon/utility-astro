@@ -68,7 +68,7 @@
         "./support": "./dist/astro/support.ts",
         "./support/*": "./dist/astro/support/*.astro",
 
-        "./functions": "./dist/astro/functions/index.ts",
+        "./functions": "./dist/astro/functions.ts",
 
         "./astro/*": [
             "./dist/astro/*.astro",
@@ -172,7 +172,7 @@
 
         "link": "run-p link:*",
             "link-ts":    "npm run unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
-            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
+            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
             "link:sass":  "npm run unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "preinstall": "npm run unlink",
@@ -192,9 +192,10 @@
         "build-start": "build-utils build --starting && npm run start",
 
         "start": "run-p watch:* start:*",
-            "watch:scss":  "watch -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -p 'src/scss/**/*'                         -c 'build-utils build --without minimize,readme,document --only-compile scss  --watchedWatcher \"watch:scss\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:docs":  "watch -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -c 'build-utils build --without minimize,readme,compile  --only-document scss --watchedWatcher \"watch:docs\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:ts":    "watch -p 'node_modules/@maddimathon/*/dist/ts/**/*'                                                                -p 'src/ts/**/*'                           -c 'build-utils build --without minimize,readme,document --only-compile ts    --watchedWatcher \"watch:ts\"   --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:scss":    "watch -p 'src/scss/**/*'                         -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -c 'build-utils build --without minimize,readme,document --only-compile scss     --watchedWatcher \"scss\"    --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:docs":    "watch -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -c 'build-utils build --without minimize,readme,compile  --only-document scss    --watchedWatcher \"docs\"    --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:ts":      "watch -p 'src/ts/**/*'                                                                                                                                        -c 'build-utils build --without minimize,readme,document --only-compile ts       --watchedWatcher \"ts\"      --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:typedoc": "watch -p 'src/ts/**/*'   -p 'src/astro/**/*'                                                                                                                  -c 'build-utils build --without minimize,readme,compile  --only-document typedoc --watchedWatcher \"typedoc\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
             "start:astro": "astro dev",
 
 
@@ -226,16 +227,17 @@
         "zod": "^3.25.76"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.6",
+        "@astrojs/check": "^0.9.8",
+        "@astrojs/ts-plugin": "^1.10.7",
         "@maddimathon/build-utilities": "~0.3.0-alpha.18",
         "@types/jest": "~30.0.0",
         "@types/luxon": "~3.7.1",
         "@types/node": "22.15.30",
         "jest": "~30.2.0",
         "npm-run-all": "~4.1.5",
-        "typedoc": "~0.28.16",
+        "typedoc": "~0.28.19",
         "typedoc-plugin-inline-sources": "~1.3.0",
-        "typedoc-plugin-markdown": "~4.9.0",
+        "typedoc-plugin-markdown": "~4.11.0",
         "typescript": "~5.9.3",
         "watch-cli": "~0.2.3"
     },

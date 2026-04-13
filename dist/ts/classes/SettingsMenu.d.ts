@@ -64,4 +64,3 @@ export declare namespace SettingsMenu {
         toggle?: string | ((menuID?: string) => string);
     }): Promise<void[]>;
 }
-//# sourceMappingURL=SettingsMenu.d.ts.map

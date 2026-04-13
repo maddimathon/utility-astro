@@ -46,4 +46,3 @@ export function htmlAttributeString(attrs) {
     }
     return ' ' + strings.join(' ');
 }
-//# sourceMappingURL=htmlAttributeString.js.map

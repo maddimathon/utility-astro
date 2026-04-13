@@ -27,7 +27,6 @@ import DocsPage from '../../layouts/DocsPage.astro';
     subtitle='This layout has a sidebar on the right side.'
     layout='sidebar-right'
 >
-    <!-- <LoremIpsum /> -->
     <LoremIpsum mode={import.meta.env.DEV ? 'fancy' : 'library'} />
-    <!-- <p slot='sidebar'>I am a pretend sidebar content.</p> -->
+    <p slot='sidebar'>I am a pretend sidebar content.</p>
 </DocsPage>

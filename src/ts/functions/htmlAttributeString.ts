@@ -20,7 +20,7 @@ import { escapeHTML } from 'astro/runtime/server/escape.js';
  */
 export function htmlAttributeString<
     T_Attrs extends Record<string, boolean | null | number | string | undefined>
->( attrs: T_Attrs ) {
+>( attrs: T_Attrs ): string {
 
     const strings = [];
 

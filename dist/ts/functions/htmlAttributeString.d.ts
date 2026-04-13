@@ -16,4 +16,3 @@
  * @experimental
  */
 export declare function htmlAttributeString<T_Attrs extends Record<string, boolean | null | number | string | undefined>>(attrs: T_Attrs): string;
-//# sourceMappingURL=htmlAttributeString.d.ts.map

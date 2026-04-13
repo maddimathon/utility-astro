@@ -138,7 +138,7 @@ export const SVG = {
 
 } as const;
 
-export const SVG_Label = {
+export const SVG_Label: {
     check: 'checkmark',
     clock: 'clock',
     compass: 'compass',
@@ -165,4 +165,31 @@ export const SVG_Label = {
     'ui-minimum': 'user interface minimum',
     up: 'up arrow',
     warning: 'warning',
-} as const satisfies { [ K in keyof typeof SVG ]: string };
+} = {
+    check: 'checkmark',
+    clock: 'clock',
+    compass: 'compass',
+    dash: 'dash',
+    'double-check': 'double checkmark',
+    down: 'down arrow',
+    external: 'external link',
+    fail: 'fail',
+    left: 'left arrow',
+    lightbulb: 'lightbulb',
+    lightning: 'lightning',
+    maximum: 'maximum',
+    minimum: 'minimum',
+    minus: 'minus',
+    no: 'no',
+    plus: 'plus',
+    question: 'question',
+    right: 'right arrow',
+    search: 'search',
+    settings: 'settings',
+    star: 'star',
+    ui: 'user interface',
+    'ui-check': 'user interface with checkmark',
+    'ui-minimum': 'user interface minimum',
+    up: 'up arrow',
+    warning: 'warning',
+};

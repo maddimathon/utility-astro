@@ -11,4 +11,3 @@
  */
 export * from './ElementToggle.js';
 export * from './JsCookie.js';
-//# sourceMappingURL=index.d.ts.map

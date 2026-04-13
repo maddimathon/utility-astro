@@ -17,4 +17,3 @@
  * @since 0.1.0-alpha
  */
 export declare function escRegExpURL(url: string): string;
-//# sourceMappingURL=escRegExpURL.d.ts.map

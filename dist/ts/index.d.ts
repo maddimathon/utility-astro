@@ -22,4 +22,3 @@
 export * from './types/index.js';
 export * from './functions/index.js';
 export * from './classes/index.js';
-//# sourceMappingURL=index.d.ts.map

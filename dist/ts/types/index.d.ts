@@ -10,4 +10,3 @@
  * @license MIT
  */
 export type * from './props.ts';
-//# sourceMappingURL=index.d.ts.map

@@ -39,4 +39,3 @@ export function escRegExpURL(url) {
     }
     return regex;
 }
-//# sourceMappingURL=escRegExpURL.js.map

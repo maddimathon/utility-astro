@@ -8,12 +8,17 @@
 .icon .icon,
 .toggle-control > :global(.icon) .icon {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
+    height: 1.375em;
     height: var(--icon-size, 1.375em);
+    height: calc(1.375em * 1);
     height: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
     );
+    min-width: 1.375em;
     min-width: var(--icon-size, 1.375em);
+    min-width: calc(1.375em * 1);
     min-width: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
     );
@@ -22,6 +27,7 @@
 .icon .icon > svg,
 .toggle-control > :global(.icon) .icon > svg {
     --display: inline-block;
+    display: inline-block;
     display: var(--display, inline-block);
     margin: 0;
     padding: 0;

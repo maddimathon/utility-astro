@@ -13,4 +13,3 @@ export * from './escRegExpURL.js';
 export * from './htmlAttributeString.js';
 export * from './mapToObject.js';
 export * from './trailingSlash.js';
-//# sourceMappingURL=index.js.map

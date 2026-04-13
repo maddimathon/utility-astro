@@ -17,4 +17,3 @@ export function mapToObject(input) {
     const partialObjs = Array.from(map.entries()).map(([_key, _val]) => ({ [_key]: _val }));
     return partialObjs.reduce((_prev, _curr) => ({ ..._prev, ..._curr }));
 }
-//# sourceMappingURL=mapToObject.js.map

@@ -8,4 +8,3 @@
  * @license MIT
  */
 export {};
-//# sourceMappingURL=props.js.map

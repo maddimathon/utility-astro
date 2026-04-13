@@ -22,4 +22,3 @@ export declare namespace trailingSlash {
      */
     function remove(str: string): string;
 }
-//# sourceMappingURL=trailingSlash.d.ts.map

@@ -14,25 +14,46 @@
  */
 export declare class ElementToggle {
     /**
+     * A map of existing successfully-registered instances of this class. Helps
+     * to avoid re-initializing the same element or a block with the same id
+     * value.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    protected static readonly instances: Map<string, ElementToggle>;
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    protected static isToggle<T_Element extends HTMLElement>(element: T_Element): boolean;
+    /**
      * Changes some properties and attributes on applicable elements since this
      * is an invalidly configured toggle element.
      *
      * @since 0.1.0-alpha.7
      */
-    static abortNew(container?: HTMLElement | null): void;
+    protected static abortNew(container: HTMLElement | null | undefined, allButtons: NodeListOf<Element> | Element[] | null | undefined): void;
     /**
-     * Runs a standard init in an HTML document with Toggle components to set up
-     * as instances of this class.
+     * Queries the document for toggle containers to set them up as instances of
+     * this class.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    static run(opts?: Partial<ElementToggle.Opts>): Promise<void>;
+    /**
+     * Adds a 'load' event listener that then {@link ElementToggle.run}, querying
+     * the document for toggle containers to set them up as instances of this
+     * class.
      *
      * @since 0.1.0-alpha.7
+     * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
      */
-    static init(opts?: Partial<ElementToggle.Opts>): Promise<void>;
+    static runOnLoad(opts?: Partial<ElementToggle.Opts>): Promise<void>;
     /**
      * Initiates a single instance asynchronously.
      *
      * @since 0.1.0-alpha.7
      */
-    static new(container: HTMLElement | null, opts?: Partial<ElementToggle.Opts>): Promise<ElementToggle | null>;
+    static new(container: HTMLElement | null, opts?: Partial<ElementToggle.Opts>): Promise<null | ElementToggle>;
     static openEvent: Event | null;
     static closeEvent: Event | null;
     /**
@@ -52,11 +73,7 @@ export declare class ElementToggle {
     protected readonly content: HTMLElement;
     protected readonly primaryButton: HTMLElement;
     protected readonly allButtons: HTMLElement[];
-    /**
-     * @since 0.1.0-alpha.7
-     */
-    protected readonly containerID: string;
-    protected closingTimeout: NodeJS.Timeout | null;
+    protected closingTimeout: ReturnType<typeof setTimeout> | null;
     /**
      * In milliseconds.
      */
@@ -156,4 +173,3 @@ export declare namespace ElementToggle {
         openWhenTargetted: boolean;
     }
 }
-//# sourceMappingURL=ElementToggle.d.ts.map

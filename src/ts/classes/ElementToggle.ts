@@ -16,46 +16,85 @@
 export class ElementToggle {
 
     /**
+     * A map of existing successfully-registered instances of this class. Helps
+     * to avoid re-initializing the same element or a block with the same id
+     * value.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected static readonly instances: Map<string, ElementToggle> = new Map();
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    protected static isToggle<T_Element extends HTMLElement>(
+        element: T_Element,
+    ): boolean {
+        return element.id ? ElementToggle.instances.has( element.id ) : false;
+    }
+
+    /**
      * Changes some properties and attributes on applicable elements since this
      * is an invalidly configured toggle element.
      * 
      * @since 0.1.0-alpha.7
      */
-    public static abortNew( container?: HTMLElement | null ) {
+    protected static abortNew(
+        container: HTMLElement | null | undefined,
+        allButtons: NodeListOf<Element> | Element[] | null | undefined,
+    ): void {
 
         if ( container ) {
             container.setAttribute( 'data-toggle-container', '' );
         }
+
+        if ( allButtons ) {
+            allButtons.forEach(
+                button => {
+                    button.setAttribute( 'aria-disabled', 'true' );
+                    button.removeAttribute( 'aria-controls' );
+                    button.removeAttribute( 'aria-expanded' );
+                }
+            );
+        }
     }
 
     /**
-     * Runs a standard init in an HTML document with Toggle components to set up
-     * as instances of this class.
-     * 
-     * @since 0.1.0-alpha.7
+     * Queries the document for toggle containers to set them up as instances of
+     * this class.
+     *
+     * @since ___PKG_VERSION___
      */
-    public static async init( opts: Partial<ElementToggle.Opts> = {} ) {
+    public static async run( opts: Partial<ElementToggle.Opts> = {} ): Promise<void> {
 
-        window.addEventListener(
-            'load',
-            () => document.querySelectorAll(
-                '[data-toggle-container]'
-            ).forEach(
-                async ( con ) => {
+        document.querySelectorAll( '[data-toggle-container]' ).forEach(
+            async ( con ) => {
 
-                    if ( opts.debug ) {
-                        console.debug( 'ElementToggle.init()', { con } );
-                    }
-
-                    // returns 
-                    if ( con.id ) {
-                        return ElementToggle.new( con as HTMLElement, opts );
-                    }
-
-                    return null;
+                if ( opts.debug ) {
+                    console.debug( 'ElementToggle.init()', { con } );
                 }
-            ),
+
+                // returns 
+                if ( con.id ) {
+                    return ElementToggle.new( con as HTMLElement, opts );
+                }
+
+                return null;
+            }
         );
+    }
+
+    /**
+     * Adds a 'load' event listener that then {@link ElementToggle.run}, querying
+     * the document for toggle containers to set them up as instances of this
+     * class.
+     *
+     * @since 0.1.0-alpha.7
+     * @since ___PKG_VERSION___ — Renamed from init to runOnLoad.
+     */
+    public static async runOnLoad( opts: Partial<ElementToggle.Opts> = {} ): Promise<void> {
+
+        window.addEventListener( 'load', () => ElementToggle.run( opts ) );
     }
 
     /**
@@ -66,16 +105,22 @@ export class ElementToggle {
     public static async new(
         container: HTMLElement | null,
         opts: Partial<ElementToggle.Opts> = {},
-    ) {
+    ): Promise<null | ElementToggle> {
         const containerID = container?.id;
 
         // returns
         if ( !container || !containerID ) {
-            ElementToggle.abortNew( container );
+            ElementToggle.abortNew( container, null );
 
             if ( opts.debug ) {
                 console.debug( 'ElementToggle.new() - aborting; no container id', { container } );
             }
+
+            return null;
+        }
+
+        // returns
+        if ( ElementToggle.instances.has( containerID ) ) {
             return null;
         }
 
@@ -85,11 +130,12 @@ export class ElementToggle {
 
         // returns
         if ( !allButtons.length ) {
-            ElementToggle.abortNew( container );
+            ElementToggle.abortNew( container, allButtons );
 
             if ( opts.debug ) {
                 console.debug( 'ElementToggle.new() - aborting; no buttons', { container, allButtons } );
             }
+
             return null;
         }
 
@@ -99,11 +145,12 @@ export class ElementToggle {
 
         // returns - invalid setup that won't work
         if ( !primaryButton ) {
-            ElementToggle.abortNew( container );
+            ElementToggle.abortNew( container, allButtons );
 
             if ( opts.debug ) {
                 console.debug( 'ElementToggle.new() - aborting; no primary button', { container, primaryButton, allButtons } );
             }
+
             return null;
         }
 
@@ -113,11 +160,12 @@ export class ElementToggle {
 
         // returns - invalid setup that won't work
         if ( !content ) {
-            ElementToggle.abortNew( container );
+            ElementToggle.abortNew( container, allButtons );
 
             if ( opts.debug ) {
                 console.debug( 'ElementToggle.new() - aborting; no content element', { container, primaryButton, allButtons, content } );
             }
+
             return null;
         }
 
@@ -144,22 +192,23 @@ export class ElementToggle {
     /** 
      * @param string  A CSS time value to convert to milliseconds.
      */
-    public static cssTimeToMilliseconds( string: string ) {
+    public static cssTimeToMilliseconds( string: string ): number {
 
         if ( string.includes( 'ms' ) ) {
             return Number( string.replace( /\s*ms\s*$/gi, '' ) );
         }
+
         return Number( string.replace( /\s*s\s*$/gi, '' ) ) * 1000;
     }
 
-    public static createCustomEvents() {
+    public static createCustomEvents(): void {
 
         if ( this.openEvent === null ) {
-            this.openEvent = new Event( 'toggle-open' );
+            ElementToggle.openEvent = new Event( 'toggle-open' );
         }
 
         if ( this.closeEvent === null ) {
-            this.closeEvent = new Event( 'toggle-close' );
+            ElementToggle.closeEvent = new Event( 'toggle-close' );
         }
     }
 
@@ -183,12 +232,7 @@ export class ElementToggle {
     protected readonly primaryButton: HTMLElement;
     protected readonly allButtons: HTMLElement[];
 
-    /**
-     * @since 0.1.0-alpha.7
-     */
-    protected readonly containerID: string;
-
-    protected closingTimeout: NodeJS.Timeout | null = null;
+    protected closingTimeout: ReturnType<typeof setTimeout> | null = null;
 
     /** 
      * In milliseconds.
@@ -230,13 +274,13 @@ export class ElementToggle {
         this.allButtons = elements.allButtons;
         this.content = elements.content;
 
-        this.containerID = this.container.id;
-
         // returns
-        if ( !this.container || !this.primaryButton || !this.containerID || !this.content ) {
+        if ( !this.container || !this.primaryButton || !this.container.id || !this.content ) {
             this.abortConstructor();
             return;
         }
+
+        ElementToggle.instances.set( this.container.id, this );
 
         this.toggle = this.toggle.bind( this );
         this.handleHashChange = this.handleHashChange.bind( this );
@@ -304,8 +348,8 @@ export class ElementToggle {
      * 
      * @since 0.1.0-alpha
      */
-    protected abortConstructor() {
-        ElementToggle.abortNew( this.container );
+    protected abortConstructor(): void {
+        ElementToggle.abortNew( this.container, this.allButtons );
     }
 
 
@@ -316,7 +360,7 @@ export class ElementToggle {
     /**
      * Clears the related timeout, if any.
      */
-    protected clearTimeout() {
+    protected clearTimeout(): void {
         /*
          * Clear any timeout currently running (like if someone clicks the
          * button before it's done).
@@ -340,7 +384,7 @@ export class ElementToggle {
 
         const hashAsId = url.hash.replace( /^#/gi, '' );
 
-        return hashAsId.toLowerCase() === this.containerID.toLowerCase();
+        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
     }
 
     /**
@@ -349,7 +393,7 @@ export class ElementToggle {
      *
      * @since 0.1.0-alpha.7
      */
-    public handleHashChange( event: HashChangeEvent ) {
+    public handleHashChange( event: HashChangeEvent ): void {
         // returns
         if ( !this.opts.openWhenTargetted ) {
             return;
@@ -381,7 +425,7 @@ export class ElementToggle {
      *
      * @since 0.1.0-alpha.7
      */
-    protected openAsTargetAnchor() {
+    protected openAsTargetAnchor(): void {
         this.open();
 
         this.primaryButton.setAttribute( 'data-toggle-is-current-target', 'true' );
@@ -393,7 +437,7 @@ export class ElementToggle {
         );
 
         this.primaryButton.focus( {
-            // @ts-expect-error
+            // @ts-ignore - IDE doesn't register an error but compile does - some tsconfig shenanigans, apparently.
             focusVisible: true,
         } );
     }
@@ -406,7 +450,7 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    public toggle() {
+    public toggle(): void {
         if ( !this.container ) { return; }
 
         /*
@@ -433,7 +477,7 @@ export class ElementToggle {
     /**
      * Toggles the element open.
      */
-    protected open() {
+    protected open(): void {
         if ( !this.allButtons ) { return; }
         if ( !this.container ) { return; }
 
@@ -456,7 +500,7 @@ export class ElementToggle {
     /**
      * Toggles the element closed.
      */
-    protected close() {
+    protected close(): void {
         if ( !this.allButtons ) { return; }
         if ( !this.container ) { return; }
 
@@ -505,6 +549,7 @@ export namespace ElementToggle {
          *
          * @default false
          */
+        // TODO - create test/demo
         closeWhenUntargetted: boolean;
 
         /**
@@ -512,6 +557,7 @@ export namespace ElementToggle {
          * 
          * @default 1800
          */
+        // TODO - create test/demo
         closingTime: number;
 
         /**
@@ -519,6 +565,7 @@ export namespace ElementToggle {
          * 
          * @since ___PKG_VERSION___
          */
+        // TODO - create test/demo
         debug: boolean;
 
         /**
@@ -527,6 +574,7 @@ export namespace ElementToggle {
          * 
          * @default true
          */
+        // TODO - create test/demo
         openWhenTargetted: boolean;
     }
 }

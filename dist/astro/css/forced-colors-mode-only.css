@@ -10,9 +10,11 @@
 }
 @media (forced-colors: active), (prefers-contrast: custom) {
     :global(.forced-colors-mode-only) {
+        display: block !important;
         display: var(--display, block) !important;
     }
 }
 [data-contrast-mode="forced-colors"] :global(.forced-colors-mode-only) {
+    display: block !important;
     display: var(--display, block) !important;
 }

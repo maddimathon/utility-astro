@@ -14,24 +14,45 @@
  */
 export class ElementToggle {
     /**
+     * A map of existing successfully-registered instances of this class. Helps
+     * to avoid re-initializing the same element or a block with the same id
+     * value.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    static instances = new Map();
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    static isToggle(element) {
+        return element.id ? ElementToggle.instances.has(element.id) : false;
+    }
+    /**
      * Changes some properties and attributes on applicable elements since this
      * is an invalidly configured toggle element.
      *
      * @since 0.1.0-alpha.7
      */
-    static abortNew(container) {
+    static abortNew(container, allButtons) {
         if (container) {
             container.setAttribute('data-toggle-container', '');
         }
+        if (allButtons) {
+            allButtons.forEach(button => {
+                button.setAttribute('aria-disabled', 'true');
+                button.removeAttribute('aria-controls');
+                button.removeAttribute('aria-expanded');
+            });
+        }
     }
     /**
-     * Runs a standard init in an HTML document with Toggle components to set up
-     * as instances of this class.
+     * Queries the document for toggle containers to set them up as instances of
+     * this class.
      *
-     * @since 0.1.0-alpha.7
+     * @since 0.1.0-beta.0.draft
      */
-    static async init(opts = {}) {
-        window.addEventListener('load', () => document.querySelectorAll('[data-toggle-container]').forEach(async (con) => {
+    static async run(opts = {}) {
+        document.querySelectorAll('[data-toggle-container]').forEach(async (con) => {
             if (opts.debug) {
                 console.debug('ElementToggle.init()', { con });
             }
@@ -40,7 +61,18 @@ export class ElementToggle {
                 return ElementToggle.new(con, opts);
             }
             return null;
-        }));
+        });
+    }
+    /**
+     * Adds a 'load' event listener that then {@link ElementToggle.run}, querying
+     * the document for toggle containers to set them up as instances of this
+     * class.
+     *
+     * @since 0.1.0-alpha.7
+     * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
+     */
+    static async runOnLoad(opts = {}) {
+        window.addEventListener('load', () => ElementToggle.run(opts));
     }
     /**
      * Initiates a single instance asynchronously.
@@ -51,16 +83,20 @@ export class ElementToggle {
         const containerID = container?.id;
         // returns
         if (!container || !containerID) {
-            ElementToggle.abortNew(container);
+            ElementToggle.abortNew(container, null);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no container id', { container });
             }
             return null;
         }
+        // returns
+        if (ElementToggle.instances.has(containerID)) {
+            return null;
+        }
         const allButtons = document.querySelectorAll(`[data-toggle-primary-control=${containerID}], [data-toggle-control=${containerID}]`);
         // returns
         if (!allButtons.length) {
-            ElementToggle.abortNew(container);
+            ElementToggle.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no buttons', { container, allButtons });
             }
@@ -69,7 +105,7 @@ export class ElementToggle {
         const primaryButton = document.querySelector(`[data-toggle-primary-control=${containerID}]`) ?? allButtons[0];
         // returns - invalid setup that won't work
         if (!primaryButton) {
-            ElementToggle.abortNew(container);
+            ElementToggle.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no primary button', { container, primaryButton, allButtons });
             }
@@ -78,7 +114,7 @@ export class ElementToggle {
         const content = container.querySelector(`[data-toggle-content=${containerID}]`);
         // returns - invalid setup that won't work
         if (!content) {
-            ElementToggle.abortNew(container);
+            ElementToggle.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no content element', { container, primaryButton, allButtons, content });
             }
@@ -107,10 +143,10 @@ export class ElementToggle {
     }
     static createCustomEvents() {
         if (this.openEvent === null) {
-            this.openEvent = new Event('toggle-open');
+            ElementToggle.openEvent = new Event('toggle-open');
         }
         if (this.closeEvent === null) {
-            this.closeEvent = new Event('toggle-close');
+            ElementToggle.closeEvent = new Event('toggle-close');
         }
     }
     /* LOCAL PROPS
@@ -127,10 +163,6 @@ export class ElementToggle {
     content;
     primaryButton;
     allButtons;
-    /**
-     * @since 0.1.0-alpha.7
-     */
-    containerID;
     closingTimeout = null;
     /**
      * In milliseconds.
@@ -156,12 +188,12 @@ export class ElementToggle {
         this.primaryButton = elements.primaryButton;
         this.allButtons = elements.allButtons;
         this.content = elements.content;
-        this.containerID = this.container.id;
         // returns
-        if (!this.container || !this.primaryButton || !this.containerID || !this.content) {
+        if (!this.container || !this.primaryButton || !this.container.id || !this.content) {
             this.abortConstructor();
             return;
         }
+        ElementToggle.instances.set(this.container.id, this);
         this.toggle = this.toggle.bind(this);
         this.handleHashChange = this.handleHashChange.bind(this);
         const contentID = this.content.id;
@@ -212,7 +244,7 @@ export class ElementToggle {
      * @since 0.1.0-alpha
      */
     abortConstructor() {
-        ElementToggle.abortNew(this.container);
+        ElementToggle.abortNew(this.container, this.allButtons);
     }
     /* UTILITIES
      * ====================================================================== */
@@ -240,7 +272,7 @@ export class ElementToggle {
             return false;
         }
         const hashAsId = url.hash.replace(/^#/gi, '');
-        return hashAsId.toLowerCase() === this.containerID.toLowerCase();
+        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
     }
     /**
      * If applicable (by opts), checks if the current url anchor targets
@@ -278,7 +310,7 @@ export class ElementToggle {
         this.primaryButton.setAttribute('data-toggle-is-current-target', 'true');
         this.primaryButton.addEventListener('blur', () => this.primaryButton.removeAttribute('data-toggle-is-current-target'), { once: true });
         this.primaryButton.focus({
-            // @ts-expect-error
+            // @ts-ignore - IDE doesn't register an error but compile does - some tsconfig shenanigans, apparently.
             focusVisible: true,
         });
     }
@@ -362,4 +394,3 @@ export class ElementToggle {
         this.container.dispatchEvent(ElementToggle.closeEvent);
     }
 }
-//# sourceMappingURL=ElementToggle.js.map
