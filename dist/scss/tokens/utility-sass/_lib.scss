@@ -6,5 +6,7 @@
 @use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/tokens' with (
-    $atProperties: pre.$atProperties
+    $atProperties: pre.$atProperties,
+    $stroke_relative: pre.$stroke_relative_unparsed,
+    $style: pre.$style
 );

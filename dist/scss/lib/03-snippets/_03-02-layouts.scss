@@ -103,9 +103,39 @@ $_flex_container_alignment: map.set(
 ///
 /// @since 0.1.0-beta.0.draft
 ///
+@mixin snippet-support-astro-body-grid--display-contents(
+    $cols: content-start/content-end,
+    $width: auto,
+    //
+    $useFeatureCheckJS: true,
+    $useWhere: true,
+    $args...
+) {
+    @include feature-check.supports(
+        displayContents,
+        $neverUseJS: if($useFeatureCheckJS, null, true)
+    ) {
+        @if $width {
+            @at-root :where(&)
+                    #{selector.nest( '>', if($useWhere, ':where(*)', '*') )} {
+                width: #{$width};
+            }
+        }
+        @at-root #{selector.nest(&, '>', if($useWhere, ':where(*)', '*') )} {
+            @include prop-grid-column($cols, $setCxProp: false, $args...);
+
+            @content;
+        }
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
 @mixin _body-grid--set-column-width(
     $cols,
     $width: auto,
+    //
     $useCxProp: true,
     $setCxProp: true,
     $includeDisplayContentUtility: true,
@@ -124,28 +154,11 @@ $_flex_container_alignment: map.set(
     @if $includeDisplayContentUtility and not $setCxProp {
         &:where(%_display-contents),
         &:is(%display-contents) {
-            @include feature-check.supports(displayContents) {
-                > :where(*) {
-                    @include prop-grid-column(
-                        $cols,
-                        $setCxProp: false,
-                        $args...
-                    );
-                }
-            }
-        }
-    }
-}
-
-///
-/// @since 0.1.0-beta.0.draft
-///
-@mixin snippet-support-astro-body-grid--display-contents(
-    $cols: content-start/content-end
-) {
-    @include feature-check.supports(displayContents) {
-        > :where(*) {
-            @include prop-grid-column($cols, $setCxProp: false);
+            @include snippet-support-astro-body-grid--display-contents(
+                $cols: $cols,
+                $setCxProp: false,
+                $args...
+            );
         }
     }
 }

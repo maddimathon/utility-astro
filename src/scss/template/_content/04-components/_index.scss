@@ -25,9 +25,6 @@
     }
 
     @include snippet-support-toggle-block;
-    // @include snippet-support-toggle-block using ($location) {
-    //     /* [snippet-support-toggle-block] location: #{$location} */
-    // }
 }
 
 @if map.get(config.$template_styles, astro, toggleNav) {

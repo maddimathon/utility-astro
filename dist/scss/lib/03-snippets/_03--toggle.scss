@@ -37,6 +37,15 @@ $_defaultHeadingSelectors_greaterThan6: ();
     }
 }
 
+@mixin _snippet-toggle-block--display-contents {
+    display: contents;
+
+    @include snippet-support-astro-body-grid--display-contents(
+        $cols: content-start/content-end,
+        $useFeatureCheckJS: false
+    );
+}
+
 ///
 /// Supports the Toggle astro component.
 ///
@@ -64,12 +73,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
         @content (flex-contents-container);
     }
 
+    @at-root %_flex-contents-container--display-contents {
+        @extend %_flex-contents-container;
+        @include _snippet-toggle-block--display-contents;
+    }
+
     ///
     /// CONTAINER
     ///
     [data-toggle-container] {
-        @extend %_flex-contents-container;
-        z-index: 999;
+        @extend %_flex-contents-container--display-contents;
 
         @content (toggle-container);
     }
@@ -78,6 +91,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
     /// CONTROL
     ///
     [data-toggle-control] {
+        margin: 0;
+        padding: 0;
+
         @if $includeBaseStyles {
             @include cx-prop(icon-color, currentColor);
 
@@ -96,10 +112,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         &[aria-disabled] {
             @if $includeBaseStyles {
-                margin-block: #{var-mrg-soft('400')} 0;
-                margin-inline: 0;
-                padding: 0;
-
                 appearance: none;
                 cursor: text;
             }
@@ -115,6 +127,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         @include hover-focus-visible-or-within('&:active') {
             @if $includeBaseStyles {
+                outline: none;
                 border: none;
                 background: none;
                 opacity: 1;
@@ -141,9 +154,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
     ///
     .toggle-title,
     #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
-        margin: 0;
-        padding: 0;
-
         @content (toggle-title-and-headings);
     }
 
@@ -151,6 +161,11 @@ $_defaultHeadingSelectors_greaterThan6: ();
     /// TITLE
     ///
     .toggle-title {
+        @extend %_flex-contents-container--display-contents;
+
+        margin: 0;
+        padding: 0;
+
         @if $includeBaseStyles {
             font-weight: 600;
         }
@@ -227,20 +242,14 @@ $_defaultHeadingSelectors_greaterThan6: ();
     /// CONTENT
     ///
     [data-toggle-content] {
-        @include prop-display(grid);
-        position: relative;
-
-        justify-content: stretch;
-        justify-items: stretch;
-        align-content: start;
-        align-items: start;
+        @extend %_flex-contents-container--display-contents;
 
         @content (toggle-content);
 
         /// BLOCK ///
 
         > .container {
-            @extend %_flex-contents-container;
+            @extend %_flex-contents-container--display-contents;
 
             @content (toggle-content--container);
         }
@@ -250,6 +259,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
     @at-root %_toggle-container-grid-basics {
         @include prop-display(grid);
+        position: relative;
 
         @include cx-prop(
             grid-template-columns--toggle,
@@ -292,6 +302,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
         ///
         [data-toggle-container] {
             @extend %_toggle-container-grid-basics;
+
+            @include prop-display(grid);
 
             @if $includeMarginBlock {
                 margin-block: #{var-mrg-firm('400')} #{var-mrg-half('400')};
@@ -349,6 +361,23 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
 
             @content (js--toggle-control);
+
+            @include focus-visible {
+                @if $includeBaseStyles {
+                    @include utils.snippet-focus-ring;
+                }
+
+                @content (js--toggle-control--hover-focus);
+                @content (js--toggle-control--focus-visible);
+            }
+
+            &:hover {
+                @content (js--toggle-control--hover-focus);
+            }
+
+            &:active {
+                @content (js--toggle-control--active);
+            }
 
             &[data-toggle-control-backdrop] {
                 @include cx-prop(display, block);
@@ -450,6 +479,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
             align-content: center;
             align-items: center;
 
+            margin: 0;
+            padding: 0;
+
             grid-row: 1 / 1;
 
             @content (js--toggle-title-and-headings);
@@ -501,7 +533,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
             padding: 0;
 
             @if $includeBaseStyles {
-                border: 0 dotted currentColor;
+                border-width: 0;
+                border-style: dotted;
+                border-color: currentColor;
+
                 border-block-start-width: #{var-border-width('200')};
                 border-block-start-style: solid;
             }

@@ -106,31 +106,30 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     > .display-contents {
     display: contents;
 }
-:where(.js__displayContents)
+@supports (display: contents) {
     :where(
-        body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
-        body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
-    )
-    > :where(form, dl)
-    > :where(*),
-:where(.js__displayContents)
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > :where(form, dl)
+        > :where(*),
     :where(
-        body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
-        body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
-    )
-    > .display-contents
-    > :where(*) {
-    grid-column: content-start/content-end;
-    grid-column: var(--grid-column, content-start/content-end);
-    width: auto;
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > .display-contents
+        > :where(*) {
+        grid-column: content-start/content-end;
+        grid-column: var(--grid-column, content-start/content-end);
+        width: auto;
+    }
 }
-
 :where(
         body,
         body > .body-subgrid,

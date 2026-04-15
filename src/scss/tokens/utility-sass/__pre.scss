@@ -6,12 +6,65 @@
 @forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide tokens-get-at-properties;
 
 @use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/math';
 @use 'pkg:@maddimathon/utility-sass/string';
+
+@use '../../config';
 
 @use '../functions' as fns;
 
 ///
 /// @since ___PKG_VERSION___
 ///
+$stroke_relative: () !default;
+
+$stroke_relative: map.ksort(
+    map.merge(
+        (
+            '100': calc(0.5 / 16),
+            '200': calc(1 / 16),
+            '400': calc(2 / 16),
+            '600': calc(3 / 16),
+            '800': calc(4 / 16),
+            '900': calc(6 / 16),
+        ),
+        $stroke_relative
+    )
+);
+
+$stroke_relative_unparsed: $stroke_relative;
+
+@each $key, $size in $stroke_relative {
+    $stroke_relative: map.set($stroke_relative, $key, math.round-to-pixel($size, 32));
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+$style: () !default;
+
+$style: map.ksort(
+    map.merge(
+        map.flatten(
+            (
+                focus-ring: (
+                    outline-width: '400',
+                    outline-offset: '400',
+                    outline-color: config.config-do-var(sys-clr-link, LinkText),
+                ),
+            )
+        ),
+        map.flatten($style),
+        $recursive: true
+    )
+);
+
+///
+/// @since ___PKG_VERSION___
+///
 $atProperties: () !default;
-$atProperties: fns.tokens-get-at-properties($atProperties);
+$atProperties: fns.tokens-get-at-properties(
+    $atProperties,
+    $stroke_relative: $stroke_relative,
+    $style_flat: $style
+);

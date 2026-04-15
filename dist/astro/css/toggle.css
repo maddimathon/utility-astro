@@ -6,6 +6,8 @@
  */
 /* # TOGGLE BLOCKS ==================================== */
 [data-toggle-content] > .container,
+[data-toggle-content],
+.toggle-title,
 [data-toggle-container] {
     --display: flex;
     display: flex;
@@ -20,11 +22,34 @@
     align-items: stretch;
 }
 
+[data-toggle-content] > .container,
+[data-toggle-content],
+.toggle-title,
 [data-toggle-container] {
-    z-index: 999;
+    display: contents;
+}
+@supports (display: contents) {
+    :where(
+            [data-toggle-content] > .container,
+            [data-toggle-content],
+            .toggle-title,
+            [data-toggle-container]
+        )
+        > :where(*) {
+        width: auto;
+    }
+    [data-toggle-content] > .container > :where(*),
+    [data-toggle-content] > :where(*),
+    .toggle-title > :where(*),
+    [data-toggle-container] > :where(*) {
+        grid-column: content-start/content-end;
+        grid-column: var(--grid-column, content-start/content-end);
+    }
 }
 
 [data-toggle-control] {
+    margin: 0;
+    padding: 0;
     --icon-color: currentColor;
     margin: 0;
     width: auto;
@@ -35,12 +60,6 @@
     color: inherit;
 }
 [data-toggle-control][aria-disabled] {
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -51,6 +70,7 @@
 }
 .no-js [data-toggle-control]:focus,
 .js__no-whereSelector [data-toggle-control]:focus {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -58,6 +78,7 @@
 }
 
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -66,6 +87,7 @@
 
 [data-toggle-control]:hover,
 [data-toggle-control]:active {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -73,6 +95,7 @@
 }
 
 [data-toggle-control]:focus-visible {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -80,6 +103,7 @@
 }
 
 [data-toggle-control]:focus-within {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -92,28 +116,9 @@
     opacity: 0;
 }
 
-.toggle-title,
-.toggle-title > .unstyled-heading,
-.toggle-title > .h1,
-.toggle-title > h1,
-.toggle-title > .h2,
-.toggle-title > h2,
-.toggle-title > .h3,
-.toggle-title > h3,
-.toggle-title > .h4,
-.toggle-title > h4,
-.toggle-title > .h5,
-.toggle-title > h5,
-.toggle-title > .h6,
-.toggle-title > h6,
-.toggle-title > .h7,
-.toggle-title > .h8,
-.toggle-title > .page-title {
+.toggle-title {
     margin: 0;
     padding: 0;
-}
-
-.toggle-title {
     font-weight: 600;
 }
 .toggle-title > .unstyled-heading .toggle-icon,
@@ -179,16 +184,6 @@
     fill: none;
 }
 
-[data-toggle-content] {
-    --display: grid;
-    display: grid;
-    display: var(--display, grid);
-    position: relative;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-}
 /* Javascript Enabled ==================================== */
 :where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
@@ -213,6 +208,7 @@
     --display: grid;
     display: grid;
     display: var(--display, grid);
+    position: relative;
     --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
         1fr;
     grid-template-columns: [icon] minmax(max-content, auto) [content] 1fr;
@@ -255,6 +251,9 @@
 }
 
 :where(.js) [data-toggle-container] {
+    --display: grid;
+    display: grid;
+    display: var(--display, grid);
     margin-top: 1.25rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
@@ -301,6 +300,76 @@
     appearance: button;
     cursor: pointer;
 }
+.no-js :where(.js) [data-toggle-control]:focus,
+.js__no-whereSelector :where(.js) [data-toggle-control]:focus {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
+:where(.js__no-focusVisible) :where(.js) [data-toggle-control]:focus {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
+:where(.js) [data-toggle-control]:focus-visible {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
 :where(.js) [data-toggle-control][data-toggle-control-backdrop] {
     --display: block;
     display: none;
@@ -431,6 +500,8 @@
 :where(.js) .toggle-title > .page-title {
     align-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
     grid-row: 1/1;
 }
 :where(.js) .toggle-title {
@@ -468,7 +539,9 @@
     grid-template-rows: 0fr;
     margin: 0;
     padding: 0;
-    border: 0 dotted currentColor;
+    border-width: 0;
+    border-style: dotted;
+    border-color: currentColor;
     border-top-width: 0.125rem;
     border-top-width: var(--border-width-200, 0.125rem);
     border-top-style: solid;

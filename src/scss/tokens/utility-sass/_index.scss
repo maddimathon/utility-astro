@@ -3,5 +3,6 @@
 /// @since ___PKG_VERSION___
 ///
 
-@forward '_pre';
-@forward 'lib' hide $atProperties, tokens-get-at-properties;
+@forward '_pre' hide $stroke_relative_unparsed;
+
+@forward 'lib' hide $atProperties, $stroke_relative, $style, tokens-get-at-properties;

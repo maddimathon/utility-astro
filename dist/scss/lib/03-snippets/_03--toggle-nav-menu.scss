@@ -15,146 +15,134 @@
 
 @use '03-02-layouts' as *;
 
-// prettier-ignore
-$_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
-
-$_titleBorderWidth: var-border-width('200');
-$_titleBorderWidth_half: var-border-width('100');
-
 ///
 /// Supports the ToggleNavMenu astro component.
 ///
-@mixin snippet-support-astro-toggle-nav-menu {
+@mixin snippet-support-astro-toggle-nav-menu(
+    $default_grid_page: snippet-support-astro-body-grid--default-grid-page(),
+    //
+    $container_alignment: (),
+    // prettier-ignore
+    $gridCols_toggle: [content] 1fr var-gap-inline(tab) [icon]
+        minmax(max-content, auto),
+    //
+    $title_borderWidth: var-border-width('200'),
+    $title_borderWidth_half: var-border-width('100'),
+    //
+    $includeBaseStyles: true
+) {
     #{config.$selector_body} {
-        &:has(> nav[data-toggle-container='open']) {
-            overflow: hidden;
-        }
-
         > nav {
             &[data-toggle-container] {
                 @include snippet-support-astro-body-grid--page-width;
+
+                @content (nav-toggle-container);
             }
         }
     }
 
     @include feature-check.supports(whereSelector) {
         #{config.$selector_body} {
+            &:has(> nav[data-toggle-container='open']) {
+                overflow: hidden;
+
+                @content (js--body-has-open-nav-toggle-container);
+            }
+
             > nav {
                 &[data-toggle-container] {
-                    // prettier-ignore
-                    $_gridCols_toggle: do-var(grid-template-columns--page, $_default_grid_page);
+                    $_var_gridCols_page: do-var(
+                        grid-template-columns--page,
+                        $default_grid_page
+                    );
+
                     /* prettier-ignore */
-                    @include cx-prop( grid-template-columns--toggle,  $_gridCols_toggle );
+                    @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
+
                     /* prettier-ignore */
-                    grid-template-columns: #{do-var(grid-template-columns--page, $_default_grid_page)};
+                    grid-template-columns: #{$_var_gridCols_page};
                     grid-template-columns: subgrid;
 
-                    justify-content: center;
-                    justify-items: center;
-                    align-content: center;
-                    align-items: center;
+                    @include snippet-content-grid-alignment(
+                        $container_alignment
+                    );
 
                     grid-column: 1 / -1;
 
                     padding: 0;
+
+                    @content (js--nav-toggle-container);
 
                     .toggle-title,
                     [data-toggle-content] {
                         @include prop-grid-column('1 / -1');
 
                         gap: 0;
+
+                        @content (js--nav-toggle-title-or-content);
                     }
 
                     [data-toggle-content] {
                         @include prop-grid-column(page-start / page-end);
                         position: absolute;
                         top: 0;
-                        justify-content: center;
-                        justify-items: stretch;
 
                         /* prettier-ignore */
                         grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, #{var-width(page)}) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
 
-                        margin-block-end: #{$_titleBorderWidth_half};
-                        padding: 0;
-                        border: none;
+                        @if $includeBaseStyles {
+                            margin-block-end: #{$title_borderWidth_half};
+                            font-size: #{var-fs(smaller-1)};
+                        }
 
-                        font-size: #{var-fs(smaller-1)};
+                        @content (js--nav-toggle-content);
 
-                        %ol,
-                        %ul {
-                            font-size: 1em !important;
+                        @if $includeBaseStyles {
+                            * {
+                                font-size: 1em !important;
+                            }
                         }
 
                         > .container {
                             @include snippet-support-astro-body-grid--page-width;
 
-                            padding-inline: #{var-mrg-firm('400')};
-                            background: #{var-sys-colour(background)};
+                            @if $includeBaseStyles {
+                                background: #{var-sys-colour(background)};
+                                max-height: 80svh;
+                            }
 
-                            max-height: 80svh;
                             overflow: auto;
 
-                            > ol,
-                            > ul {
-                                margin-inline-start: 0;
-                                width: 100%;
-                            }
+                            @content (js--nav-toggle-content--container);
                         }
                     }
 
                     .toggle-title {
                         /* prettier-ignore */
-                        grid-template-columns: #{do-var(grid-template-columns--toggle, #{do-var(grid-template-columns--page, $_default_grid_page)})};
+                        grid-template-columns: #{do-var(grid-template-columns--toggle, #{do-var(grid-template-columns--page, $default_grid_page)})};
                         grid-template-columns: subgrid;
 
-                        align-content: stretch;
-                        align-items: center;
+                        @if $includeBaseStyles {
+                            margin-block-end: calc(#{$title_borderWidth} * -1);
+                            border-block-end: #{$title_borderWidth}
+                                solid
+                                currentColor;
 
-                        margin-block-end: calc(#{$_titleBorderWidth} * -1);
-                        border-block-end: #{$_titleBorderWidth} solid
-                            currentColor;
+                            font-size: #{var-fs(heading-6)};
+                            background: #{var-sys-colour(background)};
+                        }
 
-                        font-size: #{var-fs(heading-6)};
-                        background: #{var-sys-colour(background)};
+                        @content (js--body-nav-toggle-title);
 
                         [data-toggle-control] {
                             @include snippet-support-astro-body-grid--page-width;
 
-                            // prettier-ignore
-                            $_gridCols_toggle: [content] 1fr #{var-gap-inline(tab)} [icon] minmax(max-content, auto);
                             /* prettier-ignore */
-                            @include cx-prop( grid-template-columns--toggle,  $_gridCols_toggle );
+                            @include cx-prop( grid-template-columns--toggle,  $gridCols_toggle );
                             /* prettier-ignore */
-                            grid-template-columns: #{do-var(grid-template-columns--toggle, $_gridCols_toggle)};
+                            grid-template-columns: #{do-var(grid-template-columns--toggle, $gridCols_toggle)};
 
-                            justify-content: space-between;
-                            justify-items: start;
-                            align-items: center;
-
-                            gap: 0;
-
-                            width: 100%;
-                        }
-                    }
-                }
-
-                @at-root #{selector.unify(&, ('[data-toggle-container=open]'))},
-                    #{selector.unify(&, ('[data-toggle-container=closing]'))} {
-                    > [data-toggle-content] {
-                        > .container {
-                            border: #{$_titleBorderWidth} dotted currentColor;
-                            border-block-start: none;
-                        }
-                    }
-                }
-
-                @at-root #{selector.unify(&, ('[data-toggle-container=open]'))} {
-                    > [data-toggle-content] {
-                        margin-block-end: #{var-mrg-firm('400')};
-
-                        > .container {
-                            padding-block: #{var-mrg-soft('400')};
+                            @content (js--body-nav-toggle-title--control);
                         }
                     }
                 }

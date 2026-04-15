@@ -277,6 +277,18 @@ pre {
     inherits: true;
     initial-value: currentColor;
 }
+@property --focus-ring-outline-offset {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0.125em;
+    initial-value: var(--stroke-relative-400, 0.125em);
+}
+@property --focus-ring-outline-width {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0.125em;
+    initial-value: var(--stroke-relative-400, 0.125em);
+}
 @property --grid-column {
     syntax: "*";
     inherits: true;
@@ -664,16 +676,16 @@ html {
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(
-            --focus-ring-outline-width,
-            clamp(
-                var(--border-width-200, 0.125rem),
-                var(--stroke-relative-400, 0.125em),
-                var(--border-width-400, 0.25rem)
-            )
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
         )
-        dashed currentColor;
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -689,16 +701,16 @@ html {
 :where(.js__no-focusVisible) :focus,
 :where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(
-            --focus-ring-outline-width,
-            clamp(
-                var(--border-width-200, 0.125rem),
-                var(--stroke-relative-400, 0.125em),
-                var(--border-width-400, 0.25rem)
-            )
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
         )
-        dashed currentColor;
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -713,16 +725,16 @@ html {
 
 :focus-visible {
     /* %focus-ring--visible */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(
-            --focus-ring-outline-width,
-            clamp(
-                var(--border-width-200, 0.125rem),
-                var(--stroke-relative-400, 0.125em),
-                var(--border-width-400, 0.25rem)
-            )
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
         )
-        dashed currentColor;
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -1546,8 +1558,10 @@ input {
     font: inherit;
     line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
-    border: 0.0625rem solid FieldText;
-    border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-color: FieldText;
+    border-color: var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: Field;
@@ -1911,8 +1925,10 @@ a.button[href] {
     font: inherit;
     line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;
@@ -2120,8 +2136,10 @@ a[disabled].button[href] {
     font: inherit;
     line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;
@@ -2707,31 +2725,30 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     > .display-contents {
     display: contents;
 }
-:where(.js__displayContents)
+@supports (display: contents) {
     :where(
-        body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
-        body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
-    )
-    > :where(form, dl)
-    > :where(*),
-:where(.js__displayContents)
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > :where(form, dl)
+        > :where(*),
     :where(
-        body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
-        body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
-    )
-    > .display-contents
-    > :where(*) {
-    grid-column: content-start/content-end;
-    grid-column: var(--grid-column, content-start/content-end);
-    width: auto;
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > .display-contents
+        > :where(*) {
+        grid-column: content-start/content-end;
+        grid-column: var(--grid-column, content-start/content-end);
+        width: auto;
+    }
 }
-
 :where(
         body,
         body > .body-subgrid,
@@ -3041,6 +3058,8 @@ body > :where(aside) > :first-child {
 /* # ASTRO SUPPORT - TOGGLE BLOCK
  * ======================================================================== */
 [data-toggle-content] > .container,
+[data-toggle-content],
+.toggle-title,
 [data-toggle-container] {
     --display: flex;
     display: flex;
@@ -3055,11 +3074,34 @@ body > :where(aside) > :first-child {
     align-items: stretch;
 }
 
+[data-toggle-content] > .container,
+[data-toggle-content],
+.toggle-title,
 [data-toggle-container] {
-    z-index: 999;
+    display: contents;
+}
+@supports (display: contents) {
+    :where(
+            [data-toggle-content] > .container,
+            [data-toggle-content],
+            .toggle-title,
+            [data-toggle-container]
+        )
+        > :where(*) {
+        width: auto;
+    }
+    [data-toggle-content] > .container > :where(*),
+    [data-toggle-content] > :where(*),
+    .toggle-title > :where(*),
+    [data-toggle-container] > :where(*) {
+        grid-column: content-start/content-end;
+        grid-column: var(--grid-column, content-start/content-end);
+    }
 }
 
 [data-toggle-control] {
+    margin: 0;
+    padding: 0;
     --icon-color: currentColor;
     margin: 0;
     width: auto;
@@ -3070,12 +3112,6 @@ body > :where(aside) > :first-child {
     color: inherit;
 }
 [data-toggle-control][aria-disabled] {
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -3086,6 +3122,7 @@ body > :where(aside) > :first-child {
 }
 .no-js [data-toggle-control]:focus,
 .js__no-whereSelector [data-toggle-control]:focus {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -3093,6 +3130,7 @@ body > :where(aside) > :first-child {
 }
 
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -3101,6 +3139,7 @@ body > :where(aside) > :first-child {
 
 [data-toggle-control]:hover,
 [data-toggle-control]:active {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -3108,6 +3147,7 @@ body > :where(aside) > :first-child {
 }
 
 [data-toggle-control]:focus-visible {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -3115,6 +3155,7 @@ body > :where(aside) > :first-child {
 }
 
 [data-toggle-control]:focus-within {
+    outline: none;
     border: none;
     background: none;
     opacity: 1;
@@ -3127,28 +3168,9 @@ body > :where(aside) > :first-child {
     opacity: 0;
 }
 
-.toggle-title,
-.toggle-title > .unstyled-heading,
-.toggle-title > h1,
-.toggle-title > .h1,
-.toggle-title > h2,
-.toggle-title > .h2,
-.toggle-title > h3,
-.toggle-title > .h3,
-.toggle-title > h4,
-.toggle-title > .h4,
-.toggle-title > h5,
-.toggle-title > .h5,
-.toggle-title > h6,
-.toggle-title > .h6,
-.toggle-title > .h7,
-.toggle-title > .h8,
-.toggle-title > .page-title {
+.toggle-title {
     margin: 0;
     padding: 0;
-}
-
-.toggle-title {
     font-weight: 600;
 }
 .toggle-title > .unstyled-heading .toggle-icon,
@@ -3214,16 +3236,6 @@ body > :where(aside) > :first-child {
     fill: none;
 }
 
-[data-toggle-content] {
-    --display: grid;
-    display: grid;
-    display: var(--display, grid);
-    position: relative;
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-}
 /* Javascript Enabled ==================================== */
 :where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
@@ -3248,6 +3260,7 @@ body > :where(aside) > :first-child {
     --display: grid;
     display: grid;
     display: var(--display, grid);
+    position: relative;
     --grid-template-columns--toggle: [icon] minmax(max-content, auto) [content]
         1fr;
     grid-template-columns: [icon] minmax(max-content, auto) [content] 1fr;
@@ -3290,6 +3303,9 @@ body > :where(aside) > :first-child {
 }
 
 :where(.js) [data-toggle-container] {
+    --display: grid;
+    display: grid;
+    display: var(--display, grid);
     margin-top: 1.25rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
@@ -3336,6 +3352,76 @@ body > :where(aside) > :first-child {
     appearance: button;
     cursor: pointer;
 }
+.no-js :where(.js) [data-toggle-control]:focus,
+.js__no-whereSelector :where(.js) [data-toggle-control]:focus {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
+:where(.js__no-focusVisible) :where(.js) [data-toggle-control]:focus {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
+:where(.js) [data-toggle-control]:focus-visible {
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(
+            var(--border-width-200, 0.125rem),
+            var(--stroke-relative-400, 0.125em),
+            var(--border-width-400, 0.25rem)
+        )
+    );
+    outline-style: dashed;
+    outline-color: LinkText;
+    outline-color: var(
+        --focus-ring-outline-color,
+        var(--sys-clr-link, LinkText)
+    );
+    outline-offset: 0.125em;
+    outline-offset: var(
+        --focus-ring-outline-offset,
+        var(--stroke-relative-400, 0.125em)
+    );
+}
+
 :where(.js) [data-toggle-control][data-toggle-control-backdrop] {
     --display: block;
     display: none;
@@ -3466,6 +3552,8 @@ body > :where(aside) > :first-child {
 :where(.js) .toggle-title > .page-title {
     align-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
     grid-row: 1/1;
 }
 :where(.js) .toggle-title {
@@ -3518,7 +3606,9 @@ body > :where(aside) > :first-child {
     grid-template-rows: 0fr;
     margin: 0;
     padding: 0;
-    border: 0 dotted currentColor;
+    border-width: 0;
+    border-style: dotted;
+    border-color: currentColor;
     border-top-width: 0.125rem;
     border-top-width: var(--border-width-200, 0.125rem);
     border-top-style: solid;
@@ -3666,9 +3756,6 @@ body > :where(aside) > :first-child {
 
 /* # ASTRO SUPPORT - TOGGLE NAV MENU
  * ======================================================================== */
-body:has(> nav[data-toggle-container="open"]) {
-    overflow: hidden;
-}
 body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
@@ -3676,6 +3763,9 @@ body > nav[data-toggle-container] {
     width: auto;
 }
 
+:where(.js) body:has(> nav[data-toggle-container="open"]) {
+    overflow: hidden;
+}
 :where(.js) body > nav[data-toggle-container] {
     /* prettier-ignore */
     --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
@@ -3689,9 +3779,9 @@ body > nav[data-toggle-container] {
     );
     grid-template-columns: subgrid;
     justify-content: center;
-    justify-items: center;
-    align-content: center;
-    align-items: center;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
     grid-column: 1/-1;
     padding: 0;
 }
@@ -3708,8 +3798,6 @@ body > nav[data-toggle-container] {
     grid-column: var(--grid-column, page-start/page-end);
     position: absolute;
     top: 0;
-    justify-content: center;
-    justify-items: stretch;
     /* prettier-ignore */
     grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem))) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(
@@ -3718,27 +3806,10 @@ body > nav[data-toggle-container] {
         ) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: 0.0625rem;
     margin-bottom: var(--border-width-100, 0.0625rem);
-    padding: 0;
-    border: none;
     font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
-:where(.js) body > nav[data-toggle-container] [data-toggle-content] ol,
-:where(.js) body > nav[data-toggle-container] [data-toggle-content] ul,
-:where(.js)
-    body
-    > nav[data-toggle-container]
-    .table-of-contents
-    [data-toggle-content]
-    > .container
-    ol,
-.table-of-contents
-    :where(.js)
-    body
-    > nav[data-toggle-container]
-    [data-toggle-content]
-    > .container
-    ol {
+:where(.js) body > nav[data-toggle-container] [data-toggle-content] * {
     font-size: 1em !important;
 }
 :where(.js)
@@ -3750,29 +3821,10 @@ body > nav[data-toggle-container] {
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-left: var(--mrg-firm-400, 1.25rem);
-    padding-right: var(--mrg-firm-400, 1.25rem);
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
     max-height: 80svh;
     overflow: auto;
-}
-:where(.js)
-    body
-    > nav[data-toggle-container]
-    [data-toggle-content]
-    > .container
-    > ol,
-:where(.js)
-    body
-    > nav[data-toggle-container]
-    [data-toggle-content]
-    > .container
-    > ul {
-    margin-left: 0;
-    width: 100%;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
     /* prettier-ignore */
@@ -3787,8 +3839,6 @@ body > nav[data-toggle-container] {
         )
     );
     grid-template-columns: subgrid;
-    align-content: stretch;
-    align-items: center;
     margin-bottom: calc(0.125rem * -1);
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
     border-bottom: 0.125rem solid currentColor;
@@ -3815,40 +3865,6 @@ body > nav[data-toggle-container] {
         --grid-template-columns--toggle,
         [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto)
     );
-    justify-content: space-between;
-    justify-items: start;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-}
-:where(.js)
-    body
-    > nav[data-toggle-container="open"]
-    > [data-toggle-content]
-    > .container,
-:where(.js)
-    body
-    > nav[data-toggle-container="closing"]
-    > [data-toggle-content]
-    > .container {
-    border: 0.125rem dotted currentColor;
-    border: var(--border-width-200, 0.125rem) dotted currentColor;
-    border-top: none;
-}
-
-:where(.js) body > nav[data-toggle-container="open"] > [data-toggle-content] {
-    margin-bottom: 1.25rem;
-    margin-bottom: var(--mrg-firm-400, 1.25rem);
-}
-:where(.js)
-    body
-    > nav[data-toggle-container="open"]
-    > [data-toggle-content]
-    > .container {
-    padding-top: 0.9375rem;
-    padding-bottom: 0.9375rem;
-    padding-top: var(--mrg-soft-400, 0.9375rem);
-    padding-bottom: var(--mrg-soft-400, 0.9375rem);
 }
 
 /* # ASTRO SUPPORT - SETTINGS MENU
@@ -3994,8 +4010,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     font: inherit;
     line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;

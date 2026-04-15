@@ -17,6 +17,7 @@ import { parseMenuItem } from './NavMenu.astro';
 /* import - components */
 import MenuList from './MenuList.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
+import Heading from './Heading.astro';
 
 /* import - layouts */
 
@@ -66,11 +67,16 @@ const titleID = `${id}-title`;
         id={titleID}
         class='toggle-title'
     >
-        <Toggle_Control
-            {...{ id, buttonID }}
-            set:text='Menu'
-            data-toggle-primary-control={id}
-        />
+        <Heading
+            displayHeading={-1}
+            heading={0}
+        >
+            <Toggle_Control
+                {...{ id, buttonID }}
+                set:text='Menu'
+                data-toggle-primary-control={id}
+            />
+        </Heading>
     </div>
 
     <div

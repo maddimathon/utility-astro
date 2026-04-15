@@ -146,8 +146,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     font: inherit;
     line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;

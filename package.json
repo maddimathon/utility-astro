@@ -189,14 +189,18 @@
 
         "preview": "astro preview",
         
+
+        "watch": "run-p watch:* start:*",
+            "watch:astro":     "watch -p 'src/astro/**/*'                                                                        -c 'build-utils build --without minimize,readme,document --only-compile astro --watchedWatcher \"astro\"     --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:scss":      "watch -p 'src/scss/**/*'                         -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without minimize,readme,document --only-compile scss  --watchedWatcher \"scss\"      --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:docs-scss": "watch -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without minimize,readme,compile  --only-document scss --watchedWatcher \"docs-scss\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:ts":        "watch -p 'src/ts/**/*'                                                                           -c 'build-utils build --without minimize,readme,document --only-compile ts    --watchedWatcher \"ts\"        --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+        
         
         "build-start": "build-utils build --starting && npm run start",
 
-        "start": "run-p watch:* start:*",
-            "watch:scss":    "watch -p 'src/scss/**/*'                         -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -c 'build-utils build --without minimize,readme,document --only-compile scss     --watchedWatcher \"scss\"    --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:docs":    "watch -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -p 'node_modules/@maddimathon/*/dist/scss/lib/**/*' -p 'node_modules/@maddimathon/*/dist/scss/template/**/*' -c 'build-utils build --without minimize,readme,compile  --only-document scss    --watchedWatcher \"docs\"    --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:ts":      "watch -p 'src/ts/**/*'                                                                                                                                        -c 'build-utils build --without minimize,readme,document --only-compile ts       --watchedWatcher \"ts\"      --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:typedoc": "watch -p 'src/ts/**/*'   -p 'src/astro/**/*'                                                                                                                  -c 'build-utils build --without minimize,readme,compile  --only-document typedoc --watchedWatcher \"typedoc\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+        "start": "run-p watch:docs-scss watch:scss watch:ts s-watch:* start:*",
+            "s-watch:typedoc": "watch -p 'src/ts/**/*'   -p 'src/astro/**/*'                                                                                                                  -c 'build-utils build --without minimize,readme,compile  --only-document typedoc --watchedWatcher \"typedoc\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
             "start:astro": "astro dev",
 
 

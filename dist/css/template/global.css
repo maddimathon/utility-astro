@@ -25,6 +25,16 @@
     inherits: true;
     initial-value: currentColor;
 }
+@property --focus-ring-outline-offset {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0.125em;
+}
+@property --focus-ring-outline-width {
+    syntax: "<length-percentage> | <number>";
+    inherits: true;
+    initial-value: 0.125em;
+}
 @property --grid-column {
     syntax: "*";
     inherits: true;
@@ -74,9 +84,12 @@
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
-        dashed currentColor;
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(0.125rem, 0.125em, 0.25rem)
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -89,9 +102,12 @@
 :where(.js__no-focusVisible) :focus,
 :where(.js) [data-toggle-control][data-toggle-is-current-target] {
     /* %focus-ring--where */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
-        dashed currentColor;
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(0.125rem, 0.125em, 0.25rem)
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -103,9 +119,12 @@
 
 :focus-visible {
     /* %focus-ring--visible */
-    outline: clamp(0.125rem, 0.125em, 0.25rem) dashed currentColor;
-    outline: var(--focus-ring-outline-width, clamp(0.125rem, 0.125em, 0.25rem))
-        dashed currentColor;
+    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
+    outline-width: var(
+        --focus-ring-outline-width,
+        clamp(0.125rem, 0.125em, 0.25rem)
+    );
+    outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
@@ -766,8 +785,10 @@ input {
     width: 100%;
     font: inherit;
     line-height: 1.3125;
-    border: 0.0625rem solid FieldText;
-    border: 0.0625rem solid var(--sys-clr-input-border, FieldText);
+    border-width: 0.0625rem;
+    border-style: solid;
+    border-color: FieldText;
+    border-color: var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
     background-color: Field;
@@ -1077,8 +1098,10 @@ a.button[href] {
     width: fit-content;
     font: inherit;
     line-height: 1.1875;
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;
@@ -1228,8 +1251,10 @@ a[disabled].button[href] {
     width: fit-content;
     font: inherit;
     line-height: 1.1875;
-    border: 0.125rem solid ButtonFace;
-    border: 0.125rem solid var(--sys-clr-button-border, ButtonFace);
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border, ButtonFace);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;

@@ -3,5 +3,7 @@
 /// @since 0.1.0-beta.0.draft
 ///
 
-@forward '_pre';
-@forward 'lib' hide $atProperties, tokens-get-at-properties;
+@forward '_pre' hide $stroke_relative_unparsed;
+
+@forward 'lib' hide $atProperties, $stroke_relative, $style,
+    tokens-get-at-properties;

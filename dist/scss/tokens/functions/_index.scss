@@ -14,7 +14,12 @@
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@function tokens-get-at-properties($inputs) {
+@function tokens-get-at-properties(
+    $inputs,
+    $stroke_relative,
+    $style_flat,
+    $args...
+) {
     @return fns.tokens-get-at-properties(
         $inputs: map.merge(
                 (
@@ -47,6 +52,9 @@
                 $inputs,
                 $recursive: true,
                 $respectUNDEFINED: true
-            )
+            ),
+        $stroke_relative: $stroke_relative,
+        $style_flat: $style_flat,
+        $args...
     );
 }
