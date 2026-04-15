@@ -23,8 +23,7 @@
     //
     $container_alignment: (),
     // prettier-ignore
-    $gridCols_toggle: [content] 1fr var-gap-inline(tab) [icon]
-        minmax(max-content, auto),
+    $gridCols_toggle: [content] 1fr [icon] minmax(max-content, auto),
     //
     $title_borderWidth: var-border-width('200'),
     $title_borderWidth_half: var-border-width('100'),

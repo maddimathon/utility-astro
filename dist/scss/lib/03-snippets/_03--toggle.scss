@@ -59,6 +59,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
     $control_heading_unstyled_paddingBlockEnd: 0,
     $control_paddingBlockEnd: var-mrg-soft('200'),
     //
+    // prettier-ignore
+    $gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr,
+    //
     $svg_sel_static: '#a',
     $svg_sel_moving: '#b',
     //
@@ -261,10 +264,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         @include prop-display(grid);
         position: relative;
 
-        @include cx-prop(
-            grid-template-columns--toggle,
-            [icon] minmax(max-content, auto) [content] 1fr
-        );
+        @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
         grid-template-columns: #{do-var(grid-template-columns--toggle)};
 
         grid-auto-rows: auto;

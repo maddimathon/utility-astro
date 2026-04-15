@@ -789,11 +789,11 @@ body > nav[data-toggle-container] {
     grid-column: var(--grid-column, page-start/page-end);
     width: auto;
     /* prettier-ignore */
-    --grid-template-columns--toggle: [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto);
+    --grid-template-columns--toggle: [content] 1fr [icon] minmax(max-content, auto);
     /* prettier-ignore */
-    grid-template-columns: [content] 1fr 5% [icon] minmax(max-content, auto);
+    grid-template-columns: [content] 1fr [icon] minmax(max-content, auto);
     grid-template-columns: var(
         --grid-template-columns--toggle,
-        [content] 1fr var(--gap-inline-tab, 5%) [icon] minmax(max-content, auto)
+        [content] 1fr [icon] minmax(max-content, auto)
     );
 }
