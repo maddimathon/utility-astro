@@ -34,11 +34,21 @@ $_contentCol_default: minmax(auto, $_width_content);
 
 $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 
-$_flex_container_alignment: tokens.$contentGridAlignment;
-
-$_flex_container_alignment: map.set(
-    $_flex_container_alignment,
+$_flex_container_alignment_col: map.set(
+    tokens.$contentGridAlignment,
     align-items,
+    map.get(tokens.$contentGridAlignment, justify-items)
+);
+
+$_flex_container_alignment_col: map.set(
+    $_flex_container_alignment_col,
+    justify-content,
+    map.get(tokens.$contentGridAlignment, aling-content)
+);
+
+$_flex_container_alignment_row: map.set(
+    tokens.$contentGridAlignment,
+    justify-content,
     map.get(tokens.$contentGridAlignment, justify-items)
 );
 
@@ -54,7 +64,10 @@ $_flex_container_alignment: map.set(
     $wrap: nowrap,
     $position: relative
 ) {
-    $alignment: map.merge($_flex_container_alignment, $alignment);
+    $alignment: map.merge(
+        if($direction == column, $_flex_container_alignment_col, $_flex_container_alignment_row),
+        $alignment
+    );
 
     position: #{$position};
 
@@ -175,7 +188,11 @@ $_flex_container_alignment: map.set(
 /// @since ___PKG_VERSION___ — Added optional $width param.
 ///
 @mixin snippet-support-astro-body-grid--page-width($args...) {
-    @include _body-grid--set-column-width($cols: page-start / page-end, $args...);
+    @include snippet-support-astro-body-grid--content-width($args...);
+
+    @include min-width(content) {
+        @include _body-grid--set-column-width($cols: page-start / page-end, $args...);
+    }
 }
 
 ///
@@ -191,7 +208,11 @@ $_flex_container_alignment: map.set(
 /// @since ___PKG_VERSION___ — Added optional $width param.
 ///
 @mixin snippet-support-astro-body-grid--site-width($args...) {
-    @include _body-grid--set-column-width($cols: site-start / site-end, $args...);
+    @include snippet-support-astro-body-grid--page-width($args...);
+
+    @include min-width(page) {
+        @include _body-grid--set-column-width($cols: site-start / site-end, $args...);
+    }
 }
 
 ///
@@ -218,15 +239,11 @@ $_flex_container_alignment: map.set(
         }
 
         > :where(%table) {
-            @include snippet-support-astro-body-grid--page-width($width: fit-content);
+            @include snippet-support-astro-body-grid--page-width;
         }
 
         :where(%table-wrapper) {
-            @include snippet-support-astro-body-grid--page-width(
-                $width: fit-content,
-                $setProp: false
-            );
-            max-width: 100%;
+            @include snippet-support-astro-body-grid--page-width($setProp: false);
 
             > :where(%table) {
                 width: auto;
@@ -330,7 +347,7 @@ $_flex_container_alignment: map.set(
 /// @since 0.1.0-alpha
 ///
 @mixin _body-grid--layout-content-only($bodyMargin, $contentCol, $gutterHalfCol, $sidebarHalfCol) {
-    @include min-width(sidebar) {
+    @include min-width(page) {
         // prettier-ignore
         $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
 

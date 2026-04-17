@@ -14,10 +14,19 @@
 
 .website-settings-menu,
 .page-width {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    .website-settings-menu,
+    .page-width {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 .sidebar-width {
@@ -28,10 +37,26 @@
 }
 
 .site-width {
-    --grid-column: site-start/site-end;
-    grid-column: site-start/site-end;
-    grid-column: var(--grid-column, site-start/site-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    .site-width {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
+}
+@media (min-width: 66.75em) {
+    .site-width {
+        --grid-column: site-start/site-end;
+        grid-column: site-start/site-end;
+        grid-column: var(--grid-column, site-start/site-end);
+        width: auto;
+    }
 }
 
 html {
@@ -138,11 +163,25 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         body > :where(main, nav, header, footer) > .body-subgrid
     )
     > :where(table) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
-    width: -moz-fit-content;
-    width: fit-content;
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
+    width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > :where(table) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 :where(
         body,
@@ -152,10 +191,21 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         body > :where(main, nav, header, footer) > .body-subgrid
     )
     :where(.table-wrapper) {
-    --grid-column: page-start/page-end;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: 100%;
+    --grid-column: content-start/content-end;
+    width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        :where(.table-wrapper) {
+        --grid-column: page-start/page-end;
+        width: auto;
+    }
 }
 :where(
         body,
@@ -169,7 +219,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     width: auto;
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 66.75em) {
     body {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0;
@@ -224,10 +274,18 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     margin-right: 0;
 }
 :where(body) > :where(nav, header, footer) > :where(*) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(body) > :where(nav, header, footer) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 body > :where(aside) {
@@ -258,20 +316,44 @@ body > :where(aside) > :first-child {
 }
 
 :where(.layout_full-width) > :where(main) > :where(*) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(.layout_full-width) > :where(main) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 :where(.layout_extra-wide) > :where(main) > :where(*) {
-    --grid-column: site-start/site-end;
-    grid-column: site-start/site-end;
-    grid-column: var(--grid-column, site-start/site-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
+@media (min-width: 40.875em) {
+    :where(.layout_extra-wide) > :where(main) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
+}
+@media (min-width: 66.75em) {
+    :where(.layout_extra-wide) > :where(main) > :where(*) {
+        --grid-column: site-start/site-end;
+        grid-column: site-start/site-end;
+        grid-column: var(--grid-column, site-start/site-end);
+        width: auto;
+    }
+}
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-left > :where(main),
     .layout_sidebar-left > :where(aside),
     .layout_sidebar-right > :where(main),
@@ -289,7 +371,7 @@ body > :where(aside) > :first-child {
     }
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-left {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
@@ -314,7 +396,7 @@ body > :where(aside) > :first-child {
     }
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-right {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0;

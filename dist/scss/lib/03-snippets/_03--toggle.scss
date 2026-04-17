@@ -213,19 +213,21 @@ $_defaultHeadingSelectors_greaterThan6: ();
             @include prop-display(inline-block);
 
             vertical-align: sub;
-            padding-bottom: #{var-stroke-relative('100')};
-            padding-inline-end: #{var-border-width('200')};
+            padding-bottom: var-stroke-relative('100');
+            padding-inline-end: var-border-width('200');
         }
 
         @content (toggle-icon);
 
         > svg {
+            width: auto;
+
             @if $includeBaseStyles {
                 stroke: currentColor;
                 stroke-width: clamp(
                     1px,
-                    #{var-stroke-relative('600')},
-                    #{var-border-width('400')}
+                    var-stroke-relative('600'),
+                    var-border-width('400')
                 );
                 fill: none;
             }
@@ -253,6 +255,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         > .container {
             @extend %_flex-contents-container--display-contents;
+            // width: 100%;
 
             @content (toggle-content--container);
         }
@@ -270,8 +273,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
         grid-auto-rows: auto;
         grid-auto-flow: column;
 
-        justify-content: stretch;
-        justify-items: stretch;
+        justify-content: start;
+        justify-items: start;
         align-content: start;
         align-items: start;
 
@@ -302,7 +305,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
         ///
         [data-toggle-container] {
             @extend %_toggle-container-grid-basics;
-
             @include prop-display(grid);
 
             @if $includeMarginBlock {
@@ -345,8 +347,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
         ///
         [data-toggle-control] {
             @extend %toggle-container-subgrid;
-            align-content: center;
-            align-items: center;
+
+            // align-content: center;
+            // align-items: center;
 
             margin: 0;
 
@@ -449,8 +452,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
                 &,
                 svg {
-                    @include prop-display(block);
-
                     @content (js--toggle-icon-and-svg);
                 }
 
@@ -476,8 +477,11 @@ $_defaultHeadingSelectors_greaterThan6: ();
         .toggle-title,
         #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
             @extend %toggle-container-subgrid;
-            align-content: center;
-            align-items: center;
+
+            justify-content: space-between;
+            justify-items: start;
+            align-content: stretch;
+            align-items: stretch;
 
             margin: 0;
             padding: 0;
@@ -551,7 +555,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @include prop-display(flex);
                 @include prop-grid-column('1 / -1');
 
-                padding: 0 #{$content_container_paddingInline};
+                padding-block: 0;
+                padding-inline: #{$content_container_paddingInline};
 
                 overflow: auto;
                 max-height: 100%;

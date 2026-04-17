@@ -228,15 +228,13 @@ const slots_render = mapToObject(
     >
         <Toggle_Control
             {...{ id, buttonID }}
+            aria-label="Toggle settings menu"
             class:list='website-settings__toggle'
             data-toggle-primary-control={id}
         ><Icon 
             slot='icon'
             type='settings'
             class:list={'settings-menu-icon'}
-        /><span
-            class="screen-reader-text"
-            set:text="Toggle settings menu"
         /></Toggle_Control>
     </div>
 
@@ -268,7 +266,7 @@ const slots_render = mapToObject(
             {
                 settings.brightness && (
                     <fieldset>
-                        <legend class="h8">Brightness Mode</legend>
+                        <legend>Brightness Mode</legend>
 
                         <div class='container'>
                             <Fragment
@@ -293,7 +291,7 @@ const slots_render = mapToObject(
             {
                 settings.contrast && (
                     <fieldset>
-                        <legend class="h8">Contrast Mode</legend>
+                        <legend>Contrast Mode</legend>
 
                         <div class='container'>
                             <Fragment
@@ -348,7 +346,7 @@ const slots_render = mapToObject(
             {
                 settings.motion && (
                     <fieldset>
-                        <legend class="h8">Motion/Animation</legend>
+                        <legend>Motion/Animation</legend>
 
                         <div class='container'>
                             <Fragment
@@ -375,10 +373,7 @@ const slots_render = mapToObject(
                     data-settings-menu-custom-setting={setting.id}
                     data-settings-menu-custom-setting-default={setting.default}
                 >
-                    <legend 
-                        class="h8"
-                        set:text={setting.label}
-                    />
+                    <legend set:text={setting.label} />
 
                     <div class='container'>{ setting.options.map( ( opt ) => (
                         <Fragment
@@ -412,8 +407,7 @@ const slots_render = mapToObject(
         data-toggle-control-backdrop={id}
         class='website-settings__backdrop'
         aria-hidden='true'
-    >
-    </div>
+    />
 </div>
 
 <style lang='scss'>

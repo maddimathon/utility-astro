@@ -15,6 +15,9 @@
 
 @use '03-02-layouts' as *;
 
+// prettier-ignore
+$_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 minmax(auto, var-width(page)) 0 [sidebar-end] 0 [page-end] 0 [site-end] 0 [content-end] auto;
+
 ///
 /// Supports the ToggleNavMenu astro component.
 ///
@@ -22,6 +25,8 @@
     $default_grid_page: snippet-support-astro-body-grid--default-grid-page(),
     //
     $container_alignment: (),
+    $content_grid_columns: $_content_grid_columns,
+    $content_position: absolute,
     // prettier-ignore
     $gridCols_toggle: [content] 1fr [icon] minmax(max-content, auto),
     //
@@ -33,14 +38,14 @@
     #{config.$selector_body} {
         > nav {
             &[data-toggle-container] {
-                @include snippet-support-astro-body-grid--page-width;
+                @include prop-grid-column(page-start / page-end);
 
                 @content (nav-toggle-container);
             }
         }
     }
 
-    @include feature-check.supports(whereSelector) {
+    @include feature-check.js {
         #{config.$selector_body} {
             &:has(> nav[data-toggle-container='open']) {
                 overflow: hidden;
@@ -50,21 +55,31 @@
 
             > nav {
                 &[data-toggle-container] {
-                    $_var_gridCols_page: do-var(
+                    @include prop-display(grid);
+                    position: relative;
+
+                    @include cx-prop(
                         grid-template-columns--page,
-                        $default_grid_page
+                        $content_grid_columns
                     );
-
-                    /* prettier-ignore */
-                    @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
-
-                    /* prettier-ignore */
-                    grid-template-columns: #{$_var_gridCols_page};
+                    grid-template-columns: do-var(grid-template-columns--page);
                     grid-template-columns: subgrid;
 
-                    @include snippet-content-grid-alignment(
-                        $container_alignment
-                    );
+                    justify-content: start;
+                    justify-items: start;
+                    align-content: start;
+                    align-items: start;
+
+                    // $_var_gridCols_page: do-var(grid-template-columns--page, $default_grid_page);
+
+                    // /* prettier-ignore */
+                    // @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
+
+                    // /* prettier-ignore */
+                    // grid-template-columns: #{$_var_gridCols_page};
+                    // grid-template-columns: subgrid;
+
+                    // @include snippet-content-grid-alignment($container_alignment);
 
                     grid-column: 1 / -1;
 
@@ -74,8 +89,6 @@
 
                     .toggle-title,
                     [data-toggle-content] {
-                        @include prop-grid-column('1 / -1');
-
                         gap: 0;
 
                         @content (js--nav-toggle-title-or-content);
@@ -83,11 +96,12 @@
 
                     [data-toggle-content] {
                         @include prop-grid-column(page-start / page-end);
-                        position: absolute;
+
+                        position: $content_position;
                         top: 0;
 
                         /* prettier-ignore */
-                        grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, #{var-width(page)}) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
+                        // grid-template-columns: $content_grid_columns;
 
                         @if $includeBaseStyles {
                             margin-block-end: #{$title_borderWidth_half};
@@ -103,7 +117,8 @@
                         }
 
                         > .container {
-                            @include snippet-support-astro-body-grid--page-width;
+                            @include prop-grid-column('1 / -1');
+                            width: 100%;
 
                             @if $includeBaseStyles {
                                 background: #{var-sys-colour(background)};
@@ -117,9 +132,7 @@
                     }
 
                     .toggle-title {
-                        /* prettier-ignore */
-                        grid-template-columns: #{do-var(grid-template-columns--toggle, #{do-var(grid-template-columns--page, $default_grid_page)})};
-                        grid-template-columns: subgrid;
+                        // grid-column: 1 / -1;
 
                         @if $includeBaseStyles {
                             margin-block-end: calc(#{$title_borderWidth} * -1);
@@ -134,14 +147,76 @@
                         @content (js--body-nav-toggle-title);
 
                         [data-toggle-control] {
-                            @include snippet-support-astro-body-grid--page-width;
+                            @include prop-grid-column(page-start / page-end);
 
                             /* prettier-ignore */
                             @include cx-prop( grid-template-columns--toggle,  $gridCols_toggle );
                             /* prettier-ignore */
                             grid-template-columns: #{do-var(grid-template-columns--toggle, $gridCols_toggle)};
 
+                            justify-content: space-between;
+                            justify-items: start;
+                            align-content: stretch;
+                            align-items: center;
+
                             @content (js--body-nav-toggle-title--control);
+                        }
+                    }
+                }
+
+                /// CLOSED
+                [data-toggle-container='closed'] {
+                    @content (js--nav-toggle-container--closed);
+                }
+
+                /// OPEN & CLOSING
+                [data-toggle-container='open'],
+                [data-toggle-container='closing'] {
+                    @content (js--nav-toggle-container--open-or-closing);
+
+                    [data-toggle-control] {
+                        @content (js--nav-toggle-container--open-or-closing--control);
+                    }
+
+                    > [data-toggle-content] {
+                        @content (js--nav-toggle-container--open-or-closing--content);
+
+                        > .container {
+                            @content (js--nav-toggle-container--open-or-closing--content--container);
+                        }
+                    }
+                }
+
+                /// OPEN
+                [data-toggle-container='open'] {
+                    @content (js--nav-toggle-container--open);
+
+                    [data-toggle-control] {
+                        @content (js--nav-toggle-container--open--control);
+                    }
+
+                    > [data-toggle-content] {
+                        @content (js--nav-toggle-container--open--content);
+
+                        > .container {
+                            @content (js--nav-toggle-container--open--content--container);
+                        }
+                    }
+                }
+
+                /// CLOSING
+                [data-toggle-container='closing'] {
+                    @content (js--nav-toggle-container--closing);
+
+                    [data-toggle-control] {
+                        @content (js--nav-toggle-container--closing--control);
+                    }
+
+                    > [data-toggle-content] {
+                        @content (js--nav-toggle-container--closing--content);
+
+                        > .container {
+                            @content (js--nav-toggle-container--closing--content--container);
                         }
                     }
                 }

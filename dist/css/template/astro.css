@@ -148,9 +148,6 @@ button,
 [type="reset"],
 [type="submit"] {
     -webkit-appearance: button;
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    user-select: text;
 }
 
 /**
@@ -215,6 +212,11 @@ summary {
 
 /*! end of modern-normalize */
 html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
     color-scheme: light, dark;
 }
 html[data-brightness-mode="light"] {
@@ -261,7 +263,7 @@ samp,
 pre {
     font-family:
         ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
-        monospace;
+        monospace, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 /* #endregion Normalize */
@@ -514,7 +516,7 @@ html {
     --width-content: 36rem;
     --width-sidebar: 18rem;
     --width-callout: 26.25rem;
-    --width-page: 60rem;
+    --width-page: 58.6875rem;
     --width-page: calc(
         var(--width-content, 36rem) + var(--width-sidebar, 18rem) +
             var(--gap-inline-layout, 8vw)
@@ -584,30 +586,30 @@ html {
 /* #region Tokens - Font Size */
 html {
     --fs-heading-1: 2.75rem;
-    --fs-heading-1: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-heading-1: clamp(2.5625rem, 0.90625svw + 2.375rem, 3.4375rem);
     --fs-heading-2: 2.0625rem;
-    --fs-heading-2: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
+    --fs-heading-2: clamp(1.9375rem, 0.6875svw + 1.75rem, 2.5625rem);
     --fs-heading-3: 1.8125rem;
-    --fs-heading-3: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
+    --fs-heading-3: clamp(1.6875rem, 0.59375svw + 1.5625rem, 2.25rem);
     --fs-heading-4: 1.5625rem;
-    --fs-heading-4: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
+    --fs-heading-4: clamp(1.4375rem, 0.5svw + 1.3125rem, 1.9375rem);
     --fs-heading-5: 1.3125rem;
-    --fs-heading-5: clamp(1rem, 1.75svw + 1rem, 1.5rem);
+    --fs-heading-5: clamp(1.25rem, 0.4375svw + 1.125rem, 1.625rem);
     --fs-heading-6: 1.1875rem;
-    --fs-heading-6: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    --fs-heading-6: clamp(1.125rem, 0.40625svw + 1rem, 1.5rem);
     --fs-heading-7: 0.9375rem;
-    --fs-heading-7: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    --fs-heading-7: clamp(0.875rem, 0.3125svw + 0.8125rem, 1.1875rem);
     --fs-heading-8: 0.8125rem;
-    --fs-heading-8: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
+    --fs-heading-8: clamp(0.75rem, 0.28125svw + 0.6875rem, 1rem);
     --fs-smaller-2: 0.8125rem;
     --fs-smaller-1: 0.9375rem;
     --fs-normal: 1rem;
     --fs-bigger-7: 2.75rem;
-    --fs-bigger-7: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    --fs-bigger-7: clamp(2.5625rem, 0.90625svw + 2.375rem, 3.4375rem);
     --fs-bigger-8: 3.1875rem;
-    --fs-bigger-8: clamp(2.375rem, 4.1875svw + 1rem, 3.5625rem);
+    --fs-bigger-8: clamp(3rem, 1.0625svw + 2.75rem, 4rem);
     --fs-bigger-9: 3.6875rem;
-    --fs-bigger-9: clamp(2.75rem, 4.8125svw + 1rem, 4.125rem);
+    --fs-bigger-9: clamp(3.4375rem, 1.21875svw + 3.125rem, 4.625rem);
 }
 
 /* #endregion Tokens - Font Size */
@@ -650,12 +652,11 @@ html {
 /* #endregion Tokens - Border Width */
 /* #region Tokens - Stroke Relative */
 html {
-    --stroke-relative-100: 0.03125em;
+    --stroke-relative-100: 0.0625em;
     --stroke-relative-200: 0.0625em;
     --stroke-relative-400: 0.125em;
     --stroke-relative-600: 0.1875em;
     --stroke-relative-800: 0.25em;
-    --stroke-relative-900: 0.375em;
 }
 
 /* #endregion Tokens - Stroke Relative */
@@ -952,7 +953,7 @@ h1,
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 900;
-    font-size: clamp(2.0625rem, 3.625svw + 1rem, 3.125rem);
+    font-size: clamp(2.5625rem, 0.90625svw + 2.375rem, 3.4375rem);
     font-size: var(--fs-heading-1, 2.75rem);
     line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
@@ -990,7 +991,7 @@ h2,
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 800;
-    font-size: clamp(1.5625rem, 2.6875svw + 1rem, 2.3125rem);
+    font-size: clamp(1.9375rem, 0.6875svw + 1.75rem, 2.5625rem);
     font-size: var(--fs-heading-2, 2.0625rem);
     line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
@@ -1022,7 +1023,7 @@ h3,
     margin-top: var(--mrg-soft-800, 3.5rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 700;
-    font-size: clamp(1.375rem, 2.375svw + 1rem, 2.0625rem);
+    font-size: clamp(1.6875rem, 0.59375svw + 1.5625rem, 2.25rem);
     font-size: var(--fs-heading-3, 1.8125rem);
     line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
@@ -1054,7 +1055,7 @@ h4,
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 700;
-    font-size: clamp(1.1875rem, 2.0625svw + 1rem, 1.75rem);
+    font-size: clamp(1.4375rem, 0.5svw + 1.3125rem, 1.9375rem);
     font-size: var(--fs-heading-4, 1.5625rem);
     line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
@@ -1094,7 +1095,7 @@ h5,
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 600;
-    font-size: clamp(1rem, 1.75svw + 1rem, 1.5rem);
+    font-size: clamp(1.25rem, 0.4375svw + 1.125rem, 1.625rem);
     font-size: var(--fs-heading-5, 1.3125rem);
     line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
@@ -1134,7 +1135,7 @@ h6,
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
-    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    font-size: clamp(1.125rem, 0.40625svw + 1rem, 1.5rem);
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
@@ -1173,7 +1174,7 @@ h6 a.button[href],
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
-    font-size: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    font-size: clamp(0.875rem, 0.3125svw + 0.8125rem, 1.1875rem);
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
@@ -1198,7 +1199,7 @@ h6 a.button[href],
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
-    font-size: clamp(0.625rem, 1.0625svw + 1rem, 0.9375rem);
+    font-size: clamp(0.75rem, 0.28125svw + 0.6875rem, 1rem);
     font-size: var(--fs-heading-8, 0.8125rem);
     line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
@@ -1495,7 +1496,7 @@ fieldset legend {
     margin-top: var(--mrg-soft-600, 1.875rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     font-weight: 500;
-    font-size: clamp(0.6875rem, 1.25svw + 1rem, 1.0625rem);
+    font-size: clamp(0.875rem, 0.3125svw + 0.8125rem, 1.1875rem);
     font-size: var(--fs-heading-7, 0.9375rem);
     line-height: 1.6875;
     line-height: var(--line-height-400, 1.6875);
@@ -2289,6 +2290,7 @@ table {
     );
     background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
+    max-width: 100%;
 }
 
 table {
@@ -2360,6 +2362,7 @@ table {
     margin: 0;
     padding: 0;
     background: transparent;
+    max-width: none;
 }
 
 th,
@@ -2469,7 +2472,6 @@ blockquote {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-content: center;
     justify-items: stretch;
     align-content: start;
     align-items: stretch;
@@ -2633,10 +2635,19 @@ nav ul li {
 
 .page-width,
 .website-settings-menu {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    .page-width,
+    .website-settings-menu {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 .sidebar-width {
@@ -2647,10 +2658,26 @@ nav ul li {
 }
 
 .site-width {
-    --grid-column: site-start/site-end;
-    grid-column: site-start/site-end;
-    grid-column: var(--grid-column, site-start/site-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    .site-width {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
+}
+@media (min-width: 66.75em) {
+    .site-width {
+        --grid-column: site-start/site-end;
+        grid-column: site-start/site-end;
+        grid-column: var(--grid-column, site-start/site-end);
+        width: auto;
+    }
 }
 
 html {
@@ -2757,11 +2784,25 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         body > :where(main, nav, header, footer) > .body-subgrid
     )
     > :where(table) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
-    width: -moz-fit-content;
-    width: fit-content;
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
+    width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        > :where(table) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 :where(
         body,
@@ -2771,10 +2812,21 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         body > :where(main, nav, header, footer) > .body-subgrid
     )
     :where(.table-wrapper) {
-    --grid-column: page-start/page-end;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: 100%;
+    --grid-column: content-start/content-end;
+    width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(
+            body,
+            body > .body-subgrid,
+            body > .body-subgrid > .body-subgrid,
+            body > :where(main, nav, header, footer),
+            body > :where(main, nav, header, footer) > .body-subgrid
+        )
+        :where(.table-wrapper) {
+        --grid-column: page-start/page-end;
+        width: auto;
+    }
 }
 :where(
         body,
@@ -2788,7 +2840,7 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     width: auto;
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 66.75em) {
     body {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) [page-end] 0;
@@ -2843,10 +2895,18 @@ body > :where(main, nav, header, footer) > .body-subgrid {
     margin-right: 0;
 }
 :where(body) > :where(nav, header, footer) > :where(*) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(body) > :where(nav, header, footer) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 body > :where(aside) {
@@ -2877,20 +2937,44 @@ body > :where(aside) > :first-child {
 }
 
 :where(.layout_full-width) > :where(main) > :where(*) {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
+}
+@media (min-width: 40.875em) {
+    :where(.layout_full-width) > :where(main) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
 }
 
 :where(.layout_extra-wide) > :where(main) > :where(*) {
-    --grid-column: site-start/site-end;
-    grid-column: site-start/site-end;
-    grid-column: var(--grid-column, site-start/site-end);
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
+@media (min-width: 40.875em) {
+    :where(.layout_extra-wide) > :where(main) > :where(*) {
+        --grid-column: page-start/page-end;
+        grid-column: page-start/page-end;
+        grid-column: var(--grid-column, page-start/page-end);
+        width: auto;
+    }
+}
+@media (min-width: 66.75em) {
+    :where(.layout_extra-wide) > :where(main) > :where(*) {
+        --grid-column: site-start/site-end;
+        grid-column: site-start/site-end;
+        grid-column: var(--grid-column, site-start/site-end);
+        width: auto;
+    }
+}
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-left > :where(main),
     .layout_sidebar-left > :where(aside),
     .layout_sidebar-right > :where(main),
@@ -2908,7 +2992,7 @@ body > :where(aside) > :first-child {
     }
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-left {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] var(--gap-inline-layout, 8vw) [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [page-end] 0;
@@ -2933,7 +3017,7 @@ body > :where(aside) > :first-child {
     }
 }
 
-@media (min-width: 55.5em) {
+@media (min-width: 55.625em) {
     .layout_sidebar-right {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0;
@@ -3011,7 +3095,7 @@ body > :where(aside) > :first-child {
     margin-top: var(--mrg-soft-200, 0.375rem);
     margin-bottom: 0;
     font-weight: 500;
-    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    font-size: clamp(1.125rem, 0.40625svw + 1rem, 1.5rem);
     font-size: var(--fs-heading-6, 1.1875rem);
     line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
@@ -3068,7 +3152,6 @@ body > :where(aside) > :first-child {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-content: center;
     justify-items: stretch;
     align-content: start;
     align-items: stretch;
@@ -3220,12 +3303,13 @@ body > :where(aside) > :first-child {
     display: inline-block;
     display: var(--display, inline-block);
     vertical-align: sub;
-    padding-bottom: 0.03125em;
-    padding-bottom: var(--stroke-relative-100, 0.03125em);
+    padding-bottom: 0.0625em;
+    padding-bottom: var(--stroke-relative-100, 0.0625em);
     padding-right: 0.125rem;
     padding-right: var(--border-width-200, 0.125rem);
 }
 .toggle-icon > svg {
+    width: auto;
     stroke: currentColor;
     stroke-width: clamp(1px, 0.1875em, 0.25rem);
     stroke-width: clamp(
@@ -3267,8 +3351,8 @@ body > :where(aside) > :first-child {
     grid-template-columns: var(--grid-template-columns--toggle);
     grid-auto-rows: auto;
     grid-auto-flow: column;
-    justify-content: stretch;
-    justify-items: stretch;
+    justify-content: start;
+    justify-items: start;
     align-content: start;
     align-items: start;
     grid-gap: 0 0.5rem;
@@ -3340,8 +3424,6 @@ body > :where(aside) > :first-child {
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
 :where(.js) [data-toggle-control] {
-    align-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
     padding-bottom: 0.375rem;
@@ -3518,12 +3600,6 @@ body > :where(aside) > :first-child {
     grid-column: icon;
     grid-column: var(--grid-column, icon);
 }
-:where(.js) [data-toggle-control] .toggle-icon,
-:where(.js) [data-toggle-control] .toggle-icon svg {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-}
 :where(.js) [data-toggle-control] .toggle-icon svg #a,
 :where(.js) [data-toggle-control] .toggle-icon svg #b {
     transform-origin: center;
@@ -3550,8 +3626,10 @@ body > :where(aside) > :first-child {
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
 :where(.js) .toggle-title > .page-title {
-    align-content: center;
-    align-items: center;
+    justify-content: space-between;
+    justify-items: start;
+    align-content: stretch;
+    align-items: stretch;
     margin: 0;
     padding: 0;
     grid-row: 1/1;
@@ -3621,8 +3699,12 @@ body > :where(aside) > :first-child {
     --grid-column: 1 / -1;
     grid-column: 1 / -1;
     grid-column: var(--grid-column, 1 / -1);
-    padding: 0 0.8125rem;
-    padding: 0 var(--mrg-firm-300, 0.8125rem);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     overflow: auto;
     max-height: 100%;
     visibility: hidden;
@@ -3760,26 +3842,28 @@ body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
 }
 
 :where(.js) body:has(> nav[data-toggle-container="open"]) {
     overflow: hidden;
 }
 :where(.js) body > nav[data-toggle-container] {
-    /* prettier-ignore */
-    --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
-    /* prettier-ignore */
-    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
-    grid-template-columns: var(
-        --grid-template-columns--page,
-        0 [page-start] 1fr [sidebar-start] 0 [content-start]
-            minmax(auto, var(--width-content, 36rem)) [content-end] 0
-            [sidebar-end] 1fr [page-end] 0
-    );
+    --display: grid;
+    display: grid;
+    display: var(--display, grid);
+    position: relative;
+    --grid-template-columns--page: auto [content-start] 0 [site-start] 0
+        [page-start] 0 [sidebar-start] 0
+        minmax(auto, var(--width-page, 58.6875rem)) 0 [sidebar-end] 0 [page-end]
+        0 [site-end] 0 [content-end] auto;
+    grid-template-columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 minmax(
+            auto,
+            calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem))
+        ) 0 [sidebar-end] 0 [page-end] 0 [site-end] 0 [content-end] auto;
+    grid-template-columns: var(--grid-template-columns--page);
     grid-template-columns: subgrid;
-    justify-content: center;
-    justify-items: stretch;
+    justify-content: start;
+    justify-items: start;
     align-content: start;
     align-items: start;
     grid-column: 1/-1;
@@ -3787,9 +3871,6 @@ body > nav[data-toggle-container] {
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title,
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
-    --grid-column: 1 / -1;
-    grid-column: 1 / -1;
-    grid-column: var(--grid-column, 1 / -1);
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
@@ -3799,11 +3880,6 @@ body > nav[data-toggle-container] {
     position: absolute;
     top: 0;
     /* prettier-ignore */
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem))) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(
-            auto,
-            var(--width-page, 60rem)
-        ) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: 0.0625rem;
     margin-bottom: var(--border-width-100, 0.0625rem);
     font-size: 0.9375rem;
@@ -3817,33 +3893,21 @@ body > nav[data-toggle-container] {
     > nav[data-toggle-container]
     [data-toggle-content]
     > .container {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
+    --grid-column: 1 / -1;
+    grid-column: 1 / -1;
+    grid-column: var(--grid-column, 1 / -1);
+    width: 100%;
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
     max-height: 80svh;
     overflow: auto;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
-    /* prettier-ignore */
-    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
-    grid-template-columns: var(
-        --grid-template-columns--toggle,
-        var(
-            --grid-template-columns--page,
-            0 [page-start] 1fr [sidebar-start] 0 [content-start]
-                minmax(auto, var(--width-content, 36rem)) [content-end] 0
-                [sidebar-end] 1fr [page-end] 0
-        )
-    );
-    grid-template-columns: subgrid;
     margin-bottom: calc(0.125rem * -1);
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
     border-bottom: 0.125rem solid currentColor;
     border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
-    font-size: clamp(0.875rem, 1.5625svw + 1rem, 1.3125rem);
+    font-size: clamp(1.125rem, 0.40625svw + 1rem, 1.5rem);
     font-size: var(--fs-heading-6, 1.1875rem);
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
@@ -3856,7 +3920,6 @@ body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
     /* prettier-ignore */
     --grid-template-columns--toggle: [content] 1fr [icon] minmax(max-content, auto);
     /* prettier-ignore */
@@ -3865,17 +3928,18 @@ body > nav[data-toggle-container] {
         --grid-template-columns--toggle,
         [content] 1fr [icon] minmax(max-content, auto)
     );
+    justify-content: space-between;
+    justify-items: start;
+    align-content: stretch;
+    align-items: center;
 }
-
 /* # ASTRO SUPPORT - SETTINGS MENU
  * ======================================================================== */
 .website-settings-menu {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-    --display: none;
     display: none;
-    display: var(--display, none);
     margin: 0;
     padding: 0;
 }
@@ -3894,28 +3958,13 @@ body > nav[data-toggle-container] {
     max-width: min(36rem, 90vw);
     max-width: min(var(--width-content, 36rem), 90vw);
 }
-.website-settings__content fieldset,
-.website-settings__content button,
-.website-settings__content [role="button"],
-.website-settings__content input[type="button"],
-.website-settings__content input[type="reset"],
-.website-settings__content input[type="submit"],
-.website-settings__content a.button[href] {
+.website-settings__content fieldset {
     margin-top: 0.8125rem;
     margin-bottom: 0.1875rem;
     margin-top: var(--mrg-firm-300, 0.8125rem);
     margin-bottom: var(--mrg-half-300, 0.1875rem);
     margin-left: 0;
     margin-right: 0;
-}
-.website-settings__content input,
-.website-settings__content button,
-.website-settings__content [role="button"],
-.website-settings__content a.button[href] {
-    margin-top: 1.25rem;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-}
-.website-settings__content fieldset {
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
     padding-top: var(--mrg-firm-100, 0.3125rem);
@@ -3932,34 +3981,26 @@ body > nav[data-toggle-container] {
         3vw,
         var(--mrg-firm-300, 0.8125rem)
     );
-    align-self: stretch;
 }
 .website-settings__content fieldset > legend,
 .website-settings__content fieldset > legend:first-child {
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: calc(0.375rem * -1);
-    margin-right: calc(0.375rem * -1);
-    margin-left: calc(var(--mrg-soft-200, 0.375rem) * -1);
-    margin-right: calc(var(--mrg-soft-200, 0.375rem) * -1);
-    padding-left: 0.375rem;
-    padding-right: 0.375rem;
-    padding-left: var(--mrg-soft-200, 0.375rem);
-    padding-right: var(--mrg-soft-200, 0.375rem);
 }
 .website-settings__content fieldset > .container {
     --display: flex;
     display: flex;
     display: var(--display, flex);
+    position: relative;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
-    justify-items: start;
-    align-content: start;
-    align-items: start;
     gap: 0.5rem clamp(1.25rem, 5vw, 2.25rem);
     gap: var(--mrg-firm-200, 0.5rem)
         clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
+    justify-content: stretch;
+    justify-items: stretch;
+    align-content: start;
+    align-items: start;
     margin: 0;
     padding: 0;
 }
@@ -3983,10 +4024,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     --display: flex;
     display: flex;
     display: var(--display, flex);
-}
-:where(.js) .website-settings-menu .toggle-title {
-    margin: 0;
-    padding: 0;
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     --focus-ring-outline-offset: 0.125rem;
@@ -4136,23 +4173,17 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     appearance: button;
     text-decoration: none;
     cursor: pointer;
+    --icon-size: var(--icon-size-large, 2em);
+    justify-self: end;
 }
 :where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
 :where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;
 }
-:where(.js) .website-settings-menu [data-toggle-control] {
-    --icon-size: var(--icon-size-large, 2em);
-    justify-self: end;
-}
 :where(.js)
     .website-settings-menu
     [data-toggle-control][data-toggle-control-backdrop] {
     display: none;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -4162,61 +4193,11 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     border-radius: 0;
     opacity: 1;
 }
-.no-js
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:focus,
-.js__no-whereSelector
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:focus {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js__no-focusVisible)
-    :where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:focus {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:hover,
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:active {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-toggle-control-backdrop]:focus-within {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
 :where(.js) .website-settings-menu [data-toggle-content] {
+    justify-content: stretch;
+    justify-items: start;
+    align-content: start;
+    align-items: start;
     border: none;
 }
 :where(.js) .website-settings-menu[data-toggle-container="open"],

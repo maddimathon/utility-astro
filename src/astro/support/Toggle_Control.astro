@@ -37,7 +37,7 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const buttonHTML = (await Astro.slots.render('default'))?.trim() || 'Toggle me';
+const buttonHTML = (await Astro.slots.render('default'))?.trim();
 
 const iconHTML =
     (await Astro.slots.render('icon'))?.trim() ||
@@ -79,10 +79,14 @@ const iconHTML =
     {...attrs}
 >
     {icon && <Fragment set:html={iconHTML} />}
-    <span
-        class='toggle-control-inner'
-        set:html={buttonHTML}
-    />
+    {
+        (!attrs['aria-label'] || buttonHTML) && (
+            <span
+                class='toggle-control-inner'
+                set:html={buttonHTML || 'Toggle me'}
+            />
+        )
+    }
 </button>
 
 <style lang='scss'>

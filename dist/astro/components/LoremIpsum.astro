@@ -68,10 +68,10 @@ export interface LoremIpsum_DisplaySettings {
      */
     code?: boolean;
 
-/**
- * @since 0.1.0-beta.0.draft
- */
-codeLong?: boolean;
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    codeLong?: boolean;
 
     /**
      * @since 0.1.0-alpha.20
@@ -118,7 +118,7 @@ codeLong?: boolean;
     /**
      * @since 0.1.0-beta.0.draft
      */
-     tableLong?: boolean;
+    tableLong?: boolean;
 
     /**
      * @since 0.1.0-alpha.20
@@ -821,8 +821,8 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             { ifDisplay.table && (
                 <Table>
                     <tr>
-                        <th>Table Heading 1</th>
-                        <th>Table Heading 2</th>
+                        <th scope="col">Table Heading 1</th>
+                        <th scope="col">Table Heading 2</th>
                         {/* <th>Table Heading 3</th> */}
                     </tr>
                     <tr>
@@ -841,16 +841,19 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                     { ifDisplay.tableLong && (
                         <Table>
                             <tr>
-                                <th>Table Heading 1</th>
-                                <th>Table Heading 2</th>
-                                <th>Table Heading 3</th>
+                                <th scope="col"><span class="screen-reader-text">Row Headings</span></th>
+                                <th scope="col">Table Heading 1</th>
+                                <th scope="col">Table Heading 2</th>
+                                <th scope="col">Table Heading 3</th>
                             </tr>
                             <tr>
+                                <th scope="row">Row 1</th>
                                 <td>Pellentesque in mauris neque. Vivamus rutrum sodales eros, quis cursus leo ultrices eget.</td>
                                 <td>Sed ullamcorper eu sapien vitae elementum. </td>
                                 <td>Praesent mollis efficitur odio vitae pretium.</td>
                             </tr>
                             <tr>
+                                <th scope="row">Row 2</th>
                                 <td>Quisque venenatis ac velit venenatis scelerisque.</td>
                                 <td>Ut eros lacus, mattis sit amet pretium a, fermentum et dolor. Cras eu semper massa.</td>
                                 <td>Nam congue sagittis scelerisque. Etiam et diam pharetra, tempor ex sit amet, scelerisque est.</td>

@@ -20,6 +20,7 @@
     $display: inline-block,
     $iconSize: do-var(icon-size),
     $includeMinWidth: config.$include_html,
+    $includeMaxWidth: false,
     $margin_svg: 0,
     $padding_svg: 0,
     $verticalAlign: middle
@@ -27,12 +28,18 @@
     %icon {
         @include prop-display($display);
 
-        height: #{$iconSize};
-        height: calc($iconSize * do-var(icon-size--font-multiplier));
+        $_calc_iconSize: calc($iconSize * do-var(icon-size--font-multiplier));
+
+        height: $iconSize;
+        height: $_calc_iconSize;
 
         @if $includeMinWidth {
-            min-width: #{$iconSize};
-            min-width: calc($iconSize * do-var(icon-size--font-multiplier));
+            min-width: $iconSize;
+            min-width: $_calc_iconSize;
+        }
+
+        @if $includeMaxWidth {
+            max-width: 100%;
         }
 
         vertical-align: #{$verticalAlign};

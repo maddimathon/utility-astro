@@ -19,7 +19,7 @@
 
 @include snippet-support-astro-toggle-nav-menu;
 
-@include feature-check.supports(whereSelector) {
+@include feature-check.js {
     $_navHeight: 3.125rem;
 
     @include cx-prop(height-nav-primary, $_navHeight);

@@ -16,7 +16,6 @@
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-content: center;
     justify-items: stretch;
     align-content: start;
     align-items: stretch;
@@ -168,12 +167,13 @@
     display: inline-block;
     display: var(--display, inline-block);
     vertical-align: sub;
-    padding-bottom: 0.03125em;
-    padding-bottom: var(--stroke-relative-100, 0.03125em);
+    padding-bottom: 0.0625em;
+    padding-bottom: var(--stroke-relative-100, 0.0625em);
     padding-right: 0.125rem;
     padding-right: var(--border-width-200, 0.125rem);
 }
 .toggle-icon > svg {
+    width: auto;
     stroke: currentColor;
     stroke-width: clamp(1px, 0.1875em, 0.25rem);
     stroke-width: clamp(
@@ -215,8 +215,8 @@
     grid-template-columns: var(--grid-template-columns--toggle);
     grid-auto-rows: auto;
     grid-auto-flow: column;
-    justify-content: stretch;
-    justify-items: stretch;
+    justify-content: start;
+    justify-items: start;
     align-content: start;
     align-items: start;
     grid-gap: 0 0.5rem;
@@ -288,8 +288,6 @@
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
 :where(.js) [data-toggle-control] {
-    align-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
     padding-bottom: 0.375rem;
@@ -466,12 +464,6 @@
     grid-column: icon;
     grid-column: var(--grid-column, icon);
 }
-:where(.js) [data-toggle-control] .toggle-icon,
-:where(.js) [data-toggle-control] .toggle-icon svg {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-}
 :where(.js) [data-toggle-control] .toggle-icon svg #a,
 :where(.js) [data-toggle-control] .toggle-icon svg #b {
     transform-origin: center;
@@ -498,8 +490,10 @@
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
 :where(.js) .toggle-title > .page-title {
-    align-content: center;
-    align-items: center;
+    justify-content: space-between;
+    justify-items: start;
+    align-content: stretch;
+    align-items: stretch;
     margin: 0;
     padding: 0;
     grid-row: 1/1;
@@ -554,8 +548,12 @@
     --grid-column: 1 / -1;
     grid-column: 1 / -1;
     grid-column: var(--grid-column, 1 / -1);
-    padding: 0 0.8125rem;
-    padding: 0 var(--mrg-firm-300, 0.8125rem);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
     overflow: auto;
     max-height: 100%;
     visibility: hidden;
@@ -691,26 +689,28 @@ body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
 }
 
 :where(.js) body:has(> nav[data-toggle-container="open"]) {
     overflow: hidden;
 }
 :where(.js) body > nav[data-toggle-container] {
-    /* prettier-ignore */
-    --grid-template-columns--toggle: var(--grid-template-columns--page, 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0);
-    /* prettier-ignore */
-    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
-    grid-template-columns: var(
-        --grid-template-columns--page,
-        0 [page-start] 1fr [sidebar-start] 0 [content-start]
-            minmax(auto, var(--width-content, 36rem)) [content-end] 0
-            [sidebar-end] 1fr [page-end] 0
-    );
+    --display: grid;
+    display: grid;
+    display: var(--display, grid);
+    position: relative;
+    --grid-template-columns--page: auto [content-start] 0 [site-start] 0
+        [page-start] 0 [sidebar-start] 0
+        minmax(auto, var(--width-page, 58.6875rem)) 0 [sidebar-end] 0 [page-end]
+        0 [site-end] 0 [content-end] auto;
+    grid-template-columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 minmax(
+            auto,
+            58.6875rem
+        ) 0 [sidebar-end] 0 [page-end] 0 [site-end] 0 [content-end] auto;
+    grid-template-columns: var(--grid-template-columns--page);
     grid-template-columns: subgrid;
-    justify-content: center;
-    justify-items: stretch;
+    justify-content: start;
+    justify-items: start;
     align-content: start;
     align-items: start;
     grid-column: 1/-1;
@@ -718,9 +718,6 @@ body > nav[data-toggle-container] {
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title,
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
-    --grid-column: 1 / -1;
-    grid-column: 1 / -1;
-    grid-column: var(--grid-column, 1 / -1);
     gap: 0;
 }
 :where(.js) body > nav[data-toggle-container] [data-toggle-content] {
@@ -730,11 +727,6 @@ body > nav[data-toggle-container] {
     position: absolute;
     top: 0;
     /* prettier-ignore */
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(auto, 60rem) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
-    grid-template-columns: 1fr [site-start] 0 [page-start] 0 [content-start] 0 [sidebar-start] 0 minmax(
-            auto,
-            var(--width-page, 60rem)
-        ) 0 [sidebar-end] 0 [content-end] 0 [page-end] 0 [site-end] 1fr;
     margin-bottom: 0.0625rem;
     margin-bottom: var(--border-width-100, 0.0625rem);
     font-size: 0.9375rem;
@@ -748,28 +740,16 @@ body > nav[data-toggle-container] {
     > nav[data-toggle-container]
     [data-toggle-content]
     > .container {
-    --grid-column: page-start/page-end;
-    grid-column: page-start/page-end;
-    grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
+    --grid-column: 1 / -1;
+    grid-column: 1 / -1;
+    grid-column: var(--grid-column, 1 / -1);
+    width: 100%;
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
     max-height: 80svh;
     overflow: auto;
 }
 :where(.js) body > nav[data-toggle-container] .toggle-title {
-    /* prettier-ignore */
-    grid-template-columns: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, 36rem) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
-    grid-template-columns: var(
-        --grid-template-columns--toggle,
-        var(
-            --grid-template-columns--page,
-            0 [page-start] 1fr [sidebar-start] 0 [content-start]
-                minmax(auto, var(--width-content, 36rem)) [content-end] 0
-                [sidebar-end] 1fr [page-end] 0
-        )
-    );
-    grid-template-columns: subgrid;
     margin-bottom: calc(0.125rem * -1);
     margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
     border-bottom: 0.125rem solid currentColor;
@@ -787,7 +767,6 @@ body > nav[data-toggle-container] {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-    width: auto;
     /* prettier-ignore */
     --grid-template-columns--toggle: [content] 1fr [icon] minmax(max-content, auto);
     /* prettier-ignore */
@@ -796,4 +775,8 @@ body > nav[data-toggle-container] {
         --grid-template-columns--toggle,
         [content] 1fr [icon] minmax(max-content, auto)
     );
+    justify-content: space-between;
+    justify-items: start;
+    align-content: stretch;
+    align-items: center;
 }

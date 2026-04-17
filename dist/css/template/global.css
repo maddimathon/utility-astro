@@ -1360,6 +1360,7 @@ table {
     margin-bottom: 0.9375rem;
     background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
+    max-width: 100%;
 }
 
 table {
