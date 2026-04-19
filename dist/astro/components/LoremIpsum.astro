@@ -8,8 +8,10 @@
  */
 
 /* import - types */
+import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 import type { GenericProps } from '../../ts/types/index.js';
 import type { MenuItem } from './MenuList.astro';
+import { type ToggleProps } from './Toggle.astro';
 
 /* import - functions */
 import { arrayUnique } from '@maddimathon/utility-typescript';
@@ -209,6 +211,16 @@ export interface LoremIpsumProps {
      * @since 0.1.0-alpha.17
      */
     superAbbreviated?: boolean;
+
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    ToggleComponent?: ( props: PartialExcept<ToggleProps,  'children'|'id' > ) => any;
+        
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    toggleProps?: {};
 }
 
 
@@ -219,8 +231,10 @@ type Props = GenericProps<LoremIpsumProps>;
 const {
     // abbreviated = false,
     superAbbreviated = false,
+    ToggleComponent = Toggle,
+    toggleProps = {},
     ...props
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 
 /* FUNCTIONS ===================================== */
@@ -553,20 +567,25 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
             { ifDisplay.toggleBlocks && (
                 <hr />
                 
-                <Toggle id={tableOfContentIds.toggles.id}>
+                <ToggleComponent
+                    {...toggleProps}
+                    id={tableOfContentIds.toggles.id}
+                >
                     <p>Boo!</p>
                     <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-                </Toggle>
+                </ToggleComponent>
                 
-                <Toggle
+                <ToggleComponent
+                    {...toggleProps}
                     id={`${tableOfContentIds.toggles.id}-open-default`}
                     defaultOpen={true}
                 >
                     <Fragment slot='button'>I am open by default</Fragment>
                     <p>Boo!</p>
-                </Toggle>
+                </ToggleComponent>
     
-                <Fragment>{ ifDisplay.headingLevels.map( heading => <Toggle
+                <Fragment>{ ifDisplay.headingLevels.map( heading => <ToggleComponent
+                    {...toggleProps}
                     displayHeading={heading}
                     heading={0}
                     id={`${tableOfContentIds.toggles.id}-heading${heading}`}
@@ -577,7 +596,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentIds );
                     />
                     <p>Boo!</p>
                     <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper. Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-                </Toggle> ) }</Fragment>
+                </ToggleComponent> ) }</Fragment>
             ) }
     
             <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ ifDisplay.textPage && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentIds.lists.id}></a></p>

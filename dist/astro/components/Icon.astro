@@ -19,16 +19,23 @@ import { SVG, SVG_Label } from '../../ts/svg.js';
 
 /* TYPES ===================================== */
 
-type IconProps_Slug = {
+type IconProps_Base = {
     class?: ClassList | undefined;
+
+    /**
+     * Whether to add an aria
+     */
+    useAriaLabel?: boolean;
+};
+
+type IconProps_Slug = IconProps_Base & {
     type: keyof typeof SVG;
     slug?: never | undefined;
     svg?: never | undefined;
     svgLabel?: never | undefined;
 };
 
-type IconProps_Svg = {
-    class?: ClassList | undefined;
+type IconProps_Svg = IconProps_Base & {
     type?: never | undefined;
     slug: string;
     svg: string;
@@ -48,11 +55,11 @@ export type IconProps = IconProps_Slug | IconProps_Svg;
 type Props = GenericElementProps<IconProps, 'span'>;
 
 const {
+    class: classList = [],
     slug,
     svg,
     svgLabel,
     type = 'star',
-    class: classList = [],
     ...attributes
 }: Props = Astro.props;
 

@@ -6,6 +6,7 @@
  */
 
 /* import - types */
+import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 import type { GenericElementProps } from '../../ts/types/index.js';
 import type { NavMenuProps } from './NavMenu.astro';
 import type { NestedListItem } from './NestedList.astro';
@@ -20,7 +21,7 @@ import { parseMenuItem } from './NavMenu.astro';
 /* import - components */
 import Heading from './Heading.astro';
 import NestedList from './NestedList.astro';
-import Toggle from './Toggle.astro';
+import Toggle, { type ToggleProps } from './Toggle.astro';
 
 /* import - layouts */
 
@@ -53,7 +54,7 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
      * @default true
      */
     asToggle?: boolean|undefined;
-
+    
     convertHrefStringsToAbsolute?: boolean | undefined;
 
     defaultOpen?: boolean|undefined;
@@ -70,6 +71,16 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
      * ordered lists) via utility class.
      */
     listTag?: 'ol' | 'ul'|undefined;
+
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    ToggleComponent?: ( props: PartialExcept<ToggleProps,  'children'|'id' > ) => any;
+        
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    toggleProps?: {};
 }
 
 type Props = GenericElementProps<TableOfContentsProps, 'div', 'aria-label' | 'aria-labelledby'>;
@@ -84,6 +95,8 @@ const {
     id = 'toc',
     listTag,
     menu,
+    ToggleComponent = Toggle,
+    toggleProps = {},
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -137,7 +150,8 @@ const fullClassList = [
 ---
 
 {asToggle ? (
-    <Toggle
+    <ToggleComponent
+        {...toggleProps}
         id={id}
         heading={heading}
         class:list={fullClassList}
@@ -150,7 +164,7 @@ const fullClassList = [
             tag='ol'
             list={nestedLists}
         />
-    </Toggle>
+    </ToggleComponent>
 ) : (
     <Heading
         id={headingID}

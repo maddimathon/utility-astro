@@ -9,6 +9,7 @@
     ],
     "compilerOptions": {
         "isolatedDeclarations": false,
+        "skipLibCheck": false,
 
         "plugins": [
             {

@@ -6,6 +6,7 @@
  */
 
 /* import - types */
+import type { ComponentProps } from 'astro/types';
 import type { GenericElementProps } from '../../ts/index.js';
 
 /* import - functions */
@@ -15,11 +16,10 @@ import { mapToObject } from '../../ts/index.js';
 import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 
 /* import - values */
+import { SVG } from '../../ts/svg.js';
 
 /* import - components */
-import Icon from './Icon.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
-import type { ComponentProps } from 'astro/types';
 
 /* import - layouts */
 
@@ -37,6 +37,11 @@ export interface SettingsMenuProps {
      * Email used for a focus link to report accessibility issues.
      */
     accessibilityReportEmail?: string | undefined;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    iconSVG?: string;
 
     /** 
      * Unique id attr.
@@ -127,6 +132,7 @@ const {
     accessibilityReportEmail,
 
     class: classList = ['website-settings-menu'],
+    iconSVG: iconSVG_input,
     id = 'website-settings',
 
     privacyPolicy: privacyPolicyURL,
@@ -203,6 +209,11 @@ const slots_render = mapToObject(
         })
     )
 );
+
+const iconSVG = iconSVG_input ??
+    '<span class="icon icon--settings | settings-menu-icon settings-menu-icon--fallback">' +
+    SVG.settings.trim() +
+    '</span>';
 ---
 
 <div
@@ -231,11 +242,8 @@ const slots_render = mapToObject(
             aria-label="Toggle settings menu"
             class:list='website-settings__toggle'
             data-toggle-primary-control={id}
-        ><Icon 
-            slot='icon'
-            type='settings'
-            class:list={'settings-menu-icon'}
-        /></Toggle_Control>
+            iconSVG={iconSVG}
+        />
     </div>
 
     <section

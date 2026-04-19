@@ -15,8 +15,9 @@ import type { CodeBlockProps } from '../../astro/components/CodeBlock.astro';
 
 /* import - components */
 import CodeBlock from '../../astro/components/CodeBlock.astro';
-import Toggle from '../../astro/components/Toggle.astro';
+import Toggle, { type ToggleProps } from '../../astro/components/Toggle.astro';
 import { slugify } from '@maddimathon/utility-typescript';
+import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 
 /* import - layouts */
 
@@ -31,6 +32,18 @@ export type Props_Inner = {
 
     heading?: number;
     lang?: Required<CodeBlockProps>['lang'];
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    ToggleComponent?: (
+        props: PartialExcept<ToggleProps, 'children' | 'id'>,
+    ) => any;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    toggleProps?: {};
 };
 
 export interface Props extends GenericElementProps<Props_Inner, 'div'> {}
@@ -38,9 +51,10 @@ export interface Props extends GenericElementProps<Props_Inner, 'div'> {}
 const {
     lang,
     code,
-    title,
-
     heading = 2,
+    title,
+    ToggleComponent = Toggle,
+    toggleProps = {},
 } = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
@@ -50,9 +64,10 @@ const html: string = (await Astro.slots.render('default'))?.trim();
 const id = slugify(`toggle-dump-${title}`);
 ---
 
-<Toggle
-    id={id}
+<ToggleComponent
+    {...toggleProps}
     heading={heading}
+    id={id}
 >
     <Fragment
         slot='button'
@@ -68,4 +83,4 @@ const id = slugify(`toggle-dump-${title}`);
             <Fragment set:html={html.trim()} />
         )
     }
-</Toggle>
+</ToggleComponent>

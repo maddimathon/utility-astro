@@ -302,6 +302,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         [data-toggle-container] {
             @extend %_toggle-container-grid-basics;
             @include prop-display(grid);
+            position: relative;
 
             @if $includeMarginBlock {
                 margin-block: #{var-mrg-firm('400')} #{var-mrg-half('400')};
@@ -474,7 +475,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
             @extend %toggle-container-subgrid;
 
-            justify-content: space-between;
+            justify-content: stretch;
             justify-items: start;
             align-content: stretch;
             align-items: stretch;
@@ -529,6 +530,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             grid-template-rows: 0fr;
 
+            justify-content: stretch;
+
             margin: 0;
             padding: 0;
 
@@ -555,6 +558,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 padding-inline: #{$content_container_paddingInline};
 
                 overflow: auto;
+                width: 100%;
                 max-height: 100%;
 
                 visibility: hidden;

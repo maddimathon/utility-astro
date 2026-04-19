@@ -59,6 +59,11 @@ export interface ToggleProps {
     heading?: number | undefined;
 
     /**
+     * @since 0.1.0-beta.0.draft
+     */
+    iconSVG?: string;
+
+    /**
      * Minimum allowed heading level.
      *
      * @default 2
@@ -98,6 +103,7 @@ const {
     displayHeading,
     heading = 0,
     headerTag,
+    iconSVG,
     minimumHeading = 2,
     tag: Container = 'section',
     ...attributes
@@ -142,6 +148,7 @@ const ContainerHeader =
         >
             <Toggle_Control
                 {...{ id, buttonID }}
+                iconSVG={iconSVG}
                 data-toggle-primary-control={id}
             >
                 <slot name='button' />

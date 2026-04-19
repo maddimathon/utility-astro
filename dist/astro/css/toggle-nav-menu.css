@@ -254,6 +254,7 @@
     --display: grid;
     display: grid;
     display: var(--display, grid);
+    position: relative;
     margin-top: 1.25rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
@@ -490,7 +491,7 @@
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
 :where(.js) .toggle-title > .page-title {
-    justify-content: space-between;
+    justify-content: stretch;
     justify-items: start;
     align-content: stretch;
     align-items: stretch;
@@ -531,6 +532,7 @@
     grid-column: var(--grid-column, 1 / -1);
     grid-row: 2/2;
     grid-template-rows: 0fr;
+    justify-content: stretch;
     margin: 0;
     padding: 0;
     border-width: 0;
@@ -555,6 +557,7 @@
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
     overflow: auto;
+    width: 100%;
     max-height: 100%;
     visibility: hidden;
     opacity: 0;

@@ -103,7 +103,7 @@ const headingClasses =
         <Tag
             {...attributes}
             aria-level={heading > 6 ? heading : undefined}
-            class:list={[headingClasses, '||', classList]}
+            class:list={[headingClasses, { '||': classList }, classList]}
             role={heading > 6 ? 'heading' : undefined}
             set:html={htmlContent}
         />

@@ -29,7 +29,12 @@ import Heading from './Heading.astro';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface ToggleNavMenuProps extends NavMenuProps {}
+export interface ToggleNavMenuProps extends NavMenuProps {
+    /**
+     * @since ___PKG_VERSION___
+     */
+    iconSVG?: string;
+}
 
 /* PROPS ===================================== */
 
@@ -38,6 +43,7 @@ type Props = GenericElementProps<ToggleNavMenuProps, 'div'>;
 const {
     class: classList = [],
     convertHrefStringsToAbsolute,
+    iconSVG,
     id: menuID,
     menu,
     ...attributes
@@ -54,6 +60,11 @@ const id = `${menuID}-toggle`;
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
 const titleID = `${id}-title`;
+
+/**
+ * Rendered icon HTML.
+ */
+const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
 ---
 
 <nav
@@ -73,9 +84,16 @@ const titleID = `${id}-title`;
         >
             <Toggle_Control
                 {...{ id, buttonID }}
-                set:text='Menu'
+                class='toggle-nav-menu__button'
                 data-toggle-primary-control={id}
-            />
+                iconSVG={iconSVG}
+            >
+                <slot
+                    slot='icon'
+                    name='icon'
+                />
+                <Fragment set:html={buttonHTML} />
+            </Toggle_Control>
         </Heading>
     </div>
 

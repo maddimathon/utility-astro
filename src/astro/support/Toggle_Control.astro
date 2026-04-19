@@ -20,18 +20,23 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* PROPS ===================================== */
 
-type Props = Omit<GenericElementProps<{}, 'button'>, 'class' | 'id'> & {
+type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
     id: string;
     buttonID: string;
 
     icon?: boolean;
+    iconSVG?: undefined | string;
 };
 
 const {
     buttonID,
+    class: classList = [],
     id,
 
     icon = true,
+
+    iconSVG,
+
     ...attrs
 }: Props = Astro.props;
 
@@ -39,46 +44,44 @@ const {
 
 const buttonHTML = (await Astro.slots.render('default'))?.trim();
 
-const iconHTML =
-    (await Astro.slots.render('icon'))?.trim() ||
-    `<span class='icon | toggle-icon'>
-        <svg
-            aria-ignore='true'
-            role='img'
-            width='100%'
-            height='100%'
-            viewBox='0 0 24 24'
-            version='1.1'
-            xmlns='http://www.w3.org/2000/svg'
-            xmlns:xlink='http://www.w3.org/1999/xlink'
-            xml:space='preserve'
-            fill='none'
-            stroke='currentColor'
-            stroke-width='2'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-        >
-            <path
-                id='a'
-                d='M5 12h14'
-            />
-            <path
-                id='b'
-                d='M12 5v14'
-            />
-        </svg>
-    </span>`;
+export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-icon toggle-icon--fallback'>
+    <svg
+        aria-ignore='true'
+        role='img'
+        width='100%'
+        height='100%'
+        viewBox='0 0 24 24'
+        version='1.1'
+        xmlns='http://www.w3.org/2000/svg'
+        xmlns:xlink='http://www.w3.org/1999/xlink'
+        xml:space='preserve'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+    >
+        <path
+            id='a'
+            d='M5 12h14'
+        />
+        <path
+            id='b'
+            d='M12 5v14'
+        />
+    </svg>
+</span>`;
 ---
 
 <button
+    {...attrs}
     aria-disabled='true'
-    class='toggle-control'
+    class:list={['toggle-control', { '||': classList }, classList]}
     data-toggle-control={id}
     id={buttonID}
     type='button'
-    {...attrs}
 >
-    {icon && <Fragment set:html={iconHTML} />}
+    {icon && <Fragment set:html={iconSVG ?? DEFAULT_TOGGLE_ICON} />}
     {
         (!attrs['aria-label'] || buttonHTML) && (
             <span

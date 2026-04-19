@@ -20,7 +20,7 @@ import type { SettingsMenuProps } from '../components/SettingsMenu.astro';
 import type { SkipLinksProps } from '../components/SkipLinks.astro';
 
 import type {
-    Props as ContentProps,
+    ContentProps,
     ContentType,
 } from './Content.astro';
 
@@ -121,6 +121,14 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
         html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes> | undefined;
         body?: HTMLAttributes<"body"> | undefined;
     } | undefined;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    components?: {
+        PrimaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
+        SettingsMenu?: ( props: Partial<SettingsMenuProps> & { [ key: string ]: any; } ) => any;
+    };
 
     /**
      * Configuration for the child Content component.
@@ -236,4 +244,4 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
         toggle?: boolean | undefined;
 
     } | undefined;
-};
+}

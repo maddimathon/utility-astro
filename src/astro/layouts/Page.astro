@@ -57,6 +57,11 @@ type Props<T_ContentType extends ContentType = ContentType> = GenericProps<PageP
 
 const p = Astro.props.frontmatter ?? Astro.props;
 
+const {
+    PrimaryMenu = ToggleNavMenu,
+    SettingsMenu: SettingsMenuComponent = SettingsMenu,
+} = p.components ?? {};
+
 
 /* ### Content Props ------------------ */
 
@@ -293,11 +298,11 @@ const settings = p.settings && {
             <!-- /SLOT: "body-open" -->
         ) : <!-- SLOT: "body-open" (empty) / --> }
 
-        { settings && <SettingsMenu {...settings}> 
+        { settings && <SettingsMenuComponent {...settings}> 
             <slot name="settings-menu-open" slot="settings-menu-open" />
             <slot name="settings-menu" />
             <slot name="settings-menu-close" slot="settings-menu-close" />
-        </SettingsMenu> }
+        </SettingsMenuComponent> }
 
         { slots_render.beforeHeader ? (
             <!-- SLOT: "before-header" -->
@@ -326,7 +331,7 @@ const settings = p.settings && {
                     <!-- /SLOT: "before-primary-nav" -->
                 ) : <!-- SLOT: "before-primary-nav" (empty) / --> }
 
-                <ToggleNavMenu {...menus.primary} class:list="nav-primary" />
+                <PrimaryMenu {...menus.primary} class:list="nav-primary" />
 
                 { slots_render.afterPrimaryNav ? (
                     <!-- SLOT: "after-primary-nav" -->
