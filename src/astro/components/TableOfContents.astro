@@ -8,20 +8,19 @@
 /* import - types */
 import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 import type { GenericElementProps } from '../../ts/types/index.js';
+import type { MenuItem } from './MenuList.astro';
 import type { NavMenuProps } from './NavMenu.astro';
-import type { NestedListItem } from './NestedList.astro';
+import type { ToggleProps } from './Toggle.astro';
 
 /* import - functions */
-import  { htmlAttributeString } from '../../ts/functions/index.js';
-import { parseItemAttributes } from './MenuList.astro';
+import MenuList from './MenuList.astro';
 import { parseMenuItem } from './NavMenu.astro';
 
 /* import - values */
 
 /* import - components */
 import Heading from './Heading.astro';
-import NestedList from './NestedList.astro';
-import Toggle, { type ToggleProps } from './Toggle.astro';
+import Toggle from './Toggle.astro';
 
 /* import - layouts */
 
@@ -67,12 +66,6 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
     displayHeading?: number | undefined;
 
     /**
-     * Type of list tag used for display (tables of content should always be
-     * ordered lists) via utility class.
-     */
-    listTag?: 'ol' | 'ul'|undefined;
-
-    /**
      * @since ___PKG_VERSION___
      */
     ToggleComponent?: ( props: PartialExcept<ToggleProps,  'children'|'id' > ) => any;
@@ -93,7 +86,6 @@ const {
     displayHeading,
     heading,
     id = 'toc',
-    listTag,
     menu,
     ToggleComponent = Toggle,
     toggleProps = {},
@@ -106,31 +98,32 @@ export function parseTableOfContents(
     currentURL: URL,
     item: TableOfContentsProps['menu'][number],
     convertHrefStringsToAbsolutePath: boolean | null = null,
-): NestedListItem {
+): MenuItem {
+    return parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
 
-    const asMenuItem = parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
+    // const asMenuItem = parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
 
-    const html_attrs = parseItemAttributes(asMenuItem);
+    // const html_attrs = parseItemAttributes(asMenuItem);
 
-    const html = html_attrs.href
-        ? `<a${htmlAttributeString({
-            ...html_attrs,
-            href: item.href instanceof URL ? item.href.toString() : item.href,
-            child: undefined,
-        })}>${html_attrs.html}</a>`
-        : `<span>${html_attrs.html}</span>`;
+    // const html = html_attrs.href
+    //     ? `<a${htmlAttributeString({
+    //         ...html_attrs,
+    //         href: item.href instanceof URL ? item.href.toString() : item.href,
+    //         child: undefined,
+    //     })}>${html_attrs.html}</a>`
+    //     : `<span>${html_attrs.html}</span>`;
 
-    if (!asMenuItem.child?.length) {
-        return { html };
-    }
+    // if (!asMenuItem.child?.length) {
+    //     return { html };
+    // }
 
-    const children = item.child?.map(_childItem =>parseTableOfContents(currentURL, _childItem));
+    // const children = item.child?.map(_childItem =>parseTableOfContents(currentURL, _childItem));
 
-    return {
-        html,
-        children,
-        childrenTag: 'ol',
-    };
+    // return {
+    //     html,
+    //     children,
+    //     childrenTag: 'ol',
+    // };
 }
 
 /* CONSTANTS ===================================== */
@@ -143,7 +136,6 @@ const headingHTML = (await Astro.slots.render('button'))?.trim() || 'Table of Co
 
 const fullClassList = [
     'table-of-contents',
-    listTag && `table-of-contents--${listTag}`,
     '||',
     classList,
 ];
@@ -160,10 +152,7 @@ const fullClassList = [
         tag="nav"
     >
         <Fragment slot="button" set:html={headingHTML} />
-        <NestedList
-            tag='ol'
-            list={nestedLists}
-        />
+        <MenuList menu={nestedLists} />
     </ToggleComponent>
 ) : (
     <Heading
@@ -172,18 +161,14 @@ const fullClassList = [
         displayHeading={displayHeading }
         set:html={headingHTML}
     />
-    <nav
+    <section
         {...attributes}
         aria-labelledby={headingID}
         id={id}
         class:list={fullClassList}
-        role='navigation'
     >
-        <NestedList
-            tag='ol'
-            list={nestedLists}
-        />
-    </nav>
+        <MenuList menu={nestedLists} />
+    </section>
 )}
 
 
