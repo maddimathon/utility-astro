@@ -13,17 +13,51 @@
  * @since 0.1.0-alpha
  */
 export declare class JsCookie {
+    /**
+     * Cookie's name.
+     */
     readonly name: string;
+    /**
+     * Cookie's path.
+     */
     readonly path: string;
+    /**
+     * Number of days until the cookie expires.
+     */
     readonly expireDays: number | null;
+    /**
+     * Default value to return instead of null.
+     */
     readonly defaultValue: string | null;
     /**
-     * @param name          Cookie's name.
-     * @param path          Cookie's path.
-     * @param expireDays    Optional. Number of days until the cookie expires.
-     * @param defaultValue  Optional. Default value to return instead of null.
+     * Whether to also save the cookie value to LocalStorage.
+     *
+     * @since 0.1.0-beta.0.draft
      */
-    constructor(name: string, path: string, expireDays?: number | null, defaultValue?: string | null);
+    readonly copyToLocalStorage: boolean;
+    constructor(
+    /**
+     * Cookie's name.
+     */
+    name: string, 
+    /**
+     * Cookie's path.
+     */
+    path: string, 
+    /**
+     * Number of days until the cookie expires.
+     */
+    expireDays?: number | null, 
+    /**
+     * Default value to return instead of null.
+     */
+    defaultValue?: string | null, 
+    /**
+     * Whether to also save the cookie value to LocalStorage.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    copyToLocalStorage?: boolean);
     /**
      * Empties the contents of this cookie.
      */

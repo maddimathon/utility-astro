@@ -17,23 +17,44 @@ export class JsCookie {
     path;
     expireDays;
     defaultValue;
+    copyToLocalStorage;
+    constructor(
     /**
-     * @param name          Cookie's name.
-     * @param path          Cookie's path.
-     * @param expireDays    Optional. Number of days until the cookie expires.
-     * @param defaultValue  Optional. Default value to return instead of null.
+     * Cookie's name.
      */
-    constructor(name, path, expireDays = null, defaultValue = null) {
+    name, 
+    /**
+     * Cookie's path.
+     */
+    path, 
+    /**
+     * Number of days until the cookie expires.
+     */
+    expireDays = null, 
+    /**
+     * Default value to return instead of null.
+     */
+    defaultValue = null, 
+    /**
+     * Whether to also save the cookie value to LocalStorage.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    copyToLocalStorage = false) {
         this.name = name;
         this.path = path;
         this.expireDays = expireDays;
         this.defaultValue = defaultValue;
+        this.copyToLocalStorage = copyToLocalStorage;
     }
     /**
      * Empties the contents of this cookie.
      */
     delete() {
         this.set('', -1);
+        if (this.copyToLocalStorage) {
+            window.localStorage.removeItem(this.name);
+        }
     }
     /**
      * Gets the current value of this cookie.
@@ -54,6 +75,9 @@ export class JsCookie {
      * Sets this browser cookie.
      */
     set(value, expireDays = this.expireDays) {
+        if (this.copyToLocalStorage) {
+            window.localStorage.setItem(this.name, value);
+        }
         const cookie = {
             [this.name]: value,
             expires: null,

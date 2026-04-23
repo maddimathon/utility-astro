@@ -15,54 +15,131 @@ import { JsCookie } from './JsCookie.js';
  */
 export class SettingsMenu {
     menu;
+    /**
+     * @since 0.1.0-alpha
+     */
     #attributeKeys = [];
-    #rootElement;
     /**
      * For storing the cookies made to deal with each option.
+     *
+     * @since 0.1.0-alpha
      */
     #cookies = {};
     /**
      * For storing the default value (if any) for each option.
+     *
+     * @since 0.1.0-alpha
      */
     #defaults = {};
+    /**
+     * @since 0.1.0-alpha
+     */
     #inputs;
+    /**
+     * @since 0.1.0-alpha
+     */
     #path;
+    /**
+     * @since 0.1.0-alpha
+     */
     #resetButton;
+    /**
+     * @since 0.1.0-alpha
+     */
+    #rootElement;
+    /**
+     * @since 0.1.0-alpha
+     */
     #timeout = null;
     /**
      * @param menu  The website settings menu wrapper to set up.
      */
-    constructor(menu, selectors) {
+    constructor(
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    root, 
+    /**
+     * @since 0.1.0-alpha
+     */
+    menu, 
+    /**
+     * @since 0.1.0-alpha
+     */
+    selectors) {
         this.menu = menu;
-        this.#rootElement = document.querySelector(selectors?.root || ':root');
-        this.#resetButton = this.menu.querySelector(selectors?.resetButton || '[data-settings-reset]');
-        this.#path = this.menu.getAttribute(selectors?.pathAttr || 'data-settings-path') || '/';
+        this.#rootElement = root;
         this.#inputs = this.menu.querySelectorAll(selectors?.inputs || 'input[data-settings-input]');
-        if (!this.#resetButton || !this.#inputs) {
-            return;
-        }
+        this.#path = this.menu.getAttribute(selectors?.pathAttr || 'data-settings-path') || '/';
+        this.#resetButton = this.menu.querySelector(selectors?.resetButton || '[data-settings-reset]');
         this.resetButtonClicked = this.resetButtonClicked.bind(this);
         this.settingSelected = this.settingSelected.bind(this);
         this.update_allInputs = this.update_allInputs.bind(this);
-        this._update_allInputs = this._update_allInputs.bind(this);
-        /*
-         * Adding change event listener and collecting attribute names.
-         */
-        this.update_allInputs();
-        this.#inputs.forEach((input) => {
-            input.addEventListener('change', () => this.settingSelected(input));
+        this._update_input = this._update_input.bind(this);
+        // set values from localStorage if they exist
+        Promise.all(Array.from(this.#inputs).map((input) => {
+            const attr = input.getAttribute('name');
+            // returns
+            if (!attr) {
+                return;
+            }
+            this._setup_attr_key(attr).then(() => {
+                const value = input.getAttribute('value');
+                // returns
+                if (!value) {
+                    return;
+                }
+                const current = window.localStorage.getItem(attr);
+                // returns
+                if (!current) {
+                    return;
+                }
+                if (`${value}` == `${current}`) {
+                    input.checked = true;
+                    this.#rootElement.setAttribute(`data-${attr}`, current);
+                }
+                else {
+                    input.checked = false;
+                }
+            });
+        })).then(() => {
+            // returns
+            if (!this.#resetButton) {
+                return;
+            }
+            /*
+             * Adding change event listener and collecting attribute names.
+             */
+            this.update_allInputs();
+            this.#inputs?.forEach((input) => {
+                input.addEventListener('change', () => this.settingSelected(input));
+            });
+            /*
+             * Add reset button listener.
+             */
+            this.#resetButton.addEventListener('click', this.resetButtonClicked);
         });
-        /*
-         * Add reset button listener.
-         */
-        this.#resetButton.addEventListener('click', this.resetButtonClicked);
     }
-    _setup_attr_key(attr) {
+    /**
+     * Caches attr keys that have been succesfully set up.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    #setup_attr_keys = {};
+    /**
+     * @since 0.1.0-alpha
+     * @since 0.1.0-beta.0.draft — Made async.
+     */
+    async _setup_attr_key(attr) {
+        // returns
+        if (this.#setup_attr_keys[attr] === true) {
+            return;
+        }
         let defaultValue = null;
         switch (attr) {
             case 'brightness-mode':
                 window
-                    .matchMedia(`( prefers-color-scheme: light )`)
+                    .matchMedia(`( prefers-color-scheme: no-preference )`)
                     .addEventListener('change', this.update_allInputs);
                 ['light', 'dark'].forEach((value) => {
                     if (window.matchMedia(`( prefers-color-scheme: ${value} )`).matches) {
@@ -72,20 +149,18 @@ export class SettingsMenu {
                 break;
             case 'contrast-mode':
                 window
-                    .matchMedia(`( prefers-contrast: more )`)
+                    .matchMedia(`( prefers-contrast: no-preference )`)
                     .addEventListener('change', this.update_allInputs);
                 defaultValue = 'average';
-                if (window.matchMedia(`( prefers-contrast: less )`).matches) {
+                if (window.matchMedia(`( forced-colors: active )`).matches
+                    || window.matchMedia(`( prefers-contrast: custom )`).matches) {
+                    defaultValue = 'forced-colors';
+                }
+                else if (window.matchMedia(`( prefers-contrast: less )`).matches) {
                     defaultValue = 'low';
                 }
                 else if (window.matchMedia(`( prefers-contrast: more )`).matches) {
                     defaultValue = 'high';
-                }
-                if (window.matchMedia(`( forced-colors: active )`)
-                    .matches ||
-                    window.matchMedia(`( prefers-contrast: custom )`)
-                        .matches) {
-                    defaultValue = 'forced-colors';
                 }
                 break;
             case 'motion':
@@ -107,14 +182,18 @@ export class SettingsMenu {
                 break;
         }
         this.#defaults[attr] = defaultValue;
+        // returns
         if (this.#attributeKeys.includes(attr) || this.#cookies[attr]) {
             return;
         }
         this.#attributeKeys.push(attr);
-        this.#cookies[attr] = new JsCookie(attr, this.#path, null, null);
+        this.#cookies[attr] = new JsCookie(attr, this.#path, null, null, true);
+        this.#setup_attr_keys[attr] = true;
     }
     /**
      * Triggered by a click lisetener.
+     *
+     * @since 0.1.0-alpha
      */
     resetButtonClicked() {
         this.#attributeKeys.forEach((attr) => {
@@ -125,6 +204,8 @@ export class SettingsMenu {
     }
     /**
      * A callback for when an input is selected.
+     *
+     * @since 0.1.0-alpha
      */
     settingSelected(input) {
         const attr = input.getAttribute('name');
@@ -138,6 +219,9 @@ export class SettingsMenu {
         this.#rootElement.setAttribute(`data-${attr}`, value);
         this.#cookies[attr]?.set(value);
     }
+    /**
+     * @since 0.1.0-alpha
+     */
     update_allInputs() {
         this.#inputs?.forEach((input) => {
             input.checked = false;
@@ -145,26 +229,29 @@ export class SettingsMenu {
         // fixes issues about reselecting updated values after settings
         // reset and quick-triggered event listeners
         this.#timeout && clearTimeout(this.#timeout);
-        this.#timeout = setTimeout(this._update_allInputs, 100);
+        this.#timeout = setTimeout(() => Promise.all(Array.from(this.#inputs ?? []).map(this._update_input)), 100);
     }
     /**
-     * Inner logic for SettingsMenu.update_allInputs (so it can be passed to a
-     * timeout).
+     * Prepares single inputs and sets its current values.
+     *
+     * @since 0.1.0-beta.0.draft
      */
-    _update_allInputs() {
-        for (const input of Array.from(this.#inputs ?? [])) {
-            const attr = input.getAttribute('name');
-            if (!attr) {
-                continue;
-            }
-            this._setup_attr_key(attr);
+    async _update_input(input) {
+        const attr = input.getAttribute('name');
+        // returns
+        if (!attr) {
+            return;
+        }
+        return this._setup_attr_key(attr).then(() => {
             const value = input.getAttribute('value');
+            // returns
             if (!value) {
-                continue;
+                return;
             }
             const current = this.#cookies[attr]?.get() ?? this.#defaults[attr] ?? null;
+            // returns
             if (!current) {
-                continue;
+                return;
             }
             if (`${value}` == `${current}`) {
                 input.checked = true;
@@ -173,7 +260,7 @@ export class SettingsMenu {
             else {
                 input.checked = false;
             }
-        }
+        });
     }
 }
 /**
@@ -183,71 +270,86 @@ export class SettingsMenu {
  */
 (function (SettingsMenu) {
     /**
+     * @since 0.1.0-beta.0.draft
+     */
+    async function init_mapper(root, menu, scrollBehaviour, selectors) {
+        const resetSelector = typeof selectors?.reset === 'function'
+            ? menu.id ? selectors.reset(menu.id) : '[data-settings-reset]'
+            : selectors.reset ?? '[data-settings-reset]';
+        new SettingsMenu(root, menu, {
+            inputs: selectors.inputs,
+            pathAttr: selectors.pathAttr,
+            resetButton: resetSelector,
+        });
+        const scrollToMenu = () => menu.scrollIntoView({
+            behavior: scrollBehaviour ?? 'auto',
+            block: 'start',
+            inline: 'nearest',
+        });
+        menu.addEventListener('toggle-open', scrollToMenu);
+        menu.addEventListener('toggle-close', scrollToMenu);
+        // trap the focus order in the menu
+        const menuID = menu.id;
+        if (!menuID) {
+            return;
+        }
+        const sels = {
+            reset: resetSelector,
+            toggle: selectors?.toggle
+                ? (typeof selectors.toggle === 'function'
+                    ? selectors.toggle(menuID)
+                    : selectors.toggle)
+                : `button[data-toggle-control=${menuID}]`,
+        };
+        const toggleButton = document.querySelector(sels.toggle);
+        if (!toggleButton) {
+            return;
+        }
+        const resetButton = menu.querySelector(sels.reset);
+        if (!resetButton) {
+            return;
+        }
+        const toggleBlur = (event) => {
+            if (event?.relatedTarget &&
+                !menu.contains(event.relatedTarget)) {
+                resetButton.focus();
+            }
+        };
+        const resetBlur = (event) => {
+            if (event?.relatedTarget &&
+                !menu.contains(event.relatedTarget)) {
+                toggleButton.focus();
+            }
+        };
+        menu.addEventListener('toggle-open', () => {
+            toggleButton.addEventListener('blur', toggleBlur);
+            resetButton.addEventListener('blur', resetBlur);
+        });
+        menu.addEventListener('toggle-close', () => {
+            toggleButton.removeEventListener('blur', toggleBlur);
+            resetButton.removeEventListener('blur', resetBlur);
+            toggleButton.focus();
+        });
+    }
+    /**
      * Initializes the given settings menu(s).
      *
      * @since 0.1.0-alpha
      */
-    async function init(settingsMenus, scrollBehaviour = 'auto', selectors) {
-        const mapper = async (menu) => {
-            new SettingsMenu(menu);
-            const scrollToMenu = () => menu.scrollIntoView({
-                behavior: scrollBehaviour ?? 'auto',
-                block: 'start',
-                inline: 'nearest',
-            });
-            menu.addEventListener('toggle-open', scrollToMenu);
-            menu.addEventListener('toggle-close', scrollToMenu);
-            // trap the focus order in the menu
-            const menuID = menu.id;
-            if (!menuID) {
-                return;
-            }
-            const sels = {
-                reset: selectors?.reset
-                    ? (typeof selectors.reset === 'function'
-                        ? selectors.reset(menuID)
-                        : selectors.reset)
-                    : '[data-settings-reset]',
-                toggle: selectors?.toggle
-                    ? (typeof selectors.toggle === 'function'
-                        ? selectors.toggle(menuID)
-                        : selectors.toggle)
-                    : `button[data-toggle-control=${menuID}]`,
-            };
-            const toggleButton = document.querySelector(sels.toggle);
-            if (!toggleButton) {
-                return;
-            }
-            const resetButton = menu.querySelector(sels.reset);
-            if (!resetButton) {
-                return;
-            }
-            const toggleBlur = (event) => {
-                if (event?.relatedTarget &&
-                    !menu.contains(event.relatedTarget)) {
-                    resetButton.focus();
-                }
-            };
-            const resetBlur = (event) => {
-                if (event?.relatedTarget &&
-                    !menu.contains(event.relatedTarget)) {
-                    toggleButton.focus();
-                }
-            };
-            menu.addEventListener('toggle-open', () => {
-                toggleButton.addEventListener('blur', toggleBlur);
-                resetButton.addEventListener('blur', resetBlur);
-            });
-            menu.addEventListener('toggle-close', () => {
-                toggleButton.removeEventListener('blur', toggleBlur);
-                resetButton.removeEventListener('blur', resetBlur);
-                toggleButton.focus();
-            });
-        };
+    async function init(settingsMenus, scrollBehaviour = 'auto', selectors = {}) {
+        const rootElement = document.querySelector(selectors?.root || ':root');
         const menuArray = typeof settingsMenus.forEach === 'function'
             ? Array.from(settingsMenus)
             : [settingsMenus];
-        return Promise.all(menuArray.map(mapper));
+        return Promise.all(menuArray.map(menu => init_mapper(rootElement, menu, scrollBehaviour, selectors)));
     }
     SettingsMenu.init = init;
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    let Selectors;
+    (function (Selectors) {
+        ;
+        ;
+    })(Selectors = SettingsMenu.Selectors || (SettingsMenu.Selectors = {}));
 })(SettingsMenu || (SettingsMenu = {}));

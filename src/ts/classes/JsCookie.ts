@@ -15,17 +15,33 @@
  */
 export class JsCookie {
 
-    /**
-     * @param name          Cookie's name.
-     * @param path          Cookie's path.
-     * @param expireDays    Optional. Number of days until the cookie expires.
-     * @param defaultValue  Optional. Default value to return instead of null.
-     */
     public constructor (
+        /**
+         * Cookie's name.
+         */
         public readonly name: string,
+
+        /**
+         * Cookie's path.
+         */
         public readonly path: string,
+
+        /**
+         * Number of days until the cookie expires.
+         */
         public readonly expireDays: number | null = null,
+
+        /**
+         * Default value to return instead of null.
+         */
         public readonly defaultValue: string | null = null,
+
+        /**
+         * Whether to also save the cookie value to LocalStorage.
+         * 
+         * @since ___PKG_VERSION___
+         */
+        public readonly copyToLocalStorage: boolean = false,
     ) { }
 
     /**
@@ -33,6 +49,10 @@ export class JsCookie {
      */
     public delete(): void {
         this.set( '', -1 );
+
+        if ( this.copyToLocalStorage ) {
+            window.localStorage.removeItem( this.name );
+        }
     }
 
     /**
@@ -63,6 +83,10 @@ export class JsCookie {
         value: string,
         expireDays: number | null = this.expireDays,
     ): void {
+
+        if ( this.copyToLocalStorage ) {
+            window.localStorage.setItem( this.name, value );
+        }
 
         const cookie: { [ key: string ]: string | null; } = {
             [ this.name ]: value,
