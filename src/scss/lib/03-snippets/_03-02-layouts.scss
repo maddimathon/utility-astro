@@ -287,6 +287,7 @@ $_flex_container_alignment_row: map.set(
         @include snippet-support-astro-body-grid--page-width;
     }
 
+    > :where(%_site-sidebar),
     > :where(%site-sidebar) {
         @include snippet-support-astro-body-grid--sidebar-width;
 
@@ -313,33 +314,35 @@ $_flex_container_alignment_row: map.set(
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-astro-body-grid--extend-globals {
+@mixin snippet-support-astro-body-grid--extend-globals($localOnly: false) {
     %dl {
-        @extend %_display-contents;
+        @extend %_display-contents !optional;
     }
 
     %form {
-        @extend %_display-contents;
+        @extend %_display-contents !optional;
     }
 
     aside {
-        @extend %site-sidebar;
+        @extend %_site-sidebar !optional;
     }
 
-    footer {
-        @extend %site-footer;
-    }
+    @if not $localOnly {
+        footer {
+            @extend %site-footer !optional;
+        }
 
-    header {
-        @extend %site-header;
-    }
+        header {
+            @extend %site-header !optional;
+        }
 
-    main {
-        @extend %main-content;
-    }
+        main {
+            @extend %main-content !optional;
+        }
 
-    nav {
-        @extend %main-nav;
+        nav {
+            @extend %main-nav !optional;
+        }
     }
 }
 
@@ -577,6 +580,7 @@ $_flex_container_alignment_row: map.set(
         %layout-sidebar-right {
             @include min-width(sidebar) {
                 > :where(%main-content),
+                > :where(%_site-sidebar),
                 > :where(%site-sidebar) {
                     // prettier-ignore
                     $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;

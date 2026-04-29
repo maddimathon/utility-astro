@@ -1,0 +1,19 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/config/functions' as fns;
+
+///
+/// An additional selector to use for active states. Declared separately from
+/// ':active' for better compatibility.
+///
+/// @since 0.1.0-beta.0.draft
+///
+$mx_interactiveStates_selector_active: null !default;
+$mx_interactiveStates_selector_active: fns.config-valid-selector(
+    $mx_interactiveStates_selector_active,
+    'mx_interactiveStates_selector_active',
+    $default: ('[data-state-active=true]')
+);

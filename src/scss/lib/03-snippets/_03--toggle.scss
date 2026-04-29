@@ -97,6 +97,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
         margin: 0;
         padding: 0;
 
+        box-shadow: none;
+
         @if $includeBaseStyles {
             @include cx-prop(icon-color, currentColor);
 
@@ -128,7 +130,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
         }
 
-        @include hover-focus-visible-or-within('&:active') {
+        @include hover-focus-visible-or-within($includeActive: true) {
+            box-shadow: none;
+
             @if $includeBaseStyles {
                 outline: none;
                 border: none;
@@ -375,7 +379,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @content (js--toggle-control--hover-focus);
             }
 
-            &:active {
+            @include active {
                 @content (js--toggle-control--active);
             }
 
@@ -432,7 +436,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                         opacity: 0.1875;
                     }
 
-                    @include hover-focus-visible-or-within(('&:active')) {
+                    @include hover-focus-visible-or-within($includeActive: true) {
                         border: none;
                         background: none;
                         color: inherit;

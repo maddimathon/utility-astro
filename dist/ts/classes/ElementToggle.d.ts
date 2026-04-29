@@ -13,6 +13,7 @@
  * @since 0.1.0-alpha
  */
 export declare class ElementToggle {
+    #private;
     /**
      * A map of existing successfully-registered instances of this class. Helps
      * to avoid re-initializing the same element or a block with the same id
@@ -67,6 +68,12 @@ export declare class ElementToggle {
      */
     protected readonly opts: ElementToggle.Opts;
     /**
+     * Timeout length to switch the button to active state, in milliseconds.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    protected readonly activeTimeoutLength: number;
+    /**
      * The unique ID for the toggle container to set up.
      */
     protected readonly container: HTMLElement;
@@ -95,6 +102,18 @@ export declare class ElementToggle {
      * @since 0.1.0-alpha
      */
     protected abortConstructor(): void;
+    /**
+     * Adds the active attribute to the buttons.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    protected activateButton(): void;
+    /**
+     * Removes the active attribute to the buttons.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    protected deactivateButton(): void;
     /**
      * Clears the related timeout, if any.
      */

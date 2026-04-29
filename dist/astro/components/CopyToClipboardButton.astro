@@ -24,6 +24,16 @@ export type CopyToClipboardButtonProps = CopyToClipboardButtonProps.WithChildren
 export namespace CopyToClipboardButtonProps {
     type Base = {
         /**
+         * Timeout length to switch the button to active state, in milliseconds.
+         */
+        activeTimeout?: undefined | number;
+
+        /**
+         * Timeout length to display the success message, in milliseconds.
+         */
+        messageTimeout?: undefined | number;
+
+        /**
          * Content to copy to clipboard.
          */
         toClipboard: string;
@@ -56,6 +66,8 @@ export namespace CopyToClipboardButtonProps {
 type Props = GenericElementProps<CopyToClipboardButtonProps.WithChildren, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetHtml, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetText, 'div'>;
 
 const {
+    activeTimeout,
+    messageTimeout,
     successMessage,
     toClipboard,
     class: classListInput = [],
@@ -76,56 +88,13 @@ const classList = [
     class:list={classList}
     data-copy-to-clipboard={toClipboard}
     data-copy-to-clipboard-success={successMessage}
+    data-copy-to-clipboard-active-timeout={activeTimeout}
+    data-copy-to-clipboard-message-timeout={messageTimeout}
     ><slot /></button
 >
 
 <script>
-    class CopyToClipboard {
-        protected ogInnerHTML: string;
-        protected readonly successMessage: string;
-        protected textChangeTimeout?: NodeJS.Timeout;
+    import { CopyToClipboard } from '../../ts/classes/CopyToClipboard.js';
 
-        public constructor(public readonly button: HTMLButtonElement) {
-            this.clicked = this.clicked.bind(this);
-
-            this.ogInnerHTML = this.button.innerHTML;
-            this.successMessage =
-                this.button.dataset['copyToClipboardSuccess'] || 'Copied!';
-
-            button.addEventListener('click', this.clicked);
-        }
-
-        protected changeText(msg: string, timeoutMS: number) {
-            this.ogInnerHTML = this.button.innerHTML;
-
-            this.button.innerText = msg;
-
-            this.textChangeTimeout = setTimeout(() => {
-                this.button.innerHTML = this.ogInnerHTML;
-            }, timeoutMS);
-        }
-
-        public clicked(event: Event) {
-            if (this.textChangeTimeout) {
-                this.button.innerHTML = this.ogInnerHTML;
-            }
-            // in case someone is clicking super-fast
-            clearTimeout(this.textChangeTimeout);
-
-            const target = event.target as undefined | HTMLButtonElement;
-
-            const toCopy = target?.dataset['copyToClipboard'];
-
-            if (toCopy) {
-                navigator.clipboard.writeText(toCopy);
-                this.changeText(this.successMessage, 2000);
-            }
-        }
-    }
-
-    const buttons = document.querySelectorAll('button[data-copy-to-clipboard]');
-
-    buttons.forEach(
-        (button) => new CopyToClipboard(button as HTMLButtonElement),
-    );
+    CopyToClipboard.run();
 </script>

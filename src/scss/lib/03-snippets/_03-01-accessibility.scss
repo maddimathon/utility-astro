@@ -64,7 +64,7 @@
             @content ($location: 'link-root');
         }
 
-        @at-root #{selector.unify(&, ':focus')} {
+        &:focus {
             top: #{$focus_top};
 
             @if $_content_exits {
@@ -72,7 +72,7 @@
             }
         }
 
-        @at-root #{selector.unify(&, ':focus-within')} {
+        &:focus-within {
             top: #{$focus_top};
 
             @if $_content_exits {
@@ -80,7 +80,7 @@
             }
         }
 
-        @at-root #{selector.unify(&, ':active')} {
+        @include active {
             @if $_content_exits {
                 @content ($location: 'link-active');
             }

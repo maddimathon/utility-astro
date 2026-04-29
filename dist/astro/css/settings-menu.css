@@ -223,6 +223,21 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control][data-state-active="true"] {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+
 :where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
 :where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;

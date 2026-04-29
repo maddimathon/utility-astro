@@ -223,6 +223,13 @@ export class ElementToggle {
      */
     protected readonly opts: ElementToggle.Opts;
 
+    /**
+     * Timeout length to switch the button to active state, in milliseconds.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected readonly activeTimeoutLength: number;
+
     /** 
      * The unique ID for the toggle container to set up.
      */
@@ -269,10 +276,19 @@ export class ElementToggle {
 
         this.closingTime = this.opts.closingTime;
 
-        this.container = elements.container;
-        this.primaryButton = elements.primaryButton;
         this.allButtons = elements.allButtons;
+        this.container = elements.container;
         this.content = elements.content;
+        this.primaryButton = elements.primaryButton;
+
+        const _activeLength = Number(
+            this.primaryButton.dataset[ 'toggleActiveTimeout' ],
+        );
+
+        this.activeTimeoutLength = Math.min(
+            this.closingTime,
+            Number.isNaN( _activeLength ) ? 100 : _activeLength,
+        );
 
         // returns
         if ( !this.container || !this.primaryButton || !this.container.id || !this.content ) {
@@ -350,6 +366,57 @@ export class ElementToggle {
      */
     protected abortConstructor(): void {
         ElementToggle.abortNew( this.container, this.allButtons );
+    }
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    #activeTimeout: ReturnType<typeof setTimeout> | undefined;
+    /**
+     * @since ___PKG_VERSION___
+     */
+    #activeStateHold: boolean = false;
+
+    /**
+     * Adds the active attribute to the buttons.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected activateButton(): void {
+        clearTimeout( this.#activeTimeout );
+        this.#activeStateHold = true;
+
+        this.primaryButton.setAttribute( 'data-state-active', 'true' );
+
+        this.allButtons.forEach( button => button.setAttribute( 'data-state-active', 'true' ) );
+
+        this.#activeTimeout = setTimeout( () => {
+            this.#activeStateHold = false;
+        }, this.activeTimeoutLength );
+    }
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    #deactiveTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    /**
+     * Removes the active attribute to the buttons.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected deactivateButton(): void {
+        clearTimeout( this.#deactiveTimeout );
+
+        // sets timeout to callback and returns - waiting for the activateButton() timeout to set it back to false
+        if ( this.#activeStateHold ) {
+            this.#deactiveTimeout = setTimeout( this.deactivateButton, 50 );
+            return;
+        }
+
+        this.primaryButton.removeAttribute( 'data-state-active' );
+
+        this.allButtons.forEach( button => button.removeAttribute( 'data-state-active' ) );
     }
 
 
@@ -453,6 +520,8 @@ export class ElementToggle {
     public toggle(): void {
         if ( !this.container ) { return; }
 
+        this.activateButton();
+
         /*
          * Grab the current state and trigger an opening or closing function!
          */
@@ -472,6 +541,8 @@ export class ElementToggle {
                 this.close();
                 break;
         }
+
+        this.deactivateButton();
     }
 
     /**
@@ -501,7 +572,6 @@ export class ElementToggle {
      * Toggles the element closed.
      */
     protected close(): void {
-        if ( !this.allButtons ) { return; }
         if ( !this.container ) { return; }
 
         /*
@@ -513,6 +583,7 @@ export class ElementToggle {
                 button.setAttribute( 'aria-expanded', 'false' );
             }
         } );
+
         this.container.setAttribute( 'data-toggle-container', 'closing' );
 
         /*

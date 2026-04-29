@@ -3,5 +3,5 @@
 /// @since 0.1.0-alpha
 ///
 
-// @forward '_pre';
-@forward 'lib' hide config-get-template-styles;
+@forward '_pre';
+@forward 'lib' hide $mx_interactiveStates_selector_active, config-get-template-styles;

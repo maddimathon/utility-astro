@@ -928,6 +928,12 @@ a[href]:active {
     color: ActiveText;
     color: var(--sys-clr-link-active, ActiveText);
 }
+
+a[data-state-active="true"][href] {
+    color: ActiveText;
+    color: var(--sys-clr-link-active, ActiveText);
+}
+
 a.no-style[href] {
     text-decoration: none;
     font-weight: inherit;
@@ -1806,6 +1812,12 @@ fieldset:active {
     border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
 }
+
+fieldset[data-state-active="true"] {
+    border-color: FieldText;
+    border-color: var(--sys-clr-input-border-active, FieldText);
+}
+
 fieldset legend {
     --display: block;
     display: block;
@@ -1990,6 +2002,21 @@ input:active {
     accent-color: ActiveText;
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
+
+textarea[data-state-active="true"],
+select[data-state-active="true"],
+input[data-state-active="true"] {
+    --focus-ring-outline-color: var(--sys-clr-text-active, ActiveText);
+    background-color: Field;
+    background-color: var(--sys-clr-input-bg-active, Field);
+    border-color: FieldText;
+    border-color: var(--sys-clr-input-border-active, FieldText);
+    color: FieldText;
+    color: var(--sys-clr-input-text-active, FieldText);
+    accent-color: ActiveText;
+    accent-color: var(--sys-clr-text-active, ActiveText);
+}
+
 label + textarea,
 label + select,
 label + input,
@@ -2393,6 +2420,24 @@ a.button[href]:active {
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+
+button[data-state-active="true"],
+[data-state-active="true"][role="button"],
+input[data-state-active="true"][type="button"],
+input[data-state-active="true"][type="reset"],
+input[data-state-active="true"][type="submit"],
+a[data-state-active="true"].button[href] {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+
 button[aria-disabled="true"],
 [aria-disabled="true"][role="button"],
 input[aria-disabled="true"][type="button"],
@@ -2569,6 +2614,19 @@ a[disabled].button[href] {
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
+
+[data-state-active="true"]::file-selector-button {
+    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
+    border-color: ButtonFace;
+    border-color: var(--sys-clr-button-border-active, ButtonFace);
+    color: ButtonText;
+    color: var(--sys-clr-button-text-active, ButtonText);
+    accent-color: ButtonFace;
+    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+}
+
 [aria-disabled="true"]::file-selector-button,
 [disabled]::file-selector-button {
     cursor: not-allowed;
@@ -2756,14 +2814,12 @@ a.skip-link[href]:focus {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
-
 .skip-link:focus-within,
 .skip-link[href]:focus-within,
 a.skip-link[href]:focus-within {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
-
 .skip-link-list {
     grid-column: 1/-1;
     grid-column: page-start/page-end;

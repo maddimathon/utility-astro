@@ -49,6 +49,7 @@
 [data-toggle-control] {
     margin: 0;
     padding: 0;
+    box-shadow: none;
     --icon-color: currentColor;
     margin: 0;
     width: auto;
@@ -69,6 +70,7 @@
 }
 .no-js [data-toggle-control]:focus,
 .js__no-whereSelector [data-toggle-control]:focus {
+    box-shadow: none;
     outline: none;
     border: none;
     background: none;
@@ -77,6 +79,7 @@
 }
 
 :where(.js__no-focusVisible) [data-toggle-control]:focus {
+    box-shadow: none;
     outline: none;
     border: none;
     background: none;
@@ -84,8 +87,8 @@
     color: inherit;
 }
 
-[data-toggle-control]:hover,
-[data-toggle-control]:active {
+[data-toggle-control]:hover {
+    box-shadow: none;
     outline: none;
     border: none;
     background: none;
@@ -94,6 +97,25 @@
 }
 
 [data-toggle-control]:focus-visible {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:active {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control][data-state-active="true"] {
+    box-shadow: none;
     outline: none;
     border: none;
     background: none;
@@ -102,6 +124,7 @@
 }
 
 [data-toggle-control]:focus-within {
+    box-shadow: none;
     outline: none;
     border: none;
     background: none;
@@ -435,8 +458,7 @@
     opacity: 1;
 }
 
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active {
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover {
     border: none;
     background: none;
     color: inherit;
@@ -445,6 +467,23 @@
 }
 
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    opacity: 1;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    opacity: 1;
+}
+
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"] {
     border: none;
     background: none;
     color: inherit;
