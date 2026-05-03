@@ -76,7 +76,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                     // @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
 
                     // /* prettier-ignore */
-                    // grid-template-columns: #{$_var_gridCols_page};
+                    // grid-template-columns: $_var_gridCols_page;
                     // grid-template-columns: subgrid;
 
                     // @include snippet-content-grid-alignment($container_alignment);
@@ -104,8 +104,8 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                         // grid-template-columns: $content_grid_columns;
 
                         @if $includeBaseStyles {
-                            margin-block-end: #{$title_borderWidth_half};
-                            font-size: #{var-fs(smaller-1)};
+                            margin-block-end: $title_borderWidth_half;
+                            font-size: var-fs(smaller-1);
                         }
 
                         @content (js--nav-toggle-content);
@@ -121,7 +121,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                             width: 100%;
 
                             @if $includeBaseStyles {
-                                background: #{var-sys-colour(background)};
+                                background: var-sys-colour(background);
                                 max-height: 80svh;
                             }
 
@@ -135,13 +135,13 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                         // grid-column: 1 / -1;
 
                         @if $includeBaseStyles {
-                            margin-block-end: calc(#{$title_borderWidth} * -1);
-                            border-block-end: #{$title_borderWidth}
+                            margin-block-end: calc($title_borderWidth * -1);
+                            border-block-end: $title_borderWidth
                                 solid
                                 currentColor;
 
-                            font-size: #{var-fs(heading-6)};
-                            background: #{var-sys-colour(background)};
+                            font-size: var-fs(heading-6);
+                            background: var-sys-colour(background);
                         }
 
                         @content (js--body-nav-toggle-title);
@@ -152,7 +152,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                             /* prettier-ignore */
                             @include cx-prop( grid-template-columns--toggle,  $gridCols_toggle );
                             /* prettier-ignore */
-                            grid-template-columns: #{do-var(grid-template-columns--toggle, $gridCols_toggle)};
+                            grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
 
                             justify-content: space-between;
                             justify-items: start;

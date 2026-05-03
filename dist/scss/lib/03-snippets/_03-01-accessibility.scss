@@ -27,7 +27,7 @@
     display: none !important;
 
     @include forced-colors {
-        display: #{do-var(display, block)} !important;
+        display: do-var(display, block) !important;
     }
 }
 
@@ -69,22 +69,22 @@
 
         width: fit-content;
 
-        z-index: #{$zIndex};
+        z-index: $zIndex;
 
         @if $_content_exits {
             @content ($location: 'link-root');
         }
 
-        &:focus {
-            top: #{$focus_top};
+        @include focus {
+            top: $focus_top;
 
             @if $_content_exits {
                 @content ($location: 'link-focus');
             }
         }
 
-        &:focus-within {
-            top: #{$focus_top};
+        @include focus-within {
+            top: $focus_top;
 
             @if $_content_exits {
                 @content ($location: 'link-focus');

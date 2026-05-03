@@ -68,6 +68,15 @@
 [data-toggle-control][aria-disabled] .toggle-icon {
     display: none;
 }
+[data-toggle-control]:hover {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
 .no-js [data-toggle-control]:focus,
 .js__no-whereSelector [data-toggle-control]:focus {
     box-shadow: none;
@@ -87,15 +96,6 @@
     color: inherit;
 }
 
-[data-toggle-control]:hover {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
 [data-toggle-control]:focus-visible {
     box-shadow: none;
     outline: none;
@@ -105,16 +105,7 @@
     color: inherit;
 }
 
-[data-toggle-control]:active {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control][data-state-active="true"] {
+[data-toggle-control][data-state-focus="true"] {
     box-shadow: none;
     outline: none;
     border: none;
@@ -132,6 +123,35 @@
     color: inherit;
 }
 
+[data-toggle-control]:has([data-state-focus="true"]) {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:active,
+[data-toggle-control][data-state-active="true"] {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control]:has(:active),
+[data-toggle-control]:has([data-state-active="true"]) {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
 [data-toggle-control-backdrop] {
     display: none;
     position: fixed;
@@ -140,7 +160,6 @@
 
 .toggle-title {
     margin: 0;
-    padding: 0;
     font-weight: 600;
 }
 .toggle-title > .unstyled-heading .toggle-icon,
@@ -270,7 +289,6 @@
     grid-template-columns: subgrid;
     grid-column: 1/-1;
     margin: 0;
-    padding: 0;
 }
 
 :where(.js) [data-toggle-container] {
@@ -314,6 +332,7 @@
 :where(.js) [data-toggle-control] {
     margin: 0;
     padding: 0;
+    padding: 0;
     padding-bottom: 0.375rem;
     padding-bottom: var(--mrg-soft-200, 0.375rem);
     font-weight: 600;
@@ -322,76 +341,6 @@
     appearance: button;
     cursor: pointer;
 }
-.no-js :where(.js) [data-toggle-control]:focus,
-.js__no-whereSelector :where(.js) [data-toggle-control]:focus {
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
-    );
-    outline-style: dashed;
-    outline-color: LinkText;
-    outline-color: var(
-        --focus-ring-outline-color,
-        var(--sys-clr-link, LinkText)
-    );
-    outline-offset: 0.125em;
-    outline-offset: var(
-        --focus-ring-outline-offset,
-        var(--stroke-relative-400, 0.125em)
-    );
-}
-
-:where(.js__no-focusVisible) :where(.js) [data-toggle-control]:focus {
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
-    );
-    outline-style: dashed;
-    outline-color: LinkText;
-    outline-color: var(
-        --focus-ring-outline-color,
-        var(--sys-clr-link, LinkText)
-    );
-    outline-offset: 0.125em;
-    outline-offset: var(
-        --focus-ring-outline-offset,
-        var(--stroke-relative-400, 0.125em)
-    );
-}
-
-:where(.js) [data-toggle-control]:focus-visible {
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
-    );
-    outline-style: dashed;
-    outline-color: LinkText;
-    outline-color: var(
-        --focus-ring-outline-color,
-        var(--sys-clr-link, LinkText)
-    );
-    outline-offset: 0.125em;
-    outline-offset: var(
-        --focus-ring-outline-offset,
-        var(--stroke-relative-400, 0.125em)
-    );
-}
-
 :where(.js) [data-toggle-control][data-toggle-control-backdrop] {
     --display: block;
     display: none;
@@ -437,6 +386,14 @@
     background: var(--sys-clr-link, LinkText);
     opacity: 0.1875;
 }
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    opacity: 1;
+}
+
 .no-js :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus,
 .js__no-whereSelector
     :where(.js)
@@ -458,14 +415,6 @@
     opacity: 1;
 }
 
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover {
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    opacity: 1;
-}
-
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
     border: none;
     background: none;
@@ -474,7 +423,8 @@
     opacity: 1;
 }
 
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active {
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
     border: none;
     background: none;
     color: inherit;
@@ -482,6 +432,26 @@
     opacity: 1;
 }
 
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    opacity: 1;
+}
+
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop]:has(
+        [data-state-focus="true"]
+    ) {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    opacity: 1;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"] {
     border: none;
@@ -491,7 +461,11 @@
     opacity: 1;
 }
 
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:has(:active),
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop]:has(
+        [data-state-active="true"]
+    ) {
     border: none;
     background: none;
     color: inherit;
@@ -535,7 +509,6 @@
     align-content: stretch;
     align-items: stretch;
     margin: 0;
-    padding: 0;
     grid-row: 1/1;
 }
 :where(.js) .toggle-title {
@@ -620,6 +593,13 @@
 }
 
 /* Opening & Closing ==================================== */
+:where(.js) [data-toggle-container="open"] [data-toggle-control]:hover,
+:where(.js) [data-toggle-control]:hover {
+    text-decoration-color: transparent;
+    color: LinkText;
+    color: var(--sys-clr-link, LinkText);
+}
+
 .no-js :where(.js) [data-toggle-container="open"] [data-toggle-control]:focus,
 .no-js :where(.js) [data-toggle-control]:focus,
 .js__no-whereSelector
@@ -642,15 +622,17 @@
     color: var(--sys-clr-link, LinkText);
 }
 
-:where(.js) [data-toggle-container="open"] [data-toggle-control]:hover,
-:where(.js) [data-toggle-control]:hover {
+:where(.js) [data-toggle-container="open"] [data-toggle-control]:focus-visible,
+:where(.js) [data-toggle-control]:focus-visible {
     text-decoration-color: transparent;
     color: LinkText;
     color: var(--sys-clr-link, LinkText);
 }
 
-:where(.js) [data-toggle-container="open"] [data-toggle-control]:focus-visible,
-:where(.js) [data-toggle-control]:focus-visible {
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control][data-state-focus="true"],
+:where(.js) [data-toggle-control][data-state-focus="true"] {
     text-decoration-color: transparent;
     color: LinkText;
     color: var(--sys-clr-link, LinkText);

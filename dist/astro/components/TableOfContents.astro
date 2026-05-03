@@ -97,33 +97,9 @@ const {
 export function parseTableOfContents(
     currentURL: URL,
     item: TableOfContentsProps['menu'][number],
-    convertHrefStringsToAbsolutePath: boolean | null = null,
+    convertHrefStringsToAbsolutePath: boolean | null = false,
 ): MenuItem {
     return parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
-
-    // const asMenuItem = parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
-
-    // const html_attrs = parseItemAttributes(asMenuItem);
-
-    // const html = html_attrs.href
-    //     ? `<a${htmlAttributeString({
-    //         ...html_attrs,
-    //         href: item.href instanceof URL ? item.href.toString() : item.href,
-    //         child: undefined,
-    //     })}>${html_attrs.html}</a>`
-    //     : `<span>${html_attrs.html}</span>`;
-
-    // if (!asMenuItem.child?.length) {
-    //     return { html };
-    // }
-
-    // const children = item.child?.map(_childItem =>parseTableOfContents(currentURL, _childItem));
-
-    // return {
-    //     html,
-    //     children,
-    //     childrenTag: 'ol',
-    // };
 }
 
 /* CONSTANTS ===================================== */
@@ -167,7 +143,9 @@ const fullClassList = [
         id={id}
         class:list={fullClassList}
     >
+        <slot name="before" />
         <MenuList menu={nestedLists} />
+        <slot name="after" />
     </section>
 )}
 

@@ -1,0 +1,81 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    getLoremIpsumIds,
+    LoremIpsum_DisplaySettings_Parsed,
+} from '../../functions/loremIpsum.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import Heading from '../Heading.astro';
+import Lorsum_Forms_Long from './Lorsum_Forms_Long.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props {
+    displayHeading: undefined | number;
+    heading: number;
+    ifDisplay: LoremIpsum_DisplaySettings_Parsed;
+    tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
+}
+
+const { displayHeading, heading, ifDisplay, tableOfContentsIds }: Props =
+    Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<hr />
+
+<Heading
+    displayHeading={displayHeading ?? undefined}
+    heading={heading}
+    id={tableOfContentsIds.form?.id}
+    >Simple Form</Heading
+>
+
+<form>
+    <label>Your Name</label>
+    <input
+        type='text'
+        name='your-name'
+        placeholder='What should we call you?'
+        autocomplete='off'
+    />
+
+    <label>Your Email</label>
+    <input
+        type='email'
+        name='your-email'
+        placeholder='How should we reply?'
+        autocomplete='off'
+    />
+
+    <label>Your Message</label>
+    <textarea
+        name='your-message'
+        placeholder='What would you like to tell us?'
+        rows='4'
+    ></textarea>
+
+    <input
+        type='submit'
+        value='Send Message'
+        autocomplete='off'
+    />
+</form>
+
+{ifDisplay.formsLong && <Lorsum_Forms_Long {...{ displayHeading, heading }} />}

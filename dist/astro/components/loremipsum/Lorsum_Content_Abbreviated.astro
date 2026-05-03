@@ -1,0 +1,191 @@
+---
+/**
+ * @since 0.1.0-beta.0.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { LoremIpsum_DisplaySettings_Parsed } from '../../functions/loremIpsum.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props {
+    ifDisplay: LoremIpsum_DisplaySettings_Parsed;
+}
+
+const { ifDisplay }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<p>
+    Lorem ipsum <a
+        href='#'
+        target='_blank'
+        >dolor sit amet</a
+    >, consectetur adipiscing elit. Sed vel odio at nibh <abbr
+        title='these aren’t real words'>pharetra condimentum</abbr
+    >.{
+        ifDisplay.textMedium && (
+            <Fragment
+                set:html={
+                    ' Mauris id sapien sodales, volutpat turpis. Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>.'
+                }
+            />
+        )
+    }{
+        ifDisplay.textLong && (
+            <Fragment
+                set:html={
+                    ' <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur. Nulla aliquet, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl.'
+                }
+            />
+        )
+    }
+</p>
+<ul>
+    <li>Etiam ullamcorper commodo risus.</li>
+    {
+        ifDisplay.listsMedium && (
+            <li>
+                Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
+                <ol>
+                    <li>
+                        Tellus arcu convallis erat, vel blandit nulla sem nec
+                        enim. Sed ultricies lorem.
+                        <ul>
+                            <li>
+                                Proin gravida aliquam purus, at feugiat odio
+                                mollis ut.
+                                <ol>
+                                    <li>
+                                        Convallis nisl vel, ultricies lorem.
+                                        <ul>
+                                            <li>
+                                                Duis hendrerit eu lacus at
+                                                egestas.
+                                                {ifDisplay.listsLong && (
+                                                    <ol>
+                                                        <li>
+                                                            Cras consequat id
+                                                            tortor nec dapibus.
+                                                            <ol>
+                                                                <li>
+                                                                    Suspendisse
+                                                                    dapibus
+                                                                    maximus leo,
+                                                                    quis.
+                                                                    <ol>
+                                                                        <li>
+                                                                            Proin
+                                                                            vel
+                                                                            risus
+                                                                            finibus.
+                                                                            <ol>
+                                                                                <li>
+                                                                                    Feugiat
+                                                                                    odio
+                                                                                    mollis
+                                                                                    ut.
+                                                                                </li>
+                                                                                <li>
+                                                                                    Sed
+                                                                                    ultricies
+                                                                                    lorem.
+                                                                                </li>
+                                                                            </ol>
+                                                                        </li>
+                                                                        <li>
+                                                                            Convallis
+                                                                            nisl
+                                                                            vel.
+                                                                        </li>
+                                                                    </ol>
+                                                                </li>
+                                                                <li>
+                                                                    Nam vitae
+                                                                    dolor mi.
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            Ut maximus arcu
+                                                            hendrerit in.
+                                                        </li>
+                                                    </ol>
+                                                )}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>Proin vel risus finibus.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Proin gravida aliquam purus.</li>
+                </ol>
+            </li>
+        )
+    }
+    <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
+</ul>
+<p>
+    Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus
+    eros magna, ac sagittis nibh sodales eget.
+</p>
+<Fragment
+    >{
+        ifDisplay.buttons && (
+            <div class='button-span'>
+                <button type='button'>This is a button</button>
+
+                {ifDisplay.disabledButton && (
+                    <button
+                        aria-disabled='true'
+                        type='button'
+                    >
+                        This is a disabled button
+                    </button>
+                )}
+
+                {ifDisplay.buttonVariations
+                    ? ifDisplay.buttonVariations.map(
+                          (variant) =>
+                              (ifDisplay.buttonVariationsAll ||
+                                  variant === 'secondary' ||
+                                  variant === 'tertiary') && (
+                                  <button
+                                      class={`button-${variant}`}
+                                      set:text={`This is a ${variant} button`}
+                                      type='button'
+                                  />
+                              ),
+                      )
+                    : ''}
+            </div>
+        )
+    }</Fragment
+>
+<p>
+    Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus
+    condimentum. Vivamus vulputate nisl sit amet vehicula commodo.
+</p>
+
+<slot name='two' />
+<slot name='three' />
+<slot name='four' />
+
+<style lang='scss'>
+    @forward '../../css/lorem-ipsum.css';
+</style>

@@ -1,0 +1,42 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props {
+    disclaimerHTML: string;
+}
+
+const { disclaimerHTML }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+{
+    !disclaimerHTML && (
+        <p class='screen-reader-text'>
+            The content of this section is likely only useful for users
+            navigating visually. Most of the text is nonsense (it is a type of
+            placeholder text called Lorem Ipsum, meant to look like fake latin)
+            and exits only to demonstrate the visual styling of the page. None
+            of the visual styles are described in this section.
+        </p>
+    )
+}
+<Fragment set:html={disclaimerHTML} />

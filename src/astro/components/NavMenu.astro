@@ -139,9 +139,13 @@ export function parseMenuItem(
         case 'string':
             href = item.href;
 
-            if (
+            const _convertHrefStringsToAbsolutePath =
                 convertHrefStringsToAbsolutePath ??
-                href.match(/^(\.\.?\/|\/|[a-z]+:\/\/)/) === null
+                href.match(/^(#|\/|[a-z][a-z0-9]+:\/\/)/i) === null;
+
+            if (
+                _convertHrefStringsToAbsolutePath &&
+                href.match(/^(#|\/|\.\.?\/|[a-z][a-z0-9]+:\/\/)/i) === null
             ) {
                 href = absoluteInternalURL(currentURL, item.href);
             }

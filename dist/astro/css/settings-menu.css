@@ -97,9 +97,15 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js) .website-settings-menu [data-toggle-control] {
     --focus-ring-outline-offset: 0.125rem;
-    --display: block;
-    display: block;
-    display: var(--display, block);
+    --display: flex;
+    display: flex;
+    display: var(--display, flex);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: start;
+    align-items: start;
+    gap: 0;
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 0;
@@ -115,20 +121,43 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     width: -moz-fit-content;
     width: fit-content;
     font: inherit;
+    font-size: 1em;
     line-height: 1.1875;
     line-height: var(--line-height-100, 1.1875);
     border-width: 0.125rem;
     border-style: solid;
+    border-radius: 0;
+    text-align: left;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    cursor: pointer;
+    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
-    border-radius: 0;
-    --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
     color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
+    --icon-size: var(--icon-size-large, 2em);
+    justify-self: end;
+}
+:where(.js) .website-settings-menu [data-toggle-control]:hover {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    border-color: SelectedItem;
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    color: SelectedItemText;
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
 .js__no-whereSelector
@@ -139,10 +168,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
     accent-color: SelectedItem;
@@ -157,25 +186,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    color: SelectedItemText;
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:where(.js) .website-settings-menu [data-toggle-control]:hover {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
     background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    border-color: SelectedItem;
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
     color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
     accent-color: SelectedItem;
@@ -187,10 +201,27 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    color: SelectedItemText;
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
+}
+
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control][data-state-focus="true"] {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    border-color: SelectedItem;
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
     accent-color: SelectedItem;
@@ -202,65 +233,48 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
     color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
     accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-:where(.js) .website-settings-menu [data-toggle-control]:active {
-    --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: ButtonFace;
-    background-color: var(--sys-clr-button-bg-active, ButtonFace);
-    border-color: ButtonFace;
-    border-color: var(--sys-clr-button-border-active, ButtonFace);
-    color: ButtonText;
-    color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: ButtonFace;
-    accent-color: var(--sys-clr-button-border-active, ButtonFace);
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control]:has([data-state-focus="true"]) {
+    --focus-ring-outline-color: var(
+        --sys-clr-button-border-hover,
+        SelectedItem
+    );
+    border-color: SelectedItem;
+    border-color: var(--sys-clr-button-border-hover, SelectedItem);
+    background-color: SelectedItem;
+    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
+    color: SelectedItemText;
+    color: var(--sys-clr-button-text-hover, SelectedItemText);
+    accent-color: SelectedItem;
+    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
+:where(.js) .website-settings-menu [data-toggle-control]:active,
 :where(.js)
     .website-settings-menu
     [data-toggle-control][data-state-active="true"] {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: ButtonFace;
-    background-color: var(--sys-clr-button-bg-active, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
+    background-color: ButtonFace;
+    background-color: var(--sys-clr-button-bg-active, ButtonFace);
     color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 
-:where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
-:where(.js) .website-settings-menu [data-toggle-control][disabled] {
-    cursor: not-allowed;
-}
-:where(.js) .website-settings-menu [data-toggle-control] {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-content: start;
-    align-items: start;
-    gap: 0;
-    text-align: left;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    cursor: pointer;
-    --icon-size: var(--icon-size-large, 2em);
-    justify-self: end;
-}
 :where(.js) .website-settings-menu [data-toggle-control][aria-disabled="true"],
 :where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;

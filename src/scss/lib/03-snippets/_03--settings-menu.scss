@@ -57,20 +57,20 @@
 
     .website-settings__content {
         @if $includeBaseStyles {
-            background: #{var-sys-colour(background)};
+            background: var-sys-colour(background);
             width: 100%;
-            max-width: min(#{var-width(content)}, 90vw);
+            max-width: min(var-width(content), 90vw);
         }
 
         @content ('content');
 
         fieldset {
             @if $includeBaseStyles {
-                margin-block: #{var-mrg-firm('300')} #{var-mrg-half('300')};
+                margin-block: var-mrg-firm('300') var-mrg-half('300');
                 margin-inline: 0;
 
-                padding-block: #{var-mrg-firm('100')};
-                padding-inline: clamp(#{var-mrg-firm('200')}, 3vw, #{var-mrg-firm('300')});
+                padding-block: var-mrg-firm('100');
+                padding-inline: clamp(var-mrg-firm('200'), 3vw, var-mrg-firm('300'));
             }
 
             @content ('content--fieldset');
@@ -113,7 +113,7 @@
     .website-settings__disclaimer {
         @if $includeBaseStyles {
             font-style: italic;
-            font-size: #{var-fs(smaller-1)};
+            font-size: var-fs(smaller-1);
         }
 
         @content ('disclaimer');
@@ -143,14 +143,17 @@
             [data-toggle-control] {
                 @if $includeBaseStyles {
                     @include utils.snippet-button(
-                        $gap: 0,
-                        $marginBlock: 0,
-                        $marginInline: 0,
-                        $paddingBlock: var-mrg-firm('100'),
-                        $paddingInline: var-mrg-firm('100')
-                    ) {
-                        @include cx-prop(icon-size, do-var(icon-size-large));
-                        justify-self: end;
+                            $gap: 0,
+                            $marginBlock: 0,
+                            $marginInline: 0,
+                            $paddingBlock: var-mrg-firm('100'),
+                            $paddingInline: var-mrg-firm('100')
+                        )
+                        using ($location) {
+                        @if $location == root {
+                            @include cx-prop(icon-size, do-var(icon-size-large));
+                            justify-self: end;
+                        }
                     }
                 }
 
@@ -196,7 +199,7 @@
                 @content ('js--settings-menu--open-or-closing');
 
                 [data-toggle-control-backdrop] {
-                    display: #{do-var(display, block)};
+                    display: do-var(display, block);
 
                     @content ('js--settings-menu--open-or-closing--control-backdrop');
                 }
@@ -226,7 +229,7 @@
 
                     > .container {
                         @if $includeBaseStyles {
-                            padding-block: #{var-mrg-soft('400')} #{var-mrg-firm('300')};
+                            padding-block: var-mrg-soft('400') var-mrg-firm('300');
                         }
 
                         @content ('js--settings-menu--open--content--container');

@@ -152,7 +152,6 @@ body > :where(main, nav, header, footer) > .body-subgrid {
         > :where(*) {
         grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
-        width: auto;
     }
 }
 :where(

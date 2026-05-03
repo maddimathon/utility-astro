@@ -39,10 +39,10 @@ export class ElementToggle {
      * 
      * @since 0.1.0-alpha.7
      */
-    protected static abortNew(
+    protected static async abortNew(
         container: HTMLElement | null | undefined,
         allButtons: NodeListOf<Element> | Element[] | null | undefined,
-    ): void {
+    ): Promise<void> {
 
         if ( container ) {
             container.setAttribute( 'data-toggle-container', '' );
@@ -93,8 +93,7 @@ export class ElementToggle {
      * @since ___PKG_VERSION___ — Renamed from init to runOnLoad.
      */
     public static async runOnLoad( opts: Partial<ElementToggle.Opts> = {} ): Promise<void> {
-
-        window.addEventListener( 'load', () => ElementToggle.run( opts ) );
+        window.addEventListener( 'load', () => ElementToggle.run( opts ), { once: true } );
     }
 
     /**
@@ -246,6 +245,11 @@ export class ElementToggle {
      */
     protected closingTime: number;
 
+    /**
+     * @since ___PKG_VERSION___
+     */
+    public readonly toggleListener: ( this: HTMLElement, ev: Event ) => any;
+
 
 
     /* CONSTRUCTOR
@@ -267,6 +271,7 @@ export class ElementToggle {
         partialOpts?: Partial<ElementToggle.Opts>,
     ) {
         this.opts = {
+            activeTimeoutLength: ( partialOpts?.closingTime ?? 1800 ) / 4,
             closeWhenUntargetted: false,
             closingTime: 1800,
             debug: false,
@@ -281,14 +286,23 @@ export class ElementToggle {
         this.content = elements.content;
         this.primaryButton = elements.primaryButton;
 
-        const _activeLength = Number(
-            this.primaryButton.dataset[ 'toggleActiveTimeout' ],
-        );
-
         this.activeTimeoutLength = Math.min(
             this.closingTime,
-            Number.isNaN( _activeLength ) ? 100 : _activeLength,
+            Number.isNaN( this.opts.activeTimeoutLength ) ? ( this.closingTime / 4 ) : this.opts.activeTimeoutLength,
         );
+
+        this.activateButton = this.activateButton.bind( this );
+        this.deactivateButton = this.deactivateButton.bind( this );
+        this.handleHashChange = this.handleHashChange.bind( this );
+        this.toggle = this.toggle.bind( this );
+
+        const _activateButton = this.activateButton;
+        const _toggle = this.toggle;
+
+        this.toggleListener = function () {
+            _activateButton( this );
+            _toggle( this );
+        };
 
         // returns
         if ( !this.container || !this.primaryButton || !this.container.id || !this.content ) {
@@ -298,26 +312,10 @@ export class ElementToggle {
 
         ElementToggle.instances.set( this.container.id, this );
 
-        this.toggle = this.toggle.bind( this );
-        this.handleHashChange = this.handleHashChange.bind( this );
-
         const contentID = this.content.id;
 
         this.content.setAttribute( 'aria-labelledby', this.primaryButton.id );
         this.content.setAttribute( 'role', 'region' );
-
-        if ( contentID ) {
-            this.allButtons.forEach( ( button ) => {
-
-                if (
-                    button.getAttribute( 'role' ) == 'button'
-                    || button.tagName.toUpperCase() == 'BUTTON'
-                    || button.tagName.toUpperCase() == 'A'
-                ) {
-                    button.setAttribute( 'aria-controls', contentID );
-                }
-            } );
-        }
 
         this.closingTime = ElementToggle.cssTimeToMilliseconds(
             getComputedStyle( this.container ).getPropertyValue( '--toggle-closing-time' )
@@ -326,12 +324,26 @@ export class ElementToggle {
         const isCurrentAnchorTarget = this.opts.openWhenTargetted
             && this.checkUrlTarget( new URL( window.location.href ) );
 
+        if ( !isCurrentAnchorTarget ) {
+            this.primaryButton.removeAttribute( 'data-state-focus' );
+        }
+
         const defaultIsOpen =
             this.container.getAttribute( 'data-toggle-container' ) === 'open'
             || isCurrentAnchorTarget;
 
         this.allButtons.forEach( ( button ) => {
-            button.addEventListener( 'click', this.toggle );
+            button.addEventListener( 'click', this.toggleListener );
+
+            if ( contentID ) {
+                if (
+                    button.getAttribute( 'role' ) == 'button'
+                    || button.tagName.toLowerCase() == 'button'
+                    || button.tagName.toLowerCase() == 'a'
+                ) {
+                    button.setAttribute( 'aria-controls', contentID );
+                }
+            }
 
             if ( button.getAttribute( 'aria-controls' ) ) {
                 button.removeAttribute( 'aria-disabled' );
@@ -340,7 +352,6 @@ export class ElementToggle {
         } );
 
         if ( defaultIsOpen ) {
-
             if ( isCurrentAnchorTarget ) {
                 this.openAsTargetAnchor();
             } else {
@@ -348,10 +359,6 @@ export class ElementToggle {
             }
         } else {
             this.container.setAttribute( 'data-toggle-container', 'closed' );
-        }
-
-        if ( !isCurrentAnchorTarget ) {
-            this.primaryButton.removeAttribute( 'data-toggle-is-current-target' );
         }
 
         if ( this.opts.openWhenTargetted ) {
@@ -365,8 +372,22 @@ export class ElementToggle {
      * @since 0.1.0-alpha
      */
     protected abortConstructor(): void {
+        // runs async while this function continues
         ElementToggle.abortNew( this.container, this.allButtons );
+
+        window.removeEventListener( 'hashchange', this.handleHashChange );
+
+        if ( this.allButtons ) {
+            this.allButtons.forEach(
+                button => button.removeEventListener( 'click', this.toggleListener )
+            );
+        }
     }
+
+
+
+    /* UTILITIES
+     * ====================================================================== */
 
     /**
      * @since ___PKG_VERSION___
@@ -382,17 +403,47 @@ export class ElementToggle {
      * 
      * @since ___PKG_VERSION___
      */
-    protected activateButton(): void {
+    protected activateButton( button: HTMLElement ): void {
         clearTimeout( this.#activeTimeout );
         this.#activeStateHold = true;
 
-        this.primaryButton.setAttribute( 'data-state-active', 'true' );
-
-        this.allButtons.forEach( button => button.setAttribute( 'data-state-active', 'true' ) );
+        button.setAttribute( 'data-state-active', 'true' );
 
         this.#activeTimeout = setTimeout( () => {
             this.#activeStateHold = false;
         }, this.activeTimeoutLength );
+    }
+
+    /**
+     * Clears the related timeout, if any.
+     */
+    protected clearTimeout(): void {
+        /*
+         * Clear any timeout currently running (like if someone clicks the
+         * button before it's done).
+         */
+        if ( this.closingTimeout !== null ) {
+            clearTimeout( this.closingTimeout );
+        }
+
+        this.deactivateButton();
+    }
+
+    /**
+     * Checks the current url anchor target and checks if it matches the id of
+     * this toggle element.
+     *
+     * @since 0.1.0-alpha.7
+     */
+    protected checkUrlTarget( url: URL ): boolean {
+        // returns
+        if ( !url.hash ) {
+            return false;
+        }
+
+        const hashAsId = url.hash.replace( /^#/gi, '' );
+
+        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
     }
 
     /**
@@ -419,41 +470,6 @@ export class ElementToggle {
         this.allButtons.forEach( button => button.removeAttribute( 'data-state-active' ) );
     }
 
-
-
-    /* UTILITIES
-     * ====================================================================== */
-
-    /**
-     * Clears the related timeout, if any.
-     */
-    protected clearTimeout(): void {
-        /*
-         * Clear any timeout currently running (like if someone clicks the
-         * button before it's done).
-         */
-        if ( this.closingTimeout !== null ) {
-            clearTimeout( this.closingTimeout );
-        }
-    }
-
-    /**
-     * Checks the current url anchor target and checks if it matches the id of
-     * this toggle element.
-     *
-     * @since 0.1.0-alpha.7
-     */
-    protected checkUrlTarget( url: URL ): boolean {
-        // returns
-        if ( !url.hash ) {
-            return false;
-        }
-
-        const hashAsId = url.hash.replace( /^#/gi, '' );
-
-        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
-    }
-
     /**
      * If applicable (by opts), checks if the current url anchor targets
      * this toggle and if so, opens it.
@@ -469,7 +485,7 @@ export class ElementToggle {
         const isNewTarget = this.checkUrlTarget( new URL( event.newURL ) );
 
         if ( !isNewTarget ) {
-            this.primaryButton.removeAttribute( 'data-toggle-is-current-target' );
+            this.primaryButton.removeAttribute( 'data-state-focus' );
         }
 
         if ( isNewTarget ) {
@@ -495,11 +511,11 @@ export class ElementToggle {
     protected openAsTargetAnchor(): void {
         this.open();
 
-        this.primaryButton.setAttribute( 'data-toggle-is-current-target', 'true' );
+        this.primaryButton.setAttribute( 'data-state-focus', 'true' );
 
         this.primaryButton.addEventListener(
             'blur',
-            () => this.primaryButton.removeAttribute( 'data-toggle-is-current-target' ),
+            () => this.primaryButton.removeAttribute( 'data-state-focus' ),
             { once: true },
         );
 
@@ -517,10 +533,11 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    public toggle(): void {
-        if ( !this.container ) { return; }
+    public toggle( button?: HTMLElement ): void {
+        this.activateButton( button ?? this.primaryButton );
 
-        this.activateButton();
+        // returns
+        if ( !this.container ) { return; }
 
         /*
          * Grab the current state and trigger an opening or closing function!
@@ -533,6 +550,8 @@ export class ElementToggle {
                 break;
 
             case 'closing':
+                this.clearTimeout();
+                this.open();
                 break;
 
             case 'open':
@@ -549,8 +568,11 @@ export class ElementToggle {
      * Toggles the element open.
      */
     protected open(): void {
-        if ( !this.allButtons ) { return; }
-        if ( !this.container ) { return; }
+        // returns
+        if ( !this.allButtons || !this.container ) {
+            this.deactivateButton();
+            return;
+        }
 
         this.closingTime = ElementToggle.cssTimeToMilliseconds(
             getComputedStyle( this.container ).getPropertyValue( '--toggle-closing-time' )
@@ -566,13 +588,19 @@ export class ElementToggle {
 
         ElementToggle.createCustomEvents();
         this.container.dispatchEvent( ElementToggle.openEvent as Event );
+
+        this.deactivateButton();
     }
 
     /**
      * Toggles the element closed.
      */
     protected close(): void {
-        if ( !this.container ) { return; }
+        // returns
+        if ( !this.container ) {
+            this.deactivateButton();
+            return;
+        }
 
         /*
          * Adjust the data-toggle-container on the container and the aria-expanded for
@@ -597,6 +625,8 @@ export class ElementToggle {
 
         ElementToggle.createCustomEvents();
         this.container.dispatchEvent( ElementToggle.closeEvent as Event );
+
+        this.deactivateButton();
     }
 }
 
@@ -615,6 +645,17 @@ export namespace ElementToggle {
     export interface Opts {
 
         /**
+         * Default toggle active state time. In milliseconds.
+         *
+         * @default 
+         * closingTime / 4
+         * 
+         * @since ___PKG_VERSION___
+         */
+        // TODO - create test/demo
+        activeTimeoutLength: number;
+
+        /**
          * Whether toggles should close when they are no longer the target of
          * the url's anchor.
          *
@@ -624,7 +665,7 @@ export namespace ElementToggle {
         closeWhenUntargetted: boolean;
 
         /**
-         * Default toggle closing time.
+         * Default toggle closing time. In milliseconds.
          * 
          * @default 1800
          */

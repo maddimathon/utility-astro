@@ -13,5 +13,7 @@
 
     $mx_extendSelectors_headingsByRole: false !default,
     $mx_interactiveStates_selector_active:
-        pre.$mx_interactiveStates_selector_active
+        pre.$mx_interactiveStates_selector_active,
+    $mx_interactiveStates_selector_focus:
+        pre.$mx_interactiveStates_selector_focus
 );

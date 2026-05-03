@@ -32,7 +32,7 @@ export declare class ElementToggle {
      *
      * @since 0.1.0-alpha.7
      */
-    protected static abortNew(container: HTMLElement | null | undefined, allButtons: NodeListOf<Element> | Element[] | null | undefined): void;
+    protected static abortNew(container: HTMLElement | null | undefined, allButtons: NodeListOf<Element> | Element[] | null | undefined): Promise<void>;
     /**
      * Queries the document for toggle containers to set them up as instances of
      * this class.
@@ -86,6 +86,10 @@ export declare class ElementToggle {
      */
     protected closingTime: number;
     /**
+     * @since 0.1.0-beta.0.draft
+     */
+    readonly toggleListener: (this: HTMLElement, ev: Event) => any;
+    /**
      * Class constructor.
      */
     constructor(elements: {
@@ -107,13 +111,7 @@ export declare class ElementToggle {
      *
      * @since 0.1.0-beta.0.draft
      */
-    protected activateButton(): void;
-    /**
-     * Removes the active attribute to the buttons.
-     *
-     * @since 0.1.0-beta.0.draft
-     */
-    protected deactivateButton(): void;
+    protected activateButton(button: HTMLElement): void;
     /**
      * Clears the related timeout, if any.
      */
@@ -125,6 +123,12 @@ export declare class ElementToggle {
      * @since 0.1.0-alpha.7
      */
     protected checkUrlTarget(url: URL): boolean;
+    /**
+     * Removes the active attribute to the buttons.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    protected deactivateButton(): void;
     /**
      * If applicable (by opts), checks if the current url anchor targets
      * this toggle and if so, opens it.
@@ -142,7 +146,7 @@ export declare class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    toggle(): void;
+    toggle(button?: HTMLElement): void;
     /**
      * Toggles the element open.
      */
@@ -165,6 +169,15 @@ export declare namespace ElementToggle {
      */
     interface Opts {
         /**
+         * Default toggle active state time. In milliseconds.
+         *
+         * @default
+         * closingTime / 4
+         *
+         * @since 0.1.0-beta.0.draft
+         */
+        activeTimeoutLength: number;
+        /**
          * Whether toggles should close when they are no longer the target of
          * the url's anchor.
          *
@@ -172,7 +185,7 @@ export declare namespace ElementToggle {
          */
         closeWhenUntargetted: boolean;
         /**
-         * Default toggle closing time.
+         * Default toggle closing time. In milliseconds.
          *
          * @default 1800
          */

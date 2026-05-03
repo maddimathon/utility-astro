@@ -33,7 +33,7 @@ export class ElementToggle {
      *
      * @since 0.1.0-alpha.7
      */
-    static abortNew(container, allButtons) {
+    static async abortNew(container, allButtons) {
         if (container) {
             container.setAttribute('data-toggle-container', '');
         }
@@ -72,7 +72,7 @@ export class ElementToggle {
      * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
      */
     static async runOnLoad(opts = {}) {
-        window.addEventListener('load', () => ElementToggle.run(opts));
+        window.addEventListener('load', () => ElementToggle.run(opts), { once: true });
     }
     /**
      * Initiates a single instance asynchronously.
@@ -174,6 +174,10 @@ export class ElementToggle {
      * In milliseconds.
      */
     closingTime;
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    toggleListener;
     /* CONSTRUCTOR
      * ====================================================================== */
     /**
@@ -183,6 +187,7 @@ export class ElementToggle {
     /** Optional configuration, if any. */
     partialOpts) {
         this.opts = {
+            activeTimeoutLength: (partialOpts?.closingTime ?? 1800) / 4,
             closeWhenUntargetted: false,
             closingTime: 1800,
             debug: false,
@@ -194,35 +199,43 @@ export class ElementToggle {
         this.container = elements.container;
         this.content = elements.content;
         this.primaryButton = elements.primaryButton;
-        const _activeLength = Number(this.primaryButton.dataset['toggleActiveTimeout']);
-        this.activeTimeoutLength = Math.min(this.closingTime, Number.isNaN(_activeLength) ? 100 : _activeLength);
+        this.activeTimeoutLength = Math.min(this.closingTime, Number.isNaN(this.opts.activeTimeoutLength) ? (this.closingTime / 4) : this.opts.activeTimeoutLength);
+        this.activateButton = this.activateButton.bind(this);
+        this.deactivateButton = this.deactivateButton.bind(this);
+        this.handleHashChange = this.handleHashChange.bind(this);
+        this.toggle = this.toggle.bind(this);
+        const _activateButton = this.activateButton;
+        const _toggle = this.toggle;
+        this.toggleListener = function () {
+            _activateButton(this);
+            _toggle(this);
+        };
         // returns
         if (!this.container || !this.primaryButton || !this.container.id || !this.content) {
             this.abortConstructor();
             return;
         }
         ElementToggle.instances.set(this.container.id, this);
-        this.toggle = this.toggle.bind(this);
-        this.handleHashChange = this.handleHashChange.bind(this);
         const contentID = this.content.id;
         this.content.setAttribute('aria-labelledby', this.primaryButton.id);
         this.content.setAttribute('role', 'region');
-        if (contentID) {
-            this.allButtons.forEach((button) => {
-                if (button.getAttribute('role') == 'button'
-                    || button.tagName.toUpperCase() == 'BUTTON'
-                    || button.tagName.toUpperCase() == 'A') {
-                    button.setAttribute('aria-controls', contentID);
-                }
-            });
-        }
         this.closingTime = ElementToggle.cssTimeToMilliseconds(getComputedStyle(this.container).getPropertyValue('--toggle-closing-time'));
         const isCurrentAnchorTarget = this.opts.openWhenTargetted
             && this.checkUrlTarget(new URL(window.location.href));
+        if (!isCurrentAnchorTarget) {
+            this.primaryButton.removeAttribute('data-state-focus');
+        }
         const defaultIsOpen = this.container.getAttribute('data-toggle-container') === 'open'
             || isCurrentAnchorTarget;
         this.allButtons.forEach((button) => {
-            button.addEventListener('click', this.toggle);
+            button.addEventListener('click', this.toggleListener);
+            if (contentID) {
+                if (button.getAttribute('role') == 'button'
+                    || button.tagName.toLowerCase() == 'button'
+                    || button.tagName.toLowerCase() == 'a') {
+                    button.setAttribute('aria-controls', contentID);
+                }
+            }
             if (button.getAttribute('aria-controls')) {
                 button.removeAttribute('aria-disabled');
                 button.setAttribute('aria-expanded', defaultIsOpen ? 'true' : 'false');
@@ -239,9 +252,6 @@ export class ElementToggle {
         else {
             this.container.setAttribute('data-toggle-container', 'closed');
         }
-        if (!isCurrentAnchorTarget) {
-            this.primaryButton.removeAttribute('data-toggle-is-current-target');
-        }
         if (this.opts.openWhenTargetted) {
             window.addEventListener('hashchange', this.handleHashChange);
         }
@@ -252,8 +262,15 @@ export class ElementToggle {
      * @since 0.1.0-alpha
      */
     abortConstructor() {
+        // runs async while this function continues
         ElementToggle.abortNew(this.container, this.allButtons);
+        window.removeEventListener('hashchange', this.handleHashChange);
+        if (this.allButtons) {
+            this.allButtons.forEach(button => button.removeEventListener('click', this.toggleListener));
+        }
     }
+    /* UTILITIES
+     * ====================================================================== */
     /**
      * @since 0.1.0-beta.0.draft
      */
@@ -267,14 +284,40 @@ export class ElementToggle {
      *
      * @since 0.1.0-beta.0.draft
      */
-    activateButton() {
+    activateButton(button) {
         clearTimeout(this.#activeTimeout);
         this.#activeStateHold = true;
-        this.primaryButton.setAttribute('data-state-active', 'true');
-        this.allButtons.forEach(button => button.setAttribute('data-state-active', 'true'));
+        button.setAttribute('data-state-active', 'true');
         this.#activeTimeout = setTimeout(() => {
             this.#activeStateHold = false;
         }, this.activeTimeoutLength);
+    }
+    /**
+     * Clears the related timeout, if any.
+     */
+    clearTimeout() {
+        /*
+         * Clear any timeout currently running (like if someone clicks the
+         * button before it's done).
+         */
+        if (this.closingTimeout !== null) {
+            clearTimeout(this.closingTimeout);
+        }
+        this.deactivateButton();
+    }
+    /**
+     * Checks the current url anchor target and checks if it matches the id of
+     * this toggle element.
+     *
+     * @since 0.1.0-alpha.7
+     */
+    checkUrlTarget(url) {
+        // returns
+        if (!url.hash) {
+            return false;
+        }
+        const hashAsId = url.hash.replace(/^#/gi, '');
+        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
     }
     /**
      * @since 0.1.0-beta.0.draft
@@ -295,34 +338,6 @@ export class ElementToggle {
         this.primaryButton.removeAttribute('data-state-active');
         this.allButtons.forEach(button => button.removeAttribute('data-state-active'));
     }
-    /* UTILITIES
-     * ====================================================================== */
-    /**
-     * Clears the related timeout, if any.
-     */
-    clearTimeout() {
-        /*
-         * Clear any timeout currently running (like if someone clicks the
-         * button before it's done).
-         */
-        if (this.closingTimeout !== null) {
-            clearTimeout(this.closingTimeout);
-        }
-    }
-    /**
-     * Checks the current url anchor target and checks if it matches the id of
-     * this toggle element.
-     *
-     * @since 0.1.0-alpha.7
-     */
-    checkUrlTarget(url) {
-        // returns
-        if (!url.hash) {
-            return false;
-        }
-        const hashAsId = url.hash.replace(/^#/gi, '');
-        return hashAsId.toLowerCase() === this.container.id.toLowerCase();
-    }
     /**
      * If applicable (by opts), checks if the current url anchor targets
      * this toggle and if so, opens it.
@@ -336,7 +351,7 @@ export class ElementToggle {
         }
         const isNewTarget = this.checkUrlTarget(new URL(event.newURL));
         if (!isNewTarget) {
-            this.primaryButton.removeAttribute('data-toggle-is-current-target');
+            this.primaryButton.removeAttribute('data-state-focus');
         }
         if (isNewTarget) {
             this.openAsTargetAnchor();
@@ -356,8 +371,8 @@ export class ElementToggle {
      */
     openAsTargetAnchor() {
         this.open();
-        this.primaryButton.setAttribute('data-toggle-is-current-target', 'true');
-        this.primaryButton.addEventListener('blur', () => this.primaryButton.removeAttribute('data-toggle-is-current-target'), { once: true });
+        this.primaryButton.setAttribute('data-state-focus', 'true');
+        this.primaryButton.addEventListener('blur', () => this.primaryButton.removeAttribute('data-state-focus'), { once: true });
         this.primaryButton.focus({
             // @ts-ignore - IDE doesn't register an error but compile does - some tsconfig shenanigans, apparently.
             focusVisible: true,
@@ -368,11 +383,12 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    toggle() {
+    toggle(button) {
+        this.activateButton(button ?? this.primaryButton);
+        // returns
         if (!this.container) {
             return;
         }
-        this.activateButton();
         /*
          * Grab the current state and trigger an opening or closing function!
          */
@@ -382,6 +398,8 @@ export class ElementToggle {
                 this.open();
                 break;
             case 'closing':
+                this.clearTimeout();
+                this.open();
                 break;
             case 'open':
             default:
@@ -395,10 +413,9 @@ export class ElementToggle {
      * Toggles the element open.
      */
     open() {
-        if (!this.allButtons) {
-            return;
-        }
-        if (!this.container) {
+        // returns
+        if (!this.allButtons || !this.container) {
+            this.deactivateButton();
             return;
         }
         this.closingTime = ElementToggle.cssTimeToMilliseconds(getComputedStyle(this.container).getPropertyValue('--toggle-closing-time'));
@@ -410,12 +427,15 @@ export class ElementToggle {
         });
         ElementToggle.createCustomEvents();
         this.container.dispatchEvent(ElementToggle.openEvent);
+        this.deactivateButton();
     }
     /**
      * Toggles the element closed.
      */
     close() {
+        // returns
         if (!this.container) {
+            this.deactivateButton();
             return;
         }
         /*
@@ -440,5 +460,6 @@ export class ElementToggle {
         }, this.closingTime + 50);
         ElementToggle.createCustomEvents();
         this.container.dispatchEvent(ElementToggle.closeEvent);
+        this.deactivateButton();
     }
 }

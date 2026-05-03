@@ -34,7 +34,7 @@ export type * from './components/Icon.astro';
 import LoremIpsum from './components/LoremIpsum.astro';
 export {
     getLoremIpsumIds,
-    getLoremIpsumMode,
+    getLoremIpsumDisplaySettings,
     getLoremIpsumToc,
 } from './components/LoremIpsum.astro';
 export type * from './components/LoremIpsum.astro';

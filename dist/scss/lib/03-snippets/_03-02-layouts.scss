@@ -29,7 +29,7 @@ $_contentCol_default: minmax(auto, $_width_content);
 ///
 @function snippet-support-astro-body-grid--default-grid-page() {
     // prettier-ignore
-    @return 0 [page-start] 1fr [sidebar-start] 0 [content-start] #{$_contentCol_default} [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+    @return 0 [page-start] 1fr [sidebar-start] 0 [content-start] $_contentCol_default [content-end] 0 [sidebar-end] 1fr [page-end] 0;
 }
 
 $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
@@ -73,19 +73,19 @@ $_flex_container_alignment_row: map.set(
         $alignment
     );
 
-    position: #{$position};
+    position: $position;
 
-    flex-direction: #{$direction};
-    flex-wrap: #{$wrap};
+    flex-direction: $direction;
+    flex-wrap: $wrap;
 
     @if $gap != false {
-        gap: #{$gap};
+        gap: $gap;
     }
 
-    justify-content: #{map.get($alignment, justify-content)};
-    justify-items: #{map.get($alignment, justify-items)};
-    align-content: #{map.get($alignment, align-content)};
-    align-items: #{map.get($alignment, align-items)};
+    justify-content: map.get($alignment, justify-content);
+    justify-items: map.get($alignment, justify-items);
+    align-content: map.get($alignment, align-content);
+    align-items: map.get($alignment, align-items);
 }
 
 ///
@@ -94,10 +94,10 @@ $_flex_container_alignment_row: map.set(
 @mixin snippet-content-grid-alignment($alignment: ()) {
     $alignment: map.merge(tokens.$contentGridAlignment, $alignment);
 
-    justify-content: #{map.get($alignment, justify-content)};
-    justify-items: #{map.get($alignment, justify-items)};
-    align-content: #{map.get($alignment, align-content)};
-    align-items: #{map.get($alignment, align-items)};
+    justify-content: map.get($alignment, justify-content);
+    justify-items: map.get($alignment, justify-items);
+    align-content: map.get($alignment, align-content);
+    align-items: map.get($alignment, align-items);
 }
 
 ///
@@ -135,9 +135,10 @@ $_flex_container_alignment_row: map.set(
         @if $width {
             @at-root :where(&)
                     #{selector.nest( '>', if($useWhere, ':where(*)', '*') )} {
-                width: #{$width};
+                width: $width;
             }
         }
+
         @at-root #{selector.nest(&, '>', if($useWhere, ':where(*)', '*') )} {
             @include prop-grid-column($cols, $setCxProp: false, $args...);
 
@@ -161,11 +162,11 @@ $_flex_container_alignment_row: map.set(
     @if $useCxProp {
         @include prop-grid-column($cols, $setCxProp: $setCxProp, $args...);
     } @else {
-        grid-column: #{$cols};
+        grid-column: $cols;
     }
 
     @if $width {
-        width: #{$width};
+        width: $width;
     }
 
     @if $includeDisplayContentUtility and not $setCxProp {
@@ -249,7 +250,8 @@ $_flex_container_alignment_row: map.set(
                 > :where(*) {
                     @include snippet-support-astro-body-grid--content-width(
                         $setCxProp: false,
-                        $includeDisplayContentUtility: false
+                        $includeDisplayContentUtility: false,
+                        $width: false
                     );
                 }
             }
@@ -279,11 +281,11 @@ $_flex_container_alignment_row: map.set(
 ) {
     @at-root :where(&) {
         > :where(*) + :where(*) {
-            margin-block: #{var-gap-block(layout)} 0;
+            margin-block: var-gap-block(layout) 0;
         }
 
         > :where(%site-footer) {
-            margin-block: #{var-gap-block(layout)};
+            margin-block: var-gap-block(layout);
         }
     }
 
@@ -324,10 +326,10 @@ $_flex_container_alignment_row: map.set(
             flex-wrap: nowrap;
             gap: 0;
 
-            justify-content: #{map.get($flex_alignment, justify-content)};
-            justify-items: #{map.get($flex_alignment, justify-items)};
-            align-content: #{map.get($flex_alignment, align-content)};
-            align-items: #{map.get($flex_alignment, align-items)};
+            justify-content: map.get($flex_alignment, justify-content);
+            justify-items: map.get($flex_alignment, justify-items);
+            align-content: map.get($flex_alignment, align-content);
+            align-items: map.get($flex_alignment, align-items);
         }
     }
 }
@@ -378,13 +380,13 @@ $_flex_container_alignment_row: map.set(
 ) {
     @include min-width(page) {
         // prettier-ignore
-        $_default_grid_page: 0 [page-start] #{$sidebarHalfCol} #{$gutterHalfCol} [sidebar-start] 0 [content-start] #{$contentCol} [content-end] 0 [sidebar-end] #{$gutterHalfCol} #{$sidebarHalfCol} [page-end] 0;
+        $_default_grid_page: 0 [page-start] $sidebarHalfCol $gutterHalfCol [sidebar-start] 0 [content-start] $contentCol [content-end] 0 [sidebar-end] $gutterHalfCol $sidebarHalfCol [page-end] 0;
 
         /* prettier-ignore */
         @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
         /* prettier-ignore */
-        grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
+        grid-template-columns: $bodyMargin [site-start] 1fr $_default_grid_page 1fr [site-end] $bodyMargin;
     }
 }
 
@@ -398,8 +400,8 @@ $_flex_container_alignment_row: map.set(
     $gutterCol,
     $sidebarCol
 ) {
-    $contentCol: [content-start] #{$contentCol} [content-end];
-    $sidebarCol: [sidebar-start] #{$sidebarCol} [sidebar-end];
+    $contentCol: [content-start] $contentCol [content-end];
+    $sidebarCol: [sidebar-start] $sidebarCol [sidebar-end];
 
     $_firstColumn: $contentCol;
     $_secondColumn: $sidebarCol;
@@ -411,13 +413,13 @@ $_flex_container_alignment_row: map.set(
 
     @include min-width(sidebar) {
         // prettier-ignore
-        $_default_grid_page: 0 [page-start] 0 #{$_firstColumn} #{$gutterCol} #{$_secondColumn} 0 [page-end] 0;
+        $_default_grid_page: 0 [page-start] 0 $_firstColumn $gutterCol $_secondColumn 0 [page-end] 0;
 
         /* prettier-ignore */
         @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
         /* prettier-ignore */
-        grid-template-columns: #{$bodyMargin} [site-start] 1fr #{$_default_grid_page} 1fr [site-end] #{$bodyMargin};
+        grid-template-columns: $bodyMargin [site-start] 1fr $_default_grid_page 1fr [site-end] $bodyMargin;
 
         @content;
     }
@@ -507,7 +509,7 @@ $_flex_container_alignment_row: map.set(
             @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
             /* prettier-ignore */
-            grid-template-columns: #{$bodyMargin} [site-start] #{$_default_grid_page} [site-end] #{$bodyMargin};
+            grid-template-columns: $bodyMargin [site-start] $_default_grid_page [site-end] $bodyMargin;
 
             margin-inline: 0;
 
@@ -622,7 +624,7 @@ $_flex_container_alignment_row: map.set(
                     @include cx-prop( grid-template-columns--page, $_default_grid_page );
 
                     /* prettier-ignore */
-                    grid-template-columns: 0 [site-start] #{$_default_grid_page} [site-end] 0;
+                    grid-template-columns: 0 [site-start] $_default_grid_page [site-end] 0;
                 }
 
                 > :where(%main-content) {

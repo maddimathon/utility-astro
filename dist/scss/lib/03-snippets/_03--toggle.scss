@@ -130,7 +130,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
         }
 
-        @include hover-focus-visible-or-within($includeActive: true) {
+        @include active-hover-focus-visible-or-within {
             box-shadow: none;
 
             @if $includeBaseStyles {
@@ -171,7 +171,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         @extend %_flex-contents-container--display-contents;
 
         margin: 0;
-        padding: 0;
+        // padding: 0;
 
         @if $includeBaseStyles {
             font-weight: 600;
@@ -272,7 +272,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         position: relative;
 
         @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
-        grid-template-columns: #{do-var(grid-template-columns--toggle)};
+        grid-template-columns: do-var(grid-template-columns--toggle);
 
         grid-auto-rows: auto;
         grid-auto-flow: column;
@@ -283,7 +283,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         align-items: start;
 
         @if $includeBaseStyles {
-            gap: 0 #{var-mrg-firm('200')};
+            gap: 0 var-mrg-firm('200');
         }
 
         @content (js--container-grid);
@@ -298,7 +298,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
         grid-column: 1 / -1;
 
         margin: 0;
-        padding: 0;
 
         @content (js--toggle-container-subgrid);
     }
@@ -313,7 +312,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             position: relative;
 
             @if $includeMarginBlock {
-                margin-block: #{var-mrg-firm('400')} #{var-mrg-half('400')};
+                margin-block: var-mrg-firm('400') var-mrg-half('400');
             }
 
             margin-inline: 0;
@@ -330,19 +329,19 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 &:has(#{selector.nest( '.toggle-title', '>', '%h1' )}),
                 &:has(#{selector.nest( '.toggle-title', '>', '%h2' )}),
                 &:has(#{selector.nest( '.toggle-title', '>', '%h3' )}) {
-                    margin-block-start: #{var-mrg-soft('800')};
+                    margin-block-start: var-mrg-soft('800');
                 }
 
                 &:has(#{selector.nest( '.toggle-title', '>', '%h4' )}),
                 &:has(#{selector.nest( '.toggle-title', '>', '%h5' )}),
                 &:has(#{selector.nest( '.toggle-title', '>', '%h6' )}) {
-                    margin-block-start: #{var-mrg-soft('600')};
+                    margin-block-start: var-mrg-soft('600');
                 }
 
                 &:has(
                     #{selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 )}
                 ) {
-                    margin-block-start: #{var-mrg-soft('600')};
+                    margin-block-start: var-mrg-soft('600');
                 }
             }
         }
@@ -357,10 +356,11 @@ $_defaultHeadingSelectors_greaterThan6: ();
             // align-items: center;
 
             margin: 0;
+            padding: 0;
 
             @if $includeBaseStyles {
                 padding: 0;
-                padding-block-end: #{$control_paddingBlockEnd};
+                padding-block-end: $control_paddingBlockEnd;
 
                 font-weight: 600;
 
@@ -370,17 +370,12 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             @content (js--toggle-control);
 
-            @include focus-visible {
-                @if $includeBaseStyles {
-                    @include utils.snippet-focus-ring;
-                }
-
-                @content (js--toggle-control--hover-focus);
-                @content (js--toggle-control--focus-visible);
+            @include hover-focus-visible-or-within {
+                @content (js--toggle-control--hover-focus-or-within);
             }
 
             &:hover {
-                @content (js--toggle-control--hover-focus);
+                @content (js--toggle-control--hover);
             }
 
             @include active {
@@ -431,18 +426,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
                     }
 
                     &::before {
-                        background: #{var-sys-colour(background)};
+                        background: var-sys-colour(background);
                         opacity: 0.625;
                     }
 
                     &::after {
-                        background: #{var-sys-colour(link)};
+                        background: var-sys-colour(link);
                         opacity: 0.1875;
                     }
 
-                    @include hover-focus-visible-or-within(
-                        $includeActive: true
-                    ) {
+                    @include active-hover-focus-visible-or-within {
                         border: none;
                         background: none;
                         color: inherit;
@@ -491,7 +484,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             align-items: stretch;
 
             margin: 0;
-            padding: 0;
+            // padding: 0;
 
             grid-row: 1 / 1;
 
@@ -514,14 +507,14 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 margin-block: 0;
 
                 @if $includeBaseStyles {
-                    padding-block-end: #{$control_heading_paddingBlockEnd};
+                    padding-block-end: $control_heading_paddingBlockEnd;
                 }
 
                 @content (js--toggle-title--heading);
 
                 &:where(%unstyled-heading) {
                     @if $includeBaseStyles {
-                        padding-block-end: #{$control_heading_unstyled_paddingBlockEnd};
+                        padding-block-end: $control_heading_unstyled_paddingBlockEnd;
                     }
 
                     @content (js--toggle-title--heading--unstyled);
@@ -550,7 +543,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 border-style: dotted;
                 border-color: currentColor;
 
-                border-block-start-width: #{var-border-width('200')};
+                border-block-start-width: var-border-width('200');
                 border-block-start-style: solid;
             }
 
@@ -565,7 +558,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @include prop-grid-column('1 / -1');
 
                 padding-block: 0;
-                padding-inline: #{$content_container_paddingInline};
+                padding-inline: $content_container_paddingInline;
 
                 overflow: auto;
                 width: 100%;
@@ -606,7 +599,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @include hover-focus-visible {
                     @if $includeBaseStyles {
                         text-decoration-color: transparent;
-                        color: #{var-sys-colour(link)};
+                        color: var-sys-colour(link);
                     }
 
                     @content (js--toggle-container--default-or-open--control--hover-focus);
@@ -658,7 +651,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             [data-toggle-control] {
                 @if $includeBaseStyles {
-                    color: #{var-sys-colour(text-active)};
+                    color: var-sys-colour(text-active);
                 }
 
                 @content (js--toggle-container--open--control);
@@ -680,8 +673,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             > [data-toggle-content] {
                 @if $includeBaseStyles {
-                    border-inline-width: #{var-border-width('200')};
-                    border-block-end-width: #{var-border-width('200')};
+                    border-inline-width: var-border-width('200');
+                    border-block-end-width: var-border-width('200');
                 }
 
                 grid-template-rows: 1fr;
@@ -689,7 +682,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @content (js--toggle-container--open--content);
 
                 > .container {
-                    padding-block: #{$content_container_paddingBlock};
+                    padding-block: $content_container_paddingBlock;
                     opacity: 1;
 
                     @content (js--toggle-container--open--content--container);

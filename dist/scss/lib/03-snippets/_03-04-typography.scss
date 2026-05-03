@@ -85,7 +85,7 @@
             &:is(#{snippet-pre-plaintext-selectors()}) {
                 white-space: normal;
                 text-wrap: auto;
-                max-width: #{var-width(callout)};
+                max-width: var-width(callout);
 
                 > %code {
                     white-space: pre-wrap;

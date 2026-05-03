@@ -16,11 +16,12 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin prop-grid-column($value, $args...) {
+@mixin prop-grid-column($value, $quoteString: false, $args...) {
     @include utils.prop(
         grid-column,
         $value,
         $useCustom: config.$mx_prop_useCustom_gridColumn,
+        $quoteString: $quoteString,
         $args...
     );
 }

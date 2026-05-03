@@ -1,0 +1,46 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use 'lib';
+@use 'lib/config';
+
+/* # LOREM IPSUM ==================================== */
+
+$_lineClamp: lib.do-var(loremipsum-heading-sample-line-clamp, 3);
+
+.loremipsum-heading-sample {
+    display: -webkit-inline-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $_lineClamp;
+    line-clamp: $_lineClamp;
+    overflow: hidden;
+
+    padding-block-end: lib.var-stroke-relative('400');
+}
+
+:where(.button-span) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: start;
+    align-content: start;
+    align-items: first baseline;
+
+    margin-block: lib.var-mrg-firm('400') lib.var-mrg-half('400');
+    gap: lib.var-mrg-firm('300') lib.var-mrg-firm('400');
+
+    button,
+    a.button,
+    a.button[href],
+    [role='button'],
+    input[type='button'],
+    input[type='reset'],
+    input[type='submit'] {
+        margin: 0;
+    }
+}
+
+@include lib.extend-selectors;

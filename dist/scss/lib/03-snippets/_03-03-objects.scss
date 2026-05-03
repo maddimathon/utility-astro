@@ -42,7 +42,7 @@
             max-width: 100%;
         }
 
-        vertical-align: #{$verticalAlign};
+        vertical-align: $verticalAlign;
 
         @if meta.content-exists() {
             @content ('root');
@@ -50,8 +50,8 @@
 
         > svg {
             @include prop-display($display_svg);
-            margin: #{$margin_svg};
-            padding: #{$padding_svg};
+            margin: $margin_svg;
+            padding: $padding_svg;
 
             @if meta.content-exists() {
                 @content ('svg');

@@ -52,18 +52,18 @@
         }
 
         + :where(*) {
-            margin-block-start: #{var-mrg-soft('600')};
+            margin-block-start: var-mrg-soft('600');
         }
     }
 }
 
 @if map.get(config.$template_styles, pageSubtitle) {
     %page-subtitle {
-        margin-block: #{var-mrg-soft('200')} 0;
+        margin-block: var-mrg-soft('200') 0;
 
         font-weight: 500;
-        font-size: #{var-fs(heading-6)};
-        line-height: #{var-line-height('300')};
+        font-size: var-fs(heading-6);
+        line-height: var-line-height('300');
         text-wrap: balance;
 
         @include colour-mode((low, average)) {

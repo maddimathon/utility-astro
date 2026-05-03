@@ -27,16 +27,6 @@
     //
     $additional: list.join($additional, (dl, form, nav));
 
-    $additional: list.append(
-        $additional,
-        (
-            (
-                ':where(.js) [data-toggle-control][data-toggle-is-current-target]'
-            ),
-            focus-ring--where
-        )
-    );
-
     @include lib.extend-selectors-globals(
         $additional: $additional,
         $allHeadingLevels: $allHeadingLevels
