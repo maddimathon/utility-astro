@@ -68,15 +68,8 @@
 [data-toggle-control][aria-disabled] .toggle-icon {
     display: none;
 }
-[data-toggle-control]:hover {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
+[data-toggle-control]:hover,
+[data-toggle-control][data-state-focus="true"],
 .no-js [data-toggle-control]:focus,
 .js__no-whereSelector [data-toggle-control]:focus {
     box-shadow: none;
@@ -105,15 +98,6 @@
     color: inherit;
 }
 
-[data-toggle-control][data-state-focus="true"] {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
 [data-toggle-control]:focus-within {
     box-shadow: none;
     outline: none;
@@ -134,16 +118,6 @@
 
 [data-toggle-control]:active,
 [data-toggle-control][data-state-active="true"] {
-    box-shadow: none;
-    outline: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-[data-toggle-control]:has(:active),
-[data-toggle-control]:has([data-state-active="true"]) {
     box-shadow: none;
     outline: none;
     border: none;
@@ -329,6 +303,7 @@
     margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
+
 :where(.js) [data-toggle-control] {
     margin: 0;
     padding: 0;
@@ -386,14 +361,12 @@
     background: var(--sys-clr-link, LinkText);
     opacity: 0.1875;
 }
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover {
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    opacity: 1;
-}
-
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"],
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"],
 .no-js :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus,
 .js__no-whereSelector
     :where(.js)
@@ -423,15 +396,6 @@
     opacity: 1;
 }
 
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    opacity: 1;
-}
-
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
     border: none;
     background: none;
@@ -443,24 +407,7 @@
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop]:has(
         [data-state-focus="true"]
-    ) {
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    opacity: 1;
-}
-
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"] {
-    border: none;
-    background: none;
-    color: inherit;
-    outline: none;
-    opacity: 1;
-}
-
+    ),
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]:has(:active),
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop]:has(
@@ -594,12 +541,11 @@
 
 /* Opening & Closing ==================================== */
 :where(.js) [data-toggle-container="open"] [data-toggle-control]:hover,
-:where(.js) [data-toggle-control]:hover {
-    text-decoration-color: transparent;
-    color: LinkText;
-    color: var(--sys-clr-link, LinkText);
-}
-
+:where(.js) [data-toggle-control]:hover,
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control][data-state-focus="true"],
+:where(.js) [data-toggle-control][data-state-focus="true"],
 .no-js :where(.js) [data-toggle-container="open"] [data-toggle-control]:focus,
 .no-js :where(.js) [data-toggle-control]:focus,
 .js__no-whereSelector
@@ -624,15 +570,6 @@
 
 :where(.js) [data-toggle-container="open"] [data-toggle-control]:focus-visible,
 :where(.js) [data-toggle-control]:focus-visible {
-    text-decoration-color: transparent;
-    color: LinkText;
-    color: var(--sys-clr-link, LinkText);
-}
-
-:where(.js)
-    [data-toggle-container="open"]
-    [data-toggle-control][data-state-focus="true"],
-:where(.js) [data-toggle-control][data-state-focus="true"] {
     text-decoration-color: transparent;
     color: LinkText;
     color: var(--sys-clr-link, LinkText);

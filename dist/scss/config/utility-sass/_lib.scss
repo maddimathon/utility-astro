@@ -8,12 +8,11 @@
 @forward 'pkg:@maddimathon/utility-sass/config' with (
     $internal_supressCredit: false !default,
 
+    $selector_interactiveState_active: pre.$selector_interactiveState_active,
+    $selector_interactiveState_focus: pre.$selector_interactiveState_focus,
+
     $selectorType_mode: 'attribute' !default,
     $selectorType_motion: 'attribute' !default,
 
-    $mx_extendSelectors_headingsByRole: false !default,
-    $mx_interactiveStates_selector_active:
-        pre.$mx_interactiveStates_selector_active,
-    $mx_interactiveStates_selector_focus:
-        pre.$mx_interactiveStates_selector_focus
+    $mx_extendSelectors_headingsByRole: false !default
 );

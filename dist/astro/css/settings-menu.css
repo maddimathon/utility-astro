@@ -159,6 +159,9 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
+:where(.js)
+    .website-settings-menu
+    [data-toggle-control][data-state-focus="true"],
 .no-js :where(.js) .website-settings-menu [data-toggle-control]:focus,
 .js__no-whereSelector
     :where(.js)
@@ -197,23 +200,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 
 :where(.js) .website-settings-menu [data-toggle-control]:focus-visible {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    border-color: SelectedItem;
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
-
-:where(.js)
-    .website-settings-menu
-    [data-toggle-control][data-state-focus="true"] {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem

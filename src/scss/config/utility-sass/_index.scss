@@ -4,5 +4,5 @@
 ///
 
 @forward '_pre';
-@forward 'lib' hide $mx_interactiveStates_selector_active, $mx_interactiveStates_selector_focus,
+@forward 'lib' hide $selector_interactiveState_active, $selector_interactiveState_focus,
     config-get-template-styles;

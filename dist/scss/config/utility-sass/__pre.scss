@@ -11,11 +11,11 @@
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-$mx_interactiveStates_selector_active: null !default;
-$mx_interactiveStates_selector_active: fns.config-valid-selector(
-    $mx_interactiveStates_selector_active,
-    'mx_interactiveStates_selector_active',
-    $default: ('[data-state-active=true]')
+$selector_interactiveState_active: null !default;
+$selector_interactiveState_active: fns.config-valid-selector(
+    $selector_interactiveState_active,
+    'selector_interactiveState_active',
+    $default: '[data-state-active=true]'
 );
 
 ///
@@ -24,9 +24,9 @@ $mx_interactiveStates_selector_active: fns.config-valid-selector(
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-$mx_interactiveStates_selector_focus: null !default;
-$mx_interactiveStates_selector_focus: fns.config-valid-selector(
-    $mx_interactiveStates_selector_focus,
-    'mx_interactiveStates_selector_focus',
-    $default: ('[data-state-focus=true]')
+$selector_interactiveState_focus: null !default;
+$selector_interactiveState_focus: fns.config-valid-selector(
+    $selector_interactiveState_focus,
+    'selector_interactiveState_focus',
+    $default: '[data-state-focus=true]'
 );

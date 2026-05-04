@@ -130,10 +130,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
         }
 
-        @include active-hover-focus-visible-or-within {
-            box-shadow: none;
-
+        @include hover-focus-visible-or-within {
             @if $includeBaseStyles {
+                box-shadow: none;
                 outline: none;
                 border: none;
                 background: none;
@@ -142,6 +141,19 @@ $_defaultHeadingSelectors_greaterThan6: ();
             }
 
             @content (toggle-control--hover-focus);
+        }
+
+        @include active {
+            @if $includeBaseStyles {
+                box-shadow: none;
+                outline: none;
+                border: none;
+                background: none;
+                opacity: 1;
+                color: inherit;
+            }
+
+            @content (toggle-control--active);
         }
     }
 
@@ -179,7 +191,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         @content (toggle-title);
 
-        &:has(#{selector.nest('>', ($headingSelectors))}) {
+        @at-root #{selector.has-list($headingSelectors, $direct: true, $unifyParent: true)} {
             @content (toggle-title--has-heading);
         }
 
@@ -318,25 +330,23 @@ $_defaultHeadingSelectors_greaterThan6: ();
             @content (js--toggle-container);
 
             @if $includeMarginBlock {
-                &:has(#{selector.nest( '.toggle-title', '>','%title' )}) {
+                &:has(.toggle-title > %title) {
                     margin-block-start: 0;
                 }
 
-                &:has(#{selector.nest( '.toggle-title', '>', '%h1' )}),
-                &:has(#{selector.nest( '.toggle-title', '>', '%h2' )}),
-                &:has(#{selector.nest( '.toggle-title', '>', '%h3' )}) {
+                &:has(.toggle-title > %h1),
+                &:has(.toggle-title > %h2),
+                &:has(.toggle-title > %h3) {
                     margin-block-start: var-mrg-soft('800');
                 }
 
-                &:has(#{selector.nest( '.toggle-title', '>', '%h4' )}),
-                &:has(#{selector.nest( '.toggle-title', '>', '%h5' )}),
-                &:has(#{selector.nest( '.toggle-title', '>', '%h6' )}) {
+                &:has(.toggle-title > %h4),
+                &:has(.toggle-title > %h5),
+                &:has(.toggle-title > %h6) {
                     margin-block-start: var-mrg-soft('600');
                 }
 
-                &:has(
-                    #{selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 )}
-                ) {
+                @at-root #{selector.has-list(selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 ), $unifyParent: true)} {
                     margin-block-start: var-mrg-soft('600');
                 }
             }
@@ -368,10 +378,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             @include hover-focus-visible-or-within {
                 @content (js--toggle-control--hover-focus-or-within);
-            }
-
-            &:hover {
-                @content (js--toggle-control--hover);
             }
 
             @include active {
@@ -495,7 +501,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             @content (js--toggle-title);
 
-            &:has(#{selector.nest('>', ($headingSelectors))}) {
+            @at-root #{selector.has-list($headingSelectors, $unifyParent: true)} {
                 @content (js--toggle-title--has-heading);
             }
 
