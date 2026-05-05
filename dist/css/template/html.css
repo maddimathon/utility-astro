@@ -677,6 +677,7 @@ html {
 /* #endregion Tokens - Style */
 /* # GLOBALS - ACCESSIBILITY
  * ======================================================================== */
+[data-state-focus="true"],
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring--fallback */
@@ -728,30 +729,6 @@ html {
 
 :focus-visible {
     /* %focus-ring--visible */
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
-    );
-    outline-style: dashed;
-    outline-color: LinkText;
-    outline-color: var(
-        --focus-ring-outline-color,
-        var(--sys-clr-link, LinkText)
-    );
-    outline-offset: 0.125em;
-    outline-offset: var(
-        --focus-ring-outline-offset,
-        var(--stroke-relative-400, 0.125em)
-    );
-}
-
-[data-state-focus="true"] {
-    /* %focus-ring */
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(
         --focus-ring-outline-width,
@@ -1019,14 +996,14 @@ h1 input[type="reset"],
 .h1 input[type="reset"],
 h1 input[type="submit"],
 .h1 input[type="submit"],
-h1 a.button,
-.h1 a.button,
+h1 a[href].button,
+.h1 a[href].button,
 .page-title button,
 .page-title [role="button"],
 .page-title input[type="button"],
 .page-title input[type="reset"],
 .page-title input[type="submit"],
-.page-title a.button {
+.page-title a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1054,7 +1031,7 @@ h1 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1088,8 +1065,8 @@ h2 input[type="reset"],
 .h2 input[type="reset"],
 h2 input[type="submit"],
 .h2 input[type="submit"],
-h2 a.button,
-.h2 a.button {
+h2 a[href].button,
+.h2 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1117,7 +1094,7 @@ h2 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1151,8 +1128,8 @@ h3 input[type="reset"],
 .h3 input[type="reset"],
 h3 input[type="submit"],
 .h3 input[type="submit"],
-h3 a.button,
-.h3 a.button {
+h3 a[href].button,
+.h3 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1180,7 +1157,7 @@ h3 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1222,8 +1199,8 @@ h4 input[type="reset"],
 .h4 input[type="reset"],
 h4 input[type="submit"],
 .h4 input[type="submit"],
-h4 a.button,
-.h4 a.button {
+h4 a[href].button,
+.h4 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1257,7 +1234,7 @@ h4 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1299,8 +1276,8 @@ h5 input[type="reset"],
 .h5 input[type="reset"],
 h5 input[type="submit"],
 .h5 input[type="submit"],
-h5 a.button,
-.h5 a.button {
+h5 a[href].button,
+.h5 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1334,7 +1311,7 @@ h5 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1376,8 +1353,8 @@ h6 input[type="reset"],
 .h6 input[type="reset"],
 h6 input[type="submit"],
 .h6 input[type="submit"],
-h6 a.button,
-.h6 a.button {
+h6 a[href].button,
+.h6 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1411,7 +1388,7 @@ h6 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1439,7 +1416,7 @@ h6 a.button,
 .h7 input[type="button"],
 .h7 input[type="reset"],
 .h7 input[type="submit"],
-.h7 a.button {
+.h7 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1467,7 +1444,7 @@ h6 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1501,7 +1478,7 @@ h6 a.button,
 .h8 input[type="button"],
 .h8 input[type="reset"],
 .h8 input[type="submit"],
-.h8 a.button {
+.h8 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1535,7 +1512,7 @@ h6 a.button,
         input[type="button"],
         input[type="reset"],
         input[type="submit"],
-        a.button
+        a[href].button
     ) {
     font: inherit;
     font-size: 1em;
@@ -1915,6 +1892,19 @@ input {
     accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
+textarea:hover,
+select:hover,
+input:hover {
+    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
+    background-color: Field;
+    background-color: var(--sys-clr-input-bg-hover, Field);
+    border-color: FieldText;
+    border-color: var(--sys-clr-input-border-hover, FieldText);
+    color: FieldText;
+    color: var(--sys-clr-input-text-hover, FieldText);
+    accent-color: FieldText;
+    accent-color: var(--sys-clr-input-text, FieldText);
+}
 textarea[data-state-focus="true"],
 select[data-state-focus="true"],
 input[data-state-focus="true"],
@@ -1991,19 +1981,6 @@ input:has([data-state-focus="true"]) {
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-textarea:hover,
-select:hover,
-input:hover {
-    --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
-    background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
-    border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
-    color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
-    accent-color: var(--sys-clr-input-text, FieldText);
-}
 textarea:active,
 select:active,
 input:active,
@@ -2265,7 +2242,7 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
-a.button {
+a[href].button {
     --focus-ring-outline-offset: 0.125rem;
     --display: flex;
     display: flex;
@@ -2321,38 +2298,25 @@ button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
-a.button:hover {
-    --focus-ring-outline-color: var(
-        --sys-clr-button-border-hover,
-        SelectedItem
-    );
-    border-color: SelectedItem;
-    border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
-    background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
-    color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
-    accent-color: var(--sys-clr-button-border-hover, SelectedItem);
-}
+a[href].button:hover,
 button[data-state-focus="true"],
 [data-state-focus="true"][role="button"],
 input[data-state-focus="true"][type="button"],
 input[data-state-focus="true"][type="reset"],
 input[data-state-focus="true"][type="submit"],
-a[data-state-focus="true"].button,
+a[data-state-focus="true"][href].button,
 .no-js button:focus,
 .no-js [role="button"]:focus,
 .no-js input[type="button"]:focus,
 .no-js input[type="reset"]:focus,
 .no-js input[type="submit"]:focus,
-.no-js a.button:focus,
+.no-js a[href].button:focus,
 .js__no-whereSelector button:focus,
 .js__no-whereSelector [role="button"]:focus,
 .js__no-whereSelector input[type="button"]:focus,
 .js__no-whereSelector input[type="reset"]:focus,
 .js__no-whereSelector input[type="submit"]:focus,
-.js__no-whereSelector a.button:focus {
+.js__no-whereSelector a[href].button:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2372,7 +2336,7 @@ a[data-state-focus="true"].button,
 :where(.js__no-focusVisible) input[type="button"]:focus,
 :where(.js__no-focusVisible) input[type="reset"]:focus,
 :where(.js__no-focusVisible) input[type="submit"]:focus,
-:where(.js__no-focusVisible) a.button:focus {
+:where(.js__no-focusVisible) a[href].button:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2392,7 +2356,7 @@ button:focus-visible,
 input[type="button"]:focus-visible,
 input[type="reset"]:focus-visible,
 input[type="submit"]:focus-visible,
-a.button:focus-visible {
+a[href].button:focus-visible {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2412,7 +2376,7 @@ button:focus-within,
 input[type="button"]:focus-within,
 input[type="reset"]:focus-within,
 input[type="submit"]:focus-within,
-a.button:focus-within {
+a[href].button:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2432,7 +2396,7 @@ button:has([data-state-focus="true"]),
 input[type="button"]:has([data-state-focus="true"]),
 input[type="reset"]:has([data-state-focus="true"]),
 input[type="submit"]:has([data-state-focus="true"]),
-a.button:has([data-state-focus="true"]) {
+a[href].button:has([data-state-focus="true"]) {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
@@ -2452,13 +2416,13 @@ button:active,
 input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active,
-a.button:active,
+a[href].button:active,
 button[data-state-active="true"],
 [data-state-active="true"][role="button"],
 input[data-state-active="true"][type="button"],
 input[data-state-active="true"][type="reset"],
 input[data-state-active="true"][type="submit"],
-a[data-state-active="true"].button {
+a[data-state-active="true"][href].button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
@@ -2475,13 +2439,13 @@ button[aria-disabled="true"],
 input[aria-disabled="true"][type="button"],
 input[aria-disabled="true"][type="reset"],
 input[aria-disabled="true"][type="submit"],
-a[aria-disabled="true"].button,
+a[aria-disabled="true"][href].button,
 button[disabled],
 [disabled][role="button"],
 input[disabled][type="button"],
 input[disabled][type="reset"],
 input[disabled][type="submit"],
-a[disabled].button {
+a[disabled][href].button {
     cursor: not-allowed;
 }
 
@@ -2764,7 +2728,6 @@ th {
 /* # ASTRO - SKIP LINKS
  * ======================================================================== */
 .skip-link,
-.skip-link[href],
 a.skip-link[href] {
     --display: block;
     display: block;
@@ -2777,24 +2740,20 @@ a.skip-link[href] {
     z-index: 999999;
 }
 .skip-link[data-state-focus="true"],
-.skip-link[href][data-state-focus="true"],
 a.skip-link[href][data-state-focus="true"],
 .skip-link:focus,
-.skip-link[href]:focus,
 a.skip-link[href]:focus {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
 .skip-link:focus-within,
-.skip-link[href]:focus-within,
 a.skip-link[href]:focus-within {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
 .skip-link:has([data-state-focus="true"]),
-.skip-link[href]:has([data-state-focus="true"]),
 a.skip-link[href]:has([data-state-focus="true"]) {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);

@@ -376,7 +376,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             @content (js--toggle-control);
 
-            @include hover-focus-visible-or-within {
+            @include hover-focus-visible-or-within($includeNoWhereSelectorFallback: false) {
                 @content (js--toggle-control--hover-focus-or-within);
             }
 

@@ -44,7 +44,8 @@
     @each $sel in $baseSelectors {
         $skipSelectors: list.join(
             $skipSelectors,
-            ($sel, selector.unify($sel, '[href]'), selector.unify($sel, 'a[href]')),
+            ($sel, selector.unify($sel, config.$selector_a)),
+            // ($sel, selector.unify($sel, '[href]'), selector.unify($sel, config.$selector_a)),
             $separator: comma
         );
     }
