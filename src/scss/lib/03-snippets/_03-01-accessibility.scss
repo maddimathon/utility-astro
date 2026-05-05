@@ -45,7 +45,6 @@
         $skipSelectors: list.join(
             $skipSelectors,
             ($sel, selector.unify($sel, config.$selector_a)),
-            // ($sel, selector.unify($sel, '[href]'), selector.unify($sel, config.$selector_a)),
             $separator: comma
         );
     }
@@ -62,14 +61,14 @@
         z-index: $zIndex;
 
         @if $_content_exits {
-            @content ($location: 'link-root');
+            @content (link-root);
         }
 
         @include focus {
             top: $focus_top;
 
             @if $_content_exits {
-                @content ($location: 'link-focus');
+                @content (link-focus);
             }
         }
 
@@ -77,13 +76,13 @@
             top: $focus_top;
 
             @if $_content_exits {
-                @content ($location: 'link-focus');
+                @content (link-focus);
             }
         }
 
         @include active {
             @if $_content_exits {
-                @content ($location: 'link-active');
+                @content (link-active);
             }
         }
     }

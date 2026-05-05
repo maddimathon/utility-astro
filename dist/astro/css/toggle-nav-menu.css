@@ -366,11 +366,7 @@
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"],
 :where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"],
-.no-js :where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus,
-.js__no-whereSelector
-    :where(.js)
-    [data-toggle-control][data-toggle-control-backdrop]:focus {
+    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
     border: none;
     background: none;
     color: inherit;
@@ -378,8 +374,7 @@
     opacity: 1;
 }
 
-:where(.js__no-focusVisible)
-    :where(.js)
+:where(.js):where(.js__no-focusVisible)
     [data-toggle-control][data-toggle-control-backdrop]:focus {
     border: none;
     background: none;
@@ -545,24 +540,16 @@
 :where(.js)
     [data-toggle-container="open"]
     [data-toggle-control][data-state-focus="true"],
-:where(.js) [data-toggle-control][data-state-focus="true"],
-.no-js :where(.js) [data-toggle-container="open"] [data-toggle-control]:focus,
-.no-js :where(.js) [data-toggle-control]:focus,
-.js__no-whereSelector
-    :where(.js)
-    [data-toggle-container="open"]
-    [data-toggle-control]:focus,
-.js__no-whereSelector :where(.js) [data-toggle-control]:focus {
+:where(.js) [data-toggle-control][data-state-focus="true"] {
     text-decoration-color: transparent;
     color: LinkText;
     color: var(--sys-clr-link, LinkText);
 }
 
-:where(.js__no-focusVisible)
-    :where(.js)
+:where(.js):where(.js__no-focusVisible)
     [data-toggle-container="open"]
     [data-toggle-control]:focus,
-:where(.js__no-focusVisible) :where(.js) [data-toggle-control]:focus {
+:where(.js):where(.js__no-focusVisible) [data-toggle-control]:focus {
     text-decoration-color: transparent;
     color: LinkText;
     color: var(--sys-clr-link, LinkText);

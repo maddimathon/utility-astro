@@ -443,7 +443,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
                         opacity: 0.1875;
                     }
 
-                    @include active-hover-focus-visible-or-within {
+                    @include active-hover-focus-visible-or-within(
+                        $includeNoWhereSelectorFallback: false
+                    ) {
                         border: none;
                         background: none;
                         color: inherit;
@@ -604,7 +606,9 @@ $_defaultHeadingSelectors_greaterThan6: ();
         [data-toggle-container='open'] &,
         & {
             @include feature-check.js {
-                @include hover-focus-visible {
+                @include hover-focus-visible(
+                    $includeNoWhereSelectorFallback: false
+                ) {
                     @if $includeBaseStyles {
                         text-decoration-color: transparent;
                         color: var-sys-colour(link);
