@@ -67,9 +67,11 @@ type Props = GenericElementProps<CopyToClipboardButtonProps.WithChildren, 'div'>
 
 const {
     activeTimeout,
+    // copyAs,
     messageTimeout,
     successMessage,
     toClipboard,
+
     class: classListInput = [],
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
@@ -81,6 +83,8 @@ const classList = [
     { '||': classListInput },
     classListInput,
 ];
+
+// data-copy-to-clipboard-as={copyAs}
 ---
 
 <button
@@ -91,9 +95,7 @@ const classList = [
     data-copy-to-clipboard-active-timeout={activeTimeout}
     data-copy-to-clipboard-message-timeout={messageTimeout}
     ><slot /></button
->
-
-<script>
+><script>
     import { CopyToClipboard } from '../../ts/classes/CopyToClipboard.js';
 
     CopyToClipboard.run();

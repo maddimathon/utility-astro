@@ -78,10 +78,6 @@
             > legend {
                 &,
                 &:first-child {
-                    @if $includeBaseStyles {
-                        margin-block: 0;
-                    }
-
                     @content ('content--fieldset--legend');
                 }
             }

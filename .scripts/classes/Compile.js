@@ -28,6 +28,8 @@ export class Compile extends CompileStage {
      * @readonly
      */
     subStages = [
+        // @ts-expect-error
+        'tsconfig',
         'ts',
         // @ts-expect-error
         'templates',
@@ -89,41 +91,45 @@ export class Compile extends CompileStage {
     }
 
     /**
-     * Write tsconfig files and compiles ts files to be included in the package.
-     * 
      * @protected
-     * @override
      */
-    async ts() {
+    async tsconfig() {
         this.console.progress( 'writing tsconfig files...', 1 );
 
-        const writeArgs = { force: true, rename: false };
-
-        const buildUtilsConfig = await this.compiler.resolveTsConfig( 'node_modules/@maddimathon/build-utilities/tsconfig.base.json', 2 );
-
-        const baseConfigPath = await this.writeTsConfig(
-            'tsconfig.base.json',
+        await this.atry( this.writeTsConfig, 2, [
+            'tsconfig.json',
             2,
             {
-                extends: [
-                    '@maddimathon/build-utilities/tsconfig',
-                    'astro/tsconfigs/strictest',
+                extends: './tsconfig.base.json',
+
+                include: [ './src/**/*' ],
+                exclude: [
+                    './.scripts/**/*',
+                    './node_modules/**/*',
                 ],
 
                 compilerOptions: {
-                    isolatedDeclarations: false,
+                    skipLibCheck: false,
+
+                    plugins: [
+                        {
+                            name: '@astrojs/ts-plugin',
+                        },
+                    ],
                 },
             },
-            writeArgs,
+        ] );
+
+        const buildUtilsConfig = await this.compiler.resolveTsConfig(
+            'node_modules/@maddimathon/build-utilities/tsconfig.base.json',
+            2,
         );
 
-        const basePath_relative = baseConfigPath ? this.fs.pathRelative( baseConfigPath ) : baseConfigPath;
-
-        await this.writeTsConfig(
+        await this.atry( this.writeTsConfig, 2, [
             'src/ts/tsconfig.json',
             2,
             {
-                extends: basePath_relative ? basePath_relative : '../../tsconfig.base.json',
+                extends: '../../tsconfig.base.json',
 
                 include: [
                     '../../src/ts/**/*',
@@ -144,9 +150,6 @@ export class Compile extends CompileStage {
                     target: buildUtilsConfig.compilerOptions.target,
                 },
             },
-            writeArgs,
-        );
-
-        return super.ts();
+        ] );
     }
 }

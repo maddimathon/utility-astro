@@ -58,7 +58,23 @@ export class ElementToggle {
             }
             // returns 
             if (con.id) {
-                return ElementToggle.new(con, opts);
+                return ElementToggle.new(con, opts).then((instance) => {
+                    if (!opts.debug && opts.outputResults) {
+                        const msgs = [
+                            `[ElementToggle] new: ${con.id ?? ''}`,
+                        ];
+                        if (instance) {
+                            msgs.push('\ncontainer: ', instance.container, '\nopts: ', instance.opts);
+                        }
+                        else {
+                            msgs.push('construction failed', '\ninstance: ', instance);
+                        }
+                        console.info(...msgs);
+                    }
+                });
+            }
+            if (!opts.debug && opts.outputResults) {
+                console.info('[ElementToggle] no containers found');
             }
             return null;
         });

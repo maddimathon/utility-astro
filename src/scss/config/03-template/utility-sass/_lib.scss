@@ -1,0 +1,34 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use 'sass:map';
+
+@use '_pre' as pre;
+
+@forward 'pkg:@maddimathon/utility-sass/config/template' with (
+    $mx_extendSelectors_headingsByRole: false !default,
+
+    $selector_interactiveState_active: '[data-state-active=true]' !default,
+    $selector_interactiveState_focus: '[data-state-focus=true]' !default,
+
+    $template_cssHeadings: pre.$template_cssHeadings,
+    $template_docBlock: false,
+    $template_extendSelectors: false,
+    $template_globals: pre.$template_globals,
+    $template_isDefault: true,
+    $template_name: 'Default',
+    $template_styles: map.merge(
+            pre.$template_styles,
+            (
+                blockquote: false,
+                pre: false,
+            )
+        ),
+    $template_slug: 'default',
+    $template_tokens: pre.$template_tokens,
+    $template_utils: pre.$template_utils,
+    //
+     //
+);

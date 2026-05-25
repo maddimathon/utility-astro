@@ -1,0 +1,15 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@forward 'functions';
+
+@forward 'utility-sass' hide config-get-template-styles;
+
+@use '../02-lib' as lib;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$mx_prop_useCustom_gridColumn: lib.$include_html !default;

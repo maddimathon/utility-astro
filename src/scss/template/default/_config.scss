@@ -3,7 +3,7 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward '../_content/config' with (
+@forward '../../config' with (
     $isTemplate: true !default,
     $template_cssHeadings: true !default
 );

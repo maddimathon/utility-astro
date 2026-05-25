@@ -104,17 +104,33 @@ $_flex_container_alignment_row: map.set(
 /// Includes the bascis properties for a page layout grid (but no columns).
 ///
 /// @since 0.1.0-alpha
+/// @since 0.1.0-beta.0.draft — Added optional $alignment, $autoRows, $autoFlow, $gap, $position params.
 ///
-@mixin snippet-support-astro-body-grid--base-grid {
-    @include prop-display(grid);
-    position: relative;
+@mixin snippet-support-astro-body-grid--base-grid(
+    $alignment: (),
+    $autoRows: auto,
+    $autoFlow: column,
+    $gap: 0,
+    $position: relative,
+    //
+    $display_setCxProp: true,
+    $display_setProp: true,
+    $display_useCustom: true
+) {
+    @include prop-display(
+        grid,
+        $setCxProp: $display_setCxProp,
+        $setProp: $display_setProp,
+        $useCustom: $display_useCustom
+    );
+    position: $position;
 
-    @include snippet-content-grid-alignment;
+    @include snippet-content-grid-alignment($alignment: $alignment);
 
-    grid-auto-rows: auto;
-    grid-auto-flow: column;
+    grid-auto-rows: $autoRows;
+    grid-auto-flow: $autoFlow;
 
-    gap: 0;
+    gap: $gap;
 }
 
 ///
@@ -165,7 +181,7 @@ $_flex_container_alignment_row: map.set(
         grid-column: $cols;
     }
 
-    @if $width {
+    @if $width != false {
         width: $width;
     }
 
@@ -174,6 +190,7 @@ $_flex_container_alignment_row: map.set(
         &:is(%display-contents) {
             @include snippet-support-astro-body-grid--display-contents(
                 $cols: $cols,
+                $width: $width,
                 $setCxProp: false,
                 $args...
             );
@@ -234,6 +251,19 @@ $_flex_container_alignment_row: map.set(
 }
 
 ///
+/// Set an element to full-width as a child.
+///
+/// Generally you'll want to use
+/// snippet-support-astro-body-grid--display-contents or extend
+/// %display-contents instead.
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin snippet-support-astro-body-grid--full-width($args...) {
+    @include _body-grid--set-column-width($cols: '1 / -1', $args...);
+}
+
+///
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-support-astro-body-grid--body-or-subgrid-children {
@@ -276,6 +306,19 @@ $_flex_container_alignment_row: map.set(
 ///
 /// @since 0.1.0-beta.0.draft
 ///
+@mixin snippet-support-astro-body-grid--body-subgrid-selectors {
+    & > :is(%body-subgrid),
+    & > :where(%main-content, %main-nav, %site-header, %site-footer) {
+        &,
+        & > :is(%body-subgrid) {
+            @content;
+        }
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
 @mixin snippet-support-astro-body-grid--body-children(
     $flex_alignment: tokens.$contentGridAlignment
 ) {
@@ -289,19 +332,15 @@ $_flex_container_alignment_row: map.set(
         }
     }
 
-    & > %body-subgrid,
-    & > :where(%main-content, %main-nav, %site-header, %site-footer) {
-        &,
-        & > %body-subgrid {
-            @extend %_body-subgrid;
-            grid-column: 1 / -1;
+    @include snippet-support-astro-body-grid--body-subgrid-selectors {
+        @extend %_body-subgrid;
+        grid-column: 1 / -1;
 
-            grid-template-columns: subgrid;
+        grid-template-columns: subgrid;
 
-            margin-inline: 0;
+        margin-inline: 0;
 
-            @content ('body--subgrid-children');
-        }
+        @content ('body--subgrid-children');
     }
 
     @at-root :where(&)
@@ -479,8 +518,6 @@ $_flex_container_alignment_row: map.set(
     $selector_body: '%body',
     $selector_root: '%root'
 ) {
-    $_content_exists: meta.content-exists();
-
     @at-root {
         ///
         /// WIDTH UTILITIES
@@ -496,12 +533,10 @@ $_flex_container_alignment_row: map.set(
             @include prop-display(block);
             position: relative;
 
-            @if $_content_exists {
-                @content ('root');
-            }
+            @content ('root');
         }
 
-        %_body-grid,
+        #{$selector_body},
         %_body-subgrid {
             @include snippet-support-astro-body-grid--base-grid;
 
@@ -513,20 +548,16 @@ $_flex_container_alignment_row: map.set(
 
             margin-inline: 0;
 
-            @if $_content_exists {
-                @content ('body-grid-subgrid-base');
-            }
+            @content ('body-grid-subgrid-base');
 
             /// BLOCK ///
 
             @include snippet-support-astro-body-grid--body-or-subgrid-children;
 
-            @if $_content_exists {
-                @content ('body-grid-subgrid-base--children');
-            }
+            @content ('body-grid-subgrid-base--children');
         }
 
-        %_body-grid {
+        #{$selector_body} {
             @include _body-grid--layout-content-only(
                 $bodyMargin: $bodyMargin,
                 $contentCol: $contentCol,
@@ -534,20 +565,11 @@ $_flex_container_alignment_row: map.set(
                 $sidebarHalfCol: $sidebarHalfCol
             );
 
-            @if $_content_exists {
-                @content ('body-grid-base');
-            }
-        }
-
-        #{$selector_body} {
-            @extend %_body-grid;
             margin: 0;
             padding: 0;
             z-index: 1;
 
-            @if $_content_exists {
-                @content ('body');
-            }
+            @content ('body');
 
             /// BLOCK ///
 
@@ -556,9 +578,7 @@ $_flex_container_alignment_row: map.set(
                 @content ($location);
             }
 
-            @if $_content_exists {
-                @content ('body--children');
-            }
+            @content ('body--children');
         }
 
         ///
@@ -570,25 +590,19 @@ $_flex_container_alignment_row: map.set(
                 @include snippet-support-astro-body-grid--content-width;
             }
 
-            @if $_content_exists {
-                @content ('layout-content-only');
-            }
+            @content ('layout-content-only');
         }
 
         %layout-full-width,
         %layout-extra-wide,
         %layout-sidebar-left,
         %layout-sidebar-right {
-            @if $_content_exists {
-                @content ('layout-full-width-or-extra-wide-or-sidebar');
-            }
+            @content ('layout-full-width-or-extra-wide-or-sidebar');
         }
 
         %layout-full-width,
         %layout-extra-wide {
-            @if $_content_exists {
-                @content ('layout-full-width-or-extra-wide');
-            }
+            @content ('layout-full-width-or-extra-wide');
         }
 
         %layout-full-width {
@@ -596,9 +610,7 @@ $_flex_container_alignment_row: map.set(
                 @include snippet-support-astro-body-grid--page-width;
             }
 
-            @if $_content_exists {
-                @content ('layout-full-width');
-            }
+            @content ('layout-full-width');
         }
 
         %layout-extra-wide {
@@ -606,9 +618,7 @@ $_flex_container_alignment_row: map.set(
                 @include snippet-support-astro-body-grid--site-width;
             }
 
-            @if $_content_exists {
-                @content ('layout-extra-wide');
-            }
+            @content ('layout-extra-wide');
         }
 
         %layout-sidebar-left,
@@ -631,9 +641,7 @@ $_flex_container_alignment_row: map.set(
                     @include prop-grid-column(content-start / content-end);
                 }
 
-                @if $_content_exists {
-                    @content ('layout-sidebar-left-or-right');
-                }
+                @content ('layout-sidebar-left-or-right');
             }
         }
 
@@ -645,9 +653,7 @@ $_flex_container_alignment_row: map.set(
                 $gutterCol: $gutterCol,
                 $sidebarCol: $sidebarCol
             ) {
-                @if $_content_exists {
-                    @content ('layout-sidebar-left');
-                }
+                @content ('layout-sidebar-left');
             }
         }
 
@@ -659,9 +665,7 @@ $_flex_container_alignment_row: map.set(
                 $gutterCol: $gutterCol,
                 $sidebarCol: $sidebarCol
             ) {
-                @if $_content_exists {
-                    @content ('layout-sidebar-right');
-                }
+                @content ('layout-sidebar-right');
             }
         }
 

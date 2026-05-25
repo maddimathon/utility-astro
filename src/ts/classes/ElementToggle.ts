@@ -76,7 +76,31 @@ export class ElementToggle {
 
                 // returns 
                 if ( con.id ) {
-                    return ElementToggle.new( con as HTMLElement, opts );
+                    return ElementToggle.new( con as HTMLElement, opts ).then(
+                        ( instance ) => {
+                            if ( !opts.debug && opts.outputResults ) {
+
+                                const msgs: any[] = [
+                                    `[ElementToggle] new: ${ con.id ?? '' }`,
+                                ];
+
+                                if ( instance ) {
+                                    msgs.push(
+                                        '\ncontainer: ', instance.container,
+                                        '\nopts: ', instance.opts,
+                                    );
+                                } else {
+                                    msgs.push( 'construction failed', '\ninstance: ', instance );
+                                }
+
+                                console.info( ...msgs );
+                            }
+                        }
+                    );
+                }
+
+                if ( !opts.debug && opts.outputResults ) {
+                    console.info( '[ElementToggle] no containers found' );
                 }
 
                 return null;
@@ -688,5 +712,13 @@ export namespace ElementToggle {
          */
         // TODO - create test/demo
         openWhenTargetted: boolean;
+
+        /**
+         * Whether to output the results of constructing each toggle element as
+         * it is made.
+         *
+         * @since ___PKG_VERSION___
+         */
+        outputResults?: boolean;
     }
 }

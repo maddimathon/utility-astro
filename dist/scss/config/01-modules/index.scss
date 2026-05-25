@@ -1,0 +1,16 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@forward 'functions';
+
+@forward 'utility-sass';
+
+///
+/// Additional selectors for skip links (since they don't get extended by
+/// default).
+///
+/// @since 0.1.0-alpha.14
+///
+$selectors_skipLinks_extra: () !default;

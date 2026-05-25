@@ -236,12 +236,5 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
          */
         featureCheck?: boolean | undefined;
 
-        /**
-         * Includes the Toggle_Scripts component.
-         * 
-         * @default true
-         */
-        toggle?: boolean | undefined;
-
     } | undefined;
 }

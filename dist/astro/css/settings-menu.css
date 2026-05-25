@@ -52,11 +52,6 @@
         var(--mrg-firm-300, 0.8125rem)
     );
 }
-.website-settings__content fieldset > legend,
-.website-settings__content fieldset > legend:first-child {
-    margin-top: 0;
-    margin-bottom: 0;
-}
 .website-settings__content fieldset > .container {
     --display: flex;
     display: flex;

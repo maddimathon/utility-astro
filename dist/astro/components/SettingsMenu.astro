@@ -6,14 +6,11 @@
  */
 
 /* import - types */
-import type { ComponentProps } from 'astro/types';
 import type { GenericElementProps } from '../../ts/index.js';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions.js';
 import { mapToObject } from '../../ts/index.js';
-
-import SettingsMenu_Scripts from '../support/SettingsMenu_Scripts.astro';
 
 /* import - values */
 import { SVG } from '../../ts/svg.js';
@@ -112,16 +109,7 @@ export interface SettingsMenuProps {
             }[];
 
         }[] | undefined;
-    },
-
-    /**
-     * Whether to include the support scripts.
-     * 
-     * Use an object to enable scripts and pass settings.
-     * 
-     * @default true
-     */
-    scripts?: boolean | ComponentProps<typeof SettingsMenu_Scripts> | undefined;
+    };
 }
 
 /* PROPS ===================================== */
@@ -137,8 +125,6 @@ const {
 
     privacyPolicy: privacyPolicyURL,
     settings: inputSettings,
-
-    scripts = true,
 
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
@@ -422,4 +408,5 @@ const iconSVG = iconSVG_input ??
     @forward '../css/forced-colors-mode-only.css';
 </style>
 
-{scripts && <SettingsMenu_Scripts {...(scripts === true ? {} : scripts)} />}
+<script src='../scripts/toggle.ts'></script>
+<script src='../scripts/settings-menu.ts'></script> 

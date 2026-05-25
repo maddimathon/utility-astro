@@ -67,10 +67,10 @@ html {
 }
 
 body,
-body > .body-subgrid,
-body > .body-subgrid > .body-subgrid,
+body > :is(.body-subgrid),
+body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer),
-body > :where(main, nav, header, footer) > .body-subgrid {
+body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     --display: grid;
     display: grid;
     display: var(--display, grid);
@@ -102,10 +102,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(*) {
     --grid-column: content-start/content-end;
@@ -115,18 +115,18 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(form, dl),
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > .display-contents {
     display: contents;
@@ -134,19 +134,19 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 @supports (display: contents) {
     :where(
             body,
-            body > .body-subgrid,
-            body > .body-subgrid > .body-subgrid,
+            body > :is(.body-subgrid),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
-            body > :where(main, nav, header, footer) > .body-subgrid
+            body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > :where(form, dl)
         > :where(*),
     :where(
             body,
-            body > .body-subgrid,
-            body > .body-subgrid > .body-subgrid,
+            body > :is(.body-subgrid),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
-            body > :where(main, nav, header, footer) > .body-subgrid
+            body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > .display-contents
         > :where(*) {
@@ -156,10 +156,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(table) {
     --grid-column: content-start/content-end;
@@ -170,10 +170,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 @media (min-width: 40.875em) {
     :where(
             body,
-            body > .body-subgrid,
-            body > .body-subgrid > .body-subgrid,
+            body > :is(.body-subgrid),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
-            body > :where(main, nav, header, footer) > .body-subgrid
+            body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > :where(table) {
         --grid-column: page-start/page-end;
@@ -184,10 +184,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     :where(.table-wrapper) {
     --grid-column: content-start/content-end;
@@ -196,10 +196,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 @media (min-width: 40.875em) {
     :where(
             body,
-            body > .body-subgrid,
-            body > .body-subgrid > .body-subgrid,
+            body > :is(.body-subgrid),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
-            body > :where(main, nav, header, footer) > .body-subgrid
+            body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         :where(.table-wrapper) {
         --grid-column: page-start/page-end;
@@ -208,10 +208,10 @@ body > :where(main, nav, header, footer) > .body-subgrid {
 }
 :where(
         body,
-        body > .body-subgrid,
-        body > .body-subgrid > .body-subgrid,
+        body > :is(.body-subgrid),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
-        body > :where(main, nav, header, footer) > .body-subgrid
+        body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     :where(.table-wrapper)
     > :where(table) {
@@ -245,7 +245,6 @@ body > :where(main, nav, header, footer) > .body-subgrid {
             ) [page-end] 0 1fr [site-end] var(--gap-inline-layout-half, 4vw);
     }
 }
-
 body {
     margin: 0;
     padding: 0;
@@ -263,10 +262,10 @@ body {
     margin-bottom: var(--gap-block-layout, 5vw);
 }
 
-body > .body-subgrid,
-body > .body-subgrid > .body-subgrid,
+body > :is(.body-subgrid),
+body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer),
-body > :where(main, nav, header, footer) > .body-subgrid {
+body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     grid-column: 1/-1;
     grid-template-columns: subgrid;
     margin-left: 0;

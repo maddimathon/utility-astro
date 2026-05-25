@@ -1,0 +1,93 @@
+///
+/// Variables before the utility-astro lib is loaded.
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'sass:string';
+
+@use '../../02-lib' as lib;
+
+@use '../functions' as *;
+
+///
+/// @since 0.1.0-alpha
+///
+$template_name: 'Default' !default;
+
+///
+/// @since 0.1.0-alpha
+///
+$template_slug: string.to-lower-case($template_name) !default;
+
+///
+/// @since ___PKG_VERSION___
+///
+$template_isDefault: $template_slug == default !default;
+
+///
+/// @since ___PKG_VERSION___
+///
+$template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Renamed from $print_astro to $template_astro and moved from lib to template config.
+///
+$template_astro: false !default;
+
+///
+/// Whether to include the global selectors in the output. Otherwise, all
+/// selectors are pseudo selectors.
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Renamed from $print_globals to $template_globals and moved from lib to template config.
+///
+$template_globals: $template_astro !default;
+
+///
+/// Whether to include the utility class selectors in the output.
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Renamed from $print_utils to $template_utils and moved from lib to template config.
+///
+$template_utils: lib.$include_html and ($template_globals or $template_astro) !default;
+
+///
+/// Whether to include the custom property definitions in the output.
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Renamed from $print_tokens to $template_tokens and moved from lib to template config.
+///
+$template_tokens: $template_globals or $template_utils !default;
+
+///
+/// @since 0.1.0-alpha
+/// @since ___PKG_VERSION___ — Renamed from $print_headings to $template_cssHeadings and moved from lib to template config.
+///
+$template_cssHeadings: lib.$isTemplate and
+    ($template_astro or $template_globals or $template_tokens or $template_utils) !default;
+
+///
+/// Whether to include the extend selectors mixin after the template content.
+///
+/// @since ___PKG_VERSION___
+///
+$template_extendSelectors: $template_globals or $template_utils !default;
+
+///
+/// Whether to print certain styles.
+///
+/// @since ___PKG_VERSION___ — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
+///
+$template_styles: () !default;
+$template_styles: config-get-template-styles(
+    $inputs: $template_styles,
+    $include_html: lib.$include_html,
+    $isTemplate: lib.$isTemplate,
+    $template_tokens: $template_tokens,
+    $template_globals: $template_globals,
+    $template_utils: $template_utils,
+    $template_astro: $template_astro,
+);

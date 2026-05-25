@@ -1,7 +1,8 @@
 
-import { defineConfig } from 'astro/config';
-
 import partialConfig from './.scripts/build.config.js';
+
+import { astroConfig } from './src/ts/functions/astroConfig.js';
+
 import pkg from './package.json';
 
 import {
@@ -25,20 +26,24 @@ const fs = new FileSystem(
 
 export const homeURL = new URL( pkg.homepage );
 
-const outDir = projectConfig.getDistDir( fs, 'docs' )?.replace( /\/+$/gi, '' )
-    ?? projectConfig.getDistDir( fs ).replace( /\/+$/gi, '' ) + '/docs';
+const outDir = (
+    projectConfig.getDistDir( fs, 'docs' ) ?? projectConfig.getDistDir( fs )
+).replace( /\/+$/gi, '' ) + '/docs';
 
-const srcDir = projectConfig.getSrcDir( fs, 'docs' )[ 0 ]?.replace( /\/+$/gi, '' )
-    ?? projectConfig.getSrcDir( fs ).replace( /\/+$/gi, '' ) + '/docs';
+const srcDir = (
+    projectConfig.getSrcDir( fs, 'docs' )[ 0 ] ?? projectConfig.getSrcDir( fs )
+).replace( /\/+$/gi, '' ) + '/docs';
 
-export default defineConfig( {
+export default astroConfig( {
 
     base: homeURL.pathname,
     site: homeURL.origin,
 
     compressHTML: true,
 
-    devToolbar: { enabled: false, },
+    devToolbar: {
+        enabled: false,
+    },
 
     markdown: {
         syntaxHighlight: 'prism',
@@ -51,7 +56,6 @@ export default defineConfig( {
     trailingSlash: 'never',
 
     scopedStyleStrategy: 'attribute',
-
 
     build: {
         assets: 'assets/astro',

@@ -1,0 +1,14 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since 0.1.0-alpha
+///
+
+@use 'sass:map';
+
+@use '_pre' as pre;
+
+@forward 'pkg:@maddimathon/utility-sass/config/lib' with (
+    $internal_supressCredit: false !default,
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
+);

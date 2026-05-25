@@ -31,19 +31,19 @@ import { FeatureCheck } from '@maddimathon/utility-sass';
 import { mapToObject } from '../../ts/functions/mapToObject.js';
 import { currentPagePath } from '../functions.js';
 
-import Toggle_Scripts from '../support/Toggle_Scripts.astro';
-
 /* import - values */
 
 /* import - layouts */
 import Content from './Content.astro';
 
 /* import - components */
-import NavMenu from '../components/NavMenu.astro';
-import Page_Meta from '../components/Page_Meta.astro';
-import SettingsMenu from '../components/SettingsMenu.astro';
-import SkipLinks from '../components/SkipLinks.astro';
-import ToggleNavMenu from '../components/ToggleNavMenu.astro';
+import {
+    NavMenu,
+    Page_Meta,
+    SettingsMenu,
+    SkipLinks,
+    ToggleNavMenu,
+} from '../components.ts';
 
 
 /** ## TYPES ==================================== **/
@@ -140,9 +140,7 @@ if ( p.secondaryMenu ) {
 
 const scripts = mergeArgs(
     {
-        elementToggle: false,
         featureCheck: true,
-        settings: true,
     },
     p.scripts,
 );
@@ -423,11 +421,4 @@ const settings = p.settings && {
     </body>
 </html>
 
-{ scripts.featureCheck && <script>
-    import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
-
-    // run the checks and update class names
-    new FeatureCheck().check();
-</script> }
- 
-{ scripts.elementToggle && <Toggle_Scripts /> }
+<script src="../scripts/feature-check-init.ts"></script>

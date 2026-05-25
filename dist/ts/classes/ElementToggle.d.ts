@@ -203,5 +203,12 @@ export declare namespace ElementToggle {
          * @default true
          */
         openWhenTargetted: boolean;
+        /**
+         * Whether to output the results of constructing each toggle element as
+         * it is made.
+         *
+         * @since 0.1.0-beta.0.draft
+         */
+        outputResults?: boolean;
     }
 }

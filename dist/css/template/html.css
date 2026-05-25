@@ -219,6 +219,12 @@ html {
     -webkit-font-smoothing: antialiased;
     color-scheme: light dark;
 }
+@media (prefers-color-scheme: light) {
+    html {
+        color-scheme: light;
+        color-scheme: only light;
+    }
+}
 html[data-brightness-mode="light"] {
     color-scheme: light;
     color-scheme: only light;

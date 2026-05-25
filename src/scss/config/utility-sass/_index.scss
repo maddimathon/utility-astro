@@ -1,8 +1,0 @@
-///
-/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since 0.1.0-alpha
-///
-
-@forward '_pre';
-@forward 'lib' hide $selector_interactiveState_active, $selector_interactiveState_focus,
-    config-get-template-styles;
