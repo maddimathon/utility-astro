@@ -908,6 +908,7 @@ a[href]:visited {
     color: VisitedText;
     color: var(--sys-clr-link-visited, VisitedText);
 }
+
 a[href]:hover,
 a[data-state-focus="true"][href],
 .no-js a[href]:focus,
@@ -2289,6 +2290,15 @@ a[href].button {
     appearance: button;
     text-decoration: none;
     cursor: pointer;
+}
+button,
+[role="button"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+a[href].button,
+[role="button"]:visited,
+a[href].button:visited {
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
@@ -2299,6 +2309,7 @@ a[href].button {
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
+
 button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,
@@ -2745,10 +2756,10 @@ a.skip-link[href] {
     width: fit-content;
     z-index: 999999;
 }
-.skip-link[data-state-focus="true"],
-a.skip-link[href][data-state-focus="true"],
 .skip-link:focus,
-a.skip-link[href]:focus {
+a.skip-link[href]:focus,
+.skip-link[data-state-focus="true"],
+a.skip-link[href][data-state-focus="true"] {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
@@ -2761,6 +2772,22 @@ a.skip-link[href]:focus-within {
 
 .skip-link:has([data-state-focus="true"]),
 a.skip-link[href]:has([data-state-focus="true"]) {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:active,
+a.skip-link[href]:active,
+.skip-link[data-state-active="true"],
+a.skip-link[href][data-state-active="true"] {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:has(:active),
+a.skip-link[href]:has(:active),
+.skip-link:has([data-state-active="true"]),
+a.skip-link[href]:has([data-state-active="true"]) {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }

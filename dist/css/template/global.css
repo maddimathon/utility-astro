@@ -216,6 +216,7 @@ a[href]:visited {
     color: VisitedText;
     color: var(--sys-clr-link-visited, VisitedText);
 }
+
 a[href]:hover,
 a[data-state-focus="true"][href],
 .no-js a[href]:focus,
@@ -1174,6 +1175,15 @@ a[href].button {
     appearance: button;
     text-decoration: none;
     cursor: pointer;
+}
+button,
+[role="button"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+a[href].button,
+[role="button"]:visited,
+a[href].button:visited {
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
@@ -1184,6 +1194,7 @@ a[href].button {
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
+
 button:hover,
 [role="button"]:hover,
 input[type="button"]:hover,

@@ -68,8 +68,8 @@ html {
 
 body,
 body > :is(.body-subgrid),
-body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer),
+body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     --display: grid;
     display: grid;
@@ -103,8 +103,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(*) {
@@ -116,16 +116,16 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(form, dl),
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > .display-contents {
@@ -135,8 +135,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     :where(
             body,
             body > :is(.body-subgrid),
-            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > :where(form, dl)
@@ -144,8 +144,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     :where(
             body,
             body > :is(.body-subgrid),
-            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > .display-contents
@@ -157,8 +157,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     > :where(table) {
@@ -171,8 +171,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     :where(
             body,
             body > :is(.body-subgrid),
-            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         > :where(table) {
@@ -185,8 +185,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     :where(.table-wrapper) {
@@ -197,8 +197,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     :where(
             body,
             body > :is(.body-subgrid),
-            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer),
+            body > :is(.body-subgrid) > :is(.body-subgrid),
             body > :where(main, nav, header, footer) > :is(.body-subgrid)
         )
         :where(.table-wrapper) {
@@ -209,8 +209,8 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
 :where(
         body,
         body > :is(.body-subgrid),
-        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer),
+        body > :is(.body-subgrid) > :is(.body-subgrid),
         body > :where(main, nav, header, footer) > :is(.body-subgrid)
     )
     :where(.table-wrapper)
@@ -263,14 +263,15 @@ body {
 }
 
 body > :is(.body-subgrid),
-body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer),
+body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     grid-column: 1/-1;
     grid-template-columns: subgrid;
     margin-left: 0;
     margin-right: 0;
 }
+
 :where(body) > :where(nav, header, footer) > :where(*) {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;

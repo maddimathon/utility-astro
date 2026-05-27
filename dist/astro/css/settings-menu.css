@@ -128,6 +128,11 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     appearance: button;
     text-decoration: none;
     cursor: pointer;
+    --icon-size: var(--icon-size-large, 2em);
+    justify-self: end;
+}
+:where(.js) .website-settings-menu [data-toggle-control],
+:where(.js) .website-settings-menu [data-toggle-control]:visited {
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
     border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
@@ -137,9 +142,8 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     color: var(--sys-clr-button-text, ButtonText);
     accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
-    --icon-size: var(--icon-size-large, 2em);
-    justify-self: end;
 }
+
 :where(.js) .website-settings-menu [data-toggle-control]:hover,
 :where(.js)
     .website-settings-menu

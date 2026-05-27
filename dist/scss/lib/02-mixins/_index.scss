@@ -16,11 +16,17 @@
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin prop-grid-column($value, $quoteString: false, $args...) {
+@mixin prop-grid-column(
+    $value,
+    $onlyFallbackPrefix: config.$mx_propGridColumn_onlyFallbackPrefix,
+    $quoteString: false,
+    $args...
+) {
     @include utils.prop(
         grid-column,
         $value,
         $useCustom: config.$mx_prop_useCustom_gridColumn,
+        $onlyFallbackPrefix: $onlyFallbackPrefix,
         $quoteString: $quoteString,
         $args...
     );

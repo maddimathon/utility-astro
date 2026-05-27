@@ -6,3 +6,15 @@
 @forward 'functions';
 
 @forward 'utility-sass' hide config-get-template-styles;
+
+@use 'utility-sass' as utils;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$mx_propGridColumn_onlyFallbackPrefix: null !default;
+$mx_propGridColumn_onlyFallbackPrefix: utils.config-valid-bool(
+    $mx_propGridColumn_onlyFallbackPrefix,
+    'mx_propGridColumn_onlyFallbackPrefix',
+    $default: true
+);

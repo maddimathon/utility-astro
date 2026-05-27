@@ -287,11 +287,41 @@ $_flex_container_alignment_row: map.set(
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-support-astro-body-grid--body-subgrid-selectors {
-    & > :is(%body-subgrid),
-    & > :where(%main-content, %main-nav, %site-header, %site-footer) {
-        &,
-        & > :is(%body-subgrid) {
+@mixin snippet-support-astro-body-grid--body-subgrid-selectors(
+    $additionalSelectors: (),
+    $selectors_layoutSubgrids: ':where( %main-content, %main-nav, %site-header, %site-footer )',
+    $selectors_subgrid: ':is( %body-subgrid )',
+    $selectors_subgrid_nesting: $selectors_subgrid,
+    $subgridNesting: 1
+) {
+    $subgridNesting: max(1, $subgridNesting) + 1;
+
+    $base_sels: selector.nest(&, '>', ($selectors_subgrid, $selectors_layoutSubgrids));
+
+    @at-root #{if(list.length($additionalSelectors) > 0, $additionalSelectors, config.$selector_null)},
+        #{$base_sels} {
+        // /* $subgridNesting = #{$subgridNesting} */
+        // /* $i = 0 */
+
+        $selectorList: (&);
+
+        $addToSelectorList: $selectors_subgrid_nesting;
+
+        @for $i from 1 to $subgridNesting {
+            $selectorList: list.append(
+                $selectorList,
+                selector.nest($base_sels, '>', $addToSelectorList),
+                $separator: comma
+            );
+
+            // @at-root #{$selectorList} {
+            //     /* $i = #{$i} */
+            // }
+
+            $addToSelectorList: selector.nest($addToSelectorList, '>', $selectors_subgrid_nesting);
+        }
+
+        @at-root #{list.unique($selectorList)} {
             @content;
         }
     }

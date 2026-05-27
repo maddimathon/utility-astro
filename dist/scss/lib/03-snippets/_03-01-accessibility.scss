@@ -38,23 +38,17 @@
     $focus_top: var-gap-block(layout),
     $zIndex: 999999
 ) {
-    $_content_exits: meta.content-exists();
-
     $baseSelectors: list.join(
         ('.skip-link'),
         config.$selectors_skipLinks_extra,
         $separator: comma
     );
 
-    $skipSelectors: ();
-
-    @each $sel in $baseSelectors {
-        $skipSelectors: list.join(
-            $skipSelectors,
-            ($sel, selector.unify($sel, config.$selector_a)),
-            $separator: comma
-        );
-    }
+    $skipSelectors: list.join(
+        $baseSelectors,
+        selector.unify($baseSelectors, config.$selector_a),
+        $separator: comma
+    );
 
     #{$skipSelectors} {
         @include prop-display(block);
@@ -67,30 +61,22 @@
 
         z-index: $zIndex;
 
-        @if $_content_exits {
-            @content (link-root);
-        }
+        @content (link-root);
 
-        @include focus {
+        @include apply-interactive-mixin(
+            $focus: true,
+            $focusWithin: true,
+            $fallbacksOnly: true
+        ) {
             top: $focus_top;
 
-            @if $_content_exits {
-                @content (link-focus);
-            }
+            @content (link-focus);
         }
 
-        @include focus-within {
+        @include apply-interactive-mixin($active: true, $activeWithin: true) {
             top: $focus_top;
 
-            @if $_content_exits {
-                @content (link-focus);
-            }
-        }
-
-        @include active {
-            @if $_content_exits {
-                @content (link-active);
-            }
+            @content (link-active);
         }
     }
 
@@ -101,17 +87,13 @@
         margin: 0;
         padding: 0;
 
-        @if $_content_exits {
-            @content ($location: 'list-root');
-        }
+        @content (list-root);
 
         li {
             margin: 0;
             padding: 0;
 
-            @if $_content_exits {
-                @content ($location: 'list-item');
-            }
+            @content (list-item);
         }
     }
 }
