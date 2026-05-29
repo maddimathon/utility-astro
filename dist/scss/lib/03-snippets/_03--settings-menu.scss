@@ -28,9 +28,7 @@
     $fieldset_flexContainer_gap: var-mrg-firm('200')
         clamp(var-mrg-firm('400'), 5vw, var-mrg-firm('600')),
     //
-    $includeBaseStyles: true,
-    //
-     //
+    $includeBaseStyles: true
 ) {
     .website-settings-menu {
         @include prop-grid-column(page-start / page-end);

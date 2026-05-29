@@ -51,7 +51,7 @@ const config = {
             },
         },
 
-        sass: ( args ) => sassCompilerOpts( args, {
+        sass: ( stage ) => sassCompilerOpts( stage, {
             benchmarkCompileTime: true,
             // pathToSassLoggingRoot: 'node_modules/@maddimathon/build-utilities/node_modules',
         } ),
