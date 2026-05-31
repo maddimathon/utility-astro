@@ -8,6 +8,7 @@
 @use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/config/template' with (
+    $mx_customProperty_allPrefixesSlugs: pre.$mx_customProperty_allPrefixesSlugs,
     $mx_extendSelectors_headingsByRole: false !default,
 
     $selector_interactiveState_active: '[data-state-active=true]' !default,

@@ -5,11 +5,30 @@
 /// @since ___PKG_VERSION___
 ///
 
+@use 'sass:list';
 @use 'sass:string';
 
 @use '../../02-lib' as lib;
 
 @use '../functions' as *;
+
+///
+/// List of slugs that should default to $allPrefixes: true in the custom-property mixin.
+///
+/// @since ___PKG_VERSION___
+///
+$mx_customProperty_allPrefixesSlugs: null !default;
+$mx_customProperty_allPrefixesSlugs: config-valid-list-strings(
+    $mx_customProperty_allPrefixesSlugs,
+    'mx_customProperty_allPrefixesSlugs',
+    $default: ()
+);
+
+$mx_customProperty_allPrefixesSlugs: list.join(
+    ('display', 'focus-ring-outline-color', 'grid-column', 'icon-color'),
+    $mx_customProperty_allPrefixesSlugs,
+    $separator: comma
+);
 
 ///
 /// @since 0.1.0-alpha

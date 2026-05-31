@@ -4,6 +4,7 @@
 ///
 
 @forward '_pre';
-@forward 'lib' hide $template_cssHeadings, $template_docBlock, $template_extendSelectors,
-    $template_globals, $template_isDefault, $template_name, $template_slug, $template_styles,
-    $template_tokens, $template_utils;
+
+@forward 'lib' hide $mx_customProperty_allPrefixesSlugs, $template_cssHeadings, $template_docBlock,
+    $template_extendSelectors, $template_globals, $template_isDefault, $template_name,
+    $template_slug, $template_styles, $template_tokens, $template_utils;
