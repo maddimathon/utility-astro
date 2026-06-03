@@ -385,6 +385,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @include cx-prop(display, block);
                 display: none;
                 position: fixed;
+                align-self: auto;
                 justify-self: auto;
 
                 top: 0;

@@ -17,11 +17,13 @@
 
     %table,
     %table-wrapper {
+        align-self: center;
         justify-self: center;
     }
 
     %table-wrapper {
         > %table {
+            align-self: start;
             justify-self: start;
         }
     }

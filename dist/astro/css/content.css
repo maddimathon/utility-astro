@@ -296,16 +296,6 @@ body > :where(aside) {
 body > :where(aside) > :first-child {
     margin-top: 0;
 }
-:where(body form) fieldset {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
-    justify-content: center;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-}
 
 :where(.layout_content-only) > :where(header) > :where(*) {
     --grid-column: content-start/content-end;
@@ -353,10 +343,8 @@ body > :where(aside) > :first-child {
 }
 
 @media (min-width: 55.625em) {
-    .layout_sidebar-left > :where(main),
-    .layout_sidebar-left > :where(aside),
-    .layout_sidebar-right > :where(main),
-    .layout_sidebar-right > :where(aside) {
+    .layout_sidebar-left > :where(main, aside),
+    .layout_sidebar-right > :where(main, aside) {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */

@@ -16,8 +16,8 @@
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-items: stretch;
-    align-content: start;
+    justify-content: start;
+    align-content: center;
     align-items: stretch;
 }
 
@@ -320,6 +320,7 @@
     --display: block;
     display: none;
     position: fixed;
+    align-self: auto;
     justify-self: auto;
     top: 0;
     left: 0;

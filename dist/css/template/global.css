@@ -148,8 +148,8 @@
  * ======================================================================== */
 hr {
     display: block;
-    justify-self: center;
     align-self: center;
+    justify-self: center;
     margin-top: 2.25rem;
     margin-bottom: 2.25rem;
     margin-left: 9%;
@@ -1610,6 +1610,7 @@ blockquote > cite {
     margin-bottom: 0;
     text-align: right;
     align-self: end;
+    justify-self: end;
 }
 blockquote > cite::before {
     content: "— ";
@@ -1649,6 +1650,7 @@ pre {
     max-width: 100%;
     font-size: 0.9375rem;
     overflow: auto;
+    align-self: center;
     justify-self: center;
 }
 pre > code,
@@ -1711,6 +1713,7 @@ pre:has(> :is(code, kbd, samp)):is(
 /* # ASTRO GLOBALS - Tables
  * ======================================================================== */
 table {
+    align-self: center;
     justify-self: center;
 }
 

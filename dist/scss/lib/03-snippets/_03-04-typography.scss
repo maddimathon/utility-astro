@@ -42,11 +42,13 @@
                     $gap: $flex_gap
                 );
 
+                align-self: center;
                 justify-self: center;
             }
         }
         @if $includeCite and $location == cite {
             align-self: end;
+            justify-self: end;
         }
         @content ($location);
     }
@@ -78,6 +80,7 @@
     @include utils.snippet-pre($marginInline: $marginInline, $args...) using
         ($location) {
         @if $location == root {
+            align-self: center;
             justify-self: center;
         }
 

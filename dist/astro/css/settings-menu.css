@@ -62,10 +62,9 @@
     gap: 0.5rem clamp(1.25rem, 5vw, 2.25rem);
     gap: var(--mrg-firm-200, 0.5rem)
         clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
+    justify-content: start;
+    align-content: center;
+    align-items: stretch;
     margin: 0;
     padding: 0;
 }
@@ -129,6 +128,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     text-decoration: none;
     cursor: pointer;
     --icon-size: var(--icon-size-large, 2em);
+    align-self: end;
     justify-self: end;
 }
 :where(.js) .website-settings-menu [data-toggle-control],

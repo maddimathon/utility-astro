@@ -34,22 +34,18 @@ $_contentCol_default: minmax(auto, $_width_content);
 
 $_default_grid_page: snippet-support-astro-body-grid--default-grid-page();
 
-$_flex_container_alignment_col: map.set(
-    tokens.$contentGridAlignment,
-    align-items,
-    map.get(tokens.$contentGridAlignment, justify-items)
+$_flex_container_alignment_col: (
+    justify-content: map.get(tokens.$contentGridAlignment, align-content),
+    // justify-items: map.get(tokens.$contentGridAlignment, align-items),
+    align-content: map.get(tokens.$contentGridAlignment, justify-content),
+    align-items: map.get(tokens.$contentGridAlignment, justify-items),
 );
 
-$_flex_container_alignment_col: map.set(
-    $_flex_container_alignment_col,
-    justify-content,
-    map.get(tokens.$contentGridAlignment, aling-content)
-);
-
-$_flex_container_alignment_row: map.set(
-    tokens.$contentGridAlignment,
-    justify-content,
-    map.get(tokens.$contentGridAlignment, justify-items)
+$_flex_container_alignment_row: (
+    justify-content: map.get(tokens.$contentGridAlignment, align-content),
+    // justify-items: map.get(tokens.$contentGridAlignment, align-items),
+    align-content: map.get(tokens.$contentGridAlignment, justify-content),
+    align-items: map.get(tokens.$contentGridAlignment, justify-items),
 );
 
 ///
@@ -83,7 +79,12 @@ $_flex_container_alignment_row: map.set(
     }
 
     justify-content: map.get($alignment, justify-content);
-    justify-items: map.get($alignment, justify-items);
+
+    $justifyContent: map.get($alignment, justify-items);
+    @if $justifyContent {
+        justify-items: $justifyContent;
+    }
+
     align-content: map.get($alignment, align-content);
     align-items: map.get($alignment, align-items);
 }
@@ -324,9 +325,6 @@ $_flex_container_alignment_row: map.set(
 
     @at-root #{if(list.length($additionalSelectors) > 0, $additionalSelectors, config.$selector_null)},
         #{$base_sels} {
-        // /* $subgridNesting = #{$subgridNesting} */
-        // /* $i = 0 */
-
         $selectorList: (&);
 
         $addToSelectorList: $selectors_subgrid_nesting;
@@ -337,10 +335,6 @@ $_flex_container_alignment_row: map.set(
                 selector.nest($base_sels, '>', $addToSelectorList),
                 $separator: comma
             );
-
-            // @at-root #{$selectorList} {
-            //     /* $i = #{$i} */
-            // }
 
             $addToSelectorList: selector.nest(
                 $addToSelectorList,
@@ -388,26 +382,11 @@ $_flex_container_alignment_row: map.set(
         @include snippet-support-astro-body-grid--page-width;
     }
 
-    > :where(%_site-sidebar),
-    > :where(%site-sidebar) {
+    > :where(%_site-sidebar, %site-sidebar) {
         @include snippet-support-astro-body-grid--sidebar-width;
 
         > :first-child {
             margin-block-start: 0;
-        }
-    }
-
-    @at-root :where(& %form) {
-        %fieldset {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            gap: 0;
-
-            justify-content: map.get($flex_alignment, justify-content);
-            justify-items: map.get($flex_alignment, justify-items);
-            align-content: map.get($flex_alignment, align-content);
-            align-items: map.get($flex_alignment, align-items);
         }
     }
 }
@@ -663,9 +642,7 @@ $_flex_container_alignment_row: map.set(
         %layout-sidebar-left,
         %layout-sidebar-right {
             @include min-width(sidebar) {
-                > :where(%main-content),
-                > :where(%_site-sidebar),
-                > :where(%site-sidebar) {
+                > :where(%main-content, %_site-sidebar, %site-sidebar) {
                     // prettier-ignore
                     $_default_grid_page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
 

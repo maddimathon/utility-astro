@@ -143,6 +143,7 @@
                         using ($location) {
                         @if $location == root {
                             @include cx-prop(icon-size, do-var(icon-size-large));
+                            align-self: end;
                             justify-self: end;
                         }
                     }

@@ -95,7 +95,7 @@ const ContentComponent = contentTypes[type];
             <hgroup
                 slot='content-header'
                 role='group'
-                aria-roledescription='Page Header'
+                aria-roledescription='Heading group'
             >
                 {titleString && (
                     <h1
@@ -105,6 +105,7 @@ const ContentComponent = contentTypes[type];
                 )}
                 {p.subtitle && (
                     <p
+                        aria-roledescription='subtitle'
                         class='page-subtitle'
                         set:text={p.subtitle}
                     />

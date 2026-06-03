@@ -786,8 +786,8 @@ hr {
     --display: block;
     display: block;
     display: var(--display, block);
-    justify-self: center;
     align-self: center;
+    justify-self: center;
     margin-top: 2.25rem;
     margin-bottom: 2.25rem;
     margin-top: var(--mrg-firm-600, 2.25rem);
@@ -2492,9 +2492,10 @@ blockquote {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-items: stretch;
-    align-content: start;
+    justify-content: start;
+    align-content: center;
     align-items: stretch;
+    align-self: center;
     justify-self: center;
 }
 blockquote > :first-child {
@@ -2509,6 +2510,7 @@ blockquote > cite {
     margin-bottom: 0;
     text-align: right;
     align-self: end;
+    justify-self: end;
 }
 blockquote > cite::before {
     content: "— ";
@@ -2558,6 +2560,7 @@ pre {
     font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
     overflow: auto;
+    align-self: center;
     justify-self: center;
 }
 pre > code,
@@ -2624,10 +2627,12 @@ pre:has(> :is(code, kbd, samp)):is(
  * ======================================================================== */
 table,
 .table-wrapper {
+    align-self: center;
     justify-self: center;
 }
 
 .table-wrapper > table {
+    align-self: start;
     justify-self: start;
 }
 
@@ -2937,16 +2942,6 @@ body > :where(aside) {
 body > :where(aside) > :first-child {
     margin-top: 0;
 }
-:where(body form) fieldset {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
-    justify-content: center;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
-}
 
 :where(.layout_content-only) > :where(header) > :where(*) {
     --grid-column: content-start/content-end;
@@ -2994,10 +2989,8 @@ body > :where(aside) > :first-child {
 }
 
 @media (min-width: 55.625em) {
-    .layout_sidebar-left > :where(main),
-    .layout_sidebar-left > :where(aside),
-    .layout_sidebar-right > :where(main),
-    .layout_sidebar-right > :where(aside) {
+    .layout_sidebar-left > :where(main, aside),
+    .layout_sidebar-right > :where(main, aside) {
         /* prettier-ignore */
         --grid-template-columns--page: 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
@@ -3173,8 +3166,8 @@ body > :where(aside) > :first-child {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 0;
-    justify-items: stretch;
-    align-content: start;
+    justify-content: start;
+    align-content: center;
     align-items: stretch;
 }
 
@@ -3477,6 +3470,7 @@ body > :where(aside) > :first-child {
     --display: block;
     display: none;
     position: fixed;
+    align-self: auto;
     justify-self: auto;
     top: 0;
     left: 0;
@@ -3961,10 +3955,9 @@ body > nav[data-toggle-container] {
     gap: 0.5rem clamp(1.25rem, 5vw, 2.25rem);
     gap: var(--mrg-firm-200, 0.5rem)
         clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
-    justify-content: stretch;
-    justify-items: stretch;
-    align-content: start;
-    align-items: start;
+    justify-content: start;
+    align-content: center;
+    align-items: stretch;
     margin: 0;
     padding: 0;
 }
@@ -4028,6 +4021,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     text-decoration: none;
     cursor: pointer;
     --icon-size: var(--icon-size-large, 2em);
+    align-self: end;
     justify-self: end;
 }
 :where(.js) .website-settings-menu [data-toggle-control],
