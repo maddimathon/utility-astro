@@ -292,13 +292,11 @@ pre {
     syntax: "<length-percentage> | <number>";
     inherits: true;
     initial-value: 0.125em;
-    initial-value: var(--stroke-relative-400, 0.125em);
 }
 @property --focus-ring-outline-width {
     syntax: "<length-percentage> | <number>";
     inherits: true;
     initial-value: 0.125em;
-    initial-value: var(--stroke-relative-400, 0.125em);
 }
 @property --grid-column {
     syntax: "*";
@@ -690,11 +688,7 @@ html {
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(
         --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
+        var(--stroke-relative-400, 0.125em)
     );
     outline-style: dashed;
     outline-color: LinkText;
@@ -714,11 +708,7 @@ html {
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(
         --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
+        var(--stroke-relative-400, 0.125em)
     );
     outline-style: dashed;
     outline-color: LinkText;
@@ -738,11 +728,7 @@ html {
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(
         --focus-ring-outline-width,
-        clamp(
-            var(--border-width-200, 0.125rem),
-            var(--stroke-relative-400, 0.125em),
-            var(--border-width-400, 0.25rem)
-        )
+        var(--stroke-relative-400, 0.125em)
     );
     outline-style: dashed;
     outline-color: LinkText;

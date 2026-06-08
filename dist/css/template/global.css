@@ -86,10 +86,7 @@
 .js__no-whereSelector :focus {
     /* %focus-ring--fallback */
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(0.125rem, 0.125em, 0.25rem)
-    );
+    outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
@@ -103,10 +100,7 @@
 :where(.js__no-focusVisible) :focus {
     /* %focus-ring--where */
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(0.125rem, 0.125em, 0.25rem)
-    );
+    outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
@@ -120,10 +114,7 @@
 :focus-visible {
     /* %focus-ring--visible */
     outline-width: clamp(0.125rem, 0.125em, 0.25rem);
-    outline-width: var(
-        --focus-ring-outline-width,
-        clamp(0.125rem, 0.125em, 0.25rem)
-    );
+    outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
     outline-color: LinkText;
     outline-color: var(
