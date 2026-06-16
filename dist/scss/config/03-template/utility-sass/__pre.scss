@@ -5,12 +5,35 @@
 /// @since 0.1.0-beta.0.draft
 ///
 
-@use 'sass:list';
-@use 'sass:string';
-
 @use '../../02-lib' as lib;
 
+@use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/string';
+
 @use '../functions' as *;
+
+$_doVar_allPrefixesSlugs: ('focus-ring-outline-color', 'icon-size');
+
+$_customProperty_allPrefixesSlugs: ('display', 'grid-column', 'icon-color');
+
+///
+/// List of slugs that should default to $allPrefixes: true in the
+/// do-var function.
+///
+/// @since 0.1.0-beta.0.draft
+///
+$fn_doVar_allPrefixesSlugs: null !default;
+$fn_doVar_allPrefixesSlugs: config-valid-list-strings(
+    $fn_doVar_allPrefixesSlugs,
+    'fn_doVar_allPrefixesSlugs',
+    $default: ()
+);
+
+$fn_doVar_allPrefixesSlugs: list.join(
+    $_doVar_allPrefixesSlugs,
+    $fn_doVar_allPrefixesSlugs,
+    $separator: comma
+);
 
 ///
 /// List of slugs that should default to $allPrefixes: true in the custom-property mixin.
@@ -25,8 +48,32 @@ $mx_customProperty_allPrefixesSlugs: config-valid-list-strings(
 );
 
 $mx_customProperty_allPrefixesSlugs: list.join(
-    ('display', 'focus-ring-outline-color', 'grid-column', 'icon-color'),
+    list.join(
+        $fn_doVar_allPrefixesSlugs,
+        $_customProperty_allPrefixesSlugs,
+        $separator: comma
+    ),
     $mx_customProperty_allPrefixesSlugs,
+    $separator: comma
+);
+
+///
+/// List of slugs that should be excluded from the default
+/// $mx_customProperty_allPrefixesSlugs list.
+///
+/// @since 0.1.0-beta.0.draft
+///
+$mx_customProperty_allPrefixesSlugs_except: null !default;
+$mx_customProperty_allPrefixesSlugs_except: config-valid-list-strings(
+    $mx_customProperty_allPrefixesSlugs_except,
+    'mx_customProperty_allPrefixesSlugs_except',
+    $default: (),
+    $allowEmptyList: true
+);
+
+$mx_customProperty_allPrefixesSlugs: list.except-any(
+    $mx_customProperty_allPrefixesSlugs,
+    $mx_customProperty_allPrefixesSlugs_except,
     $separator: comma
 );
 

@@ -27,6 +27,8 @@
     $fieldset_flexContainer_direction: row,
     $fieldset_flexContainer_gap: var-mrg-firm('200')
         clamp(var-mrg-firm('400'), 5vw, var-mrg-firm('600')),
+    $zIndex: 1,
+    $zIndex_open: 999999,
     //
     $includeBaseStyles: true
 ) {
@@ -47,7 +49,7 @@
             }
 
             overscroll-behavior: none;
-            z-index: 999;
+            z-index: $zIndex;
 
             @content ('settings-menu--container');
         }
@@ -193,8 +195,6 @@
 
             &[data-toggle-container='open'],
             &[data-toggle-container='closing'] {
-                z-index: 999999;
-
                 @content ('js--settings-menu--open-or-closing');
 
                 [data-toggle-control-backdrop] {
@@ -205,6 +205,8 @@
             }
 
             &[data-toggle-container='open'] {
+                z-index: $zIndex_open;
+
                 @content ('js--settings-menu--open');
 
                 [data-toggle-control-backdrop] {

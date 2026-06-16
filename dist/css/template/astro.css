@@ -3897,7 +3897,7 @@ body > nav[data-toggle-container] {
     align-content: end;
     align-items: end;
     overscroll-behavior: none;
-    z-index: 999;
+    z-index: 1;
 }
 
 .website-settings__content {
@@ -4148,10 +4148,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     align-items: start;
     border: none;
 }
-:where(.js) .website-settings-menu[data-toggle-container="open"],
-:where(.js) .website-settings-menu[data-toggle-container="closing"] {
-    z-index: 999999;
-}
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
     [data-toggle-control-backdrop],
@@ -4160,6 +4156,9 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     [data-toggle-control-backdrop] {
     display: block;
     display: var(--display, block);
+}
+:where(.js) .website-settings-menu[data-toggle-container="open"] {
+    z-index: 999999;
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
