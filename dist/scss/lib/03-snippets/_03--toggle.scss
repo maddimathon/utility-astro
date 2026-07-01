@@ -16,7 +16,10 @@
 
 @use '03-02-layouts' as *;
 
-$_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title'));
+$_defaultHeadingSelectors: list.join(
+    selector-all-headings(),
+    ('%title', '.unstyled-heading')
+);
 
 $_defaultHeadingSelectors_bigOnly: ('%title');
 
@@ -265,6 +268,8 @@ $_defaultHeadingSelectors_greaterThan6: ();
     [data-toggle-content] {
         @extend %_flex-contents-container--display-contents;
 
+        // justify-content: stretch;
+
         @content (toggle-content);
 
         /// BLOCK ///
@@ -289,10 +294,11 @@ $_defaultHeadingSelectors_greaterThan6: ();
         grid-auto-rows: auto;
         grid-auto-flow: column;
 
-        justify-content: start;
-        justify-items: start;
-        align-content: start;
-        align-items: start;
+        @include snippet-content-grid-alignment(
+            (
+                justify-content: stretch,
+            )
+        );
 
         @if $includeBaseStyles {
             gap: 0 var-mrg-firm('200');
@@ -366,6 +372,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
             padding: 0;
 
             @if $includeBaseStyles {
+                align-items: center;
                 padding: 0;
                 padding-block-end: $control_paddingBlockEnd;
 
@@ -486,10 +493,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
         #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
             @extend %toggle-container-subgrid;
 
-            justify-content: stretch;
-            justify-items: start;
-            align-content: stretch;
-            align-items: stretch;
+            // justify-content: stretch;
+            // justify-items: start;
+            // align-content: stretch;
+            // align-items: stretch;
+            @include snippet-content-grid-alignment(
+                (
+                    align-content: stretch,
+                    align-items: center,
+                )
+            );
 
             margin: 0;
             // padding: 0;
@@ -541,12 +554,12 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             grid-template-rows: 0fr;
 
-            justify-content: stretch;
-
             margin: 0;
             padding: 0;
 
             @if $includeBaseStyles {
+                width: 100%;
+
                 border-width: 0;
                 border-style: dotted;
                 border-color: currentColor;

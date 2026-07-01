@@ -94,6 +94,13 @@ export interface LoremIpsum_DisplaySettings {
     headingsList?: boolean;
 
     /**
+     * Add subtitles to the heading snippets.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    headingSubtitlesList?: boolean;
+
+    /**
      * @since 0.1.0-alpha.20
      */
     listsLong?: boolean;
@@ -194,6 +201,13 @@ export interface LoremIpsumProps {
     abbreviated?: boolean;
 
     /**
+     * Whether to wrap in a section element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    asSection?: boolean;
+
+    /**
      * The starting visual heading level.
      * 
      * @default null
@@ -263,6 +277,7 @@ export function getLoremIpsumIds(
         buttons,
         code,
         headingsList,
+        headingSubtitlesList,
         forms,
         table,
         toggleBlocks,
@@ -296,6 +311,9 @@ export function getLoremIpsumIds(
     return {
 
         headings: headingsList ? { label: 'Headings', id: 'headings' } as const : undefined,
+        headingSubtitles: headingsList
+            ? ( headingSubtitlesList ? { label: 'Headings with Subheadings', id: 'heading-subheadings' } as const : undefined )
+            : { label: 'Headings', id: 'headings' } as const,
 
         // MAIN SLOT
         ...slots.$,
@@ -406,6 +424,7 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
         forms: isFancy && !abbreviated,
         formsLong: isFancy && !abbreviated,
         headingsList: isFancy && !abbreviated,
+        headingSubtitlesList: false,
         listsMedium: isLibrary,
         listsLong: isFancy && !abbreviated,
         table: isFancy && !abbreviated,
@@ -417,7 +436,7 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
 
         toc,
         tocDefaultOpen: true,
-        tocDisplayHeading: -1,
+        tocDisplayHeading: 0,
         tocExtraItems: undefined,
         tocSortByLabel: false,
 

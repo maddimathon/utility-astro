@@ -78,10 +78,7 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
         id={titleID}
         class='toggle-title'
     >
-        <Heading
-            displayHeading={-1}
-            heading={0}
-        >
+        <Heading heading={0}>
             <Toggle_Control
                 {...{ id, buttonID }}
                 class='toggle-nav-menu__button'

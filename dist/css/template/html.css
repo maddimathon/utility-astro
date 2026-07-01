@@ -2962,7 +2962,7 @@ table,
     justify-self: start;
 }
 
-.page-subtitle {
+.page-title__subheading {
     margin-top: 0.375rem;
     margin-top: var(--mrg-soft-200, 0.375rem);
     margin-bottom: 0;
@@ -2974,11 +2974,11 @@ table,
     text-wrap: balance;
 }
 @media (prefers-contrast: less) {
-    .page-subtitle {
+    .page-title__subheading {
         opacity: 0.75;
     }
 }
-.page-subtitle {
+.page-title__subheading {
     opacity: 0.75;
 }
 
@@ -3003,9 +3003,9 @@ table,
     vertical-align: middle;
 }
 .icon > svg {
-    --display: inline-block;
-    display: inline-block;
-    display: var(--display, inline-block);
+    --display: block;
+    display: block;
+    display: var(--display, block);
     margin: 0;
     padding: 0;
     fill: currentColor;

@@ -28,6 +28,12 @@
     max-width: min(36rem, 90vw);
     max-width: min(var(--width-content, 36rem), 90vw);
 }
+.website-settings__content > :first-child {
+    margin-top: 0;
+}
+.website-settings__content > :last-child {
+    margin-bottom: 0;
+}
 .website-settings__content fieldset {
     margin-top: 0.8125rem;
     margin-bottom: 0.1875rem;

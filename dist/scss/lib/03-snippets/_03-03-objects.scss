@@ -16,7 +16,7 @@
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-support-icons(
-    $display_svg: inline-block,
+    $display_svg: block,
     $display: inline-block,
     $iconSize: do-var(icon-size),
     $includeMinWidth: config.$include_html,

@@ -58,25 +58,26 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                     @include prop-display(grid);
                     position: relative;
 
-                    @include cx-prop(grid-template-columns--page, $content_grid_columns);
-                    grid-template-columns: do-var(grid-template-columns--page);
-                    grid-template-columns: subgrid;
-
-                    justify-content: start;
-                    justify-items: start;
-                    align-content: start;
-                    align-items: start;
-
-                    // $_var_gridCols_page: do-var(grid-template-columns--page, $default_grid_page);
-
-                    // /* prettier-ignore */
-                    // @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
-
-                    // /* prettier-ignore */
-                    // grid-template-columns: $_var_gridCols_page;
+                    // @include cx-prop(grid-template-columns--page, $content_grid_columns);
+                    // grid-template-columns: do-var(grid-template-columns--page);
                     // grid-template-columns: subgrid;
 
-                    // @include snippet-content-grid-alignment($container_alignment);
+                    // @include snippet-content-grid-alignment(
+                    //     (
+                    //         justify-content: stretch,
+                    //     )
+                    // );
+
+                    $_var_gridCols_page: do-var(grid-template-columns--page, $default_grid_page);
+
+                    /* prettier-ignore */
+                    @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
+
+                    /* prettier-ignore */
+                    grid-template-columns: $_var_gridCols_page;
+                    grid-template-columns: subgrid;
+
+                    @include snippet-content-grid-alignment($container_alignment);
 
                     grid-column: 1 / -1;
 
@@ -129,8 +130,6 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                     }
 
                     .toggle-title {
-                        // grid-column: 1 / -1;
-
                         @if $includeBaseStyles {
                             margin-block-end: calc($title_borderWidth * -1);
                             border-block-end: $title_borderWidth solid currentColor;

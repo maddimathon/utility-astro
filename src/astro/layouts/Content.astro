@@ -21,6 +21,8 @@ import { mergeArgs } from '@maddimathon/utility-typescript';
 /* import - values */
 
 /* import - components */
+import { Heading } from '../components.ts';
+
 import Content_ExtraWide from './content/Content_ExtraWide.astro';
 import Content_FullWidth from './content/Content_FullWidth.astro';
 import Content_Only from './content/Content_Only.astro';
@@ -91,37 +93,25 @@ const ContentComponent = contentTypes[type];
 
 <ContentComponent {...p}>
     {
-        titleString && p.subtitle ? (
-            <hgroup
+        titleString ? (
+            <Heading
                 slot='content-header'
-                role='group'
-                aria-roledescription='Heading group'
-            >
-                {titleString && (
-                    <h1
-                        class='page-title'
-                        set:text={titleString}
-                    />
-                )}
-                {p.subtitle && (
-                    <p
-                        aria-roledescription='subtitle'
-                        class='page-subtitle'
-                        set:text={p.subtitle}
-                    />
-                )}
-            </hgroup>
-        ) : titleString ? (
-            <h1
-                slot='content-header'
+                attrs={{ subheading: { class: 'page-title__subheading' } }}
                 class='page-title'
-                set:text={titleString}
-            />
+                heading={1}
+                minimum={1}
+            >
+                <Fragment set:text={titleString} />
+                <Fragment
+                    slot='subheading'
+                    set:text={p.subtitle}
+                />
+            </Heading>
         ) : (
             p.subtitle && (
                 <p
                     slot='content-header'
-                    class='page-subtitle'
+                    class='page-title__subheading'
                     set:text={p.subtitle}
                 />
             )

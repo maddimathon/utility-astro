@@ -10,7 +10,9 @@
 
 import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
-export type ClassList = undefined | string | { [ key: string ]: boolean | undefined; } | ClassList[];
+export type ClassListItem = string | string[] | { [ key: string ]: boolean | undefined; };
+
+export type ClassList = ClassListItem | ( undefined | ClassListItem )[];
 
 /**
  * Creates a props object for components.
@@ -41,8 +43,8 @@ export type ElementProps<
     HTMLAttributes<T_HtmlTag>,
     T_OmitKeys | "class" | "class:list"
 >> & {
-    'aria-description'?: string;
-    class?: ClassList;
+    'aria-description'?: undefined | string;
+    class?: undefined | ClassList;
 };
 
 /**
@@ -62,12 +64,12 @@ export type GenericElementProps<
     T_OmitKeys extends number | string = never,
 > =
     GenericProps<T_Props & {
-        class?: ClassList;
+        class?: undefined | ClassList;
     }>
     & Partial<Omit<
         HTMLAttributes<T_HtmlTag>,
         T_OmitKeys | "class" | "class:list"
     >>
     & {
-        'aria-description'?: string;
+        'aria-description'?: undefined | string;
     };

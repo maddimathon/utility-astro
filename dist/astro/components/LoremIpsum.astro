@@ -44,6 +44,7 @@ type Props = GenericProps<LoremIpsumProps>;
 
 const {
     // abbreviated = false,
+    asSection = true,
     superAbbreviated = false,
     ToggleComponent = Toggle,
     toggleProps = {},
@@ -59,11 +60,9 @@ const ifDisplay = getLoremIpsumDisplaySettings(props);
 
 const tableOfContentsIds = getLoremIpsumIds(props, ifDisplay);
 
-let _heading = props.heading ?? 2;
+const displayHeading = props.displayHeading ?? props.heading;
 
-const displayHeading = props.displayHeading ?? _heading;
-
-const heading = _heading + (props.abbreviated ? -1 : 0);
+const heading = props.heading ?? 2;
 
 const disclaimerHTML = (await Astro.slots.render('disclaimer'))?.trim();
 
@@ -82,86 +81,52 @@ const fullProps = {
     ToggleComponent,
     toggleProps,
 } satisfies ComponentProps<typeof Lorsum_Content_Full>;
+
+const Lorsum_Content = superAbbreviated ? Lorsum_Content_Abbreviated :Lorsum_Content_Full;
 ---
 
 {
-    disclaimerHTML ? (
-        <Fragment>
-            <Lorsum_Disclaimer disclaimerHTML={disclaimerHTML} />
-            {superAbbreviated ? (
-                <Lorsum_Content_Abbreviated {...{ ifDisplay }}>
-                    <slot />
-                    <slot
-                        slot='two'
-                        name='two'
-                    />
-                    <slot
-                        slot='three'
-                        name='three'
-                    />
-                    <slot
-                        slot='four'
-                        name='four'
-                    />
-                </Lorsum_Content_Abbreviated>
-            ) : (
-                <Lorsum_Content_Full {...fullProps}>
-                    <slot />
-                    <slot
-                        slot='two'
-                        name='two'
-                    />
-                    <slot
-                        slot='three'
-                        name='three'
-                    />
-                    <slot
-                        slot='four'
-                        name='four'
-                    />
-                </Lorsum_Content_Full>
-            )}
-        </Fragment>
-    ) : (
+    asSection ? (
         <section
             class='display-contents'
             aria-label='Visual styles preview'
         >
-            <Lorsum_Disclaimer disclaimerHTML={disclaimerHTML} />
-            {superAbbreviated ? (
-                <Lorsum_Content_Abbreviated {...{ ifDisplay }}>
-                    <slot />
-                    <slot
-                        slot='two'
-                        name='two'
-                    />
-                    <slot
-                        slot='three'
-                        name='three'
-                    />
-                    <slot
-                        slot='four'
-                        name='four'
-                    />
-                </Lorsum_Content_Abbreviated>
-            ) : (
-                <Lorsum_Content_Full {...fullProps}>
-                    <slot />
-                    <slot
-                        slot='two'
-                        name='two'
-                    />
-                    <slot
-                        slot='three'
-                        name='three'
-                    />
-                    <slot
-                        slot='four'
-                        name='four'
-                    />
-                </Lorsum_Content_Full>
-            )}
+            <Lorsum_Disclaimer
+                {...{ disclaimerHTML, displayHeading, heading }}
+            />
+            <Lorsum_Content {...fullProps}>
+                <slot />
+                <slot
+                    slot='two'
+                    name='two'
+                />
+                <slot
+                    slot='three'
+                    name='three'
+                />
+                <slot
+                    slot='four'
+                    name='four'
+                />
+            </Lorsum_Content>
         </section>
+    ) : (
+    <Lorsum_Disclaimer {...{ disclaimerHTML, displayHeading, heading }} />
+        <Lorsum_Content {...fullProps}>
+            <slot />
+            <slot
+                slot='two'
+                name='two'
+            />
+            <slot
+                slot='three'
+                name='three'
+            />
+            <slot
+                slot='four'
+                name='four'
+            />
+        </Lorsum_Content>
     )
 }
 

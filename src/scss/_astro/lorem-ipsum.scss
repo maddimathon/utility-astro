@@ -10,7 +10,8 @@
 
 $_lineClamp: lib.do-var(loremipsum-heading-sample-line-clamp, 3);
 
-.loremipsum-heading-sample {
+:global(.loremipsum-heading-sample),
+:global(.loremipsum-heading-sample__subheading) {
     display: -webkit-inline-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $_lineClamp;

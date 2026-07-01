@@ -5,7 +5,8 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # LOREM IPSUM ==================================== */
-.loremipsum-heading-sample {
+:global(.loremipsum-heading-sample),
+:global(.loremipsum-heading-sample__subheading) {
     display: -webkit-inline-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;

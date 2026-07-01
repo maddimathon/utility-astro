@@ -80,7 +80,7 @@ body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     align-content: start;
     align-items: start;
     grid-auto-rows: auto;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     grid-gap: 0;
     gap: 0;
     /* prettier-ignore */
@@ -268,6 +268,7 @@ body > :is(.body-subgrid) > :is(.body-subgrid),
 body > :where(main, nav, header, footer) > :is(.body-subgrid) {
     grid-column: 1/-1;
     grid-template-columns: subgrid;
+    grid-auto-rows: auto;
     margin-left: 0;
     margin-right: 0;
 }
@@ -292,9 +293,6 @@ body > :where(aside) {
     grid-column: sidebar-start/sidebar-end;
     grid-column: var(--grid-column, sidebar-start/sidebar-end);
     width: auto;
-}
-body > :where(aside) > :first-child {
-    margin-top: 0;
 }
 
 :where(.layout_content-only) > :where(header) > :where(*) {

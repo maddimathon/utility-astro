@@ -54,6 +54,7 @@ const { ifDisplay }: Props = Astro.props;
         )
     }
 </p>
+
 <ul>
     <li>Etiam ullamcorper commodo risus.</li>
     {
@@ -140,43 +141,44 @@ const { ifDisplay }: Props = Astro.props;
     }
     <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
 </ul>
+
 <p>
     Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus
     eros magna, ac sagittis nibh sodales eget.
 </p>
-<Fragment
-    >{
-        ifDisplay.buttons && (
-            <div class='button-span'>
-                <button type='button'>This is a button</button>
 
-                {ifDisplay.disabledButton && (
-                    <button
-                        aria-disabled='true'
-                        type='button'
-                    >
-                        This is a disabled button
-                    </button>
-                )}
+{
+    ifDisplay.buttons && (
+        <div class='button-span'>
+            <button type='button'>This is a button</button>
 
-                {ifDisplay.buttonVariations
-                    ? ifDisplay.buttonVariations.map(
-                          (variant) =>
-                              (ifDisplay.buttonVariationsAll ||
-                                  variant === 'secondary' ||
-                                  variant === 'tertiary') && (
-                                  <button
-                                      class={`button-${variant}`}
-                                      set:text={`This is a ${variant} button`}
-                                      type='button'
-                                  />
-                              ),
-                      )
-                    : ''}
-            </div>
-        )
-    }</Fragment
->
+            {ifDisplay.disabledButton && (
+                <button
+                    aria-disabled='true'
+                    type='button'
+                >
+                    This is a disabled button
+                </button>
+            )}
+
+            {ifDisplay.buttonVariations
+                ? ifDisplay.buttonVariations.map(
+                      (variant) =>
+                          (ifDisplay.buttonVariationsAll ||
+                              variant === 'secondary' ||
+                              variant === 'tertiary') && (
+                              <button
+                                  class={`button-${variant}`}
+                                  set:text={`This is a ${variant} button`}
+                                  type='button'
+                              />
+                          ),
+                  )
+                : ''}
+        </div>
+    )
+}
+
 <p>
     Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus
     condimentum. Vivamus vulputate nisl sit amet vehicula commodo.

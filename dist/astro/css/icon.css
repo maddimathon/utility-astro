@@ -26,9 +26,9 @@
 }
 .icon .icon > svg,
 .toggle-control > :global(.icon) .icon > svg {
-    --display: inline-block;
-    display: inline-block;
-    display: var(--display, inline-block);
+    --display: block;
+    display: block;
+    display: var(--display, block);
     margin: 0;
     padding: 0;
     fill: currentColor;

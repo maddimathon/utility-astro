@@ -106,7 +106,7 @@ $_flex_container_alignment_row: (
 @mixin snippet-support-astro-body-grid--base-grid(
     $alignment: (),
     $autoRows: auto,
-    $autoFlow: column,
+    $autoFlow: row,
     $gap: 0,
     $position: relative,
     //
@@ -124,7 +124,10 @@ $_flex_container_alignment_row: (
 
     @include snippet-content-grid-alignment($alignment: $alignment);
 
-    grid-auto-rows: $autoRows;
+    @if $autoRows != false {
+        grid-auto-rows: $autoRows;
+    }
+
     grid-auto-flow: $autoFlow;
 
     gap: $gap;
@@ -325,15 +328,18 @@ $_flex_container_alignment_row: (
 /// @since ___PKG_VERSION___
 ///
 @mixin snippet-support-astro-body-grid--body-children(
-    $flex_alignment: tokens.$contentGridAlignment
+    $flex_alignment: tokens.$contentGridAlignment,
+    $includeMarginBlock: true
 ) {
-    @at-root :where(&) {
-        > :where(*) + :where(*) {
-            margin-block: var-gap-block(layout) 0;
-        }
+    @if $includeMarginBlock {
+        @at-root :where(&) {
+            > :where(*) + :where(*) {
+                margin-block: var-gap-block(layout) 0;
+            }
 
-        > :where(%site-footer) {
-            margin-block: var-gap-block(layout);
+            > :where(%site-footer) {
+                margin-block: var-gap-block(layout);
+            }
         }
     }
 
@@ -342,6 +348,7 @@ $_flex_container_alignment_row: (
         grid-column: 1 / -1;
 
         grid-template-columns: subgrid;
+        grid-auto-rows: auto;
 
         margin-inline: 0;
 
@@ -354,10 +361,6 @@ $_flex_container_alignment_row: (
 
     > :where(%_site-sidebar, %site-sidebar) {
         @include snippet-support-astro-body-grid--sidebar-width;
-
-        > :first-child {
-            margin-block-start: 0;
-        }
     }
 }
 

@@ -26,13 +26,9 @@ const fs = new FileSystem(
 
 export const homeURL = new URL( pkg.homepage );
 
-const outDir = (
-    projectConfig.getDistDir( fs, 'docs' ) ?? projectConfig.getDistDir( fs )
-).replace( /\/+$/gi, '' ) + '/docs';
+const outDir = projectConfig.getDistDir( fs, 'docs' ) ?? projectConfig.getDistDir( fs ).replace( /\/+$/gi, '' ) + '/docs';
 
-const srcDir = (
-    projectConfig.getSrcDir( fs, 'docs' )[ 0 ] ?? projectConfig.getSrcDir( fs )
-).replace( /\/+$/gi, '' ) + '/docs';
+const srcDir = projectConfig.getSrcDir( fs, 'docs' )[ 0 ] ?? projectConfig.getSrcDir( fs ).replace( /\/+$/gi, '' ) + '/docs';
 
 export default astroConfig( {
 

@@ -24,6 +24,8 @@ import CodeBlock from '../CodeBlock.astro';
 import Heading from '../Heading.astro';
 import TableOfContents from '../TableOfContents.astro';
 
+import Lorsum_Heading from './Lorsum_Heading.astro';
+
 /* import - layouts */
 
 /* TYPES ===================================== */
@@ -119,21 +121,37 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 
 { ifDisplay.headingsList && (
     <hr />
-    <Heading
-        class="page-title | loremipsum-heading-sample"
-        displayHeading={1}
-        heading={0}
+    <Lorsum_Heading
+        class="page-title"
+        heading={1}
         id={tableOfContentsIds.headings?.id}
-    >Title (.page-title) Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
+        prefix="Title (.page-title)"
+    />
+    <Fragment>{ ifDisplay.headingLevels.map( num => <Lorsum_Heading heading={num} /> ) }</Fragment>
 ) }
 
-{ ifDisplay.headingsList && ifDisplay.headingLevels.map( (num) => (
-    <Heading
-        class="loremipsum-heading-sample"
-        displayHeading={num}
-        heading={0}
-    >Heading {num} Maecenas <strong>Facilisis <a href="#">Sollicitudin Nisi</a></strong>, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus</Heading>
-) ) }
+{ ifDisplay.headingSubtitlesList && (
+    <hr />
+    <Lorsum_Heading
+        class="page-title"
+        heading={1}
+        id={tableOfContentsIds.headingSubtitles?.id}
+        prefix="Title (.page-title)"
+        subheading={true}
+    />
+    <Fragment>{ ifDisplay.textPage && (
+        <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
+    ) }</Fragment>
+
+    <Fragment>{ ifDisplay.headingLevels.map(
+        num => (
+            <Lorsum_Heading heading={num} subheading={true} />
+            <Fragment>{ ifDisplay.textPage && (
+                <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
+            ) }</Fragment>
+        )
+    ) }</Fragment>
+) }
 
 { (ifDisplay.headingsList || ifDisplay.textPage) && (
     <p>Aenean lacinia urna sed lacus interdum faucibus. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>

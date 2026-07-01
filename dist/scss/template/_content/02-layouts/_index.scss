@@ -58,7 +58,7 @@
 }
 
 @if map.get(config.$template_styles, pageSubtitle) {
-    %page-subtitle {
+    %title__subheading {
         margin-block: var-mrg-soft('200') 0;
 
         font-weight: 500;

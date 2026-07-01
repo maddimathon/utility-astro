@@ -6,11 +6,12 @@
  */
 
 /* import - types */
-import { makeNumber } from '@maddimathon/utility-typescript';
-import type { GenericElementProps } from '../../ts/types/index.js';
-import type { HTMLTag } from 'astro/types';
+import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
 /* import - functions */
+import { makeNumber } from '@maddimathon/utility-typescript';
+import { makeClassList } from '../functions/utilities.js';
 
 /* import - values */
 
@@ -51,11 +52,30 @@ export interface HeadingProps {
      * The minimum allowed value for this heading.
      */
     minimum?: number | undefined;
+
+    /**
+     * Additional attributes for other elements.
+     */
+    attrs?:
+        | undefined
+        | {
+              hgroup?:
+                  | undefined
+                  | (Omit<HTMLAttributes<'hgroup'>, 'class' | 'class:list'> & {
+                        class?: ClassList;
+                    });
+              subheading?:
+                  | undefined
+                  | (Omit<HTMLAttributes<'p'>, 'class' | 'class:list'> & {
+                        class?: ClassList;
+                    });
+          };
 }
 
 type Props = GenericElementProps<HeadingProps, 'div'>;
 
 const {
+    attrs: { hgroup: attrs_hgroup, subheading: attrs_subheading } = {},
     class: classList = [],
     displayHeading: displayHeadingRaw,
     fallbackTag = 'p',
@@ -66,7 +86,10 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const htmlContent = (await Astro.slots.render('default'))?.trim();
+const html = {
+    content: (await Astro.slots.render('default'))?.trim(),
+    subheading: (await Astro.slots.render('subheading'))?.trim(),
+};
 
 const heading = Math.round(Number(headingRaw));
 
@@ -75,37 +98,90 @@ const numDisplayHeadingRaw = makeNumber(displayHeadingRaw) ?? displayHeadingRaw;
 const displayHeading =
     typeof numDisplayHeadingRaw === 'number'
         ? Math.round(numDisplayHeadingRaw)
-        : numDisplayHeadingRaw;
+        : typeof numDisplayHeadingRaw === 'undefined'
+          ? numDisplayHeadingRaw
+          : -1;
 
 const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
 
+const headingClass =
+    typeof displayHeading === 'undefined' || displayHeading < 0
+        ? !heading
+            ? ('unstyled-heading' as const)
+            : heading > 6
+              ? (`h${heading}` as const)
+              : headingIsMoreThanMinimum
+                ? ('' as const)
+                : ('unstyled-heading' as const)
+        : displayHeading < 1
+          ? ('unstyled-heading' as const)
+          : (`h${displayHeading}` as const);
+
 const Tag =
     headingIsMoreThanMinimum && heading < 7
-        ? (`h${heading as 2 | 3 | 4 | 5 | 6}` as const)
+        ? (`h${heading as 1 | 2 | 3 | 4 | 5 | 6}` as const)
         : fallbackTag;
 
-const headingClasses =
-    typeof displayHeading === 'undefined'
-        ? heading < 1
-            ? 'unstyled-heading'
-            : heading > 6
-              ? `h${heading}`
-              : headingIsMoreThanMinimum
-                ? ''
-                : 'unstyled-heading'
-        : displayHeading === false || displayHeading < 1
-          ? 'unstyled-heading'
-          : `h${displayHeading}`;
+const guaranteedHeadingClass = headingClass
+    ? headingClass
+    : Tag === 'p'
+      ? 'unstyled-heading'
+      : Tag;
+
+const attrs_heading = {
+    ...attributes,
+    'aria-level': heading > 6 ? heading : undefined,
+    'class:list': makeClassList(headingClass, classList),
+    'role': heading > 6 ? 'heading' : undefined,
+} as const;
+
+const attrs_hgroup_class = makeClassList(
+    `${guaranteedHeadingClass}__hgroup`,
+    attrs_hgroup?.class,
+);
+
+if (attrs_hgroup?.class) {
+    delete attrs_hgroup.class;
+}
+
+const attrs_subheading_class = makeClassList(
+    `${guaranteedHeadingClass}__subheading`,
+    attrs_subheading?.class,
+);
+
+if (attrs_subheading?.class) {
+    delete attrs_subheading.class;
+}
 ---
 
 {
-    htmlContent && (
-        <Tag
-            {...attributes}
-            aria-level={heading > 6 ? heading : undefined}
-            class:list={[headingClasses, { '||': classList }, classList]}
-            role={heading > 6 ? 'heading' : undefined}
-            set:html={htmlContent}
-        />
+    html.content && html.subheading ? (
+        <hgroup
+            {...(attrs_hgroup as Omit<typeof attrs_hgroup, 'class'>)}
+            aria-roledescription='heading group'
+            class:list={attrs_hgroup_class}
+            role='group'
+        >
+            <Tag
+                {...attrs_heading}
+                set:html={html.content}
+            />
+            <p
+                {...(attrs_subheading as Omit<
+                    typeof attrs_subheading,
+                    'class'
+                >)}
+                aria-roledescription='subheading'
+                set:html={html.subheading}
+                class:list={attrs_subheading_class}
+            />
+        </hgroup>
+    ) : (
+        html.content && (
+            <Tag
+                {...attrs_heading}
+                set:html={html.content}
+            />
+        )
     )
 }

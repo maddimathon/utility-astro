@@ -8,9 +8,10 @@
  * @license MIT
  */
 import type { HTMLAttributes, HTMLTag } from 'astro/types';
-export type ClassList = undefined | string | {
+export type ClassListItem = string | string[] | {
     [key: string]: boolean | undefined;
-} | ClassList[];
+};
+export type ClassList = ClassListItem | (undefined | ClassListItem)[];
 /**
  * Creates a props object for components.
  *
@@ -32,8 +33,8 @@ export type GenericProps<T_Props> = T_Props & {
  * ```
  */
 export type ElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys extends number | string = keyof T_Props & number | string> = T_Props & Partial<Omit<HTMLAttributes<T_HtmlTag>, T_OmitKeys | "class" | "class:list">> & {
-    'aria-description'?: string;
-    class?: ClassList;
+    'aria-description'?: undefined | string;
+    class?: undefined | ClassList;
 };
 /**
  * Creates a props object for components, with attributes inherited from the
@@ -47,7 +48,7 @@ export type ElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys extends 
  * @since 0.1.0-alpha.7 — Added optional T_OmitKeys type param.
  */
 export type GenericElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitKeys extends number | string = never> = GenericProps<T_Props & {
-    class?: ClassList;
+    class?: undefined | ClassList;
 }> & Partial<Omit<HTMLAttributes<T_HtmlTag>, T_OmitKeys | "class" | "class:list">> & {
-    'aria-description'?: string;
+    'aria-description'?: undefined | string;
 };

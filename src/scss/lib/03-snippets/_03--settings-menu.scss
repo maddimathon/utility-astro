@@ -64,6 +64,15 @@
 
         @content ('content');
 
+        @if $includeBaseStyles {
+            > :first-child {
+                margin-block-start: 0;
+            }
+            > :last-child {
+                margin-block-end: 0;
+            }
+        }
+
         fieldset {
             @if $includeBaseStyles {
                 margin-block: var-mrg-firm('300') var-mrg-half('300');

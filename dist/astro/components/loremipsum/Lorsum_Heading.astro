@@ -1,0 +1,75 @@
+---
+/**
+ * @since 0.1.0-beta.0.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { ComponentProps } from 'astro/types';
+import type { ClassList } from '../../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import Heading from '../Heading.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface Props extends Omit<
+    ComponentProps<typeof Heading>,
+    'displayHeading'
+> {
+    class?: ClassList;
+    heading: number;
+    prefix?: undefined | string;
+    subheading?: boolean;
+}
+
+const {
+    class: classList,
+    heading,
+    prefix,
+    subheading = false,
+    ...props
+}: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<Heading
+    {...props}
+    attrs={{
+        hgroup: {
+            class: ['loremipsum-heading-sample__hgroup'],
+        },
+        subheading: {
+            class: ['loremipsum-heading-sample__subheading'],
+        },
+    }}
+    class:list={['loremipsum-heading-sample', { '||': classList }, classList]}
+    displayHeading={heading}
+    heading={0}
+    >{prefix ?? `Heading ${heading}`} Maecenas <strong
+        >Facilisis <a
+            href='#'
+            target='_blank'
+            >Sollicitudin Nisi</a
+        ></strong
+    >, Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus
+    Interdum Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra
+    Ligula; Proin Efficitur Rhoncus ex Auctor Faucibus{
+        subheading ? (
+            // prettier-ignore
+            <Fragment slot='subheading'>Morbi pulvinar ut <strong>arcu nec fermentum.</strong> Pellentesque at <a href='#' target='_blank'>ipsum malesuada</a>, egestas odio molestie, sollicitudin eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu ornare, varius ligula eget, mattis sem.</Fragment>
+        ) : (
+            ''
+        )
+    }</Heading
+>
