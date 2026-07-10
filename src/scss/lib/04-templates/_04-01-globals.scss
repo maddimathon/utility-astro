@@ -1,0 +1,188 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@use 'pkg:@maddimathon/utility-sass/lib/templates' as utils;
+
+@use '../../config';
+// @use '../../tokens';
+
+// @use '../01-functions' as *;
+@use '../02-mixins' as *;
+@use '../03-snippets' as *;
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-content-globals-accessibility(
+    $print_skipLinks: map.get(config.$template_styles, skipLinks),
+    //
+    $css_headings: null,
+    $content_exists: null,
+    $args...
+) {
+    $_print_any: $print_skipLinks;
+
+    @if $content_exists == null {
+        $content_exists: meta.content-exists();
+    }
+
+    @if $css_headings == null {
+        $css_headings: if(
+            config.$template_cssHeadings and ($content_exists or $_print_any),
+            true,
+            null
+        );
+    }
+
+    @include utils.template-content-globals-accessibility(
+            $css_headings: $css_headings,
+            $content_exists: $content_exists,
+            $args...
+        )
+        using ($location) {
+        @content ($location);
+    }
+
+    @if $print_skipLinks {
+        @if $css_headings {
+            /* ## Accessibility - Skip Links ==================================== */
+        }
+
+        @include template-utility-astro {
+            @include snippet-support-skip-links;
+        }
+    }
+    @content (skipLinks);
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-content-globals-typography(
+    $print_blockquote: map.get(config.$template_styles, blockquote),
+    $print_pre: map.get(config.$template_styles, pre),
+    //
+    $css_headings: null,
+    $css_headings_blocks: null,
+    $css_headings_inlines: null,
+    $content_exists: null,
+    $args...
+) {
+    $_print_blocks_any: $print_blockquote or $print_pre;
+    $_print_inlines_any: false;
+
+    $_print_any: $_print_blocks_any or $_print_inlines_any;
+
+    @if $content_exists == null {
+        $content_exists: meta.content-exists();
+    }
+
+    @if $css_headings == null {
+        $css_headings: if(
+            config.$template_cssHeadings and ($content_exists or $_print_any),
+            true,
+            null
+        );
+    }
+
+    @if $css_headings_blocks == null {
+        $css_headings_blocks: if(
+            $css_headings != false and ($content_exists or $_print_blocks_any),
+            true,
+            null
+        );
+    }
+
+    @if $css_headings_inlines == null {
+        $css_headings_inlines: if(
+            $css_headings != false and ($content_exists or $_print_inlines_any),
+            true,
+            null
+        );
+    }
+
+    @include utils.template-content-globals-typography(
+            $print_blockquote: false,
+            $print_pre: false,
+            //
+            $css_headings: $css_headings,
+            $css_headings_blocks: $css_headings_blocks,
+            $css_headings_inlines: $css_headings_inlines,
+            $content_exists: $content_exists,
+            $args...
+        )
+        using ($location) {
+        //
+        @if $location == blockquote and $print_blockquote {
+            @include template-end-utility-sass;
+
+            @include template-utility-astro {
+                %blockquote {
+                    @include snippet-blockquote(
+                        $display: if(
+                                map.get(config.$template_styles, astro, bodyGrid),
+                                flex,
+                                if(map.get(config.$template_styles, bodyFlow), flex, block)
+                            )
+                    );
+                }
+            }
+            @content ($location);
+
+            @include template-start-utility-sass;
+        }
+        //
+        @else if $location == pre and $print_pre {
+            @include template-end-utility-sass;
+
+            @include template-utility-astro {
+                %pre {
+                    @include snippet-pre;
+                }
+            }
+            @content ($location);
+
+            @include template-start-utility-sass;
+        }
+        //
+        @else {
+            @content ($location);
+        }
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-content-globals(
+    $print_accessibility: true,
+    $print_typography: true,
+    //
+    $css_headings: null,
+    $args...
+) {
+    @if $print_accessibility {
+        @include template-content-globals-accessibility($css_headings: $css_headings);
+    }
+    @content (accessibility);
+
+    @include utils.template-content-globals(
+            $print_accessibility: false,
+            $print_typography: false,
+            $css_headings: $css_headings,
+            $args...
+        )
+        using ($location) {
+        @if $location == typography and $print_typography {
+            @include template-content-globals-typography($css_headings: $css_headings);
+            @content ($location);
+        } @else if $location != accessibility {
+            @content ($location);
+        }
+    }
+}

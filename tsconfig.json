@@ -34,7 +34,6 @@
         "pretty": true,
         "removeComments": false,
         "resolveJsonModule": true,
-        "resolvePackageJsonExports": true,
         "skipLibCheck": false,
         "sourceMap": false,
         "strict": true,
@@ -44,6 +43,10 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "target": "ESNext",
+        "types": [
+            "node",
+            "jest"
+        ],
         "useUnknownInCatchVariables": true,
         "verbatimModuleSyntax": true
     },

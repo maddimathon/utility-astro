@@ -11,7 +11,6 @@
  * 
  * https://maddimathon.github.io/utility-astro
  */
-/*! START of @maddimathon/utility-astro/template/html */
 /*! START of @maddimathon/utility-sass/template */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -276,8 +275,10 @@ pre {
 }
 
 /* #endregion Normalize */
+/*! END of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 /* #region Tokens - @property */
 @property --display {
     syntax: "*";
@@ -679,8 +680,10 @@ html {
 }
 
 /* #endregion Tokens - Style */
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - ACCESSIBILITY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 [data-state-focus="true"],
 .no-js :focus,
 .js__no-whereSelector :focus {
@@ -753,44 +756,73 @@ html {
     overflow: hidden !important;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/* ## Accessibility - Skip Links ==================================== */
+/*! START of @maddimathon/utility-astro/template/html */
+.skip-link,
+a.skip-link[href] {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    position: fixed;
+    margin: 0;
+    top: -100%;
+    width: -moz-fit-content;
+    width: fit-content;
+    z-index: 999999;
+}
+.skip-link:focus,
+a.skip-link[href]:focus,
+.skip-link[data-state-focus="true"],
+a.skip-link[href][data-state-focus="true"] {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:focus-within,
+a.skip-link[href]:focus-within {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:has([data-state-focus="true"]),
+a.skip-link[href]:has([data-state-focus="true"]) {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:active,
+a.skip-link[href]:active,
+.skip-link[data-state-active="true"],
+a.skip-link[href][data-state-active="true"] {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:has(:active),
+a.skip-link[href]:has(:active),
+.skip-link:has([data-state-active="true"]),
+a.skip-link[href]:has([data-state-active="true"]) {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link-list {
+    grid-column: 1/-1;
+    grid-column: page-start/page-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.skip-link-list li {
+    margin: 0;
+    padding: 0;
+}
+
+/*! END of @maddimathon/utility-astro/template/html */
 /* # GLOBALS - OBJECTS
  * ======================================================================== */
-html {
-    --scroll-padding-top: var(--gap-block-layout, 5vw);
-    --scroll-padding-top: calc(
-        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
-    );
-}
-
-html,
-body {
-    scroll-padding-top: calc(0 + clamp(1.875rem, 5svw, 3.5rem));
-    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
-}
-
-body {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: clamp(1.875rem, 5svw, 3.5rem) clamp(1.25rem, 8svw, 7.125rem);
-    gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
-    margin-top: clamp(1.875rem, 5svw, 3.5rem);
-    margin-bottom: clamp(1.875rem, 5svw, 3.5rem);
-    margin-top: var(--gap-block-layout, 5vw);
-    margin-bottom: var(--gap-block-layout, 5vw);
-    margin-left: clamp(1.25rem, 8svw, 7.125rem);
-    margin-right: clamp(1.25rem, 8svw, 7.125rem);
-    margin-left: var(--gap-inline-layout, 8vw);
-    margin-right: var(--gap-inline-layout, 8vw);
-}
-:where(body) > :where(*) {
-    width: min(calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem)), 100%);
-    width: min(var(--width-page, 58.6875rem), 100%);
-}
-
+/*! START of @maddimathon/utility-sass/template */
 hr {
     --display: block;
     display: block;
@@ -813,8 +845,10 @@ hr {
     border-bottom: currentColor solid var(--border-width-200, 0.125rem);
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ::-moz-selection {
     background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
@@ -848,7 +882,9 @@ body {
     font-size: var(--fs-normal, 1rem);
 }
 
-/* ## Typography - Inline ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Inlines ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 strong,
 b {
     font-weight: 700;
@@ -944,7 +980,9 @@ abbr[title] {
     cursor: help;
 }
 
-/* ## Typography - Block ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Blocks ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 p {
     margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
@@ -954,6 +992,78 @@ hr + p {
     margin-top: 0;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/html */
+blockquote {
+    --display: flex;
+    display: flex;
+    display: var(--display, flex);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0.9375rem;
+    margin-top: var(--mrg-soft-400, 0.9375rem);
+    margin-bottom: 0;
+    margin-top: 1.875rem;
+    margin-bottom: calc(1.875rem - 0.9375rem);
+    margin-top: var(--mrg-soft-600, 1.875rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
+    );
+    padding-left: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: 0.125rem solid currentColor;
+    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+    width: auto;
+    max-width: 26.25rem;
+    max-width: var(--width-callout, 26.25rem);
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    justify-content: start;
+    align-content: center;
+    align-items: stretch;
+    align-self: center;
+    justify-self: center;
+}
+blockquote > :first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    margin-top: 0.9375rem;
+    margin-top: var(--mrg-soft-400, 0.9375rem);
+    margin-bottom: 0;
+    text-align: right;
+    align-self: end;
+    justify-self: end;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+/*! END of @maddimathon/utility-astro/template/html */
+/*! START of @maddimathon/utility-sass/template */
 code,
 kbd,
 pre,
@@ -961,9 +1071,104 @@ samp {
     position: relative;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/html */
+pre {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    position: relative;
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.3125rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-top: var(--mrg-soft-300, 0.625rem);
+    padding-bottom: var(--mrg-soft-300, 0.625rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
+    border: 0.0625rem solid currentColor;
+    border: var(--border-width-100, 0.0625rem) solid currentColor;
+    width: auto;
+    max-width: 100%;
+    font-size: 0.9375rem;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+    overflow: auto;
+    align-self: center;
+    justify-self: center;
+}
+pre > code,
+pre > kbd,
+pre > samp {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    ) {
+    white-space: normal;
+    text-wrap: auto;
+    max-width: 26.25rem;
+    max-width: var(--width-callout, 26.25rem);
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    )
+    > code {
+    white-space: pre-wrap;
+    text-wrap: auto;
+}
+
+/*! END of @maddimathon/utility-astro/template/html */
+/*! START of @maddimathon/utility-sass/template */
+/*! END of @maddimathon/utility-sass/template */
 /* ## Typography - Headings ==================================== */
-h1,
+/*! START of @maddimathon/utility-sass/template */
 .h1,
+h1,
 .page-title {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
@@ -979,18 +1184,18 @@ h1,
     text-wrap: balance;
     font-style: normal;
 }
-h1 button,
 .h1 button,
-h1 [role="button"],
 .h1 [role="button"],
-h1 input[type="button"],
 .h1 input[type="button"],
-h1 input[type="reset"],
 .h1 input[type="reset"],
-h1 input[type="submit"],
 .h1 input[type="submit"],
-h1 a[href].button,
 .h1 a[href].button,
+h1 button,
+h1 [role="button"],
+h1 input[type="button"],
+h1 input[type="reset"],
+h1 input[type="submit"],
+h1 a[href].button,
 .page-title button,
 .page-title [role="button"],
 .page-title input[type="button"],
@@ -1032,8 +1237,8 @@ h1 a[href].button,
     text-transform: inherit;
 }
 
-h2,
-.h2 {
+.h2,
+h2 {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
@@ -1048,18 +1253,18 @@ h2,
     text-wrap: balance;
     font-style: normal;
 }
-h2 button,
 .h2 button,
-h2 [role="button"],
 .h2 [role="button"],
-h2 input[type="button"],
 .h2 input[type="button"],
-h2 input[type="reset"],
 .h2 input[type="reset"],
-h2 input[type="submit"],
 .h2 input[type="submit"],
-h2 a[href].button,
-.h2 a[href].button {
+.h2 a[href].button,
+h2 button,
+h2 [role="button"],
+h2 input[type="button"],
+h2 input[type="reset"],
+h2 input[type="submit"],
+h2 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1095,8 +1300,8 @@ h2 a[href].button,
     text-transform: inherit;
 }
 
-h3,
-.h3 {
+.h3,
+h3 {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
@@ -1111,18 +1316,18 @@ h3,
     text-wrap: balance;
     font-style: normal;
 }
-h3 button,
 .h3 button,
-h3 [role="button"],
 .h3 [role="button"],
-h3 input[type="button"],
 .h3 input[type="button"],
-h3 input[type="reset"],
 .h3 input[type="reset"],
-h3 input[type="submit"],
 .h3 input[type="submit"],
-h3 a[href].button,
-.h3 a[href].button {
+.h3 a[href].button,
+h3 button,
+h3 [role="button"],
+h3 input[type="button"],
+h3 input[type="reset"],
+h3 input[type="submit"],
+h3 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1158,8 +1363,8 @@ h3 a[href].button,
     text-transform: inherit;
 }
 
-h4,
-.h4 {
+.h4,
+h4 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1174,26 +1379,26 @@ h4,
     text-wrap: balance;
     font-style: italic;
 }
-h4 em,
-.h4 em {
+.h4 em,
+h4 em {
     font-style: normal;
 }
-h4 em em,
-.h4 em em {
+.h4 em em,
+h4 em em {
     font-style: italic;
 }
-h4 button,
 .h4 button,
-h4 [role="button"],
 .h4 [role="button"],
-h4 input[type="button"],
 .h4 input[type="button"],
-h4 input[type="reset"],
 .h4 input[type="reset"],
-h4 input[type="submit"],
 .h4 input[type="submit"],
-h4 a[href].button,
-.h4 a[href].button {
+.h4 a[href].button,
+h4 button,
+h4 [role="button"],
+h4 input[type="button"],
+h4 input[type="reset"],
+h4 input[type="submit"],
+h4 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1235,8 +1440,8 @@ h4 a[href].button,
     text-transform: inherit;
 }
 
-h5,
-.h5 {
+.h5,
+h5 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1251,26 +1456,26 @@ h5,
     text-wrap: balance;
     font-style: italic;
 }
-h5 em,
-.h5 em {
+.h5 em,
+h5 em {
     font-style: normal;
 }
-h5 em em,
-.h5 em em {
+.h5 em em,
+h5 em em {
     font-style: italic;
 }
-h5 button,
 .h5 button,
-h5 [role="button"],
 .h5 [role="button"],
-h5 input[type="button"],
 .h5 input[type="button"],
-h5 input[type="reset"],
 .h5 input[type="reset"],
-h5 input[type="submit"],
 .h5 input[type="submit"],
-h5 a[href].button,
-.h5 a[href].button {
+.h5 a[href].button,
+h5 button,
+h5 [role="button"],
+h5 input[type="button"],
+h5 input[type="reset"],
+h5 input[type="submit"],
+h5 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1312,8 +1517,8 @@ h5 a[href].button,
     text-transform: inherit;
 }
 
-h6,
-.h6 {
+.h6,
+h6 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1328,26 +1533,26 @@ h6,
     text-wrap: balance;
     font-style: italic;
 }
-h6 em,
-.h6 em {
+.h6 em,
+h6 em {
     font-style: normal;
 }
-h6 em em,
-.h6 em em {
+.h6 em em,
+h6 em em {
     font-style: italic;
 }
-h6 button,
 .h6 button,
-h6 [role="button"],
 .h6 [role="button"],
-h6 input[type="button"],
 .h6 input[type="button"],
-h6 input[type="reset"],
 .h6 input[type="reset"],
-h6 input[type="submit"],
 .h6 input[type="submit"],
-h6 a[href].button,
-.h6 a[href].button {
+.h6 a[href].button,
+h6 button,
+h6 [role="button"],
+h6 input[type="button"],
+h6 input[type="reset"],
+h6 input[type="submit"],
+h6 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1538,20 +1743,20 @@ h6 a[href].button,
     font-style: italic;
 }
 
-h1:is(.unstyled-heading),
-.h1:is(.unstyled-heading),
-h2:is(.unstyled-heading),
-.h2:is(.unstyled-heading),
-h3:is(.unstyled-heading),
-.h3:is(.unstyled-heading),
-h4:is(.unstyled-heading),
-.h4:is(.unstyled-heading),
-h5:is(.unstyled-heading),
-.h5:is(.unstyled-heading),
+.h8:is(.unstyled-heading),
+.h7:is(.unstyled-heading),
 h6:is(.unstyled-heading),
 .h6:is(.unstyled-heading),
-.h7:is(.unstyled-heading),
-.h8:is(.unstyled-heading) {
+h5:is(.unstyled-heading),
+.h5:is(.unstyled-heading),
+h4:is(.unstyled-heading),
+.h4:is(.unstyled-heading),
+h3:is(.unstyled-heading),
+.h3:is(.unstyled-heading),
+h2:is(.unstyled-heading),
+.h2:is(.unstyled-heading),
+h1:is(.unstyled-heading),
+.h1:is(.unstyled-heading) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1566,63 +1771,63 @@ h6:is(.unstyled-heading),
     font-style: normal;
     font-style: normal;
 }
-h1:is(.unstyled-heading) em,
-.h1:is(.unstyled-heading) em,
-h2:is(.unstyled-heading) em,
-.h2:is(.unstyled-heading) em,
-h3:is(.unstyled-heading) em,
-.h3:is(.unstyled-heading) em,
-h4:is(.unstyled-heading) em,
-.h4:is(.unstyled-heading) em,
-h5:is(.unstyled-heading) em,
-.h5:is(.unstyled-heading) em,
+.h8:is(.unstyled-heading) em,
+.h7:is(.unstyled-heading) em,
 h6:is(.unstyled-heading) em,
 .h6:is(.unstyled-heading) em,
-.h7:is(.unstyled-heading) em,
-.h8:is(.unstyled-heading) em {
+h5:is(.unstyled-heading) em,
+.h5:is(.unstyled-heading) em,
+h4:is(.unstyled-heading) em,
+.h4:is(.unstyled-heading) em,
+h3:is(.unstyled-heading) em,
+.h3:is(.unstyled-heading) em,
+h2:is(.unstyled-heading) em,
+.h2:is(.unstyled-heading) em,
+h1:is(.unstyled-heading) em,
+.h1:is(.unstyled-heading) em {
     font-style: italic;
 }
-h1:is(.unstyled-heading) em em,
-.h1:is(.unstyled-heading) em em,
-h2:is(.unstyled-heading) em em,
-.h2:is(.unstyled-heading) em em,
-h3:is(.unstyled-heading) em em,
-.h3:is(.unstyled-heading) em em,
-h4:is(.unstyled-heading) em em,
-.h4:is(.unstyled-heading) em em,
-h5:is(.unstyled-heading) em em,
-.h5:is(.unstyled-heading) em em,
+.h8:is(.unstyled-heading) em em,
+.h7:is(.unstyled-heading) em em,
 h6:is(.unstyled-heading) em em,
 .h6:is(.unstyled-heading) em em,
-.h7:is(.unstyled-heading) em em,
-.h8:is(.unstyled-heading) em em {
+h5:is(.unstyled-heading) em em,
+.h5:is(.unstyled-heading) em em,
+h4:is(.unstyled-heading) em em,
+.h4:is(.unstyled-heading) em em,
+h3:is(.unstyled-heading) em em,
+.h3:is(.unstyled-heading) em em,
+h2:is(.unstyled-heading) em em,
+.h2:is(.unstyled-heading) em em,
+h1:is(.unstyled-heading) em em,
+.h1:is(.unstyled-heading) em em {
     font-style: normal;
 }
-h1:is(.unstyled-heading) em em em,
-.h1:is(.unstyled-heading) em em em,
-h2:is(.unstyled-heading) em em em,
-.h2:is(.unstyled-heading) em em em,
-h3:is(.unstyled-heading) em em em,
-.h3:is(.unstyled-heading) em em em,
-h4:is(.unstyled-heading) em em em,
-.h4:is(.unstyled-heading) em em em,
-h5:is(.unstyled-heading) em em em,
-.h5:is(.unstyled-heading) em em em,
+.h8:is(.unstyled-heading) em em em,
+.h7:is(.unstyled-heading) em em em,
 h6:is(.unstyled-heading) em em em,
 .h6:is(.unstyled-heading) em em em,
-.h7:is(.unstyled-heading) em em em,
-.h8:is(.unstyled-heading) em em em {
+h5:is(.unstyled-heading) em em em,
+.h5:is(.unstyled-heading) em em em,
+h4:is(.unstyled-heading) em em em,
+.h4:is(.unstyled-heading) em em em,
+h3:is(.unstyled-heading) em em em,
+.h3:is(.unstyled-heading) em em em,
+h2:is(.unstyled-heading) em em em,
+.h2:is(.unstyled-heading) em em em,
+h1:is(.unstyled-heading) em em em,
+.h1:is(.unstyled-heading) em em em {
     font-style: italic;
 }
 
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="8"]),
 :is(.unstyled-heading):where([role="heading"][aria-level="7"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) {
+:is(.unstyled-heading):where([role="heading"][aria-level="6"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="5"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="4"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="3"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="2"]),
+:is(.unstyled-heading):where([role="heading"][aria-level="1"]) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1637,43 +1842,45 @@ h6:is(.unstyled-heading) em em em,
     font-style: normal;
     font-style: normal;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em,
 :is(.unstyled-heading):where([role="heading"][aria-level="7"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em {
+:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em,
+:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em {
     font-style: italic;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em,
 :is(.unstyled-heading):where([role="heading"][aria-level="7"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em {
+:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em {
     font-style: normal;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em em,
 :is(.unstyled-heading):where([role="heading"][aria-level="7"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em em {
+:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em em,
+:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em em {
     font-style: italic;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - LISTS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ol,
-ul,
 .table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol {
+.table-of-contents > ol,
+ul {
     margin: 0;
     margin-left: 20%;
     padding: 0;
@@ -1684,12 +1891,12 @@ ul,
 }
 ol ol,
 ol ul,
-ul ol,
 .table-of-contents [data-toggle-content] > .container ol ol,
 .table-of-contents > ol ol,
-ul ul,
+ul ol,
 .table-of-contents [data-toggle-content] > .container ol ul,
-.table-of-contents > ol ul {
+.table-of-contents > ol ul,
+ul ul {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -1703,9 +1910,9 @@ ol ol {
 ol ol ol {
     list-style-type: lower-roman;
 }
-ul,
 .table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol {
+.table-of-contents > ol,
+ul {
     list-style-type: disc;
 }
 .table-of-contents [data-toggle-content] > .container ol ol,
@@ -1757,8 +1964,10 @@ li li li li em em {
     font-style: italic;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - FORMS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 fieldset {
     --display: block;
     display: block;
@@ -2601,11 +2810,15 @@ a[disabled][href].button {
     cursor: not-allowed;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TABLES
  * ======================================================================== */
-.table-wrapper,
-table {
+/*! START of @maddimathon/utility-sass/template */
+table,
+.table-wrapper {
     position: relative;
+    align-self: center;
+    justify-self: center;
     margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: 0;
@@ -2684,6 +2897,8 @@ table {
     overscroll-behavior-x: none;
 }
 .table-wrapper > table {
+    align-self: start;
+    justify-self: start;
     margin: 0;
     padding: 0;
     background: transparent;
@@ -2728,240 +2943,49 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO - SKIP LINKS
+/* # LAYOUTS - BODY
  * ======================================================================== */
-.skip-link,
-a.skip-link[href] {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    position: fixed;
-    margin: 0;
-    top: -100%;
-    width: -moz-fit-content;
-    width: fit-content;
-    z-index: 999999;
-}
-.skip-link:focus,
-a.skip-link[href]:focus,
-.skip-link[data-state-focus="true"],
-a.skip-link[href][data-state-focus="true"] {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
+/*! START of @maddimathon/utility-sass/template */
+html {
+    --scroll-padding-top: var(--gap-block-layout, 5vw);
+    --scroll-padding-top: calc(
+        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
+    );
 }
 
-.skip-link:focus-within,
-a.skip-link[href]:focus-within {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
+html,
+body {
+    scroll-padding-top: calc(0 + clamp(1.875rem, 5svw, 3.5rem));
+    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
 }
 
-.skip-link:has([data-state-focus="true"]),
-a.skip-link[href]:has([data-state-focus="true"]) {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:active,
-a.skip-link[href]:active,
-.skip-link[data-state-active="true"],
-a.skip-link[href][data-state-active="true"] {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:has(:active),
-a.skip-link[href]:has(:active),
-.skip-link:has([data-state-active="true"]),
-a.skip-link[href]:has([data-state-active="true"]) {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link-list {
-    grid-column: 1/-1;
-    grid-column: page-start/page-end;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.skip-link-list li {
-    margin: 0;
-    padding: 0;
-}
-
-/* # ASTRO GLOBALS - Typography
- * ======================================================================== */
-blockquote {
+body {
     --display: flex;
     display: flex;
     display: var(--display, flex);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    margin-top: 1.875rem;
-    margin-bottom: calc(1.875rem - 0.9375rem);
-    margin-top: var(--mrg-soft-600, 1.875rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
-    );
-    padding-left: 0.8125rem;
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    border-left: 0.125rem solid currentColor;
-    border-left: var(--border-width-200, 0.125rem) solid currentColor;
-    width: auto;
-    max-width: 26.25rem;
-    max-width: var(--width-callout, 26.25rem);
-    position: relative;
     flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
     justify-content: start;
-    align-content: center;
-    align-items: stretch;
-    align-self: center;
-    justify-self: center;
+    align-items: center;
+    gap: clamp(1.875rem, 5svw, 3.5rem) clamp(1.25rem, 8svw, 7.125rem);
+    gap: var(--gap-block-layout, 5vw) var(--gap-inline-layout, 8vw);
+    margin-top: clamp(1.875rem, 5svw, 3.5rem);
+    margin-bottom: clamp(1.875rem, 5svw, 3.5rem);
+    margin-top: var(--gap-block-layout, 5vw);
+    margin-bottom: var(--gap-block-layout, 5vw);
+    margin-left: clamp(1.25rem, 8svw, 7.125rem);
+    margin-right: clamp(1.25rem, 8svw, 7.125rem);
+    margin-left: var(--gap-inline-layout, 8vw);
+    margin-right: var(--gap-inline-layout, 8vw);
 }
-blockquote > :first-child {
-    margin-top: 0;
-}
-blockquote > cite {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    text-align: right;
-    align-self: end;
-    justify-self: end;
-}
-blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
-}
-@media (prefers-contrast: less) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
-}
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
+:where(body) > :where(*) {
+    width: min(calc(36rem + 18rem + clamp(1.25rem, 8svw, 7.125rem)), 100%);
+    width: min(var(--width-page, 58.6875rem), 100%);
 }
 
-@media (prefers-contrast: more) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
-}
-
-pre {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    position: relative;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-    margin-bottom: var(--mrg-half-400, 0.3125rem);
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    padding-top: var(--mrg-soft-300, 0.625rem);
-    padding-bottom: var(--mrg-soft-300, 0.625rem);
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
-    border: 0.0625rem solid currentColor;
-    border: var(--border-width-100, 0.0625rem) solid currentColor;
-    width: auto;
-    max-width: 100%;
-    font-size: 0.9375rem;
-    font-size: var(--fs-smaller-1, 0.9375rem);
-    overflow: auto;
-    align-self: center;
-    justify-self: center;
-}
-pre > code,
-pre > kbd,
-pre > samp {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    margin: 0;
-    padding: 0;
-    border: none;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: none;
-    overflow: visible;
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) {
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) > code {
-    white-space: pre;
-    text-wrap: nowrap;
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    ) {
-    white-space: normal;
-    text-wrap: auto;
-    max-width: 26.25rem;
-    max-width: var(--width-callout, 26.25rem);
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    )
-    > code {
-    white-space: pre-wrap;
-    text-wrap: auto;
-}
-
-/* # ASTRO GLOBALS - Tables
+/*! END of @maddimathon/utility-sass/template */
+/* # LAYOUTS - CONTENT HEADER
  * ======================================================================== */
-table,
-.table-wrapper {
-    align-self: center;
-    justify-self: center;
-}
-
-.table-wrapper > table {
-    align-self: start;
-    justify-self: start;
-}
-
+/*! START of @maddimathon/utility-astro/template/html */
 .page-title__subheading {
     margin-top: 0.375rem;
     margin-top: var(--mrg-soft-200, 0.375rem);
@@ -2982,6 +3006,7 @@ table,
     opacity: 0.75;
 }
 
+/*! END of @maddimathon/utility-astro/template/html */
 /* # BLOCKS - ICONS
  * ======================================================================== */
 .icon {
@@ -3010,5 +3035,3 @@ table,
     padding: 0;
     fill: currentColor;
 }
-
-/*! END of @maddimathon/utility-astro/template/html */

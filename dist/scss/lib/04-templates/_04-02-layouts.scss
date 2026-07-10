@@ -1,0 +1,157 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@use 'pkg:@maddimathon/utility-sass/lib/templates' as utils;
+
+@use '../../config';
+// @use '../../tokens';
+
+@use '../01-functions' as *;
+@use '../02-mixins' as *;
+@use '../03-snippets' as *;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin template-content-layouts-body-grid($css_headings: null) {
+    @if $css_headings == null {
+        $css_headings: config.$template_cssHeadings;
+    }
+
+    @if $css_headings {
+        /* # LAYOUTS - BODY GRID
+         * ======================================================================== */
+    }
+
+    @content (start);
+
+    @include template-utility-astro {
+        %nav {
+            ol,
+            ul {
+                margin-block: 0;
+
+                li {
+                    margin-block: 0;
+                }
+            }
+        }
+
+        @include snippet-support-astro-body-grid;
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin template-content-layouts-content-header(
+    $print_contentHeader: map.get(config.$template_styles, astro, contentHeader),
+    $print_pageSubtitle: map.get(config.$template_styles, pageSubtitle),
+    //
+    $css_headings: null,
+    $content_exists: null
+) {
+    $_print_any: $print_contentHeader or $print_pageSubtitle;
+
+    @if $css_headings == null {
+        @if $content_exists == null {
+            $content_exists: meta.content-exists();
+        }
+
+        $css_headings: config.$template_cssHeadings and
+            ($content_exists or $_print_any);
+    }
+
+    @if $css_headings {
+        /* # LAYOUTS - CONTENT HEADER
+         * ======================================================================== */
+    }
+
+    @content (start);
+
+    @if $_print_any {
+        @include template-utility-astro {
+            @if $print_contentHeader {
+                $_sels_allHeadings: selector-all-headings();
+
+                %content-header {
+                    &,
+                    > hgroup {
+                        > :first-child {
+                            margin-block-start: 0;
+                        }
+                    }
+
+                    > :where(#{$_sels_allHeadings}),
+                    hgroup > :where(#{$_sels_allHeadings}) {
+                        margin-block-start: 0;
+                    }
+
+                    + :where(*) {
+                        margin-block-start: var-mrg-soft('600');
+                    }
+                }
+            }
+            @content (contentHeader);
+
+            @if $print_pageSubtitle {
+                %title__subheading {
+                    margin-block: var-mrg-soft('200') 0;
+
+                    font-weight: 500;
+                    font-size: var-fs(heading-6);
+                    line-height: var-line-height('300');
+                    text-wrap: balance;
+
+                    @include colour-mode((low, average)) {
+                        opacity: 0.75;
+                    }
+                }
+            }
+            @content (pageSubtitle);
+        }
+    } @else {
+        @content (contentHeader);
+        @content (pageSubtitle);
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin template-content-layouts(
+    $print_bodyGrid: map.get(config.$template_styles, astro, bodyGrid),
+    $print_contentHeader: true,
+    //
+    $css_headings: null,
+    $args...
+) {
+    @include utils.template-content-layouts(
+            $css_headings: $css_headings,
+            $args...
+        )
+        using ($location) {
+        @if $location == body {
+            @if $print_bodyGrid {
+                @include template-content-layouts-body-grid(
+                    $css_headings: $css_headings
+                );
+            }
+            @content ($location);
+
+            @if $print_contentHeader {
+                @include template-content-layouts-content-header(
+                    $css_headings: $css_headings
+                );
+            }
+            @content (contentHeader);
+        } @else {
+            @content ($location);
+        }
+    }
+}

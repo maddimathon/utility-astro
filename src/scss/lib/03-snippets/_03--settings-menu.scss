@@ -6,7 +6,7 @@
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 
-@use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+@use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
 
 @use '../../config';
 @use '../../tokens';

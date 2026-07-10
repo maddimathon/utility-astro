@@ -136,6 +136,7 @@
     margin: 0;
     font-weight: 600;
 }
+.toggle-title > .unstyled-heading .toggle-icon,
 .toggle-title > .page-title .toggle-icon,
 .toggle-title > .h1 .toggle-icon,
 .toggle-title > h1 .toggle-icon,
@@ -150,11 +151,11 @@
 .toggle-title > .h6 .toggle-icon,
 .toggle-title > h6 .toggle-icon,
 .toggle-title > .h7 .toggle-icon,
-.toggle-title > .h8 .toggle-icon,
-.toggle-title > .unstyled-heading .toggle-icon {
+.toggle-title > .h8 .toggle-icon {
     --icon-size: 1em;
     padding-bottom: 0;
 }
+.toggle-title > .unstyled-heading [data-toggle-control],
 .toggle-title > .page-title [data-toggle-control],
 .toggle-title > .h1 [data-toggle-control],
 .toggle-title > h1 [data-toggle-control],
@@ -169,8 +170,7 @@
 .toggle-title > .h6 [data-toggle-control],
 .toggle-title > h6 [data-toggle-control],
 .toggle-title > .h7 [data-toggle-control],
-.toggle-title > .h8 [data-toggle-control],
-.toggle-title > .unstyled-heading [data-toggle-control] {
+.toggle-title > .h8 [data-toggle-control] {
     font: inherit;
     line-height: inherit;
     letter-spacing: inherit;
@@ -204,6 +204,7 @@
 :where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h1,
@@ -219,7 +220,6 @@
 :where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) [data-toggle-control] {
     --display: grid;
     display: grid;
@@ -243,6 +243,7 @@
 
 :where(.js) [data-toggle-content],
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h1,
@@ -258,7 +259,6 @@
 :where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) [data-toggle-control] {
     grid-template-columns: subgrid;
     grid-column: 1/-1;
@@ -432,6 +432,7 @@
     grid-column: var(--grid-column, content);
 }
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h1,
@@ -446,8 +447,7 @@
 :where(.js) .toggle-title > .h6,
 :where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading {
+:where(.js) .toggle-title > .h8 {
     justify-content: center;
     justify-items: stretch;
     align-content: stretch;
@@ -458,6 +458,7 @@
 :where(.js) .toggle-title {
     z-index: 2;
 }
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
 :where(.js) .toggle-title > .h1,
 :where(.js) .toggle-title > h1,
@@ -472,14 +473,32 @@
 :where(.js) .toggle-title > .h6,
 :where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading {
+:where(.js) .toggle-title > .h8 {
     margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 0.125em;
     padding-bottom: var(--stroke-relative-400, 0.125em);
 }
-:where(.js) .toggle-title > .unstyled-heading:where(.unstyled-heading) {
+:where(.js)
+    .toggle-title
+    > :is(
+        .unstyled-heading,
+        .page-title,
+        .h1,
+        h1,
+        .h2,
+        h2,
+        .h3,
+        h3,
+        .h4,
+        h4,
+        .h5,
+        h5,
+        .h6,
+        h6,
+        .h7,
+        .h8
+    ):where(.unstyled-heading) {
     padding-bottom: 0;
 }
 :where(.js) [data-toggle-content] {

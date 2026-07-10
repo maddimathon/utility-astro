@@ -5,9 +5,10 @@
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
-@use 'pkg:@maddimathon/utility-sass/03-snippets' as utils;
+@use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
 
 @use '../../config';
 
@@ -16,7 +17,7 @@
 
 @use '03-02-layouts' as *;
 
-$_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title', '.unstyled-heading'));
+$_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title'));
 
 $_defaultHeadingSelectors_bigOnly: ('%title');
 
@@ -523,14 +524,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 }
 
                 @content (js--toggle-title--heading);
+            }
 
-                &:where(%unstyled-heading) {
-                    @if $includeBaseStyles {
-                        padding-block-end: $control_heading_unstyled_paddingBlockEnd;
-                    }
-
-                    @content (js--toggle-title--heading--unstyled);
+            > :is(#{$headingSelectors}):where(.unstyled-heading),
+            > %unstyled-heading--is,
+            > %unstyled-heading--where {
+                @if $includeBaseStyles {
+                    padding-block-end: $control_heading_unstyled_paddingBlockEnd;
                 }
+
+                @content (js--toggle-title--heading--unstyled);
             }
         }
 

@@ -7,7 +7,17 @@
 
 @forward 'utility-sass' hide config-get-template-styles;
 
+@use 'utility-sass' as utils;
 @use '../02-lib' as lib;
+
+///
+/// @since ___PKG_VERSION___
+///
+$template_packagePath: if(
+    utils.$template_isDefault,
+    '@maddimathon/utility-astro/template',
+    '@maddimathon/utility-astro/template/#{utils.$template_slug}'
+) !default;
 
 ///
 /// @since ___PKG_VERSION___

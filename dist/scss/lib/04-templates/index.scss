@@ -1,0 +1,15 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@forward 'pkg:@maddimathon/utility-sass/lib/templates' hide extend-selectors,
+    extend-selectors-globals, extend-selectors-utils, template-content-globals,
+    template-content-globals-accessibility, template-content-globals-typography,
+    template-content-layouts;
+
+@forward '04-01-globals';
+@forward '04-02-layouts';
+// @forward '04-03-utilities';
+@forward '04-04-blocks';
+@forward '04-05-extend-selectors';

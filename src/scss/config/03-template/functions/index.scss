@@ -25,6 +25,7 @@
     $_styles_astro: map.deep-merge(
         (
             bodyGrid: $template_astro,
+            contentHeader: $template_astro or map.get($inputs, astro, bodyGrid),
             toggleNav: $template_astro and
                 if(map.has-key($inputs, toggleBlock), map.get($inputs, toggleBlock), true),
         ),

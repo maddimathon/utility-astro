@@ -1,0 +1,71 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use 'pkg:@maddimathon/utility-sass/map';
+
+// @use 'pkg:@maddimathon/utility-sass/lib/templates' as utils;
+
+@use '../../config';
+// @use '../../tokens';
+
+// @use '../01-functions' as *;
+// @use '../02-mixins' as *;
+@use '../03-snippets' as *;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin template-content-blocks(
+    $print_icons: map.get(config.$template_styles, icons),
+    $print_toggle: map.get(config.$template_styles, toggle),
+    $print_toggleNav: map.get(config.$template_styles, astro, toggleNav),
+    $print_siteSettingsMenu: map.get(config.$template_styles, siteSettingsMenu),
+    //
+    $css_headings: null
+) {
+    @if $css_headings == null {
+        $css_headings: config.$template_cssHeadings;
+    }
+
+    @if $print_icons {
+        @if $css_headings {
+            /* # BLOCKS - ICONS
+             * ======================================================================== */
+        }
+
+        @include snippet-support-icons;
+    }
+    @content (icons );
+
+    @if $print_toggle {
+        @if $css_headings {
+            /* # ASTRO SUPPORT - TOGGLE BLOCK
+             * ======================================================================== */
+        }
+
+        @include snippet-support-toggle-block;
+    }
+    @content (toggle);
+
+    @if $print_toggleNav {
+        @if $css_headings {
+            /* # ASTRO SUPPORT - TOGGLE NAV MENU
+             * ======================================================================== */
+        }
+
+        @include snippet-support-astro-toggle-nav-menu;
+    }
+    @content (toggleNav);
+
+    @if $print_siteSettingsMenu {
+        @if $css_headings {
+            /* # ASTRO SUPPORT - SETTINGS MENU
+             * ======================================================================== */
+        }
+
+        @include snippet-support-site-settings-menu;
+    }
+    @content (siteSettingsMenu);
+}

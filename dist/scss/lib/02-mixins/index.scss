@@ -1,0 +1,35 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-alpha
+///
+
+@forward 'pkg:@maddimathon/utility-sass/lib/mixins';
+
+@forward '02-00-meta';
+
+@use '../../config';
+
+@use 'pkg:@maddimathon/utility-sass/lib/mixins' as utils;
+
+///
+/// Sets grid-column custom and normal properties.
+///
+/// @param {any} $value
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin prop-grid-column(
+    $value,
+    $onlyFallbackPrefix: config.$mx_propGridColumn_onlyFallbackPrefix,
+    $quoteString: false,
+    $args...
+) {
+    @include utils.prop(
+        grid-column,
+        $value,
+        $useCustom: config.$mx_prop_useCustom_gridColumn,
+        $onlyFallbackPrefix: $onlyFallbackPrefix,
+        $quoteString: $quoteString,
+        $args...
+    );
+}

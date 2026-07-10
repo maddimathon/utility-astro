@@ -11,10 +11,9 @@
  * 
  * https://maddimathon.github.io/utility-astro
  */
-/*! START of @maddimathon/utility-astro/template/global */
-/*! START of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 /* #region Tokens - @property */
 @property --display {
     syntax: "*";
@@ -79,8 +78,10 @@
 }
 
 /* #endregion Tokens - Style */
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - ACCESSIBILITY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 [data-state-focus="true"],
 .no-js :focus,
 .js__no-whereSelector :focus {
@@ -135,8 +136,10 @@
     overflow: hidden !important;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - OBJECTS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 hr {
     display: block;
     align-self: center;
@@ -151,8 +154,10 @@ hr {
     border-bottom: currentColor solid 0.125rem;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ::-moz-selection {
     background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
@@ -166,7 +171,9 @@ hr {
     color: var(--sys-clr-selection-text, HighlightText);
 }
 
-/* ## Typography - Inline ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Inlines ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 strong,
 b {
     font-weight: 700;
@@ -254,7 +261,9 @@ abbr[title] {
     cursor: help;
 }
 
-/* ## Typography - Block ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Blocks ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 p {
     margin-top: 0.9375rem;
     margin-bottom: 0;
@@ -263,6 +272,56 @@ hr + p {
     margin-top: 0;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/global */
+blockquote {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0.9375rem;
+    margin-bottom: 0;
+    margin-top: 1.875rem;
+    margin-bottom: 0.9375rem;
+    padding-left: 0.8125rem;
+    border-left: 0.125rem solid currentColor;
+    width: auto;
+    max-width: 26.25rem;
+}
+blockquote > :first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    display: block;
+    margin-top: 0.9375rem;
+    margin-bottom: 0;
+    text-align: right;
+    align-self: end;
+    justify-self: end;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+/*! END of @maddimathon/utility-astro/template/global */
+/*! START of @maddimathon/utility-sass/template */
 code,
 kbd,
 pre,
@@ -270,7 +329,89 @@ samp {
     position: relative;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/global */
+pre {
+    display: block;
+    position: relative;
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    border: 0.0625rem solid currentColor;
+    width: auto;
+    max-width: 100%;
+    font-size: 0.9375rem;
+    overflow: auto;
+    align-self: center;
+    justify-self: center;
+}
+pre > code,
+pre > kbd,
+pre > samp {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    ) {
+    white-space: normal;
+    text-wrap: auto;
+    max-width: 26.25rem;
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    )
+    > code {
+    white-space: pre-wrap;
+    text-wrap: auto;
+}
+
+/*! END of @maddimathon/utility-astro/template/global */
+/*! START of @maddimathon/utility-sass/template */
+/*! END of @maddimathon/utility-sass/template */
 /* ## Typography - Headings ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 h1 {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
@@ -653,8 +794,10 @@ h6 a[href].button {
     text-transform: inherit;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - LISTS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ol,
 ul {
     margin: 0;
@@ -716,8 +859,10 @@ li li li li em em {
     font-style: italic;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - FORMS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 fieldset {
     display: block;
     margin-top: 1.25rem;
@@ -1485,10 +1630,14 @@ a[disabled][href].button {
     cursor: not-allowed;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TABLES
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 table {
     position: relative;
+    align-self: center;
+    justify-self: center;
     margin-top: 1.25rem;
     margin-bottom: 0;
     margin-top: 2.25rem;
@@ -1577,135 +1726,3 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO GLOBALS - Typography
- * ======================================================================== */
-blockquote {
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
-    margin-top: 1.875rem;
-    margin-bottom: 0.9375rem;
-    padding-left: 0.8125rem;
-    border-left: 0.125rem solid currentColor;
-    width: auto;
-    max-width: 26.25rem;
-}
-blockquote > :first-child {
-    margin-top: 0;
-}
-blockquote > cite {
-    display: block;
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
-    text-align: right;
-    align-self: end;
-    justify-self: end;
-}
-blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
-}
-@media (prefers-contrast: less) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
-}
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
-}
-
-@media (prefers-contrast: more) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
-}
-
-pre {
-    display: block;
-    position: relative;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
-    border: 0.0625rem solid currentColor;
-    width: auto;
-    max-width: 100%;
-    font-size: 0.9375rem;
-    overflow: auto;
-    align-self: center;
-    justify-self: center;
-}
-pre > code,
-pre > kbd,
-pre > samp {
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: none;
-    overflow: visible;
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) {
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) > code {
-    white-space: pre;
-    text-wrap: nowrap;
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    ) {
-    white-space: normal;
-    text-wrap: auto;
-    max-width: 26.25rem;
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    )
-    > code {
-    white-space: pre-wrap;
-    text-wrap: auto;
-}
-
-/* # ASTRO GLOBALS - Tables
- * ======================================================================== */
-table {
-    align-self: center;
-    justify-self: center;
-}
-
-/*! END of @maddimathon/utility-astro/template/global */

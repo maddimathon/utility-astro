@@ -131,7 +131,10 @@ const guaranteedHeadingClass = headingClass
 const attrs_heading = {
     ...attributes,
     'aria-level': heading > 6 ? heading : undefined,
-    'class:list': makeClassList(headingClass, classList),
+    'class:list': makeClassList(
+        headingClass + ' ' + `${guaranteedHeadingClass}--hgroup`,
+        classList,
+    ),
     'role': heading > 6 ? 'heading' : undefined,
 } as const;
 
@@ -155,33 +158,32 @@ if (attrs_subheading?.class) {
 ---
 
 {
-    html.content && html.subheading ? (
-        <hgroup
-            {...(attrs_hgroup as Omit<typeof attrs_hgroup, 'class'>)}
-            aria-roledescription='heading group'
-            class:list={attrs_hgroup_class}
-            role='group'
-        >
+    html.content &&
+        (html.subheading ? (
+            <hgroup
+                {...(attrs_hgroup as Omit<typeof attrs_hgroup, 'class'>)}
+                aria-roledescription='heading group'
+                class:list={attrs_hgroup_class}
+                role='group'
+            >
+                <Tag
+                    {...attrs_heading}
+                    set:html={html.content}
+                />
+                <p
+                    {...(attrs_subheading as Omit<
+                        typeof attrs_subheading,
+                        'class'
+                    >)}
+                    aria-roledescription='subheading'
+                    set:html={html.subheading}
+                    class:list={attrs_subheading_class}
+                />
+            </hgroup>
+        ) : (
             <Tag
                 {...attrs_heading}
                 set:html={html.content}
             />
-            <p
-                {...(attrs_subheading as Omit<
-                    typeof attrs_subheading,
-                    'class'
-                >)}
-                aria-roledescription='subheading'
-                set:html={html.subheading}
-                class:list={attrs_subheading_class}
-            />
-        </hgroup>
-    ) : (
-        html.content && (
-            <Tag
-                {...attrs_heading}
-                set:html={html.content}
-            />
-        )
-    )
+        ))
 }

@@ -3,7 +3,7 @@
 /// @since 0.1.0-alpha
 ///
 
-@forward 'pkg:@maddimathon/utility-sass/03-snippets' hide snippet-blockquote,
+@forward 'pkg:@maddimathon/utility-sass/lib/snippets' hide snippet-blockquote,
     snippet-pre;
 
 @forward '03-01-accessibility';

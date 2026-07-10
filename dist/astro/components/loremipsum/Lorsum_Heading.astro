@@ -53,7 +53,14 @@ const {
             class: ['loremipsum-heading-sample__subheading'],
         },
     }}
-    class:list={['loremipsum-heading-sample', { '||': classList }, classList]}
+    class:list={[
+        'loremipsum-heading-sample',
+        {
+            'loremipsum-heading-sample--hgroup': subheading,
+            '||': classList,
+        },
+        classList,
+    ]}
     displayHeading={heading}
     heading={0}
     >{prefix ?? `Heading ${heading}`} Maecenas <strong

@@ -4,21 +4,15 @@
 ///
 
 @forward '_header';
+@forward 'pkg:@maddimathon/utility-sass/notice';
 
-@forward 'utility-sass';
+@use '../../config';
+@use '../../lib' as *;
 
-@forward '01-globals';
-@forward '02-layouts';
-@forward '03-utilities';
-@forward '04-components';
-
-@forward '_footer';
-
-/// # EXTENDING SELECTORS
-/// ======================================================================== ///
-
-@use 'config';
-@use 'lib' as *;
+@include template-content-abstracts;
+@include template-content-globals;
+@include template-content-layouts;
+@include template-content-blocks;
 
 @if config.$template_extendSelectors {
     @include extend-selectors;

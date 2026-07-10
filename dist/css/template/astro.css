@@ -11,7 +11,6 @@
  * 
  * https://maddimathon.github.io/utility-astro
  */
-/*! START of @maddimathon/utility-astro/template/astro */
 /*! START of @maddimathon/utility-sass/template */
 /* #region Normalize */
 /*! modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -276,8 +275,10 @@ pre {
 }
 
 /* #endregion Normalize */
+/*! END of @maddimathon/utility-sass/template */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 /* #region Tokens - @property */
 @property --display {
     syntax: "*";
@@ -679,8 +680,10 @@ html {
 }
 
 /* #endregion Tokens - Style */
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - ACCESSIBILITY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 [data-state-focus="true"],
 .no-js :focus,
 .js__no-whereSelector :focus {
@@ -753,21 +756,73 @@ html {
     overflow: hidden !important;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/* ## Accessibility - Skip Links ==================================== */
+/*! START of @maddimathon/utility-astro/template/astro */
+.skip-link,
+a.skip-link[href] {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    position: fixed;
+    margin: 0;
+    top: -100%;
+    width: -moz-fit-content;
+    width: fit-content;
+    z-index: 999999;
+}
+.skip-link:focus,
+a.skip-link[href]:focus,
+.skip-link[data-state-focus="true"],
+a.skip-link[href][data-state-focus="true"] {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:focus-within,
+a.skip-link[href]:focus-within {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:has([data-state-focus="true"]),
+a.skip-link[href]:has([data-state-focus="true"]) {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:active,
+a.skip-link[href]:active,
+.skip-link[data-state-active="true"],
+a.skip-link[href][data-state-active="true"] {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link:has(:active),
+a.skip-link[href]:has(:active),
+.skip-link:has([data-state-active="true"]),
+a.skip-link[href]:has([data-state-active="true"]) {
+    top: clamp(1.875rem, 5svw, 3.5rem);
+    top: var(--gap-block-layout, 5vw);
+}
+
+.skip-link-list {
+    grid-column: 1/-1;
+    grid-column: page-start/page-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.skip-link-list li {
+    margin: 0;
+    padding: 0;
+}
+
+/*! END of @maddimathon/utility-astro/template/astro */
 /* # GLOBALS - OBJECTS
  * ======================================================================== */
-html {
-    --scroll-padding-top: var(--gap-block-layout, 5vw);
-    --scroll-padding-top: calc(
-        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
-    );
-}
-
-html,
-body {
-    scroll-padding-top: calc(0 + clamp(1.875rem, 5svw, 3.5rem));
-    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
-}
-
+/*! START of @maddimathon/utility-sass/template */
 hr {
     --display: block;
     display: block;
@@ -790,8 +845,10 @@ hr {
     border-bottom: currentColor solid var(--border-width-200, 0.125rem);
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ::-moz-selection {
     background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
@@ -825,7 +882,9 @@ body {
     font-size: var(--fs-normal, 1rem);
 }
 
-/* ## Typography - Inline ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Inlines ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 strong,
 b {
     font-weight: 700;
@@ -921,7 +980,9 @@ abbr[title] {
     cursor: help;
 }
 
-/* ## Typography - Block ==================================== */
+/*! END of @maddimathon/utility-sass/template */
+/* ## Typography - Blocks ==================================== */
+/*! START of @maddimathon/utility-sass/template */
 p {
     margin-top: 0.9375rem;
     margin-top: var(--mrg-soft-400, 0.9375rem);
@@ -931,6 +992,78 @@ hr + p {
     margin-top: 0;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/astro */
+blockquote {
+    --display: flex;
+    display: flex;
+    display: var(--display, flex);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0.9375rem;
+    margin-top: var(--mrg-soft-400, 0.9375rem);
+    margin-bottom: 0;
+    margin-top: 1.875rem;
+    margin-bottom: calc(1.875rem - 0.9375rem);
+    margin-top: var(--mrg-soft-600, 1.875rem);
+    margin-bottom: calc(
+        var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
+    );
+    padding-left: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    border-left: 0.125rem solid currentColor;
+    border-left: var(--border-width-200, 0.125rem) solid currentColor;
+    width: auto;
+    max-width: 26.25rem;
+    max-width: var(--width-callout, 26.25rem);
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    justify-content: start;
+    align-content: center;
+    align-items: stretch;
+    align-self: center;
+    justify-self: center;
+}
+blockquote > :first-child {
+    margin-top: 0;
+}
+blockquote > cite {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    margin-top: 0.9375rem;
+    margin-top: var(--mrg-soft-400, 0.9375rem);
+    margin-bottom: 0;
+    text-align: right;
+    align-self: end;
+    justify-self: end;
+}
+blockquote > cite::before {
+    content: "— ";
+    content: "— "/"";
+}
+@media (prefers-contrast: less) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 75%, transparent);
+    }
+}
+blockquote > cite {
+    color: color-mix(in srgb, currentColor 75%, transparent);
+}
+
+@media (prefers-contrast: more) {
+    blockquote > cite {
+        color: color-mix(in srgb, currentColor 87.5%, transparent);
+    }
+}
+[data-contrast-mode="high"] blockquote > cite {
+    color: color-mix(in srgb, currentColor 87.5%, transparent);
+}
+
+/*! END of @maddimathon/utility-astro/template/astro */
+/*! START of @maddimathon/utility-sass/template */
 code,
 kbd,
 pre,
@@ -938,9 +1071,104 @@ samp {
     position: relative;
 }
 
+/*! END of @maddimathon/utility-sass/template */
+/*! START of @maddimathon/utility-astro/template/astro */
+pre {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    position: relative;
+    margin-top: 1.25rem;
+    margin-bottom: 0.3125rem;
+    margin-top: var(--mrg-firm-400, 1.25rem);
+    margin-bottom: var(--mrg-half-400, 0.3125rem);
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    padding-top: var(--mrg-soft-300, 0.625rem);
+    padding-bottom: var(--mrg-soft-300, 0.625rem);
+    padding-left: 0.8125rem;
+    padding-right: 0.8125rem;
+    padding-left: var(--mrg-firm-300, 0.8125rem);
+    padding-right: var(--mrg-firm-300, 0.8125rem);
+    border: 0.0625rem solid currentColor;
+    border: var(--border-width-100, 0.0625rem) solid currentColor;
+    width: auto;
+    max-width: 100%;
+    font-size: 0.9375rem;
+    font-size: var(--fs-smaller-1, 0.9375rem);
+    overflow: auto;
+    align-self: center;
+    justify-self: center;
+}
+pre > code,
+pre > kbd,
+pre > samp {
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: none;
+    overflow: visible;
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) {
+    white-space: normal;
+    text-wrap: auto;
+}
+pre:has(> :is(code, kbd, samp)) > code {
+    white-space: pre;
+    text-wrap: nowrap;
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    ) {
+    white-space: normal;
+    text-wrap: auto;
+    max-width: 26.25rem;
+    max-width: var(--width-callout, 26.25rem);
+}
+pre:has(> :is(code, kbd, samp)):is(
+        .language-wiki,
+        .language-context,
+        .language-tex,
+        .language-latex,
+        .language-text,
+        .language-md,
+        .language-markdown,
+        .language-hbs,
+        .language-mustache,
+        .language-handlebars,
+        .language-plaintext
+    )
+    > code {
+    white-space: pre-wrap;
+    text-wrap: auto;
+}
+
+/*! END of @maddimathon/utility-astro/template/astro */
+/*! START of @maddimathon/utility-sass/template */
+/*! END of @maddimathon/utility-sass/template */
 /* ## Typography - Headings ==================================== */
-h1,
+/*! START of @maddimathon/utility-sass/template */
 .h1,
+h1,
 .page-title {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
@@ -956,18 +1184,18 @@ h1,
     text-wrap: balance;
     font-style: normal;
 }
-h1 button,
 .h1 button,
-h1 [role="button"],
 .h1 [role="button"],
-h1 input[type="button"],
 .h1 input[type="button"],
-h1 input[type="reset"],
 .h1 input[type="reset"],
-h1 input[type="submit"],
 .h1 input[type="submit"],
-h1 a[href].button,
 .h1 a[href].button,
+h1 button,
+h1 [role="button"],
+h1 input[type="button"],
+h1 input[type="reset"],
+h1 input[type="submit"],
+h1 a[href].button,
 .page-title button,
 .page-title [role="button"],
 .page-title input[type="button"],
@@ -979,8 +1207,8 @@ h1 a[href].button,
     letter-spacing: inherit;
     text-transform: inherit;
 }
-h2,
-.h2 {
+.h2,
+h2 {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
@@ -995,25 +1223,25 @@ h2,
     text-wrap: balance;
     font-style: normal;
 }
-h2 button,
 .h2 button,
-h2 [role="button"],
 .h2 [role="button"],
-h2 input[type="button"],
 .h2 input[type="button"],
-h2 input[type="reset"],
 .h2 input[type="reset"],
-h2 input[type="submit"],
 .h2 input[type="submit"],
-h2 a[href].button,
-.h2 a[href].button {
+.h2 a[href].button,
+h2 button,
+h2 [role="button"],
+h2 input[type="button"],
+h2 input[type="reset"],
+h2 input[type="submit"],
+h2 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-h3,
-.h3 {
+.h3,
+h3 {
     margin-top: 3.5rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
@@ -1028,25 +1256,25 @@ h3,
     text-wrap: balance;
     font-style: normal;
 }
-h3 button,
 .h3 button,
-h3 [role="button"],
 .h3 [role="button"],
-h3 input[type="button"],
 .h3 input[type="button"],
-h3 input[type="reset"],
 .h3 input[type="reset"],
-h3 input[type="submit"],
 .h3 input[type="submit"],
-h3 a[href].button,
-.h3 a[href].button {
+.h3 a[href].button,
+h3 button,
+h3 [role="button"],
+h3 input[type="button"],
+h3 input[type="reset"],
+h3 input[type="submit"],
+h3 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-h4,
-.h4 {
+.h4,
+h4 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1061,33 +1289,33 @@ h4,
     text-wrap: balance;
     font-style: italic;
 }
-h4 em,
-.h4 em {
+.h4 em,
+h4 em {
     font-style: normal;
 }
-h4 em em,
-.h4 em em {
+.h4 em em,
+h4 em em {
     font-style: italic;
 }
-h4 button,
 .h4 button,
-h4 [role="button"],
 .h4 [role="button"],
-h4 input[type="button"],
 .h4 input[type="button"],
-h4 input[type="reset"],
 .h4 input[type="reset"],
-h4 input[type="submit"],
 .h4 input[type="submit"],
-h4 a[href].button,
-.h4 a[href].button {
+.h4 a[href].button,
+h4 button,
+h4 [role="button"],
+h4 input[type="button"],
+h4 input[type="reset"],
+h4 input[type="submit"],
+h4 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-h5,
-.h5 {
+.h5,
+h5 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1102,33 +1330,33 @@ h5,
     text-wrap: balance;
     font-style: italic;
 }
-h5 em,
-.h5 em {
+.h5 em,
+h5 em {
     font-style: normal;
 }
-h5 em em,
-.h5 em em {
+.h5 em em,
+h5 em em {
     font-style: italic;
 }
-h5 button,
 .h5 button,
-h5 [role="button"],
 .h5 [role="button"],
-h5 input[type="button"],
 .h5 input[type="button"],
-h5 input[type="reset"],
 .h5 input[type="reset"],
-h5 input[type="submit"],
 .h5 input[type="submit"],
-h5 a[href].button,
-.h5 a[href].button {
+.h5 a[href].button,
+h5 button,
+h5 [role="button"],
+h5 input[type="button"],
+h5 input[type="reset"],
+h5 input[type="submit"],
+h5 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-h6,
-.h6 {
+.h6,
+h6 {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1143,26 +1371,26 @@ h6,
     text-wrap: balance;
     font-style: italic;
 }
-h6 em,
-.h6 em {
+.h6 em,
+h6 em {
     font-style: normal;
 }
-h6 em em,
-.h6 em em {
+.h6 em em,
+h6 em em {
     font-style: italic;
 }
-h6 button,
 .h6 button,
-h6 [role="button"],
 .h6 [role="button"],
-h6 input[type="button"],
 .h6 input[type="button"],
-h6 input[type="reset"],
 .h6 input[type="reset"],
-h6 input[type="submit"],
 .h6 input[type="submit"],
-h6 a[href].button,
-.h6 a[href].button {
+.h6 a[href].button,
+h6 button,
+h6 [role="button"],
+h6 input[type="button"],
+h6 input[type="reset"],
+h6 input[type="submit"],
+h6 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
@@ -1251,20 +1479,20 @@ h6 a[href].button,
     font-style: italic;
 }
 
-h1:is(.unstyled-heading),
-.h1:is(.unstyled-heading),
-h2:is(.unstyled-heading),
-.h2:is(.unstyled-heading),
-h3:is(.unstyled-heading),
-.h3:is(.unstyled-heading),
-h4:is(.unstyled-heading),
-.h4:is(.unstyled-heading),
-h5:is(.unstyled-heading),
-.h5:is(.unstyled-heading),
+.h8:is(.unstyled-heading),
+.h7:is(.unstyled-heading),
 h6:is(.unstyled-heading),
 .h6:is(.unstyled-heading),
-.h7:is(.unstyled-heading),
-.h8:is(.unstyled-heading) {
+h5:is(.unstyled-heading),
+.h5:is(.unstyled-heading),
+h4:is(.unstyled-heading),
+.h4:is(.unstyled-heading),
+h3:is(.unstyled-heading),
+.h3:is(.unstyled-heading),
+h2:is(.unstyled-heading),
+.h2:is(.unstyled-heading),
+h1:is(.unstyled-heading),
+.h1:is(.unstyled-heading) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1279,61 +1507,63 @@ h6:is(.unstyled-heading),
     font-style: normal;
     font-style: normal;
 }
-h1:is(.unstyled-heading) em,
-.h1:is(.unstyled-heading) em,
-h2:is(.unstyled-heading) em,
-.h2:is(.unstyled-heading) em,
-h3:is(.unstyled-heading) em,
-.h3:is(.unstyled-heading) em,
-h4:is(.unstyled-heading) em,
-.h4:is(.unstyled-heading) em,
-h5:is(.unstyled-heading) em,
-.h5:is(.unstyled-heading) em,
+.h8:is(.unstyled-heading) em,
+.h7:is(.unstyled-heading) em,
 h6:is(.unstyled-heading) em,
 .h6:is(.unstyled-heading) em,
-.h7:is(.unstyled-heading) em,
-.h8:is(.unstyled-heading) em {
+h5:is(.unstyled-heading) em,
+.h5:is(.unstyled-heading) em,
+h4:is(.unstyled-heading) em,
+.h4:is(.unstyled-heading) em,
+h3:is(.unstyled-heading) em,
+.h3:is(.unstyled-heading) em,
+h2:is(.unstyled-heading) em,
+.h2:is(.unstyled-heading) em,
+h1:is(.unstyled-heading) em,
+.h1:is(.unstyled-heading) em {
     font-style: italic;
 }
-h1:is(.unstyled-heading) em em,
-.h1:is(.unstyled-heading) em em,
-h2:is(.unstyled-heading) em em,
-.h2:is(.unstyled-heading) em em,
-h3:is(.unstyled-heading) em em,
-.h3:is(.unstyled-heading) em em,
-h4:is(.unstyled-heading) em em,
-.h4:is(.unstyled-heading) em em,
-h5:is(.unstyled-heading) em em,
-.h5:is(.unstyled-heading) em em,
+.h8:is(.unstyled-heading) em em,
+.h7:is(.unstyled-heading) em em,
 h6:is(.unstyled-heading) em em,
 .h6:is(.unstyled-heading) em em,
-.h7:is(.unstyled-heading) em em,
-.h8:is(.unstyled-heading) em em {
+h5:is(.unstyled-heading) em em,
+.h5:is(.unstyled-heading) em em,
+h4:is(.unstyled-heading) em em,
+.h4:is(.unstyled-heading) em em,
+h3:is(.unstyled-heading) em em,
+.h3:is(.unstyled-heading) em em,
+h2:is(.unstyled-heading) em em,
+.h2:is(.unstyled-heading) em em,
+h1:is(.unstyled-heading) em em,
+.h1:is(.unstyled-heading) em em {
     font-style: normal;
 }
-h1:is(.unstyled-heading) em em em,
-.h1:is(.unstyled-heading) em em em,
-h2:is(.unstyled-heading) em em em,
-.h2:is(.unstyled-heading) em em em,
-h3:is(.unstyled-heading) em em em,
-.h3:is(.unstyled-heading) em em em,
-h4:is(.unstyled-heading) em em em,
-.h4:is(.unstyled-heading) em em em,
-h5:is(.unstyled-heading) em em em,
-.h5:is(.unstyled-heading) em em em,
+.h8:is(.unstyled-heading) em em em,
+.h7:is(.unstyled-heading) em em em,
 h6:is(.unstyled-heading) em em em,
 .h6:is(.unstyled-heading) em em em,
-.h7:is(.unstyled-heading) em em em,
-.h8:is(.unstyled-heading) em em em {
+h5:is(.unstyled-heading) em em em,
+.h5:is(.unstyled-heading) em em em,
+h4:is(.unstyled-heading) em em em,
+.h4:is(.unstyled-heading) em em em,
+h3:is(.unstyled-heading) em em em,
+.h3:is(.unstyled-heading) em em em,
+h2:is(.unstyled-heading) em em em,
+.h2:is(.unstyled-heading) em em em,
+h1:is(.unstyled-heading) em em em,
+.h1:is(.unstyled-heading) em em em {
     font-style: italic;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - LISTS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 ol,
-ul,
 .table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol {
+.table-of-contents > ol,
+ul {
     margin: 0;
     margin-left: 20%;
     padding: 0;
@@ -1344,12 +1574,12 @@ ul,
 }
 ol ol,
 ol ul,
-ul ol,
 .table-of-contents [data-toggle-content] > .container ol ol,
 .table-of-contents > ol ol,
-ul ul,
+ul ol,
 .table-of-contents [data-toggle-content] > .container ol ul,
-.table-of-contents > ol ul {
+.table-of-contents > ol ul,
+ul ul {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -1363,9 +1593,9 @@ ol ol {
 ol ol ol {
     list-style-type: lower-roman;
 }
-ul,
 .table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol {
+.table-of-contents > ol,
+ul {
     list-style-type: disc;
 }
 .table-of-contents [data-toggle-content] > .container ol ol,
@@ -1417,8 +1647,10 @@ li li li li em em {
     font-style: italic;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - FORMS
  * ======================================================================== */
+/*! START of @maddimathon/utility-sass/template */
 fieldset {
     --display: block;
     display: block;
@@ -2261,11 +2493,15 @@ a[disabled][href].button {
     cursor: not-allowed;
 }
 
+/*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TABLES
  * ======================================================================== */
-.table-wrapper,
-table {
+/*! START of @maddimathon/utility-sass/template */
+table,
+.table-wrapper {
     position: relative;
+    align-self: center;
+    justify-self: center;
     margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: 0;
@@ -2344,6 +2580,8 @@ table {
     overscroll-behavior-x: none;
 }
 .table-wrapper > table {
+    align-self: start;
+    justify-self: start;
     margin: 0;
     padding: 0;
     background: transparent;
@@ -2388,242 +2626,26 @@ th {
 }
 
 /*! END of @maddimathon/utility-sass/template */
-/* # ASTRO - SKIP LINKS
+/* # LAYOUTS - BODY
  * ======================================================================== */
-.skip-link,
-a.skip-link[href] {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    position: fixed;
-    margin: 0;
-    top: -100%;
-    width: -moz-fit-content;
-    width: fit-content;
-    z-index: 999999;
-}
-.skip-link:focus,
-a.skip-link[href]:focus,
-.skip-link[data-state-focus="true"],
-a.skip-link[href][data-state-focus="true"] {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:focus-within,
-a.skip-link[href]:focus-within {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:has([data-state-focus="true"]),
-a.skip-link[href]:has([data-state-focus="true"]) {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:active,
-a.skip-link[href]:active,
-.skip-link[data-state-active="true"],
-a.skip-link[href][data-state-active="true"] {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link:has(:active),
-a.skip-link[href]:has(:active),
-.skip-link:has([data-state-active="true"]),
-a.skip-link[href]:has([data-state-active="true"]) {
-    top: clamp(1.875rem, 5svw, 3.5rem);
-    top: var(--gap-block-layout, 5vw);
-}
-
-.skip-link-list {
-    grid-column: 1/-1;
-    grid-column: page-start/page-end;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.skip-link-list li {
-    margin: 0;
-    padding: 0;
-}
-
-/* # ASTRO GLOBALS - Typography
- * ======================================================================== */
-blockquote {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    margin-top: 1.875rem;
-    margin-bottom: calc(1.875rem - 0.9375rem);
-    margin-top: var(--mrg-soft-600, 1.875rem);
-    margin-bottom: calc(
-        var(--mrg-soft-600, 1.875rem) - var(--mrg-soft-400, 0.9375rem)
+/*! START of @maddimathon/utility-sass/template */
+html {
+    --scroll-padding-top: var(--gap-block-layout, 5vw);
+    --scroll-padding-top: calc(
+        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
     );
-    padding-left: 0.8125rem;
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    border-left: 0.125rem solid currentColor;
-    border-left: var(--border-width-200, 0.125rem) solid currentColor;
-    width: auto;
-    max-width: 26.25rem;
-    max-width: var(--width-callout, 26.25rem);
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
-    justify-content: start;
-    align-content: center;
-    align-items: stretch;
-    align-self: center;
-    justify-self: center;
-}
-blockquote > :first-child {
-    margin-top: 0;
-}
-blockquote > cite {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    margin-top: 0.9375rem;
-    margin-top: var(--mrg-soft-400, 0.9375rem);
-    margin-bottom: 0;
-    text-align: right;
-    align-self: end;
-    justify-self: end;
-}
-blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
-}
-@media (prefers-contrast: less) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
-}
-blockquote > cite {
-    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 
-@media (prefers-contrast: more) {
-    blockquote > cite {
-        color: color-mix(in srgb, currentColor 87.5%, transparent);
-    }
-}
-[data-contrast-mode="high"] blockquote > cite {
-    color: color-mix(in srgb, currentColor 87.5%, transparent);
+html,
+body {
+    scroll-padding-top: calc(0 + clamp(1.875rem, 5svw, 3.5rem));
+    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
 }
 
-pre {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    position: relative;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-top: var(--mrg-firm-400, 1.25rem);
-    margin-bottom: var(--mrg-half-400, 0.3125rem);
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    padding-top: var(--mrg-soft-300, 0.625rem);
-    padding-bottom: var(--mrg-soft-300, 0.625rem);
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
-    padding-left: var(--mrg-firm-300, 0.8125rem);
-    padding-right: var(--mrg-firm-300, 0.8125rem);
-    border: 0.0625rem solid currentColor;
-    border: var(--border-width-100, 0.0625rem) solid currentColor;
-    width: auto;
-    max-width: 100%;
-    font-size: 0.9375rem;
-    font-size: var(--fs-smaller-1, 0.9375rem);
-    overflow: auto;
-    align-self: center;
-    justify-self: center;
-}
-pre > code,
-pre > kbd,
-pre > samp {
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    margin: 0;
-    padding: 0;
-    border: none;
-    width: -moz-fit-content;
-    width: fit-content;
-    max-width: none;
-    overflow: visible;
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) {
-    white-space: normal;
-    text-wrap: auto;
-}
-pre:has(> :is(code, kbd, samp)) > code {
-    white-space: pre;
-    text-wrap: nowrap;
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    ) {
-    white-space: normal;
-    text-wrap: auto;
-    max-width: 26.25rem;
-    max-width: var(--width-callout, 26.25rem);
-}
-pre:has(> :is(code, kbd, samp)):is(
-        .language-wiki,
-        .language-context,
-        .language-tex,
-        .language-latex,
-        .language-text,
-        .language-md,
-        .language-markdown,
-        .language-hbs,
-        .language-mustache,
-        .language-handlebars,
-        .language-plaintext
-    )
-    > code {
-    white-space: pre-wrap;
-    text-wrap: auto;
-}
-
-/* # ASTRO GLOBALS - Tables
+/*! END of @maddimathon/utility-sass/template */
+/* # LAYOUTS - BODY GRID
  * ======================================================================== */
-table,
-.table-wrapper {
-    align-self: center;
-    justify-self: center;
-}
-
-.table-wrapper > table {
-    align-self: start;
-    justify-self: start;
-}
-
-/* # ASTRO LAYOUT
- * ======================================================================== */
+/*! START of @maddimathon/utility-astro/template/astro */
 nav ol,
 nav ul {
     margin-top: 0;
@@ -2635,8 +2657,6 @@ nav ul li {
     margin-bottom: 0;
 }
 
-/* # ASTRO LAYOUT - BODY GRID SUPPORT
- * ======================================================================== */
 .content-width {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
@@ -2644,16 +2664,16 @@ nav ul li {
     width: auto;
 }
 
-.page-width,
-.website-settings-menu {
+.website-settings-menu,
+.page-width {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
 @media (min-width: 40.875em) {
-    .page-width,
-    .website-settings-menu {
+    .website-settings-menu,
+    .page-width {
         --grid-column: page-start/page-end;
         grid-column: page-start/page-end;
         grid-column: var(--grid-column, page-start/page-end);
@@ -3038,6 +3058,10 @@ body > :where(aside) {
     }
 }
 
+/*! END of @maddimathon/utility-astro/template/astro */
+/* # LAYOUTS - CONTENT HEADER
+ * ======================================================================== */
+/*! START of @maddimathon/utility-astro/template/astro */
 .content-header > :first-child,
 .content-header > hgroup > :first-child {
     margin-top: 0;
@@ -3046,18 +3070,18 @@ body > :where(aside) {
     > :where(
         .unstyled-heading,
         .page-title,
-        h1,
         .h1,
-        h2,
+        h1,
         .h2,
-        h3,
+        h2,
         .h3,
-        h4,
+        h3,
         .h4,
-        h5,
+        h4,
         .h5,
-        h6,
+        h5,
         .h6,
+        h6,
         .h7,
         .h8
     ),
@@ -3066,18 +3090,18 @@ body > :where(aside) {
     > :where(
         .unstyled-heading,
         .page-title,
-        h1,
         .h1,
-        h2,
+        h1,
         .h2,
-        h3,
+        h2,
         .h3,
-        h4,
+        h3,
         .h4,
-        h5,
+        h4,
         .h5,
-        h6,
+        h5,
         .h6,
+        h6,
         .h7,
         .h8
     ) {
@@ -3108,6 +3132,7 @@ body > :where(aside) {
     opacity: 0.75;
 }
 
+/*! END of @maddimathon/utility-astro/template/astro */
 /* # BLOCKS - ICONS
  * ======================================================================== */
 .icon {
@@ -3270,41 +3295,41 @@ body > :where(aside) {
     margin: 0;
     font-weight: 600;
 }
+.toggle-title > .unstyled-heading .toggle-icon,
 .toggle-title > .page-title .toggle-icon,
-.toggle-title > h1 .toggle-icon,
 .toggle-title > .h1 .toggle-icon,
-.toggle-title > h2 .toggle-icon,
+.toggle-title > h1 .toggle-icon,
 .toggle-title > .h2 .toggle-icon,
-.toggle-title > h3 .toggle-icon,
+.toggle-title > h2 .toggle-icon,
 .toggle-title > .h3 .toggle-icon,
-.toggle-title > h4 .toggle-icon,
+.toggle-title > h3 .toggle-icon,
 .toggle-title > .h4 .toggle-icon,
-.toggle-title > h5 .toggle-icon,
+.toggle-title > h4 .toggle-icon,
 .toggle-title > .h5 .toggle-icon,
-.toggle-title > h6 .toggle-icon,
+.toggle-title > h5 .toggle-icon,
 .toggle-title > .h6 .toggle-icon,
+.toggle-title > h6 .toggle-icon,
 .toggle-title > .h7 .toggle-icon,
-.toggle-title > .h8 .toggle-icon,
-.toggle-title > .unstyled-heading .toggle-icon {
+.toggle-title > .h8 .toggle-icon {
     --icon-size: 1em;
     padding-bottom: 0;
 }
+.toggle-title > .unstyled-heading [data-toggle-control],
 .toggle-title > .page-title [data-toggle-control],
-.toggle-title > h1 [data-toggle-control],
 .toggle-title > .h1 [data-toggle-control],
-.toggle-title > h2 [data-toggle-control],
+.toggle-title > h1 [data-toggle-control],
 .toggle-title > .h2 [data-toggle-control],
-.toggle-title > h3 [data-toggle-control],
+.toggle-title > h2 [data-toggle-control],
 .toggle-title > .h3 [data-toggle-control],
-.toggle-title > h4 [data-toggle-control],
+.toggle-title > h3 [data-toggle-control],
 .toggle-title > .h4 [data-toggle-control],
-.toggle-title > h5 [data-toggle-control],
+.toggle-title > h4 [data-toggle-control],
 .toggle-title > .h5 [data-toggle-control],
-.toggle-title > h6 [data-toggle-control],
+.toggle-title > h5 [data-toggle-control],
 .toggle-title > .h6 [data-toggle-control],
+.toggle-title > h6 [data-toggle-control],
 .toggle-title > .h7 [data-toggle-control],
-.toggle-title > .h8 [data-toggle-control],
-.toggle-title > .unstyled-heading [data-toggle-control] {
+.toggle-title > .h8 [data-toggle-control] {
     font: inherit;
     line-height: inherit;
     letter-spacing: inherit;
@@ -3338,22 +3363,22 @@ body > :where(aside) {
 :where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
-:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > h2,
 :where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > h3,
 :where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > h4,
 :where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) [data-toggle-control] {
     --display: grid;
     display: grid;
@@ -3377,22 +3402,22 @@ body > :where(aside) {
 
 :where(.js) [data-toggle-content],
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
-:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > h2,
 :where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > h3,
 :where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > h4,
 :where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
 :where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) [data-toggle-control] {
     grid-template-columns: subgrid;
     grid-column: 1/-1;
@@ -3416,20 +3441,20 @@ body > :where(aside) {
     margin-top: 0;
 }
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h1, .toggle-title > .h1),
+    [data-toggle-container]:has(.toggle-title > .h1, .toggle-title > h1),
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h2, .toggle-title > .h2),
+    [data-toggle-container]:has(.toggle-title > .h2, .toggle-title > h2),
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h3, .toggle-title > .h3) {
+    [data-toggle-container]:has(.toggle-title > .h3, .toggle-title > h3) {
     margin-top: 3.5rem;
     margin-top: var(--mrg-soft-800, 3.5rem);
 }
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h4, .toggle-title > .h4),
+    [data-toggle-container]:has(.toggle-title > .h4, .toggle-title > h4),
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h5, .toggle-title > .h5),
+    [data-toggle-container]:has(.toggle-title > .h5, .toggle-title > h5),
 :where(.js)
-    [data-toggle-container]:has(.toggle-title > h6, .toggle-title > .h6) {
+    [data-toggle-container]:has(.toggle-title > .h6, .toggle-title > h6) {
     margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
@@ -3566,22 +3591,22 @@ body > :where(aside) {
     grid-column: var(--grid-column, content);
 }
 :where(.js) .toggle-title,
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
-:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > h2,
 :where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > h3,
 :where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > h4,
 :where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading {
+:where(.js) .toggle-title > .h8 {
     justify-content: center;
     justify-items: stretch;
     align-content: stretch;
@@ -3592,43 +3617,47 @@ body > :where(aside) {
 :where(.js) .toggle-title {
     z-index: 2;
 }
+:where(.js) .toggle-title > .unstyled-heading,
 :where(.js) .toggle-title > .page-title,
-:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h1,
-:where(.js) .toggle-title > h2,
+:where(.js) .toggle-title > h1,
 :where(.js) .toggle-title > .h2,
-:where(.js) .toggle-title > h3,
+:where(.js) .toggle-title > h2,
 :where(.js) .toggle-title > .h3,
-:where(.js) .toggle-title > h4,
+:where(.js) .toggle-title > h3,
 :where(.js) .toggle-title > .h4,
-:where(.js) .toggle-title > h5,
+:where(.js) .toggle-title > h4,
 :where(.js) .toggle-title > .h5,
-:where(.js) .toggle-title > h6,
+:where(.js) .toggle-title > h5,
 :where(.js) .toggle-title > .h6,
+:where(.js) .toggle-title > h6,
 :where(.js) .toggle-title > .h7,
-:where(.js) .toggle-title > .h8,
-:where(.js) .toggle-title > .unstyled-heading {
+:where(.js) .toggle-title > .h8 {
     margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 0.125em;
     padding-bottom: var(--stroke-relative-400, 0.125em);
 }
-:where(.js) .toggle-title > .unstyled-heading:where(.unstyled-heading),
-:where(.js) .toggle-title > .page-title:where(.unstyled-heading),
-:where(.js) .toggle-title > h1:where(.unstyled-heading),
-:where(.js) .toggle-title > .h1:where(.unstyled-heading),
-:where(.js) .toggle-title > h2:where(.unstyled-heading),
-:where(.js) .toggle-title > .h2:where(.unstyled-heading),
-:where(.js) .toggle-title > h3:where(.unstyled-heading),
-:where(.js) .toggle-title > .h3:where(.unstyled-heading),
-:where(.js) .toggle-title > h4:where(.unstyled-heading),
-:where(.js) .toggle-title > .h4:where(.unstyled-heading),
-:where(.js) .toggle-title > h5:where(.unstyled-heading),
-:where(.js) .toggle-title > .h5:where(.unstyled-heading),
-:where(.js) .toggle-title > h6:where(.unstyled-heading),
-:where(.js) .toggle-title > .h6:where(.unstyled-heading),
-:where(.js) .toggle-title > .h7:where(.unstyled-heading),
-:where(.js) .toggle-title > .h8:where(.unstyled-heading) {
+:where(.js)
+    .toggle-title
+    > :is(
+        .unstyled-heading,
+        .page-title,
+        .h1,
+        h1,
+        .h2,
+        h2,
+        .h3,
+        h3,
+        .h4,
+        h4,
+        .h5,
+        h5,
+        .h6,
+        h6,
+        .h7,
+        .h8
+    ):where(.unstyled-heading) {
     padding-bottom: 0;
 }
 :where(.js) [data-toggle-content] {
@@ -3674,9 +3703,9 @@ body > :where(aside) {
     margin-bottom: 0;
 }
 :where(.js) [data-toggle-content] > .container > ol,
-:where(.js) [data-toggle-content] > .container > ul,
 :where(.js) .table-of-contents [data-toggle-content] > .container > ol,
-.table-of-contents :where(.js) [data-toggle-content] > .container > ol {
+.table-of-contents :where(.js) [data-toggle-content] > .container > ol,
+:where(.js) [data-toggle-content] > .container > ul {
     width: 100%;
 }
 :where(.js) [data-toggle-content] > .container > ol:only-child,
@@ -4193,5 +4222,3 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     padding-top: var(--mrg-soft-400, 0.9375rem);
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
 }
-
-/*! END of @maddimathon/utility-astro/template/astro */

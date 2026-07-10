@@ -1,0 +1,69 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../../config';
+
+@use 'pkg:@maddimathon/utility-sass/string';
+
+@use 'pkg:@maddimathon/utility-sass/lib/mixins' as utils;
+
+$_stylesheet_name: if(
+    config.$template_isDefault,
+    'Template',
+    'Template - #{config.$template_name}'
+);
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-docblock-utility-astro(
+    $stylesheet_name: $_stylesheet_name,
+    $stylesheet_packagePath: config.$template_packagePath
+) {
+    @if string.length(#{config.$template_description}) > 0 {
+        /**
+         * Utility Astro - #{$stylesheet_name}
+         * #{$stylesheet_packagePath}@___CURRENT_VERSION___
+         * 
+         * #{config.$template_description}
+         * 
+         * ___CURRENT_URL___
+         */
+    } @else {
+        /**
+         * Utility Astro - #{$stylesheet_name}
+         * #{$stylesheet_packagePath}@___CURRENT_VERSION___
+         * 
+         * ___CURRENT_URL___
+         */
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-start-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
+    @at-root {
+        /*! START of #{$stylesheet_packagePath} */
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-end-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
+    @at-root {
+        /*! END of #{$stylesheet_packagePath} */
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin template-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
+    @include template-start-utility-astro($stylesheet_packagePath: $stylesheet_packagePath);
+    @content;
+    @include template-end-utility-astro($stylesheet_packagePath: $stylesheet_packagePath);
+}
