@@ -33,10 +33,13 @@
 
 ///
 /// @since 0.1.0-alpha.14
+/// @since 0.1.0-beta.0.draft — Added optional $includeBaseStyles param.
 ///
 @mixin snippet-support-skip-links(
+    $unfocus_top: -100%,
     $focus_top: var-gap-block(layout),
-    $zIndex: 999999
+    $zIndex: 999999,
+    $includeBaseStyles: true
 ) {
     $baseSelectors: list.join(
         ('.skip-link'),
@@ -51,32 +54,30 @@
     );
 
     #{$skipSelectors} {
-        @include prop-display(block);
-        position: fixed;
+        @if $includeBaseStyles {
+            @include prop-display(block);
+            width: fit-content;
+        }
+
         margin: 0;
+        position: fixed;
 
-        top: -100%;
-
-        width: fit-content;
+        top: $unfocus_top;
 
         z-index: $zIndex;
 
         @content (link-root);
 
         @include apply-interactive-mixin(
+            $active: true,
+            $activeWithin: true,
             $focus: true,
             $focusWithin: true,
             $fallbacksOnly: true
         ) {
             top: $focus_top;
 
-            @content (link-focus);
-        }
-
-        @include apply-interactive-mixin($active: true, $activeWithin: true) {
-            top: $focus_top;
-
-            @content (link-active);
+            @content (link-focus-or-active);
         }
     }
 
