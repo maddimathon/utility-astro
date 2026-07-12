@@ -22,6 +22,7 @@
 }
 
 .website-settings__content {
+    margin: 0;
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
     width: 100%;

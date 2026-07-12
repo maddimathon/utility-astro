@@ -56,13 +56,15 @@
     }
 
     .website-settings__content {
+        margin: 0;
+
         @if $includeBaseStyles {
             background: var-sys-colour(background);
             width: 100%;
             max-width: min(var-width(content), 90vw);
         }
 
-        @content ('content');
+        @content (content);
 
         @if $includeBaseStyles {
             > :first-child {

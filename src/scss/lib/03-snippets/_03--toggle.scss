@@ -262,15 +262,13 @@ $_defaultHeadingSelectors_greaterThan6: ();
     [data-toggle-content] {
         @extend %_flex-contents-container--display-contents;
 
-        // justify-content: stretch;
-
         @content (toggle-content);
 
         /// BLOCK ///
 
         > .container {
             @extend %_flex-contents-container--display-contents;
-            // width: 100%;
+            margin: 0;
 
             @content (toggle-content--container);
         }
@@ -629,6 +627,17 @@ $_defaultHeadingSelectors_greaterThan6: ();
         ///
         [data-toggle-container='closed'] {
             @content (js--toggle-container--closed);
+
+            > [data-toggle-content] {
+                @content (js--toggle-container--closed--content);
+
+                > .container {
+                    opacity: 0;
+                    visibility: hidden;
+
+                    @content (js--toggle-container--closed--content--container);
+                }
+            }
         }
 
         ///

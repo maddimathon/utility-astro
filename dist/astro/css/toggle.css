@@ -200,6 +200,10 @@
     fill: none;
 }
 
+[data-toggle-content] > .container {
+    margin: 0;
+}
+
 /* Javascript Enabled ==================================== */
 :where(.js) [data-toggle-container],
 :where(.js) [data-toggle-content],
@@ -583,6 +587,13 @@
     color: var(--sys-clr-link, LinkText);
 }
 
+:where(.js)
+    [data-toggle-container="closed"]
+    > [data-toggle-content]
+    > .container {
+    opacity: 0;
+    visibility: hidden;
+}
 :where(.js) [data-toggle-container="open"] > [data-toggle-content] > .container,
 :where(.js)
     [data-toggle-container="closing"]

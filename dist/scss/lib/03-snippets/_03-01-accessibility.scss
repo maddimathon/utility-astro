@@ -38,20 +38,18 @@
 @mixin snippet-support-skip-links(
     $unfocus_top: -100%,
     $focus_top: var-gap-block(layout),
+    $unfocus_right: false,
+    $focus_right: false,
     $zIndex: 999999,
     $includeBaseStyles: true
 ) {
     $baseSelectors: list.join(
         ('.skip-link'),
-        config.$selectors_skipLinks_extra,
+        config.$selectors_skipLinks_extraModifiers,
         $separator: comma
     );
 
-    $skipSelectors: list.join(
-        $baseSelectors,
-        selector.unify($baseSelectors, config.$selector_a),
-        $separator: comma
-    );
+    $skipSelectors: selector.unify($baseSelectors, config.$selector_a);
 
     #{$skipSelectors} {
         @if $includeBaseStyles {
@@ -63,6 +61,10 @@
         position: fixed;
 
         top: $unfocus_top;
+
+        @if $unfocus_right != false {
+            right: $unfocus_right;
+        }
 
         z-index: $zIndex;
 
@@ -76,6 +78,10 @@
             $fallbacksOnly: true
         ) {
             top: $focus_top;
+
+            @if $focus_right != false {
+                right: $focus_right;
+            }
 
             @content (link-focus-or-active);
         }

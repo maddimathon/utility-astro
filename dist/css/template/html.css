@@ -723,7 +723,6 @@ html {
 /*! END of @maddimathon/utility-sass/template */
 /* ## Accessibility - Skip Links ==================================== */
 /*! START of @maddimathon/utility-astro/template/html */
-.skip-link,
 a.skip-link[href] {
     --display: block;
     display: block;
@@ -735,27 +734,19 @@ a.skip-link[href] {
     top: -100%;
     z-index: 999999;
 }
-.skip-link:focus,
 a.skip-link[href]:focus,
-.skip-link:active,
 a.skip-link[href]:active,
-.skip-link[data-state-active="true"],
 a.skip-link[href][data-state-active="true"],
-.skip-link[data-state-focus="true"],
 a.skip-link[href][data-state-focus="true"] {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
-.skip-link:focus-within,
 a.skip-link[href]:focus-within {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
 
-.skip-link:has([data-state-focus="true"]),
-.skip-link:has(:active),
-.skip-link:has([data-state-active="true"]),
 a.skip-link[href]:has([data-state-focus="true"]),
 a.skip-link[href]:has(:active),
 a.skip-link[href]:has([data-state-active="true"]) {
