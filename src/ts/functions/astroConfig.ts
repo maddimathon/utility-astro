@@ -81,6 +81,13 @@ export function astroConfig<
                 default: env.toggle?.outputResults ?? false,
                 optional: true,
             } ),
+
+            STYLES_ICON: envField.boolean( {
+                access: 'public',
+                context: 'client',
+                default: env.styles?.icon ?? true,
+                optional: true,
+            } ),
         }
     };
 
@@ -103,6 +110,14 @@ export namespace astroConfig {
             /** @default false */
             outputResults: boolean;
         };
+
+        /**
+         * @since ___PKG_VERSION___
+         */
+        styles: {
+            /** @default true */
+            icon: boolean;
+        },
 
         toggle: {
             /** @default false */

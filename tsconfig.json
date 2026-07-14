@@ -43,10 +43,6 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "target": "ESNext",
-        "types": [
-            "node",
-            "jest"
-        ],
         "useUnknownInCatchVariables": true,
         "verbatimModuleSyntax": true
     },

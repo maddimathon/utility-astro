@@ -26,6 +26,7 @@ import CopyToClipboardButton from './components/CopyToClipboardButton.astro';
 export type * from './components/CopyToClipboardButton.astro';
 
 import Heading from './components/Heading.astro';
+export { parseHeadingParams } from './components/Heading.astro';
 export type * from './components/Heading.astro';
 
 import Icon from './components/Icon.astro';
@@ -38,6 +39,15 @@ export {
     getLoremIpsumToc,
 } from './components/LoremIpsum.astro';
 export type * from './components/LoremIpsum.astro';
+
+import Lorsum_Content_Abbreviated from './components/loremipsum/Lorsum_Content_Abbreviated.astro';
+import Lorsum_Content_Full from './components/loremipsum/Lorsum_Content_Full.astro';
+import Lorsum_Disclaimer from './components/loremipsum/Lorsum_Disclaimer.astro';
+import Lorsum_Forms from './components/loremipsum/Lorsum_Forms.astro';
+import Lorsum_Heading from './components/loremipsum/Lorsum_Heading.astro';
+import Lorsum_Lists from './components/loremipsum/Lorsum_Lists.astro';
+import Lorsum_Table from './components/loremipsum/Lorsum_Table.astro';
+import Lorsum_Toggle from './components/loremipsum/Lorsum_Toggle.astro';
 
 import MenuList from './components/MenuList.astro';
 export { parseItemAttributes } from './components/MenuList.astro';
@@ -83,6 +93,14 @@ export {
     Heading,
     Icon,
     LoremIpsum,
+    Lorsum_Content_Abbreviated,
+    Lorsum_Content_Full,
+    Lorsum_Disclaimer,
+    Lorsum_Forms,
+    Lorsum_Heading,
+    Lorsum_Lists,
+    Lorsum_Table,
+    Lorsum_Toggle,
     MenuList,
     NavMenu,
     NestedList,

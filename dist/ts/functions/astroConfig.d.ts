@@ -29,6 +29,13 @@ export declare namespace astroConfig {
             /** @default false */
             outputResults: boolean;
         };
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        styles: {
+            /** @default true */
+            icon: boolean;
+        };
         toggle: {
             /** @default false */
             debug: boolean;

@@ -54,6 +54,12 @@ export function astroConfig(config, env = {}) {
                 default: env.toggle?.outputResults ?? false,
                 optional: true,
             }),
+            STYLES_ICON: envField.boolean({
+                access: 'public',
+                context: 'client',
+                default: env.styles?.icon ?? true,
+                optional: true,
+            }),
         }
     };
     return defineConfig(config);

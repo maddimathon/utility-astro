@@ -11,6 +11,8 @@ import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
 /* import - functions */
 
 /* import - values */
+import { STYLES_ICON } from 'astro:env/client';
+
 import { SVG, SVG_Label } from '../../ts/svg.js';
 
 /* import - components */
@@ -21,6 +23,11 @@ import { SVG, SVG_Label } from '../../ts/svg.js';
 
 type IconProps_Base = {
     class?: ClassList | undefined;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    includeStyles?: boolean;
 
     /**
      * Whether to add an aria
@@ -56,6 +63,7 @@ type Props = GenericElementProps<IconProps, 'span'>;
 
 const {
     class: classList = [],
+    includeStyles = STYLES_ICON,
     slug,
     svg,
     svgLabel,
@@ -74,8 +82,4 @@ const label = `${svgLabel ?? SVG_Label[type]} icon`;
     aria-label={label}
     set:html={svg ? svg.trim() : SVG[type].trim()}
     title={label}
-/>
-
-<style lang='scss'>
-    @forward '../css/icon.css';
-</style>
+/>{includeStyles && <style lang='scss'>@forward '../css/icon.css';</style>}

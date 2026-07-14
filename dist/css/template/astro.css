@@ -1426,20 +1426,22 @@ h6 a[href].button {
     font-style: italic;
 }
 
-.h8:is(.unstyled-heading),
-.h7:is(.unstyled-heading),
-h6:is(.unstyled-heading),
-.h6:is(.unstyled-heading),
-h5:is(.unstyled-heading),
-.h5:is(.unstyled-heading),
-h4:is(.unstyled-heading),
-.h4:is(.unstyled-heading),
-h3:is(.unstyled-heading),
-.h3:is(.unstyled-heading),
-h2:is(.unstyled-heading),
-.h2:is(.unstyled-heading),
-h1:is(.unstyled-heading),
-.h1:is(.unstyled-heading) {
+.unstyled-heading:is(
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6,
+    .h7,
+    .h8
+) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1454,52 +1456,64 @@ h1:is(.unstyled-heading),
     font-style: normal;
     font-style: normal;
 }
-.h8:is(.unstyled-heading) em,
-.h7:is(.unstyled-heading) em,
-h6:is(.unstyled-heading) em,
-.h6:is(.unstyled-heading) em,
-h5:is(.unstyled-heading) em,
-.h5:is(.unstyled-heading) em,
-h4:is(.unstyled-heading) em,
-.h4:is(.unstyled-heading) em,
-h3:is(.unstyled-heading) em,
-.h3:is(.unstyled-heading) em,
-h2:is(.unstyled-heading) em,
-.h2:is(.unstyled-heading) em,
-h1:is(.unstyled-heading) em,
-.h1:is(.unstyled-heading) em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em {
     font-style: italic;
 }
-.h8:is(.unstyled-heading) em em,
-.h7:is(.unstyled-heading) em em,
-h6:is(.unstyled-heading) em em,
-.h6:is(.unstyled-heading) em em,
-h5:is(.unstyled-heading) em em,
-.h5:is(.unstyled-heading) em em,
-h4:is(.unstyled-heading) em em,
-.h4:is(.unstyled-heading) em em,
-h3:is(.unstyled-heading) em em,
-.h3:is(.unstyled-heading) em em,
-h2:is(.unstyled-heading) em em,
-.h2:is(.unstyled-heading) em em,
-h1:is(.unstyled-heading) em em,
-.h1:is(.unstyled-heading) em em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em
+    em {
     font-style: normal;
 }
-.h8:is(.unstyled-heading) em em em,
-.h7:is(.unstyled-heading) em em em,
-h6:is(.unstyled-heading) em em em,
-.h6:is(.unstyled-heading) em em em,
-h5:is(.unstyled-heading) em em em,
-.h5:is(.unstyled-heading) em em em,
-h4:is(.unstyled-heading) em em em,
-.h4:is(.unstyled-heading) em em em,
-h3:is(.unstyled-heading) em em em,
-.h3:is(.unstyled-heading) em em em,
-h2:is(.unstyled-heading) em em em,
-.h2:is(.unstyled-heading) em em em,
-h1:is(.unstyled-heading) em em em,
-.h1:is(.unstyled-heading) em em em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em
+    em
+    em {
     font-style: italic;
 }
 

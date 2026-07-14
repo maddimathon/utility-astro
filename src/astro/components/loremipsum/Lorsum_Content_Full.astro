@@ -108,7 +108,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
     />
 ) }
 
-<p>Lorem ipsum <a href="#" target="_blank">dolor sit amet</a>, consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
+<p>Lorem ipsum <a href="#" target="_blank">dolor sit amet,</a> consectetur adipiscing elit. Sed vel odio at nibh <abbr title="these aren’t real words">pharetra condimentum</abbr>. <em>Nam tincidunt dapibus purus, nec tempus mi tempor vitae.</em> Mauris id sapien sodales, dignissim tortor eget, volutpat turpis.{ ifDisplay.textMedium ? <span> Donec mi ex, venenatis in elit vitae, <a href="#" aria-disabled="true">blandit sodales nunc</a>. <strong><em>Nunc pellentesque</em></strong> urna sed metus vulputate, vel maximus magna consectetur.</span> : '' }{ ifDisplay.textLong ? <span> In hac habitasse platea dictumst. Nulla aliquet iaculis dignissim. Donec pulvinar euismod ex quis imperdiet. Donec bibendum, <strong>sem id ullamcorper</strong> vehicula, ligula ante mattis nisl, ut scelerisque tortor tortor sit amet quam. Praesent lacinia elementum erat et feugiat.</span> : '' }</p>
 
 { ifDisplay.textPage && (
     <Heading
@@ -119,8 +119,9 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
     <p>Vivamus facilisis vitae sapien sit amet blandit. In ac justo mollis, pulvinar leo nec, efficitur tortor. Praesent molestie dolor id tellus finibus, a placerat elit faucibus.</p>
 ) }
 
+<hr />
+
 { ifDisplay.headingsList && (
-    <hr />
     <Lorsum_Heading
         class="page-title"
         heading={1}
@@ -128,10 +129,10 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
         prefix="Title (.page-title)"
     />
     <Fragment>{ ifDisplay.headingLevels.map( num => <Lorsum_Heading heading={num} /> ) }</Fragment>
+    <Lorsum_Heading heading={0} />
 ) }
 
 { ifDisplay.headingSubtitlesList && (
-    <hr />
     <Lorsum_Heading
         class="page-title"
         heading={1}
@@ -150,6 +151,11 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
                 <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
             ) }</Fragment>
         )
+    ) }</Fragment>
+
+    <Lorsum_Heading heading={0} subheading={true} />
+    <Fragment>{ ifDisplay.textPage && (
+        <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
     ) }</Fragment>
 ) }
 

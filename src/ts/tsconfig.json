@@ -13,8 +13,7 @@
         "isolatedDeclarations": true,
         "isolatedModules": true,
         "jsx": "preserve",
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "module": "Node20",
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
         "noImplicitOverride": true,
@@ -37,10 +36,6 @@
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "types": [
-            "node",
-            "jest"
-        ],
         "useUnknownInCatchVariables": true,
         "verbatimModuleSyntax": true
     },

@@ -97,10 +97,42 @@ export class Compile extends CompileStage {
         this.console.progress( 'writing tsconfig files...', 1 );
 
         await this.atry( this.writeTsConfig, 2, [
+            'tsconfig.base.json',
+            2,
+            {
+                extends: [
+                    '@maddimathon/build-utilities/tsconfig',
+                    'astro/tsconfigs/strictest',
+                ],
+
+                compilerOptions: {
+                    types: undefined,
+                },
+            },
+        ] );
+
+        this.try( this.fs.write, 2, [
+            'tsconfig.astro.json',
+            JSON.stringify( {
+                extends: [
+                    './tsconfig.base.json',
+                    'astro/tsconfigs/base',
+                ],
+
+                compilerOptions: {
+                    isolatedDeclarations: false,
+                    // module: 'NodeNext',
+                    // moduleResolution: 'NodeNext',
+                },
+            }, null, 4 ),
+            { force: true },
+        ] );
+
+        await this.atry( this.writeTsConfig, 2, [
             'tsconfig.json',
             2,
             {
-                extends: './tsconfig.base.json',
+                extends: './tsconfig.astro.json',
 
                 include: [ './src/**/*' ],
                 exclude: [
@@ -144,9 +176,11 @@ export class Compile extends CompileStage {
                     allowJs: undefined,
                     declaration: true,
                     declarationMap: false,
-                    isolatedDeclarations: true,
+                    module: buildUtilsConfig.compilerOptions.module,
+                    moduleResolution: buildUtilsConfig.compilerOptions.moduleResolution,
                     noEmit: undefined,
                     outDir: '../../dist/ts/',
+                    sourceMap: false,
                     target: buildUtilsConfig.compilerOptions.target,
                 },
             },

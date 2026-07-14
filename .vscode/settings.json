@@ -12,6 +12,7 @@
         "src/docs/css/**/*": true,
 
         "src/ts/tsconfig.json": true,
+        "tsconfig.base.json": true,
         "tsconfig.json": true,
     },
     "search.exclude": {

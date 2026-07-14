@@ -1690,20 +1690,22 @@ h6 a[href].button {
     font-style: italic;
 }
 
-.h8:is(.unstyled-heading),
-.h7:is(.unstyled-heading),
-h6:is(.unstyled-heading),
-.h6:is(.unstyled-heading),
-h5:is(.unstyled-heading),
-.h5:is(.unstyled-heading),
-h4:is(.unstyled-heading),
-.h4:is(.unstyled-heading),
-h3:is(.unstyled-heading),
-.h3:is(.unstyled-heading),
-h2:is(.unstyled-heading),
-.h2:is(.unstyled-heading),
-h1:is(.unstyled-heading),
-.h1:is(.unstyled-heading) {
+.unstyled-heading:is(
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6,
+    .h7,
+    .h8
+) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1718,63 +1720,77 @@ h1:is(.unstyled-heading),
     font-style: normal;
     font-style: normal;
 }
-.h8:is(.unstyled-heading) em,
-.h7:is(.unstyled-heading) em,
-h6:is(.unstyled-heading) em,
-.h6:is(.unstyled-heading) em,
-h5:is(.unstyled-heading) em,
-.h5:is(.unstyled-heading) em,
-h4:is(.unstyled-heading) em,
-.h4:is(.unstyled-heading) em,
-h3:is(.unstyled-heading) em,
-.h3:is(.unstyled-heading) em,
-h2:is(.unstyled-heading) em,
-.h2:is(.unstyled-heading) em,
-h1:is(.unstyled-heading) em,
-.h1:is(.unstyled-heading) em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em {
     font-style: italic;
 }
-.h8:is(.unstyled-heading) em em,
-.h7:is(.unstyled-heading) em em,
-h6:is(.unstyled-heading) em em,
-.h6:is(.unstyled-heading) em em,
-h5:is(.unstyled-heading) em em,
-.h5:is(.unstyled-heading) em em,
-h4:is(.unstyled-heading) em em,
-.h4:is(.unstyled-heading) em em,
-h3:is(.unstyled-heading) em em,
-.h3:is(.unstyled-heading) em em,
-h2:is(.unstyled-heading) em em,
-.h2:is(.unstyled-heading) em em,
-h1:is(.unstyled-heading) em em,
-.h1:is(.unstyled-heading) em em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em
+    em {
     font-style: normal;
 }
-.h8:is(.unstyled-heading) em em em,
-.h7:is(.unstyled-heading) em em em,
-h6:is(.unstyled-heading) em em em,
-.h6:is(.unstyled-heading) em em em,
-h5:is(.unstyled-heading) em em em,
-.h5:is(.unstyled-heading) em em em,
-h4:is(.unstyled-heading) em em em,
-.h4:is(.unstyled-heading) em em em,
-h3:is(.unstyled-heading) em em em,
-.h3:is(.unstyled-heading) em em em,
-h2:is(.unstyled-heading) em em em,
-.h2:is(.unstyled-heading) em em em,
-h1:is(.unstyled-heading) em em em,
-.h1:is(.unstyled-heading) em em em {
+.unstyled-heading:is(
+        h1,
+        .h1,
+        h2,
+        .h2,
+        h3,
+        .h3,
+        h4,
+        .h4,
+        h5,
+        .h5,
+        h6,
+        .h6,
+        .h7,
+        .h8
+    )
+    em
+    em
+    em {
     font-style: italic;
 }
 
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="7"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]),
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) {
+.unstyled-heading:where(
+    [role="heading"][aria-level="1"],
+    [role="heading"][aria-level="2"],
+    [role="heading"][aria-level="3"],
+    [role="heading"][aria-level="4"],
+    [role="heading"][aria-level="5"],
+    [role="heading"][aria-level="6"],
+    [role="heading"][aria-level="7"],
+    [role="heading"][aria-level="8"]
+) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1789,34 +1805,46 @@ h1:is(.unstyled-heading) em em em,
     font-style: normal;
     font-style: normal;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="7"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em,
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em {
+.unstyled-heading:where(
+        [role="heading"][aria-level="1"],
+        [role="heading"][aria-level="2"],
+        [role="heading"][aria-level="3"],
+        [role="heading"][aria-level="4"],
+        [role="heading"][aria-level="5"],
+        [role="heading"][aria-level="6"],
+        [role="heading"][aria-level="7"],
+        [role="heading"][aria-level="8"]
+    )
+    em {
     font-style: italic;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="7"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em {
+.unstyled-heading:where(
+        [role="heading"][aria-level="1"],
+        [role="heading"][aria-level="2"],
+        [role="heading"][aria-level="3"],
+        [role="heading"][aria-level="4"],
+        [role="heading"][aria-level="5"],
+        [role="heading"][aria-level="6"],
+        [role="heading"][aria-level="7"],
+        [role="heading"][aria-level="8"]
+    )
+    em
+    em {
     font-style: normal;
 }
-:is(.unstyled-heading):where([role="heading"][aria-level="8"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="7"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="6"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="5"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="4"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="3"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="2"]) em em em,
-:is(.unstyled-heading):where([role="heading"][aria-level="1"]) em em em {
+.unstyled-heading:where(
+        [role="heading"][aria-level="1"],
+        [role="heading"][aria-level="2"],
+        [role="heading"][aria-level="3"],
+        [role="heading"][aria-level="4"],
+        [role="heading"][aria-level="5"],
+        [role="heading"][aria-level="6"],
+        [role="heading"][aria-level="7"],
+        [role="heading"][aria-level="8"]
+    )
+    em
+    em
+    em {
     font-style: italic;
 }
 

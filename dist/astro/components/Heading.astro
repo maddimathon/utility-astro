@@ -74,15 +74,111 @@ export interface HeadingProps {
 
 type Props = GenericElementProps<HeadingProps, 'div'>;
 
-const {
-    attrs: { hgroup: attrs_hgroup, subheading: attrs_subheading } = {},
-    class: classList = [],
-    displayHeading: displayHeadingRaw,
-    fallbackTag = 'p',
-    heading: headingRaw = 0,
-    minimum = 2,
-    ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+/* FUNCTIONS ===================================== */
+
+export function parseHeadingParams(
+    html: { content: string; subheading: string },
+    {
+        attrs: { hgroup: attrs_hgroup, subheading: attrs_subheading } = {},
+        class: classList = [],
+        displayHeading: displayHeadingRaw,
+        fallbackTag = 'p',
+        heading: headingRaw = 0,
+        minimum = 2,
+        ...attributes
+    }: Props,
+) {
+    const heading = Math.round(Number(headingRaw));
+
+    const numDisplayHeadingRaw =
+        makeNumber(displayHeadingRaw) ?? displayHeadingRaw;
+
+    const displayHeading =
+        typeof numDisplayHeadingRaw === 'number'
+            ? Math.round(numDisplayHeadingRaw)
+            : typeof numDisplayHeadingRaw === 'undefined'
+              ? numDisplayHeadingRaw
+              : -1;
+
+    const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
+
+    const headingClass =
+        typeof displayHeading === 'undefined' || displayHeading < 0
+            ? !heading
+                ? ('unstyled-heading' as const)
+                : heading > 6
+                  ? (`h${heading}` as const)
+                  : headingIsMoreThanMinimum
+                    ? ('' as const)
+                    : ('unstyled-heading' as const)
+            : displayHeading < 1
+              ? ('unstyled-heading' as const)
+              : (`h${displayHeading}` as const);
+
+    const HeadingWrapper =
+        headingIsMoreThanMinimum && heading < 7
+            ? (`h${heading as 1 | 2 | 3 | 4 | 5 | 6}` as const)
+            : fallbackTag;
+
+    const guaranteedHeadingClass = headingClass
+        ? headingClass
+        : HeadingWrapper === 'p'
+          ? 'unstyled-heading'
+          : HeadingWrapper;
+
+    return {
+        attrs: {
+            heading: {
+                ...attributes,
+                'aria-level': heading > 6 ? heading : undefined,
+                'class:list': makeClassList(
+                    [
+                        headingClass,
+                        html.subheading
+                            ? `${guaranteedHeadingClass}--hgroup`
+                            : '',
+                    ],
+                    classList,
+                ),
+                'role': heading > 6 ? 'heading' : undefined,
+            } satisfies HTMLAttributes<'p'>,
+
+            hgroup: {
+                'aria-roledescription': 'heading group',
+
+                ...attrs_hgroup,
+
+                'class': undefined,
+                'class:list': makeClassList(
+                    `${guaranteedHeadingClass}__hgroup`,
+                    attrs_hgroup?.class,
+                ),
+
+                'role': 'group',
+            } satisfies HTMLAttributes<'hgroup'>,
+
+            subheading: {
+                'aria-roledescription': 'subheading',
+
+                ...attrs_subheading,
+
+                'class': undefined,
+                'class:list': makeClassList(
+                    `hgroup__subheading ${guaranteedHeadingClass}__subheading`,
+                    attrs_subheading?.class,
+                ),
+            } satisfies HTMLAttributes<'p'>,
+        },
+
+        displayHeading,
+        heading,
+
+        headingClass,
+        guaranteedHeadingClass,
+
+        HeadingWrapper,
+    } as const;
+}
 
 /* CONSTANTS ===================================== */
 
@@ -91,98 +187,28 @@ const html = {
     subheading: (await Astro.slots.render('subheading'))?.trim(),
 };
 
-const heading = Math.round(Number(headingRaw));
-
-const numDisplayHeadingRaw = makeNumber(displayHeadingRaw) ?? displayHeadingRaw;
-
-const displayHeading =
-    typeof numDisplayHeadingRaw === 'number'
-        ? Math.round(numDisplayHeadingRaw)
-        : typeof numDisplayHeadingRaw === 'undefined'
-          ? numDisplayHeadingRaw
-          : -1;
-
-const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
-
-const headingClass =
-    typeof displayHeading === 'undefined' || displayHeading < 0
-        ? !heading
-            ? ('unstyled-heading' as const)
-            : heading > 6
-              ? (`h${heading}` as const)
-              : headingIsMoreThanMinimum
-                ? ('' as const)
-                : ('unstyled-heading' as const)
-        : displayHeading < 1
-          ? ('unstyled-heading' as const)
-          : (`h${displayHeading}` as const);
-
-const Tag =
-    headingIsMoreThanMinimum && heading < 7
-        ? (`h${heading as 1 | 2 | 3 | 4 | 5 | 6}` as const)
-        : fallbackTag;
-
-const guaranteedHeadingClass = headingClass
-    ? headingClass
-    : Tag === 'p'
-      ? 'unstyled-heading'
-      : Tag;
-
-const attrs_heading = {
-    ...attributes,
-    'aria-level': heading > 6 ? heading : undefined,
-    'class:list': makeClassList(
-        headingClass + ' ' + `${guaranteedHeadingClass}--hgroup`,
-        classList,
-    ),
-    'role': heading > 6 ? 'heading' : undefined,
-} as const;
-
-const attrs_hgroup_class = makeClassList(
-    `${guaranteedHeadingClass}__hgroup`,
-    attrs_hgroup?.class,
+const { attrs, HeadingWrapper } = parseHeadingParams(
+    html,
+    Astro.props.frontmatter ?? Astro.props,
 );
-
-if (attrs_hgroup?.class) {
-    delete attrs_hgroup.class;
-}
-
-const attrs_subheading_class = makeClassList(
-    `${guaranteedHeadingClass}__subheading`,
-    attrs_subheading?.class,
-);
-
-if (attrs_subheading?.class) {
-    delete attrs_subheading.class;
-}
 ---
 
 {
     html.content &&
         (html.subheading ? (
-            <hgroup
-                {...(attrs_hgroup as Omit<typeof attrs_hgroup, 'class'>)}
-                aria-roledescription='heading group'
-                class:list={attrs_hgroup_class}
-                role='group'
-            >
-                <Tag
-                    {...attrs_heading}
+            <hgroup {...attrs.hgroup}>
+                <HeadingWrapper
+                    {...attrs.heading}
                     set:html={html.content}
                 />
                 <p
-                    {...(attrs_subheading as Omit<
-                        typeof attrs_subheading,
-                        'class'
-                    >)}
-                    aria-roledescription='subheading'
+                    {...attrs.subheading}
                     set:html={html.subheading}
-                    class:list={attrs_subheading_class}
                 />
             </hgroup>
         ) : (
-            <Tag
-                {...attrs_heading}
+            <HeadingWrapper
+                {...attrs.heading}
                 set:html={html.content}
             />
         ))
