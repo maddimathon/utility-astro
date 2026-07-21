@@ -24,7 +24,7 @@ import CopyToClipboardButton from './CopyToClipboardButton.astro';
 
 /**
  * Input props for the CodeBlock component.
- * 
+ *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
@@ -34,12 +34,12 @@ export interface CodeBlockProps {
      */
     children?: any;
 
-    copyToClipboard?: boolean|undefined;
+    copyToClipboard?: boolean | undefined;
 
     /**
      * Code language, if any.
      */
-    lang?: string|undefined;
+    lang?: string | undefined;
 }
 
 type Props = GenericElementProps<CodeBlockProps, 'div'>;
@@ -57,27 +57,30 @@ const {
 const codeHTML: string =
     typeof children === 'string'
         ? children
-        : (await Astro.slots.render('default'))?.trim() ?? '';
+        : ((await Astro.slots.render('default'))?.trim() ?? '');
 ---
 
-{lang ? (
-    <Prism
-        code={codeHTML}
-        lang={lang}
-        class:list={classList}
-        {...attributes}
-    />
-) : (
-    <!-- prettier-ignore -->
-    <pre
-        class:list={classList}
-        {...attributes}
-    ><code><Fragment set:text={codeHTML} /></code></pre>
-)}
+{
+    lang ? (
+        <Prism
+            code={codeHTML}
+            lang={lang}
+            class:list={classList}
+            {...attributes}
+        />
+    ) : (
+        // prettier-ignore
+        <pre class:list={classList} {...attributes}><code><Fragment set:text={codeHTML} /></code></pre>
+    )
+}
 
-{ copyToClipboard && <CopyToClipboardButton
-    class:list='button--inline button--copy-code'
-    toClipboard={codeHTML}
-    successMessage='copied!'
-    set:text='copy'
-/> }
+{
+    copyToClipboard && (
+        <CopyToClipboardButton
+            class:list='button--inline button--copy-code'
+            toClipboard={codeHTML}
+            successMessage='copied!'
+            set:text='copy'
+        />
+    )
+}

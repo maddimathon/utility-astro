@@ -380,7 +380,7 @@ $_flex_container_alignment_row: (
 
         margin-inline: 0;
 
-        @content ('body--subgrid-children');
+        @content (body--subgrid-children);
     }
 
     @at-root :where(&)
@@ -554,7 +554,7 @@ $_flex_container_alignment_row: (
             @include prop-display(block);
             position: relative;
 
-            @content ('root');
+            @content (root);
         }
 
         #{$selector_body},
@@ -569,13 +569,13 @@ $_flex_container_alignment_row: (
 
             margin-inline: 0;
 
-            @content ('body-grid-subgrid-base');
+            @content (body-grid-subgrid-base);
 
             /// BLOCK ///
 
             @include snippet-support-astro-body-grid--body-or-subgrid-children;
 
-            @content ('body-grid-subgrid-base--children');
+            @content (body-grid-subgrid-base--children);
         }
 
         #{$selector_body} {
@@ -590,7 +590,7 @@ $_flex_container_alignment_row: (
             padding: 0;
             z-index: 1;
 
-            @content ('body');
+            @content (body);
 
             /// BLOCK ///
 
@@ -599,7 +599,7 @@ $_flex_container_alignment_row: (
                 @content ($location);
             }
 
-            @content ('body--children');
+            @content (body--children);
         }
 
         ///
@@ -611,19 +611,19 @@ $_flex_container_alignment_row: (
                 @include snippet-support-astro-body-grid--content-width;
             }
 
-            @content ('layout-content-only');
+            @content (layout-content-only);
         }
 
         %layout-full-width,
         %layout-extra-wide,
         %layout-sidebar-left,
         %layout-sidebar-right {
-            @content ('layout-full-width-or-extra-wide-or-sidebar');
+            @content (layout-full-width-or-extra-wide-or-sidebar);
         }
 
         %layout-full-width,
         %layout-extra-wide {
-            @content ('layout-full-width-or-extra-wide');
+            @content (layout-full-width-or-extra-wide);
         }
 
         %layout-full-width {
@@ -631,7 +631,7 @@ $_flex_container_alignment_row: (
                 @include snippet-support-astro-body-grid--page-width;
             }
 
-            @content ('layout-full-width');
+            @content (layout-full-width);
         }
 
         %layout-extra-wide {
@@ -639,7 +639,7 @@ $_flex_container_alignment_row: (
                 @include snippet-support-astro-body-grid--site-width;
             }
 
-            @content ('layout-extra-wide');
+            @content (layout-extra-wide);
         }
 
         %layout-sidebar-left,
@@ -660,7 +660,7 @@ $_flex_container_alignment_row: (
                     @include prop-grid-column(content-start / content-end);
                 }
 
-                @content ('layout-sidebar-left-or-right');
+                @content (layout-sidebar-left-or-right);
             }
         }
 
@@ -672,7 +672,7 @@ $_flex_container_alignment_row: (
                 $gutterCol: $gutterCol,
                 $sidebarCol: $sidebarCol
             ) {
-                @content ('layout-sidebar-left');
+                @content (layout-sidebar-left);
             }
         }
 
@@ -684,7 +684,7 @@ $_flex_container_alignment_row: (
                 $gutterCol: $gutterCol,
                 $sidebarCol: $sidebarCol
             ) {
-                @content ('layout-sidebar-right');
+                @content (layout-sidebar-right);
             }
         }
 

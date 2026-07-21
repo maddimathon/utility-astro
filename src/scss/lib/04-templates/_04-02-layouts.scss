@@ -18,8 +18,12 @@
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin template-content-layouts-body-grid($css_headings: null) {
+@mixin template-content-layouts-body-grid($content_exists: null, $css_headings: null) {
     @if $css_headings == null {
+        @if $content_exists == null {
+            $content_exists: meta.content-exists();
+        }
+
         $css_headings: config.$template_cssHeadings;
     }
 
@@ -53,8 +57,8 @@
     $print_contentHeader: map.get(config.$template_styles, astro, contentHeader),
     $print_pageSubtitle: map.get(config.$template_styles, pageSubtitle),
     //
-    $css_headings: null,
-    $content_exists: null
+    $content_exists: null,
+    $css_headings: null
 ) {
     $_print_any: $print_contentHeader or $print_pageSubtitle;
 
@@ -127,19 +131,40 @@
     $print_bodyGrid: map.get(config.$template_styles, astro, bodyGrid),
     $print_contentHeader: true,
     //
+    $content_exists: null,
     $css_headings: null,
     $args...
 ) {
-    @include utils.template-content-layouts($css_headings: $css_headings, $args...) using
-        ($location) {
+    @if $content_exists == null {
+        $content_exists: meta.content-exists();
+    }
+
+    @include utils.template-content-layouts(
+            $content_exists: $content_exists,
+            $css_headings: $css_headings,
+            $args...
+        )
+        using ($location) {
         @if $location == body {
             @if $print_bodyGrid {
-                @include template-content-layouts-body-grid($css_headings: $css_headings);
+                @include template-content-layouts-body-grid(
+                        $content_exists: $content_exists,
+                        $css_headings: $css_headings
+                    )
+                    using ($_loc) {
+                    @content (bodyGrid--#{$_loc});
+                }
             }
             @content ($location);
 
             @if $print_contentHeader {
-                @include template-content-layouts-content-header($css_headings: $css_headings);
+                @include template-content-layouts-content-header(
+                        $content_exists: $content_exists,
+                        $css_headings: $css_headings
+                    )
+                    using ($_loc) {
+                    @content (contentHeader--#{$_loc});
+                }
             }
             @content (contentHeader);
         } @else {

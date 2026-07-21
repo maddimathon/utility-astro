@@ -25,26 +25,31 @@ export interface Props {
     disclaimerHTML: string;
     displayHeading?: undefined | number;
     heading: number;
+    headingHtmlContent?: string;
 }
 
-const { disclaimerHTML, displayHeading, heading }: Props = Astro.props;
+const { disclaimerHTML, displayHeading, heading, headingHtmlContent }: Props =
+    Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
 
+<Heading
+    class='screen-reader-text'
+    displayHeading={displayHeading}
+    heading={heading}
+    set:html={headingHtmlContent ?? 'Visual styles preview'}
+/>
+
 {
     !disclaimerHTML && (
-        <Heading
-            class='screen-reader-text'
-            displayHeading={displayHeading}
-            heading={heading}
-        >
+        <p class='screen-reader-text'>
             The content of this section is likely only useful for users
             navigating visually. Most of the text is nonsense (it is a type of
             placeholder text called Lorem Ipsum, meant to look like fake latin)
             and exits only to demonstrate the visual styling of the page. None
             of the visual styles are described in this section.
-        </Heading>
+        </p>
     )
 }
 <Fragment set:html={disclaimerHTML} />

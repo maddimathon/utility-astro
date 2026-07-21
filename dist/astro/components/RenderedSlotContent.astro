@@ -1,0 +1,53 @@
+---
+/**
+ * @since 0.1.0-beta.0.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface RenderedSlotContentProps {
+    /**
+     * This is the content rendered via `Astro.slots.render()`.
+     */
+    html: string | false | null | undefined;
+
+    /**
+     * Name of the slot being displayed. True is the main slot.
+     */
+    name: true | string;
+}
+
+type Props = RenderedSlotContentProps;
+
+const { html, name }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const htmlSlotName = typeof name === 'string' && name ? `SLOT: "${name}"` : 'SLOT (MAIN)'
+---
+
+{
+    html ? (
+        <slot name="before" />
+        <Fragment set:html={`<!-- ${htmlSlotName} -->` + html + `<!-- /${htmlSlotName} -->`} />
+        <slot name="after" />
+    ) : (
+        <slot name="empty-before" />
+        <Fragment set:html={`<!-- ${htmlSlotName} (empty) / -->`} />
+        <slot name="empty-after" />
+    )
+}

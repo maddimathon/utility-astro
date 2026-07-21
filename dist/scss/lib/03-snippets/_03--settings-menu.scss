@@ -39,7 +39,7 @@
         margin: 0;
         padding: 0;
 
-        @content ('settings-menu');
+        @content (settings-menu);
 
         &[data-toggle-container] {
             @if $includeBaseStyles {
@@ -51,7 +51,7 @@
             overscroll-behavior: none;
             z-index: $zIndex;
 
-            @content ('settings-menu--container');
+            @content (settings-menu--container);
         }
     }
 
@@ -88,12 +88,12 @@
                 );
             }
 
-            @content ('content--fieldset');
+            @content (content--fieldset);
 
             > legend {
                 &,
                 &:first-child {
-                    @content ('content--fieldset--legend');
+                    @content (content--fieldset--legend);
                 }
             }
 
@@ -109,13 +109,13 @@
                 margin: 0;
                 padding: 0;
 
-                @content ('content--fieldset--container');
+                @content (content--fieldset--container);
 
                 > label,
                 > input {
                     margin: 0;
 
-                    @content ('content--fieldset--container--label-or-input');
+                    @content (content--fieldset--container--label-or-input);
                 }
             }
         }
@@ -127,7 +127,7 @@
             font-size: var-fs(smaller-1);
         }
 
-        @content ('disclaimer');
+        @content (disclaimer);
     }
 
     /* With Javascript ==================================== */
@@ -142,10 +142,10 @@
         .website-settings-menu {
             @include prop-display(flex);
 
-            @content ('js--settings-menu');
+            @content (js--settings-menu);
 
             .toggle-title {
-                @content ('js--settings-menu--title');
+                @content (js--settings-menu--title);
             }
 
             [data-toggle-control] {
@@ -169,7 +169,7 @@
                     }
                 }
 
-                @content ('js--settings-menu--control');
+                @content (js--settings-menu--control);
 
                 &[data-toggle-control-backdrop] {
                     display: none;
@@ -187,7 +187,7 @@
                         opacity: 1;
                     }
 
-                    @content ('js--settings-menu--control--backdrop');
+                    @content (js--settings-menu--control--backdrop);
                 }
             }
 
@@ -201,29 +201,29 @@
                     border: none;
                 }
 
-                @content ('js--settings-menu--content');
+                @content (js--settings-menu--content);
             }
 
             &[data-toggle-container='open'],
             &[data-toggle-container='closing'] {
-                @content ('js--settings-menu--open-or-closing');
+                @content (js--settings-menu--open-or-closing);
 
                 [data-toggle-control-backdrop] {
                     display: do-var(display, block);
 
-                    @content ('js--settings-menu--open-or-closing--control-backdrop');
+                    @content (js--settings-menu--open-or-closing--control-backdrop);
                 }
             }
 
             &[data-toggle-container='open'] {
                 z-index: $zIndex_open;
 
-                @content ('js--settings-menu--open');
+                @content (js--settings-menu--open);
 
                 [data-toggle-control-backdrop] {
                     opacity: 1;
 
-                    @content ('js--settings-menu--open--control-backdrop');
+                    @content (js--settings-menu--open--control-backdrop);
                 }
 
                 > [data-toggle-content] {
@@ -240,7 +240,7 @@
                         );
                     }
 
-                    @content ('js--settings-menu--open--content');
+                    @content (js--settings-menu--open--content);
 
                     > .container {
                         @if $includeBaseStyles {
@@ -248,7 +248,7 @@
                                 var-mrg-firm('300');
                         }
 
-                        @content ('js--settings-menu--open--content--container');
+                        @content (js--settings-menu--open--content--container);
                     }
                 }
             }

@@ -10,10 +10,12 @@ import type { GenericElementProps } from '../../ts/index.js';
 
 /* import - functions */
 import { mapToObject } from '../../ts/index.js';
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
 /* import - components */
+import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* import - layouts */
 
@@ -21,12 +23,11 @@ import { mapToObject } from '../../ts/index.js';
 
 /**
  * Input props for the Main component.
- * 
+ *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface MainProps {
-}
+export interface MainProps {}
 
 /* PROPS ===================================== */
 
@@ -52,59 +53,71 @@ const slots_render = mapToObject(
         ).map(async (_key) => {
             const _kebab = _key.replace(
                 /([a-z0-9])([A-Z])/g,
-                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase()
+                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
             );
 
             return [
                 _key,
-                Astro.slots.has(_kebab) && (await Astro.slots.render(_kebab))?.trim(),
+                Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))?.trim(),
             ] as const;
-        })
-    )
+        }),
+    ),
 );
 ---
 
 <main
     role='main'
     id='main'
-    class:list={['site-content', '||', classList]}
+    class:list={makeClassList('site-content', classList)}
     {...attributes}
 >
+    <RenderedSlotContent
+        name='content-header'
+        html={slots_render.contentHeader}
+    >
+        <Fragment
+            slot='before'
+            set:html='<header class="content-header">'
+        />
+        <Fragment
+            slot='after'
+            set:html='</header>'
+        />
+        <h1
+            slot='empty-before'
+            class='screen-reader-text'
+        >
+            Main Content
+        </h1>
+    </RenderedSlotContent>
 
-    { slots_render.contentHeader ? (
-        <header class='content-header'>
-            <!-- SLOT: "content-header" -->
-            <Fragment set:html={slots_render.contentHeader} />
-            <!-- /SLOT: "content-header" -->
-        </header>
-    ) : (
-        <h1 class="screen-reader-text">Main Content</h1>
-        <!-- SLOT: "content-header" (empty) / -->
-    ) }
+    <RenderedSlotContent
+        name='before-site-content'
+        html={slots_render.beforeSiteContent}
+    />
 
-    { slots_render.beforeSiteContent ? (
-        <!-- SLOT: "before-site-content" -->
-        <Fragment set:html={slots_render.beforeSiteContent} />
-        <!-- /SLOT: "before-site-content" -->
-    ) : <!-- SLOT: "before-site-content" (empty) / --> }
+    <RenderedSlotContent
+        name=''
+        html={slots_render.default}
+        ><p
+            slot='empty-before'
+            class='aside'
+        >
+            Content coming soon!
+        </p></RenderedSlotContent
+    >
 
-    { slots_render.default ? (
-        <!-- SLOT (MAIN) -->
-        <Fragment set:html={slots_render.default} />
-        <!-- /SLOT (MAIN) -->
-    ) : (
-        <p class="aside">Content coming soon!</p>
-        <!-- SLOT (MAIN) (empty) / -->
-    ) }
-
-    { slots_render.afterSiteContent ? (
-        <!-- SLOT: "after-site-content" -->
-        <Fragment set:html={slots_render.afterSiteContent} />
-        <!-- /SLOT: "after-site-content" -->
-    ) : (
-        <p class="screen-reader-text">Sidebar is empty, sorry!</p>
-        <!-- SLOT: "after-site-content" (empty) / -->
-    ) }
+    <RenderedSlotContent
+        name='after-site-content'
+        html={slots_render.afterSiteContent}
+        ><p
+            slot='empty-before'
+            class='screen-reader-text'
+        >
+            Sidebar is empty, sorry!
+        </p></RenderedSlotContent
+    >
 </main>
 
 <style lang='scss'>

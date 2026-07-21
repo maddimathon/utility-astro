@@ -7,6 +7,7 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/types/index.js';
+import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* import - functions */
 
@@ -20,11 +21,10 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 
 /**
  * Input props for the Sidebar component.
- * 
+ *
  * @since 0.1.0-alpha
  */
-export interface SidebarProps {
-}
+export interface SidebarProps {}
 
 /* PROPS ===================================== */
 
@@ -35,7 +35,8 @@ const { class: classList = [], ...attributes }: Props =
 
 /* CONSTANTS ===================================== */
 
-const rendered = Astro.slots.has('default') && (await Astro.slots.render('default'))?.trim();
+const rendered =
+    Astro.slots.has('default') && (await Astro.slots.render('default'))?.trim();
 ---
 
 <aside
@@ -44,14 +45,16 @@ const rendered = Astro.slots.has('default') && (await Astro.slots.render('defaul
     class:list={['site-sidebar', '||', classList]}
     {...attributes}
 >
-    { rendered ? (
-        <!-- SLOT: "sidebar" -->
-        <Fragment set:html={rendered} />
-        <!-- /SLOT: "sidebar" -->
-    ) : (
-        <p class="screen-reader-text">This sidebar is empty.</p>
-        <!-- SLOT: "sidebar" (empty) / -->
-    ) }
+    <RenderedSlotContent
+        name='sidebar'
+        html={rendered}
+        ><p
+            slot='empty-before'
+            class='screen-reader-text'
+        >
+            This sidebar is empty, sorry!
+        </p></RenderedSlotContent
+    >
 </aside>
 
 <style lang='scss'>

@@ -14,7 +14,6 @@ import type {
     AstroUserConfig,
     FontProvider,
     Locales,
-    SessionDriverName,
 } from 'astro';
 
 import { defineConfig, envField } from 'astro/config';
@@ -27,7 +26,7 @@ import { defineConfig, envField } from 'astro/config';
  */
 export function astroConfig<
     T_Locales extends Locales = never,
-    T_Driver extends SessionDriverName = never,
+    T_Driver extends string = never,
     T_FontProviders extends Array<FontProvider> = never
 >(
     config: AstroUserConfig<T_Locales, T_Driver, T_FontProviders>,

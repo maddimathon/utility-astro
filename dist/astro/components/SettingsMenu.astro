@@ -17,6 +17,7 @@ import { SVG } from '../../ts/svg.js';
 
 /* import - components */
 import Toggle_Control from '../support/Toggle_Control.astro';
+import RenderedSlotContent from './RenderedSlotContent.astro';
 
 /* import - layouts */
 
@@ -24,12 +25,11 @@ import Toggle_Control from '../support/Toggle_Control.astro';
 
 /**
  * Input props for the SettingsMenu component.
- * 
+ *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export interface SettingsMenuProps {
-
     /**
      * Email used for a focus link to report accessibility issues.
      */
@@ -40,10 +40,10 @@ export interface SettingsMenuProps {
      */
     iconSVG?: string;
 
-    /** 
+    /**
      * Unique id attr.
      */
-    id?: string|undefined;
+    id?: string | undefined;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -54,7 +54,6 @@ export interface SettingsMenuProps {
      * Whether to each settings group.
      */
     settings?: {
-
         /**
          * @default true
          */
@@ -63,15 +62,17 @@ export interface SettingsMenuProps {
         /**
          * @default false
          */
-        contrast?: boolean | {
-
-            /** 
-             * Whether to include the max contrast option.
-             * 
-             * @default false 
-             */
-            max?: boolean | undefined;
-        } | undefined;
+        contrast?:
+            | boolean
+            | {
+                  /**
+                   * Whether to include the max contrast option.
+                   *
+                   * @default false
+                   */
+                  max?: boolean | undefined;
+              }
+            | undefined;
 
         /**
          * @default false
@@ -81,34 +82,34 @@ export interface SettingsMenuProps {
         /**
          * Custom settings options to append to the defaults.
          */
-        custom?: {
+        custom?:
+            | {
+                  /**
+                   * Unique id value for this setting -- also used to set the associated data attribute.
+                   */
+                  id: string;
 
-            /** 
-             * Unique id value for this setting -- also used to set the associated data attribute.
-             */
-            id: string;
+                  /**
+                   * The display name for this setting in the menu.
+                   */
+                  label: string;
 
-            /**
-             * The display name for this setting in the menu.
-             */
-            label: string;
+                  /**
+                   * Default value.
+                   */
+                  default: string;
 
-            /**
-             * Default value.
-             */
-            default: string;
+                  /**
+                   * All options, including the default.
+                   */
+                  options: {
+                      label: string;
+                      value: string;
 
-            /**
-             * All options, including the default.
-             */
-            options: {
-                label: string;
-                value: string;
-
-                labelClass?: string | undefined;
-            }[];
-
-        }[] | undefined;
+                      labelClass?: string | undefined;
+                  }[];
+              }[]
+            | undefined;
     };
 }
 
@@ -135,7 +136,7 @@ function optionHTML(
     name: string,
     label: string,
     value: string,
-    labelClass: string = ''
+    labelClass: string = '',
 ): string {
     const id = `${name}-${value}`;
 
@@ -156,10 +157,11 @@ const titleID = `${id}-title`;
 
 const accessEmailSubject =
     'Accessibility Issue — ' +
-    absoluteInternalURL(Astro.url, Astro.url.pathname, false).replace(
-        /^https?:\/\/(www\.)?/gi,
-        ''
-    );
+    absoluteInternalURL(
+        Astro.url,
+        decodeURI(Astro.url.pathname),
+        false,
+    ).replace(/^https?:\/\/(www\.)?/gi, '');
 
 const settings: Required<Required<SettingsMenuProps>['settings']> = {
     brightness: true,
@@ -176,30 +178,28 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
  */
 const slots_render = mapToObject(
     await Promise.all(
-        (
-            [
-                'default',
-                'settingsMenuOpen',
-                'settingsMenuClose',
-            ] as const
-        ).map(async (_key) => {
-            const _kebab = _key.replace(
-                /([a-z0-9])([A-Z])/g,
-                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase()
-            );
+        (['default', 'settingsMenuOpen', 'settingsMenuClose'] as const).map(
+            async (_key) => {
+                const _kebab = _key.replace(
+                    /([a-z0-9])([A-Z])/g,
+                    (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
+                );
 
-            return [
-                _key,
-                Astro.slots.has(_kebab) && (await Astro.slots.render(_kebab))?.trim(),
-            ] as const;
-        })
-    )
+                return [
+                    _key,
+                    Astro.slots.has(_kebab) &&
+                        (await Astro.slots.render(_kebab))?.trim(),
+                ] as const;
+            },
+        ),
+    ),
 );
 
-const iconSVG = iconSVG_input ??
+const iconSVG =
+    iconSVG_input ??
     '<span class="icon icon--settings | settings-menu-icon settings-menu-icon--fallback">' +
-    SVG.settings.trim() +
-    '</span>';
+        SVG.settings.trim() +
+        '</span>';
 ---
 
 <div
@@ -212,11 +212,10 @@ const iconSVG = iconSVG_input ??
     data-settings-path={absoluteInternalURL(Astro.url, '')}
     data-toggle-container
 >
-    { slots_render.default ? (
-        <!-- SLOT: "settings-menu" -->
-        <Fragment set:html={slots_render.default} />
-        <!-- /SLOT: "settings-menu" -->
-    ) : <!-- SLOT: "settings-menu" (empty) / --> }
+    <RenderedSlotContent
+        name='settings-menu'
+        html={slots_render.default}
+    />
 
     <div
         id={titleID}
@@ -225,7 +224,7 @@ const iconSVG = iconSVG_input ??
     >
         <Toggle_Control
             {...{ id, buttonID }}
-            aria-label="Toggle settings menu"
+            aria-label='Toggle settings menu'
             class:list='website-settings__toggle'
             data-toggle-primary-control={id}
             iconSVG={iconSVG}
@@ -234,16 +233,15 @@ const iconSVG = iconSVG_input ??
 
     <section
         aria-labelledby={buttonID}
-        class="website-settings__content"
+        class='website-settings__content'
         data-toggle-content={id}
         id={contentID}
     >
         <form class='container'>
-            { slots_render.settingsMenuOpen ? (
-                <!-- SLOT: "settings-menu-open" --> 
-                <Fragment set:html={slots_render.settingsMenuOpen} />
-                <!-- /SLOT: "settings-menu-open" -->
-            ) : <!-- SLOT: "settings-menu-open" (empty) / --> }
+            <RenderedSlotContent
+                name='settings-menu-open'
+                html={slots_render.settingsMenuOpen}
+            />
 
             {
                 accessibilityReportEmail && (
@@ -261,20 +259,19 @@ const iconSVG = iconSVG_input ??
                 settings.brightness && (
                     <fieldset>
                         <legend>Brightness Mode</legend>
-
                         <div class='container'>
                             <Fragment
                                 set:html={optionHTML(
                                     'brightness-mode',
                                     'Light',
-                                    'light'
+                                    'light',
                                 )}
                             />
                             <Fragment
                                 set:html={optionHTML(
                                     'brightness-mode',
                                     'Dark',
-                                    'dark'
+                                    'dark',
                                 )}
                             />
                         </div>
@@ -286,7 +283,6 @@ const iconSVG = iconSVG_input ??
                 settings.contrast && (
                     <fieldset>
                         <legend>Contrast Mode</legend>
-
                         <div class='container'>
                             <Fragment
                                 set:html={optionHTML(
@@ -309,15 +305,16 @@ const iconSVG = iconSVG_input ??
                                     'high',
                                 )}
                             />
-                            { typeof settings.contrast === 'object' && settings.contrast.max && (
-                                <Fragment
-                                    set:html={optionHTML(
-                                        'contrast-mode',
-                                        'Maximum',
-                                        'max',
-                                    )}
-                                />
-                            ) }
+                            {typeof settings.contrast === 'object' &&
+                                settings.contrast.max && (
+                                    <Fragment
+                                        set:html={optionHTML(
+                                            'contrast-mode',
+                                            'Maximum',
+                                            'max',
+                                        )}
+                                    />
+                                )}
                             <Fragment
                                 set:html={optionHTML(
                                     'contrast-mode',
@@ -329,8 +326,8 @@ const iconSVG = iconSVG_input ??
                         </div>
 
                         <p class='forced-colors-mode-only aside'>
-                            Your browser or computer has a ‘forced colours’ or 
-                            custom contrast mode enabled, so changing the 
+                            Your browser or computer has a ‘forced colours’ or
+                            custom contrast mode enabled, so changing the
                             contrast setting will have little impact (if any).
                         </p>
                     </fieldset>
@@ -341,20 +338,19 @@ const iconSVG = iconSVG_input ??
                 settings.motion && (
                     <fieldset>
                         <legend>Motion/Animation</legend>
-
                         <div class='container'>
                             <Fragment
                                 set:html={optionHTML(
                                     'motion',
                                     'Default',
-                                    'no-preference'
+                                    'no-preference',
                                 )}
                             />
                             <Fragment
                                 set:html={optionHTML(
                                     'motion',
                                     'Reduce',
-                                    'reduce'
+                                    'reduce',
                                 )}
                             />
                         </div>
@@ -362,37 +358,48 @@ const iconSVG = iconSVG_input ??
                 )
             }
 
-            { settings.custom && settings.custom.map( ( setting ) => setting.options.length && (
-                <fieldset
-                    data-settings-menu-custom-setting={setting.id}
-                    data-settings-menu-custom-setting-default={setting.default}
-                >
-                    <legend set:text={setting.label} />
+            {
+                settings.custom &&
+                    settings.custom.map(
+                        (setting) =>
+                            setting.options.length && (
+                                <fieldset
+                                    data-settings-menu-custom-setting={
+                                        setting.id
+                                    }
+                                    data-settings-menu-custom-setting-default={
+                                        setting.default
+                                    }
+                                >
+                                    <legend set:text={setting.label} />
 
-                    <div class='container'>{ setting.options.map( ( opt ) => (
-                        <Fragment
-                            set:html={optionHTML(
-                                setting.id,
-                                opt.label,
-                                opt.value,
-                                opt.labelClass,
-                            )}
-                        />
-                    ) ) }</div>
-                </fieldset>
-            ) ) }
+                                    <div class='container'>
+                                        {setting.options.map((opt) => (
+                                            <Fragment
+                                                set:html={optionHTML(
+                                                    setting.id,
+                                                    opt.label,
+                                                    opt.value,
+                                                    opt.labelClass,
+                                                )}
+                                            />
+                                        ))}
+                                    </div>
+                                </fieldset>
+                            ),
+                    )
+            }
 
             <button
                 data-settings-reset
                 set:text='Reset Settings'
-                type="reset"
+                type='reset'
             />
-            
-            { slots_render.settingsMenuClose ? (
-                <!-- SLOT: "settings-menu-close" -->
-                <Fragment set:html={slots_render.settingsMenuClose} />
-                <!-- /SLOT: "settings-menu-close" -->
-            ) : <!-- SLOT: "settings-menu-close" (empty) / --> }
+
+            <RenderedSlotContent
+                name='settings-menu-close'
+                html={slots_render.settingsMenuClose}
+            />
         </form>
     </section>
 
@@ -401,7 +408,8 @@ const iconSVG = iconSVG_input ??
         data-toggle-control-backdrop={id}
         class='website-settings__backdrop'
         aria-hidden='true'
-    />
+    >
+    </div>
 </div>
 
 <style lang='scss'>
@@ -409,4 +417,4 @@ const iconSVG = iconSVG_input ??
 </style>
 
 <script src='../scripts/toggle.ts'></script>
-<script src='../scripts/settings-menu.ts'></script> 
+<script src='../scripts/settings-menu.ts'></script>

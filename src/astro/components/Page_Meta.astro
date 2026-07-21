@@ -70,7 +70,7 @@ const canonical =
     ? meta.canonical
     : absoluteInternalURL(
         Astro.url,
-        ( meta.canonical ?? Astro.url.pathname ),
+        ( meta.canonical ?? decodeURI(Astro.url.pathname) ),
         false
     );
 

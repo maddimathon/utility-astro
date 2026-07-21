@@ -5,6 +5,7 @@
 
 @use 'pkg:@maddimathon/utility-sass/map';
 @use 'pkg:@maddimathon/utility-sass/meta';
+@use 'pkg:@maddimathon/utility-sass/string';
 
 @use 'pkg:@maddimathon/utility-sass/lib/templates' as utils;
 
@@ -172,28 +173,43 @@
     $print_typography: true,
     //
     $css_headings: null,
+    $content_exists: null,
     $args...
 ) {
+    @if $content_exists == null {
+        $content_exists: meta.content-exists();
+    }
+
+    @content (accessibility-before);
     @if $print_accessibility {
         @include template-content-globals-accessibility(
-            $css_headings: $css_headings
-        );
+                $content_exists: $content_exists,
+                $css_headings: $css_headings
+            )
+            using ($location) {
+            @content (accessibility--#{$location});
+        }
     }
     @content (accessibility);
 
     @include utils.template-content-globals(
             $print_accessibility: false,
             $print_typography: false,
+            $content_exists: $content_exists,
             $css_headings: $css_headings,
             $args...
         )
         using ($location) {
         @if $location == typography and $print_typography {
             @include template-content-globals-typography(
-                $css_headings: $css_headings
-            );
+                    $content_exists: $content_exists,
+                    $css_headings: $css_headings
+                )
+                using ($_loc) {
+                @content (typography--#{$_loc});
+            }
             @content ($location);
-        } @else if $location != accessibility {
+        } @else if not string.match($location, '^(accessibility)(-|$)') {
             @content ($location);
         }
     }

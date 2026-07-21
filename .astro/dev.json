@@ -1,0 +1,15 @@
+{
+	"pid": 33242,
+	"port": 8080,
+	"url": "http://localhost:8080",
+	"urls": {
+		"local": [
+			"http://localhost:8080/"
+		],
+		"network": [
+			"http://192.168.16.218:8080/"
+		]
+	},
+	"background": false,
+	"startedAt": "2026-07-21T02:55:31.676Z"
+}

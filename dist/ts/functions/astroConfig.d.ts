@@ -8,13 +8,13 @@
  * @license MIT
  */
 import type { RecursivePartial } from '@maddimathon/utility-typescript/types';
-import type { AstroUserConfig, FontProvider, Locales, SessionDriverName } from 'astro';
+import type { AstroUserConfig, FontProvider, Locales } from 'astro';
 /**
  * Includes defaults and env variables for use with this library
  *
  * @since 0.1.0-beta.0.draft
  */
-export declare function astroConfig<T_Locales extends Locales = never, T_Driver extends SessionDriverName = never, T_FontProviders extends Array<FontProvider> = never>(config: AstroUserConfig<T_Locales, T_Driver, T_FontProviders>, env?: RecursivePartial<astroConfig.EnvironmentConfig>): AstroUserConfig<T_Locales, T_Driver, T_FontProviders>;
+export declare function astroConfig<T_Locales extends Locales = never, T_Driver extends string = never, T_FontProviders extends Array<FontProvider> = never>(config: AstroUserConfig<T_Locales, T_Driver, T_FontProviders>, env?: RecursivePartial<astroConfig.EnvironmentConfig>): AstroUserConfig<T_Locales, T_Driver, T_FontProviders>;
 /**
  * Utilities for the {@link astroConfig} function.
  *

@@ -44,7 +44,10 @@ import Lorsum_Content_Abbreviated from './components/loremipsum/Lorsum_Content_A
 import Lorsum_Content_Full from './components/loremipsum/Lorsum_Content_Full.astro';
 import Lorsum_Disclaimer from './components/loremipsum/Lorsum_Disclaimer.astro';
 import Lorsum_Forms from './components/loremipsum/Lorsum_Forms.astro';
+
 import Lorsum_Heading from './components/loremipsum/Lorsum_Heading.astro';
+export type { LorsumHeadingProps } from './components/loremipsum/Lorsum_Heading.astro';
+
 import Lorsum_Lists from './components/loremipsum/Lorsum_Lists.astro';
 import Lorsum_Table from './components/loremipsum/Lorsum_Table.astro';
 import Lorsum_Toggle from './components/loremipsum/Lorsum_Toggle.astro';
@@ -62,6 +65,9 @@ export type * from './components/NestedList.astro';
 
 import Page_Meta from './components/Page_Meta.astro';
 export type * from './components/Page_Meta.astro';
+
+import RenderedSlotContent from './components/RenderedSlotContent.astro';
+export type * from './components/RenderedSlotContent.astro';
 
 import SettingsMenu from './components/SettingsMenu.astro';
 export type * from './components/SettingsMenu.astro';
@@ -105,6 +111,7 @@ export {
     NavMenu,
     NestedList,
     Page_Meta,
+    RenderedSlotContent,
     SettingsMenu,
     SkipLinks,
     Table,

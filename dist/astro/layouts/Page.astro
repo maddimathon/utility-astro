@@ -1,25 +1,20 @@
 ---
 /**
- * 
- * 
+ *
+ *
  * @package boilerplate-astro-project@0.1.0-beta.0.draft
  * @since 0.1.0-alpha
  */
 
 /* import - types */
 
-import type {
-    PartialExcept,
-} from '@maddimathon/utility-typescript/types';
+import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 
 import type { GenericProps } from '../../ts/index.ts';
 
 import type { NavMenuProps } from '../components/NavMenu.astro';
 
-import type {
-    ContentProps, 
-    ContentType, 
-} from './Content.astro';
+import type { ContentProps, ContentType } from './Content.astro';
 
 import type { PageProps } from './Page.d.ts';
 
@@ -44,16 +39,17 @@ import {
     SkipLinks,
     ToggleNavMenu,
 } from '../components.ts';
-
+import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /** ## TYPES ==================================== **/
 
 export type * from './Page.d.ts';
 
-
 /** ## PROPS ==================================== **/
 
-type Props<T_ContentType extends ContentType = ContentType> = GenericProps<PageProps<T_ContentType>>;
+type Props<T_ContentType extends ContentType = ContentType> = GenericProps<
+    PageProps<T_ContentType>
+>;
 
 const p = Astro.props.frontmatter ?? Astro.props;
 
@@ -62,28 +58,31 @@ const {
     SettingsMenu: SettingsMenuComponent = SettingsMenu,
 } = p.components ?? {};
 
-
 /* ### Content Props ------------------ */
 
 const content = {
-
     ...p.content,
 
     subtitle: p.subtitle,
 
-    title: Array.isArray( p.title ) ? ( p.title.length ? p.title : [] )  : ( p.title.length ? [ p.title ] : [] ),
+    title: Array.isArray(p.title)
+        ? p.title.length
+            ? p.title
+            : []
+        : p.title.length
+          ? [p.title]
+          : [],
 
     type: p.layout,
-
 } satisfies ContentProps<ContentType>;
-
 
 /** ## CONSTANTS ==================================== **/
 
-const pageSlug: string = slugify( currentPagePath( Astro.url ).replace(/\.(html|php)$/gi, '') ) || 'home';
+const pageSlug: string =
+    slugify(currentPagePath(Astro.url).replace(/\.(html|php)$/gi, '')) ||
+    'home';
 
-const SiteTitleTag = ( content.title && content.title.length ) ? 'p' : 'h1';
-
+const SiteTitleTag = content.title && content.title.length ? 'p' : 'h1';
 
 /* ### Nav Menus ------------------ */
 
@@ -95,46 +94,43 @@ const menus: {
     secondary?: NavMenuProps;
 } = {};
 
-if ( p.primaryMenu ) {
+if (p.primaryMenu) {
+    let _menu: PartialExcept<NavMenuProps, 'menu'>;
 
-    let _menu: PartialExcept<NavMenuProps, "menu">;
-    
-    if ( Array.isArray( p.primaryMenu ) ) {
+    if (Array.isArray(p.primaryMenu)) {
         _menu = {
             menu: p.primaryMenu,
-        }
+        };
     } else {
         _menu = p.primaryMenu;
     }
 
     menus.primary = {
         'aria-label': 'Primary Menu',
-        id: 'primary-menu',
+        'id': 'primary-menu',
         ..._menu,
-        convertHrefStringsToAbsolute: p.convertHrefStringsToAbsolute,
+        'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
     };
 }
 
-if ( p.secondaryMenu ) {
+if (p.secondaryMenu) {
+    let _menu: PartialExcept<NavMenuProps, 'menu'>;
 
-    let _menu: PartialExcept<NavMenuProps, "menu">;
-    
-    if ( Array.isArray( p.secondaryMenu ) ) {
+    if (Array.isArray(p.secondaryMenu)) {
         _menu = {
             menu: p.secondaryMenu,
-        }
+        };
     } else {
         _menu = p.secondaryMenu;
     }
 
     menus.secondary = {
         'aria-label': 'Secondary Menu',
-        id: 'secondary-menu',
+        'id': 'secondary-menu',
         ..._menu,
-        convertHrefStringsToAbsolute: p.convertHrefStringsToAbsolute,
+        'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
     };
 }
-
 
 /* ### Support ------------------ */
 
@@ -145,7 +141,6 @@ const scripts = mergeArgs(
     p.scripts,
 );
 
-
 /* ### Slots ------------------ */
 
 /**
@@ -153,37 +148,38 @@ const scripts = mergeArgs(
  */
 const slots_render = mapToObject(
     await Promise.all(
-        ( [
-            'afterFooter',
-            'afterHeader',
-            'afterPrimaryNav',
-            'afterSecondaryNav',
-            'beforeFooter',
-            'beforeHeader',
-            'beforePrimaryNav',
-            'beforeSecondaryNav',
-            'bodyClose',
-            'bodyOpen',
-            'footer',
-            'footerScripts',
-            'headClose',
-            'header',
-            'headOpen',
-        ] as const ).map( async ( _key ) => {
-
+        (
+            [
+                'afterFooter',
+                'afterHeader',
+                'afterPrimaryNav',
+                'afterSecondaryNav',
+                'beforeFooter',
+                'beforeHeader',
+                'beforePrimaryNav',
+                'beforeSecondaryNav',
+                'bodyClose',
+                'bodyOpen',
+                'footer',
+                'footerScripts',
+                'headClose',
+                'header',
+                'headOpen',
+            ] as const
+        ).map(async (_key) => {
             const _kebab = _key.replace(
                 /([a-z0-9])([A-Z])/g,
-                ( _v, _cap1, _cap2 ) => _cap1 + '-' + _cap2.toLowerCase()
+                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
             );
 
             return [
                 _key,
-                Astro.slots.has( _kebab ) && (await Astro.slots.render( _kebab ))?.trim(),
+                Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))?.trim(),
             ] as const;
-        } )
-    )
+        }),
+    ),
 );
-
 
 /* ### Include ------------------ */
 
@@ -191,234 +187,261 @@ const slots_render = mapToObject(
  * Sections/components to include or not.
  */
 const include = {
-    
-    footer: p.footer && ( 
-        p.footer.copyright
-        || p.footer.designedBy
-        || slots_render.footer
-    ),
-    
-    header: p.header && ( 
-        p.header.title 
-        || p.header.tagline
-        || slots_render.header
-    ),
-};
+    footer:
+        p.footer &&
+        (p.footer.copyright || p.footer.designedBy || slots_render.footer),
 
+    header:
+        p.header && (p.header.title || p.header.tagline || slots_render.header),
+};
 
 /* ### Preformatted ------------------ */
 
 const today = DateTime.now();
 
-const _footerCopyrightYear = p.footer?.copyright ? (p.footer.copyright.year ?? today.year) : null;
+const _footerCopyrightYear = p.footer?.copyright
+    ? (p.footer.copyright.year ?? today.year)
+    : null;
 
 /**
  * Some formatted text strings to use below.
  */
 const formatted = {
-
     footer: {
-        year: _footerCopyrightYear && today.year > _footerCopyrightYear
-            ? `${_footerCopyrightYear}–${today.year}` 
-            : _footerCopyrightYear,
+        year:
+            _footerCopyrightYear && today.year > _footerCopyrightYear
+                ? `${_footerCopyrightYear}–${today.year}`
+                : _footerCopyrightYear,
     },
 };
 
-
 /* ### FeatureCheck ------------------ */
 
-const featureClasses = scripts.featureCheck ? FeatureCheck.DEFAULT_CLASSLIST() : [];
-
+const featureClasses = scripts.featureCheck
+    ? FeatureCheck.DEFAULT_CLASSLIST()
+    : [];
 
 /* ### Settings ------------------ */
 
 const settings = p.settings && {
-    ...( p.settings === true ? {} : p.settings ),
+    ...(p.settings === true ? {} : p.settings),
     accessibilityReportEmail: p.accessibilityReportEmail,
     privacyPolicy: p.privacyPolicy,
 };
-
 ---
 
 <html
-    { ...p.attrs?.html ?? {} }
-
+    {...p.attrs?.html ?? {}}
     lang={p.lang}
     dir={p.dir ?? 'auto'}
-
-    class:list={ [
-        featureClasses,
-        p.attrs?.html?.class,
-    ] }
+    class:list={[featureClasses, p.attrs?.html?.class]}
 >
     <!-- 
         This page includes html generated using
         @maddimathon/utility-astro@0.1.0-beta.0.draft
 
-        Author: Maddi Mathon (www.maddimathon.com)
+        Author: Maddi Mathon (https://www.maddimathon.com/web)
         License: MIT
     -->
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charset='UTF-8' />
+        <meta
+            name='viewport'
+            content='width=device-width,initial-scale=1'
+        />
 
-        { p.lang && <meta property="og:locale" content={p.lang} /> }
+        { p.lang && <meta
+            property='og:locale'
+            content={p.lang}
+        /> }
 
-        { slots_render.headOpen ? (
-            <!-- SLOT: "head-open" -->
-            <Fragment set:html={slots_render.headOpen} />
-            <!-- /SLOT: "head-open" -->
-        ) : <!-- SLOT: "head-open" (empty) / --> }
+        <RenderedSlotContent
+            name='head-open'
+            html={slots_render.headOpen}
+        />
 
         <Page_Meta {...p.meta} />
 
-        { slots_render.headClose ? (
-            <!-- SLOT: "head-close" -->
-            <Fragment set:html={slots_render.headClose} />
-            <!-- /SLOT: "head-close" -->
-        ) : <!-- SLOT: "head-close" (empty) / --> }
+        <RenderedSlotContent
+            name='head-close'
+            html={slots_render.headClose}
+        />
     </head>
 
-    <body 
-        { ...p.attrs?.body ?? {} }
-
-        class:list={ [
+    <body
+        {...p.attrs?.body ?? {}}
+        class:list={[
             `page_${pageSlug}`,
-            content.type && `layout_${slugify( content.type )}`,
+            content.type && `layout_${slugify(content.type)}`,
             p.attrs?.body?.class,
-        ] }
+        ]}
     >
-        { p.skipLinks && <SkipLinks links={p.skipLinks} /> }
+        {p.skipLinks && <SkipLinks links={p.skipLinks} />}
 
-        { slots_render.bodyOpen ? (
-            <!-- SLOT: "body-open" -->
-            <Fragment set:html={slots_render.bodyOpen} />
-            <!-- /SLOT: "body-open" -->
-        ) : <!-- SLOT: "body-open" (empty) / --> }
+        <RenderedSlotContent
+            name='body-open'
+            html={slots_render.bodyOpen}
+        />
 
-        { settings && <SettingsMenuComponent {...settings}> 
-            <slot name="settings-menu-open" slot="settings-menu-open" />
-            <slot name="settings-menu" />
-            <slot name="settings-menu-close" slot="settings-menu-close" />
-        </SettingsMenuComponent> }
+        {
+            settings && (
+                <SettingsMenuComponent {...settings}>
+                    <slot
+                        name='settings-menu-open'
+                        slot='settings-menu-open'
+                    />
+                    <slot name='settings-menu' />
+                    <slot
+                        name='settings-menu-close'
+                        slot='settings-menu-close'
+                    />
+                </SettingsMenuComponent>
+            )
+        }
 
-        { slots_render.beforeHeader ? (
-            <!-- SLOT: "before-header" -->
-            <Fragment set:html={slots_render.beforeHeader} />
-            <!-- /SLOT: "before-header" -->
-        ) : <!-- SLOT: "before-header" (empty) / --> }
-        
-        { include.header && (
-            <header class="site-header">
-                { p.header?.title && <SiteTitleTag class="site-title" set:text={p.header.title} /> }
-                { p.header?.tagline && <p class="site-tagline" set:text={p.header.tagline} /> }
+        <RenderedSlotContent
+            name='before-header'
+            html={slots_render.beforeHeader}
+        />
 
-                { slots_render.header ? (
-                    <!-- SLOT: "header" -->
-                    <Fragment set:html={slots_render.header} />
-                    <!-- /SLOT: "header" -->
-                ) : <!-- SLOT: "header" (empty) / --> }
-            </header>
-        ) }
+        {
+            include.header && (
+                <header class='site-header'>
+                    {p.header?.title && (
+                        <SiteTitleTag
+                            class='site-title'
+                            set:text={p.header.title}
+                        />
+                    )}
+                    {p.header?.tagline && (
+                        <p
+                            class='site-tagline'
+                            set:text={p.header.tagline}
+                        />
+                    )}
 
-        { menus.primary && menus.primary.menu.length > 0 && (
-            <Fragment>
-                { slots_render.beforePrimaryNav ? (
-                    <!-- SLOT: "before-primary-nav" -->
-                    <Fragment set:html={slots_render.beforePrimaryNav} />
-                    <!-- /SLOT: "before-primary-nav" -->
-                ) : <!-- SLOT: "before-primary-nav" (empty) / --> }
+                    <RenderedSlotContent
+                        name='header'
+                        html={slots_render.header}
+                    />
+                </header>
+            )
+        }
 
-                <PrimaryMenu {...menus.primary} class:list="nav-primary" />
+        {
+            menus.primary && menus.primary.menu.length > 0 && (
+                <Fragment>
+                    <RenderedSlotContent
+                        name='before-primary-nav'
+                        html={slots_render.beforePrimaryNav}
+                    />
 
-                { slots_render.afterPrimaryNav ? (
-                    <!-- SLOT: "after-primary-nav" -->
-                    <Fragment set:html={slots_render.afterPrimaryNav} />
-                    <!-- /SLOT: "after-primary-nav" -->
-                ) : <!-- SLOT: "after-primary-nav" (empty) / --> }
-            </Fragment>
-        ) }
+                    <PrimaryMenu
+                        {...menus.primary}
+                        class:list='nav-primary'
+                    />
 
-        { slots_render.afterHeader ? (
-            <!-- SLOT: "after-header" -->
-            <Fragment set:html={slots_render.afterHeader} />
-            <!-- /SLOT: "after-header" -->
-        ) : <!-- SLOT: "after-header" (empty) / --> }
-         
+                    <RenderedSlotContent
+                        name='after-primary-nav'
+                        html={slots_render.afterPrimaryNav}
+                    />
+                </Fragment>
+            )
+        }
+
+        <RenderedSlotContent
+            name='after-header'
+            html={slots_render.afterHeader}
+        />
+
         <Content {...content}>
-            <slot slot="content-header" name="content-header" />
-            <slot slot="before-site-content" name="before-site-content" />
+            <slot
+                slot='content-header'
+                name='content-header'
+            />
+            <slot
+                slot='before-site-content'
+                name='before-site-content'
+            />
             <slot />
-            <slot slot="after-site-content" name="after-site-content" />
-            <slot slot="sidebar" name="sidebar" />
+            <slot
+                slot='after-site-content'
+                name='after-site-content'
+            />
+            <slot
+                slot='sidebar'
+                name='sidebar'
+            />
         </Content>
 
-         { menus.secondary && menus.secondary.menu.length > 0 && (
-             <Fragment>
-                 { slots_render.beforeSecondaryNav ? (
-                     <!-- SLOT: "before-secondary-nav" -->
-                    <Fragment set:html={slots_render.beforeSecondaryNav} />
-                     <!-- /SLOT: "before-secondary-nav" -->
-                 ) : <!-- SLOT: "before-secondary-nav" (empty) / --> }
+        {
+            menus.secondary && menus.secondary.menu.length > 0 && (
+                <RenderedSlotContent
+                    name='before-secondary-nav'
+                    html={slots_render.beforeSecondaryNav}
+                />
+                <NavMenu
+                    {...menus.secondary}
+                    class:list='nav-secondary'
+                />
+                <RenderedSlotContent
+                    name='after-secondary-nav'
+                    html={slots_render.afterSecondaryNav}
+                />
+            )
+        }
 
-                 <NavMenu {...menus.secondary} class:list="nav-secondary" />
+        <RenderedSlotContent
+            name='before-footer'
+            html={slots_render.beforeFooter}
+        />
 
-                 { slots_render.afterSecondaryNav ? (
-                     <!-- SLOT: "after-secondary-nav" -->
-                    <Fragment set:html={slots_render.afterSecondaryNav} />
-                     <!-- /SLOT: "after-secondary-nav" -->
-                 ) : <!-- SLOT: "after-secondary-nav" (empty) / --> }
-             </Fragment>
-         ) }
+        {
+            p.footer && include.footer && (
+                <footer class='site-footer'>
+                    <RenderedSlotContent
+                        name='footer'
+                        html={slots_render.footer}
+                    />
 
-        { slots_render.beforeFooter ? (
-            <!-- SLOT: "before-footer" -->
-            <Fragment set:html={slots_render.beforeFooter} />
-            <!-- /SLOT: "before-footer" -->
-        ) : <!-- SLOT: "before-footer" (empty) / --> }
-        
-        { p.footer && include.footer && (
-            <footer class="site-footer">
-                { slots_render.footer ? (
-                    <!-- SLOT: "footer" -->
-                    <Fragment set:html={slots_render.footer} />
-                    <!-- /SLOT: "footer" -->
-                ) : <!-- SLOT: "footer" (empty) / --> }
+                    {(p.footer.designedBy || p.footer.copyright) && (
+                        <div class='site-footer__disclaimer'>
+                            {p.footer.copyright && (
+                                <p class='copyright'>
+                                    <span class='copyright__copy'>&copy;</span>
+                                    <Fragment
+                                        set:text={' ' + formatted.footer.year + ' '}
+                                    />
+                                    {p.footer.copyright.owner ? <Fragment
+                                        set:text={p.footer.copyright.owner}
+                                    /> : <Fragment
+                                        set:html={p.footer.copyright.html}
+                                    />}
+                                </p>
+                            )}
 
-                { ( p.footer.designedBy || p.footer.copyright ) && (
-                    <div class="site-footer__disclaimer">
-                        { p.footer.copyright && (
-                            <p class="copyright"><span class="copyright__copy">&copy;</span> <Fragment set:text={formatted.footer.year} /> {
-                                p.footer.copyright.owner
-                                ? <Fragment set:text={p.footer.copyright.owner} />
-                                : <Fragment set:html={p.footer.copyright.html} />
-                            }</p>
-                        ) }
+                            {p.footer.designedBy && (
+                                <Fragment set:html={p.footer.designedBy} />
+                            )}
+                        </div>
+                    )}
+                </footer>
+            )
+        }
 
-                        { p.footer.designedBy && <Fragment set:html={p.footer.designedBy} /> }
-                    </div>
-                ) }
-            </footer>
-        ) }
-
-        { slots_render.afterFooter ? (
-            <!-- SLOT: "after-footer" -->
-            <Fragment set:html={slots_render.afterFooter} />
-            <!-- /SLOT: "after-footer" -->
-        ) : <!-- SLOT: "after-footer" (empty) / --> }
-
-        { slots_render.bodyClose ? (
-            <!-- SLOT: "body-close" -->
-            <Fragment set:html={slots_render.bodyClose} />
-            <!-- /SLOT: "body-close" -->
-        ) : <!-- SLOT: "body-close" (empty) / --> }
-
-        { slots_render.footerScripts ? (
-            <!-- SLOT: "footer-scripts" -->
-            <Fragment set:html={slots_render.footerScripts} />
-            <!-- /SLOT: "footer-scripts" -->
-        ) : <!-- SLOT: "footer-scripts" (empty) / --> }
+        <RenderedSlotContent
+            name='after-footer'
+            html={slots_render.afterFooter}
+        />
+        <RenderedSlotContent
+            name='body-close'
+            html={slots_render.bodyClose}
+        />
+        <RenderedSlotContent
+            name='footer-scripts'
+            html={slots_render.footerScripts}
+        />
     </body>
 </html>
 
-<script src="../scripts/feature-check-init.ts"></script>
+<script src='../scripts/feature-check-init.ts'></script>

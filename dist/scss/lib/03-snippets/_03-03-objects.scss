@@ -44,20 +44,16 @@
 
         vertical-align: $verticalAlign;
 
-        @if meta.content-exists() {
-            @content ('root');
-        }
+        @content (root);
 
         > svg {
             @include prop-display($display_svg);
             margin: $margin_svg;
             padding: $padding_svg;
 
-            @if meta.content-exists() {
-                @content ('svg');
-            } @else {
-                fill: currentColor;
-            }
+            fill: currentColor;
+
+            @content (svg);
         }
     }
 }

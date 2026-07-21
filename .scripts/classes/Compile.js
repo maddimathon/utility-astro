@@ -3,7 +3,7 @@
 'use strict';
 /*
  * @package @maddimathon/utility-astro
- * @author Maddi Mathon (www.maddimathon.com)
+ * @author Maddi Mathon (https://www.maddimathon.com/web)
  * 
  * @license MIT
  */
