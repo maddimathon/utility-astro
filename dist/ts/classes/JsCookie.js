@@ -13,11 +13,6 @@
  * @since 0.1.0-alpha
  */
 export class JsCookie {
-    name;
-    path;
-    expireDays;
-    defaultValue;
-    copyToLocalStorage;
     constructor(
     /**
      * Cookie's name.

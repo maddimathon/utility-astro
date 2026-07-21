@@ -21,19 +21,13 @@
         ('.layout_extra-wide', 'layout-extra-wide'),
         ('.layout_sidebar-left', 'layout-sidebar-left'),
         ('.layout_sidebar-right', 'layout-sidebar-right'),
-        ('.content-header', 'content-header')
-    );
-
-    $sels: list.join(
-        $sels,
-        (
-            (('.body-subgrid'), 'body-subgrid'),
-            ('.site-width', 'site-width'),
-            ('.page-width', 'page-width'),
-            ('.content-width', 'content-width'),
-            ('.sidebar-width', 'sidebar-width')
-        ),
-        $separator: comma
+        ('.content-header', 'content-header'),
+        ('.main-content__article', 'main-content__article'),
+        ('.body-subgrid', 'body-subgrid'),
+        ('.site-width', 'site-width'),
+        ('.page-width', 'page-width'),
+        ('.content-width', 'content-width'),
+        ('.sidebar-width', 'sidebar-width')
     );
 
     @return $sels;

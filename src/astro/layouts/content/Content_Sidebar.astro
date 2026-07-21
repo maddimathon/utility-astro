@@ -23,7 +23,9 @@ import Sidebar from '../Sidebar.astro';
 
 /* PROPS ===================================== */
 
-export type Props = GenericProps<ContentProps<'sidebar-right'>>;
+export type Props =
+    | GenericProps<ContentProps<'sidebar-left'>>
+    | GenericProps<ContentProps<'sidebar-right'>>;
 
 const p: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -36,14 +38,17 @@ const p: Props = Astro.props.frontmatter ?? Astro.props;
         name='content-header'
     />
     <slot
-        slot='before-site-content'
-        name='before-site-content'
+        slot='before-main-content'
+        name='before-main-content'
     />
     <slot />
     <slot
-        slot='after-site-content'
-        name='after-site-content'
+        slot='after-main-content'
+        name='after-main-content'
     />
+    <Sidebar
+        {...p.attrs.sidebar}
+        slot='sidebar'
+        ><slot name='sidebar' /></Sidebar
+    >
 </Main>
-
-<Sidebar {...p.attrs.sidebar}><slot name='sidebar' /></Sidebar>

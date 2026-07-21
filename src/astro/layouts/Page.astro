@@ -24,7 +24,7 @@ import { mergeArgs, slugify } from '@maddimathon/utility-typescript';
 import { FeatureCheck } from '@maddimathon/utility-sass';
 
 import { mapToObject } from '../../ts/functions/mapToObject.js';
-import { currentPagePath } from '../functions.js';
+import { currentPagePath, makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -245,23 +245,13 @@ const settings = p.settings && {
     -->
     <head>
         <meta charset='UTF-8' />
-        <meta
-            name='viewport'
-            content='width=device-width,initial-scale=1'
-        />
-
-        { p.lang && <meta
-            property='og:locale'
-            content={p.lang}
-        /> }
-
+        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        { p.lang && <meta property='og:locale' content={p.lang} /> }
         <RenderedSlotContent
             name='head-open'
             html={slots_render.headOpen}
         />
-
         <Page_Meta {...p.meta} />
-
         <RenderedSlotContent
             name='head-close'
             html={slots_render.headClose}
@@ -270,11 +260,10 @@ const settings = p.settings && {
 
     <body
         {...p.attrs?.body ?? {}}
-        class:list={[
+        class:list={makeClassList([
             `page_${pageSlug}`,
             content.type && `layout_${slugify(content.type)}`,
-            p.attrs?.body?.class,
-        ]}
+        ], p.attrs?.body?.class ?? [])}
     >
         {p.skipLinks && <SkipLinks links={p.skipLinks} />}
 
@@ -330,22 +319,18 @@ const settings = p.settings && {
 
         {
             menus.primary && menus.primary.menu.length > 0 && (
-                <Fragment>
-                    <RenderedSlotContent
-                        name='before-primary-nav'
-                        html={slots_render.beforePrimaryNav}
-                    />
-
-                    <PrimaryMenu
-                        {...menus.primary}
-                        class:list='nav-primary'
-                    />
-
-                    <RenderedSlotContent
-                        name='after-primary-nav'
-                        html={slots_render.afterPrimaryNav}
-                    />
-                </Fragment>
+                <RenderedSlotContent
+                    name='before-primary-nav'
+                    html={slots_render.beforePrimaryNav}
+                />
+                <PrimaryMenu
+                    {...menus.primary}
+                    class:list='nav-primary'
+                />
+                <RenderedSlotContent
+                    name='after-primary-nav'
+                    html={slots_render.afterPrimaryNav}
+                />
             )
         }
 
@@ -360,13 +345,13 @@ const settings = p.settings && {
                 name='content-header'
             />
             <slot
-                slot='before-site-content'
-                name='before-site-content'
+                slot='before-main-content'
+                name='before-main-content'
             />
             <slot />
             <slot
-                slot='after-site-content'
-                name='after-site-content'
+                slot='after-main-content'
+                name='after-main-content'
             />
             <slot
                 slot='sidebar'
@@ -419,10 +404,7 @@ const settings = p.settings && {
                                     />}
                                 </p>
                             )}
-
-                            {p.footer.designedBy && (
-                                <Fragment set:html={p.footer.designedBy} />
-                            )}
+                            {p.footer.designedBy && <Fragment set:html={p.footer.designedBy} />}
                         </div>
                     )}
                 </footer>

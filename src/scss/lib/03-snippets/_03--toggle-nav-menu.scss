@@ -22,7 +22,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
 /// Supports the ToggleNavMenu astro component.
 ///
 @mixin snippet-support-astro-toggle-nav-menu(
-    $default_grid_page: snippet-support-astro-body-grid--default-grid-page(),
+    $default_grid_page: snippet-body-grid--default-columns(),
     //
     $container_alignment: (),
     $content_grid_columns: $_content_grid_columns,
@@ -62,7 +62,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                     // grid-template-columns: do-var(grid-template-columns--page);
                     // grid-template-columns: subgrid;
 
-                    // @include snippet-content-grid-alignment(
+                    // @include snippet-body-grid--grid-alignment(
                     //     (
                     //         justify-content: stretch,
                     //     )
@@ -77,7 +77,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                     grid-template-columns: $_var_gridCols_page;
                     grid-template-columns: subgrid;
 
-                    @include snippet-content-grid-alignment($container_alignment);
+                    @include snippet-body-grid--grid-alignment($container_alignment);
 
                     grid-column: 1 / -1;
 
@@ -144,7 +144,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                             @include prop-grid-column(page-start / page-end);
 
                             /* prettier-ignore */
-                            @include cx-prop( grid-template-columns--toggle,  $gridCols_toggle );
+                            @include cx-prop( grid-template-columns--toggle, $gridCols_toggle );
                             /* prettier-ignore */
                             grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
 

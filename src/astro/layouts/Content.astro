@@ -26,8 +26,7 @@ import { Heading } from '../components.ts';
 import Content_ExtraWide from './content/Content_ExtraWide.astro';
 import Content_FullWidth from './content/Content_FullWidth.astro';
 import Content_Only from './content/Content_Only.astro';
-import Content_SidebarLeft from './content/Content_SidebarLeft.astro';
-import Content_SidebarRight from './content/Content_SidebarRight.astro';
+import Content_Sidebar from './content/Content_Sidebar.astro';
 
 /* import - layouts */
 
@@ -74,24 +73,24 @@ const titleString = title.reverse().join(' / ');
 /**
  * @since ___PKG_VERSION___ — Added to exports.
  */
-const contentTypes: {
+const contentTypes = {
+    'content-only': Content_Only,
+    'full-width': Content_FullWidth,
+    'extra-wide': Content_ExtraWide,
+    'sidebar-left': Content_Sidebar,
+    'sidebar-right': Content_Sidebar,
+} as const satisfies {
     [K in ContentType]: (
         result: any,
         props: ContentProps_Full<K>,
         slots?: any,
     ) => any;
-} = {
-    'content-only': Content_Only,
-    'full-width': Content_FullWidth,
-    'extra-wide': Content_ExtraWide,
-    'sidebar-left': Content_SidebarLeft,
-    'sidebar-right': Content_SidebarRight,
-} as const;
+};
 
 const ContentComponent = contentTypes[type];
 ---
 
-<ContentComponent {...p}>
+<ContentComponent {...{ ...p, type }}>
     {
         titleString ? (
             <Heading
@@ -123,13 +122,13 @@ const ContentComponent = contentTypes[type];
         name='content-header'
     />
     <slot
-        slot='before-site-content'
-        name='before-site-content'
+        slot='before-main-content'
+        name='before-main-content'
     />
     <slot />
     <slot
-        slot='after-site-content'
-        name='after-site-content'
+        slot='after-main-content'
+        name='after-main-content'
     />
     <slot
         slot='sidebar'

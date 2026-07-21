@@ -1,7 +1,7 @@
 
 import partialConfig from './.scripts/build.config.js';
 
-import { astroConfig } from './src/ts/functions/astroConfig.js';
+import { astroConfig } from './src/astro/functions/astroConfig.js';
 
 import pkg from './package.json';
 

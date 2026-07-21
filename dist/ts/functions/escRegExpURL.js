@@ -19,7 +19,7 @@ import { escRegExp } from '@maddimathon/utility-typescript';
  */
 export function escRegExpURL(url) {
     const matches = url.match(/^((?:https?:\/\/)?)((?:www\.)?)(.*)(\/?)$/i);
-    const [matched, http, www, meat, trailingSlash,] = matches ?? [];
+    const [matched, http, www, meat, trailingSlash,] = matches !== null && matches !== void 0 ? matches : [];
     // returns
     if (!matched) {
         return url;

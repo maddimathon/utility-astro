@@ -9,6 +9,7 @@
 import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -37,12 +38,22 @@ const { class: classList = [], ...attributes }: Props =
 
 const rendered =
     Astro.slots.has('default') && (await Astro.slots.render('default'))?.trim();
+
+delete attributes.slot;
+
+if (
+    !attributes['aria-label'] &&
+    !attributes['aria-labelledby'] &&
+    !attributes.title
+) {
+    attributes['aria-label'] = 'Main Sidebar';
+}
 ---
 
 <aside
     role='complementary'
     id='sidebar'
-    class:list={['site-sidebar', '||', classList]}
+    class:list={makeClassList('main-sidebar', classList)}
     {...attributes}
 >
     <RenderedSlotContent

@@ -11,7 +11,6 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 /* import - functions */
 
 /* import - values */
-import { STYLES_ICON } from 'astro:env/client';
 
 /* import - components */
 
@@ -27,18 +26,12 @@ type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
 
     icon?: boolean;
     iconSVG?: undefined | string;
-
-    /**
-     * @since ___PKG_VERSION___
-     */
-    includeIconStyles?: boolean;
 };
 
 const {
     buttonID,
     class: classList = [],
     id,
-    includeIconStyles = STYLES_ICON,
 
     icon = true,
 
@@ -99,4 +92,6 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-icon
     }
 </button>
 
-{includeIconStyles && <style lang='scss'>@forward '../css/icon.css';</style>}
+<style lang='scss'>
+    @forward '../css/icon.css';
+</style>

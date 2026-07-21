@@ -74,6 +74,10 @@
         "./support/*": "./dist/astro/support/*.astro",
 
         "./functions": "./dist/astro/functions.ts",
+        "./functions/*": [
+            "./dist/astro/functions/*.ts",
+            "./dist/astro/functions/*"
+        ],
 
         "./astro/*": [
             "./dist/astro/*.astro",
@@ -181,7 +185,7 @@
 
         "link": "run-p link:*",
             "link-ts":    "npm run unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
-            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
+            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.browser.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
             "link:sass":  "npm run unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "preinstall": "npm run unlink",
@@ -199,10 +203,10 @@
         
 
         "watch": "run-p watch:* start:*",
-            "watch:astro":     "watch -p 'src/astro/**/*'                                                                        -c 'build-utils build --without minimize,readme,document --only-compile astro --watchedWatcher \"astro\"     --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:scss":      "watch -p 'src/scss/**/*'                         -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without minimize,readme,document --only-compile scss  --watchedWatcher \"scss\"      --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:docs-scss": "watch -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without minimize,readme,compile  --only-document scss --watchedWatcher \"docs-scss\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
-            "watch:ts":        "watch -p 'src/ts/**/*'                                                                           -c 'build-utils build --without minimize,readme,document --only-compile ts    --watchedWatcher \"ts\"        --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:astro":     "watch -p 'src/astro/**/*'                                                                        -c 'build-utils build --without readme,document --only-compile astro          --watchedWatcher \"astro\"     --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:scss":      "watch -p 'src/scss/**/*'                         -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without readme,document --only-compile scss,templates --watchedWatcher \"scss\"      --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:docs-scss": "watch -p 'src/scss/**/*' -p 'src/docs/scss/**/*' -p 'node_modules/@maddimathon/*/dist/scss/**/*' -c 'build-utils build --without readme,compile  --only-document scss,replace  --watchedWatcher \"docs-scss\" --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
+            "watch:ts":        "watch -p 'src/ts/**/*'                                                                           -c 'build-utils build --without readme,document --only-compile ts             --watchedWatcher \"ts\"        --watchedChange --watchedFilename \"$FILENAME\" --watchedEvent \"$EVENT\"'",
         
         
         "build-start": "build-utils build --starting && npm run start",
@@ -240,7 +244,6 @@
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.9",
-        "@astrojs/compiler-rs": "^0.3.1",
         "@astrojs/ts-plugin": "^1.10.10",
         "@maddimathon/build-utilities": "~0.3.0-beta.1",
         "@types/jest": "~30.0.0",

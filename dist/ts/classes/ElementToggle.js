@@ -7,20 +7,24 @@
  * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _ElementToggle_activeTimeout, _ElementToggle_activeStateHold, _ElementToggle_deactiveTimeout;
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
  *
  * @since 0.1.0-alpha
  */
 export class ElementToggle {
-    /**
-     * A map of existing successfully-registered instances of this class. Helps
-     * to avoid re-initializing the same element or a block with the same id
-     * value.
-     *
-     * @since 0.1.0-beta.0.draft
-     */
-    static instances = new Map();
     /**
      * @since 0.1.0-beta.0.draft
      */
@@ -59,9 +63,10 @@ export class ElementToggle {
             // returns 
             if (con.id) {
                 return ElementToggle.new(con, opts).then((instance) => {
+                    var _a;
                     if (!opts.debug && opts.outputResults) {
                         const msgs = [
-                            `[ElementToggle] new: ${con.id ?? ''}`,
+                            `[ElementToggle] new: ${(_a = con.id) !== null && _a !== void 0 ? _a : ''}`,
                         ];
                         if (instance) {
                             msgs.push('\ncontainer: ', instance.container, '\nopts: ', instance.opts);
@@ -96,7 +101,8 @@ export class ElementToggle {
      * @since 0.1.0-alpha.7
      */
     static async new(container, opts = {}) {
-        const containerID = container?.id;
+        var _a;
+        const containerID = container === null || container === void 0 ? void 0 : container.id;
         // returns
         if (!container || !containerID) {
             ElementToggle.abortNew(container, null);
@@ -118,7 +124,7 @@ export class ElementToggle {
             }
             return null;
         }
-        const primaryButton = document.querySelector(`[data-toggle-primary-control=${containerID}]`) ?? allButtons[0];
+        const primaryButton = (_a = document.querySelector(`[data-toggle-primary-control=${containerID}]`)) !== null && _a !== void 0 ? _a : allButtons[0];
         // returns - invalid setup that won't work
         if (!primaryButton) {
             ElementToggle.abortNew(container, allButtons);
@@ -146,8 +152,6 @@ export class ElementToggle {
             content,
         }, opts);
     }
-    static openEvent = null;
-    static closeEvent = null;
     /**
      * @param string  A CSS time value to convert to milliseconds.
      */
@@ -165,35 +169,6 @@ export class ElementToggle {
             ElementToggle.closeEvent = new Event('toggle-close');
         }
     }
-    /* LOCAL PROPS
-     * ====================================================================== */
-    /**
-     * Optional configuration, if any.
-     * @since 0.1.0-alpha.7
-     */
-    opts;
-    /**
-     * Timeout length to switch the button to active state, in milliseconds.
-     *
-     * @since 0.1.0-beta.0.draft
-     */
-    activeTimeoutLength;
-    /**
-     * The unique ID for the toggle container to set up.
-     */
-    container;
-    content;
-    primaryButton;
-    allButtons;
-    closingTimeout = null;
-    /**
-     * In milliseconds.
-     */
-    closingTime;
-    /**
-     * @since 0.1.0-beta.0.draft
-     */
-    toggleListener;
     /* CONSTRUCTOR
      * ====================================================================== */
     /**
@@ -202,14 +177,23 @@ export class ElementToggle {
     constructor(elements, 
     /** Optional configuration, if any. */
     partialOpts) {
-        this.opts = {
-            activeTimeoutLength: (partialOpts?.closingTime ?? 1800) / 4,
-            closeWhenUntargetted: false,
-            closingTime: 1800,
-            debug: false,
-            openWhenTargetted: true,
-            ...partialOpts,
-        };
+        var _a;
+        this.closingTimeout = null;
+        /* UTILITIES
+         * ====================================================================== */
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        _ElementToggle_activeTimeout.set(this, void 0);
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        _ElementToggle_activeStateHold.set(this, false);
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        _ElementToggle_deactiveTimeout.set(this, void 0);
+        this.opts = Object.assign({ activeTimeoutLength: ((_a = partialOpts === null || partialOpts === void 0 ? void 0 : partialOpts.closingTime) !== null && _a !== void 0 ? _a : 1800) / 4, closeWhenUntargetted: false, closingTime: 1800, debug: false, openWhenTargetted: true }, partialOpts);
         this.closingTime = this.opts.closingTime;
         this.allButtons = elements.allButtons;
         this.container = elements.container;
@@ -285,28 +269,18 @@ export class ElementToggle {
             this.allButtons.forEach(button => button.removeEventListener('click', this.toggleListener));
         }
     }
-    /* UTILITIES
-     * ====================================================================== */
-    /**
-     * @since 0.1.0-beta.0.draft
-     */
-    #activeTimeout;
-    /**
-     * @since 0.1.0-beta.0.draft
-     */
-    #activeStateHold = false;
     /**
      * Adds the active attribute to the buttons.
      *
      * @since 0.1.0-beta.0.draft
      */
     activateButton(button) {
-        clearTimeout(this.#activeTimeout);
-        this.#activeStateHold = true;
+        clearTimeout(__classPrivateFieldGet(this, _ElementToggle_activeTimeout, "f"));
+        __classPrivateFieldSet(this, _ElementToggle_activeStateHold, true, "f");
         button.setAttribute('data-state-active', 'true');
-        this.#activeTimeout = setTimeout(() => {
-            this.#activeStateHold = false;
-        }, this.activeTimeoutLength);
+        __classPrivateFieldSet(this, _ElementToggle_activeTimeout, setTimeout(() => {
+            __classPrivateFieldSet(this, _ElementToggle_activeStateHold, false, "f");
+        }, this.activeTimeoutLength), "f");
     }
     /**
      * Clears the related timeout, if any.
@@ -336,19 +310,15 @@ export class ElementToggle {
         return hashAsId.toLowerCase() === this.container.id.toLowerCase();
     }
     /**
-     * @since 0.1.0-beta.0.draft
-     */
-    #deactiveTimeout;
-    /**
      * Removes the active attribute to the buttons.
      *
      * @since 0.1.0-beta.0.draft
      */
     deactivateButton() {
-        clearTimeout(this.#deactiveTimeout);
+        clearTimeout(__classPrivateFieldGet(this, _ElementToggle_deactiveTimeout, "f"));
         // sets timeout to callback and returns - waiting for the activateButton() timeout to set it back to false
-        if (this.#activeStateHold) {
-            this.#deactiveTimeout = setTimeout(this.deactivateButton, 50);
+        if (__classPrivateFieldGet(this, _ElementToggle_activeStateHold, "f")) {
+            __classPrivateFieldSet(this, _ElementToggle_deactiveTimeout, setTimeout(this.deactivateButton, 50), "f");
             return;
         }
         this.primaryButton.removeAttribute('data-state-active');
@@ -400,7 +370,7 @@ export class ElementToggle {
      * Toggles the open/close state of the element.
      */
     toggle(button) {
-        this.activateButton(button ?? this.primaryButton);
+        this.activateButton(button !== null && button !== void 0 ? button : this.primaryButton);
         // returns
         if (!this.container) {
             return;
@@ -479,3 +449,14 @@ export class ElementToggle {
         this.deactivateButton();
     }
 }
+_ElementToggle_activeTimeout = new WeakMap(), _ElementToggle_activeStateHold = new WeakMap(), _ElementToggle_deactiveTimeout = new WeakMap();
+/**
+ * A map of existing successfully-registered instances of this class. Helps
+ * to avoid re-initializing the same element or a block with the same id
+ * value.
+ *
+ * @since 0.1.0-beta.0.draft
+ */
+ElementToggle.instances = new Map();
+ElementToggle.openEvent = null;
+ElementToggle.closeEvent = null;

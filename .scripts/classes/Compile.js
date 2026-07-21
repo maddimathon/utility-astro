@@ -106,7 +106,6 @@ export class Compile extends CompileStage {
                 ],
 
                 compilerOptions: {
-                    types: undefined,
                 },
             },
         ] );
@@ -152,16 +151,11 @@ export class Compile extends CompileStage {
             },
         ] );
 
-        const buildUtilsConfig = await this.compiler.resolveTsConfig(
-            'node_modules/@maddimathon/build-utilities/tsconfig.base.json',
-            2,
-        );
-
         await this.atry( this.writeTsConfig, 2, [
             'src/ts/tsconfig.json',
             2,
             {
-                extends: '../../tsconfig.base.json',
+                extends: '@maddimathon/build-utilities/tsconfig.browser',
 
                 include: [
                     '../../src/ts/**/*',
@@ -176,12 +170,10 @@ export class Compile extends CompileStage {
                     allowJs: undefined,
                     declaration: true,
                     declarationMap: false,
-                    module: buildUtilsConfig.compilerOptions.module,
-                    moduleResolution: buildUtilsConfig.compilerOptions.moduleResolution,
                     noEmit: undefined,
                     outDir: '../../dist/ts/',
                     sourceMap: false,
-                    target: buildUtilsConfig.compilerOptions.target,
+                    target: 'ES2017',
                 },
             },
         ] );

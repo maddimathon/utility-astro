@@ -39,6 +39,20 @@ export function astroConfig<
         schema: {
             ...config.env?.schema ?? {},
 
+            MAIN_AS_ARTICLE: envField.boolean( {
+                access: 'public',
+                context: 'client',
+                default: env.main?.asArticle ?? true,
+                optional: true,
+            } ),
+
+            PRINT_SLOT_COMMENTS: envField.boolean( {
+                access: 'public',
+                context: 'client',
+                default: env.print?.slotComments ?? import.meta.env.DEV,
+                optional: true,
+            } ),
+
             SCRIPTS_FEATURECHECK: envField.boolean( {
                 access: 'public',
                 context: 'client',
@@ -80,13 +94,6 @@ export function astroConfig<
                 default: env.toggle?.outputResults ?? false,
                 optional: true,
             } ),
-
-            STYLES_ICON: envField.boolean( {
-                access: 'public',
-                context: 'client',
-                default: env.styles?.icon ?? true,
-                optional: true,
-            } ),
         }
     };
 
@@ -113,10 +120,18 @@ export namespace astroConfig {
         /**
          * @since ___PKG_VERSION___
          */
-        styles: {
+        main: {
             /** @default true */
-            icon: boolean;
-        },
+            asArticle: boolean;
+        };
+
+        /**
+         * @since ___PKG_VERSION___
+         */
+        print: {
+            /** @default import.meta.env.DEV */
+            slotComments: boolean;
+        };
 
         toggle: {
             /** @default false */

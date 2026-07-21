@@ -15,5 +15,5 @@
 export function mapToObject(input) {
     const map = input instanceof Map ? input : new Map(input);
     const partialObjs = Array.from(map.entries()).map(([_key, _val]) => ({ [_key]: _val }));
-    return partialObjs.reduce((_prev, _curr) => ({ ..._prev, ..._curr }));
+    return partialObjs.reduce((_prev, _curr) => (Object.assign(Object.assign({}, _prev), _curr)));
 }

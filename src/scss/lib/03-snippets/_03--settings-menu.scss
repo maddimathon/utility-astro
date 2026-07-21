@@ -95,7 +95,7 @@
 
             > .container {
                 @include prop-display(flex);
-                @include snippet-content-flex-container(
+                @include snippet-body-grid--flex-container(
                     $alignment: $fieldset_flexContainer_alignment,
                     $gap: $fieldset_flexContainer_gap,
                     $direction: $fieldset_flexContainer_direction,

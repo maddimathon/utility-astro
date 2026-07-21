@@ -13,6 +13,7 @@ import { mapToObject } from '../../ts/index.js';
 import { makeClassList } from '../functions.js';
 
 /* import - values */
+import { MAIN_AS_ARTICLE } from 'astro:env/client';
 
 /* import - components */
 import RenderedSlotContent from '../components/RenderedSlotContent.astro';
@@ -27,14 +28,19 @@ import RenderedSlotContent from '../components/RenderedSlotContent.astro';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface MainProps {}
+export interface MainProps {
+    asArticle?: boolean;
+}
 
 /* PROPS ===================================== */
 
 type Props = GenericElementProps<MainProps, 'main'>;
 
-const { class: classList = [], ...attributes }: Props =
-    Astro.props.frontmatter ?? Astro.props;
+const {
+    asArticle = MAIN_AS_ARTICLE,
+    class: classList = [],
+    ...attributes
+}: Props = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -69,9 +75,22 @@ const slots_render = mapToObject(
 <main
     role='main'
     id='main'
-    class:list={makeClassList('site-content', classList)}
+    class:list={makeClassList('main-content', classList)}
     {...attributes}
 >
+    {
+        asArticle && (
+            <RenderedSlotContent
+                name='before-main-content'
+                html={slots_render.beforeSiteContent}
+            />
+            <Fragment
+                slot='before'
+                set:html='<article class="main-content__article">'
+            />
+        )
+    }
+
     <RenderedSlotContent
         name='content-header'
         html={slots_render.contentHeader}
@@ -92,32 +111,36 @@ const slots_render = mapToObject(
         </h1>
     </RenderedSlotContent>
 
-    <RenderedSlotContent
-        name='before-site-content'
+    {!asArticle && <RenderedSlotContent
+        name='before-main-content'
         html={slots_render.beforeSiteContent}
-    />
+    />}
 
     <RenderedSlotContent
         name=''
         html={slots_render.default}
-        ><p
+    >
+        <p
             slot='empty-before'
             class='aside'
-        >
-            Content coming soon!
-        </p></RenderedSlotContent
-    >
+            set:text='Content coming soon!'
+        />
+    </RenderedSlotContent>
+
+    {
+        asArticle && (
+            <Fragment
+                slot='after'
+                set:html='</article>'
+            />
+        )
+    }
 
     <RenderedSlotContent
-        name='after-site-content'
+        name='after-main-content'
         html={slots_render.afterSiteContent}
-        ><p
-            slot='empty-before'
-            class='screen-reader-text'
-        >
-            Sidebar is empty, sorry!
-        </p></RenderedSlotContent
-    >
+    />
+    <slot name='sidebar' />
 </main>
 
 <style lang='scss'>

@@ -10,6 +10,7 @@
 /* import - functions */
 
 /* import - values */
+import {PRINT_SLOT_COMMENTS} from 'astro:env/client';
 
 /* import - components */
 
@@ -43,11 +44,11 @@ const htmlSlotName = typeof name === 'string' && name ? `SLOT: "${name}"` : 'SLO
 {
     html ? (
         <slot name="before" />
-        <Fragment set:html={`<!-- ${htmlSlotName} -->` + html + `<!-- /${htmlSlotName} -->`} />
+        <Fragment set:html={PRINT_SLOT_COMMENTS ? `<!-- ${htmlSlotName} -->` + html + `<!-- /${htmlSlotName} -->` : html} />
         <slot name="after" />
     ) : (
         <slot name="empty-before" />
-        <Fragment set:html={`<!-- ${htmlSlotName} (empty) / -->`} />
+        <Fragment set:html={PRINT_SLOT_COMMENTS ? `<!-- ${htmlSlotName} (empty) / -->` : ''} />
         <slot name="empty-after" />
     )
 }

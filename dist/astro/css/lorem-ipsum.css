@@ -26,11 +26,3 @@
     align-content: start;
     align-items: first baseline;
 }
-:where(.button-span) button,
-:where(.button-span) [role="button"],
-:where(.button-span) input[type="button"],
-:where(.button-span) input[type="reset"],
-:where(.button-span) input[type="submit"],
-:where(.button-span) a[href].button {
-    margin: 0;
-}

@@ -14,6 +14,7 @@
  */
 
 export * from './functions/absoluteInternalURL.js';
+export * from './functions/astroConfig.js';
 export * from './functions/autoTrailingSlash.js';
 export * from './functions/currentPagePath.js';
 export * from './functions/utilities.js';

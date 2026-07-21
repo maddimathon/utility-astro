@@ -216,7 +216,6 @@ const iconSVG =
         name='settings-menu'
         html={slots_render.default}
     />
-
     <div
         id={titleID}
         class='toggle-title'
@@ -231,13 +230,13 @@ const iconSVG =
         />
     </div>
 
-    <section
+    <form
         aria-labelledby={buttonID}
         class='website-settings__content'
         data-toggle-content={id}
         id={contentID}
     >
-        <form class='container'>
+        <div class='container'>
             <RenderedSlotContent
                 name='settings-menu-open'
                 html={slots_render.settingsMenuOpen}
@@ -400,8 +399,8 @@ const iconSVG =
                 name='settings-menu-close'
                 html={slots_render.settingsMenuClose}
             />
-        </form>
-    </section>
+        </div>
+    </form>
 
     <div
         data-toggle-control={id}

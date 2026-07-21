@@ -29,13 +29,6 @@ $_lineClamp: lib.do-var(loremipsum-heading-sample-line-clamp, 3);
     justify-content: start;
     align-content: start;
     align-items: first baseline;
-
-    // margin-block: lib.var-mrg-firm('400') lib.var-mrg-half('400');
-    // gap: lib.var-mrg-firm('300') lib.var-mrg-firm('400');
-
-    %button {
-        margin: 0;
-    }
 }
 
 @include lib.extend-selectors;

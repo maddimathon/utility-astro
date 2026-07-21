@@ -10,7 +10,6 @@
  * @license MIT
  */
 
-export * from './astroConfig.js';
 export * from './escRegExpURL.js';
 export * from './htmlAttributeString.js';
 export * from './mapToObject.js';
