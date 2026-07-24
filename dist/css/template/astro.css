@@ -1522,8 +1522,10 @@ h6 a[href].button {
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
 ol,
-.table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol,
+ol.table-of-contents,
+ul.table-of-contents,
+.table-of-contents ol,
+.table-of-contents ul,
 ul {
     margin: 0;
     margin-left: 20%;
@@ -1535,11 +1537,15 @@ ul {
 }
 ol ol,
 ol ul,
-.table-of-contents [data-toggle-content] > .container ol ol,
-.table-of-contents > ol ol,
+ol.table-of-contents ol,
+ul.table-of-contents ol,
+.table-of-contents ol ol,
+.table-of-contents ul ol,
 ul ol,
-.table-of-contents [data-toggle-content] > .container ol ul,
-.table-of-contents > ol ul,
+ol.table-of-contents ul,
+ul.table-of-contents ul,
+.table-of-contents ol ul,
+.table-of-contents ul ul,
 ul ul {
     margin-top: 0;
     margin-bottom: 0;
@@ -1554,26 +1560,40 @@ ol ol {
 ol ol ol {
     list-style-type: lower-roman;
 }
-.table-of-contents [data-toggle-content] > .container ol,
-.table-of-contents > ol,
+ol.table-of-contents,
+ul.table-of-contents,
+.table-of-contents ol,
+.table-of-contents ul,
 ul {
     list-style-type: disc;
 }
-.table-of-contents [data-toggle-content] > .container ol ol,
-.table-of-contents [data-toggle-content] > .container ol ul,
-.table-of-contents > ol ol,
-.table-of-contents > ol ul,
+ol.table-of-contents ol,
+ol.table-of-contents ul,
+ul.table-of-contents ol,
+ul.table-of-contents ul,
+.table-of-contents ol ol,
+.table-of-contents ol ul,
+.table-of-contents ul ol,
+.table-of-contents ul ul,
 ul ul {
     list-style-type: circle;
 }
-.table-of-contents [data-toggle-content] > .container ol ol ol,
-.table-of-contents [data-toggle-content] > .container ol ol ul,
-.table-of-contents [data-toggle-content] > .container ol ul ol,
-.table-of-contents [data-toggle-content] > .container ol ul ul,
-.table-of-contents > ol ol ol,
-.table-of-contents > ol ol ul,
-.table-of-contents > ol ul ol,
-.table-of-contents > ol ul ul,
+ol.table-of-contents ol ol,
+ol.table-of-contents ol ul,
+ol.table-of-contents ul ol,
+ol.table-of-contents ul ul,
+ul.table-of-contents ol ol,
+ul.table-of-contents ol ul,
+ul.table-of-contents ul ol,
+ul.table-of-contents ul ul,
+.table-of-contents ol ol ol,
+.table-of-contents ol ol ul,
+.table-of-contents ol ul ol,
+.table-of-contents ol ul ul,
+.table-of-contents ul ol ol,
+.table-of-contents ul ol ul,
+.table-of-contents ul ul ol,
+.table-of-contents ul ul ul,
 ol ol ol ol,
 ul ul ul {
     list-style-type: square; /* fallback */
@@ -1963,6 +1983,7 @@ input[type="week"][aria-disabled="true"],
 input[type="week"][disabled] {
     cursor: not-allowed;
 }
+
 input[type="email"],
 input[type="month"],
 input[type="number"],
@@ -1994,6 +2015,7 @@ input[type="week"][aria-disabled="true"],
 input[type="week"][disabled] {
     cursor: not-allowed;
 }
+
 input[type="checkbox"],
 input[type="radio"] {
     --display: inline-block;
@@ -3678,8 +3700,6 @@ body > :where(main) > :where(aside) {
     margin-bottom: 0;
 }
 :where(.js) [data-toggle-content] > .container > ol,
-:where(.js) .table-of-contents [data-toggle-content] > .container > ol,
-.table-of-contents :where(.js) [data-toggle-content] > .container > ol,
 :where(.js) [data-toggle-content] > .container > ul {
     width: 100%;
 }
@@ -4146,6 +4166,7 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 :where(.js) .website-settings-menu [data-toggle-control][disabled] {
     cursor: not-allowed;
 }
+
 :where(.js)
     .website-settings-menu
     [data-toggle-control][data-toggle-control-backdrop] {

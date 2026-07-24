@@ -22,6 +22,6 @@ import { ElementToggle } from '../../ts/classes/ElementToggle.js';
 if ( SCRIPTS_TOGGLE ) {
     await ElementToggle.runOnLoad( {
         debug: SCRIPTS_TOGGLE_DEBUG,
-        outputResults: SCRIPTS_TOGGLE_OUTPUTRESULTS,
+        logResults: SCRIPTS_TOGGLE_OUTPUTRESULTS,
     } );
 }

@@ -537,8 +537,6 @@
     margin-bottom: 0;
 }
 :where(.js) [data-toggle-content] > .container > ol,
-:where(.js) .table-of-contents [data-toggle-content] > .container > ol,
-.table-of-contents :where(.js) [data-toggle-content] > .container > ol,
 :where(.js) [data-toggle-content] > .container > ul {
     width: 100%;
 }

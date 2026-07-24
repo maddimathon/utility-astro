@@ -21,6 +21,6 @@ import { FeatureCheck } from '@maddimathon/utility-sass/classes/FeatureCheck';
 if ( SCRIPTS_FEATURECHECK ) {
     // run the checks and update class names
     new FeatureCheck( {
-        outputResults: SCRIPTS_FEATURECHECK_OUTPUTRESULTS,
+        logResults: SCRIPTS_FEATURECHECK_OUTPUTRESULTS,
     } ).check();
 }

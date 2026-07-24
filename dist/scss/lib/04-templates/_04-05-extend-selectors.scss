@@ -39,7 +39,8 @@
 ///
 @mixin extend-selectors-utils(
     $additional: (),
-    $allHeadingLevels: token-all-heading-levels()
+    $allHeadingLevels: token-all-heading-levels(),
+    $includeTableOfContents: true
 ) {
     //
     $additional: list.append($additional, ('.icon', 'icon'));
@@ -61,24 +62,30 @@
         $separator: comma
     );
 
-    $_baseLevelListSelector: (
-        '.table-of-contents [data-toggle-content] > .container ol',
-        '.table-of-contents > ol'
-    );
-    $_baseLevelListSelector_lvl2: selector.nest(
-        $_baseLevelListSelector,
-        'ol, ul'
-    );
+    @if $includeTableOfContents {
+        $_listSels: ('ol', 'ul');
 
-    $additional: list.join(
-        $additional,
-        (
-            ($_baseLevelListSelector, 'ul'),
-            ($_baseLevelListSelector_lvl2, 'ul-2'),
-            (selector.nest($_baseLevelListSelector_lvl2, 'ol, ul'), 'ul-3')
-        ),
-        $separator: comma
-    );
+        $_baseLevelListSelector: list.join(
+            selector.unify('.table-of-contents', $_listSels),
+            selector.nest('.table-of-contents', $_listSels),
+            $separator: comma
+        );
+
+        $_baseLevelListSelector_2: selector.nest(
+            $_baseLevelListSelector,
+            $_listSels
+        );
+
+        $additional: list.join(
+            $additional,
+            (
+                ($_baseLevelListSelector, 'ul'),
+                ($_baseLevelListSelector_2, 'ul-2'),
+                (selector.nest($_baseLevelListSelector_2, $_listSels), 'ul-3')
+            ),
+            $separator: comma
+        );
+    }
 
     @if map.get(config.$template_styles, siteSettingsMenu) {
         $additional: list.append(

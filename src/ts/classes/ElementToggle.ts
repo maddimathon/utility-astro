@@ -78,7 +78,7 @@ export class ElementToggle {
                 if ( con.id ) {
                     return ElementToggle.new( con as HTMLElement, opts ).then(
                         ( instance ) => {
-                            if ( !opts.debug && opts.outputResults ) {
+                            if ( !opts.debug && opts.logResults ) {
 
                                 const msgs: any[] = [
                                     `[ElementToggle] new: ${ con.id ?? '' }`,
@@ -99,7 +99,7 @@ export class ElementToggle {
                     );
                 }
 
-                if ( !opts.debug && opts.outputResults ) {
+                if ( !opts.debug && opts.logResults ) {
                     console.info( '[ElementToggle] no containers found' );
                 }
 
@@ -719,6 +719,6 @@ export namespace ElementToggle {
          *
          * @since ___PKG_VERSION___
          */
-        outputResults?: boolean;
+        logResults?: boolean;
     }
 }

@@ -209,6 +209,6 @@ export declare namespace ElementToggle {
          *
          * @since 0.1.0-beta.0.draft
          */
-        outputResults?: boolean;
+        logResults?: boolean;
     }
 }

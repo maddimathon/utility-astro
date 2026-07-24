@@ -63,7 +63,7 @@ export function astroConfig<
             SCRIPTS_FEATURECHECK_OUTPUTRESULTS: envField.boolean( {
                 access: 'public',
                 context: 'client',
-                default: env.featureCheck?.outputResults ?? false,
+                default: env.featureCheck?.logResults ?? false,
                 optional: true,
             } ),
 
@@ -91,7 +91,7 @@ export function astroConfig<
             SCRIPTS_TOGGLE_OUTPUTRESULTS: envField.boolean( {
                 access: 'public',
                 context: 'client',
-                default: env.toggle?.outputResults ?? false,
+                default: env.toggle?.logResults ?? false,
                 optional: true,
             } ),
         }
@@ -114,7 +114,7 @@ export namespace astroConfig {
 
         featureCheck: {
             /** @default false */
-            outputResults: boolean;
+            logResults: boolean;
         };
 
         /**
@@ -138,7 +138,7 @@ export namespace astroConfig {
             debug: boolean;
 
             /** @default false */
-            outputResults: boolean;
+            logResults: boolean;
         };
 
         /**
