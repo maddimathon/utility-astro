@@ -78,4 +78,14 @@ const { displayHeading, heading, ifDisplay, tableOfContentsIds }: Props =
     />
 </form>
 
-{ifDisplay.formsLong && <Lorsum_Forms_Long {...{ displayHeading, heading }} />}
+{
+    ifDisplay.formsLong && (
+        <Lorsum_Forms_Long
+            {...{
+                disabledButtons: ifDisplay.disabledButton,
+                displayHeading,
+                heading,
+            }}
+        />
+    )
+}

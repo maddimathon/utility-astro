@@ -1955,6 +1955,22 @@ input[type="time"],
 input[type="week"] {
     cursor: pointer;
 }
+input[type="button"][readonly],
+input[type="checkbox"][readonly],
+input[type="color"][readonly],
+input[type="date"][readonly],
+input[type="datetime-local"][readonly],
+input[type="file"][readonly],
+input[type="month"][readonly],
+input[type="radio"][readonly],
+input[type="range"][readonly],
+input[type="reset"][readonly],
+input[type="submit"][readonly],
+input[type="time"][readonly],
+input[type="week"][readonly] {
+    cursor: auto;
+}
+
 input[type="button"][aria-disabled="true"],
 input[type="button"][disabled],
 input[type="checkbox"][aria-disabled="true"],
@@ -2083,11 +2099,15 @@ label:has(> :where([type="checkbox"], [type="radio"])) {
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
-label[aria-disabled="true"]:has(> :where([type="checkbox"], [type="radio"])),
-label[disabled]:has(> :where([type="checkbox"], [type="radio"])) {
+label:has(> [readonly]:where([type="checkbox"], [type="radio"])) {
+    cursor: auto;
+}
+label:has(
+    > [aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
+    > [disabled]:where([type="checkbox"], [type="radio"])
+) {
     cursor: not-allowed;
 }
-
 label:has(> :where([type="checkbox"], [type="radio"]))
     + label:has(> :where([type="checkbox"], [type="radio"])) {
     margin-top: 0.5rem;
@@ -2099,8 +2119,8 @@ label:has(> :where([type="checkbox"], [type="radio"])) + textarea {
     margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
-label > input[type="checkbox"],
-label > input[type="radio"] {
+label > [type="checkbox"],
+label > [type="radio"] {
     margin: 0;
 }
 
@@ -3066,11 +3086,11 @@ body > :where(main) > :where(aside) {
 /* # LAYOUTS - CONTENT HEADER
  * ======================================================================== */
 /*! START of @maddimathon/utility-astro/template/astro */
-.content-header > :first-child,
-.content-header > hgroup > :first-child {
+.main-content__header > :first-child,
+.main-content__header > hgroup > :first-child {
     margin-top: 0;
 }
-.content-header
+.main-content__header
     > :where(
         .unstyled-heading,
         .page-title,
@@ -3089,7 +3109,7 @@ body > :where(main) > :where(aside) {
         .h7,
         .h8
     ),
-.content-header
+.main-content__header
     hgroup
     > :where(
         .unstyled-heading,
@@ -3111,7 +3131,7 @@ body > :where(main) > :where(aside) {
     ) {
     margin-top: 0;
 }
-.content-header + :where(*) {
+.main-content__header + :where(*) {
     margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }

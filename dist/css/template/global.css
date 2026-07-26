@@ -1140,6 +1140,22 @@ input[type="time"],
 input[type="week"] {
     cursor: pointer;
 }
+input[type="button"][readonly],
+input[type="checkbox"][readonly],
+input[type="color"][readonly],
+input[type="date"][readonly],
+input[type="datetime-local"][readonly],
+input[type="file"][readonly],
+input[type="month"][readonly],
+input[type="radio"][readonly],
+input[type="range"][readonly],
+input[type="reset"][readonly],
+input[type="submit"][readonly],
+input[type="time"][readonly],
+input[type="week"][readonly] {
+    cursor: auto;
+}
+
 input[type="button"][aria-disabled="true"],
 input[type="button"][disabled],
 input[type="checkbox"][aria-disabled="true"],
@@ -1257,11 +1273,15 @@ label:has(> :where([type="checkbox"], [type="radio"])) {
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
-label[aria-disabled="true"]:has(> :where([type="checkbox"], [type="radio"])),
-label[disabled]:has(> :where([type="checkbox"], [type="radio"])) {
+label:has(> [readonly]:where([type="checkbox"], [type="radio"])) {
+    cursor: auto;
+}
+label:has(
+    > [aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
+    > [disabled]:where([type="checkbox"], [type="radio"])
+) {
     cursor: not-allowed;
 }
-
 label:has(> :where([type="checkbox"], [type="radio"]))
     + label:has(> :where([type="checkbox"], [type="radio"])) {
     margin-top: 0.5rem;
@@ -1271,8 +1291,8 @@ label:has(> :where([type="checkbox"], [type="radio"])) + select,
 label:has(> :where([type="checkbox"], [type="radio"])) + textarea {
     margin-top: 1.25rem;
 }
-label > input[type="checkbox"],
-label > input[type="radio"] {
+label > [type="checkbox"],
+label > [type="radio"] {
     margin: 0;
 }
 

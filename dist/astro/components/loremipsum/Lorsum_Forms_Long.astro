@@ -21,11 +21,12 @@ import Heading from '../Heading.astro';
 /* PROPS ===================================== */
 
 export interface Props {
+    disabledButtons:boolean;
     displayHeading: undefined | number;
     heading: number;
 }
 
-const { displayHeading, heading }: Props = Astro.props;
+const { disabledButtons, displayHeading, heading }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
@@ -363,25 +364,99 @@ const { displayHeading, heading }: Props = Astro.props;
         autocomplete='off'
     />
 
-    <button
+    <input
         type='button'
         id='button'
         name='button'
+        onclick="alert('Hello!')"
+        value='Say Hello!'
+    />
+
+    <input
+        type='reset'
+        id='input20'
+        name='input20'
+        value='Reset Button'
+    />
+
+    <input
+        type='submit'
+        id='input21'
+        name='input21'
+        value='Submit Button'
+    />
+
+    <button
+        type='button'
+        id='button2'
+        name='button2'
         onclick="alert('Hello!')"
         set:text='Say Hello!'
     />
 
     <button
         type='reset'
-        id='input20'
-        name='input20'
+        id='input22'
+        name='input22'
         set:text='Reset Button'
     />
 
     <button
         type='submit'
-        id='input21'
-        name='input21'
+        id='input23'
+        name='input23'
         set:text='Submit Button'
     />
+
+    {disabledButtons && (
+        <input
+            type='button'
+            id='button-d'
+            name='button-d'
+            aria-disabled='true'
+            onclick="alert('Hello!')"
+            value='Say Hello!'
+        />
+
+        <input
+            type='reset'
+            id='input20-d'
+            name='input20-d'
+            aria-disabled='true'
+            value='Reset Button'
+        />
+
+        <input
+            type='submit'
+            id='input21-d'
+            name='input21-d'
+            aria-disabled='true'
+            value='Submit Button'
+        />
+
+        <button
+            type='button'
+            id='button2-d'
+            name='button2-d'
+            aria-disabled='true'
+            onclick="alert('Hello!')"
+            set:text='Say Hello!'
+        />
+
+        <button
+            type='reset'
+            id='input22-d'
+            name='input22-d'
+            aria-disabled='true'
+            set:text='Reset Button'
+        />
+
+        <button
+            type='submit'
+            id='input23-d'
+            name='input23-d'
+            aria-disabled='true'
+            set:text='Submit Button'
+        />
+    )}
 </form>
