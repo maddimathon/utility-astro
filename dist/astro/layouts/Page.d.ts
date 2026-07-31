@@ -237,4 +237,11 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
         featureCheck?: boolean | undefined;
 
     } | undefined;
+
+    /**
+     * Used to check for current page when its value isn't set.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    urlMaker?: ( currentURL: URL, targetSubpath: string ) => string;
 }

@@ -63,6 +63,13 @@ export interface NavMenuProps {
          */
         child?: Props['menu'] | undefined;
     })[];
+
+    /**
+     * Used to check for current page when its value isn't set.
+     *
+     * @since ___PKG_VERSION___
+     */
+    'urlMaker'?: (currentURL: URL, targetSubpath: string) => string;
 }
 
 /* PROPS ===================================== */
@@ -74,8 +81,9 @@ const {
     convertHrefStringsToAbsolute,
     id,
     menu,
+    urlMaker = absoluteInternalURL,
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props['frontmatter'] ?? Astro.props;
 
 /* FUNCTIONS ===================================== */
 
@@ -86,6 +94,10 @@ export function parseMenuItem(
     currentURL: URL,
     item: ArrayItem<NavMenuProps['menu']>,
     convertHrefStringsToAbsolutePath: boolean | null = null,
+    urlMaker: (
+        currentURL: URL,
+        targetSubpath: string,
+    ) => string = absoluteInternalURL,
 ): MenuItem {
     /**
      * The regex representing the current page's url (used to check for
@@ -96,9 +108,7 @@ export function parseMenuItem(
          * To use on string values, assuming they are paths relative to the root.
          */
         string: new RegExp(
-            `^(${escRegExp(
-                absoluteInternalURL(currentURL, currentURL.pathname),
-            )})\/?$`,
+            `^(${escRegExp(urlMaker(currentURL, currentURL.pathname))})\/?$`,
             'gi',
         ),
 
@@ -110,16 +120,26 @@ export function parseMenuItem(
                 currentURL.toString().replace(/\/$/gi, '/'),
             )}|${escRegExpURL(
                 config_site +
-                    absoluteInternalURL(
-                        currentURL,
-                        currentURL.pathname,
-                    ).replace(/\/$/gi, '/'),
+                    urlMaker(currentURL, currentURL.pathname).replace(
+                        /\/$/gi,
+                        '/',
+                    ),
             )})\/?$`,
             'gi',
         ),
     };
 
     let isCurrentPage: boolean = item.current ?? false;
+
+    if (item.href && typeof item.current !== 'boolean') {
+        isCurrentPage =
+            urlMaker(
+                currentURL,
+                typeof item.href === 'string'
+                    ? item.href
+                    : item.href.toString(),
+            ) === urlMaker(currentURL, currentURL.pathname);
+    }
 
     let href: MenuItem['href'];
 
@@ -147,7 +167,7 @@ export function parseMenuItem(
                 _convertHrefStringsToAbsolutePath &&
                 href.match(/^(#|\/|\.\.?\/|[a-z][a-z0-9]+:\/\/)/i) === null
             ) {
-                href = absoluteInternalURL(currentURL, item.href);
+                href = urlMaker(currentURL, item.href);
             }
             isCurrentPage =
                 isCurrentPage ||
@@ -168,7 +188,7 @@ export function parseMenuItem(
     }
 
     return {
-        ...item,
+        ...(item as MenuItem),
         href,
         current: isCurrentPage || undefined,
         child,
@@ -178,7 +198,7 @@ export function parseMenuItem(
 /* CONSTANTS ===================================== */
 
 const parsedMenu = [...menu].map((_item) =>
-    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute),
+    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute, urlMaker),
 );
 ---
 
@@ -188,5 +208,8 @@ const parsedMenu = [...menu].map((_item) =>
     class:list={classList}
     role='navigation'
 >
-    <MenuList menu={parsedMenu} />
+    <MenuList
+        menu={parsedMenu}
+        urlMaker={urlMaker}
+    />
 </nav>

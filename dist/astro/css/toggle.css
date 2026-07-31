@@ -397,12 +397,7 @@
 
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop]:has(
-        [data-state-focus="true"]
-    ),
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:has(:active),
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop]:has(
-        [data-state-active="true"]
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
     ) {
     border: none;
     background: none;

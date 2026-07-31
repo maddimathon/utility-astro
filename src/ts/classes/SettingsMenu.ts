@@ -56,7 +56,7 @@ export class SettingsMenu {
     /**
      * @since 0.1.0-alpha
      */
-    readonly #rootElement: HTMLElement;
+    readonly #targetElement: HTMLHtmlElement | HTMLBodyElement;
 
     /**
      * @since 0.1.0-alpha
@@ -70,7 +70,7 @@ export class SettingsMenu {
         /**
          * @since ___PKG_VERSION___
          */
-        root: HTMLElement,
+        target: HTMLHtmlElement | HTMLBodyElement,
 
         /**
          * @since 0.1.0-alpha
@@ -83,7 +83,7 @@ export class SettingsMenu {
         selectors?: SettingsMenu.Selectors.Constructor,
     ) {
 
-        this.#rootElement = root;
+        this.#targetElement = target;
 
         this.#inputs = this.menu.querySelectorAll(
             selectors?.inputs || 'input[data-settings-input]'
@@ -131,7 +131,7 @@ export class SettingsMenu {
 
                             if ( `${ value }` == `${ current }` ) {
                                 input.checked = true;
-                                this.#rootElement.setAttribute( `data-${ attr }`, current );
+                                this.#targetElement.setAttribute( `data-${ attr }`, current );
                             } else {
                                 input.checked = false;
                             }
@@ -277,7 +277,7 @@ export class SettingsMenu {
      */
     public resetButtonClicked(): void {
         this.#attributeKeys.forEach( ( attr: string ) => {
-            this.#rootElement.removeAttribute( attr );
+            this.#targetElement.removeAttribute( attr );
             this.#cookies[ attr ]?.delete();
         } );
 
@@ -300,7 +300,7 @@ export class SettingsMenu {
             return;
         }
 
-        this.#rootElement.setAttribute( `data-${ attr }`, value );
+        this.#targetElement.setAttribute( `data-${ attr }`, value );
         this.#cookies[ attr ]?.set( value );
     }
 
@@ -355,7 +355,7 @@ export class SettingsMenu {
                 if ( `${ value }` == `${ current }` ) {
                     input.checked = true;
 
-                    this.#rootElement.setAttribute( `data-${ attr }`, current );
+                    this.#targetElement.setAttribute( `data-${ attr }`, current );
                 } else {
                     input.checked = false;
                 }
@@ -375,7 +375,7 @@ export namespace SettingsMenu {
      * @since ___PKG_VERSION___
      */
     async function init_mapper(
-        root: HTMLElement,
+        target: HTMLHtmlElement | HTMLBodyElement,
         menu: HTMLElement,
         scrollBehaviour: ScrollBehavior,
         selectors: Selectors.Mapper,
@@ -385,7 +385,7 @@ export namespace SettingsMenu {
             ? menu.id ? selectors.reset( menu.id ) : '[data-settings-reset]'
             : selectors.reset ?? '[data-settings-reset]';
 
-        new SettingsMenu( root, menu, {
+        new SettingsMenu( target, menu, {
             inputs: selectors.inputs,
             pathAttr: selectors.pathAttr,
             resetButton: resetSelector,
@@ -477,11 +477,9 @@ export namespace SettingsMenu {
         settingsMenus: HTMLElement | NodeListOf<HTMLElement>,
         scrollBehaviour: ScrollBehavior = 'auto',
         selectors: SettingsMenu.Selectors.Mapper = {},
-    ): Promise<void[]> {
+    ): Promise<void | void[]> {
 
-        const rootElement = document.querySelector(
-            selectors?.root || ':root'
-        ) as HTMLElement;
+        const targetElement = document.querySelector( selectors?.target || ':root' ) as HTMLHtmlElement | HTMLBodyElement;
 
         const menuArray =
             typeof ( settingsMenus as NodeListOf<HTMLElement> ).forEach === 'function'
@@ -489,7 +487,7 @@ export namespace SettingsMenu {
                 : [ settingsMenus as HTMLElement ];
 
         return Promise.all( menuArray.map(
-            menu => init_mapper( rootElement, menu, scrollBehaviour, selectors )
+            menu => init_mapper( targetElement, menu, scrollBehaviour, selectors )
         ) );
     }
 
@@ -512,10 +510,6 @@ export namespace SettingsMenu {
          * @since ___PKG_VERSION___ — Moved out of constructor to separate definition.
          */
         export interface Mapper extends Omit<Constructor, 'resetButton'> {
-            /**
-             * @since ___PKG_VERSION___
-             */
-            root?: undefined | string;
 
             /**
              * @default 
@@ -524,6 +518,15 @@ export namespace SettingsMenu {
              * @since 0.1.0-alpha
              */
             reset?: undefined | string | ( ( menuID?: string ) => string );
+
+            /**
+             * The element on which to set settings attributes. Probably ':root' or 'body'.
+             * 
+             * @default ':root'
+             * 
+             * @since ___PKG_VERSION___
+             */
+            target?: undefined | string;
 
             /**
              * @default 

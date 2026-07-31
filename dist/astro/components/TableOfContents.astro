@@ -89,6 +89,7 @@ const {
     menu,
     ToggleComponent = Toggle,
     toggleProps = {},
+    urlMaker,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
@@ -98,15 +99,16 @@ export function parseTableOfContents(
     currentURL: URL,
     item: TableOfContentsProps['menu'][number],
     convertHrefStringsToAbsolutePath: boolean | null = false,
+    urlMaker?: undefined | ((currentURL: URL, targetSubpath: string) => string),
 ): MenuItem {
-    return parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath);
+    return parseMenuItem(currentURL, item, convertHrefStringsToAbsolutePath, urlMaker);
 }
 
 /* CONSTANTS ===================================== */
 
 const headingID = `${id}---heading-element`;
 
-const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item, convertHrefStringsToAbsolute));
+const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item, convertHrefStringsToAbsolute, urlMaker));
 
 const headingHTML = (await Astro.slots.render('button'))?.trim() || 'Table of Contents';
 
@@ -128,7 +130,7 @@ const fullClassList = [
         tag="section"
     >
         <Fragment slot="button" set:html={headingHTML} />
-        <MenuList menu={nestedLists} />
+        <MenuList menu={nestedLists} urlMaker={urlMaker} />
     </ToggleComponent>
 ) : (
     <Heading
@@ -144,7 +146,7 @@ const fullClassList = [
         class:list={fullClassList}
     >
         <slot name="before" />
-        <MenuList menu={nestedLists} />
+        <MenuList menu={nestedLists} urlMaker={urlMaker} />
         <slot name="after" />
     </section>
 )}

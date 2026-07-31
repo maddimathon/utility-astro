@@ -46,13 +46,14 @@ const {
     iconSVG,
     id: menuID,
     menu,
+    urlMaker,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
 const parsedMenu = menu.map((_item) =>
-    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute),
+    parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute, urlMaker),
 );
 
 const id = `${menuID}-toggle`;
@@ -99,7 +100,12 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
         data-toggle-content={id}
         id={contentID}
     >
-        <div class='container'><MenuList menu={parsedMenu} /></div>
+        <div class='container'>
+            <MenuList
+                menu={parsedMenu}
+                urlMaker={urlMaker}
+            />
+        </div>
     </div>
 
     <div

@@ -25,7 +25,7 @@ export declare class SettingsMenu {
     /**
      * @since 0.1.0-beta.0.draft
      */
-    root: HTMLElement, 
+    target: HTMLHtmlElement | HTMLBodyElement, 
     /**
      * @since 0.1.0-alpha
      */
@@ -73,7 +73,7 @@ export declare namespace SettingsMenu {
      *
      * @since 0.1.0-alpha
      */
-    function init(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, scrollBehaviour?: ScrollBehavior, selectors?: SettingsMenu.Selectors.Mapper): Promise<void[]>;
+    function init(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, scrollBehaviour?: ScrollBehavior, selectors?: SettingsMenu.Selectors.Mapper): Promise<void | void[]>;
     /**
      * @since 0.1.0-beta.0.draft
      */
@@ -92,16 +92,20 @@ export declare namespace SettingsMenu {
          */
         interface Mapper extends Omit<Constructor, 'resetButton'> {
             /**
-             * @since 0.1.0-beta.0.draft
-             */
-            root?: undefined | string;
-            /**
              * @default
              * '[data-settings-reset]'
              *
              * @since 0.1.0-alpha
              */
             reset?: undefined | string | ((menuID?: string) => string);
+            /**
+             * The element on which to set settings attributes. Probably ':root' or 'body'.
+             *
+             * @default ':root'
+             *
+             * @since 0.1.0-beta.0.draft
+             */
+            target?: undefined | string;
             /**
              * @default
              * `button[data-toggle-control=${ menuID }]`

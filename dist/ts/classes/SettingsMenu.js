@@ -18,7 +18,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _SettingsMenu_attributeKeys, _SettingsMenu_cookies, _SettingsMenu_defaults, _SettingsMenu_inputs, _SettingsMenu_path, _SettingsMenu_resetButton, _SettingsMenu_rootElement, _SettingsMenu_timeout, _SettingsMenu_setup_attr_keys;
+var _SettingsMenu_attributeKeys, _SettingsMenu_cookies, _SettingsMenu_defaults, _SettingsMenu_inputs, _SettingsMenu_path, _SettingsMenu_resetButton, _SettingsMenu_targetElement, _SettingsMenu_timeout, _SettingsMenu_setup_attr_keys;
 import { JsCookie } from './JsCookie.js';
 /**
  * Sets up and manages the SettingsMenu component's js.
@@ -33,7 +33,7 @@ export class SettingsMenu {
     /**
      * @since 0.1.0-beta.0.draft
      */
-    root, 
+    target, 
     /**
      * @since 0.1.0-alpha
      */
@@ -74,7 +74,7 @@ export class SettingsMenu {
         /**
          * @since 0.1.0-alpha
          */
-        _SettingsMenu_rootElement.set(this, void 0);
+        _SettingsMenu_targetElement.set(this, void 0);
         /**
          * @since 0.1.0-alpha
          */
@@ -85,7 +85,7 @@ export class SettingsMenu {
          * @since 0.1.0-beta.0.draft
          */
         _SettingsMenu_setup_attr_keys.set(this, {});
-        __classPrivateFieldSet(this, _SettingsMenu_rootElement, root, "f");
+        __classPrivateFieldSet(this, _SettingsMenu_targetElement, target, "f");
         __classPrivateFieldSet(this, _SettingsMenu_inputs, this.menu.querySelectorAll((selectors === null || selectors === void 0 ? void 0 : selectors.inputs) || 'input[data-settings-input]'), "f");
         __classPrivateFieldSet(this, _SettingsMenu_path, this.menu.getAttribute((selectors === null || selectors === void 0 ? void 0 : selectors.pathAttr) || 'data-settings-path') || '/', "f");
         __classPrivateFieldSet(this, _SettingsMenu_resetButton, this.menu.querySelector((selectors === null || selectors === void 0 ? void 0 : selectors.resetButton) || '[data-settings-reset]'), "f");
@@ -113,7 +113,7 @@ export class SettingsMenu {
                 }
                 if (`${value}` == `${current}`) {
                     input.checked = true;
-                    __classPrivateFieldGet(this, _SettingsMenu_rootElement, "f").setAttribute(`data-${attr}`, current);
+                    __classPrivateFieldGet(this, _SettingsMenu_targetElement, "f").setAttribute(`data-${attr}`, current);
                 }
                 else {
                     input.checked = false;
@@ -210,7 +210,7 @@ export class SettingsMenu {
     resetButtonClicked() {
         __classPrivateFieldGet(this, _SettingsMenu_attributeKeys, "f").forEach((attr) => {
             var _a;
-            __classPrivateFieldGet(this, _SettingsMenu_rootElement, "f").removeAttribute(attr);
+            __classPrivateFieldGet(this, _SettingsMenu_targetElement, "f").removeAttribute(attr);
             (_a = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr]) === null || _a === void 0 ? void 0 : _a.delete();
         });
         this.update_allInputs();
@@ -230,7 +230,7 @@ export class SettingsMenu {
         if (!value) {
             return;
         }
-        __classPrivateFieldGet(this, _SettingsMenu_rootElement, "f").setAttribute(`data-${attr}`, value);
+        __classPrivateFieldGet(this, _SettingsMenu_targetElement, "f").setAttribute(`data-${attr}`, value);
         (_a = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr]) === null || _a === void 0 ? void 0 : _a.set(value);
     }
     /**
@@ -271,7 +271,7 @@ export class SettingsMenu {
             }
             if (`${value}` == `${current}`) {
                 input.checked = true;
-                __classPrivateFieldGet(this, _SettingsMenu_rootElement, "f").setAttribute(`data-${attr}`, current);
+                __classPrivateFieldGet(this, _SettingsMenu_targetElement, "f").setAttribute(`data-${attr}`, current);
             }
             else {
                 input.checked = false;
@@ -279,7 +279,7 @@ export class SettingsMenu {
         });
     }
 }
-_SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap(), _SettingsMenu_defaults = new WeakMap(), _SettingsMenu_inputs = new WeakMap(), _SettingsMenu_path = new WeakMap(), _SettingsMenu_resetButton = new WeakMap(), _SettingsMenu_rootElement = new WeakMap(), _SettingsMenu_timeout = new WeakMap(), _SettingsMenu_setup_attr_keys = new WeakMap();
+_SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap(), _SettingsMenu_defaults = new WeakMap(), _SettingsMenu_inputs = new WeakMap(), _SettingsMenu_path = new WeakMap(), _SettingsMenu_resetButton = new WeakMap(), _SettingsMenu_targetElement = new WeakMap(), _SettingsMenu_timeout = new WeakMap(), _SettingsMenu_setup_attr_keys = new WeakMap();
 /**
  * Utilities for the {@link SettingsMenu} class.
  *
@@ -289,12 +289,12 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
     /**
      * @since 0.1.0-beta.0.draft
      */
-    async function init_mapper(root, menu, scrollBehaviour, selectors) {
+    async function init_mapper(target, menu, scrollBehaviour, selectors) {
         var _a;
         const resetSelector = typeof (selectors === null || selectors === void 0 ? void 0 : selectors.reset) === 'function'
             ? menu.id ? selectors.reset(menu.id) : '[data-settings-reset]'
             : (_a = selectors.reset) !== null && _a !== void 0 ? _a : '[data-settings-reset]';
-        new SettingsMenu(root, menu, {
+        new SettingsMenu(target, menu, {
             inputs: selectors.inputs,
             pathAttr: selectors.pathAttr,
             resetButton: resetSelector,
@@ -355,11 +355,11 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
      * @since 0.1.0-alpha
      */
     async function init(settingsMenus, scrollBehaviour = 'auto', selectors = {}) {
-        const rootElement = document.querySelector((selectors === null || selectors === void 0 ? void 0 : selectors.root) || ':root');
+        const targetElement = document.querySelector((selectors === null || selectors === void 0 ? void 0 : selectors.target) || ':root');
         const menuArray = typeof settingsMenus.forEach === 'function'
             ? Array.from(settingsMenus)
             : [settingsMenus];
-        return Promise.all(menuArray.map(menu => init_mapper(rootElement, menu, scrollBehaviour, selectors)));
+        return Promise.all(menuArray.map(menu => init_mapper(targetElement, menu, scrollBehaviour, selectors)));
     }
     SettingsMenu.init = init;
     /**

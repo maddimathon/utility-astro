@@ -8,10 +8,10 @@
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
 import type { Classify } from '@maddimathon/utility-typescript/types';
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
-import { escapeHTML } from 'astro/runtime/server/escape.js';
+import { absoluteInternalURL, makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -22,18 +22,34 @@ import { escapeHTML } from 'astro/runtime/server/escape.js';
 
 /* TYPES ===================================== */
 
+export type BaseMenuItem = {
+    /** 
+     * Display text for this link item.
+     */
+    label: string;
+    labelHTML?:undefined;
+} | {
+    label?:undefined;
+    /** 
+     * Display HTML for this link item.
+     */
+    labelHTML: string;
+};
+
 /**
  * A single menu item for the MenuList component.
  * 
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface MenuItem {
+export type MenuItem = BaseMenuItem & {
 
-    /** 
-     * Display text for link item.
+    /**
+     * Optional aria label for this link.
+     * 
+     * @since 0.1.0-beta.0.draft
      */
-    label: string;
+    ariaLabel?: string |  undefined;
 
     /**
      * If false, the link prints without href and with aria-disabled.  If null
@@ -51,7 +67,7 @@ export interface MenuItem {
     /**
      * Whether this item should be marked as the current page.
      */
-    current?: true | undefined;
+    current?: boolean | undefined;
 
     /**
      * Whether this item should be opened in a new window.
@@ -59,6 +75,11 @@ export interface MenuItem {
      * @since 0.1.0-beta.0.draft — Removed `false` in favour of `undefined`.
      */
     external?: true | undefined;
+
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    class?: ClassList | undefined;
 }
 
 /**
@@ -88,6 +109,13 @@ export interface MenuListProps {
      * @internal
      */
     submenu?: boolean;
+
+    /**
+     * Used to check for current page when its value isn't set.
+     * 
+     * @since 0.1.0-beta.0.draft
+     */
+    urlMaker?: undefined | ((currentURL: URL, targetSubpath: string) => string);
 }
 
 
@@ -101,86 +129,107 @@ const {
     class: classList = [],
     separator = null,
     submenu = false,
+    urlMaker: inputUrlMaker = absoluteInternalURL,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
 
 
 /* FUNCTIONS ===================================== */
 
-export type UnlabelledMenuItem = Omit<Classify<MenuItem>, 'href'| 'label'>;
+export type MenuItemLabel = {
+        html: string;
+        text: undefined;
+    } | {
+        html: undefined;
+        text: string;
+    };
+
+export type UnlabelledMenuItem = MenuItemLabel & Omit<Classify<MenuItem>, 'ariaLabel' | 'href' | 'label' | 'labelHTML'>;
 
 export type ParsedMenuItem_NoHref = UnlabelledMenuItem & {
-    html:string;
     href: false;
 };
 
 export type ParsedMenuItem_WithHref = UnlabelledMenuItem & {
-    html:string;
     href: string;
 
     'aria-current': HTMLAttributes<'a'>['aria-current'];
+    'aria-label': HTMLAttributes<'a'>['aria-label'];
     target: HTMLAttributes<'a'>['target'];
 };
 
 export type ParsedMenuItem = ParsedMenuItem_NoHref | ParsedMenuItem_WithHref;
 
-export function parseItemAttributes(item: MenuItem): ParsedMenuItem {
+export function parseItemAttributes(
+    currentURL: URL,
+    item: MenuItem,
+    urlMaker: (currentURL: URL, targetSubpath: string) => string = absoluteInternalURL,
+): ParsedMenuItem {
 
-    const html = escapeHTML(item.label);
-    const href = item.href || undefined;
+    const labels =  {
+        html: item.labelHTML || undefined,
+        text: item.label || (item.labelHTML ? undefined : ''),
+    } as MenuItemLabel ;
+    
+    const {href} = item;
+
+    if (href?.match(/^#/g) === null && typeof item.current === 'undefined') {
+        item.current = urlMaker(currentURL, href) === urlMaker(currentURL, currentURL.pathname)
+    }
     
     // returns 
-    if ( typeof href === 'undefined' || href === undefined ) {
+    if ( typeof href === 'undefined'  ) {
 
         return {
-            html,
+           ...labels,
             href: false,
             current: item.current,
             external: item.external,
             child: item.child,
-        } as const;
+            class: item.class,
+        } as const satisfies ParsedMenuItem_NoHref;
     }
     
     return {
-        html,
+           ...labels,
         href,
         current: item.current,
         external: item.external,
         child: item.child,
-
+        
+        class: item.class,
         target: ( item.href && item.external ) ? '_blank' : undefined,
         'aria-current': ( item.href && item.current ) ? 'page' : undefined,
-    } as const;
+        'aria-label': item.ariaLabel,
+    } as const satisfies ParsedMenuItem_WithHref;
 }
 
 
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map(parseItemAttributes);
+const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUrlMaker));
 
 ---
 
 { menu && (
     <ul 
         {...attributes} 
-        role="menu" 
         class:list={[ {submenu}, classList ]}
     >
         { parsedMenu.map( ( item, index ) =>  ( item.href || item.child ) && (
-            <li role="none">
+            <li>
                 { item.href ? (
                     <a
-                        role="menuitem"
+                        class:list={item.class ?? ''}
                         href={ item.href }
                         target={ item.target }
                         aria-current={ item['aria-current'] }
-                        set:html={ item.html }
-                    /> 
+                        aria-label={ item['aria-label'] }
+                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a> 
                 ) : item.child?.length && (
                     <span
-                        role="menuitem"
-                        set:html={ item.html }
-                    />
+                        class:list={makeClassList('nav__menu-item', item.class)}
+                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</span>
                 ) }
                 { item.child?.length && <Astro.self menu={ item.child } submenu={ true } /> }
             </li>

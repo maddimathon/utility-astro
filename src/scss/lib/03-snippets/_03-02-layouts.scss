@@ -338,7 +338,7 @@ $_flex_container_alignment_row: (
     $additionalSelectors: (),
     $selector_mainContent: '%main-content',
     $selectors_layoutSubgrids:
-        ':where( #{$selector_mainContent}, %primary-nav, %site-header, %site-footer )',
+        ':where( #{$selector_mainContent}, %primary-nav, %site-header, %site-footer, %_site-footer )',
     $selectors_subgrid: ':is( %body-subgrid )',
     $selectors_subgrid_nesting: $selectors_subgrid,
     $selectors_main_nesting: ':is( %main-content__article, %_main-sidebar, %main-sidebar )',
@@ -395,7 +395,7 @@ $_flex_container_alignment_row: (
                 margin-block: var-gap-block(layout) 0;
             }
 
-            > :where(%site-footer) {
+            > :where(%site-footer, %_site-footer) {
                 margin-block: var-gap-block(layout);
             }
         }
@@ -413,7 +413,9 @@ $_flex_container_alignment_row: (
         @content (body--subgrid-children);
     }
 
-    @at-root :where(&) > :where(%primary-nav, %site-header, %site-footer) > :where(*) {
+    @at-root :where(&)
+            > :where(%primary-nav, %site-header, %site-footer, %_site-footer)
+            > :where(*) {
         @include snippet-body-grid--page-width;
     }
 
@@ -430,13 +432,21 @@ $_flex_container_alignment_row: (
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin snippet-body-grid--extend-selectors($localOnly: false) {
-    %dl {
-        @extend %_display-contents !optional;
+@mixin snippet-body-grid--extend-selectors(
+    $localOnly: false,
+    $dl_displayContents: config.$mx_bodyGrid_form_displayContents,
+    $form_displayContents: config.$mx_bodyGrid_form_displayContents
+) {
+    @if $dl_displayContents {
+        %dl {
+            @extend %_display-contents !optional;
+        }
     }
 
-    %form {
-        @extend %_display-contents !optional;
+    @if $form_displayContents {
+        %form {
+            @extend %_display-contents !optional;
+        }
     }
 
     aside {
@@ -445,7 +455,7 @@ $_flex_container_alignment_row: (
 
     @if not $localOnly {
         footer {
-            @extend %site-footer !optional;
+            @extend %_site-footer !optional;
         }
 
         header {

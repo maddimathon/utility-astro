@@ -747,9 +747,9 @@ a.skip-link[href]:focus-within {
     top: var(--gap-block-layout, 5vw);
 }
 
-a.skip-link[href]:has([data-state-focus="true"]),
-a.skip-link[href]:has(:active),
-a.skip-link[href]:has([data-state-active="true"]) {
+a.skip-link[href]:has(
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
+    ) {
     top: clamp(1.875rem, 5svw, 3.5rem);
     top: var(--gap-block-layout, 5vw);
 }
@@ -3580,12 +3580,7 @@ body > :where(main) > :where(aside) {
 
 :where(.js)
     [data-toggle-control][data-toggle-control-backdrop]:has(
-        [data-state-focus="true"]
-    ),
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:has(:active),
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop]:has(
-        [data-state-active="true"]
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
     ) {
     border: none;
     background: none;

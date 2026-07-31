@@ -51,7 +51,7 @@ type Props<T_ContentType extends ContentType = ContentType> = GenericProps<
     PageProps<T_ContentType>
 >;
 
-const p = Astro.props.frontmatter ?? Astro.props;
+const {urlMaker, ...p} = Astro.props.frontmatter ?? Astro.props;
 
 const {
     PrimaryMenu = ToggleNavMenu,
@@ -111,6 +111,10 @@ if (p.primaryMenu) {
         ..._menu,
         'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
     };
+
+    if (urlMaker) {
+        menus.primary.urlMaker = urlMaker;
+    }
 }
 
 if (p.secondaryMenu) {
@@ -130,6 +134,10 @@ if (p.secondaryMenu) {
         ..._menu,
         'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
     };
+
+if (urlMaker) {
+    menus.secondary.urlMaker = urlMaker;
+}
 }
 
 /* ### Support ------------------ */

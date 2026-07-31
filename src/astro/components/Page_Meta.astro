@@ -69,8 +69,8 @@ const canonical =
     typeof meta.canonical === 'object'
     ? meta.canonical
     : absoluteInternalURL(
-        Astro.url,
-        ( meta.canonical ?? decodeURI(Astro.url.pathname) ),
+        Astro.site ?? Astro.url,
+        meta.canonical ?? decodeURI(Astro.url.pathname),
         false
     );
 

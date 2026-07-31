@@ -23,3 +23,33 @@ $template_packagePath: if(
 /// @since ___PKG_VERSION___
 ///
 $mx_prop_useCustom_gridColumn: lib.$include_html !default;
+
+///
+/// @since ___PKG_VERSION___
+///
+$mx_bodyGrid_displayContents: null !default;
+$mx_bodyGrid_displayContents: utils.config-valid-bool(
+    $mx_bodyGrid_displayContents,
+    'mx_bodyGrid_displayContents',
+    $default: true
+);
+
+///
+/// @since ___PKG_VERSION___
+///
+$mx_bodyGrid_dl_displayContents: null !default;
+$mx_bodyGrid_dl_displayContents: utils.config-valid-bool(
+    $mx_bodyGrid_dl_displayContents,
+    'mx_bodyGrid_dl_displayContents',
+    $default: $mx_bodyGrid_displayContents
+);
+
+///
+/// @since ___PKG_VERSION___
+///
+$mx_bodyGrid_form_displayContents: null !default;
+$mx_bodyGrid_form_displayContents: utils.config-valid-bool(
+    $mx_bodyGrid_form_displayContents,
+    'mx_bodyGrid_form_displayContents',
+    $default: $mx_bodyGrid_displayContents
+);
