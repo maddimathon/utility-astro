@@ -1401,6 +1401,12 @@ h6 a[href].button {
     letter-spacing: inherit;
     text-transform: inherit;
 }
+h1.unstyled-heading,
+h2.unstyled-heading,
+h3.unstyled-heading,
+h4.unstyled-heading,
+h5.unstyled-heading,
+h6.unstyled-heading,
 .unstyled-heading {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
@@ -1423,97 +1429,6 @@ h6 a[href].button {
     font-style: normal;
 }
 .unstyled-heading em em em {
-    font-style: italic;
-}
-
-.unstyled-heading:is(
-    h1,
-    .h1,
-    h2,
-    .h2,
-    h3,
-    .h3,
-    h4,
-    .h4,
-    h5,
-    .h5,
-    h6,
-    .h6,
-    .h7,
-    .h8
-) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
-    margin-top: var(--mrg-soft-600, 1.875rem);
-    margin-bottom: var(--mrg-half-400, 0.3125rem);
-    font-weight: 600;
-    font-size: 1rem;
-    font-size: var(--fs-normal, 1rem);
-    line-height: 1.6875;
-    line-height: var(--line-height-400, 1.6875);
-    letter-spacing: normal;
-    text-transform: none;
-    font-style: normal;
-    font-style: normal;
-}
-.unstyled-heading:is(
-        h1,
-        .h1,
-        h2,
-        .h2,
-        h3,
-        .h3,
-        h4,
-        .h4,
-        h5,
-        .h5,
-        h6,
-        .h6,
-        .h7,
-        .h8
-    )
-    em {
-    font-style: italic;
-}
-.unstyled-heading:is(
-        h1,
-        .h1,
-        h2,
-        .h2,
-        h3,
-        .h3,
-        h4,
-        .h4,
-        h5,
-        .h5,
-        h6,
-        .h6,
-        .h7,
-        .h8
-    )
-    em
-    em {
-    font-style: normal;
-}
-.unstyled-heading:is(
-        h1,
-        .h1,
-        h2,
-        .h2,
-        h3,
-        .h3,
-        h4,
-        .h4,
-        h5,
-        .h5,
-        h6,
-        .h6,
-        .h7,
-        .h8
-    )
-    em
-    em
-    em {
     font-style: italic;
 }
 
@@ -1690,7 +1605,16 @@ fieldset legend {
     text-wrap: balance;
     font-style: normal;
 }
-fieldset legend:is(.unstyled-heading) {
+fieldset
+    legend:is(
+        h1.unstyled-heading,
+        h2.unstyled-heading,
+        h3.unstyled-heading,
+        h4.unstyled-heading,
+        h5.unstyled-heading,
+        h6.unstyled-heading,
+        .unstyled-heading
+    ) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -3092,6 +3016,12 @@ body > :where(main) > :where(aside) {
 }
 .main-content__header
     > :where(
+        h1.unstyled-heading,
+        h2.unstyled-heading,
+        h3.unstyled-heading,
+        h4.unstyled-heading,
+        h5.unstyled-heading,
+        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,
@@ -3112,6 +3042,12 @@ body > :where(main) > :where(aside) {
 .main-content__header
     hgroup
     > :where(
+        h1.unstyled-heading,
+        h2.unstyled-heading,
+        h3.unstyled-heading,
+        h4.unstyled-heading,
+        h5.unstyled-heading,
+        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,
@@ -3653,6 +3589,12 @@ body > :where(main) > :where(aside) {
 :where(.js)
     .toggle-title
     > :is(
+        h1.unstyled-heading,
+        h2.unstyled-heading,
+        h3.unstyled-heading,
+        h4.unstyled-heading,
+        h5.unstyled-heading,
+        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,

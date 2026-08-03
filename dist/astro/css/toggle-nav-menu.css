@@ -470,6 +470,12 @@
 :where(.js)
     .toggle-title
     > :is(
+        h1.unstyled-heading,
+        h2.unstyled-heading,
+        h3.unstyled-heading,
+        h4.unstyled-heading,
+        h5.unstyled-heading,
+        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,
