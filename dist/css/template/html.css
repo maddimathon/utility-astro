@@ -1699,16 +1699,7 @@ h6.unstyled-heading,
     font-style: italic;
 }
 
-.unstyled-heading:where(
-    [role="heading"][aria-level="1"],
-    [role="heading"][aria-level="2"],
-    [role="heading"][aria-level="3"],
-    [role="heading"][aria-level="4"],
-    [role="heading"][aria-level="5"],
-    [role="heading"][aria-level="6"],
-    [role="heading"][aria-level="7"],
-    [role="heading"][aria-level="8"]
-) {
+.unstyled-heading:where([role="heading"]) {
     margin-top: 1.875rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
@@ -1723,46 +1714,13 @@ h6.unstyled-heading,
     font-style: normal;
     font-style: normal;
 }
-.unstyled-heading:where(
-        [role="heading"][aria-level="1"],
-        [role="heading"][aria-level="2"],
-        [role="heading"][aria-level="3"],
-        [role="heading"][aria-level="4"],
-        [role="heading"][aria-level="5"],
-        [role="heading"][aria-level="6"],
-        [role="heading"][aria-level="7"],
-        [role="heading"][aria-level="8"]
-    )
-    em {
+.unstyled-heading:where([role="heading"]) em {
     font-style: italic;
 }
-.unstyled-heading:where(
-        [role="heading"][aria-level="1"],
-        [role="heading"][aria-level="2"],
-        [role="heading"][aria-level="3"],
-        [role="heading"][aria-level="4"],
-        [role="heading"][aria-level="5"],
-        [role="heading"][aria-level="6"],
-        [role="heading"][aria-level="7"],
-        [role="heading"][aria-level="8"]
-    )
-    em
-    em {
+.unstyled-heading:where([role="heading"]) em em {
     font-style: normal;
 }
-.unstyled-heading:where(
-        [role="heading"][aria-level="1"],
-        [role="heading"][aria-level="2"],
-        [role="heading"][aria-level="3"],
-        [role="heading"][aria-level="4"],
-        [role="heading"][aria-level="5"],
-        [role="heading"][aria-level="6"],
-        [role="heading"][aria-level="7"],
-        [role="heading"][aria-level="8"]
-    )
-    em
-    em
-    em {
+.unstyled-heading:where([role="heading"]) em em em {
     font-style: italic;
 }
 

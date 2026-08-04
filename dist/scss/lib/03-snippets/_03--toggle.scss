@@ -17,23 +17,14 @@
 
 @use '03-02-layouts' as *;
 
-$_defaultHeadingSelectors: list.join(selector-all-headings(), ('%title'));
-
-$_defaultHeadingSelectors_bigOnly: ('%title');
-
-$_defaultHeadingSelectors_greaterThan6: ();
+$_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
 @each $level in token-all-heading-levels() {
-    @if $level < 7 {
-        $_defaultHeadingSelectors_bigOnly: list.append(
-            $_defaultHeadingSelectors_bigOnly,
-            ('%h#{$level}')
-        );
-    }
     @if $level > 6 {
-        $_defaultHeadingSelectors_greaterThan6: list.append(
-            $_defaultHeadingSelectors_greaterThan6,
-            ('%h#{$level}')
+        $_defaultHeadingSelectors_greaterThan6_withWhere: list.join(
+            $_defaultHeadingSelectors_greaterThan6_withWhere,
+            ('%h#{$level}', '%h#{$level}--where'),
+            $separator: comma
         );
     }
 }
@@ -51,9 +42,6 @@ $_defaultHeadingSelectors_greaterThan6: ();
 /// Supports the Toggle astro component.
 ///
 @mixin snippet-support-toggle-block(
-    $headingSelectors: $_defaultHeadingSelectors,
-    $headingSelectors_bigOnly: $_defaultHeadingSelectors_bigOnly,
-    //
     $content_container_paddingBlock: var-mrg-soft('300'),
     $content_container_paddingInline: var-mrg-firm('300'),
     $control_heading_paddingBlockEnd: var-stroke-relative('400'),
@@ -171,7 +159,10 @@ $_defaultHeadingSelectors_greaterThan6: ();
     /// TITLE & HEADINGS
     ///
     .toggle-title,
-    #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
+    #{selector.nest('.toggle-title', '>', selector-all-headings--base())} {
+        @content (toggle-title-and-headings);
+    }
+    #{selector.nest('.toggle-title', '>', selector-all-headings--where())} {
         @content (toggle-title-and-headings);
     }
 
@@ -190,11 +181,16 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
         @content (toggle-title);
 
-        @at-root #{selector.has-list($headingSelectors, $direct: true, $unifyParent: true)} {
+        @include selector.has(
+            selector-all-headings($where: config.$selector_headingsByRole),
+            $direct: true,
+            $split: false,
+            $unifyParent: true
+        ) {
             @content (toggle-title--has-heading);
         }
 
-        #{selector.nest('>', ($headingSelectors))} {
+        @include selector-all-headings($direct: true) {
             @content (toggle-title--heading);
 
             .toggle-icon {
@@ -350,7 +346,15 @@ $_defaultHeadingSelectors_greaterThan6: ();
                     margin-block-start: var-mrg-soft('600');
                 }
 
-                @at-root #{selector.has-list(selector.nest( '.toggle-title', '>', $_defaultHeadingSelectors_greaterThan6 ), $unifyParent: true)} {
+                @include selector.has(
+                    selector.nest(
+                        '.toggle-title',
+                        '>',
+                        $_defaultHeadingSelectors_greaterThan6_withWhere
+                    ),
+                    $split: false,
+                    $unifyParent: true
+                ) {
                     margin-block-start: var-mrg-soft('600');
                 }
             }
@@ -483,7 +487,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
         /// TITLE & HEADINGS
         ///
         .toggle-title,
-        #{selector.nest('.toggle-title', '>', ($headingSelectors))} {
+        #{selector.nest('.toggle-title', '>', selector-all-headings(  $where: config.$selector_headingsByRole ))} {
             @extend %toggle-container-subgrid;
 
             // justify-content: stretch;
@@ -513,11 +517,15 @@ $_defaultHeadingSelectors_greaterThan6: ();
 
             @content (js--toggle-title);
 
-            @at-root #{selector.has-list($headingSelectors, $unifyParent: true)} {
+            @include selector.has(
+                selector-all-headings($where: config.$selector_headingsByRole),
+                $split: false,
+                $unifyParent: true
+            ) {
                 @content (js--toggle-title--has-heading);
             }
 
-            #{selector.nest('>', ($headingSelectors))} {
+            @include selector-all-headings($direct: true) {
                 margin-block: 0;
 
                 @if $includeBaseStyles {
@@ -527,8 +535,7 @@ $_defaultHeadingSelectors_greaterThan6: ();
                 @content (js--toggle-title--heading);
             }
 
-            > :is(#{$headingSelectors}):where(.unstyled-heading),
-            > %unstyled-heading--is,
+            > %unstyled-heading,
             > %unstyled-heading--where {
                 @if $includeBaseStyles {
                     padding-block-end: $control_heading_unstyled_paddingBlockEnd;

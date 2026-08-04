@@ -5,6 +5,7 @@
 
 @use 'pkg:@maddimathon/utility-sass/map';
 @use 'pkg:@maddimathon/utility-sass/meta';
+@use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/lib/templates' as utils;
 
@@ -80,8 +81,6 @@
     @if $_print_any {
         @include template-utility-astro {
             @if $print_contentHeader {
-                $_sels_allHeadings: selector-all-headings();
-
                 %content-header {
                     &,
                     > hgroup {
@@ -90,9 +89,12 @@
                         }
                     }
 
-                    > :where(#{$_sels_allHeadings}),
-                    hgroup > :where(#{$_sels_allHeadings}) {
-                        margin-block-start: 0;
+                    &,
+                    & hgroup {
+                        > :where(#{selector-all-headings--base()}),
+                        #{selector.nest('>', selector-all-headings--where())} {
+                            margin-block-start: 0;
+                        }
                     }
 
                     + :where(*) {

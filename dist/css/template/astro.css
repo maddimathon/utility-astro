@@ -3019,12 +3019,6 @@ body > :where(main) > :where(aside) {
 }
 .main-content__header
     > :where(
-        h1.unstyled-heading,
-        h2.unstyled-heading,
-        h3.unstyled-heading,
-        h4.unstyled-heading,
-        h5.unstyled-heading,
-        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,
@@ -3045,12 +3039,6 @@ body > :where(main) > :where(aside) {
 .main-content__header
     hgroup
     > :where(
-        h1.unstyled-heading,
-        h2.unstyled-heading,
-        h3.unstyled-heading,
-        h4.unstyled-heading,
-        h5.unstyled-heading,
-        h6.unstyled-heading,
         .unstyled-heading,
         .page-title,
         .h1,
@@ -3419,7 +3407,8 @@ body > :where(main) > :where(aside) {
     margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
-:where(.js) [data-toggle-container]:has(.toggle-title > .h7 .h8) {
+:where(.js)
+    [data-toggle-container]:has(.toggle-title > .h7, .toggle-title > .h8) {
     margin-top: 1.875rem;
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
@@ -3589,32 +3578,7 @@ body > :where(main) > :where(aside) {
     padding-bottom: 0.125em;
     padding-bottom: var(--stroke-relative-400, 0.125em);
 }
-:where(.js)
-    .toggle-title
-    > :is(
-        h1.unstyled-heading,
-        h2.unstyled-heading,
-        h3.unstyled-heading,
-        h4.unstyled-heading,
-        h5.unstyled-heading,
-        h6.unstyled-heading,
-        .unstyled-heading,
-        .page-title,
-        .h1,
-        h1,
-        .h2,
-        h2,
-        .h3,
-        h3,
-        .h4,
-        h4,
-        .h5,
-        h5,
-        .h6,
-        h6,
-        .h7,
-        .h8
-    ):where(.unstyled-heading) {
+:where(.js) .toggle-title > .unstyled-heading {
     padding-bottom: 0;
 }
 :where(.js) [data-toggle-content] {

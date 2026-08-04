@@ -10,7 +10,6 @@
 @forward 'pkg:@maddimathon/utility-sass/config/template' with (
     $fn_doVar_allPrefixesSlugs: pre.$fn_doVar_allPrefixesSlugs,
     $mx_customProperty_allPrefixesSlugs: pre.$mx_customProperty_allPrefixesSlugs,
-    $mx_extendSelectors_headingsByRole: false !default,
 
     $selector_interactiveState_active: '[data-state-active=true]' !default,
     $selector_interactiveState_focus: '[data-state-focus=true]' !default,
