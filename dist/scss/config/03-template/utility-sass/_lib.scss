@@ -16,8 +16,6 @@
     $selector_interactiveState_focus: '[data-state-focus=true]' !default,
 
     $template_isDefault: true,
-    $template_name: 'Default',
-    $template_slug: 'default',
 
     $template_cssHeadings: pre.$template_cssHeadings,
     $template_docBlock: false,
@@ -25,7 +23,5 @@
     $template_globals: pre.$template_globals,
     $template_styles: pre.$template_styles,
     $template_tokens: pre.$template_tokens,
-    $template_utils: pre.$template_utils,
-    //
-     //
+    $template_utils: pre.$template_utils
 );

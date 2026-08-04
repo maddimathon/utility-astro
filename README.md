@@ -45,7 +45,7 @@ below.
 
 ## Development & Coding Practices
 
-This library is maintained by [Maddi Mathon](https://www.maddimathon.com) and is
+This library is maintained by [Maddi Mathon](https://www.maddimathon.com/web) and is
 currently unlikely to accept other contributions.
 
 Each file that defines items/exports should limit its exports to one item and

@@ -5,65 +5,71 @@
 
 @use '../../config';
 
-@use 'pkg:@maddimathon/utility-sass/string';
+@use 'pkg:@maddimathon/utility-sass/meta';
 
 @use 'pkg:@maddimathon/utility-sass/lib/mixins' as utils;
 
-$_stylesheet_name: if(
-    config.$template_isDefault,
-    'Template',
-    'Template - #{config.$template_name}'
+$_pkgBase_template: '@maddimathon/utility-astro/template';
+
+$_pkgBase: if(config.$isTemplate, $_pkgBase_template, '@maddimathon/utility-astro');
+
+$_path_template: if(
+    config.$template_isDefault or (not meta.is-truthy(config.$template_slug)),
+    $_pkgBase_template,
+    '#{$_pkgBase_template}/#{config.$template_slug}'
 );
 
 ///
 /// @since ___PKG_VERSION___
 ///
 @mixin template-docblock-utility-astro(
-    $stylesheet_name: $_stylesheet_name,
-    $stylesheet_packagePath: config.$template_packagePath
+    $title: config.$template_title,
+    $author: true,
+    $license: true,
+    $path: true,
+    $url: true,
+    $version: true,
+    $args...
 ) {
-    @if string.length(#{config.$template_description}) > 0 {
-        /**
-         * Utility Astro - #{$stylesheet_name}
-         * #{$stylesheet_packagePath}@___CURRENT_VERSION___
-         * 
-         * #{config.$template_description}
-         * 
-         * ___CURRENT_URL___
-         */
-    } @else {
-        /**
-         * Utility Astro - #{$stylesheet_name}
-         * #{$stylesheet_packagePath}@___CURRENT_VERSION___
-         * 
-         * ___CURRENT_URL___
-         */
-    }
+    @include utils.template-docblock(
+        'Utility Astro',
+        $author: if($author, 'Maddi Mathon (https://www.maddimathon.com/web)', false),
+        $license: if($license, 'MIT', false),
+        $path: if(
+                $path,
+                if(
+                    config.$template_isDefault or (not meta.is-truthy(config.$template_slug)),
+                    $_pkgBase,
+                    '#{$_pkgBase}/#{config.$template_slug}'
+                ),
+                false
+            ),
+        $title: $title,
+        $url: if($url, '___CURRENT_URL___', false),
+        $version: if($version, '___CURRENT_VERSION___', false),
+        $args...
+    );
 }
 
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin template-start-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
-    @at-root {
-        /*! START of #{$stylesheet_packagePath} */
-    }
+@mixin template-start-utility-astro($args...) {
+    @include utils.template-start($path: $_path_template, $args...);
 }
 
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin template-end-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
-    @at-root {
-        /*! END of #{$stylesheet_packagePath} */
-    }
+@mixin template-end-utility-astro($args...) {
+    @include utils.template-end($path: $_path_template, $args...);
 }
 
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin template-utility-astro($stylesheet_packagePath: config.$template_packagePath) {
-    @include template-start-utility-astro($stylesheet_packagePath: $stylesheet_packagePath);
+@mixin template-utility-astro($region_at_root: true, $args...) {
+    @include template-start-utility-astro($at_root: $region_at_root, $args...);
     @content;
-    @include template-end-utility-astro($stylesheet_packagePath: $stylesheet_packagePath);
+    @include template-end-utility-astro($at_root: $region_at_root, $args...);
 }

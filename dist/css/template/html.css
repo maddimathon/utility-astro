@@ -10,8 +10,10 @@
  * @maddimathon/utility-astro/template/html@0.1.0-beta.0.draft
  * 
  * https://maddimathon.github.io/utility-astro
+ * 
+ * Author: Maddi Mathon (https://www.maddimathon.com/web)
+ * License: MIT
  */
-/*! START of @maddimathon/utility-sass/template */
 /* #region Normalize */
 /*! START of modern-normalize v3.0.1 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /* Normalize - Document ==================================== */
@@ -170,6 +172,7 @@ summary {
 }
 
 /*! END of modern-normalize v3.0.1 */
+/*! START of @maddimathon/utility-sass/template */
 html {
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
@@ -238,8 +241,8 @@ small {
     font-size: 0.9375em;
 }
 
-/* #endregion Normalize */
 /*! END of @maddimathon/utility-sass/template */
+/* #endregion Normalize */
 /* # TOKENS & PROPERTIES
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
