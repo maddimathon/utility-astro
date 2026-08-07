@@ -10,7 +10,6 @@
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/map';
-@use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 @use 'pkg:@maddimathon/utility-sass/string';
 
@@ -320,10 +319,10 @@ $_flex_container_alignment_row: (
 /// @since ___PKG_VERSION___
 ///
 @mixin snippet-body-grid--selectors--main-content(
-    $selector_mainContent: '%main-content',
+    $selector_main: '%main-content',
     $selector_mainArticle: '%main-content__article'
 ) {
-    $sels_directMain: selector.nest('>', $selector_mainContent);
+    $sels_directMain: selector.nest('>', $selector_main);
 
     #{$sels_directMain},
     #{selector.nest($sels_directMain,'>', $selector_mainArticle)} {
@@ -336,49 +335,75 @@ $_flex_container_alignment_row: (
 ///
 @mixin snippet-body-grid--selectors--body-and-subgrid(
     $additionalSelectors: (),
-    $selector_mainContent: '%main-content',
-    $selectors_layoutSubgrids:
-        ':where( #{$selector_mainContent}, %primary-nav, %site-header, %site-footer, %_site-footer )',
-    $selectors_subgrid: ':is( %body-subgrid )',
-    $selectors_subgrid_nesting: $selectors_subgrid,
-    $selectors_main_nesting: ':is( %main-content__article, %_main-sidebar, %main-sidebar )',
+    $selector_main: '%main-content',
+
+    $selectors_body_subgrid:
+        '#{$selector_main}, %primary-nav, %site-header, %site-footer, %_site-footer',
+    $selectors_body_subgrid_nesting: ':is( %body-subgrid )',
+
+    $selectors_main_subgrid: ' %main-content__article, %_main-sidebar, %main-sidebar',
+    $selectors_main_subgrid_nesting: ':is( %main-subgrid )',
+
     $subgridNesting: 1
 ) {
     $subgridNesting: max(1, $subgridNesting) + 1;
 
-    $base_sels: selector.nest(&, '>', ($selectors_subgrid, $selectors_layoutSubgrids));
+    $body_sels: list.join(
+        &,
+        selector.nest(&, '>', ':where( #{$selectors_body_subgrid} )'),
+        $separator: comma
+    );
 
-    $main_content_sels: selector.nest(&, '>', ':where( #{$selector_mainContent} )');
+    $main_sels: list.join(
+        selector.nest(&, '> :where( #{$selector_main} )'),
+        selector.nest(&, '> :where( #{$selector_main} ) > :where( #{$selectors_main_subgrid} )'),
+        $separator: comma
+    );
 
-    @at-root #{if(list.length($additionalSelectors) > 0, $additionalSelectors, config.$selector_null)},
-        #{$base_sels} {
-        $selectorList_layout: list.join(
-            (&),
-            list.join(
-                selector.nest($main_content_sels, '>', $selectors_main_nesting),
-                selector.nest($base_sels, '>', $selectors_subgrid_nesting),
-                $separator: comma
+    $body_sels_nested: selector.nest(&, '>', ':where( #{$selectors_body_subgrid} )');
+    $main_sels_nested: selector.nest(
+        &,
+        '> :where( #{$selector_main} ) > :where( #{$selectors_main_subgrid} )'
+    );
+
+    @for $i from 1 to $subgridNesting {
+        $body_sels_nested: list.join(
+            $body_sels_nested,
+            selector.nest(
+                if($i < 2 and $subgridNesting > 2, $body_sels, &),
+                '>',
+                $selectors_body_subgrid_nesting
             ),
             $separator: comma
         );
 
-        $selectorList_utils: (&);
+        $main_sels_nested: list.join(
+            $main_sels_nested,
+            selector.nest($main_sels, '>', $selectors_main_subgrid_nesting),
+            $separator: comma
+        );
 
-        $addToList_utils: $selectors_subgrid_nesting;
+        $selectors_body_subgrid_nesting: selector.nest(
+            $selectors_body_subgrid_nesting,
+            '>',
+            $selectors_body_subgrid_nesting
+        );
 
-        @for $i from 1 to $subgridNesting {
-            $selectorList_utils: list.join(
-                $selectorList_utils,
-                selector.nest($base_sels, '>', $addToList_utils),
-                $separator: comma
-            );
+        $selectors_main_subgrid_nesting: selector.nest(
+            $selectors_main_subgrid_nesting,
+            '>',
+            $selectors_main_subgrid_nesting
+        );
+    }
 
-            $addToList_utils: selector.nest($addToList_utils, '>', $selectors_subgrid_nesting);
-        }
+    $_allSels: list.join(
+        $additionalSelectors,
+        list.join($body_sels_nested, $main_sels_nested, $separator: comma),
+        $separator: comma
+    );
 
-        @at-root #{list.unique(list.join($selectorList_layout, $selectorList_utils, $separator:comma))} {
-            @content;
-        }
+    @at-root #{list.sort(list.unique($_allSels))} {
+        @content;
     }
 }
 
@@ -623,7 +648,7 @@ $_flex_container_alignment_row: (
 
         %layout-extra-wide {
             @include snippet-body-grid--selectors--main-content(
-                $selector_mainContent: ':where(%main-content)',
+                $selector_main: ':where(%main-content)',
                 $selector_mainArticle: ':where(%main-content__article)'
             ) {
                 // prettier-ignore
