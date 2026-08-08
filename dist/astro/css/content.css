@@ -67,7 +67,7 @@ html {
 }
 
 body,
-body > :is(.body-subgrid),
+body > :is(.main-subgrid),
 body > :where(main) > :is(.main-subgrid),
 body > :where(main, nav, header, footer),
 body > :where(main) > :where(.main-content__article, aside),
@@ -107,7 +107,7 @@ body
 }
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -124,7 +124,7 @@ body
 }
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -136,7 +136,7 @@ body
     > :where(form, dl),
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -151,7 +151,7 @@ body
 @supports (display: contents) {
     :where(
             body,
-            body > :is(.body-subgrid),
+            body > :is(.main-subgrid),
             body > :where(main) > :is(.main-subgrid),
             body > :where(main, nav, header, footer),
             body > :where(main) > :where(.main-content__article, aside),
@@ -164,7 +164,7 @@ body
         > :where(*),
     :where(
             body,
-            body > :is(.body-subgrid),
+            body > :is(.main-subgrid),
             body > :where(main) > :is(.main-subgrid),
             body > :where(main, nav, header, footer),
             body > :where(main) > :where(.main-content__article, aside),
@@ -181,7 +181,7 @@ body
 }
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -199,7 +199,7 @@ body
 @media (min-width: 40.875em) {
     :where(
             body,
-            body > :is(.body-subgrid),
+            body > :is(.main-subgrid),
             body > :where(main) > :is(.main-subgrid),
             body > :where(main, nav, header, footer),
             body > :where(main) > :where(.main-content__article, aside),
@@ -217,7 +217,7 @@ body
 }
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -233,7 +233,7 @@ body
 @media (min-width: 40.875em) {
     :where(
             body,
-            body > :is(.body-subgrid),
+            body > :is(.main-subgrid),
             body > :where(main) > :is(.main-subgrid),
             body > :where(main, nav, header, footer),
             body > :where(main) > :where(.main-content__article, aside),
@@ -249,7 +249,7 @@ body
 }
 :where(
         body,
-        body > :is(.body-subgrid),
+        body > :is(.main-subgrid),
         body > :where(main) > :is(.main-subgrid),
         body > :where(main, nav, header, footer),
         body > :where(main) > :where(.main-content__article, aside),
@@ -307,7 +307,7 @@ body {
     margin-bottom: var(--gap-block-layout, 5vw);
 }
 
-body > :is(.body-subgrid),
+body > :is(.main-subgrid),
 body > :where(main) > :is(.main-subgrid),
 body > :where(main, nav, header, footer),
 body > :where(main) > :where(.main-content__article, aside),
