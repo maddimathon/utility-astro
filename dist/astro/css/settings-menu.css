@@ -296,16 +296,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
-    > [data-toggle-content] {
-    max-height: 80svh;
-    max-height: calc(95svh - 0px - 5vw - 1.375em);
-    max-height: calc(
-        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
-            var(--icon-size, 1.375em)
-    );
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
     > [data-toggle-content]
     > * {
     flex-shrink: 0;
@@ -318,4 +308,10 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     padding-bottom: 0.8125rem;
     padding-top: var(--mrg-soft-400, 0.9375rem);
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
+    max-height: 80svh;
+    max-height: calc(95svh - 0px - 5vw - 1.375em);
+    max-height: calc(
+        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
+            var(--icon-size, 1.375em)
+    );
 }

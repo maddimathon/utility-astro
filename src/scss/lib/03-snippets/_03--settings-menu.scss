@@ -220,15 +220,6 @@
                 }
 
                 > [data-toggle-content] {
-                    @if $includeBaseStyles {
-                        max-height: 80svh;
-                        max-height: calc(
-                            95svh - do-var(scroll-padding-top) - var-gap-block(layout) - do-var(
-                                    icon-size
-                                )
-                        );
-                    }
-
                     @content (js--settings-menu--open--content);
 
                     > * {
@@ -242,6 +233,13 @@
                     > .container {
                         @if $includeBaseStyles {
                             padding-block: var-mrg-soft('400') var-mrg-firm('300');
+
+                            max-height: 80svh;
+                            max-height: calc(
+                                95svh - do-var(scroll-padding-top) - var-gap-block(layout) - do-var(
+                                        icon-size
+                                    )
+                            );
                         }
 
                         @content (js--settings-menu--open--content--container);

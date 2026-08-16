@@ -116,6 +116,7 @@
                     font-size: var-fs(heading-6);
                     line-height: var-line-height('300');
                     text-wrap: balance;
+                    text-wrap: pretty;
 
                     @include colour-mode((low, average)) {
                         opacity: 0.75;

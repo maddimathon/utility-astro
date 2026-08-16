@@ -1132,6 +1132,7 @@ h1,
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 .h1 button,
@@ -1171,6 +1172,7 @@ h2 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 .h2 button,
@@ -1204,6 +1206,7 @@ h3 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 .h3 button,
@@ -1237,6 +1240,7 @@ h4 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 .h4 em,
@@ -1278,6 +1282,7 @@ h5 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 .h5 em,
@@ -1319,6 +1324,7 @@ h6 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 .h6 em,
@@ -1359,6 +1365,7 @@ h6 a[href].button {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 .h7 button,
@@ -1385,6 +1392,7 @@ h6 a[href].button {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 .h8 em {
@@ -1606,6 +1614,7 @@ fieldset legend {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 fieldset
@@ -2005,6 +2014,7 @@ label {
     line-height: 1.3125;
     line-height: var(--line-height-200, 1.3125);
     text-wrap: balance;
+    text-wrap: pretty;
     color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
@@ -2552,6 +2562,7 @@ th {
     padding-bottom: 0.375rem;
     padding-bottom: var(--mrg-soft-200, 0.375rem);
     text-wrap: balance;
+    text-wrap: pretty;
     background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
     color: Canvas;
@@ -3112,6 +3123,7 @@ body > :where(main) > :where(aside) {
     line-height: 1.4375;
     line-height: var(--line-height-300, 1.4375);
     text-wrap: balance;
+    text-wrap: pretty;
 }
 @media (prefers-contrast: less) {
     .page-title__subheading {
@@ -4172,19 +4184,6 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]
-    > [data-toggle-content] {
-    max-height: 80svh;
-    max-height: calc(
-        95svh - calc(0 + clamp(1.875rem, 5svw, 3.5rem)) -
-            clamp(1.875rem, 5svw, 3.5rem) - 1.375em
-    );
-    max-height: calc(
-        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
-            var(--icon-size, 1.375em)
-    );
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
     > [data-toggle-content]
     > * {
     flex-shrink: 0;
@@ -4197,4 +4196,13 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     padding-bottom: 0.8125rem;
     padding-top: var(--mrg-soft-400, 0.9375rem);
     padding-bottom: var(--mrg-firm-300, 0.8125rem);
+    max-height: 80svh;
+    max-height: calc(
+        95svh - calc(0 + clamp(1.875rem, 5svw, 3.5rem)) -
+            clamp(1.875rem, 5svw, 3.5rem) - 1.375em
+    );
+    max-height: calc(
+        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
+            var(--icon-size, 1.375em)
+    );
 }

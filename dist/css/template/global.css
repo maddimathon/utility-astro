@@ -424,6 +424,7 @@ h1 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 h1 button,
@@ -446,6 +447,7 @@ h1 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 :where([role="heading"][aria-level="1"])
@@ -472,6 +474,7 @@ h2 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 h2 button,
@@ -494,6 +497,7 @@ h2 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 :where([role="heading"][aria-level="2"])
@@ -520,6 +524,7 @@ h3 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 h3 button,
@@ -542,6 +547,7 @@ h3 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 :where([role="heading"][aria-level="3"])
@@ -568,6 +574,7 @@ h4 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 h4 em {
@@ -596,6 +603,7 @@ h4 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 :where([role="heading"][aria-level="4"]) em {
@@ -628,6 +636,7 @@ h5 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 h5 em {
@@ -656,6 +665,7 @@ h5 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 :where([role="heading"][aria-level="5"]) em {
@@ -688,6 +698,7 @@ h6 {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 h6 em {
@@ -716,6 +727,7 @@ h6 a[href].button {
     letter-spacing: normal;
     text-transform: none;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 :where([role="heading"][aria-level="6"]) em {
@@ -748,6 +760,7 @@ h6 a[href].button {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 :where([role="heading"][aria-level="7"])
@@ -774,6 +787,7 @@ h6 a[href].button {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: italic;
 }
 :where([role="heading"][aria-level="8"]) em {
@@ -905,6 +919,7 @@ fieldset legend {
     letter-spacing: 0.0625em;
     text-transform: uppercase;
     text-wrap: balance;
+    text-wrap: pretty;
     font-style: normal;
 }
 fieldset legend {
@@ -1260,6 +1275,7 @@ label {
     font-weight: 600;
     line-height: 1.3125;
     text-wrap: balance;
+    text-wrap: pretty;
     color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
@@ -1747,6 +1763,7 @@ th {
     padding-top: 0.375rem;
     padding-bottom: 0.375rem;
     text-wrap: balance;
+    text-wrap: pretty;
     background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
     color: Canvas;
