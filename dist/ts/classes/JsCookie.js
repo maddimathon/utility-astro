@@ -25,29 +25,41 @@ export class JsCookie {
     /**
      * Number of days until the cookie expires.
      */
-    expireDays = null, 
+    expireDaysOrOpts, 
     /**
      * Default value to return instead of null.
      */
-    defaultValue = null, 
+    dep_defaultValue = null, 
     /**
      * Whether to also save the cookie value to LocalStorage.
      *
      * @since 0.1.0-beta.0.draft
      */
-    copyToLocalStorage = false) {
+    dep_copyToLocalStorage = false) {
+        var _a, _b, _c, _d;
         this.name = name;
         this.path = path;
-        this.expireDays = expireDays;
-        this.defaultValue = defaultValue;
-        this.copyToLocalStorage = copyToLocalStorage;
+        const maxAge = 60 * 60 * 24 * 365 * 5;
+        this.opts = typeof expireDaysOrOpts !== 'object'
+            ? {
+                copyToLocalStorage: dep_copyToLocalStorage,
+                fallbackValue: dep_defaultValue !== null && dep_defaultValue !== void 0 ? dep_defaultValue : null,
+                expireDays: expireDaysOrOpts !== null && expireDaysOrOpts !== void 0 ? expireDaysOrOpts : null,
+                maxAge,
+            }
+            : {
+                copyToLocalStorage: (_a = expireDaysOrOpts === null || expireDaysOrOpts === void 0 ? void 0 : expireDaysOrOpts.copyToLocalStorage) !== null && _a !== void 0 ? _a : false,
+                fallbackValue: (_b = expireDaysOrOpts === null || expireDaysOrOpts === void 0 ? void 0 : expireDaysOrOpts.fallbackValue) !== null && _b !== void 0 ? _b : null,
+                expireDays: (_c = expireDaysOrOpts === null || expireDaysOrOpts === void 0 ? void 0 : expireDaysOrOpts.expireDays) !== null && _c !== void 0 ? _c : null,
+                maxAge: (_d = expireDaysOrOpts === null || expireDaysOrOpts === void 0 ? void 0 : expireDaysOrOpts.maxAge) !== null && _d !== void 0 ? _d : maxAge,
+            };
     }
     /**
      * Empties the contents of this cookie.
      */
     delete() {
         this.set('', -1);
-        if (this.copyToLocalStorage) {
+        if (this.opts.copyToLocalStorage) {
             window.localStorage.removeItem(this.name);
         }
     }
@@ -64,31 +76,38 @@ export class JsCookie {
                 return pair.replace(cookieRegex, '');
             }
         }
-        return this.defaultValue;
+        return this.opts.fallbackValue;
     }
     /**
      * Sets this browser cookie.
      */
-    set(value, expireDays = this.expireDays) {
-        if (this.copyToLocalStorage) {
+    set(value, expireDays = this.opts.expireDays) {
+        var _a, _b;
+        if (this.opts.copyToLocalStorage) {
             window.localStorage.setItem(this.name, value);
         }
+        const expiry = typeof expireDays === 'number'
+            ? (() => {
+                const d = new Date();
+                d.setTime(d.getTime() + (expireDays * 24 * 60 * 60 * 1000));
+                return {
+                    date: d.toUTCString(),
+                    expireDays,
+                };
+            })()
+            : null;
         const cookie = {
             [this.name]: value,
-            expires: null,
+            expires: ((_a = expiry === null || expiry === void 0 ? void 0 : expiry.date) === null || _a === void 0 ? void 0 : _a.length) ? expiry.date : null,
+            'max-age': ((_b = expiry === null || expiry === void 0 ? void 0 : expiry.date) === null || _b === void 0 ? void 0 : _b.length) ? (expiry.expireDays <= 0 ? 0 : null) : String(this.opts.maxAge),
             path: this.path,
         };
-        if (typeof expireDays === 'number') {
-            const d = new Date();
-            d.setTime(d.getTime() + (expireDays * 24 * 60 * 60 * 1000));
-            cookie['expires'] = d.toUTCString();
-        }
         const cookieString = [];
         for (const key in cookie) {
             if (cookie[key] !== null) {
                 cookieString.push(`${key}=${cookie[key]}`);
             }
         }
-        document.cookie = cookieString.join(';');
+        document.cookie = cookieString.join('; ');
     }
 }

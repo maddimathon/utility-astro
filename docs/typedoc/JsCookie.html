@@ -18,7 +18,8 @@
 <h4 class="tsd-anchor-link" id="since">Since<a href="#since" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha</p>
 </div></div></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L16" class="external" target="_blank">classes/JsCookie.ts:16</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L18" class="external" target="_blank">classes/JsCookie.ts:18</a></li>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L206" class="external" target="_blank">classes/JsCookie.ts:206</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
@@ -30,11 +31,9 @@
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-index-list"><a href="#copytolocalstorage" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>copy<wbr/>To<wbr/>Local<wbr/>Storage</span></a>
-<a href="#defaultvalue" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value</span></a>
-<a href="#expiredays" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>expire<wbr/>Days</span></a>
-<a href="#name" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>name</span></a>
+<div class="tsd-index-list"><a href="#name" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>name</span></a>
 <a href="#path" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>path</span></a>
+<a href="#opts" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
@@ -49,8 +48,10 @@
 <h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="constructorjscookie"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">JsCookie</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">path</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">expireDays</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">defaultValue</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">copyToLocalStorage</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a><a href="#constructorjscookie" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="constructorjscookie"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">JsCookie</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">path</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">opts</span><span class="tsd-signature-symbol">:</span> <a href="JsCookie/Opts/Input.html" class="tsd-signature-type tsd-kind-type-alias">Input</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a><a href="#constructorjscookie" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Now accepting an args object instead of params 3-5.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -60,64 +61,74 @@
 <li><span><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span></span>
 <div class="tsd-comment tsd-typography"><p>Cookie's path.</p>
 </div></li>
-<li><span><span class="tsd-kind-parameter">expireDays</span>: <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></span>
-<div class="tsd-comment tsd-typography"><p>Number of days until the cookie expires.</p>
-</div></li>
-<li><span><span class="tsd-kind-parameter">defaultValue</span>: <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></span>
-<div class="tsd-comment tsd-typography"><p>Default value to return instead of null.</p>
-</div></li>
-<li><span><span class="tsd-kind-parameter">copyToLocalStorage</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></span>
-<div class="tsd-comment tsd-typography"><p>Whether to also save the cookie value to LocalStorage.</p>
-</div>
+<li><span><span class="tsd-kind-parameter">opts</span>: <a href="JsCookie/Opts/Input.html" class="tsd-signature-type tsd-kind-type-alias">Input</a></span>
+<div class="tsd-comment tsd-typography"><p>Additional options for this instance.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-since">
 <h4 class="tsd-anchor-link" id="since-1">Since<a href="#since-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
-</div></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a></h4><aside class="tsd-sources">
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L18" class="external" target="_blank">classes/JsCookie.ts:18</a></li></ul></aside></div></li></ul></section></section></details>
-<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
-<h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
-<section>
-<section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="copytolocalstorage"><code class="tsd-tag">Readonly</code><span>copy<wbr/>To<wbr/>Local<wbr/>Storage</span><a href="#copytolocalstorage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">copyToLocalStorage</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L30" class="external" target="_blank">classes/JsCookie.ts:30</a></li></ul></aside></div></li>
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="constructorjscookie-1"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">JsCookie</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">path</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">expireDays</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">fallbackValue</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">copyToLocalStorage</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a><a href="#constructorjscookie-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Please pass an opts object as the third param instead.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Cookie's name.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">path</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Cookie's path.</p>
+</div></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">expireDays</span>: <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></span>
+<div class="tsd-comment tsd-typography"><p>Number of days until the cookie expires.</p>
+</div></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">fallbackValue</span>: <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></span>
+<div class="tsd-comment tsd-typography"><p>Default value to return instead of null.</p>
+</div></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">copyToLocalStorage</span>: <span class="tsd-signature-type">boolean</span></span>
 <div class="tsd-comment tsd-typography"><p>Whether to also save the cookie value to LocalStorage.</p>
 </div>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-since">
 <h4 class="tsd-anchor-link" id="since-2">Since<a href="#since-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
+</div></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">JsCookie</a></h4>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-deprecated">
+<h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L44" class="external" target="_blank">classes/JsCookie.ts:44</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="defaultvalue"><code class="tsd-tag">Readonly</code><span>default<wbr/>Value</span><a href="#defaultvalue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">defaultValue</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div>
-<div class="tsd-comment tsd-typography"><p>Default value to return instead of null.</p>
-</div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L37" class="external" target="_blank">classes/JsCookie.ts:37</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member">
-<h3 class="tsd-anchor-link" id="expiredays"><code class="tsd-tag">Readonly</code><span>expire<wbr/>Days</span><a href="#expiredays" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<div class="tsd-signature"><span class="tsd-kind-property">expireDays</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div>
-<div class="tsd-comment tsd-typography"><p>Number of days until the cookie expires.</p>
-</div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L32" class="external" target="_blank">classes/JsCookie.ts:32</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L52" class="external" target="_blank">classes/JsCookie.ts:52</a></li></ul></aside></div></li></ul></section></section></details>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="name"><code class="tsd-tag">Readonly</code><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Cookie's name.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L22" class="external" target="_blank">classes/JsCookie.ts:22</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L85" class="external" target="_blank">classes/JsCookie.ts:85</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="path"><code class="tsd-tag">Readonly</code><span>path</span><a href="#path" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">path</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Cookie's path.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L27" class="external" target="_blank">classes/JsCookie.ts:27</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L90" class="external" target="_blank">classes/JsCookie.ts:90</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="opts"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>opts</span><a href="#opts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">opts</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Classify</span><span class="tsd-signature-symbol">&lt;</span><a href="JsCookie-1.html" class="tsd-signature-type tsd-kind-namespace">JsCookie</a><span class="tsd-signature-symbol">.</span><a href="JsCookie/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><p>Cookie's path.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L23" class="external" target="_blank">classes/JsCookie.ts:23</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -131,7 +142,7 @@
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L50" class="external" target="_blank">classes/JsCookie.ts:50</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L130" class="external" target="_blank">classes/JsCookie.ts:130</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="get"><span>get</span><a href="#get" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -142,7 +153,7 @@
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L61" class="external" target="_blank">classes/JsCookie.ts:61</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L141" class="external" target="_blank">classes/JsCookie.ts:141</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="set"><span>set</span><a href="#set" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -158,7 +169,7 @@
 <li><span><span class="tsd-kind-parameter">expireDays</span>: <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = ...</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L82" class="external" target="_blank">classes/JsCookie.ts:82</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/JsCookie.ts#L162" class="external" target="_blank">classes/JsCookie.ts:162</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -180,7 +191,7 @@
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#copytolocalstorage"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>copy<wbr/>To<wbr/>Local<wbr/>Storage</span></a><a href="#defaultvalue"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value</span></a><a href="#expiredays"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>expire<wbr/>Days</span></a><a href="#name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>name</span></a><a href="#path"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>path</span></a></div></details>
+<div><a href="#name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>name</span></a><a href="#path"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>path</span></a><a href="#opts" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
 <div><a href="#delete"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>delete</span></a><a href="#get"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>get</span></a><a href="#set"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>set</span></a></div></details></div></details></div>
 <div class="site-menu">

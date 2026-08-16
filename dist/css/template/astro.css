@@ -2008,7 +2008,7 @@ label {
     color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
-label:has(> :where([type="checkbox"], [type="radio"])) {
+label:has(> input:where([type="checkbox"], [type="radio"])) {
     --display: grid;
     display: grid;
     display: var(--display, grid);
@@ -2026,28 +2026,31 @@ label:has(> :where([type="checkbox"], [type="radio"])) {
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
-label:has(> [readonly]:where([type="checkbox"], [type="radio"])) {
+
+label:has(> input[readonly]:where([type="checkbox"], [type="radio"])) {
     cursor: auto;
 }
+
 label:has(
-    > [aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
-    > [disabled]:where([type="checkbox"], [type="radio"])
+    > input[aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
+    > input[disabled]:where([type="checkbox"], [type="radio"])
 ) {
     cursor: not-allowed;
 }
-label:has(> :where([type="checkbox"], [type="radio"]))
-    + label:has(> :where([type="checkbox"], [type="radio"])) {
+
+label:has(> input:where([type="checkbox"], [type="radio"]))
+    + label:has(> input:where([type="checkbox"], [type="radio"])) {
     margin-top: 0.5rem;
     margin-top: var(--mrg-firm-200, 0.5rem);
 }
-label:has(> :where([type="checkbox"], [type="radio"])) + input,
-label:has(> :where([type="checkbox"], [type="radio"])) + select,
-label:has(> :where([type="checkbox"], [type="radio"])) + textarea {
+label:has(> input:where([type="checkbox"], [type="radio"]))
+    + :is(input, select, textarea) {
     margin-top: 1.25rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
 }
-label > [type="checkbox"],
-label > [type="radio"] {
+
+label > input[type="checkbox"],
+label > input[type="radio"] {
     margin: 0;
 }
 
@@ -3653,6 +3656,9 @@ body > :where(main) > :where(aside) {
     visibility: hidden;
     opacity: 0;
 }
+:where(.js) [data-toggle-content] > .container > * {
+    flex-shrink: 0;
+}
 :where(.js) [data-toggle-content] > .container > :first-child {
     margin-top: 0;
 }
@@ -4168,14 +4174,20 @@ body:has(.website-settings-menu[data-toggle-container="open"]) {
     .website-settings-menu[data-toggle-container="open"]
     > [data-toggle-content] {
     max-height: 80svh;
-    max-height: calc(95svh - calc(0 + clamp(1.875rem, 5svw, 3.5rem)));
     max-height: calc(
-        95svh -
-            var(
-                --scroll-padding-top,
-                calc(2.75rem + var(--gap-block-layout-half, 2.5vw) * 2)
-            )
+        95svh - calc(0 + clamp(1.875rem, 5svw, 3.5rem)) -
+            clamp(1.875rem, 5svw, 3.5rem) - 1.375em
     );
+    max-height: calc(
+        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
+            var(--icon-size, 1.375em)
+    );
+}
+:where(.js)
+    .website-settings-menu[data-toggle-container="open"]
+    > [data-toggle-content]
+    > * {
+    flex-shrink: 0;
 }
 :where(.js)
     .website-settings-menu[data-toggle-container="open"]

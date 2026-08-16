@@ -1263,7 +1263,7 @@ label {
     color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
-label:has(> :where([type="checkbox"], [type="radio"])) {
+label:has(> input:where([type="checkbox"], [type="radio"])) {
     display: grid;
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
@@ -1276,26 +1276,29 @@ label:has(> :where([type="checkbox"], [type="radio"])) {
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
-label:has(> [readonly]:where([type="checkbox"], [type="radio"])) {
+
+label:has(> input[readonly]:where([type="checkbox"], [type="radio"])) {
     cursor: auto;
 }
+
 label:has(
-    > [aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
-    > [disabled]:where([type="checkbox"], [type="radio"])
+    > input[aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
+    > input[disabled]:where([type="checkbox"], [type="radio"])
 ) {
     cursor: not-allowed;
 }
-label:has(> :where([type="checkbox"], [type="radio"]))
-    + label:has(> :where([type="checkbox"], [type="radio"])) {
+
+label:has(> input:where([type="checkbox"], [type="radio"]))
+    + label:has(> input:where([type="checkbox"], [type="radio"])) {
     margin-top: 0.5rem;
 }
-label:has(> :where([type="checkbox"], [type="radio"])) + input,
-label:has(> :where([type="checkbox"], [type="radio"])) + select,
-label:has(> :where([type="checkbox"], [type="radio"])) + textarea {
+label:has(> input:where([type="checkbox"], [type="radio"]))
+    + :is(input, select, textarea) {
     margin-top: 1.25rem;
 }
-label > [type="checkbox"],
-label > [type="radio"] {
+
+label > input[type="checkbox"],
+label > input[type="radio"] {
     margin: 0;
 }
 

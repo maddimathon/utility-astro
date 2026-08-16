@@ -9,6 +9,7 @@
  */
 
 import type { Classify } from '@maddimathon/utility-typescript/types';
+import { hasIterator } from '@maddimathon/utility-typescript';
 
 import { JsCookie } from './JsCookie.js';
 
@@ -20,9 +21,134 @@ import { JsCookie } from './JsCookie.js';
 export class SettingsMenu {
 
     /**
+     * Sets up a new instance.
+     */
+    public static async new(
+        /**
+         * The element on which to update data attributes to reflect settings values.
+         */
+        target: HTMLHtmlElement | HTMLBodyElement,
+        /**
+         * The container containing all fieldsets in inputs for this menu.
+         */
+        menu: HTMLElement,
+        {
+            scrollBehaviour = 'auto',
+            cookieNamer,
+            ...opts
+        }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Constructor>> & {
+            cookieNamer?: ( attr: string ) => string;
+            scrollBehaviour?: ScrollBehavior;
+        } = {},
+    ): Promise<undefined | SettingsMenu> {
+
+        const inputs = Array.from( menu.querySelectorAll<HTMLInputElement>(
+            opts.selectors?.inputs || 'input[data-settings-input]'
+        ) ?? [] );
+
+        // returns
+        if ( !inputs.length ) {
+            if ( opts.debug ) {
+                console.debug( 'SettingsMenu.new() - failed, no inputs', { inputs, menu } );
+            }
+            return undefined;
+        }
+
+        const optsComplete = {
+            ...opts,
+
+            cookieCacheExpireDays: opts.cookieCacheExpireDays ?? 7,
+            cookiePrefix: opts.cookiePrefix ?? '',
+            defaultCookieCache: opts.defaultCookieCache ?? false,
+
+            path: menu.getAttribute(
+                opts.selectors?.pathAttr || 'data-settings-path'
+            ) || '/',
+        } satisfies SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
+            path: string,
+        };
+
+        const resetButton = menu.querySelector<HTMLButtonElement>(
+            optsComplete.selectors?.resetButton || 'button[data-settings-reset]'
+        );
+
+        cookieNamer = cookieNamer ?? ( ( attr: string ) => optsComplete.cookiePrefix + attr );
+
+        const instance = new SettingsMenu(
+            { inputs, menu, resetButton, target },
+            cookieNamer,
+            optsComplete,
+        );
+
+        if ( optsComplete.debug ) {
+            console.debug( 'SettingsMenu.new() - constructed', { menu, instance } );
+        } else if ( optsComplete.logResults ) {
+            console.info(
+                `[SettingsMenu] new: ${ menu.id ?? '' }`,
+                '\nmenu: ', instance?.menu,
+                '\nopts: ', instance?.opts,
+            );
+        }
+
+        return Promise.all(
+            instance.#inputs.map(
+                async ( input: HTMLInputElement ) => {
+                    const attr = input.getAttribute( 'name' );
+
+                    // returns
+                    if ( !attr ) {
+                        if ( instance.opts.debug ) {
+                            console.debug( 'SettingsMenu.new() setupInput - returning early', {
+                                input,
+                                attr,
+                                menu: instance.menu.id,
+                            } );
+                        }
+                        return;
+                    }
+
+                    return instance._setup_attr_key( attr );
+                }
+            )
+        ).then(
+            () => {
+                /*
+                 * Adding change event listener and collecting attribute names.
+                 */
+                instance.update_allInputs();
+
+                instance.#inputs?.forEach(
+                    input => input.addEventListener( 'change', () =>
+                        instance.settingSelected( input )
+                    )
+                );
+
+                /*
+                 * Add reset button listener.
+                 */
+                instance.#resetButton?.addEventListener(
+                    'click',
+                    instance.resetButtonClicked,
+                );
+
+                const scrollToMenu = () => menu.scrollIntoView( {
+                    behavior: scrollBehaviour ?? 'auto',
+                    block: 'start',
+                    inline: 'nearest',
+                } );
+
+                menu.addEventListener( 'toggle-open', scrollToMenu );
+                menu.addEventListener( 'toggle-close', scrollToMenu );
+
+                return instance;
+            }
+        );
+    }
+
+    /**
      * @since 0.1.0-alpha
      */
-    readonly #attributeKeys: string[] = [];
+    #attributeKeys: string[] = [];
 
     /**
      * For storing the cookies made to deal with each option.
@@ -41,12 +167,12 @@ export class SettingsMenu {
     /**
      * @since 0.1.0-alpha
      */
-    readonly #inputs: NodeListOf<HTMLInputElement> | null;
+    readonly #inputs: HTMLInputElement[];
 
     /**
      * @since 0.1.0-alpha
      */
-    readonly #path: string;
+    public readonly menu: HTMLElement;
 
     /**
      * @since 0.1.0-alpha
@@ -59,113 +185,191 @@ export class SettingsMenu {
     readonly #targetElement: HTMLHtmlElement | HTMLBodyElement;
 
     /**
-     * @since 0.1.0-alpha
+     * Not to be used directly. Use {@link SettingsMenu.new} instead.
      */
-    #timeout: ReturnType<typeof setTimeout> | null = null;
+    protected constructor (
+        /**
+         * @since 0.1.0-alpha
+         * @since ___PKG_VERSION___ — Is now an object accepting many elements.
+         */
+        elements: {
+            inputs: HTMLInputElement[];
+            menu: HTMLElement;
+            resetButton: HTMLButtonElement | null;
+            target: HTMLHtmlElement | HTMLBodyElement;
+        },
 
-    /**
-     * @param menu  The website settings menu wrapper to set up.
-     */
-    public constructor (
+        public readonly cookieNamer: ( attr: string ) => string,
+
         /**
          * @since ___PKG_VERSION___
          */
-        target: HTMLHtmlElement | HTMLBodyElement,
-
-        /**
-         * @since 0.1.0-alpha
-         */
-        public readonly menu: HTMLElement,
-
-        /**
-         * @since 0.1.0-alpha
-         */
-        selectors?: SettingsMenu.Selectors.Constructor,
+        public readonly opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
+            path: string;
+        },
     ) {
-
-        this.#targetElement = target;
-
-        this.#inputs = this.menu.querySelectorAll(
-            selectors?.inputs || 'input[data-settings-input]'
-        );
-
-        this.#path = this.menu.getAttribute(
-            selectors?.pathAttr || 'data-settings-path'
-        ) || '/';
-
-        this.#resetButton = this.menu.querySelector(
-            selectors?.resetButton || '[data-settings-reset]'
-        );
+        this.#inputs = elements.inputs;
+        this.menu = elements.menu;
+        this.#resetButton = elements.resetButton;
+        this.#targetElement = elements.target;
 
         this.resetButtonClicked = this.resetButtonClicked.bind( this );
         this.settingSelected = this.settingSelected.bind( this );
         this.update_allInputs = this.update_allInputs.bind( this );
         this._update_input = this._update_input.bind( this );
+    }
 
-        // set values from localStorage if they exist
-        Promise.all(
-            Array.from( this.#inputs ).map(
-                ( input ) => {
-                    const attr = input.getAttribute( 'name' );
+    /**
+     * Caches attr keys that have been succesfully set up.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    #set_default_listeners: { [ key: string ]: boolean; } = {};
 
-                    // returns
-                    if ( !attr ) {
-                        return;
+    /**
+     * @since ___PKG_VERSION___
+     */
+    private async _set_default( attr: string ): Promise<string | null> {
+
+        const _defaultCookie = this.#cookies[ attr + '-default' ];
+        const _update_allInputs = this.update_allInputs.bind( this );
+
+        let defaultValue = null;
+
+        switch ( attr ) {
+
+            case 'brightness-mode':
+                const getBrightnessMode = () => {
+                    // returns on success
+                    for ( const value of [ 'light', 'dark' ] as const ) {
+                        if (
+                            window.matchMedia( `( prefers-color-scheme: ${ value } )` ).matches
+                        ) {
+                            return value;
+                        }
                     }
 
-                    this._setup_attr_key( attr ).then(
-                        () => {
-                            const value = input.getAttribute( 'value' );
+                    return null;
+                };
 
-                            // returns
-                            if ( !value ) {
-                                return;
-                            }
+                if ( !this.#set_default_listeners[ attr ] ) {
+                    window
+                        .matchMedia( `( prefers-color-scheme: no-preference )` )
+                        .addEventListener( 'change', () => {
+                            const value = getBrightnessMode();
+                            value && _defaultCookie?.set( value );
+                            _update_allInputs();
+                        } );
 
-                            const current: string | null = window.localStorage.getItem( attr );
-
-                            // returns
-                            if ( !current ) {
-                                return;
-                            }
-
-                            if ( `${ value }` == `${ current }` ) {
-                                input.checked = true;
-                                this.#targetElement.setAttribute( `data-${ attr }`, current );
-                            } else {
-                                input.checked = false;
-                            }
-                        }
-                    );
-                }
-            )
-        ).then(
-            () => {
-                // returns
-                if ( !this.#resetButton ) {
-                    return;
+                    this.#set_default_listeners[ attr ] = true;
                 }
 
-                /*
-                 * Adding change event listener and collecting attribute names.
-                 */
-                this.update_allInputs();
+                defaultValue = getBrightnessMode();
+                break;
 
-                this.#inputs?.forEach( ( input ) => {
-                    input.addEventListener( 'change', () =>
-                        this.settingSelected( input )
-                    );
-                } );
+            case 'contrast-mode':
+                const getContrastMode = () => {
+                    // returns
+                    if (
+                        window.matchMedia( `( forced-colors: active )` ).matches
+                        || window.matchMedia( `( prefers-contrast: custom )` ).matches
+                    ) {
+                        return 'forced-colors';
+                    }
 
-                /*
-                 * Add reset button listener.
-                 */
-                this.#resetButton.addEventListener(
-                    'click',
-                    this.resetButtonClicked
-                );
-            }
-        );
+                    // returns
+                    if ( window.matchMedia( `( prefers-contrast: less )` ).matches ) {
+                        return 'low';
+                    }
+
+                    // returns
+                    if ( window.matchMedia( `( prefers-contrast: more )` ).matches ) {
+                        return 'high';
+                    }
+
+                    return 'average';
+                };
+
+                if ( !this.#set_default_listeners[ attr ] ) {
+                    window
+                        .matchMedia( `( prefers-contrast: no-preference )` )
+                        .addEventListener( 'change', () => {
+                            const value = getContrastMode();
+                            value && _defaultCookie?.set( value );
+                            _update_allInputs();
+                        } );
+
+                    this.#set_default_listeners[ attr ] = true;
+                }
+
+                defaultValue = getContrastMode();
+                break;
+
+            case 'motion':
+                const getMotion = () => {
+                    // returns
+                    if (
+                        window.matchMedia( '( prefers-reduced-motion: reduce )' ).matches
+                    ) {
+                        defaultValue = 'reduce';
+                    }
+
+                    return 'no-preference';
+                };
+
+                if ( !this.#set_default_listeners[ attr ] ) {
+                    window
+                        .matchMedia( `( prefers-reduced-motion: no-preference )` )
+                        .addEventListener( 'change', () => {
+                            const value = getMotion();
+                            value && _defaultCookie?.set( value );
+                            _update_allInputs();
+                        } );
+
+                    this.#set_default_listeners[ attr ] = true;
+                }
+
+                defaultValue = getMotion();
+                break;
+
+            default:
+                this.opts.defaultCookieCache = false;
+                const fieldset = this.menu.querySelector( `[data-settings-menu-custom-setting=${ attr }]` );
+
+                // breaks
+                if ( !fieldset ) {
+                    break;
+                }
+
+                defaultValue = fieldset.getAttribute( 'data-settings-menu-custom-setting-default' );
+                break;
+        }
+
+        if ( this.opts.defaultCookieCache && !this.#cookies[ attr + '-default' ] ) {
+            this.#cookies[ attr + '-default' ] = new JsCookie(
+                this.cookieNamer( attr + '-default' ),
+                this.opts.path,
+                {
+                    copyToLocalStorage: true,
+                },
+            );
+        }
+
+        this.#defaults[ attr ] = defaultValue;
+
+        if ( this.#defaults[ attr ] ) {
+            this.#cookies[ attr + '-default' ]?.set( this.#defaults[ attr ], this.opts.cookieCacheExpireDays );
+        }
+
+        if ( this.opts.debug ) {
+            console.debug( 'SettingsMenu._set_default()', {
+                attr,
+                defaultValue,
+                menu: this.menu.id,
+            } );
+        }
+
+        return this.#defaults[ attr ];
     }
 
     /**
@@ -179,95 +383,41 @@ export class SettingsMenu {
      * @since 0.1.0-alpha
      * @since ___PKG_VERSION___ — Made async.
      */
-    private async _setup_attr_key( attr: string ): Promise<void> {
-
+    private async _setup_attr_key( attr: string, alwaysSetDefault: boolean = false ): Promise<void> {
         // returns
         if ( this.#setup_attr_keys[ attr ] === true ) {
+            // returns
+            if ( alwaysSetDefault ) {
+                return this._set_default( attr ).then( () => { } );
+            }
             return;
         }
-
-        let defaultValue: string | null = null;
-
-        switch ( attr ) {
-            case 'brightness-mode':
-                window
-                    .matchMedia( `( prefers-color-scheme: no-preference )` )
-                    .addEventListener( 'change', this.update_allInputs );
-
-                [ 'light', 'dark' ].forEach( ( value ) => {
-                    if (
-                        window.matchMedia(
-                            `( prefers-color-scheme: ${ value } )`
-                        ).matches
-                    ) {
-                        defaultValue = value;
-                    }
-                } );
-                break;
-
-            case 'contrast-mode':
-                window
-                    .matchMedia( `( prefers-contrast: no-preference )` )
-                    .addEventListener( 'change', this.update_allInputs );
-
-                defaultValue = 'average';
-
-                if (
-                    window.matchMedia( `( forced-colors: active )` ).matches
-                    || window.matchMedia( `( prefers-contrast: custom )` ).matches
-                ) {
-                    defaultValue = 'forced-colors';
-                } else if (
-                    window.matchMedia( `( prefers-contrast: less )` ).matches
-                ) {
-                    defaultValue = 'low';
-                } else if (
-                    window.matchMedia( `( prefers-contrast: more )` ).matches
-                ) {
-                    defaultValue = 'high';
-                }
-                break;
-
-            case 'motion':
-                window
-                    .matchMedia( `( prefers-reduced-motion: reduce )` )
-                    .addEventListener( 'change', this.update_allInputs );
-
-                defaultValue = 'reduce';
-
-                if (
-                    window.matchMedia(
-                        '( prefers-reduced-motion: no-preference )'
-                    ).matches
-                ) {
-                    defaultValue = 'no-preference';
-                }
-                break;
-
-            default:
-                const fieldset = this.menu.querySelector( `[data-settings-menu-custom-setting=${ attr }]` );
-
-                // breaks
-                if ( !fieldset ) {
-                    break;
-                }
-
-                defaultValue = fieldset.getAttribute( 'data-settings-menu-custom-setting-default' );
-                break;
-        }
-
-        this.#defaults[ attr ] = defaultValue;
-
-        // returns
-        if ( this.#attributeKeys.includes( attr ) || this.#cookies[ attr ] ) {
-            return;
-        }
-
-        this.#attributeKeys.push( attr );
-
-        this.#cookies[ attr ] = new JsCookie( attr, this.#path, null, null, true );
 
         this.#setup_attr_keys[ attr ] = true;
+
+        if ( !this.#attributeKeys.includes( attr ) ) {
+            this.#attributeKeys.push( attr );
+        }
+
+        if ( !this.#cookies[ attr ] ) {
+            this.#cookies[ attr ] = new JsCookie(
+                this.cookieNamer( attr ),
+                this.opts.path,
+                {
+                    copyToLocalStorage: true,
+                },
+            );
+        }
+
+        const defaultValue = await this._set_default( attr );
+
+        if ( this.opts.debug ) {
+            console.debug( 'SettingsMenu._setup_attr_key()', {
+                attr,
+                defaultValue,
+                menu: this.menu.id,
+            } );
+        }
     }
 
     /**
@@ -277,11 +427,40 @@ export class SettingsMenu {
      */
     public resetButtonClicked(): void {
         this.#attributeKeys.forEach( ( attr: string ) => {
-            this.#targetElement.removeAttribute( attr );
+
+            const startingCookie = document.cookie;
+
             this.#cookies[ attr ]?.delete();
+            this.#cookies[ attr + '-default' ]?.delete();
+
+            if ( this.opts.debug ) {
+                console.debug( 'SettingsMenu.resetButtonClicked() - forEach', {
+                    attr,
+                    cookie_get: this.#cookies[ attr ]?.get(),
+                    defaultCookieCache_get: this.#cookies[ attr + '-default' ]?.get(),
+                    cookie: this.#cookies[ attr ],
+                    defaultCookieCache: this.#cookies[ attr + '-default' ],
+                    'START - document.cookie': startingCookie,
+                    'END - document.cookie': document.cookie,
+                } );
+            }
         } );
 
-        this.update_allInputs();
+        if ( this.opts.debug ) {
+            console.debug( 'SettingsMenu.resetButtonClicked() - before update_allInputs', {
+                attributeKeys: this.#attributeKeys.map(
+                    attr => ( {
+                        attr,
+                        cookie: this.#cookies[ attr ]?.get(),
+                        defaultCookieCache: this.#cookies[ attr + '-default' ]?.get(),
+                    } )
+                )
+            } );
+        }
+
+        this.update_allInputs().then(
+            () => this.opts.debug && console.debug( 'SettingsMenu.resetButtonClicked() - after update_allInputs' )
+        );
     }
 
     /**
@@ -291,34 +470,83 @@ export class SettingsMenu {
      */
     public settingSelected( input: HTMLInputElement ): void {
         const attr = input.getAttribute( 'name' );
+
+        // returns
         if ( !attr ) {
             return;
         }
 
         const value = input.getAttribute( 'value' );
+
+        // returns
         if ( !value ) {
             return;
         }
 
         this.#targetElement.setAttribute( `data-${ attr }`, value );
         this.#cookies[ attr ]?.set( value );
+
+        if ( this.opts.debug ) {
+            console.debug( 'SettingsMenu.settingSelected()', {
+                input,
+                attr,
+                value,
+                attribute: this.#targetElement.getAttribute( `data-${ attr }` ),
+                cookie_get: this.#cookies[ attr ]?.get(),
+                defaultCookieCache_get: this.#cookies[ attr + '-default' ]?.get(),
+                menu: this.menu.id,
+            } );
+        }
     }
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    #update_allInputs_running: boolean = false;
 
     /**
      * @since 0.1.0-alpha
      */
-    public update_allInputs(): void {
-        this.#inputs?.forEach( ( input ) => {
-            input.checked = false;
-        } );
+    #update_allInputs_timeout: ReturnType<typeof setTimeout> | null = null;
 
-        // fixes issues about reselecting updated values after settings
-        // reset and quick-triggered event listeners
-        this.#timeout && clearTimeout( this.#timeout );
-        this.#timeout = setTimeout(
-            () => Promise.all( Array.from( this.#inputs ?? [] ).map( this._update_input ) ),
-            100,
-        );
+    /**
+     * @since 0.1.0-alpha
+     */
+    public async update_allInputs(): Promise<void> {
+        // returns
+        if ( this.#update_allInputs_running ) {
+            this.opts.debug && console.debug( 'SettingsMenu.update_allInputs() already running' );
+            return;
+        }
+
+        this.#update_allInputs_running = true;
+
+        return new Promise<void>(
+            ( resolve ) => {
+                this.#inputs?.forEach( ( input ) => {
+                    input.checked = false;
+                } );
+
+                // we can start this before the timeout
+                const setDefaults = Promise.all(
+                    this.#attributeKeys.map( key => this._set_default( key ) )
+                );
+
+                // the timeout/delay fixes issues about reselecting updated values
+                // quickly after reset and quick-triggered event listeners
+                this.#update_allInputs_timeout && clearTimeout( this.#update_allInputs_timeout );
+                this.#update_allInputs_timeout = setTimeout(
+                    () => setDefaults.then(
+                        () => Promise.all(
+                            this.#inputs?.map( i => this._update_input( i ) )
+                        ).then( () => resolve() )
+                    ),
+                    80,
+                );
+            }
+        ).then( () => {
+            this.#update_allInputs_running = false;
+        } );
     }
 
     /**
@@ -327,11 +555,17 @@ export class SettingsMenu {
      * @since ___PKG_VERSION___
      */
     protected async _update_input( input: HTMLInputElement ): Promise<void> {
-
         const attr = input.getAttribute( 'name' );
 
         // returns
         if ( !attr ) {
+            if ( this.opts.debug ) {
+                console.debug( 'SettingsMenu._update_input()', {
+                    input,
+                    attr,
+                    menu: this.menu.id,
+                } );
+            }
             return;
         }
 
@@ -341,23 +575,44 @@ export class SettingsMenu {
 
                 // returns
                 if ( !value ) {
+                    if ( this.opts.debug ) {
+                        console.debug( 'SettingsMenu._update_input()', {
+                            input,
+                            attr,
+                            value,
+                            menu: this.menu.id,
+                        } );
+                    }
                     return;
                 }
 
-                const current: string | null =
-                    this.#cookies[ attr ]?.get() ?? this.#defaults[ attr ] ?? null;
+                const current = this.#cookies[ attr ]?.get()
+                    ?? this.#defaults[ attr ]
+                    ?? null;
+
+                if ( this.opts.debug ) {
+                    console.debug( 'SettingsMenu._update_input()', {
+                        input,
+                        attr,
+                        value,
+                        current,
+                        checked: `${ value }` == `${ current }`,
+                        localStorage: window.localStorage.getItem( this.cookieNamer( attr ) ),
+                        cookie: this.#cookies[ attr ]?.get(),
+                        default: this.#defaults[ attr ],
+                        menu: this.menu.id,
+                    } );
+                }
 
                 // returns
                 if ( !current ) {
                     return;
                 }
 
-                if ( `${ value }` == `${ current }` ) {
-                    input.checked = true;
+                input.checked = `${ value }` == `${ current }`;
 
+                if ( input.checked ) {
                     this.#targetElement.setAttribute( `data-${ attr }`, current );
-                } else {
-                    input.checked = false;
                 }
             }
         );
@@ -374,97 +629,28 @@ export namespace SettingsMenu {
     /**
      * @since ___PKG_VERSION___
      */
-    async function init_mapper(
+    async function run_mapper(
         target: HTMLHtmlElement | HTMLBodyElement,
         menu: HTMLElement,
-        scrollBehaviour: ScrollBehavior,
-        selectors: Selectors.Mapper,
-    ): Promise<void> {
+        {
+            selectors = {},
+            ...opts
+        }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
+            scrollBehaviour: ScrollBehavior,
+        },
+    ): Promise<undefined | SettingsMenu> {
 
         const resetSelector = typeof selectors?.reset === 'function'
             ? menu.id ? selectors.reset( menu.id ) : '[data-settings-reset]'
             : selectors.reset ?? '[data-settings-reset]';
 
-        new SettingsMenu( target, menu, {
-            inputs: selectors.inputs,
-            pathAttr: selectors.pathAttr,
-            resetButton: resetSelector,
-        } satisfies Classify<Selectors.Constructor> );
-
-        const scrollToMenu = () =>
-            menu.scrollIntoView( {
-                behavior: scrollBehaviour ?? 'auto',
-                block: 'start',
-                inline: 'nearest',
-            } );
-
-        menu.addEventListener( 'toggle-open', scrollToMenu );
-        menu.addEventListener( 'toggle-close', scrollToMenu );
-
-        // trap the focus order in the menu
-
-        const menuID: string = menu.id;
-
-        if ( !menuID ) {
-            return;
-        }
-
-        const sels: {
-            [ K in keyof Pick<Selectors.Mapper, 'reset' | 'toggle'> ]-?: string;
-        } = {
-
-            reset: resetSelector,
-
-            toggle: selectors?.toggle
-                ? (
-                    typeof selectors.toggle === 'function'
-                        ? selectors.toggle( menuID )
-                        : selectors.toggle
-                )
-                : `button[data-toggle-control=${ menuID }]`,
-        };
-
-        const toggleButton: HTMLButtonElement | null =
-            document.querySelector( sels.toggle );
-
-        if ( !toggleButton ) {
-            return;
-        }
-
-        const resetButton: HTMLButtonElement | null =
-            menu.querySelector( sels.reset );
-
-        if ( !resetButton ) {
-            return;
-        }
-
-        const toggleBlur = ( event?: HTMLElementEventMap[ 'blur' ] ) => {
-            if (
-                event?.relatedTarget &&
-                !menu.contains( event.relatedTarget as HTMLElement )
-            ) {
-                resetButton.focus();
-            }
-        };
-
-        const resetBlur = ( event?: HTMLElementEventMap[ 'blur' ] ) => {
-            if (
-                event?.relatedTarget &&
-                !menu.contains( event.relatedTarget as HTMLElement )
-            ) {
-                toggleButton.focus();
-            }
-        };
-
-        menu.addEventListener( 'toggle-open', () => {
-            toggleButton.addEventListener( 'blur', toggleBlur );
-            resetButton.addEventListener( 'blur', resetBlur );
-        } );
-
-        menu.addEventListener( 'toggle-close', () => {
-            toggleButton.removeEventListener( 'blur', toggleBlur );
-            resetButton.removeEventListener( 'blur', resetBlur );
-            toggleButton.focus();
+        return SettingsMenu.new( target, menu, {
+            ...opts,
+            selectors: {
+                inputs: selectors.inputs,
+                pathAttr: selectors.pathAttr,
+                resetButton: resetSelector,
+            } satisfies Classify<Selectors.Constructor>,
         } );
     }
 
@@ -472,23 +658,153 @@ export namespace SettingsMenu {
      * Initializes the given settings menu(s).
      * 
      * @since 0.1.0-alpha
+     * @since ___PKG_VERSION___ — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
-    export async function init(
+    export async function run(
         settingsMenus: HTMLElement | NodeListOf<HTMLElement>,
         scrollBehaviour: ScrollBehavior = 'auto',
-        selectors: SettingsMenu.Selectors.Mapper = {},
-    ): Promise<void | void[]> {
+        {
+            targetElement,
+            ...opts
+        }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
+            cookieNamer?: ( attr: string ) => string;
+            targetElement?: HTMLHtmlElement | HTMLBodyElement | null;
+        } = {},
+    ): Promise<SettingsMenu[]> {
 
-        const targetElement = document.querySelector( selectors?.target || ':root' ) as HTMLHtmlElement | HTMLBodyElement;
+        targetElement = targetElement ?? document.querySelector<HTMLHtmlElement | HTMLBodyElement>( opts.selectors?.target || ':root' ) ?? undefined;
 
-        const menuArray =
-            typeof ( settingsMenus as NodeListOf<HTMLElement> ).forEach === 'function'
-                ? Array.from( settingsMenus as NodeListOf<HTMLElement> )
-                : [ settingsMenus as HTMLElement ];
+        // returns
+        if ( !targetElement ) {
+            return [];
+        }
+
+        const menuArray = hasIterator( settingsMenus )
+            ? Array.from( settingsMenus )
+            : [ settingsMenus ];
 
         return Promise.all( menuArray.map(
-            menu => init_mapper( targetElement, menu, scrollBehaviour, selectors )
-        ) );
+            menu => run_mapper( targetElement, menu, {
+                ...opts,
+                scrollBehaviour,
+            } )
+        ) ).then(
+            arr => arr.filter( i => !!i )
+        );
+    }
+
+    /**
+     * Adds a 'load' event listener that then {@link SettingsMenu.run}, querying
+     * the document for settings menu containers to set them up as instances of
+     * this class.
+     *
+     * @since ___PKG_VERSION___
+     */
+    export async function runOnLoad(
+        opts: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> = {},
+        attrsToSet: string[] = [],
+    ): Promise<void> {
+        const cookieNamer = ( attr: string ) => ( opts.cookiePrefix ?? '' ) + attr;
+        const targetElement = document.querySelector<HTMLHtmlElement | HTMLBodyElement>( opts.selectors?.target || ':root' );
+
+        window.addEventListener( 'load', async () => {
+
+            const settingsMenus = document.querySelectorAll<HTMLElement>( '[data-settings-menu]' );
+
+            const scrollBehaviour =
+                ( window.getComputedStyle( document.documentElement ).scrollBehavior as
+                    | ScrollBehavior
+                    | undefined ) || undefined;
+
+            /*
+             * Setting up each found menu.
+             */
+            await SettingsMenu.run( settingsMenus, scrollBehaviour, {
+                ...opts,
+                cookieNamer,
+                targetElement,
+            } );
+        }, { once: true } );
+
+        if ( opts.debug ) {
+            console.debug( 'SettingsMenu.runOnLoad()', {
+                attrsToSet,
+                targetElement,
+            } );
+        }
+
+        if ( attrsToSet.length && targetElement ) {
+
+            attrsToSet.forEach(
+                attr => {
+                    let value = window.localStorage.getItem( cookieNamer( attr ) );
+
+                    if ( !value && opts.defaultCookieCache ) {
+                        value = window.localStorage.getItem( cookieNamer( attr + '-default' ) );
+                    }
+
+                    if ( value ) {
+                        targetElement.setAttribute( `data-${ attr }`, value );
+                    }
+
+                    if ( opts.debug ) {
+                        console.debug( 'SettingsMenu.runOnLoad() attrsToSet', {
+                            attr,
+                            value,
+                            [ `data-${ attr }` ]: targetElement.getAttribute( `data-${ attr }` ),
+                        } );
+                    }
+                }
+            );
+        }
+    }
+
+    /**
+     * Options for the configuration of {@link SettingsMenu} instances.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    export interface Opts<T_Selectors extends SettingsMenu.Selectors.Constructor | SettingsMenu.Selectors.Mapper> {
+
+        /**
+         * Whether to create a cookie that caches the detected default value.
+         * 
+         * @default 7
+         * 
+         * @since ___PKG_VERSION___
+         */
+        cookieCacheExpireDays: number;
+
+        /**
+         * A prefix to use before cookie names when storing the settings values.
+         * 
+         * @since ___PKG_VERSION___
+         */
+        cookiePrefix: string;
+
+        /**
+         * Outputs information to the console.
+         * 
+         * @since ___PKG_VERSION___
+         */
+        debug?: undefined | boolean;
+
+        /**
+         * Whether to create a cookie that caches the detected default value.
+         * 
+         * @since ___PKG_VERSION___
+         */
+        defaultCookieCache: boolean;
+
+        /**
+         * Whether to output the results of constructing each toggle element as
+         * it is made.
+         *
+         * @since ___PKG_VERSION___
+         */
+        logResults?: undefined | boolean;
+
+        selectors?: undefined | T_Selectors;
     }
 
     /**

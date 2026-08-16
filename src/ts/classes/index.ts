@@ -10,5 +10,8 @@
  * @license MIT
  */
 
+export * from './CopyToClipboard.js';
 export * from './ElementToggle.js';
 export * from './JsCookie.js';
+export * from './SettingsMenu.js';
+export * from './UniqueIdentifiers.js';

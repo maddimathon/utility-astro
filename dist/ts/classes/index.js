@@ -9,5 +9,8 @@
  * @maddimathon/utility-astro@0.1.0-beta.0.draft
  * @license MIT
  */
+export * from './CopyToClipboard.js';
 export * from './ElementToggle.js';
 export * from './JsCookie.js';
+export * from './SettingsMenu.js';
+export * from './UniqueIdentifiers.js';

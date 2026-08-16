@@ -507,6 +507,9 @@
     visibility: hidden;
     opacity: 0;
 }
+:where(.js) [data-toggle-content] > .container > * {
+    flex-shrink: 0;
+}
 :where(.js) [data-toggle-content] > .container > :first-child {
     margin-top: 0;
 }

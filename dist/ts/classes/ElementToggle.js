@@ -18,7 +18,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _ElementToggle_activeTimeout, _ElementToggle_activeStateHold, _ElementToggle_deactiveTimeout;
+var _a, _ElementToggle_activeTimeout, _ElementToggle_activeStateHold, _ElementToggle_deactiveTimeout, _ElementToggle_focusableContainerChildren, _ElementToggle_focusableContentChildren, _ElementToggle_focusTrappers;
 /**
  * Manages toggle containers made both by the Toggle component and elsewhere.
  *
@@ -29,7 +29,7 @@ export class ElementToggle {
      * @since 0.1.0-beta.0.draft
      */
     static isToggle(element) {
-        return element.id ? ElementToggle.instances.has(element.id) : false;
+        return element.id ? _a.instances.has(element.id) : false;
     }
     /**
      * Changes some properties and attributes on applicable elements since this
@@ -62,11 +62,11 @@ export class ElementToggle {
             }
             // returns 
             if (con.id) {
-                return ElementToggle.new(con, opts).then((instance) => {
-                    var _a;
+                return _a.new(con, opts).then((instance) => {
+                    var _b;
                     if (!opts.debug && opts.logResults) {
                         const msgs = [
-                            `[ElementToggle] new: ${(_a = con.id) !== null && _a !== void 0 ? _a : ''}`,
+                            `[ElementToggle] new: ${(_b = con.id) !== null && _b !== void 0 ? _b : ''}`,
                         ];
                         if (instance) {
                             msgs.push('\ncontainer: ', instance.container, '\nopts: ', instance.opts);
@@ -79,7 +79,7 @@ export class ElementToggle {
                 });
             }
             if (!opts.debug && opts.logResults) {
-                console.info('[ElementToggle] no containers found');
+                console.info('[ElementToggle] no valid container found');
             }
             return null;
         });
@@ -93,7 +93,7 @@ export class ElementToggle {
      * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
      */
     static async runOnLoad(opts = {}) {
-        window.addEventListener('load', () => ElementToggle.run(opts), { once: true });
+        window.addEventListener('load', () => _a.run(opts), { once: true });
     }
     /**
      * Initiates a single instance asynchronously.
@@ -101,33 +101,33 @@ export class ElementToggle {
      * @since 0.1.0-alpha.7
      */
     static async new(container, opts = {}) {
-        var _a;
+        var _b;
         const containerID = container === null || container === void 0 ? void 0 : container.id;
         // returns
         if (!container || !containerID) {
-            ElementToggle.abortNew(container, null);
+            _a.abortNew(container, null);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no container id', { container });
             }
             return null;
         }
         // returns
-        if (ElementToggle.instances.has(containerID)) {
+        if (_a.instances.has(containerID)) {
             return null;
         }
         const allButtons = document.querySelectorAll(`[data-toggle-primary-control=${containerID}], [data-toggle-control=${containerID}]`);
         // returns
         if (!allButtons.length) {
-            ElementToggle.abortNew(container, allButtons);
+            _a.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no buttons', { container, allButtons });
             }
             return null;
         }
-        const primaryButton = (_a = document.querySelector(`[data-toggle-primary-control=${containerID}]`)) !== null && _a !== void 0 ? _a : allButtons[0];
+        const primaryButton = (_b = document.querySelector(`[data-toggle-primary-control=${containerID}]`)) !== null && _b !== void 0 ? _b : allButtons[0];
         // returns - invalid setup that won't work
         if (!primaryButton) {
-            ElementToggle.abortNew(container, allButtons);
+            _a.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no primary button', { container, primaryButton, allButtons });
             }
@@ -136,7 +136,7 @@ export class ElementToggle {
         const content = container.querySelector(`[data-toggle-content=${containerID}]`);
         // returns - invalid setup that won't work
         if (!content) {
-            ElementToggle.abortNew(container, allButtons);
+            _a.abortNew(container, allButtons);
             if (opts.debug) {
                 console.debug('ElementToggle.new() - aborting; no content element', { container, primaryButton, allButtons, content });
             }
@@ -145,7 +145,7 @@ export class ElementToggle {
         if (opts.debug) {
             console.debug('ElementToggle.new() - constructing', { container, primaryButton, allButtons, content });
         }
-        return new ElementToggle({
+        return new _a({
             container,
             primaryButton,
             allButtons: Array.from(allButtons),
@@ -156,6 +156,11 @@ export class ElementToggle {
      * @param string  A CSS time value to convert to milliseconds.
      */
     static cssTimeToMilliseconds(string) {
+        // returns
+        if (typeof string === 'number') {
+            return string;
+        }
+        // returns
         if (string.includes('ms')) {
             return Number(string.replace(/\s*ms\s*$/gi, ''));
         }
@@ -163,11 +168,19 @@ export class ElementToggle {
     }
     static createCustomEvents() {
         if (this.openEvent === null) {
-            ElementToggle.openEvent = new Event('toggle-open');
+            _a.openEvent = new Event('toggle-open');
         }
         if (this.closeEvent === null) {
-            ElementToggle.closeEvent = new Event('toggle-close');
+            _a.closeEvent = new Event('toggle-close');
         }
+    }
+    /**
+     * Whether this container is currently open.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    get isOpen() {
+        return this.container.getAttribute('data-toggle-container') === 'open';
     }
     /* CONSTRUCTOR
      * ====================================================================== */
@@ -177,7 +190,7 @@ export class ElementToggle {
     constructor(elements, 
     /** Optional configuration, if any. */
     partialOpts) {
-        var _a;
+        var _b, _c, _d;
         this.closingTimeout = null;
         /* UTILITIES
          * ====================================================================== */
@@ -193,67 +206,98 @@ export class ElementToggle {
          * @since 0.1.0-beta.0.draft
          */
         _ElementToggle_deactiveTimeout.set(this, void 0);
-        this.opts = Object.assign({ activeTimeoutLength: ((_a = partialOpts === null || partialOpts === void 0 ? void 0 : partialOpts.closingTime) !== null && _a !== void 0 ? _a : 1800) / 4, closeWhenUntargetted: false, closingTime: 1800, debug: false, openWhenTargetted: true }, partialOpts);
+        _ElementToggle_focusableContainerChildren.set(this, void 0);
+        _ElementToggle_focusableContentChildren.set(this, void 0);
+        _ElementToggle_focusTrappers.set(this, void 0);
+        this.opts = Object.assign({ activeTimeoutLength: ((_b = partialOpts === null || partialOpts === void 0 ? void 0 : partialOpts.closingTime) !== null && _b !== void 0 ? _b : 1800) / 4, closeWhenUntargetted: false, closingTime: 1800, closingTimeProperty: '--toggle-closing-time', debug: false, openWhenTargetted: true }, partialOpts);
         this.closingTime = this.opts.closingTime;
         this.allButtons = elements.allButtons;
         this.container = elements.container;
         this.content = elements.content;
         this.primaryButton = elements.primaryButton;
+        this.attr = {
+            active: this.container.dataset['toggleAttrStateActive'] || 'data-state-active',
+            focus: this.container.dataset['toggleAttrStateFocus'] || 'data-state-focus',
+        };
+        const _containerType = (_d = (_c = this.container.dataset['toggleContainerType']) === null || _c === void 0 ? void 0 : _c.split(',')) !== null && _d !== void 0 ? _d : [];
+        this.isMenu = _containerType.includes('menu');
+        this.asModal = this.isMenu || _containerType.includes('modal');
+        this.isNav = _containerType.includes('nav')
+            || (!this.isMenu && (this.container.role === 'navigation'
+                || this.container.tagName.toLowerCase() === 'nav'));
+        if (this.opts.debug) {
+            console.debug('new ElementToggle()', {
+                id: this.container.id,
+                attr: this.attr,
+                asModal: this.asModal,
+                isMenu: this.isMenu,
+                isNav: this.isNav,
+            });
+        }
         this.activeTimeoutLength = Math.min(this.closingTime, Number.isNaN(this.opts.activeTimeoutLength) ? (this.closingTime / 4) : this.opts.activeTimeoutLength);
         this.activateButton = this.activateButton.bind(this);
         this.deactivateButton = this.deactivateButton.bind(this);
         this.handleHashChange = this.handleHashChange.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.validateButton = this.validateButton.bind(this);
         const _activateButton = this.activateButton;
         const _toggle = this.toggle;
         this.toggleListener = function () {
             _activateButton(this);
             _toggle(this);
         };
+        const isCurrentAnchorTarget = this.opts.openWhenTargetted
+            && this.checkUrlTarget(new URL(window.location.href));
+        this.defaultIsOpen = this.isOpen || isCurrentAnchorTarget;
         // returns
         if (!this.container || !this.primaryButton || !this.container.id || !this.content) {
             this.abortConstructor();
             return;
         }
-        ElementToggle.instances.set(this.container.id, this);
-        const contentID = this.content.id;
-        this.content.setAttribute('aria-labelledby', this.primaryButton.id);
-        this.content.setAttribute('role', 'region');
-        this.closingTime = ElementToggle.cssTimeToMilliseconds(getComputedStyle(this.container).getPropertyValue('--toggle-closing-time'));
-        const isCurrentAnchorTarget = this.opts.openWhenTargetted
-            && this.checkUrlTarget(new URL(window.location.href));
+        _a.instances.set(this.container.id, this);
+        this.setClosingTime();
         if (!isCurrentAnchorTarget) {
-            this.primaryButton.removeAttribute('data-state-focus');
+            this.primaryButton.removeAttribute(this.attr.focus);
         }
-        const defaultIsOpen = this.container.getAttribute('data-toggle-container') === 'open'
-            || isCurrentAnchorTarget;
-        this.allButtons.forEach((button) => {
-            button.addEventListener('click', this.toggleListener);
-            if (contentID) {
-                if (button.getAttribute('role') == 'button'
-                    || button.tagName.toLowerCase() == 'button'
-                    || button.tagName.toLowerCase() == 'a') {
-                    button.setAttribute('aria-controls', contentID);
+        Promise.all(this.allButtons.map(this.validateButton)).then(() => {
+            if (this.defaultIsOpen) {
+                if (isCurrentAnchorTarget) {
+                    this.openAsTargetAnchor();
+                }
+                else {
+                    this.open();
                 }
             }
-            if (button.getAttribute('aria-controls')) {
-                button.removeAttribute('aria-disabled');
-                button.setAttribute('aria-expanded', defaultIsOpen ? 'true' : 'false');
+            else {
+                this.container.setAttribute('data-toggle-container', 'closed');
+            }
+            if (this.opts.openWhenTargetted) {
+                window.addEventListener('hashchange', this.handleHashChange);
             }
         });
-        if (defaultIsOpen) {
-            if (isCurrentAnchorTarget) {
-                this.openAsTargetAnchor();
-            }
-            else {
-                this.open();
+    }
+    /**
+     * Validates the markup of a button used to toggle this element.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    async validateButton(button) {
+        const contentID = this.content.id;
+        button.addEventListener('click', this.toggleListener);
+        if (contentID) {
+            if (button.role == 'button'
+                || button.tagName.toLowerCase() == 'button'
+                || button.tagName.toLowerCase() == 'a') {
+                button.setAttribute('aria-controls', contentID);
             }
         }
-        else {
-            this.container.setAttribute('data-toggle-container', 'closed');
-        }
-        if (this.opts.openWhenTargetted) {
-            window.addEventListener('hashchange', this.handleHashChange);
+        if (button.getAttribute('aria-controls')) {
+            button.removeAttribute('aria-disabled');
+            button.setAttribute('aria-expanded', this.isOpen ? 'true' : 'false');
+            if (this.asModal) {
+                button.setAttribute('aria-haspopup', 'dialog');
+                this.content.role = 'dialog';
+            }
         }
     }
     /**
@@ -263,7 +307,7 @@ export class ElementToggle {
      */
     abortConstructor() {
         // runs async while this function continues
-        ElementToggle.abortNew(this.container, this.allButtons);
+        _a.abortNew(this.container, this.allButtons);
         window.removeEventListener('hashchange', this.handleHashChange);
         if (this.allButtons) {
             this.allButtons.forEach(button => button.removeEventListener('click', this.toggleListener));
@@ -277,7 +321,7 @@ export class ElementToggle {
     activateButton(button) {
         clearTimeout(__classPrivateFieldGet(this, _ElementToggle_activeTimeout, "f"));
         __classPrivateFieldSet(this, _ElementToggle_activeStateHold, true, "f");
-        button.setAttribute('data-state-active', 'true');
+        button.setAttribute(this.attr.active, 'true');
         __classPrivateFieldSet(this, _ElementToggle_activeTimeout, setTimeout(() => {
             __classPrivateFieldSet(this, _ElementToggle_activeStateHold, false, "f");
         }, this.activeTimeoutLength), "f");
@@ -321,8 +365,8 @@ export class ElementToggle {
             __classPrivateFieldSet(this, _ElementToggle_deactiveTimeout, setTimeout(this.deactivateButton, 50), "f");
             return;
         }
-        this.primaryButton.removeAttribute('data-state-active');
-        this.allButtons.forEach(button => button.removeAttribute('data-state-active'));
+        this.primaryButton.removeAttribute(this.attr.active);
+        this.allButtons.forEach(button => button.removeAttribute(this.attr.active));
     }
     /**
      * If applicable (by opts), checks if the current url anchor targets
@@ -337,7 +381,7 @@ export class ElementToggle {
         }
         const isNewTarget = this.checkUrlTarget(new URL(event.newURL));
         if (!isNewTarget) {
-            this.primaryButton.removeAttribute('data-state-focus');
+            this.primaryButton.removeAttribute(this.attr.focus);
         }
         if (isNewTarget) {
             this.openAsTargetAnchor();
@@ -357,11 +401,144 @@ export class ElementToggle {
      */
     openAsTargetAnchor() {
         this.open();
-        this.primaryButton.setAttribute('data-state-focus', 'true');
-        this.primaryButton.addEventListener('blur', () => this.primaryButton.removeAttribute('data-state-focus'), { once: true });
+        this.primaryButton.setAttribute(this.attr.focus, 'true');
+        this.primaryButton.addEventListener('blur', () => this.primaryButton.removeAttribute(this.attr.focus), { once: true });
         this.primaryButton.focus({
             // @ts-ignore - IDE doesn't register an error but compile does - some tsconfig shenanigans, apparently.
             focusVisible: true,
+        });
+    }
+    /**
+     * The methods used as event listeners for trapping focus.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    get focusableContainerChildren() {
+        // returns
+        if (__classPrivateFieldGet(this, _ElementToggle_focusableContainerChildren, "f")) {
+            return __classPrivateFieldGet(this, _ElementToggle_focusableContainerChildren, "f");
+        }
+        __classPrivateFieldSet(this, _ElementToggle_focusableContainerChildren, _a.getFocusableChildren(this.container), "f");
+        return __classPrivateFieldGet(this, _ElementToggle_focusableContainerChildren, "f");
+    }
+    /**
+     * The methods used as event listeners for trapping focus.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    get focusableContentChildren() {
+        // returns
+        if (__classPrivateFieldGet(this, _ElementToggle_focusableContentChildren, "f")) {
+            return __classPrivateFieldGet(this, _ElementToggle_focusableContentChildren, "f");
+        }
+        __classPrivateFieldSet(this, _ElementToggle_focusableContentChildren, _a.getFocusableChildren(this.content), "f");
+        return __classPrivateFieldGet(this, _ElementToggle_focusableContentChildren, "f");
+    }
+    /**
+     * The methods used as event listeners for trapping focus.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    get focusTrappers() {
+        // returns
+        if (__classPrivateFieldGet(this, _ElementToggle_focusTrappers, "f")) {
+            return __classPrivateFieldGet(this, _ElementToggle_focusTrappers, "f");
+        }
+        const container = this.container;
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const primaryButton = this.primaryButton;
+        const toggleClose = this.close.bind(this);
+        __classPrivateFieldSet(this, _ElementToggle_focusTrappers, {
+            keydown: function (event) {
+                // escape key should close modals
+                if (event.code === 'Escape') {
+                    toggleClose();
+                }
+            },
+            first: function (event) {
+                var _b;
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (event.relatedTarget
+                    && !container.contains(event.relatedTarget)) {
+                    ((_b = focusableContainerChildren.last) !== null && _b !== void 0 ? _b : primaryButton).focus();
+                }
+            },
+            last: function (event) {
+                var _b;
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (event.relatedTarget
+                    && !container.contains(event.relatedTarget)) {
+                    ((_b = focusableContainerChildren.first) !== null && _b !== void 0 ? _b : primaryButton).focus();
+                }
+            },
+            any: function (event) {
+                var _b;
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (event.relatedTarget
+                    && !container.contains(event.relatedTarget)) {
+                    ((_b = focusableContainerChildren.first) !== null && _b !== void 0 ? _b : primaryButton).focus();
+                }
+            },
+        }, "f");
+        return __classPrivateFieldGet(this, _ElementToggle_focusTrappers, "f");
+    }
+    /**
+     * Sets the closing time property via computed style value.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    setClosingTime() {
+        const computedClosingTime = getComputedStyle(this.container).getPropertyValue(this.opts.closingTimeProperty);
+        this.closingTime = _a.cssTimeToMilliseconds((computedClosingTime === null || computedClosingTime === void 0 ? void 0 : computedClosingTime.length) ? computedClosingTime : this.opts.closingTime);
+    }
+    /**
+     * Called when the element is toggled open.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    trapFocus() {
+        // returns - untraps focus first
+        if (!this.isOpen) {
+            this.untrapFocus();
+            return;
+        }
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const focusTrappers = this.focusTrappers;
+        document.addEventListener('keydown', focusTrappers.keydown, { capture: true });
+        // add listeners to all children, but special listeners for the first and last
+        focusableContainerChildren.all.forEach((element) => {
+            var _b, _c;
+            // returns
+            if (element.isSameNode((_b = focusableContainerChildren.first) !== null && _b !== void 0 ? _b : null)) {
+                element.addEventListener('blur', focusTrappers.first);
+                return;
+            }
+            // returns
+            if (element.isSameNode((_c = focusableContainerChildren.last) !== null && _c !== void 0 ? _c : null)) {
+                element.addEventListener('blur', focusTrappers.last);
+                return;
+            }
+            element.addEventListener('blur', focusTrappers.any);
+        });
+    }
+    /**
+     * Called when the element is toggled closed.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    untrapFocus() {
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const focusTrappers = this.focusTrappers;
+        // add listeners to all children, but special listeners for the first and last
+        focusableContainerChildren.all.forEach((element) => {
+            // returns
+            if (!focusTrappers) {
+                return;
+            }
+            document.removeEventListener('keydown', focusTrappers.keydown, { capture: true });
+            element.removeEventListener('blur', focusTrappers.first);
+            element.removeEventListener('blur', focusTrappers.last);
+            element.removeEventListener('blur', focusTrappers.any);
         });
     }
     /* TOGGLING
@@ -380,9 +557,6 @@ export class ElementToggle {
          */
         switch (this.container.getAttribute('data-toggle-container')) {
             case 'closed':
-                this.clearTimeout();
-                this.open();
-                break;
             case 'closing':
                 this.clearTimeout();
                 this.open();
@@ -404,21 +578,30 @@ export class ElementToggle {
             this.deactivateButton();
             return;
         }
-        this.closingTime = ElementToggle.cssTimeToMilliseconds(getComputedStyle(this.container).getPropertyValue('--toggle-closing-time'));
+        this.setClosingTime();
         this.container.setAttribute('data-toggle-container', 'open');
         this.allButtons.forEach((button) => {
             if (button.getAttribute('aria-controls')) {
                 button.setAttribute('aria-expanded', 'true');
             }
         });
-        ElementToggle.createCustomEvents();
-        this.container.dispatchEvent(ElementToggle.openEvent);
+        // trap focus
+        if (this.asModal) {
+            this.trapFocus();
+            this.content.focus();
+        }
+        _a.createCustomEvents();
+        this.container.dispatchEvent(_a.openEvent);
         this.deactivateButton();
     }
     /**
      * Toggles the element closed.
      */
     close() {
+        // untrap focus
+        if (this.asModal) {
+            this.untrapFocus();
+        }
         // returns
         if (!this.container) {
             this.deactivateButton();
@@ -438,18 +621,14 @@ export class ElementToggle {
          * Wait for animations to finish.
          */
         this.closingTimeout = setTimeout(() => {
-            // Sets the data-toggle-container to closed now that animations are over.
-            if (!this.container) {
-                return;
-            }
             this.container.setAttribute('data-toggle-container', 'closed');
+            _a.createCustomEvents();
+            this.container.dispatchEvent(_a.closeEvent);
         }, this.closingTime + 50);
-        ElementToggle.createCustomEvents();
-        this.container.dispatchEvent(ElementToggle.closeEvent);
         this.deactivateButton();
     }
 }
-_ElementToggle_activeTimeout = new WeakMap(), _ElementToggle_activeStateHold = new WeakMap(), _ElementToggle_deactiveTimeout = new WeakMap();
+_a = ElementToggle, _ElementToggle_activeTimeout = new WeakMap(), _ElementToggle_activeStateHold = new WeakMap(), _ElementToggle_deactiveTimeout = new WeakMap(), _ElementToggle_focusableContainerChildren = new WeakMap(), _ElementToggle_focusableContentChildren = new WeakMap(), _ElementToggle_focusTrappers = new WeakMap();
 /**
  * A map of existing successfully-registered instances of this class. Helps
  * to avoid re-initializing the same element or a block with the same id
@@ -460,3 +639,70 @@ _ElementToggle_activeTimeout = new WeakMap(), _ElementToggle_activeStateHold = n
 ElementToggle.instances = new Map();
 ElementToggle.openEvent = null;
 ElementToggle.closeEvent = null;
+/**
+ * Utilities for the {@link ElementToggle} class.
+ *
+ * @since 0.1.0-alpha.7
+ */
+(function (ElementToggle) {
+    /**
+     * Gets all focusable elements within a container.
+     *
+     * Use this with caution and when you have control over the possible
+     * children and can avoid weird edge cases (like changing contenteditable or
+     * weird tabindex behaviour).
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    function getFocusableChildren(container) {
+        const elements = Array.from(container.querySelectorAll(`a,
+                button,
+                input,
+                textarea,
+                select,
+                details,
+                iframe,
+                embed,
+                object,
+                summary,
+                dialog,
+                audio[controls],
+                video[controls],
+                [contenteditable],
+                [tabindex]
+              `));
+        return {
+            get all() {
+                return elements;
+            },
+            get keyboardOnly() {
+                return this.all.filter(element => {
+                    // returns
+                    if (element.hasAttribute('disabled') || element.hasAttribute('aria-disabled')) {
+                        return false;
+                    }
+                    // returns
+                    if (element.hasAttribute('hidden')) {
+                        return false;
+                    }
+                    // returns
+                    if (window.getComputedStyle(element).display === 'none') {
+                        return false;
+                    }
+                    // returns
+                    if (element.tabIndex <= -1) {
+                        return false;
+                    }
+                    return true;
+                });
+            },
+            get first() {
+                return this.keyboardOnly[0];
+            },
+            get last() {
+                return this.keyboardOnly[this.keyboardOnly.length - 1];
+            },
+        };
+    }
+    ElementToggle.getFocusableChildren = getFocusableChildren;
+})(ElementToggle || (ElementToggle = {}));

@@ -42,12 +42,9 @@
     $allHeadingLevels: token-all-heading-levels(),
     $includeTableOfContents: true
 ) {
-    //
-    $additional: list.append($additional, ('.icon', 'icon'));
-
-    $additional: list.append(
+    $additional: list.join(
         $additional,
-        (('.display-contents'), 'display-contents')
+        (('.icon', 'icon'), (('.display-contents'), 'display-contents'))
     );
 
     $additional: list.join(

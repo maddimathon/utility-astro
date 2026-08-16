@@ -39,10 +39,10 @@
     $allHeadingLevels: token-all-heading-levels(),
     $includeTableOfContents: true
 ) {
-    //
-    $additional: list.append($additional, ('.icon', 'icon'));
-
-    $additional: list.append($additional, (('.display-contents'), 'display-contents'));
+    $additional: list.join(
+        $additional,
+        (('.icon', 'icon'), (('.display-contents'), 'display-contents'))
+    );
 
     $additional: list.join($additional, to-extend-selectors-body-grid(), $separator: comma);
 

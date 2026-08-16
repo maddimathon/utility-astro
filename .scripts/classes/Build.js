@@ -21,6 +21,8 @@ import {
     BuildStage,
 } from '@maddimathon/build-utilities';
 
+import * as esbuild from 'esbuild';
+
 /**
  * Extension of the built-in one.
  */
@@ -39,6 +41,8 @@ export class Build extends BuildStage {
         'readme',
         'prettify',
         'minimize',
+        // @ts-expect-error
+        'bundle',
         'test',
         'document',
     ];
@@ -61,6 +65,61 @@ export class Build extends BuildStage {
         }
 
         return super.ARGS_DEFAULT;
+    }
+
+
+    /**
+     * @protected
+     */
+    async bundle() {
+        this.console.progress( 'bundling javascript...', 1 );
+
+        /** 
+         * @type {string[]}
+         */
+        const typeGlobs = [];
+
+        this.console.verbose( 'bundling...', 2 );
+        await Promise.all( [
+            'ElementToggle',
+            'JsCookie',
+            'SettingsMenu',
+        ].map(
+            filename => {
+                typeGlobs.push( `${ filename }.d.ts` );
+
+                return this.atry(
+                    esbuild.build,
+                    this.params.verbose ? 3 : 2,
+                    [ {
+                        bundle: true,
+                        entryPoints: [ this.fs.pathResolve( `src/ts/classes/${ filename }.ts` ) ],
+                        external: [],
+                        format: 'esm',
+                        outfile: this.fs.pathResolve( `dist/ts/bundled/${ filename }.js` ),
+                        platform: 'browser',
+                    } ],
+                );
+            }
+        ) );
+
+        this.console.verbose( 'copying types...', 2 );
+        await this.atry(
+            this.fs.copy,
+            this.params.verbose ? 3 : 2,
+            [
+                typeGlobs,
+                this.params.verbose ? 3 : 2,
+                'dist/ts/bundled/',
+                'dist/ts/classes/',
+            ]
+        );
+
+        this.console.verbose( 'replacing placeholders...', 2 );
+        const paths = this.fs.glob( [ 'dist/ts/bundled/**/*' ] );
+
+        this.replaceInFiles( paths, 'current', this.params.verbose ? 3 : 2 );
+        this.replaceInFiles( paths, 'package', this.params.verbose ? 3 : 2 );
     }
 
 

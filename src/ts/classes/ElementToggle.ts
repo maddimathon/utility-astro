@@ -100,7 +100,7 @@ export class ElementToggle {
                 }
 
                 if ( !opts.debug && opts.logResults ) {
-                    console.info( '[ElementToggle] no containers found' );
+                    console.info( '[ElementToggle] no valid container found' );
                 }
 
                 return null;
@@ -215,8 +215,13 @@ export class ElementToggle {
     /** 
      * @param string  A CSS time value to convert to milliseconds.
      */
-    public static cssTimeToMilliseconds( string: string ): number {
+    public static cssTimeToMilliseconds( string: number | string ): number {
+        // returns
+        if ( typeof string === 'number' ) {
+            return string;
+        }
 
+        // returns
         if ( string.includes( 'ms' ) ) {
             return Number( string.replace( /\s*ms\s*$/gi, '' ) );
         }
@@ -253,6 +258,13 @@ export class ElementToggle {
      */
     protected readonly activeTimeoutLength: number;
 
+    /**
+     * Whether this toggle-able element should be treated as a modal (i.e., trap focus).
+     *
+     * @since ___PKG_VERSION___
+     */
+    protected readonly asModal: boolean;
+
     /** 
      * The unique ID for the toggle container to set up.
      */
@@ -270,6 +282,48 @@ export class ElementToggle {
     protected closingTime: number;
 
     /**
+     * Whether this toggle-able element defaults to the open state.
+     *
+     * @since ___PKG_VERSION___
+     */
+    protected readonly defaultIsOpen: boolean;
+
+    /**
+     * Attribute strings for adding custom focus & active states.
+     *
+     * @since ___PKG_VERSION___
+     */
+    protected readonly attr: {
+        active: string;
+        focus: string;
+    };
+
+    /**
+     * Whether this container is currently open.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    public get isOpen(): boolean {
+        return this.container.getAttribute( 'data-toggle-container' ) === 'open';
+    }
+
+    /**
+     * Whether this toggle-able element is a menu (which slightly changes
+     * some behaviour/aria).
+     *
+     * @since ___PKG_VERSION___
+     */
+    protected readonly isMenu: boolean;
+
+    /**
+     * Whether this toggle-able element is a nav element/region (which slightly
+     * changes some behaviour/aria).
+     *
+     * @since ___PKG_VERSION___
+     */
+    protected readonly isNav: boolean;
+
+    /**
      * @since ___PKG_VERSION___
      */
     public readonly toggleListener: ( this: HTMLElement, ev: Event ) => any;
@@ -282,7 +336,7 @@ export class ElementToggle {
     /** 
      * Class constructor.
      */
-    public constructor (
+    protected constructor (
 
         elements: {
             container: HTMLElement,
@@ -298,6 +352,7 @@ export class ElementToggle {
             activeTimeoutLength: ( partialOpts?.closingTime ?? 1800 ) / 4,
             closeWhenUntargetted: false,
             closingTime: 1800,
+            closingTimeProperty: '--toggle-closing-time',
             debug: false,
             openWhenTargetted: true,
             ...partialOpts,
@@ -310,6 +365,35 @@ export class ElementToggle {
         this.content = elements.content;
         this.primaryButton = elements.primaryButton;
 
+        this.attr = {
+            active: this.container.dataset[ 'toggleAttrStateActive' ] || 'data-state-active',
+            focus: this.container.dataset[ 'toggleAttrStateFocus' ] || 'data-state-focus',
+        };
+
+        const _containerType = this.container.dataset[ 'toggleContainerType' ]?.split( ',' ) ?? [];
+
+        this.isMenu = _containerType.includes( 'menu' );
+
+        this.asModal = this.isMenu || _containerType.includes( 'modal' );
+
+        this.isNav = _containerType.includes( 'nav' )
+            || (
+                !this.isMenu && (
+                    this.container.role === 'navigation'
+                    || this.container.tagName.toLowerCase() === 'nav'
+                )
+            );
+
+        if ( this.opts.debug ) {
+            console.debug( 'new ElementToggle()', {
+                id: this.container.id,
+                attr: this.attr,
+                asModal: this.asModal,
+                isMenu: this.isMenu,
+                isNav: this.isNav,
+            } );
+        }
+
         this.activeTimeoutLength = Math.min(
             this.closingTime,
             Number.isNaN( this.opts.activeTimeoutLength ) ? ( this.closingTime / 4 ) : this.opts.activeTimeoutLength,
@@ -319,14 +403,20 @@ export class ElementToggle {
         this.deactivateButton = this.deactivateButton.bind( this );
         this.handleHashChange = this.handleHashChange.bind( this );
         this.toggle = this.toggle.bind( this );
+        this.validateButton = this.validateButton.bind( this );
 
         const _activateButton = this.activateButton;
         const _toggle = this.toggle;
 
-        this.toggleListener = function () {
+        this.toggleListener = function ( this: HTMLElement ) {
             _activateButton( this );
             _toggle( this );
         };
+
+        const isCurrentAnchorTarget = this.opts.openWhenTargetted
+            && this.checkUrlTarget( new URL( window.location.href ) );
+
+        this.defaultIsOpen = this.isOpen || isCurrentAnchorTarget;
 
         // returns
         if ( !this.container || !this.primaryButton || !this.container.id || !this.content ) {
@@ -336,57 +426,59 @@ export class ElementToggle {
 
         ElementToggle.instances.set( this.container.id, this );
 
-        const contentID = this.content.id;
-
-        this.content.setAttribute( 'aria-labelledby', this.primaryButton.id );
-        this.content.setAttribute( 'role', 'region' );
-
-        this.closingTime = ElementToggle.cssTimeToMilliseconds(
-            getComputedStyle( this.container ).getPropertyValue( '--toggle-closing-time' )
-        );
-
-        const isCurrentAnchorTarget = this.opts.openWhenTargetted
-            && this.checkUrlTarget( new URL( window.location.href ) );
+        this.setClosingTime();
 
         if ( !isCurrentAnchorTarget ) {
-            this.primaryButton.removeAttribute( 'data-state-focus' );
+            this.primaryButton.removeAttribute( this.attr.focus );
         }
 
-        const defaultIsOpen =
-            this.container.getAttribute( 'data-toggle-container' ) === 'open'
-            || isCurrentAnchorTarget;
+        Promise.all( this.allButtons.map( this.validateButton ) ).then(
+            () => {
+                if ( this.defaultIsOpen ) {
+                    if ( isCurrentAnchorTarget ) {
+                        this.openAsTargetAnchor();
+                    } else {
+                        this.open();
+                    }
+                } else {
+                    this.container.setAttribute( 'data-toggle-container', 'closed' );
+                }
 
-        this.allButtons.forEach( ( button ) => {
-            button.addEventListener( 'click', this.toggleListener );
-
-            if ( contentID ) {
-                if (
-                    button.getAttribute( 'role' ) == 'button'
-                    || button.tagName.toLowerCase() == 'button'
-                    || button.tagName.toLowerCase() == 'a'
-                ) {
-                    button.setAttribute( 'aria-controls', contentID );
+                if ( this.opts.openWhenTargetted ) {
+                    window.addEventListener( 'hashchange', this.handleHashChange );
                 }
             }
+        );
+    }
 
-            if ( button.getAttribute( 'aria-controls' ) ) {
-                button.removeAttribute( 'aria-disabled' );
-                button.setAttribute( 'aria-expanded', defaultIsOpen ? 'true' : 'false' );
-            }
-        } );
+    /**
+     * Validates the markup of a button used to toggle this element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected async validateButton( button: HTMLElement ): Promise<void> {
+        const contentID = this.content.id;
 
-        if ( defaultIsOpen ) {
-            if ( isCurrentAnchorTarget ) {
-                this.openAsTargetAnchor();
-            } else {
-                this.open();
+        button.addEventListener( 'click', this.toggleListener );
+
+        if ( contentID ) {
+            if (
+                button.role == 'button'
+                || button.tagName.toLowerCase() == 'button'
+                || button.tagName.toLowerCase() == 'a'
+            ) {
+                button.setAttribute( 'aria-controls', contentID );
             }
-        } else {
-            this.container.setAttribute( 'data-toggle-container', 'closed' );
         }
 
-        if ( this.opts.openWhenTargetted ) {
-            window.addEventListener( 'hashchange', this.handleHashChange );
+        if ( button.getAttribute( 'aria-controls' ) ) {
+            button.removeAttribute( 'aria-disabled' );
+            button.setAttribute( 'aria-expanded', this.isOpen ? 'true' : 'false' );
+
+            if ( this.asModal ) {
+                button.setAttribute( 'aria-haspopup', 'dialog' );
+                this.content.role = 'dialog';
+            }
         }
     }
 
@@ -417,6 +509,7 @@ export class ElementToggle {
      * @since ___PKG_VERSION___
      */
     #activeTimeout: ReturnType<typeof setTimeout> | undefined;
+
     /**
      * @since ___PKG_VERSION___
      */
@@ -431,7 +524,7 @@ export class ElementToggle {
         clearTimeout( this.#activeTimeout );
         this.#activeStateHold = true;
 
-        button.setAttribute( 'data-state-active', 'true' );
+        button.setAttribute( this.attr.active, 'true' );
 
         this.#activeTimeout = setTimeout( () => {
             this.#activeStateHold = false;
@@ -489,9 +582,9 @@ export class ElementToggle {
             return;
         }
 
-        this.primaryButton.removeAttribute( 'data-state-active' );
+        this.primaryButton.removeAttribute( this.attr.active );
 
-        this.allButtons.forEach( button => button.removeAttribute( 'data-state-active' ) );
+        this.allButtons.forEach( button => button.removeAttribute( this.attr.active ) );
     }
 
     /**
@@ -509,7 +602,7 @@ export class ElementToggle {
         const isNewTarget = this.checkUrlTarget( new URL( event.newURL ) );
 
         if ( !isNewTarget ) {
-            this.primaryButton.removeAttribute( 'data-state-focus' );
+            this.primaryButton.removeAttribute( this.attr.focus );
         }
 
         if ( isNewTarget ) {
@@ -535,11 +628,11 @@ export class ElementToggle {
     protected openAsTargetAnchor(): void {
         this.open();
 
-        this.primaryButton.setAttribute( 'data-state-focus', 'true' );
+        this.primaryButton.setAttribute( this.attr.focus, 'true' );
 
         this.primaryButton.addEventListener(
             'blur',
-            () => this.primaryButton.removeAttribute( 'data-state-focus' ),
+            () => this.primaryButton.removeAttribute( this.attr.focus ),
             { once: true },
         );
 
@@ -547,6 +640,188 @@ export class ElementToggle {
             // @ts-ignore - IDE doesn't register an error but compile does - some tsconfig shenanigans, apparently.
             focusVisible: true,
         } );
+    }
+
+    #focusableContainerChildren?: ReturnType<typeof ElementToggle.getFocusableChildren>;
+
+    /**
+     * The methods used as event listeners for trapping focus.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    get focusableContainerChildren(): ReturnType<typeof ElementToggle.getFocusableChildren> {
+        // returns
+        if ( this.#focusableContainerChildren ) {
+            return this.#focusableContainerChildren;
+        }
+
+        this.#focusableContainerChildren = ElementToggle.getFocusableChildren( this.container );
+        return this.#focusableContainerChildren;
+    }
+
+    #focusableContentChildren?: ReturnType<typeof ElementToggle.getFocusableChildren>;
+
+    /**
+     * The methods used as event listeners for trapping focus.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    get focusableContentChildren(): ReturnType<typeof ElementToggle.getFocusableChildren> {
+        // returns
+        if ( this.#focusableContentChildren ) {
+            return this.#focusableContentChildren;
+        }
+
+        this.#focusableContentChildren = ElementToggle.getFocusableChildren( this.content );
+        return this.#focusableContentChildren;
+    }
+
+    #focusTrappers?: {
+        keydown: ( this: Document, event: KeyboardEvent ) => void,
+        first: ( this: HTMLElement, event: FocusEvent ) => void,
+        last: ( this: HTMLElement, event: FocusEvent ) => void,
+        any: ( this: HTMLElement, event: FocusEvent ) => void,
+    };
+
+    /**
+     * The methods used as event listeners for trapping focus.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    get focusTrappers(): {
+        keydown: ( this: Document, event: KeyboardEvent ) => void,
+        first: ( this: HTMLElement, event: FocusEvent ) => void,
+        last: ( this: HTMLElement, event: FocusEvent ) => void,
+        any: ( this: HTMLElement, event: FocusEvent ) => void,
+    } {
+        // returns
+        if ( this.#focusTrappers ) {
+            return this.#focusTrappers;
+        }
+
+        const container = this.container;
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const primaryButton = this.primaryButton;
+        const toggleClose = this.close.bind( this );
+
+        this.#focusTrappers = {
+
+            keydown: function ( this: Document, event: KeyboardEvent ) {
+                // escape key should close modals
+                if ( event.code === 'Escape' ) {
+                    toggleClose();
+                }
+            },
+
+            first: function ( this: HTMLElement, event: FocusEvent ) {
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (
+                    event.relatedTarget
+                    && !container.contains( event.relatedTarget as Node )
+                ) {
+                    ( focusableContainerChildren.last ?? primaryButton ).focus();
+                }
+            },
+
+            last: function ( this: HTMLElement, event: FocusEvent ) {
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (
+                    event.relatedTarget
+                    && !container.contains( event.relatedTarget as Node )
+                ) {
+                    ( focusableContainerChildren.first ?? primaryButton ).focus();
+                }
+            },
+
+            any: function ( this: HTMLElement, event: FocusEvent ) {
+                // if the newly-focused element is outside the container, we should redirect focus
+                if (
+                    event.relatedTarget
+                    && !container.contains( event.relatedTarget as Node )
+                ) {
+                    ( focusableContainerChildren.first ?? primaryButton ).focus();
+                }
+            },
+        };
+
+        return this.#focusTrappers;
+    }
+
+    /**
+     * Sets the closing time property via computed style value.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected setClosingTime(): void {
+        const computedClosingTime = getComputedStyle( this.container ).getPropertyValue( this.opts.closingTimeProperty );
+
+        this.closingTime = ElementToggle.cssTimeToMilliseconds(
+            computedClosingTime?.length ? computedClosingTime : this.opts.closingTime
+        );
+    }
+
+    /**
+     * Called when the element is toggled open.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected trapFocus(): void {
+        // returns - untraps focus first
+        if ( !this.isOpen ) {
+            this.untrapFocus();
+            return;
+        }
+
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const focusTrappers = this.focusTrappers;
+
+        document.addEventListener( 'keydown', focusTrappers.keydown, { capture: true } );
+
+        // add listeners to all children, but special listeners for the first and last
+        focusableContainerChildren.all.forEach(
+            ( element ) => {
+
+                // returns
+                if ( element.isSameNode( focusableContainerChildren.first ?? null ) ) {
+                    element.addEventListener( 'blur', focusTrappers.first );
+                    return;
+                }
+
+                // returns
+                if ( element.isSameNode( focusableContainerChildren.last ?? null ) ) {
+                    element.addEventListener( 'blur', focusTrappers.last );
+                    return;
+                }
+
+                element.addEventListener( 'blur', focusTrappers.any );
+            }
+        );
+    }
+
+    /**
+     * Called when the element is toggled closed.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    protected untrapFocus(): void {
+        const focusableContainerChildren = this.focusableContainerChildren;
+        const focusTrappers = this.focusTrappers;
+
+        // add listeners to all children, but special listeners for the first and last
+        focusableContainerChildren.all.forEach(
+            ( element ) => {
+                // returns
+                if ( !focusTrappers ) {
+                    return;
+                }
+
+                document.removeEventListener( 'keydown', focusTrappers.keydown, { capture: true } );
+
+                element.removeEventListener( 'blur', focusTrappers.first );
+                element.removeEventListener( 'blur', focusTrappers.last );
+                element.removeEventListener( 'blur', focusTrappers.any );
+            }
+        );
     }
 
 
@@ -569,10 +844,6 @@ export class ElementToggle {
         switch ( this.container.getAttribute( 'data-toggle-container' ) ) {
 
             case 'closed':
-                this.clearTimeout();
-                this.open();
-                break;
-
             case 'closing':
                 this.clearTimeout();
                 this.open();
@@ -598,9 +869,7 @@ export class ElementToggle {
             return;
         }
 
-        this.closingTime = ElementToggle.cssTimeToMilliseconds(
-            getComputedStyle( this.container ).getPropertyValue( '--toggle-closing-time' )
-        );
+        this.setClosingTime();
 
         this.container.setAttribute( 'data-toggle-container', 'open' );
 
@@ -609,6 +878,12 @@ export class ElementToggle {
                 button.setAttribute( 'aria-expanded', 'true' );
             }
         } );
+
+        // trap focus
+        if ( this.asModal ) {
+            this.trapFocus();
+            this.content.focus();
+        }
 
         ElementToggle.createCustomEvents();
         this.container.dispatchEvent( ElementToggle.openEvent as Event );
@@ -620,6 +895,11 @@ export class ElementToggle {
      * Toggles the element closed.
      */
     protected close(): void {
+        // untrap focus
+        if ( this.asModal ) {
+            this.untrapFocus();
+        }
+
         // returns
         if ( !this.container ) {
             this.deactivateButton();
@@ -641,14 +921,15 @@ export class ElementToggle {
         /*
          * Wait for animations to finish.
          */
-        this.closingTimeout = setTimeout( () => {
-            // Sets the data-toggle-container to closed now that animations are over.
-            if ( !this.container ) { return; }
-            this.container.setAttribute( 'data-toggle-container', 'closed' );
-        }, this.closingTime + 50 );
+        this.closingTimeout = setTimeout(
+            () => {
+                this.container.setAttribute( 'data-toggle-container', 'closed' );
 
-        ElementToggle.createCustomEvents();
-        this.container.dispatchEvent( ElementToggle.closeEvent as Event );
+                ElementToggle.createCustomEvents();
+                this.container.dispatchEvent( ElementToggle.closeEvent as Event );
+            },
+            this.closingTime + 50,
+        );
 
         this.deactivateButton();
     }
@@ -660,6 +941,81 @@ export class ElementToggle {
  * @since 0.1.0-alpha.7
  */
 export namespace ElementToggle {
+
+    /**
+     * Gets all focusable elements within a container.
+     *
+     * Use this with caution and when you have control over the possible
+     * children and can avoid weird edge cases (like changing contenteditable or
+     * weird tabindex behaviour).
+     *
+     * @since ___PKG_VERSION___
+     */
+    export function getFocusableChildren( container: HTMLElement ) {
+
+        const elements = Array.from(
+            container.querySelectorAll<HTMLElement>(
+                `a,
+                button,
+                input,
+                textarea,
+                select,
+                details,
+                iframe,
+                embed,
+                object,
+                summary,
+                dialog,
+                audio[controls],
+                video[controls],
+                [contenteditable],
+                [tabindex]
+              `,
+            )
+        );
+
+        return {
+            get all(): HTMLElement[] {
+                return elements;
+            },
+
+            get keyboardOnly(): HTMLElement[] {
+                return this.all.filter(
+                    element => {
+                        // returns
+                        if ( element.hasAttribute( 'disabled' ) || element.hasAttribute( 'aria-disabled' ) ) {
+                            return false;
+                        }
+
+                        // returns
+                        if ( element.hasAttribute( 'hidden' ) ) {
+                            return false;
+                        }
+
+                        // returns
+                        if ( window.getComputedStyle( element ).display === 'none' ) {
+                            return false;
+                        }
+
+                        // returns
+                        if ( element.tabIndex <= -1 ) {
+                            return false;
+                        }
+
+                        return true;
+                    }
+                );
+            },
+
+            get first(): undefined | HTMLElement {
+                return this.keyboardOnly[ 0 ];
+            },
+
+            get last(): undefined | HTMLElement {
+                return this.keyboardOnly[ this.keyboardOnly.length - 1 ];
+            },
+        };
+    }
 
     /**
      * Options for the configuration of {@link ElementToggle} instances.
@@ -697,12 +1053,28 @@ export namespace ElementToggle {
         closingTime: number;
 
         /**
+         * Name of the computed style property to use for the closing time of
+         * each element.
+         *
+         * @since ___PKG_VERSION___
+         */
+        closingTimeProperty: string;
+
+        /**
          * Outputs information to the console.
          * 
          * @since ___PKG_VERSION___
          */
         // TODO - create test/demo
         debug: boolean;
+
+        /**
+         * Whether to output the results of constructing each toggle element as
+         * it is made.
+         *
+         * @since ___PKG_VERSION___
+         */
+        logResults?: boolean;
 
         /**
          * Whether toggles should open when they are the target of the url's
@@ -712,13 +1084,5 @@ export namespace ElementToggle {
          */
         // TODO - create test/demo
         openWhenTargetted: boolean;
-
-        /**
-         * Whether to output the results of constructing each toggle element as
-         * it is made.
-         *
-         * @since ___PKG_VERSION___
-         */
-        logResults?: boolean;
     }
 }

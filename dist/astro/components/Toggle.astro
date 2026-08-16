@@ -49,6 +49,17 @@ export interface ToggleProps {
     displayHeading?: number | undefined;
 
     /**
+     * To generate ID values for the component.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    generateID?: {
+        button: (id: string) => string;
+        content: (id: string) => string;
+        title: (id: string) => string;
+    };
+
+    /**
      * If any, the heading level used to wrap the toggle button.
      *
      * @default 0
@@ -100,6 +111,11 @@ const {
     id,
     // optional
     displayHeading,
+    generateID = {
+        button: (_id: string) => `${_id}-button`,
+        content: (_id: string) => `${_id}-content`,
+        title: (_id: string) => `${_id}-title`,
+    },
     heading = 0,
     headerTag,
     iconSVG,
@@ -107,19 +123,6 @@ const {
     tag: Container = 'section',
     ...attributes
 }: Props = Astro.props;
-
-/* FUNCTIONS ===================================== */
-
-/**
- * Functions that generate ID values for Toggle elements.
- *
- * @since 0.1.0-alpha.7
- */
-export const generateID = {
-    button: (_id: string) => `${_id}-button`,
-    content: (_id: string) => `${_id}-content`,
-    title: (_id: string) => `${_id}-title`,
-};
 
 /* CONSTANTS ===================================== */
 

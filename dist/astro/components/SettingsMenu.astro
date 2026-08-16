@@ -153,7 +153,6 @@ function optionHTML(
 
 const buttonID = `${id}-button`;
 const contentID = `${id}-content`;
-const titleID = `${id}-title`;
 
 const accessEmailSubject =
     'Accessibility Issue — ' +
@@ -202,36 +201,31 @@ const iconSVG =
         '</span>';
 ---
 
-<div
+<section
     id={id}
     class:list={classList}
     aria-label='Accessibility & Display Settings'
     {...attributes}
-    role='region'
     data-settings-menu
     data-settings-path={absoluteInternalURL(Astro.url, '')}
     data-toggle-container
+    data-toggle-container-type='menu'
 >
     <RenderedSlotContent
         name='settings-menu'
         html={slots_render.default}
     />
-    <div
-        id={titleID}
-        class='toggle-title'
+    <Toggle_Control
+        {...{ id, buttonID }}
+        aria-label='Toggle settings menu'
+        class:list='website-settings__toggle'
+        data-toggle-primary-control={id}
+        iconSVG={iconSVG}
         title='Accessibility & Display Settings'
-    >
-        <Toggle_Control
-            {...{ id, buttonID }}
-            aria-label='Toggle settings menu'
-            class:list='website-settings__toggle'
-            data-toggle-primary-control={id}
-            iconSVG={iconSVG}
-        />
-    </div>
+    />
 
     <form
-        aria-labelledby={buttonID}
+        aria-label='Settings menu'
         class='website-settings__content'
         data-toggle-content={id}
         id={contentID}
@@ -241,7 +235,6 @@ const iconSVG =
                 name='settings-menu-open'
                 html={slots_render.settingsMenuOpen}
             />
-
             {
                 accessibilityReportEmail && (
                     <p class='website-settings__report'>
@@ -253,10 +246,9 @@ const iconSVG =
                     </p>
                 )
             }
-
             {
                 settings.brightness && (
-                    <fieldset>
+                    <fieldset tabindex='-1'>
                         <legend>Brightness Mode</legend>
                         <div class='container'>
                             <Fragment
@@ -277,10 +269,9 @@ const iconSVG =
                     </fieldset>
                 )
             }
-
             {
                 settings.contrast && (
-                    <fieldset>
+                    <fieldset tabindex='-1'>
                         <legend>Contrast Mode</legend>
                         <div class='container'>
                             <Fragment
@@ -332,10 +323,9 @@ const iconSVG =
                     </fieldset>
                 )
             }
-
             {
                 settings.motion && (
-                    <fieldset>
+                    <fieldset tabindex='-1'>
                         <legend>Motion/Animation</legend>
                         <div class='container'>
                             <Fragment
@@ -356,7 +346,6 @@ const iconSVG =
                     </fieldset>
                 )
             }
-
             {
                 settings.custom &&
                     settings.custom.map(
@@ -369,6 +358,7 @@ const iconSVG =
                                     data-settings-menu-custom-setting-default={
                                         setting.default
                                     }
+                                    tabindex='-1'
                                 >
                                     <legend set:text={setting.label} />
 
@@ -409,7 +399,7 @@ const iconSVG =
         aria-hidden='true'
     >
     </div>
-</div>
+</section>
 
 <style lang='scss'>
     @forward '../css/forced-colors-mode-only.css';

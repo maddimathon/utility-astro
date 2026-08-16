@@ -223,14 +223,21 @@
                     @if $includeBaseStyles {
                         max-height: 80svh;
                         max-height: calc(
-                            95svh - do-var(
-                                    scroll-padding-top,
-                                    calc(2.75rem + (var-gap-block(layout-half) * 2))
+                            95svh - do-var(scroll-padding-top) - var-gap-block(layout) - do-var(
+                                    icon-size
                                 )
                         );
                     }
 
                     @content (js--settings-menu--open--content);
+
+                    > * {
+                        @if $includeBaseStyles {
+                            flex-shrink: 0;
+                        }
+
+                        @content (js--settings-menu--open--content--direct-child);
+                    }
 
                     > .container {
                         @if $includeBaseStyles {

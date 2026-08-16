@@ -72,6 +72,7 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
     {...attributes}
     id={id}
     data-toggle-container
+    data-toggle-container-type='modal,nav'
     class:list={classList}
     role='navigation'
 >

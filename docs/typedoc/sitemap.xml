@@ -2,82 +2,142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/index.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/hierarchy.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/About.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/About/Changelog.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/About/MIT_License.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/escRegExpURL.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/htmlAttributeString.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/mapToObject.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/CopyToClipboard.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ElementToggle.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/JsCookie.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/UniqueIdentifiers.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ClassList.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ClassListItem.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ElementProps.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/GenericElementProps.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/GenericProps.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ElementToggle-1.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/ElementToggle/getFocusableChildren.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/ElementToggle/Opts.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/JsCookie-1.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/JsCookie/Opts.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/JsCookie/Opts-1.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/JsCookie/Opts/Input.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu-1.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/run.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/runOnLoad.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/Opts.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/Selectors.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/Selectors/Constructor.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
+	</url>
+	<url>
+		<loc>https://maddimathon.github.io/utility-astro/SettingsMenu/Selectors/Mapper.html</loc>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/trailingSlash.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/trailingSlash/add.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 	<url>
 		<loc>https://maddimathon.github.io/utility-astro/trailingSlash/remove.html</loc>
-		<lastmod>2026-08-08T05:14:18.119Z</lastmod>
+		<lastmod>2026-08-16T03:29:54.449Z</lastmod>
 	</url>
 </urlset>

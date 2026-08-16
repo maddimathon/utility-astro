@@ -162,7 +162,10 @@ export class Compile extends CompileStage {
                     './src/ts/**/*',
                 ],
                 exclude: [
-                    '**/node_modules/**/*'
+                    '**/node_modules/**/*',
+
+                    '../../src/ts/bundled/**/*',
+                    './src/ts/bundled/**/*',
                 ],
 
                 compilerOptions: {
@@ -172,6 +175,7 @@ export class Compile extends CompileStage {
                     declarationMap: false,
                     noEmit: undefined,
                     outDir: '../../dist/ts/',
+                    rootDir: '../../src/ts/',
                     sourceMap: false,
                     target: 'ES2017',
                 },

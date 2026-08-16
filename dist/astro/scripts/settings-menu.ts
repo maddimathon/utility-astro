@@ -31,5 +31,5 @@ if ( SCRIPTS_SETTINGSMENU ) {
     /*
      * Setting up each found menu.
      */
-    await SettingsMenu.init( settingsMenus, scrollBehaviour );
+    await SettingsMenu.run( settingsMenus, scrollBehaviour );
 }

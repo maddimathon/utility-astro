@@ -157,7 +157,9 @@ $_flex_container_alignment_row: (
         grid-auto-flow: $autoFlow dense;
     }
 
-    gap: $gap;
+    @if $gap != false {
+        gap: $gap;
+    }
 }
 
 ///

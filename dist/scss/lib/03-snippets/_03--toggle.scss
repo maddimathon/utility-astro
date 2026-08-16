@@ -593,6 +593,10 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                 @content (js--toggle-content--container);
 
                 @if $includeBaseStyles {
+                    > * {
+                        flex-shrink: 0;
+                    }
+
                     > :first-child {
                         margin-block-start: 0;
                     }
