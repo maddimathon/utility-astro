@@ -45,7 +45,7 @@ type Copyright_HTML = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    year?: number | undefined;
+    year?: number | false | undefined;
 };
 
 type Copyright_PlainOwner = {

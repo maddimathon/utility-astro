@@ -50,7 +50,7 @@ export class SettingsMenu {
      * The container containing all fieldsets in inputs for this menu.
      */
     menu, _a = {}) {
-        var _b, _c, _d, _e, _f, _g, _h, _j;
+        var _b, _c, _d, _e, _f, _g, _h, _j, _k;
         var { scrollBehaviour = 'auto', cookieNamer } = _a, opts = __rest(_a, ["scrollBehaviour", "cookieNamer"]);
         const inputs = Array.from((_c = menu.querySelectorAll(((_b = opts.selectors) === null || _b === void 0 ? void 0 : _b.inputs) || 'input[data-settings-input]')) !== null && _c !== void 0 ? _c : []);
         // returns
@@ -60,15 +60,15 @@ export class SettingsMenu {
             }
             return undefined;
         }
-        const optsComplete = Object.assign(Object.assign({}, opts), { cookieCacheExpireDays: (_d = opts.cookieCacheExpireDays) !== null && _d !== void 0 ? _d : 7, cookiePrefix: (_e = opts.cookiePrefix) !== null && _e !== void 0 ? _e : '', defaultCookieCache: (_f = opts.defaultCookieCache) !== null && _f !== void 0 ? _f : false, path: menu.getAttribute(((_g = opts.selectors) === null || _g === void 0 ? void 0 : _g.pathAttr) || 'data-settings-path') || '/' });
-        const resetButton = menu.querySelector(((_h = optsComplete.selectors) === null || _h === void 0 ? void 0 : _h.resetButton) || 'button[data-settings-reset]');
+        const optsComplete = Object.assign(Object.assign({}, opts), { cookieCacheExpireDays: (_d = opts.cookieCacheExpireDays) !== null && _d !== void 0 ? _d : 7, cookiePrefix: (_e = opts.cookiePrefix) !== null && _e !== void 0 ? _e : '', defaultCookieCache: (_f = opts.defaultCookieCache) !== null && _f !== void 0 ? _f : false, domain: menu.getAttribute(((_g = opts.selectors) === null || _g === void 0 ? void 0 : _g.domainAttr) || 'data-settings-domain') || undefined, path: menu.getAttribute(((_h = opts.selectors) === null || _h === void 0 ? void 0 : _h.pathAttr) || 'data-settings-path') || '/' });
+        const resetButton = menu.querySelector(((_j = optsComplete.selectors) === null || _j === void 0 ? void 0 : _j.resetButton) || 'button[data-settings-reset]');
         cookieNamer = cookieNamer !== null && cookieNamer !== void 0 ? cookieNamer : ((attr) => optsComplete.cookiePrefix + attr);
         const instance = new SettingsMenu({ inputs, menu, resetButton, target }, cookieNamer, optsComplete);
         if (optsComplete.debug) {
             console.debug('SettingsMenu.new() - constructed', { menu, instance });
         }
         else if (optsComplete.logResults) {
-            console.info(`[SettingsMenu] new: ${(_j = menu.id) !== null && _j !== void 0 ? _j : ''}`, '\nmenu: ', instance === null || instance === void 0 ? void 0 : instance.menu, '\nopts: ', instance === null || instance === void 0 ? void 0 : instance.opts);
+            console.info(`[SettingsMenu] new: ${(_k = menu.id) !== null && _k !== void 0 ? _k : ''}`, '\nmenu: ', instance === null || instance === void 0 ? void 0 : instance.menu, '\nopts: ', instance === null || instance === void 0 ? void 0 : instance.opts);
         }
         return Promise.all(__classPrivateFieldGet(instance, _SettingsMenu_inputs, "f").map(async (input) => {
             const attr = input.getAttribute('name');
@@ -268,8 +268,10 @@ export class SettingsMenu {
                 break;
         }
         if (this.opts.defaultCookieCache && !__classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr + '-default']) {
-            __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr + '-default'] = new JsCookie(this.cookieNamer(attr + '-default'), this.opts.path, {
+            __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr + '-default'] = new JsCookie(this.cookieNamer(attr + '-default'), {
                 copyToLocalStorage: true,
+                domain: this.opts.domain,
+                path: this.opts.path,
             });
         }
         __classPrivateFieldGet(this, _SettingsMenu_defaults, "f")[attr] = defaultValue;
@@ -303,8 +305,10 @@ export class SettingsMenu {
             __classPrivateFieldGet(this, _SettingsMenu_attributeKeys, "f").push(attr);
         }
         if (!__classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr]) {
-            __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr] = new JsCookie(this.cookieNamer(attr), this.opts.path, {
+            __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr] = new JsCookie(this.cookieNamer(attr), {
                 copyToLocalStorage: true,
+                domain: this.opts.domain,
+                path: this.opts.path,
             });
         }
         const defaultValue = await this._set_default(attr);
@@ -487,6 +491,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
             ? menu.id ? selectors.reset(menu.id) : '[data-settings-reset]'
             : (_b = selectors.reset) !== null && _b !== void 0 ? _b : '[data-settings-reset]';
         return SettingsMenu.new(target, menu, Object.assign(Object.assign({}, opts), { selectors: {
+                domainAttr: selectors.domainAttr,
                 inputs: selectors.inputs,
                 pathAttr: selectors.pathAttr,
                 resetButton: resetSelector,

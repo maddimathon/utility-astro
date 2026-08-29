@@ -21,10 +21,6 @@ export declare class JsCookie {
     /**
      * Cookie's path.
      */
-    readonly path: string;
-    /**
-     * Cookie's path.
-     */
     protected readonly opts: Classify<JsCookie.Opts>;
     /**
      * Now accepting an args object instead of params 3-5.
@@ -36,10 +32,6 @@ export declare class JsCookie {
      * Cookie's name.
      */
     name: string, 
-    /**
-     * Cookie's path.
-     */
-    path: string, 
     /**
      * Additional options for this instance.
      */
@@ -104,11 +96,9 @@ export declare namespace JsCookie {
          */
         copyToLocalStorage?: undefined | boolean;
         /**
-         * Value to return instead of null when no cookie value is found.
-         *
-         * @default null
+         * Cookie's path.
          */
-        fallbackValue: string | null;
+        domain?: undefined | string;
         /**
          * Default number of days until the cookie expires.
          *
@@ -116,12 +106,22 @@ export declare namespace JsCookie {
          */
         expireDays: number | null;
         /**
+         * Value to return instead of null when no cookie value is found.
+         *
+         * @default null
+         */
+        fallbackValue: string | null;
+        /**
          * Maximum age to use when this cookie is set.
          *
          * @default
          * 60 * 60 * 24 * 365 * 5
          */
         maxAge: number;
+        /**
+         * Cookie's path.
+         */
+        path: string;
     }
     /**
      * Additional types for {@link JsCookie.Opts}.

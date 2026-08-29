@@ -1,19 +1,22 @@
 // src/ts/classes/JsCookie.ts
 var JsCookie = class {
-  constructor(name, path, expireDaysOrOpts, dep_defaultValue = null, dep_copyToLocalStorage = false) {
+  constructor(name, pathOrOpts, dep_expireDays = null, dep_defaultValue = null, dep_copyToLocalStorage = false) {
     this.name = name;
-    this.path = path;
     const maxAge = 60 * 60 * 24 * 365 * 5;
-    this.opts = typeof expireDaysOrOpts !== "object" ? {
+    this.opts = typeof pathOrOpts !== "object" ? {
       copyToLocalStorage: dep_copyToLocalStorage,
+      domain: void 0,
+      expireDays: dep_expireDays ?? null,
       fallbackValue: dep_defaultValue ?? null,
-      expireDays: expireDaysOrOpts ?? null,
-      maxAge
+      maxAge,
+      path: pathOrOpts ?? "/"
     } : {
-      copyToLocalStorage: expireDaysOrOpts?.copyToLocalStorage ?? false,
-      fallbackValue: expireDaysOrOpts?.fallbackValue ?? null,
-      expireDays: expireDaysOrOpts?.expireDays ?? null,
-      maxAge: expireDaysOrOpts?.maxAge ?? maxAge
+      copyToLocalStorage: pathOrOpts?.copyToLocalStorage ?? false,
+      domain: pathOrOpts?.domain,
+      expireDays: pathOrOpts?.expireDays ?? null,
+      fallbackValue: pathOrOpts?.fallbackValue ?? null,
+      maxAge: pathOrOpts?.maxAge ?? maxAge,
+      path: pathOrOpts?.path ?? "/"
     };
   }
   /**
@@ -49,20 +52,22 @@ var JsCookie = class {
       const d = /* @__PURE__ */ new Date();
       d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1e3);
       return {
-        date: d.toUTCString(),
+        date: d.toISOString(),
         expireDays
       };
     })() : null;
     const cookie = {
       [this.name]: value,
+      domain: this.opts.domain ?? null,
       expires: expiry?.date?.length ? expiry.date : null,
       "max-age": expiry?.date?.length ? expiry.expireDays <= 0 ? 0 : null : String(this.opts.maxAge),
-      path: this.path
+      path: this.opts.path
     };
     const cookieString = [];
     for (const key in cookie) {
-      if (cookie[key] !== null) {
-        cookieString.push(`${key}=${cookie[key]}`);
+      const value2 = cookie[key];
+      if (value2 !== null && typeof value2 !== "undefined") {
+        cookieString.push(`${key}=${value2}`);
       }
     }
     document.cookie = cookieString.join("; ");

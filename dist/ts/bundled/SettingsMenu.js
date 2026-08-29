@@ -1581,20 +1581,23 @@ var VariableInspector = class _VariableInspector {
 
 // src/ts/classes/JsCookie.ts
 var JsCookie = class {
-  constructor(name, path, expireDaysOrOpts, dep_defaultValue = null, dep_copyToLocalStorage = false) {
+  constructor(name, pathOrOpts, dep_expireDays = null, dep_defaultValue = null, dep_copyToLocalStorage = false) {
     this.name = name;
-    this.path = path;
     const maxAge = 60 * 60 * 24 * 365 * 5;
-    this.opts = typeof expireDaysOrOpts !== "object" ? {
+    this.opts = typeof pathOrOpts !== "object" ? {
       copyToLocalStorage: dep_copyToLocalStorage,
+      domain: void 0,
+      expireDays: dep_expireDays ?? null,
       fallbackValue: dep_defaultValue ?? null,
-      expireDays: expireDaysOrOpts ?? null,
-      maxAge
+      maxAge,
+      path: pathOrOpts ?? "/"
     } : {
-      copyToLocalStorage: expireDaysOrOpts?.copyToLocalStorage ?? false,
-      fallbackValue: expireDaysOrOpts?.fallbackValue ?? null,
-      expireDays: expireDaysOrOpts?.expireDays ?? null,
-      maxAge: expireDaysOrOpts?.maxAge ?? maxAge
+      copyToLocalStorage: pathOrOpts?.copyToLocalStorage ?? false,
+      domain: pathOrOpts?.domain,
+      expireDays: pathOrOpts?.expireDays ?? null,
+      fallbackValue: pathOrOpts?.fallbackValue ?? null,
+      maxAge: pathOrOpts?.maxAge ?? maxAge,
+      path: pathOrOpts?.path ?? "/"
     };
   }
   /**
@@ -1630,20 +1633,22 @@ var JsCookie = class {
       const d = /* @__PURE__ */ new Date();
       d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1e3);
       return {
-        date: d.toUTCString(),
+        date: d.toISOString(),
         expireDays
       };
     })() : null;
     const cookie = {
       [this.name]: value,
+      domain: this.opts.domain ?? null,
       expires: expiry?.date?.length ? expiry.date : null,
       "max-age": expiry?.date?.length ? expiry.expireDays <= 0 ? 0 : null : String(this.opts.maxAge),
-      path: this.path
+      path: this.opts.path
     };
     const cookieString = [];
     for (const key in cookie) {
-      if (cookie[key] !== null) {
-        cookieString.push(`${key}=${cookie[key]}`);
+      const value2 = cookie[key];
+      if (value2 !== null && typeof value2 !== "undefined") {
+        cookieString.push(`${key}=${value2}`);
       }
     }
     document.cookie = cookieString.join("; ");
@@ -1689,6 +1694,9 @@ var SettingsMenu = class _SettingsMenu {
       cookieCacheExpireDays: opts.cookieCacheExpireDays ?? 7,
       cookiePrefix: opts.cookiePrefix ?? "",
       defaultCookieCache: opts.defaultCookieCache ?? false,
+      domain: menu.getAttribute(
+        opts.selectors?.domainAttr || "data-settings-domain"
+      ) || void 0,
       path: menu.getAttribute(
         opts.selectors?.pathAttr || "data-settings-path"
       ) || "/"
@@ -1867,9 +1875,10 @@ var SettingsMenu = class _SettingsMenu {
     if (this.opts.defaultCookieCache && !this.#cookies[attr + "-default"]) {
       this.#cookies[attr + "-default"] = new JsCookie(
         this.cookieNamer(attr + "-default"),
-        this.opts.path,
         {
-          copyToLocalStorage: true
+          copyToLocalStorage: true,
+          domain: this.opts.domain,
+          path: this.opts.path
         }
       );
     }
@@ -1911,9 +1920,10 @@ var SettingsMenu = class _SettingsMenu {
     if (!this.#cookies[attr]) {
       this.#cookies[attr] = new JsCookie(
         this.cookieNamer(attr),
-        this.opts.path,
         {
-          copyToLocalStorage: true
+          copyToLocalStorage: true,
+          domain: this.opts.domain,
+          path: this.opts.path
         }
       );
     }
@@ -2095,6 +2105,7 @@ var SettingsMenu = class _SettingsMenu {
     return SettingsMenu2.new(target, menu, {
       ...opts,
       selectors: {
+        domainAttr: selectors.domainAttr,
         inputs: selectors.inputs,
         pathAttr: selectors.pathAttr,
         resetButton: resetSelector

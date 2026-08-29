@@ -34,11 +34,6 @@ export class JsCookie {
         name: string,
 
         /**
-         * Cookie's path.
-         */
-        path: string,
-
-        /**
          * Additional options for this instance.
          */
         opts: JsCookie.Opts.Input,
@@ -85,14 +80,14 @@ export class JsCookie {
         public readonly name: string,
 
         /**
-         * Cookie's path.
+         * Number of days until the cookie expires.
          */
-        public readonly path: string,
+        pathOrOpts?: string | null | JsCookie.Opts.Input,
 
         /**
          * Number of days until the cookie expires.
          */
-        expireDaysOrOpts?: number | null | JsCookie.Opts.Input,
+        dep_expireDays: number | null = null,
 
         /**
          * Default value to return instead of null.
@@ -109,18 +104,22 @@ export class JsCookie {
 
         const maxAge = 60 * 60 * 24 * 365 * 5;
 
-        this.opts = typeof expireDaysOrOpts !== 'object'
+        this.opts = typeof pathOrOpts !== 'object'
             ? {
                 copyToLocalStorage: dep_copyToLocalStorage,
+                domain: undefined,
+                expireDays: dep_expireDays ?? null,
                 fallbackValue: dep_defaultValue ?? null,
-                expireDays: expireDaysOrOpts ?? null,
                 maxAge,
+                path: pathOrOpts ?? '/',
             } satisfies Classify<JsCookie.Opts>
             : {
-                copyToLocalStorage: expireDaysOrOpts?.copyToLocalStorage ?? false,
-                fallbackValue: expireDaysOrOpts?.fallbackValue ?? null,
-                expireDays: expireDaysOrOpts?.expireDays ?? null,
-                maxAge: expireDaysOrOpts?.maxAge ?? maxAge,
+                copyToLocalStorage: pathOrOpts?.copyToLocalStorage ?? false,
+                domain: pathOrOpts?.domain,
+                expireDays: pathOrOpts?.expireDays ?? null,
+                fallbackValue: pathOrOpts?.fallbackValue ?? null,
+                maxAge: pathOrOpts?.maxAge ?? maxAge,
+                path: pathOrOpts?.path ?? '/',
             } satisfies Classify<JsCookie.Opts>;
     }
 
@@ -172,7 +171,7 @@ export class JsCookie {
                 const d = new Date();
                 d.setTime( d.getTime() + ( expireDays * 24 * 60 * 60 * 1000 ) );
                 return {
-                    date: d.toUTCString(),
+                    date: d.toISOString(),
                     expireDays,
                 };
             } )()
@@ -180,17 +179,19 @@ export class JsCookie {
 
         const cookie = {
             [ this.name ]: value,
+            domain: this.opts.domain ?? null,
             expires: expiry?.date?.length ? expiry.date : null,
             'max-age': expiry?.date?.length ? ( expiry.expireDays <= 0 ? 0 : null ) : String( this.opts.maxAge ),
-            path: this.path,
+            path: this.opts.path,
         };
 
         const cookieString = [];
 
         for ( const key in cookie ) {
+            const value = cookie[ key ];
 
-            if ( cookie[ key ] !== null ) {
-                cookieString.push( `${ key }=${ cookie[ key ] }` );
+            if ( value !== null && typeof value !== 'undefined' ) {
+                cookieString.push( `${ key }=${ value }` );
             }
         }
 
@@ -220,11 +221,9 @@ export namespace JsCookie {
         copyToLocalStorage?: undefined | boolean;
 
         /**
-         * Value to return instead of null when no cookie value is found.
-         * 
-         * @default null
+         * Cookie's path.
          */
-        fallbackValue: string | null;
+        domain?: undefined | string;
 
         /**
          * Default number of days until the cookie expires.
@@ -234,12 +233,24 @@ export namespace JsCookie {
         expireDays: number | null;
 
         /**
+         * Value to return instead of null when no cookie value is found.
+         * 
+         * @default null
+         */
+        fallbackValue: string | null;
+
+        /**
          * Maximum age to use when this cookie is set.
          * 
          * @default
          * 60 * 60 * 24 * 365 * 5
          */
         maxAge: number;
+
+        /**
+         * Cookie's path.
+         */
+        path: string,
     }
 
     /**

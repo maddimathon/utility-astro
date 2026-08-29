@@ -358,7 +358,7 @@ $_flex_container_alignment_row: (
     $selector_main: '%main-content',
 
     $selector_body_subgrid:
-        '#{$selector_main}, %primary-nav, %site-header, %site-footer, %_site-footer',
+        '#{$selector_main}, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer',
 
     $selector_main_subgrid:
         '%main-content__article, %_main-sidebar, %main-sidebar',

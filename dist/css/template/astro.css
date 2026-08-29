@@ -3906,7 +3906,7 @@ body > nav[data-toggle-container] {
     align-content: end;
     align-items: end;
     overscroll-behavior: none;
-    z-index: 1;
+    z-index: 100;
 }
 
 .website-settings__content {

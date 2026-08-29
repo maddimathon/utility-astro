@@ -27,7 +27,7 @@
     $fieldset_flexContainer_direction: row,
     $fieldset_flexContainer_gap: var-mrg-firm('200')
         clamp(var-mrg-firm('400'), 5vw, var-mrg-firm('600')),
-    $zIndex: 1,
+    $zIndex: 100,
     $zIndex_open: 999999,
     //
     $includeBaseStyles: true

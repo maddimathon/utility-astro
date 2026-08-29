@@ -217,7 +217,9 @@ const _footerCopyrightYear = p.footer?.copyright
 const formatted = {
     footer: {
         year:
-            _footerCopyrightYear && today.year > _footerCopyrightYear
+        _footerCopyrightYear === false
+            ? _footerCopyrightYear
+            : _footerCopyrightYear && today.year > _footerCopyrightYear
                 ? `${_footerCopyrightYear}–${today.year}`
                 : _footerCopyrightYear,
     },
@@ -401,10 +403,12 @@ const settings = p.settings && {
                         <div class='site-footer__disclaimer'>
                             {p.footer.copyright && (
                                 <p class='copyright'>
-                                    <span class='copyright__copy'>&copy;</span>
-                                    <Fragment
-                                        set:text={' ' + formatted.footer.year + ' '}
-                                    />
+                                    {formatted.footer.year && (
+                                        <span class='copyright__copy'>&copy;</span>
+                                        <Fragment
+                                            set:text={' ' + formatted.footer.year + ' '}
+                                        />
+                                    )}
                                     {p.footer.copyright.owner ? <Fragment
                                         set:text={p.footer.copyright.owner}
                                     /> : <Fragment

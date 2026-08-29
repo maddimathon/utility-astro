@@ -19,6 +19,7 @@ export declare class SettingsMenu {
      * @since 0.1.0-beta.0.draft
      */
     readonly opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
+        domain: undefined | string;
         path: string;
     };
     /**
@@ -58,6 +59,7 @@ export declare class SettingsMenu {
      * @since 0.1.0-beta.0.draft
      */
     opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
+        domain: undefined | string;
         path: string;
     });
     /**
@@ -165,6 +167,7 @@ export declare namespace SettingsMenu {
          * @since 0.1.0-beta.0.draft
          */
         interface Constructor {
+            domainAttr?: undefined | string;
             inputs?: undefined | string;
             pathAttr?: undefined | string;
             resetButton?: undefined | string;

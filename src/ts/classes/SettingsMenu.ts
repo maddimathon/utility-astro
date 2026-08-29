@@ -61,11 +61,16 @@ export class SettingsMenu {
             cookiePrefix: opts.cookiePrefix ?? '',
             defaultCookieCache: opts.defaultCookieCache ?? false,
 
+            domain: menu.getAttribute(
+                opts.selectors?.domainAttr || 'data-settings-domain'
+            ) || undefined,
+
             path: menu.getAttribute(
                 opts.selectors?.pathAttr || 'data-settings-path'
             ) || '/',
         } satisfies SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
-            path: string,
+            domain: undefined | string;
+            path: string;
         };
 
         const resetButton = menu.querySelector<HTMLButtonElement>(
@@ -205,6 +210,7 @@ export class SettingsMenu {
          * @since ___PKG_VERSION___
          */
         public readonly opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
+            domain: undefined | string;
             path: string;
         },
     ) {
@@ -348,9 +354,10 @@ export class SettingsMenu {
         if ( this.opts.defaultCookieCache && !this.#cookies[ attr + '-default' ] ) {
             this.#cookies[ attr + '-default' ] = new JsCookie(
                 this.cookieNamer( attr + '-default' ),
-                this.opts.path,
                 {
                     copyToLocalStorage: true,
+                    domain: this.opts.domain,
+                    path: this.opts.path,
                 },
             );
         }
@@ -402,9 +409,10 @@ export class SettingsMenu {
         if ( !this.#cookies[ attr ] ) {
             this.#cookies[ attr ] = new JsCookie(
                 this.cookieNamer( attr ),
-                this.opts.path,
                 {
                     copyToLocalStorage: true,
+                    domain: this.opts.domain,
+                    path: this.opts.path,
                 },
             );
         }
@@ -647,6 +655,7 @@ export namespace SettingsMenu {
         return SettingsMenu.new( target, menu, {
             ...opts,
             selectors: {
+                domainAttr: selectors.domainAttr,
                 inputs: selectors.inputs,
                 pathAttr: selectors.pathAttr,
                 resetButton: resetSelector,
@@ -816,6 +825,7 @@ export namespace SettingsMenu {
          * @since ___PKG_VERSION___
          */
         export interface Constructor {
+            domainAttr?: undefined | string;
             inputs?: undefined | string;
             pathAttr?: undefined | string;
             resetButton?: undefined | string;
