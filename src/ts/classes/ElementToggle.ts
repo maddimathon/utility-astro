@@ -351,7 +351,7 @@ export class ElementToggle {
         this.opts = {
             activeTimeoutLength: ( partialOpts?.closingTime ?? 1800 ) / 4,
             closeWhenUntargetted: false,
-            closingTime: 1800,
+            closingTime: 0,
             closingTimeProperty: '--toggle-closing-time',
             debug: false,
             openWhenTargetted: true,
@@ -370,7 +370,7 @@ export class ElementToggle {
             focus: this.container.dataset[ 'toggleAttrStateFocus' ] || 'data-state-focus',
         };
 
-        const _containerType = this.container.dataset[ 'toggleContainerType' ]?.split( ',' ) ?? [];
+        const _containerType = this.container.dataset[ 'toggleContainerType' ]?.split( /\s+/g ) ?? [];
 
         this.isMenu = _containerType.includes( 'menu' );
 
@@ -834,9 +834,7 @@ export class ElementToggle {
      */
     public toggle( button?: HTMLElement ): void {
         this.activateButton( button ?? this.primaryButton );
-
-        // returns
-        if ( !this.container ) { return; }
+        this.clearTimeout();
 
         /*
          * Grab the current state and trigger an opening or closing function!
@@ -845,13 +843,11 @@ export class ElementToggle {
 
             case 'closed':
             case 'closing':
-                this.clearTimeout();
                 this.open();
                 break;
 
             case 'open':
             default:
-                this.clearTimeout();
                 this.close();
                 break;
         }
@@ -863,12 +859,6 @@ export class ElementToggle {
      * Toggles the element open.
      */
     protected open(): void {
-        // returns
-        if ( !this.allButtons || !this.container ) {
-            this.deactivateButton();
-            return;
-        }
-
         this.setClosingTime();
 
         this.container.setAttribute( 'data-toggle-container', 'open' );
@@ -898,12 +888,6 @@ export class ElementToggle {
         // untrap focus
         if ( this.asModal ) {
             this.untrapFocus();
-        }
-
-        // returns
-        if ( !this.container ) {
-            this.deactivateButton();
-            return;
         }
 
         /*

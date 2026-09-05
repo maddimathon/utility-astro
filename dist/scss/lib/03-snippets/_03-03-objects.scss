@@ -15,7 +15,7 @@
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin snippet-support-icons(
+@mixin snippet-icon-block(
     $display_svg: block,
     $display: inline-block,
     $iconSize: do-var(icon-size),
@@ -23,37 +23,59 @@
     $includeMaxWidth: false,
     $margin_svg: 0,
     $padding_svg: 0,
-    $verticalAlign: middle
+    $verticalAlign: middle,
+    //
+    $multipleContentBlocks: false
 ) {
-    %icon {
-        @include prop-display($display);
+    @include prop-display($display);
 
-        $_calc_iconSize: calc($iconSize * do-var(icon-size--font-multiplier));
+    $_calc_iconSize: calc($iconSize * do-var(icon-size--font-multiplier));
 
-        height: $iconSize;
-        height: $_calc_iconSize;
+    height: $iconSize;
+    height: $_calc_iconSize;
 
-        @if $includeMinWidth {
-            min-width: $iconSize;
-            min-width: $_calc_iconSize;
-        }
+    @if $includeMinWidth {
+        min-width: $iconSize;
+        min-width: $_calc_iconSize;
+    }
 
-        @if $includeMaxWidth {
-            max-width: 100%;
-        }
+    @if $includeMaxWidth {
+        max-width: 100%;
+    }
 
-        vertical-align: $verticalAlign;
+    vertical-align: $verticalAlign;
 
+    @if $multipleContentBlocks {
         @content (root);
+    } @else {
+        @content;
+    }
 
-        > svg {
-            @include prop-display($display_svg);
-            margin: $margin_svg;
-            padding: $padding_svg;
+    > svg {
+        @include prop-display($display_svg);
+        margin: $margin_svg;
+        padding: $padding_svg;
 
-            fill: currentColor;
+        fill: currentColor;
 
+        @if $multipleContentBlocks {
             @content (svg);
+        }
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin snippet-support-icons($multipleContentBlocks: false, $args...) {
+    %icon {
+        @include snippet-icon-block($multipleContentBlocks: true, $args...)
+            using ($location) {
+            @if $multipleContentBlocks {
+                @content ($location);
+            } @else if $location == root {
+                @content;
+            }
         }
     }
 }

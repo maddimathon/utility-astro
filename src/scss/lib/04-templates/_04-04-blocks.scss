@@ -44,7 +44,7 @@
              * ======================================================================== */
         }
 
-        @include snippet-support-icons using ($location) {
+        @include snippet-support-icons($multipleContentBlocks: true) using ($location) {
             @content (icons--#{$location});
         }
     }

@@ -144,7 +144,7 @@
 
             @content (js--settings-menu);
 
-            .toggle-title {
+            .toggle-block__title {
                 @content (js--settings-menu--title);
             }
 

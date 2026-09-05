@@ -2194,6 +2194,8 @@ export {
 @maddimathon/utility-typescript/dist/functions/maps/mapFlattenAsync.js:
 @maddimathon/utility-typescript/dist/functions/maps/mapToObject.js:
 @maddimathon/utility-typescript/dist/functions/maps/mapToObjectAsync.js:
+@maddimathon/utility-typescript/dist/functions/numbers/makeNumber.js:
+@maddimathon/utility-typescript/dist/functions/numbers/makeNumberAsync.js:
 @maddimathon/utility-typescript/dist/functions/numbers/toValidNumber.js:
 @maddimathon/utility-typescript/dist/functions/numbers/validNumber.js:
 @maddimathon/utility-typescript/dist/functions/objects/isObjectEmpty.js:
@@ -2203,12 +2205,13 @@ export {
 @maddimathon/utility-typescript/dist/functions/objects/objectFlatten.js:
 @maddimathon/utility-typescript/dist/functions/objects/objectFlattenAsync.js:
 @maddimathon/utility-typescript/dist/functions/objects/objectFromEntries.js:
+@maddimathon/utility-typescript/dist/functions/objects/objectKeySortAsync.js:
 @maddimathon/utility-typescript/dist/functions/objects/objectMap.js:
 @maddimathon/utility-typescript/dist/functions/objects/objectMapAsync.js:
+@maddimathon/utility-typescript/dist/functions/objects/objectOmit.js:
 @maddimathon/utility-typescript/dist/functions/regex/escRegExp.js:
 @maddimathon/utility-typescript/dist/functions/regex/escRegExpReplace.js:
-@maddimathon/utility-typescript/dist/functions/numbers/makeNumber.js:
-@maddimathon/utility-typescript/dist/functions/numbers/makeNumberAsync.js:
+@maddimathon/utility-typescript/dist/functions/strings/changeIndent.js:
 @maddimathon/utility-typescript/dist/functions/strings/slugify.js:
 @maddimathon/utility-typescript/dist/functions/strings/softWrapText.js:
 @maddimathon/utility-typescript/dist/functions/strings/timestamp.js:
@@ -2220,12 +2223,6 @@ export {
 @maddimathon/utility-typescript/dist/index.js:
   (*!
    * @maddimathon/utility-typescript@2.0.0-beta.5.draft
-   * @license MIT
-   *)
-
-@maddimathon/utility-typescript/dist/functions/objects/objectKeySortAsync.js:
-  (*!
-   * @maddimathon/design-system-utilities@2.0.0-beta.5.draft
    * @license MIT
    *)
 */

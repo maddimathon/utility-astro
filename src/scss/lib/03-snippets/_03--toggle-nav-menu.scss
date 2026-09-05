@@ -85,7 +85,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
 
                     @content (js--nav-toggle-container);
 
-                    .toggle-title,
+                    .toggle-block__title,
                     [data-toggle-content] {
                         gap: 0;
 
@@ -129,7 +129,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                         }
                     }
 
-                    .toggle-title {
+                    .toggle-block__title {
                         @if $includeBaseStyles {
                             margin-block-end: calc($title_borderWidth * -1);
                             border-block-end: $title_borderWidth solid currentColor;

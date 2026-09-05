@@ -184,9 +184,9 @@
             "unlink:sass":  "rm -rf node_modules/@maddimathon/utility-sass || echo ''",
 
         "link": "run-p link:*",
-            "link-ts":    "npm run unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
-            "link-build": "npm run unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.browser.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
-            "link:sass":  "npm run unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
+            "link-ts":    "npm run --silent unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
+            "link-build": "npm run --silent unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.browser.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
+            "link:sass":  "npm run --silent unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "preinstall": "npm run unlink",
 

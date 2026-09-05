@@ -64,7 +64,7 @@ type Copyright_PlainOwner = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    year?: number | undefined;
+    year?: number | false | undefined;
 };
 
 type Copyright_PlainYear = {
@@ -83,7 +83,7 @@ type Copyright_PlainYear = {
      * 
      * *Text to be escaped, NOT html.*
      */
-    year: number;
+    year: number | false;
 };
 
 /**

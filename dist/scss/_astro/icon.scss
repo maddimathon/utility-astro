@@ -9,8 +9,8 @@
 /* # ICONS ==================================== */
 
 %icon,
-.toggle-control > :global(.icon) {
-    @include lib.snippet-support-icons;
+.toggle-block__control > :global(.icon) {
+    @include lib.snippet-icon-block;
 }
 
 @include lib.extend-selectors;

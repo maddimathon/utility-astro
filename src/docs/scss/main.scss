@@ -25,7 +25,7 @@
     @include cx-prop(height-nav-primary, $_navHeight);
 
     .nav-primary[data-toggle-container] {
-        position: sticky;
+        // position: sticky;
         top: 0;
         grid-row: 1;
 
@@ -35,7 +35,7 @@
 
         z-index: 9999;
 
-        > .toggle-title {
+        > .toggle-block__title {
             min-height: do-var(height-nav-primary, $_navHeight);
 
             [data-toggle-control] {

@@ -5,8 +5,8 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # ICONS ==================================== */
-.icon .icon,
-.toggle-control > :global(.icon) .icon {
+.icon,
+.toggle-block__control > :global(.icon) {
     --display: inline-block;
     display: inline-block;
     display: var(--display, inline-block);
@@ -24,8 +24,8 @@
     );
     vertical-align: middle;
 }
-.icon .icon > svg,
-.toggle-control > :global(.icon) .icon > svg {
+.icon > svg,
+.toggle-block__control > :global(.icon) > svg {
     --display: block;
     display: block;
     display: var(--display, block);

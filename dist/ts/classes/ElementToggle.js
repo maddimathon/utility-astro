@@ -219,7 +219,7 @@ export class ElementToggle {
             active: this.container.dataset['toggleAttrStateActive'] || 'data-state-active',
             focus: this.container.dataset['toggleAttrStateFocus'] || 'data-state-focus',
         };
-        const _containerType = (_d = (_c = this.container.dataset['toggleContainerType']) === null || _c === void 0 ? void 0 : _c.split(',')) !== null && _d !== void 0 ? _d : [];
+        const _containerType = (_d = (_c = this.container.dataset['toggleContainerType']) === null || _c === void 0 ? void 0 : _c.split(/\s+/g)) !== null && _d !== void 0 ? _d : [];
         this.isMenu = _containerType.includes('menu');
         this.asModal = this.isMenu || _containerType.includes('modal');
         this.isNav = _containerType.includes('nav')
@@ -548,22 +548,17 @@ export class ElementToggle {
      */
     toggle(button) {
         this.activateButton(button !== null && button !== void 0 ? button : this.primaryButton);
-        // returns
-        if (!this.container) {
-            return;
-        }
+        this.clearTimeout();
         /*
          * Grab the current state and trigger an opening or closing function!
          */
         switch (this.container.getAttribute('data-toggle-container')) {
             case 'closed':
             case 'closing':
-                this.clearTimeout();
                 this.open();
                 break;
             case 'open':
             default:
-                this.clearTimeout();
                 this.close();
                 break;
         }
@@ -573,11 +568,6 @@ export class ElementToggle {
      * Toggles the element open.
      */
     open() {
-        // returns
-        if (!this.allButtons || !this.container) {
-            this.deactivateButton();
-            return;
-        }
         this.setClosingTime();
         this.container.setAttribute('data-toggle-container', 'open');
         this.allButtons.forEach((button) => {
@@ -601,11 +591,6 @@ export class ElementToggle {
         // untrap focus
         if (this.asModal) {
             this.untrapFocus();
-        }
-        // returns
-        if (!this.container) {
-            this.deactivateButton();
-            return;
         }
         /*
          * Adjust the data-toggle-container on the container and the aria-expanded for

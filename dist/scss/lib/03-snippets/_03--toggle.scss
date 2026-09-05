@@ -17,12 +17,19 @@
 
 @use '03-02-layouts' as *;
 
-$_defaultHeadingSelectors_greaterThan6_withWhere: ();
+$_defaultHeadingSelectors_greaterThan3_withWhere: ();
+
+$_selector_any_modal_container: (
+    '[data-toggle-container-type=menu]',
+    '[data-toggle-container-type|=menu]',
+    '[data-toggle-container-type=modal]',
+    '[data-toggle-container-type|=modal]'
+);
 
 @each $level in token-all-heading-levels() {
-    @if $level > 6 {
-        $_defaultHeadingSelectors_greaterThan6_withWhere: list.join(
-            $_defaultHeadingSelectors_greaterThan6_withWhere,
+    @if $level > 3 {
+        $_defaultHeadingSelectors_greaterThan3_withWhere: list.join(
+            $_defaultHeadingSelectors_greaterThan3_withWhere,
             ('%h#{$level}', '%h#{$level}--where'),
             $separator: comma
         );
@@ -30,34 +37,20 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 }
 
 @mixin _snippet-toggle-block--display-contents {
-    display: contents;
-
     @include snippet-body-grid--display-contents(
         $cols: content-start/content-end,
         $useFeatureCheckJS: false
-    );
+    ) {
+        @include prop-display(contents);
+
+        @content;
+    }
 }
 
 ///
-/// Supports the Toggle astro component.
+/// @since 0.1.0-beta.0.draft
 ///
-@mixin snippet-support-toggle-block(
-    $content_container_paddingBlock: var-mrg-soft('300'),
-    $content_container_paddingInline: var-mrg-firm('300'),
-    $control_heading_paddingBlockEnd: var-stroke-relative('400'),
-    $control_heading_unstyled_paddingBlockEnd: 0,
-    $control_paddingBlockEnd: var-mrg-soft('200'),
-    //
-    // prettier-ignore
-    $gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr,
-    //
-    $svg_sel_static: '#a',
-    $svg_sel_moving: '#b',
-    //
-    $includeBackdropControlStyles: true,
-    $includeBaseStyles: true,
-    $includeMarginBlock: true
-) {
+@mixin _snippet-support-toggle-block-base--pseudo-classes {
     @at-root %_flex-contents-container {
         @include prop-display(flex);
         @include snippet-body-grid--flex-container;
@@ -67,13 +60,363 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
     @at-root %_flex-contents-container--display-contents {
         @extend %_flex-contents-container;
-        @include _snippet-toggle-block--display-contents;
+        @include _snippet-toggle-block--display-contents {
+            @content (flex-contents-container--display-contents);
+        }
     }
+}
+
+///
+/// Adds only the most basic toggle block functionality using attribute
+/// selectors.
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin snippet-support-toggle-block-base(
+    $svg_sel_static: '#a',
+    $svg_sel_moving: '#b'
+) {
+    @include _snippet-support-toggle-block-base--pseudo-classes using
+        ($location) {
+        @content (base-$location);
+    }
+
+    /* Universal Toggling ==================================== */
 
     ///
     /// CONTAINER
     ///
     [data-toggle-container] {
+        @content (toggle-base--container);
+    }
+
+    ///
+    /// CONTROL
+    ///
+    [data-toggle-control] {
+        @content (toggle-base--control);
+
+        @include config.selector-button-disabled {
+            @content (toggle-base--control--disabled);
+
+            .toggle-block__control__icon {
+                display: none !important;
+
+                @content (toggle-base--control--disabled--icon);
+            }
+        }
+    }
+
+    ///
+    /// CONTROL - BACKDROP
+    ///
+    [data-toggle-control-backdrop] {
+        @content (toggle-base--control-backdrop);
+    }
+
+    ///
+    /// TITLE & HEADINGS
+    ///
+    .toggle-block__title,
+    .toggle-block__title__heading {
+        @content (toggle-base--title-and-headings);
+    }
+    .toggle-block__title__heading {
+        @content (toggle-base--title--headings);
+    }
+
+    ///
+    /// TITLE
+    ///
+    .toggle-block__title {
+        @content (toggle-base--title);
+
+        &:has(> .toggle-block__title__heading) {
+            @content (toggle-base--title--has-heading);
+        }
+
+        > .toggle-block__title__heading {
+            @content (toggle-base--title--heading);
+
+            .toggle-block__control__icon {
+                @content (toggle-base--title--heading--icon);
+            }
+
+            [data-toggle-control] {
+                @content (toggle-base--title--heading--toggle-control);
+            }
+        }
+    }
+
+    ///
+    /// CONTENT
+    ///
+    [data-toggle-content] {
+        @content (toggle-base--content);
+
+        /// BLOCK ///
+
+        > .container {
+            margin: 0;
+
+            @content (toggle-base--content--container);
+        }
+    }
+
+    /* Javascript Enabled ==================================== */
+
+    @include feature-check.js {
+        ///
+        /// CONTAINER
+        ///
+        [data-toggle-container] {
+            @content (js--toggle-base--container);
+        }
+
+        ///
+        /// CONTROL
+        ///
+        [data-toggle-control] {
+            @content (js--toggle-base--control);
+
+            &[data-toggle-control-backdrop] {
+                @content (js--toggle-base--control-backdrop);
+            }
+
+            .toggle-block__control__icon {
+                @content (js--toggle-base--icon);
+
+                &,
+                svg {
+                    @content (js--toggle-base--icon-and-svg);
+                }
+            }
+        }
+
+        ///
+        /// CONTROL INNER
+        ///
+        .toggle-block__control__inner {
+            @content (js--toggle-base--control-inner);
+        }
+
+        ///
+        /// TITLE & HEADINGS
+        ///
+        .toggle-block__title,
+        .toggle-block__title > .toggle-block__title__heading {
+            @content (js--toggle-base--title-and-headings);
+        }
+
+        ///
+        /// TITLE
+        ///
+        .toggle-block__title {
+            @content (js--toggle-base--title);
+
+            &:has(.toggle-block__title__heading) {
+                @content (js--toggle-base--title--has-heading);
+            }
+
+            > .toggle-block__title__heading {
+                @content (js--toggle-base--title--heading);
+            }
+
+            > %unstyled-heading,
+            > %unstyled-heading--where {
+                @content (js--toggle-base--title--heading--unstyled);
+            }
+        }
+
+        ///
+        /// CONTENT
+        ///
+        [data-toggle-content] {
+            @content (js--toggle-base--content);
+
+            /// BLOCK ///
+
+            > .container {
+                @content (js--toggle-base--content--container);
+            }
+        }
+    }
+
+    /* Opening & Closing ==================================== */
+
+    @include feature-check.js {
+        @include selector.add-body-selector(
+            selector.has-list(
+                selector.is-list(
+                    $_selector_any_modal_container,
+                    $parentSelector: '[data-toggle-container=open]',
+                    $split: false,
+                    $unify: true
+                ),
+                $parentSelector: config.$selector_body,
+                $split: false,
+                $unify: true
+            )
+        ) {
+            overflow: hidden;
+        }
+
+        ///
+        /// CLOSED
+        ///
+        [data-toggle-container='closed'] {
+            @content (js--toggle-base--container--closed);
+
+            > [data-toggle-content] {
+                @content (js--toggle-base--container--closed--content);
+
+                > .container {
+                    @content (js--toggle-base--container--closed--content--container);
+                }
+            }
+        }
+
+        ///
+        /// OPEN & CLOSING
+        ///
+        [data-toggle-container='open'],
+        [data-toggle-container='closing'] {
+            @content (js--toggle-base--container--open-or-closing);
+
+            > [data-toggle-content] {
+                @content (js--toggle-base--container--open-or-closing--content);
+
+                > .container {
+                    @content (js--toggle-base--container--open-or-closing--content--container);
+                }
+            }
+
+            [data-toggle-control] {
+                @content (js--toggle-base--container--open-or-closing--control);
+
+                &[data-toggle-control-backdrop] {
+                    @content (js--toggle-base--container--open-or-closing--control-backdrop);
+                }
+            }
+        }
+
+        ///
+        /// OPEN
+        ///
+        [data-toggle-container='open'] {
+            @content (js--toggle-base--container--open);
+
+            [data-toggle-control] {
+                @content (js--toggle-base--container--open--control);
+
+                .toggle-block__control__icon {
+                    @content (js--toggle-base--container--open--control--icon);
+
+                    > svg #{$svg_sel_moving} {
+                        @content (js--toggle-base--container--open--control--icon--moving);
+                    }
+                }
+
+                &[data-toggle-control-backdrop] {
+                    @content (js--toggle-base--container--open--control-background);
+                }
+            }
+
+            > [data-toggle-content] {
+                @content (js--toggle-base--container--open--content);
+
+                > .container {
+                    @content (js--toggle-base--container--open--content--container);
+                }
+            }
+        }
+
+        ///
+        /// CLOSING
+        ///
+        [data-toggle-container='closing'] {
+            @content (js--toggle-base--container--closing);
+
+            [data-toggle-control] {
+                @content (js--toggle-base--container--closing--control);
+
+                .toggle-block__control__icon {
+                    @content (js--toggle-base--container--closing--control--icon);
+
+                    > svg #{$svg_sel_moving} {
+                        @content (js--toggle-base--container--closing--control--icon--moving);
+                    }
+                }
+            }
+
+            > [data-toggle-content] {
+                @content (js--toggle-base--container--closing--content);
+
+                > .container {
+                    @content (js--toggle-base--container--closing--content--container);
+                }
+            }
+        }
+    }
+}
+
+@mixin snippet-support-toggle-block(
+    $content_container_paddingBlock: var-mrg-soft('300'),
+    $content_container_paddingInline: var-mrg-firm('300'),
+    $control_heading_paddingBlockEnd: var-stroke-relative('400'),
+    $control_heading_unstyled_paddingBlockEnd: 0,
+    $control_paddingBlockEnd: var-mrg-soft('200'),
+    //
+    $gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr,
+    //
+    $svg_sel_moving: '#b',
+    $svg_sel_static: '#a',
+    //
+    $includeBackdropControlStyles: true,
+    $includeBase: true,
+    $includeMarginBlock: true,
+    $includeStyles: true,
+    //
+    $selector_container: '.toggle-block',
+    $selector_content: selector.append($selector_container, '__content'),
+    $selector_control: selector.append($selector_container, '__control'),
+    $selector_control_backdrop: '[data-toggle-control-backdrop]',
+    $selector_control_icon: selector.append($selector_control, '__icon'),
+    $selector_control_inner: selector.append($selector_control, '__inner'),
+    $selector_title: selector.append($selector_container, '__title'),
+    $selector_title_heading: selector.append(
+            $selector_container,
+            '__title__heading'
+        ),
+    //
+     //
+) {
+    @if $includeBase {
+        @include snippet-support-toggle-block-base(
+                $svg_sel_moving: $svg_sel_moving,
+                $svg_sel_static: $svg_sel_static
+            )
+            using ($location) {
+            @content ($location);
+        }
+    } @else {
+        @include _snippet-support-toggle-block-base--pseudo-classes using
+            ($location) {
+            @content ($location);
+        }
+    }
+
+    $selector_title_heading__direct: selector.nest(
+        '>',
+        $selector_title_heading
+    );
+
+    /* Toggle Blocks ==================================== */
+
+    ///
+    /// CONTAINER
+    ///
+    #{$selector_container} {
         @extend %_flex-contents-container--display-contents;
 
         @content (toggle-container);
@@ -82,72 +425,54 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
     ///
     /// CONTROL
     ///
-    [data-toggle-control] {
+    #{$selector_control} {
         margin: 0;
         padding: 0;
 
-        box-shadow: none;
-
-        @if $includeBaseStyles {
+        @if $includeStyles {
             @include cx-prop(icon-color, currentColor);
-
-            margin: 0;
             width: auto;
 
             font: inherit;
-            text-align: inherit;
+            font-size: 1em;
 
-            border: none;
-            background: none;
-            color: inherit;
+            text-align: inherit;
         }
 
         @content (toggle-control);
 
-        &[aria-disabled] {
-            @if $includeBaseStyles {
+        @include apply-interactive-mixin(
+            $hover: true,
+            $focus: true,
+            $focusWithin: true,
+            $active: true,
+            $self: true
+        ) {
+            @if $includeStyles {
+                box-shadow: none;
+                border: none;
+                background: none;
+                opacity: 1;
+                color: inherit;
+            }
+
+            @content (toggle-control--hover-focus-active);
+        }
+
+        @include config.selector-button-disabled {
+            @if $includeStyles {
                 appearance: none;
                 cursor: text;
             }
 
             @content (toggle-control--disabled);
-
-            .toggle-icon {
-                display: none;
-
-                @content (toggle-control--disabled--icon);
-            }
-        }
-
-        @include hover-focus-visible-or-within {
-            @if $includeBaseStyles {
-                box-shadow: none;
-                border: none;
-                background: none;
-                opacity: 1;
-                color: inherit;
-            }
-
-            @content (toggle-control--hover-focus);
-        }
-
-        @include active {
-            @if $includeBaseStyles {
-                box-shadow: none;
-                border: none;
-                background: none;
-                opacity: 1;
-                color: inherit;
-            }
-
-            @content (toggle-control--active);
         }
     }
 
     ///
     /// CONTROL - BACKDROP
     ///
-    [data-toggle-control-backdrop] {
+    #{$selector_control_backdrop} {
         display: none;
         position: fixed;
         opacity: 0;
@@ -158,43 +483,37 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
     ///
     /// TITLE & HEADINGS
     ///
-    .toggle-title,
-    #{selector.nest('.toggle-title', '>', selector-all-headings--base())} {
-        @content (toggle-title-and-headings);
-    }
-    #{selector.nest('.toggle-title', '>', selector-all-headings--where())} {
-        @content (toggle-title-and-headings);
-    }
+    // #{$selector_title},
+    // #{$selector_title_heading} {
+    //     @content (toggle-title-and-headings);
+    // }
+    // #{$selector_title_heading} {
+    //     @content (toggle-title--headings);
+    // }
 
     ///
     /// TITLE
     ///
-    .toggle-title {
+    #{$selector_title} {
         @extend %_flex-contents-container--display-contents;
 
         margin: 0;
-        // padding: 0;
 
-        @if $includeBaseStyles {
+        @if $includeStyles {
             font-weight: 600;
         }
 
         @content (toggle-title);
 
-        @include selector.has(
-            selector-all-headings($where: config.$selector_headingsByRole),
-            $direct: true,
-            $split: false,
-            $unifyParent: true
-        ) {
-            @content (toggle-title--has-heading);
-        }
+        // &:has(#{$selector_title_heading__direct}) {
+        //     @content (toggle-title--has-heading);
+        // }
 
-        @include selector-all-headings($direct: true) {
+        #{$selector_title_heading__direct} {
             @content (toggle-title--heading);
 
-            .toggle-icon {
-                @if $includeBaseStyles {
+            #{$selector_control_icon} {
+                @if $includeStyles {
                     @include cx-prop(icon-size, 1em);
                     padding-bottom: 0;
                 }
@@ -202,8 +521,8 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                 @content (toggle-title--heading--icon);
             }
 
-            [data-toggle-control] {
-                @if $includeBaseStyles {
+            #{$selector_control} {
+                @if $includeStyles {
                     font: inherit;
                     line-height: inherit;
                     letter-spacing: inherit;
@@ -218,8 +537,8 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
     ///
     /// ICON
     ///
-    .toggle-icon {
-        @if $includeBaseStyles {
+    #{$selector_control_icon} {
+        @if $includeStyles {
             @include cx-prop(icon-size, 1.125em);
             @include prop-display(inline-block);
 
@@ -233,7 +552,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         > svg {
             width: auto;
 
-            @if $includeBaseStyles {
+            @if $includeStyles {
                 stroke: currentColor;
                 stroke-width: clamp(
                     1px,
@@ -250,14 +569,14 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
     ///
     /// CONTROL INNER
     ///
-    .toggle-control-inner {
-        @content (toggle-control-inner);
-    }
+    // #{$selector_control_inner} {
+    //     @content (toggle-control-inner);
+    // }
 
     ///
     /// CONTENT
     ///
-    [data-toggle-content] {
+    #{$selector_content} {
         @extend %_flex-contents-container--display-contents;
 
         @content (toggle-content);
@@ -266,7 +585,6 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
         > .container {
             @extend %_flex-contents-container--display-contents;
-            margin: 0;
 
             @content (toggle-content--container);
         }
@@ -279,7 +597,10 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         position: relative;
 
         @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
-        grid-template-columns: do-var(grid-template-columns--toggle);
+        grid-template-columns: do-var(
+            grid-template-columns--toggle,
+            $gridCols_toggle
+        );
 
         grid-auto-rows: auto;
         grid-auto-flow: column;
@@ -290,7 +611,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
             )
         );
 
-        @if $includeBaseStyles {
+        @if $includeStyles {
             gap: 0 var-mrg-firm('200');
         }
 
@@ -314,7 +635,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// CONTAINER
         ///
-        [data-toggle-container] {
+        #{$selector_container} {
             @extend %_toggle-container-grid-basics;
             @include prop-display(grid);
             position: relative;
@@ -330,30 +651,25 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
             @content (js--toggle-container);
 
             @if $includeMarginBlock {
-                &:has(.toggle-title > %title) {
+                &:has(#{selector.nest( $selector_title, '>', '%title' )}),
+                &:has(.toggle-block__title > %title) {
                     margin-block-start: 0;
                 }
 
-                &:has(.toggle-title > %h1),
-                &:has(.toggle-title > %h2),
-                &:has(.toggle-title > %h3) {
+                &:has(#{selector.nest( $selector_title, '>', '%h1' )}),
+                &:has(#{selector.nest( $selector_title, '>', '%h2' )}),
+                &:has(#{selector.nest( $selector_title, '>', '%h3' )}) {
                     margin-block-start: var-mrg-soft('800');
-                }
-
-                &:has(.toggle-title > %h4),
-                &:has(.toggle-title > %h5),
-                &:has(.toggle-title > %h6) {
-                    margin-block-start: var-mrg-soft('600');
                 }
 
                 @include selector.has(
                     selector.nest(
-                        '.toggle-title',
+                        $selector_title,
                         '>',
-                        $_defaultHeadingSelectors_greaterThan6_withWhere
+                        $_defaultHeadingSelectors_greaterThan3_withWhere
                     ),
                     $split: false,
-                    $unifyParent: true
+                    $unify: true
                 ) {
                     margin-block-start: var-mrg-soft('600');
                 }
@@ -363,13 +679,13 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// CONTROL
         ///
-        [data-toggle-control] {
+        #{$selector_control} {
             @extend %toggle-container-subgrid;
 
             margin: 0;
             padding: 0;
 
-            @if $includeBaseStyles {
+            @if $includeStyles {
                 align-items: center;
                 padding: 0;
                 padding-block-end: $control_paddingBlockEnd;
@@ -392,7 +708,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                 @content (js--toggle-control--active);
             }
 
-            &[data-toggle-control-backdrop] {
+            @at-root #{selector.unify(&, $selector_control_backdrop)} {
                 @include cx-prop(display, block);
                 display: none;
                 position: fixed;
@@ -446,7 +762,12 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                         opacity: 0.1875;
                     }
 
-                    @include active-hover-focus-visible-or-within(
+                    @include apply-interactive-mixin(
+                        $hover: true,
+                        $focus: true,
+                        $focusWithin: true,
+                        $active: true,
+                        $activeWithin: true,
                         $includeNoWhereSelectorFallback: false
                     ) {
                         border: none;
@@ -457,7 +778,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                 }
             }
 
-            .toggle-icon {
+            #{$selector_control_icon} {
                 @include prop-grid-column(icon);
 
                 @content (js--toggle-icon);
@@ -467,9 +788,11 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
                     @content (js--toggle-icon-and-svg);
                 }
 
-                svg #{$svg_sel_static},
-                svg #{$svg_sel_moving} {
-                    transform-origin: center;
+                svg {
+                    #{$svg_sel_static},
+                    #{$svg_sel_moving} {
+                        transform-origin: center;
+                    }
                 }
             }
         }
@@ -477,7 +800,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// CONTROL INNER
         ///
-        .toggle-control-inner {
+        #{$selector_control_inner} {
             @include prop-grid-column(content);
 
             @content (js--toggle-control-inner);
@@ -486,14 +809,10 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// TITLE & HEADINGS
         ///
-        .toggle-title,
-        #{selector.nest('.toggle-title', '>', selector-all-headings(  $where: config.$selector_headingsByRole ))} {
+        #{$selector_title},
+        #{selector.nest($selector_title, '>', $selector_title_heading)} {
             @extend %toggle-container-subgrid;
 
-            // justify-content: stretch;
-            // justify-items: start;
-            // align-content: stretch;
-            // align-items: stretch;
             @include snippet-body-grid--grid-alignment(
                 (
                     align-content: stretch,
@@ -512,23 +831,19 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// TITLE
         ///
-        .toggle-title {
+        #{$selector_title} {
             z-index: 2;
 
             @content (js--toggle-title);
 
-            @include selector.has(
-                selector-all-headings($where: config.$selector_headingsByRole),
-                $split: false,
-                $unifyParent: true
-            ) {
+            &:has(#{$selector_title_heading}) {
                 @content (js--toggle-title--has-heading);
             }
 
-            @include selector-all-headings($direct: true) {
+            #{selector.nest('>', $selector_title_heading)} {
                 margin-block: 0;
 
-                @if $includeBaseStyles {
+                @if $includeStyles {
                     padding-block-end: $control_heading_paddingBlockEnd;
                 }
 
@@ -537,7 +852,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
             > %unstyled-heading,
             > %unstyled-heading--where {
-                @if $includeBaseStyles {
+                @if $includeStyles {
                     padding-block-end: $control_heading_unstyled_paddingBlockEnd;
                 }
 
@@ -548,7 +863,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
         ///
         /// CONTENT
         ///
-        [data-toggle-content] {
+        #{$selector_content} {
             @extend %toggle-container-subgrid;
 
             @include prop-grid-column('1 / -1');
@@ -559,7 +874,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
             margin: 0;
             padding: 0;
 
-            @if $includeBaseStyles {
+            @if $includeStyles {
                 width: 100%;
 
                 border-width: 0;
@@ -592,7 +907,7 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
                 @content (js--toggle-content--container);
 
-                @if $includeBaseStyles {
+                @if $includeStyles {
                     > * {
                         flex-shrink: 0;
                     }
@@ -619,14 +934,14 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
 
     /* Opening & Closing ==================================== */
 
-    [data-toggle-control] {
+    #{$selector_control} {
         [data-toggle-container='open'] &,
         & {
             @include feature-check.js {
                 @include hover-focus-visible(
                     $includeNoWhereSelectorFallback: false
                 ) {
-                    @if $includeBaseStyles {
+                    @if $includeStyles {
                         text-decoration-color: transparent;
                         color: var-sys-colour(link);
                     }
@@ -638,126 +953,132 @@ $_defaultHeadingSelectors_greaterThan6_withWhere: ();
     }
 
     @include feature-check.js {
-        ///
-        /// CLOSED
-        ///
-        [data-toggle-container='closed'] {
-            @content (js--toggle-container--closed);
+        #{$selector_container} {
+            ///
+            /// CLOSED
+            ///
+            &[data-toggle-container='closed'] {
+                @content (js--toggle-container--closed);
 
-            > [data-toggle-content] {
-                @content (js--toggle-container--closed--content);
+                #{selector.nest('>', $selector_content)} {
+                    @content (js--toggle-container--closed--content);
 
-                > .container {
-                    opacity: 0;
-                    visibility: hidden;
+                    > .container {
+                        opacity: 0;
+                        visibility: hidden;
 
-                    @content (js--toggle-container--closed--content--container);
-                }
-            }
-        }
-
-        ///
-        /// OPEN & CLOSING
-        ///
-        [data-toggle-container='open'],
-        [data-toggle-container='closing'] {
-            @content (js--toggle-container--open-or-closing);
-
-            > [data-toggle-content] {
-                @content (js--toggle-container--open-or-closing--content);
-
-                > .container {
-                    visibility: visible;
-                    @content (js--toggle-container--open-or-closing--content--container);
-                }
-            }
-
-            [data-toggle-control] {
-                @content (js--toggle-container--open-or-closing--control);
-
-                &[data-toggle-control-backdrop] {
-                    display: do-var(display, block);
-
-                    @content (js--toggle-container--open-or-closing--control-backdrop);
-                }
-            }
-        }
-
-        ///
-        /// OPEN
-        ///
-        [data-toggle-container='open'] {
-            @content (js--toggle-container--open);
-
-            [data-toggle-control] {
-                @if $includeBaseStyles {
-                    color: var-sys-colour(text-active);
-                }
-
-                @content (js--toggle-container--open--control);
-
-                .toggle-icon {
-                    @content (js--toggle-container--open--control--icon);
-
-                    > svg #{$svg_sel_moving} {
-                        transform: rotate(270deg);
-                    }
-                }
-
-                &[data-toggle-control-backdrop] {
-                    opacity: 1;
-
-                    @content (js--toggle-container--open--control-background);
-                }
-            }
-
-            > [data-toggle-content] {
-                @if $includeBaseStyles {
-                    border-inline-width: var-border-width('200');
-                    border-block-end-width: var-border-width('200');
-                }
-
-                grid-template-rows: 1fr;
-
-                @content (js--toggle-container--open--content);
-
-                > .container {
-                    padding-block: $content_container_paddingBlock;
-                    opacity: 1;
-
-                    @content (js--toggle-container--open--content--container);
-                }
-            }
-        }
-
-        ///
-        /// CLOSING
-        ///
-        [data-toggle-container='closing'] {
-            @content (js--toggle-container--closing);
-
-            [data-toggle-control] {
-                @content (js--toggle-container--closing--control);
-
-                .toggle-icon {
-                    @content (js--toggle-container--closing--control--icon);
-
-                    > svg #{$svg_sel_moving} {
-                        transform: rotate(540deg);
+                        @content (js--toggle-container--closed--content--container);
                     }
                 }
             }
 
-            > [data-toggle-content] {
-                grid-template-rows: 0fr;
+            ///
+            /// OPEN & CLOSING
+            ///
+            &[data-toggle-container='open'],
+            &[data-toggle-container='closing'] {
+                @content (js--toggle-container--open-or-closing);
 
-                @content (js--toggle-container--closing--content);
+                #{selector.nest('>', $selector_content)} {
+                    @content (js--toggle-container--open-or-closing--content);
 
-                > .container {
-                    opacity: 0;
-                    visibility: visible;
+                    > .container {
+                        visibility: visible;
+                        @content (js--toggle-container--open-or-closing--content--container);
+                    }
+                }
 
-                    @content (js--toggle-container--closing--content--container);
+                #{$selector_control} {
+                    @content (js--toggle-container--open-or-closing--control);
+
+                    @at-root #{selector.unify(&, $selector_control_backdrop)} {
+                        display: do-var(display, block);
+
+                        @content (js--toggle-container--open-or-closing--control-backdrop);
+                    }
+                }
+            }
+
+            ///
+            /// OPEN
+            ///
+            &[data-toggle-container='open'] {
+                @content (js--toggle-container--open);
+
+                #{$selector_control} {
+                    @if $includeStyles {
+                        color: var-sys-colour(text-active);
+                    }
+
+                    @content (js--toggle-container--open--control);
+
+                    #{$selector_control_icon} {
+                        @content (js--toggle-container--open--control--icon);
+
+                        > svg #{$svg_sel_moving} {
+                            transform: rotate(270deg);
+
+                            @content (js--toggle-container--open--control--icon--moving);
+                        }
+                    }
+
+                    @at-root #{selector.unify(&, $selector_control_backdrop)} {
+                        opacity: 1;
+
+                        @content (js--toggle-container--open--control-background);
+                    }
+                }
+
+                #{selector.nest('>', $selector_content)} {
+                    @if $includeStyles {
+                        border-inline-width: var-border-width('200');
+                        border-block-end-width: var-border-width('200');
+                    }
+
+                    grid-template-rows: 1fr;
+
+                    @content (js--toggle-container--open--content);
+
+                    > .container {
+                        padding-block: $content_container_paddingBlock;
+                        opacity: 1;
+
+                        @content (js--toggle-container--open--content--container);
+                    }
+                }
+            }
+
+            ///
+            /// CLOSING
+            ///
+            &[data-toggle-container='closing'] {
+                @content (js--toggle-container--closing);
+
+                #{$selector_control} {
+                    @content (js--toggle-container--closing--control);
+
+                    #{$selector_control_icon} {
+                        @content (js--toggle-container--closing--control--icon);
+
+                        > svg #{$svg_sel_moving} {
+                            transform: rotate(540deg);
+
+                            @content (js--toggle-container--closing--control--icon--moving);
+                        }
+                    }
+                }
+
+                #{selector.nest('>', $selector_content)} {
+                    grid-template-rows: 0fr;
+
+                    @content (js--toggle-container--closing--content);
+
+                    > .container {
+                        opacity: 0;
+                        visibility: visible;
+
+                        @content (js--toggle-container--closing--content--container);
+                    }
                 }
             }
         }

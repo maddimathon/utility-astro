@@ -9,12 +9,13 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
 /* import - components */
-import Heading from './Heading.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
+import Heading from './Heading.astro';
 
 /* import - layouts */
 
@@ -110,6 +111,7 @@ const {
     defaultOpen,
     id,
     // optional
+    class: classList,
     displayHeading,
     generateID = {
         button: (_id: string) => `${_id}-button`,
@@ -135,23 +137,27 @@ const ContainerHeader =
 ---
 
 <div
-    id={id}
     {...attributes}
+    id={id}
+    class:list={makeClassList('toggle-block', classList)}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
 >
     <ContainerHeader
+        class='toggle-block__title'
+        data-toggle-title={id}
         id={titleID}
-        class='toggle-title'
     >
         <Heading
+            class='toggle-block__title__heading'
+            data-toggle-title-heading={id}
             displayHeading={displayHeading}
             heading={heading}
             minimum={minimumHeading}
         >
             <Toggle_Control
                 {...{ id, buttonID }}
-                iconSVG={iconSVG}
                 data-toggle-primary-control={id}
+                iconSVG={iconSVG}
             >
                 <slot name='button' />
             </Toggle_Control>
@@ -160,6 +166,7 @@ const ContainerHeader =
 
     <Container
         aria-labelledby={titleID}
+        class='toggle-block__content'
         data-toggle-content={id}
         id={contentID}
     >

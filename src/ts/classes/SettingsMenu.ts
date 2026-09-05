@@ -435,7 +435,6 @@ export class SettingsMenu {
      */
     public resetButtonClicked(): void {
         this.#attributeKeys.forEach( ( attr: string ) => {
-
             const startingCookie = document.cookie;
 
             this.#cookies[ attr ]?.delete();

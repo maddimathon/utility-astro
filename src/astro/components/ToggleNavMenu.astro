@@ -78,7 +78,7 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
 >
     <div
         id={titleID}
-        class='toggle-title'
+        class='toggle-block__title'
     >
         <Heading heading={0}>
             <Toggle_Control
@@ -112,7 +112,7 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
     <div
         data-toggle-control={id}
         data-toggle-control-backdrop={id}
-        class='toggle-nav-menu__backdrop'
+        class='toggle-block__control--backdrop toggle-nav-menu__backdrop'
         aria-hidden='true'
     >
     </div>

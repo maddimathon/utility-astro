@@ -169,6 +169,7 @@ $_flex_container_alignment_row: (
     $cols: content-start/content-end,
     $width: auto,
     //
+    $multipleContentBlocks: false,
     $useFeatureCheckJS: true,
     $useWhere: true,
     $args...
@@ -177,16 +178,28 @@ $_flex_container_alignment_row: (
         displayContents,
         $neverUseJS: if($useFeatureCheckJS, null, true)
     ) {
-        @if $width {
-            @at-root :where(&) #{selector.nest( '>', if($useWhere, ':where(*)', '*') )} {
+        @if $multipleContentBlocks {
+            @content (root);
+        } @else {
+            @content;
+        }
+
+        @at-root :where(&) #{selector.nest( '>', if($useWhere, ':where(*)', '*') )} {
+            @if $width {
                 width: $width;
+            }
+
+            @if $multipleContentBlocks {
+                @content (where-direct-child);
             }
         }
 
         @at-root #{selector.nest(&, '>', if($useWhere, ':where(*)', '*') )} {
             @include prop-grid-column($cols, $setCxProp: false, $args...);
 
-            @content;
+            @if $multipleContentBlocks {
+                @content (direct-child);
+            }
         }
     }
 }

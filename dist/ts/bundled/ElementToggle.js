@@ -29,7 +29,7 @@ var ElementToggle = class _ElementToggle {
       active: this.container.dataset["toggleAttrStateActive"] || "data-state-active",
       focus: this.container.dataset["toggleAttrStateFocus"] || "data-state-focus"
     };
-    const _containerType = this.container.dataset["toggleContainerType"]?.split(",") ?? [];
+    const _containerType = this.container.dataset["toggleContainerType"]?.split(/\s+/g) ?? [];
     this.isMenu = _containerType.includes("menu");
     this.asModal = this.isMenu || _containerType.includes("modal");
     this.isNav = _containerType.includes("nav") || !this.isMenu && (this.container.role === "navigation" || this.container.tagName.toLowerCase() === "nav");
@@ -532,18 +532,14 @@ var ElementToggle = class _ElementToggle {
    */
   toggle(button) {
     this.activateButton(button ?? this.primaryButton);
-    if (!this.container) {
-      return;
-    }
+    this.clearTimeout();
     switch (this.container.getAttribute("data-toggle-container")) {
       case "closed":
       case "closing":
-        this.clearTimeout();
         this.open();
         break;
       case "open":
       default:
-        this.clearTimeout();
         this.close();
         break;
     }
@@ -553,10 +549,6 @@ var ElementToggle = class _ElementToggle {
    * Toggles the element open.
    */
   open() {
-    if (!this.allButtons || !this.container) {
-      this.deactivateButton();
-      return;
-    }
     this.setClosingTime();
     this.container.setAttribute("data-toggle-container", "open");
     this.allButtons.forEach((button) => {
@@ -578,10 +570,6 @@ var ElementToggle = class _ElementToggle {
   close() {
     if (this.asModal) {
       this.untrapFocus();
-    }
-    if (!this.container) {
-      this.deactivateButton();
-      return;
     }
     this.allButtons.forEach((button) => {
       if (button.getAttribute("aria-controls")) {

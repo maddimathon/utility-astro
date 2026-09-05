@@ -9,6 +9,7 @@
 import type { GenericElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -44,7 +45,7 @@ const {
 
 const buttonHTML = (await Astro.slots.render('default'))?.trim();
 
-export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-icon toggle-icon--fallback'>
+export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-block__control__icon toggle-block__control__icon--fallback'>
     <svg
         aria-ignore='true'
         role='img'
@@ -76,7 +77,7 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-icon
 <button
     {...attrs}
     aria-disabled='true'
-    class:list={['toggle-control', { '||': classList }, classList]}
+    class:list={makeClassList('toggle-block__control', classList)}
     data-toggle-control={id}
     id={buttonID}
     type='button'
@@ -85,7 +86,7 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-icon
     {
         (!attrs['aria-label'] || buttonHTML) && (
             <span
-                class='toggle-control-inner'
+                class='toggle-block__control__inner'
                 set:html={buttonHTML || 'Toggle me'}
             />
         )
