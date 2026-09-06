@@ -209,7 +209,7 @@ export class ElementToggle {
         _ElementToggle_focusableContainerChildren.set(this, void 0);
         _ElementToggle_focusableContentChildren.set(this, void 0);
         _ElementToggle_focusTrappers.set(this, void 0);
-        this.opts = Object.assign({ activeTimeoutLength: ((_b = partialOpts === null || partialOpts === void 0 ? void 0 : partialOpts.closingTime) !== null && _b !== void 0 ? _b : 1800) / 4, closeWhenUntargetted: false, closingTime: 1800, closingTimeProperty: '--toggle-closing-time', debug: false, openWhenTargetted: true }, partialOpts);
+        this.opts = Object.assign({ activeTimeoutLength: ((_b = partialOpts === null || partialOpts === void 0 ? void 0 : partialOpts.closingTime) !== null && _b !== void 0 ? _b : 1800) / 4, closeWhenUntargetted: false, closingTime: 0, closingTimeProperty: '--toggle-closing-time', debug: false, openWhenTargetted: true }, partialOpts);
         this.closingTime = this.opts.closingTime;
         this.allButtons = elements.allButtons;
         this.container = elements.container;
@@ -219,7 +219,7 @@ export class ElementToggle {
             active: this.container.dataset['toggleAttrStateActive'] || 'data-state-active',
             focus: this.container.dataset['toggleAttrStateFocus'] || 'data-state-focus',
         };
-        const _containerType = (_d = (_c = this.container.dataset['toggleContainerType']) === null || _c === void 0 ? void 0 : _c.split(/\s+/g)) !== null && _d !== void 0 ? _d : [];
+        const _containerType = (_d = (_c = this.container.dataset['toggleContainerType']) === null || _c === void 0 ? void 0 : _c.split(/[,\s]+/g)) !== null && _d !== void 0 ? _d : [];
         this.isMenu = _containerType.includes('menu');
         this.asModal = this.isMenu || _containerType.includes('modal');
         this.isNav = _containerType.includes('nav')

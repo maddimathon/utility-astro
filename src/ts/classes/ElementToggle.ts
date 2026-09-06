@@ -370,7 +370,7 @@ export class ElementToggle {
             focus: this.container.dataset[ 'toggleAttrStateFocus' ] || 'data-state-focus',
         };
 
-        const _containerType = this.container.dataset[ 'toggleContainerType' ]?.split( /\s+/g ) ?? [];
+        const _containerType = this.container.dataset[ 'toggleContainerType' ]?.split( /[,\s]+/g ) ?? [];
 
         this.isMenu = _containerType.includes( 'menu' );
 

@@ -5,10 +5,10 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # TOGGLE BLOCKS ==================================== */
-.toggle-block__content > .container,
-.toggle-block__content,
-.toggle-block__title,
-.toggle-block {
+.toggle-block .toggle-block__title,
+.toggle-block,
+[data-toggle-content] > .container,
+[data-toggle-content] {
     --display: flex;
     display: flex;
     display: var(--display, flex);
@@ -22,36 +22,122 @@
 }
 
 @supports (display: contents) {
-    .toggle-block__content > .container,
-    .toggle-block__content,
-    .toggle-block__title,
-    .toggle-block {
+    .toggle-block .toggle-block__title,
+    .toggle-block,
+    [data-toggle-content] > .container,
+    [data-toggle-content] {
         --display: contents;
         display: contents;
         display: var(--display, contents);
     }
     :where(
-            .toggle-block__content > .container,
-            .toggle-block__content,
-            .toggle-block__title,
-            .toggle-block
+            .toggle-block .toggle-block__title,
+            .toggle-block,
+            [data-toggle-content] > .container,
+            [data-toggle-content]
         )
         > :where(*) {
         width: auto;
     }
-    .toggle-block__content > .container > :where(*),
-    .toggle-block__content > :where(*),
-    .toggle-block__title > :where(*),
-    .toggle-block > :where(*) {
+    .toggle-block .toggle-block__title > :where(*),
+    .toggle-block > :where(*),
+    [data-toggle-content] > .container > :where(*),
+    [data-toggle-content] > :where(*) {
         grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
     }
 }
 
 /* Universal Toggling ==================================== */
+[data-toggle-control][aria-disabled="true"],
+[data-toggle-control][disabled],
+[data-toggle-control][aria-disabled="true"]:hover,
+[data-toggle-control][disabled]:hover,
+[data-toggle-control][aria-disabled="true"]:active,
+[data-toggle-control][disabled]:active,
+[data-toggle-control][data-state-active="true"][aria-disabled="true"],
+[data-toggle-control][data-state-active="true"][disabled],
+[data-toggle-control][data-state-focus="true"][aria-disabled="true"],
+[data-toggle-control][data-state-focus="true"][disabled],
+.no-js [data-toggle-control][aria-disabled="true"]:focus,
+.no-js [data-toggle-control][disabled]:focus,
+.js__no-whereSelector [data-toggle-control][aria-disabled="true"]:focus,
+.js__no-whereSelector [data-toggle-control][disabled]:focus {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+:where(.js__no-focusVisible) [data-toggle-control][aria-disabled="true"]:focus,
+:where(.js__no-focusVisible) [data-toggle-control][disabled]:focus {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control][aria-disabled="true"]:focus-visible,
+[data-toggle-control][disabled]:focus-visible {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control][aria-disabled="true"]:focus-within,
+[data-toggle-control][disabled]:focus-within {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control][aria-disabled="true"]:has(
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
+    ),
+[data-toggle-control][disabled]:has(
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
+    ) {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+
+[data-toggle-control][aria-disabled="true"],
+[data-toggle-control][disabled] {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    text-align: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: text;
+}
+[data-toggle-control][aria-disabled="true"]::before,
+[data-toggle-control][aria-disabled="true"]::after,
+[data-toggle-control][disabled]::before,
+[data-toggle-control][disabled]::after {
+    content: none !important;
+}
+[data-toggle-control][aria-disabled="true"] .icon,
 [data-toggle-control][aria-disabled="true"] .toggle-block__control__icon,
+[data-toggle-control][disabled] .icon,
 [data-toggle-control][disabled] .toggle-block__control__icon {
     display: none !important;
+}
+
+[data-toggle-control-backdrop] {
+    display: none !important;
+    position: fixed;
+    opacity: 0;
 }
 
 [data-toggle-content] > .container {
@@ -59,135 +145,13 @@
 }
 
 /* Javascript Enabled ==================================== */
-/* Opening & Closing ==================================== */
-:where(.js)
-    body:has(
-        [data-toggle-container="open"]:is(
-            [data-toggle-container-type="menu"],
-            [data-toggle-container-type|="menu"],
-            [data-toggle-container-type="modal"],
-            [data-toggle-container-type|="modal"]
-        )
-    ) {
-    overflow: hidden;
-}
-
-/* Toggle Blocks ==================================== */
-.toggle-block__control {
-    margin: 0;
-    padding: 0;
-    --icon-color: currentColor;
-    width: auto;
-    font: inherit;
-    font-size: 1em;
-    text-align: inherit;
-}
-.toggle-block__control,
-.toggle-block__control:hover,
-.toggle-block__control:active,
-.toggle-block__control[data-state-active="true"],
-.toggle-block__control[data-state-focus="true"],
-.no-js .toggle-block__control:focus,
-.js__no-whereSelector .toggle-block__control:focus {
-    box-shadow: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-:where(.js__no-focusVisible) .toggle-block__control:focus {
-    box-shadow: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-.toggle-block__control:focus-visible {
-    box-shadow: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-.toggle-block__control:focus-within {
-    box-shadow: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-.toggle-block__control:has([data-state-focus="true"]) {
-    box-shadow: none;
-    border: none;
-    background: none;
-    opacity: 1;
-    color: inherit;
-}
-
-.toggle-block__control[aria-disabled="true"],
-.toggle-block__control[disabled] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    cursor: text;
-}
-
-[data-toggle-control-backdrop] {
-    display: none;
-    position: fixed;
-    opacity: 0;
-}
-
-.toggle-block__title {
-    margin: 0;
-    font-weight: 600;
-}
-.toggle-block__title
-    > .toggle-block__title__heading
-    .toggle-block__control__icon {
-    --icon-size: 1em;
-    padding-bottom: 0;
-}
-.toggle-block__title > .toggle-block__title__heading .toggle-block__control {
-    font: inherit;
-    line-height: inherit;
-    letter-spacing: inherit;
-    text-transform: inherit;
-}
-
-.toggle-block__control__icon {
-    --icon-size: 1.125em;
-    --display: inline-block;
-    display: inline-block;
-    display: var(--display, inline-block);
-    vertical-align: sub;
-    padding-bottom: 0.0625em;
-    padding-bottom: var(--stroke-relative-100, 0.0625em);
-    padding-right: 0.125rem;
-    padding-right: var(--border-width-200, 0.125rem);
-}
-.toggle-block__control__icon > svg {
-    width: auto;
-    stroke: currentColor;
-    stroke-width: clamp(1px, 0.1875em, 0.25rem);
-    stroke-width: clamp(
-        1px,
-        var(--stroke-relative-600, 0.1875em),
-        var(--border-width-400, 0.25rem)
-    );
-    fill: none;
-}
-
-/* Javascript Enabled ==================================== */
-:where(.js) .toggle-block,
-:where(.js) .toggle-block__content,
-:where(.js) .toggle-block__title,
-:where(.js) .toggle-block__title > .toggle-block__title__heading,
-:where(.js) .toggle-block__control {
+:where(.js) [data-toggle-container],
+:where(.js) .toggle-block .toggle-block__title,
+:where(.js) .toggle-block .toggle-block__title > .toggle-block__title__heading,
+:where(.js) [data-toggle-content],
+:where(.js) [data-toggle-title],
+:where(.js) [data-toggle-title-heading],
+:where(.js) [data-toggle-control] {
     --display: grid;
     display: grid;
     display: var(--display, grid);
@@ -205,33 +169,292 @@
     justify-items: stretch;
     align-content: start;
     align-items: start;
-    grid-gap: 0 0.5rem;
-    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
-    gap: 0 0.5rem;
-    gap: 0 var(--mrg-firm-200, 0.5rem);
 }
 
-:where(.js) .toggle-block__content,
-:where(.js) .toggle-block__title,
-:where(.js) .toggle-block__title > .toggle-block__title__heading,
-:where(.js) .toggle-block__control {
+:where(.js) .toggle-block .toggle-block__title,
+:where(.js) .toggle-block .toggle-block__title > .toggle-block__title__heading,
+:where(.js) [data-toggle-content],
+:where(.js) [data-toggle-title],
+:where(.js) [data-toggle-title-heading],
+:where(.js) [data-toggle-control] {
     grid-template-columns: subgrid;
     grid-column: 1/-1;
-    margin: 0;
 }
 
+:where(.js) [data-toggle-container] {
+    z-index: 1;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop] {
+    position: fixed !important;
+    align-self: auto;
+    justify-self: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 !important;
+    padding: 0;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+    cursor: pointer;
+    z-index: -2;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop],
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"],
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 1;
+}
+
+:where(.js):where(.js__no-focusVisible)
+    [data-toggle-control][data-toggle-control-backdrop]:focus {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 1;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 1;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 1;
+}
+
+:where(.js)
+    [data-toggle-control][data-toggle-control-backdrop]:has(
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
+    ) {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 1;
+}
+
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::before,
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
+    content: "";
+    content: ""/"";
+    --display: block;
+    display: block;
+    display: var(--display, block);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::before {
+    background: Canvas;
+    background: var(--sys-clr-background, Canvas);
+    opacity: 0.625;
+}
+:where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
+    background: LinkText;
+    background: var(--sys-clr-link, LinkText);
+    opacity: 0.1875;
+}
+:where(.js) [data-toggle-control] .icon svg #a,
+:where(.js) [data-toggle-control] .icon svg #b,
+:where(.js) [data-toggle-control] .toggle-block__control__icon svg #a,
+:where(.js) [data-toggle-control] .toggle-block__control__icon svg #b {
+    transform-origin: center;
+}
+:where(.js) [data-toggle-title] {
+    z-index: 2;
+}
+:where(.js) [data-toggle-content] {
+    grid-row: 2;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+}
+:where(.js) [data-toggle-content] > .container {
+    --grid-column: 1 / -1;
+    grid-column: 1 / -1;
+    grid-column: var(--grid-column, 1 / -1);
+    --display: flex;
+    display: flex;
+    display: var(--display, flex);
+    width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+}
+:where(.js) [data-toggle-content] > .container > * {
+    flex-shrink: 0;
+}
+
+/* Opening & Closing ==================================== */
+:where(.js)
+    body:has(
+        [data-toggle-container="open"]:is(
+            [data-toggle-container-type="menu"],
+            [data-toggle-container-type~="menu"],
+            [data-toggle-container-type="modal"],
+            [data-toggle-container-type~="modal"]
+        )
+    ):has([data-toggle-control-backdrop]) {
+    overflow: hidden !important;
+}
+
+:where(.js)
+    [data-toggle-container="closed"]
+    > [data-toggle-content]
+    > .container {
+    opacity: 0;
+    visibility: hidden;
+}
+:where(.js) [data-toggle-container="open"] > [data-toggle-content] > .container,
+:where(.js)
+    [data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    visibility: visible;
+}
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control][data-toggle-control-backdrop],
+:where(.js)
+    [data-toggle-container="closing"]
+    [data-toggle-control][data-toggle-control-backdrop] {
+    display: block !important;
+    display: var(--display, block) !important;
+}
+:where(.js) [data-toggle-container="open"] [data-toggle-control] .icon > svg #b,
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control]
+    .toggle-block__control__icon
+    > svg
+    #b {
+    transform: rotate(270deg);
+}
+:where(.js)
+    [data-toggle-container="open"]
+    [data-toggle-control][data-toggle-control-backdrop] {
+    opacity: 1;
+}
+:where(.js) [data-toggle-container="open"] > [data-toggle-content] {
+    grid-template-rows: 1fr;
+}
+:where(.js)
+    [data-toggle-container="open"]
+    > [data-toggle-content]
+    > .container {
+    opacity: 1;
+}
+:where(.js)
+    [data-toggle-container="closing"]
+    [data-toggle-control]
+    .icon
+    > svg
+    #b,
+:where(.js)
+    [data-toggle-container="closing"]
+    [data-toggle-control]
+    .toggle-block__control__icon
+    > svg
+    #b {
+    transform: rotate(540deg);
+}
+:where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
+    grid-template-rows: 0fr;
+}
+:where(.js)
+    [data-toggle-container="closing"]
+    > [data-toggle-content]
+    > .container {
+    opacity: 0;
+    visibility: visible;
+}
+
+/* Toggle Blocks ==================================== */
+.toggle-block .toggle-block__control {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    font: inherit;
+    font-size: 1em;
+    text-align: inherit;
+}
+.toggle-block .toggle-block__control,
+.toggle-block .toggle-block__control:hover,
+.toggle-block .toggle-block__control:active,
+.toggle-block .toggle-block__control[data-state-active="true"],
+.toggle-block .toggle-block__control[data-state-focus="true"],
+.no-js .toggle-block .toggle-block__control:focus,
+.js__no-whereSelector .toggle-block .toggle-block__control:focus {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+:where(.js__no-focusVisible) .toggle-block .toggle-block__control:focus {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+.toggle-block .toggle-block__control:focus-visible {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+.toggle-block .toggle-block__control:focus-within {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+.toggle-block
+    .toggle-block__control:has(
+        :is([data-state-focus="true"], :active, [data-state-active="true"])
+    ) {
+    box-shadow: none;
+    border: none;
+    background: none;
+    opacity: 1;
+    color: inherit;
+}
+.toggle-block .toggle-block__title {
+    font-weight: 600;
+}
+.toggle-block
+    .toggle-block__title
+    > .toggle-block__title__heading
+    .toggle-block__control__icon {
+    --icon-size: 1em;
+}
+/* Javascript Enabled ==================================== */
 :where(.js) .toggle-block {
-    --display: grid;
-    display: grid;
-    display: var(--display, grid);
-    position: relative;
     margin-top: 1.25rem;
     margin-bottom: 0.3125rem;
     margin-top: var(--mrg-firm-400, 1.25rem);
     margin-bottom: var(--mrg-half-400, 0.3125rem);
     margin-left: 0;
     margin-right: 0;
-    z-index: 1;
 }
 :where(.js) .toggle-block:has(.toggle-block__title > .page-title) {
     margin-top: 0;
@@ -260,282 +483,92 @@
     margin-top: var(--mrg-soft-600, 1.875rem);
 }
 
-:where(.js) .toggle-block__control {
-    margin: 0;
-    padding: 0;
+:where(.js) .toggle-block .toggle-block__control {
+    margin-bottom: 0.375rem;
+    margin-top: 0;
+    margin-bottom: var(--mrg-soft-200, 0.375rem);
     align-items: center;
-    padding: 0;
-    padding-bottom: 0.375rem;
-    padding-bottom: var(--mrg-soft-200, 0.375rem);
-    font-weight: 600;
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
     cursor: pointer;
 }
-:where(.js) .toggle-block__control[data-toggle-control-backdrop] {
-    --display: block;
-    display: none;
-    position: fixed;
-    align-self: auto;
-    justify-self: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    z-index: -2;
-    -webkit-backdrop-filter: blur(1rem);
-    backdrop-filter: blur(1rem);
-    background: none;
-    border: none;
-    opacity: 1;
-    cursor: pointer;
-}
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]::before,
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]::after {
-    content: "";
-    content: ""/"";
-    --display: block;
-    display: block;
-    display: var(--display, block);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]::before {
-    background: Canvas;
-    background: var(--sys-clr-background, Canvas);
-    opacity: 0.625;
-}
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]::after {
-    background: LinkText;
-    background: var(--sys-clr-link, LinkText);
-    opacity: 0.1875;
-}
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]:hover,
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]:active,
-:where(.js)
-    .toggle-block__control[data-toggle-control-backdrop][data-state-active="true"],
-:where(.js)
-    .toggle-block__control[data-toggle-control-backdrop][data-state-focus="true"] {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js):where(.js__no-focusVisible)
-    .toggle-block__control[data-toggle-control-backdrop]:focus {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]:focus-visible {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) .toggle-block__control[data-toggle-control-backdrop]:focus-within {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    .toggle-block__control[data-toggle-control-backdrop]:has(
-        :is([data-state-focus="true"], :active, [data-state-active="true"])
-    ) {
-    border: none;
-    background: none;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) .toggle-block__control .toggle-block__control__icon {
-    --grid-column: icon;
+:where(.js) .toggle-block .toggle-block__control .toggle-block__control__icon {
     grid-column: icon;
-    grid-column: var(--grid-column, icon);
 }
-:where(.js) .toggle-block__control .toggle-block__control__icon svg #a,
-:where(.js) .toggle-block__control .toggle-block__control__icon svg #b {
-    transform-origin: center;
-}
-:where(.js) .toggle-block__control__inner {
-    --grid-column: content;
+:where(.js) .toggle-block .toggle-block__control__inner {
     grid-column: content;
-    grid-column: var(--grid-column, content);
 }
-:where(.js) .toggle-block__title,
-:where(.js) .toggle-block__title > .toggle-block__title__heading {
+:where(.js) .toggle-block .toggle-block__title,
+:where(.js) .toggle-block .toggle-block__title > .toggle-block__title__heading {
     justify-content: center;
     justify-items: stretch;
     align-content: stretch;
     align-items: center;
-    margin: 0;
-    grid-row: 1/1;
-}
-:where(.js) .toggle-block__title {
-    z-index: 2;
-}
-:where(.js) .toggle-block__title > .toggle-block__title__heading {
     margin-top: 0;
     margin-bottom: 0;
-    padding-bottom: 0.125em;
-    padding-bottom: var(--stroke-relative-400, 0.125em);
 }
-:where(.js) .toggle-block__title > .unstyled-heading {
-    padding-bottom: 0;
-}
-:where(.js) .toggle-block__content {
-    --grid-column: 1 / -1;
-    grid-column: 1 / -1;
-    grid-column: var(--grid-column, 1 / -1);
-    grid-row: 2/2;
-    grid-template-rows: 0fr;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+:where(.js) .toggle-block .toggle-block__content {
     border-width: 0;
-    border-style: dotted;
+    border-style: solid;
     border-color: currentColor;
     border-top-width: 0.125rem;
     border-top-width: var(--border-width-200, 0.125rem);
-    border-top-style: solid;
-    overflow: hidden;
 }
-:where(.js) .toggle-block__content > .container {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    --grid-column: 1 / -1;
-    grid-column: 1 / -1;
-    grid-column: var(--grid-column, 1 / -1);
+:where(.js) .toggle-block .toggle-block__content > .container {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0.8125rem;
     padding-right: 0.8125rem;
     padding-left: var(--mrg-firm-300, 0.8125rem);
     padding-right: var(--mrg-firm-300, 0.8125rem);
-    overflow: auto;
-    width: 100%;
-    max-height: 100%;
-    visibility: hidden;
-    opacity: 0;
 }
-:where(.js) .toggle-block__content > .container > * {
-    flex-shrink: 0;
-}
-:where(.js) .toggle-block__content > .container > :first-child {
+:where(.js) .toggle-block .toggle-block__content > .container > :first-child,
+:where(.js)
+    .toggle-block
+    .toggle-block__content
+    > .container
+    > ol
+    > :first-child,
+:where(.js)
+    .toggle-block
+    .toggle-block__content
+    > .container
+    > ul
+    > :first-child {
     margin-top: 0;
 }
-:where(.js) .toggle-block__content > .container > :last-child {
+:where(.js) .toggle-block .toggle-block__content > .container > :last-child,
+:where(.js)
+    .toggle-block
+    .toggle-block__content
+    > .container
+    > ol
+    > :last-child,
+:where(.js)
+    .toggle-block
+    .toggle-block__content
+    > .container
+    > ul
+    > :last-child {
     margin-bottom: 0;
 }
-:where(.js) .toggle-block__content > .container > ol,
-:where(.js) .toggle-block__content > .container > ul {
+:where(.js) .toggle-block .toggle-block__content > .container > ol,
+:where(.js) .toggle-block .toggle-block__content > .container > ul {
     width: 100%;
 }
-:where(.js) .toggle-block__content > .container > ol:only-child,
-:where(.js) .toggle-block__content > .container > ul:only-child {
+:where(.js) .toggle-block .toggle-block__content > .container > ol:only-child,
+:where(.js) .toggle-block .toggle-block__content > .container > ul:only-child {
     margin-left: 0;
     margin-right: 0;
 }
 
 /* Opening & Closing ==================================== */
-:where(.js) [data-toggle-container="open"] .toggle-block__control:hover,
-:where(.js) .toggle-block__control:hover,
-:where(.js)
-    [data-toggle-container="open"]
-    .toggle-block__control[data-state-focus="true"],
-:where(.js) .toggle-block__control[data-state-focus="true"] {
-    text-decoration-color: transparent;
-    color: LinkText;
-    color: var(--sys-clr-link, LinkText);
-}
-
-:where(.js):where(.js__no-focusVisible)
-    [data-toggle-container="open"]
-    .toggle-block__control:focus,
-:where(.js):where(.js__no-focusVisible) .toggle-block__control:focus {
-    text-decoration-color: transparent;
-    color: LinkText;
-    color: var(--sys-clr-link, LinkText);
-}
-
-:where(.js) [data-toggle-container="open"] .toggle-block__control:focus-visible,
-:where(.js) .toggle-block__control:focus-visible {
-    text-decoration-color: transparent;
-    color: LinkText;
-    color: var(--sys-clr-link, LinkText);
-}
-
-:where(.js)
-    .toggle-block[data-toggle-container="closed"]
-    > .toggle-block__content
-    > .container {
-    opacity: 0;
-    visibility: hidden;
-}
-:where(.js)
-    .toggle-block[data-toggle-container="open"]
-    > .toggle-block__content
-    > .container,
-:where(.js)
-    .toggle-block[data-toggle-container="closing"]
-    > .toggle-block__content
-    > .container {
-    visibility: visible;
-}
-:where(.js)
-    .toggle-block[data-toggle-container="open"]
-    .toggle-block__control[data-toggle-control-backdrop],
-:where(.js)
-    .toggle-block[data-toggle-container="closing"]
-    .toggle-block__control[data-toggle-control-backdrop] {
-    display: block;
-    display: var(--display, block);
-}
-
-:where(.js) .toggle-block[data-toggle-container="open"] .toggle-block__control {
-    color: ActiveText;
-    color: var(--sys-clr-text-active, ActiveText);
-}
-:where(.js)
-    .toggle-block[data-toggle-container="open"]
-    .toggle-block__control
-    .toggle-block__control__icon
-    > svg
-    #b {
-    transform: rotate(270deg);
-}
-:where(.js)
-    .toggle-block[data-toggle-container="open"]
-    .toggle-block__control[data-toggle-control-backdrop] {
-    opacity: 1;
-}
-
 :where(.js)
     .toggle-block[data-toggle-container="open"]
     > .toggle-block__content {
-    border-left-width: 0.125rem;
-    border-right-width: 0.125rem;
-    border-left-width: var(--border-width-200, 0.125rem);
-    border-right-width: var(--border-width-200, 0.125rem);
-    border-bottom-width: 0.125rem;
-    border-bottom-width: var(--border-width-200, 0.125rem);
-    grid-template-rows: 1fr;
+    border-width: 0.125rem;
+    border-width: var(--border-width-200, 0.125rem);
 }
 :where(.js)
     .toggle-block[data-toggle-container="open"]
@@ -545,25 +578,4 @@
     padding-bottom: 0.625rem;
     padding-top: var(--mrg-soft-300, 0.625rem);
     padding-bottom: var(--mrg-soft-300, 0.625rem);
-    opacity: 1;
-}
-:where(.js)
-    .toggle-block[data-toggle-container="closing"]
-    .toggle-block__control
-    .toggle-block__control__icon
-    > svg
-    #b {
-    transform: rotate(540deg);
-}
-:where(.js)
-    .toggle-block[data-toggle-container="closing"]
-    > .toggle-block__content {
-    grid-template-rows: 0fr;
-}
-:where(.js)
-    .toggle-block[data-toggle-container="closing"]
-    > .toggle-block__content
-    > .container {
-    opacity: 0;
-    visibility: visible;
 }

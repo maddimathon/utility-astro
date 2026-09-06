@@ -6,7 +6,8 @@
  */
 
 /* import - types */
-import type { ElementProps } from '../../ts/types/index.js';
+import type { HTMLTag } from 'astro/types';
+import type { ClassList, ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 import { makeClassList } from '../functions.js';
@@ -14,12 +15,15 @@ import { makeClassList } from '../functions.js';
 /* import - values */
 
 /* import - components */
+import Toggle_Backdrop from '../support/Toggle_Backdrop.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
 import Heading from './Heading.astro';
 
 /* import - layouts */
 
 /* PROPS ===================================== */
+
+export type ToggleContainerType = 'modal' | 'menu' | 'nav';
 
 /**
  * Input props for the Toggle component.
@@ -34,7 +38,19 @@ export interface ToggleProps {
      */
     id: string;
 
-    class?: string | undefined;
+    /**
+     * @default false
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    backdrop?: boolean;
+
+    class?: ClassList | undefined;
+
+    /**
+     * Add an additional base class to use.
+     */
+    classBase?: string | undefined;
 
     defaultOpen?: boolean | undefined;
 
@@ -72,7 +88,7 @@ export interface ToggleProps {
     /**
      * @since 0.1.0-beta.0.draft
      */
-    iconSVG?: string;
+    iconSVG?: string | undefined;
 
     /**
      * Minimum allowed heading level.
@@ -93,12 +109,28 @@ export interface ToggleProps {
     tag?: 'div' | 'li' | 'nav' | 'section' | undefined;
 
     /**
+     * The HTML tag used for the container element.
+     *
+     * @default 'section'
+     *
+     * @since 0.1.0-alpha.7
+     */
+    contentTag?: HTMLTag;
+
+    /**
      * The HTML tag used for the container's header element. If tag is
      * 'section', default is 'header', else it is 'div'.
      *
      * @since 0.1.0-alpha.7
      */
     headerTag?: 'div' | 'header' | undefined;
+
+    /**
+     * Used to set the data-toggle-container-type attribute.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    type?: ToggleContainerType | ToggleContainerType[] | undefined;
 }
 
 type Props = ElementProps<
@@ -111,7 +143,9 @@ const {
     defaultOpen,
     id,
     // optional
+    backdrop,
     class: classList,
+    classBase,
     displayHeading,
     generateID = {
         button: (_id: string) => `${_id}-button`,
@@ -123,8 +157,12 @@ const {
     iconSVG,
     minimumHeading = 2,
     tag: Container = 'section',
+    contentTag: ContentContainer = 'section',
+    type,
     ...attributes
 }: Props = Astro.props;
+
+const HeaderContainer = headerTag ?? 'div';
 
 /* CONSTANTS ===================================== */
 
@@ -132,46 +170,65 @@ const buttonID = generateID.button(id);
 const contentID = generateID.content(id);
 const titleID = generateID.title(id);
 
-const ContainerHeader =
-    headerTag ?? (Container === 'section' ? 'header' : 'div');
+const classMaker = classBase
+    ? (append: string = '') =>
+          'toggle-block' + append + ' ' + classBase + append
+    : (append: string = '') => 'toggle-block' + append;
+
+const containerTypes = !type ? [] : Array.isArray(type) ? type : [type];
+
+const includeBackdrop =
+    typeof backdrop === 'boolean'
+        ? backdrop
+        : containerTypes.includes('modal') || containerTypes.includes('nav');
 ---
 
-<div
+<Container
     {...attributes}
     id={id}
-    class:list={makeClassList('toggle-block', classList)}
+    class:list={makeClassList(classMaker(), classList)}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
+    data-toggle-container-type={containerTypes.join(' ')}
 >
-    <ContainerHeader
-        class='toggle-block__title'
+    <HeaderContainer
+        class={classMaker('__title')}
         data-toggle-title={id}
         id={titleID}
     >
         <Heading
-            class='toggle-block__title__heading'
+            class={classMaker('__title__heading')}
             data-toggle-title-heading={id}
             displayHeading={displayHeading}
             heading={heading}
             minimum={minimumHeading}
         >
             <Toggle_Control
-                {...{ id, buttonID }}
+                {...{ classBase, id, buttonID }}
                 data-toggle-primary-control={id}
                 iconSVG={iconSVG}
             >
                 <slot name='button' />
             </Toggle_Control>
         </Heading>
-    </ContainerHeader>
+    </HeaderContainer>
 
-    <Container
+    <ContentContainer
         aria-labelledby={titleID}
-        class='toggle-block__content'
+        class={classMaker('__content')}
         data-toggle-content={id}
         id={contentID}
     >
         <div class='container'><slot /></div>
-    </Container>
-</div>
+    </ContentContainer>
+
+    {
+        includeBackdrop && (
+            <Toggle_Backdrop
+                classBase={classBase}
+                toggleID={id}
+            />
+        )
+    }
+</Container>
 
 <script src='../scripts/toggle.ts'></script>

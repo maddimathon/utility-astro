@@ -1,0 +1,50 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { ElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+export interface ToggleBackdropProps {
+    /**
+     * Add an additional base class to use.
+     */
+    classBase?: string | undefined;
+
+    toggleID: string;
+}
+
+type Props = ElementProps<ToggleBackdropProps, 'div'>;
+
+const { classBase, toggleID }: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const classMaker = classBase
+    ? (append: string = '') =>
+          'toggle-block' + append + ' ' + classBase + append
+    : (append: string = '') => 'toggle-block' + append;
+---
+
+<div
+    data-toggle-control={toggleID}
+    data-toggle-control-backdrop={toggleID}
+    class={classMaker('__control--backdrop')}
+    aria-hidden='true'
+>
+</div>

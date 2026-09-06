@@ -24,26 +24,30 @@
 
     @include cx-prop(height-nav-primary, $_navHeight);
 
-    .nav-primary[data-toggle-container] {
-        // position: sticky;
-        top: 0;
-        grid-row: 1;
+    body {
+        > .nav-primary[data-toggle-container] {
+            position: sticky;
+            top: 0;
+            grid-row: 1;
 
-        margin: 0;
-        padding: 0;
-        gap: 0;
+            margin: 0;
+            // padding: 0;
+            // gap: 0;
 
-        z-index: 9999;
+            z-index: 9999;
 
-        > .toggle-block__title {
-            min-height: do-var(height-nav-primary, $_navHeight);
+            > .toggle-block__title {
+                min-height: do-var(height-nav-primary, $_navHeight);
 
-            [data-toggle-control] {
-                padding-block: min(0.75vh, var-mrg-soft('300'));
+                [data-toggle-control] {
+                    margin-block: 0;
+                    padding-block: var-mrg-soft('200');
+                }
             }
         }
     }
+
     .website-settings-menu {
-        margin-block-start: 0;
+        // margin-block-start: 0;
     }
 }

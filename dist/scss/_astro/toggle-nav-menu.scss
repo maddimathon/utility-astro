@@ -8,8 +8,6 @@
 
 /* # TOGGLE NAV MENU ==================================== */
 
-@include lib.snippet-support-toggle-block;
-
-@include lib.snippet-support-astro-toggle-nav-menu;
+@include lib.snippet-support-astro-toggle-nav-menu($includeBase: true);
 
 @include lib.extend-selectors;

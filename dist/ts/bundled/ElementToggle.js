@@ -14,7 +14,7 @@ var ElementToggle = class _ElementToggle {
     this.opts = {
       activeTimeoutLength: (partialOpts?.closingTime ?? 1800) / 4,
       closeWhenUntargetted: false,
-      closingTime: 1800,
+      closingTime: 0,
       closingTimeProperty: "--toggle-closing-time",
       debug: false,
       openWhenTargetted: true,
@@ -29,7 +29,7 @@ var ElementToggle = class _ElementToggle {
       active: this.container.dataset["toggleAttrStateActive"] || "data-state-active",
       focus: this.container.dataset["toggleAttrStateFocus"] || "data-state-focus"
     };
-    const _containerType = this.container.dataset["toggleContainerType"]?.split(/\s+/g) ?? [];
+    const _containerType = this.container.dataset["toggleContainerType"]?.split(/[,\s]+/g) ?? [];
     this.isMenu = _containerType.includes("menu");
     this.asModal = this.isMenu || _containerType.includes("modal");
     this.isNav = _containerType.includes("nav") || !this.isMenu && (this.container.role === "navigation" || this.container.tagName.toLowerCase() === "nav");

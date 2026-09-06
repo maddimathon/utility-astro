@@ -21,10 +21,12 @@ $_defaultHeadingSelectors_greaterThan3_withWhere: ();
 
 $_selector_any_modal_container: (
     '[data-toggle-container-type=menu]',
-    '[data-toggle-container-type|=menu]',
+    '[data-toggle-container-type~=menu]',
     '[data-toggle-container-type=modal]',
-    '[data-toggle-container-type|=modal]'
+    '[data-toggle-container-type~=modal]'
 );
+
+$_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 
 @each $level in token-all-heading-levels() {
     @if $level > 3 {
@@ -36,13 +38,18 @@ $_selector_any_modal_container: (
     }
 }
 
-@mixin _snippet-toggle-block--display-contents {
-    @include snippet-body-grid--display-contents(
-        $cols: content-start/content-end,
-        $useFeatureCheckJS: false
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-apply-all-interactive-states($args...) {
+    @include apply-interactive-mixin(
+        $hover: true,
+        $focus: true,
+        $focusWithin: true,
+        $active: true,
+        $activeWithin: true,
+        $args...
     ) {
-        @include prop-display(contents);
-
         @content;
     }
 }
@@ -50,7 +57,7 @@ $_selector_any_modal_container: (
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin _snippet-support-toggle-block-base--pseudo-classes {
+@mixin _toggle-block--base-pseudo-classes {
     @at-root %_flex-contents-container {
         @include prop-display(flex);
         @include snippet-body-grid--flex-container;
@@ -60,8 +67,121 @@ $_selector_any_modal_container: (
 
     @at-root %_flex-contents-container--display-contents {
         @extend %_flex-contents-container;
-        @include _snippet-toggle-block--display-contents {
+
+        @include snippet-body-grid--display-contents(
+            $cols: content-start/content-end,
+            $useFeatureCheckJS: false
+        ) {
+            @include prop-display(contents);
+
             @content (flex-contents-container--display-contents);
+        }
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-block--js-pseudo-classes($gridCols_toggle) {
+    @at-root %_toggle-container-grid-basics {
+        @include prop-display(grid);
+        position: relative;
+
+        @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
+        grid-template-columns: do-var(
+            grid-template-columns--toggle,
+            $gridCols_toggle
+        );
+
+        grid-auto-rows: auto;
+        grid-auto-flow: column;
+
+        @include snippet-body-grid--grid-alignment(
+            (
+                justify-content: stretch,
+            )
+        );
+
+        @content (js--container-grid);
+    }
+
+    @at-root %toggle-container-subgrid {
+        @extend %_toggle-container-grid-basics;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
+
+        // margin: 0;
+
+        @content (js--toggle-container-subgrid);
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-block--backdrop-control($includeBackdropControlStyles) {
+    position: fixed !important;
+    align-self: auto;
+    justify-self: auto;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    margin: 0 !important;
+    padding: 0;
+    width: auto !important;
+    height: auto !important;
+
+    border-radius: 0 !important;
+
+    @if $includeBackdropControlStyles {
+        backdrop-filter: blur(1rem);
+    }
+
+    cursor: pointer;
+
+    z-index: -2;
+
+    @content;
+
+    @include _toggle-apply-all-interactive-states(
+        $self: true,
+        $includeNoWhereSelectorFallback: false,
+        $warnOnSelf: false
+    ) {
+        @if $includeBackdropControlStyles {
+            background: none !important;
+            border: none !important;
+            color: inherit;
+        }
+
+        opacity: 1;
+    }
+
+    @if $includeBackdropControlStyles {
+        &::before,
+        &::after {
+            content: '';
+            content: '' / '';
+            @include prop-display(block);
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        &::before {
+            background: var-sys-colour(background);
+            opacity: 0.625;
+        }
+
+        &::after {
+            background: var-sys-colour(link);
+            opacity: 0.1875;
         }
     }
 }
@@ -73,11 +193,12 @@ $_selector_any_modal_container: (
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-support-toggle-block-base(
+    $includeBackdropControlStyles: true,
+    $gridCols_toggle: $_gridCols_toggle,
     $svg_sel_static: '#a',
     $svg_sel_moving: '#b'
 ) {
-    @include _snippet-support-toggle-block-base--pseudo-classes using
-        ($location) {
+    @include _toggle-block--base-pseudo-classes using ($location) {
         @content (base-$location);
     }
 
@@ -96,9 +217,40 @@ $_selector_any_modal_container: (
     [data-toggle-control] {
         @content (toggle-base--control);
 
+        @include _toggle-apply-all-interactive-states(
+            $self: true,
+            $warnOnSelf: false
+        ) {
+            @include config.selector-button-disabled {
+                box-shadow: none;
+                border: none;
+                background: none;
+                opacity: 1;
+                color: inherit;
+
+                @content (toggle-base--control--disabled--active-hover-focus);
+            }
+        }
+
         @include config.selector-button-disabled {
+            margin: 0;
+            padding: 0;
+
+            width: auto;
+
+            text-align: inherit;
+
+            appearance: none;
+            cursor: text;
+
             @content (toggle-base--control--disabled);
 
+            &::before,
+            &::after {
+                content: none !important;
+            }
+
+            %icon,
             .toggle-block__control__icon {
                 display: none !important;
 
@@ -111,33 +263,35 @@ $_selector_any_modal_container: (
     /// CONTROL - BACKDROP
     ///
     [data-toggle-control-backdrop] {
+        display: none !important;
+        position: fixed;
+        opacity: 0;
+
         @content (toggle-base--control-backdrop);
     }
 
     ///
     /// TITLE & HEADINGS
     ///
-    .toggle-block__title,
-    .toggle-block__title__heading {
+    [data-toggle-title],
+    [data-toggle-title-heading] {
         @content (toggle-base--title-and-headings);
-    }
-    .toggle-block__title__heading {
-        @content (toggle-base--title--headings);
     }
 
     ///
     /// TITLE
     ///
-    .toggle-block__title {
+    [data-toggle-title] {
         @content (toggle-base--title);
 
-        &:has(> .toggle-block__title__heading) {
+        &:has(> [data-toggle-title-heading]) {
             @content (toggle-base--title--has-heading);
         }
 
-        > .toggle-block__title__heading {
+        > [data-toggle-title-heading] {
             @content (toggle-base--title--heading);
 
+            %icon,
             .toggle-block__control__icon {
                 @content (toggle-base--title--heading--icon);
             }
@@ -152,11 +306,14 @@ $_selector_any_modal_container: (
     /// CONTENT
     ///
     [data-toggle-content] {
+        @extend %_flex-contents-container--display-contents;
+
         @content (toggle-base--content);
 
         /// BLOCK ///
 
         > .container {
+            @extend %_flex-contents-container--display-contents;
             margin: 0;
 
             @content (toggle-base--content--container);
@@ -165,11 +322,22 @@ $_selector_any_modal_container: (
 
     /* Javascript Enabled ==================================== */
 
+    @include _toggle-block--js-pseudo-classes(
+            $gridCols_toggle: $gridCols_toggle
+        )
+        using ($args...) {
+        @content ($args...);
+    }
+
     @include feature-check.js {
         ///
         /// CONTAINER
         ///
         [data-toggle-container] {
+            @extend %_toggle-container-grid-basics;
+
+            z-index: 1;
+
             @content (js--toggle-base--container);
         }
 
@@ -177,12 +345,19 @@ $_selector_any_modal_container: (
         /// CONTROL
         ///
         [data-toggle-control] {
+            @extend %toggle-container-subgrid;
+
             @content (js--toggle-base--control);
 
             &[data-toggle-control-backdrop] {
-                @content (js--toggle-base--control-backdrop);
+                @include _toggle-block--backdrop-control(
+                    $includeBackdropControlStyles: $includeBackdropControlStyles
+                ) {
+                    @content (js--toggle-base--control-backdrop);
+                }
             }
 
+            %icon,
             .toggle-block__control__icon {
                 @content (js--toggle-base--icon);
 
@@ -190,35 +365,43 @@ $_selector_any_modal_container: (
                 svg {
                     @content (js--toggle-base--icon-and-svg);
                 }
-            }
-        }
 
-        ///
-        /// CONTROL INNER
-        ///
-        .toggle-block__control__inner {
-            @content (js--toggle-base--control-inner);
+                svg {
+                    #{$svg_sel_static},
+                    #{$svg_sel_moving} {
+                        transform-origin: center;
+                    }
+                }
+            }
+
+            .toggle-block__control__inner {
+                @content (js--toggle-base--control-inner);
+            }
         }
 
         ///
         /// TITLE & HEADINGS
         ///
-        .toggle-block__title,
-        .toggle-block__title > .toggle-block__title__heading {
+        [data-toggle-title],
+        [data-toggle-title-heading] {
+            @extend %toggle-container-subgrid;
+
             @content (js--toggle-base--title-and-headings);
         }
 
         ///
         /// TITLE
         ///
-        .toggle-block__title {
+        [data-toggle-title] {
+            z-index: 2;
+
             @content (js--toggle-base--title);
 
-            &:has(.toggle-block__title__heading) {
+            &:has([data-toggle-title-heading]) {
                 @content (js--toggle-base--title--has-heading);
             }
 
-            > .toggle-block__title__heading {
+            > [data-toggle-title-heading] {
                 @content (js--toggle-base--title--heading);
             }
 
@@ -232,12 +415,35 @@ $_selector_any_modal_container: (
         /// CONTENT
         ///
         [data-toggle-content] {
+            @extend %toggle-container-subgrid;
+
+            grid-row: 2;
+
+            grid-template-rows: 0fr;
+
+            overflow: hidden;
+
             @content (js--toggle-base--content);
 
             /// BLOCK ///
 
             > .container {
+                @include prop-grid-column('1 / -1');
+                @include prop-display(flex);
+
+                width: 100%;
+                max-height: 100%;
+
+                overflow: auto;
+
+                visibility: hidden;
+                opacity: 0;
+
                 @content (js--toggle-base--content--container);
+
+                > * {
+                    flex-shrink: 0;
+                }
             }
         }
     }
@@ -258,7 +464,9 @@ $_selector_any_modal_container: (
                 $unify: true
             )
         ) {
-            overflow: hidden;
+            &:has([data-toggle-control-backdrop]) {
+                overflow: hidden !important;
+            }
         }
 
         ///
@@ -271,6 +479,9 @@ $_selector_any_modal_container: (
                 @content (js--toggle-base--container--closed--content);
 
                 > .container {
+                    opacity: 0;
+                    visibility: hidden;
+
                     @content (js--toggle-base--container--closed--content--container);
                 }
             }
@@ -287,6 +498,8 @@ $_selector_any_modal_container: (
                 @content (js--toggle-base--container--open-or-closing--content);
 
                 > .container {
+                    visibility: visible;
+
                     @content (js--toggle-base--container--open-or-closing--content--container);
                 }
             }
@@ -295,6 +508,8 @@ $_selector_any_modal_container: (
                 @content (js--toggle-base--container--open-or-closing--control);
 
                 &[data-toggle-control-backdrop] {
+                    display: do-var(display, block) !important;
+
                     @content (js--toggle-base--container--open-or-closing--control-backdrop);
                 }
             }
@@ -309,23 +524,32 @@ $_selector_any_modal_container: (
             [data-toggle-control] {
                 @content (js--toggle-base--container--open--control);
 
+                %icon,
                 .toggle-block__control__icon {
                     @content (js--toggle-base--container--open--control--icon);
 
                     > svg #{$svg_sel_moving} {
+                        transform: rotate(270deg);
+
                         @content (js--toggle-base--container--open--control--icon--moving);
                     }
                 }
 
                 &[data-toggle-control-backdrop] {
+                    opacity: 1;
+
                     @content (js--toggle-base--container--open--control-background);
                 }
             }
 
             > [data-toggle-content] {
+                grid-template-rows: 1fr;
+
                 @content (js--toggle-base--container--open--content);
 
                 > .container {
+                    opacity: 1;
+
                     @content (js--toggle-base--container--open--content--container);
                 }
             }
@@ -340,19 +564,27 @@ $_selector_any_modal_container: (
             [data-toggle-control] {
                 @content (js--toggle-base--container--closing--control);
 
+                %icon,
                 .toggle-block__control__icon {
                     @content (js--toggle-base--container--closing--control--icon);
 
                     > svg #{$svg_sel_moving} {
+                        transform: rotate(540deg);
+
                         @content (js--toggle-base--container--closing--control--icon--moving);
                     }
                 }
             }
 
             > [data-toggle-content] {
+                grid-template-rows: 0fr;
+
                 @content (js--toggle-base--container--closing--content);
 
                 > .container {
+                    opacity: 0;
+                    visibility: visible;
+
                     @content (js--toggle-base--container--closing--content--container);
                 }
             }
@@ -363,11 +595,9 @@ $_selector_any_modal_container: (
 @mixin snippet-support-toggle-block(
     $content_container_paddingBlock: var-mrg-soft('300'),
     $content_container_paddingInline: var-mrg-firm('300'),
-    $control_heading_paddingBlockEnd: var-stroke-relative('400'),
-    $control_heading_unstyled_paddingBlockEnd: 0,
     $control_paddingBlockEnd: var-mrg-soft('200'),
     //
-    $gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr,
+    $gridCols_toggle: $_gridCols_toggle,
     //
     $svg_sel_moving: '#b',
     $svg_sel_static: '#a',
@@ -387,12 +617,12 @@ $_selector_any_modal_container: (
     $selector_title_heading: selector.append(
             $selector_container,
             '__title__heading'
-        ),
-    //
-     //
+        )
 ) {
     @if $includeBase {
         @include snippet-support-toggle-block-base(
+                $gridCols_toggle: $gridCols_toggle,
+                $includeBackdropControlStyles: $includeBackdropControlStyles,
                 $svg_sel_moving: $svg_sel_moving,
                 $svg_sel_static: $svg_sel_static
             )
@@ -400,8 +630,7 @@ $_selector_any_modal_container: (
             @content ($location);
         }
     } @else {
-        @include _snippet-support-toggle-block-base--pseudo-classes using
-            ($location) {
+        @include _toggle-block--base-pseudo-classes using ($location) {
             @content ($location);
         }
     }
@@ -420,215 +649,102 @@ $_selector_any_modal_container: (
         @extend %_flex-contents-container--display-contents;
 
         @content (toggle-container);
-    }
 
-    ///
-    /// CONTROL
-    ///
-    #{$selector_control} {
-        margin: 0;
-        padding: 0;
-
-        @if $includeStyles {
-            @include cx-prop(icon-color, currentColor);
-            width: auto;
-
-            font: inherit;
-            font-size: 1em;
-
-            text-align: inherit;
-        }
-
-        @content (toggle-control);
-
-        @include apply-interactive-mixin(
-            $hover: true,
-            $focus: true,
-            $focusWithin: true,
-            $active: true,
-            $self: true
-        ) {
+        ///
+        /// CONTROL
+        ///
+        #{$selector_control} {
             @if $includeStyles {
-                box-shadow: none;
-                border: none;
-                background: none;
-                opacity: 1;
-                color: inherit;
+                margin: 0;
+                padding: 0;
+
+                width: auto;
+
+                font: inherit;
+                font-size: 1em;
+
+                text-align: inherit;
             }
 
-            @content (toggle-control--hover-focus-active);
-        }
+            @content (toggle-control);
 
-        @include config.selector-button-disabled {
-            @if $includeStyles {
-                appearance: none;
-                cursor: text;
-            }
-
-            @content (toggle-control--disabled);
-        }
-    }
-
-    ///
-    /// CONTROL - BACKDROP
-    ///
-    #{$selector_control_backdrop} {
-        display: none;
-        position: fixed;
-        opacity: 0;
-
-        @content (toggle-control-backdrop);
-    }
-
-    ///
-    /// TITLE & HEADINGS
-    ///
-    // #{$selector_title},
-    // #{$selector_title_heading} {
-    //     @content (toggle-title-and-headings);
-    // }
-    // #{$selector_title_heading} {
-    //     @content (toggle-title--headings);
-    // }
-
-    ///
-    /// TITLE
-    ///
-    #{$selector_title} {
-        @extend %_flex-contents-container--display-contents;
-
-        margin: 0;
-
-        @if $includeStyles {
-            font-weight: 600;
-        }
-
-        @content (toggle-title);
-
-        // &:has(#{$selector_title_heading__direct}) {
-        //     @content (toggle-title--has-heading);
-        // }
-
-        #{$selector_title_heading__direct} {
-            @content (toggle-title--heading);
-
-            #{$selector_control_icon} {
+            @include _toggle-apply-all-interactive-states(
+                $self: true,
+                $warnOnSelf: false
+            ) {
                 @if $includeStyles {
-                    @include cx-prop(icon-size, 1em);
-                    padding-bottom: 0;
+                    box-shadow: none;
+                    border: none;
+                    background: none;
+                    opacity: 1;
+                    color: inherit;
                 }
 
-                @content (toggle-title--heading--icon);
-            }
+                @content (toggle-control--hover-focus-active);
 
-            #{$selector_control} {
-                @if $includeStyles {
-                    font: inherit;
-                    line-height: inherit;
-                    letter-spacing: inherit;
-                    text-transform: inherit;
+                @include config.selector-button-disabled {
+                    @content (toggle-control--disabled);
                 }
-
-                @content (toggle-title--heading--toggle-control);
             }
         }
-    }
 
-    ///
-    /// ICON
-    ///
-    #{$selector_control_icon} {
-        @if $includeStyles {
-            @include cx-prop(icon-size, 1.125em);
-            @include prop-display(inline-block);
-
-            vertical-align: sub;
-            padding-bottom: var-stroke-relative('100');
-            padding-inline-end: var-border-width('200');
+        ///
+        /// CONTROL - BACKDROP
+        ///
+        #{$selector_control_backdrop} {
+            @content (toggle-control-backdrop);
         }
 
-        @content (toggle-icon);
-
-        > svg {
-            width: auto;
-
-            @if $includeStyles {
-                stroke: currentColor;
-                stroke-width: clamp(
-                    1px,
-                    var-stroke-relative('600'),
-                    var-border-width('400')
-                );
-                fill: none;
-            }
-
-            @content (toggle-icon--svg);
-        }
-    }
-
-    ///
-    /// CONTROL INNER
-    ///
-    // #{$selector_control_inner} {
-    //     @content (toggle-control-inner);
-    // }
-
-    ///
-    /// CONTENT
-    ///
-    #{$selector_content} {
-        @extend %_flex-contents-container--display-contents;
-
-        @content (toggle-content);
-
-        /// BLOCK ///
-
-        > .container {
+        ///
+        /// TITLE
+        ///
+        #{$selector_title} {
             @extend %_flex-contents-container--display-contents;
 
-            @content (toggle-content--container);
+            @if $includeStyles {
+                font-weight: 600;
+            }
+
+            @content (toggle-title);
+
+            #{$selector_title_heading__direct} {
+                @content (toggle-title--heading);
+
+                #{$selector_control_icon} {
+                    @if $includeStyles {
+                        @include cx-prop(icon-size, 1em);
+                    }
+
+                    @content (toggle-title--heading--icon);
+                }
+
+                #{$selector_control} {
+                    @content (toggle-title--heading--toggle-control);
+                }
+            }
+        }
+
+        ///
+        /// ICON
+        ///
+        #{$selector_control_icon} {
+            @content (toggle-icon);
+
+            > svg {
+                @content (toggle-icon--svg);
+            }
         }
     }
 
     /* Javascript Enabled ==================================== */
 
-    @at-root %_toggle-container-grid-basics {
-        @include prop-display(grid);
-        position: relative;
-
-        @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
-        grid-template-columns: do-var(
-            grid-template-columns--toggle,
-            $gridCols_toggle
-        );
-
-        grid-auto-rows: auto;
-        grid-auto-flow: column;
-
-        @include snippet-body-grid--grid-alignment(
-            (
-                justify-content: stretch,
+    @if not $includeBase {
+        @include _toggle-block--js-pseudo-classes(
+                $gridCols_toggle: $gridCols_toggle
             )
-        );
-
-        @if $includeStyles {
-            gap: 0 var-mrg-firm('200');
+            using ($args...) {
+            @content ($args...);
         }
-
-        @content (js--container-grid);
-    }
-
-    ///
-    /// TOGGLE SUBGRID
-    ///
-    @at-root %toggle-container-subgrid {
-        @extend %_toggle-container-grid-basics;
-        grid-template-columns: subgrid;
-        grid-column: 1 / -1;
-
-        margin: 0;
-
-        @content (js--toggle-container-subgrid);
     }
 
     @include feature-check.js {
@@ -636,17 +752,11 @@ $_selector_any_modal_container: (
         /// CONTAINER
         ///
         #{$selector_container} {
-            @extend %_toggle-container-grid-basics;
-            @include prop-display(grid);
-            position: relative;
-
             @if $includeMarginBlock {
                 margin-block: var-mrg-firm('400') var-mrg-half('400');
             }
 
             margin-inline: 0;
-
-            z-index: 1;
 
             @content (js--toggle-container);
 
@@ -674,257 +784,135 @@ $_selector_any_modal_container: (
                     margin-block-start: var-mrg-soft('600');
                 }
             }
-        }
 
-        ///
-        /// CONTROL
-        ///
-        #{$selector_control} {
-            @extend %toggle-container-subgrid;
+            ///
+            /// CONTROL
+            ///
+            #{$selector_control} {
+                @if $includeStyles {
+                    margin-block: 0 var-mrg-soft('200');
+                    align-items: center;
 
-            margin: 0;
-            padding: 0;
-
-            @if $includeStyles {
-                align-items: center;
-                padding: 0;
-                padding-block-end: $control_paddingBlockEnd;
-
-                font-weight: 600;
-
-                appearance: button;
-                cursor: pointer;
-            }
-
-            @content (js--toggle-control);
-
-            @include hover-focus-visible-or-within(
-                $includeNoWhereSelectorFallback: false
-            ) {
-                @content (js--toggle-control--hover-focus-or-within);
-            }
-
-            @include active {
-                @content (js--toggle-control--active);
-            }
-
-            @at-root #{selector.unify(&, $selector_control_backdrop)} {
-                @include cx-prop(display, block);
-                display: none;
-                position: fixed;
-                align-self: auto;
-                justify-self: auto;
-
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-
-                margin: 0;
-                padding: 0;
-                width: auto;
-                height: auto;
-
-                border-radius: 0;
-
-                z-index: -2;
-
-                @content (js--toggle-control-backdrop);
-
-                @if $includeBackdropControlStyles {
-                    backdrop-filter: blur(1rem);
-                    background: none;
-                    border: none;
-                    opacity: 1;
-
+                    appearance: button;
                     cursor: pointer;
+                }
 
-                    &::before,
-                    &::after {
-                        content: '';
-                        content: '' / '';
-                        @include prop-display(block);
-                        position: absolute;
+                @content (js--toggle-control);
 
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                    }
+                @include hover-focus-visible-or-within(
+                    $includeNoWhereSelectorFallback: false
+                ) {
+                    @content (js--toggle-control--hover-focus-or-within);
+                }
 
-                    &::before {
-                        background: var-sys-colour(background);
-                        opacity: 0.625;
-                    }
+                @include active {
+                    @content (js--toggle-control--active);
+                }
 
-                    &::after {
-                        background: var-sys-colour(link);
-                        opacity: 0.1875;
-                    }
+                @at-root #{selector.unify(&, $selector_control_backdrop)} {
+                }
 
-                    @include apply-interactive-mixin(
-                        $hover: true,
-                        $focus: true,
-                        $focusWithin: true,
-                        $active: true,
-                        $activeWithin: true,
-                        $includeNoWhereSelectorFallback: false
-                    ) {
-                        border: none;
-                        background: none;
-                        color: inherit;
-                        opacity: 1;
+                #{$selector_control_icon} {
+                    grid-column: icon;
+
+                    @content (js--toggle-icon);
+
+                    &,
+                    svg {
+                        @content (js--toggle-icon-and-svg);
                     }
                 }
             }
 
-            #{$selector_control_icon} {
-                @include prop-grid-column(icon);
+            ///
+            /// CONTROL INNER
+            ///
+            #{$selector_control_inner} {
+                grid-column: content;
 
-                @content (js--toggle-icon);
-
-                &,
-                svg {
-                    @content (js--toggle-icon-and-svg);
-                }
-
-                svg {
-                    #{$svg_sel_static},
-                    #{$svg_sel_moving} {
-                        transform-origin: center;
-                    }
-                }
-            }
-        }
-
-        ///
-        /// CONTROL INNER
-        ///
-        #{$selector_control_inner} {
-            @include prop-grid-column(content);
-
-            @content (js--toggle-control-inner);
-        }
-
-        ///
-        /// TITLE & HEADINGS
-        ///
-        #{$selector_title},
-        #{selector.nest($selector_title, '>', $selector_title_heading)} {
-            @extend %toggle-container-subgrid;
-
-            @include snippet-body-grid--grid-alignment(
-                (
-                    align-content: stretch,
-                    align-items: center,
-                )
-            );
-
-            margin: 0;
-            // padding: 0;
-
-            grid-row: 1 / 1;
-
-            @content (js--toggle-title-and-headings);
-        }
-
-        ///
-        /// TITLE
-        ///
-        #{$selector_title} {
-            z-index: 2;
-
-            @content (js--toggle-title);
-
-            &:has(#{$selector_title_heading}) {
-                @content (js--toggle-title--has-heading);
+                @content (js--toggle-control-inner);
             }
 
-            #{selector.nest('>', $selector_title_heading)} {
+            ///
+            /// TITLE & HEADINGS
+            ///
+            #{$selector_title},
+            #{selector.nest($selector_title, '>', $selector_title_heading)} {
+                @extend %toggle-container-subgrid;
+
+                @include snippet-body-grid--grid-alignment(
+                    (
+                        align-content: stretch,
+                        align-items: center,
+                    )
+                );
+
                 margin-block: 0;
 
-                @if $includeStyles {
-                    padding-block-end: $control_heading_paddingBlockEnd;
+                @content (js--toggle-title-and-headings);
+            }
+
+            ///
+            /// TITLE
+            ///
+            #{$selector_title} {
+                @content (js--toggle-title);
+
+                &:has(#{$selector_title_heading}) {
+                    @content (js--toggle-title--has-heading);
                 }
 
-                @content (js--toggle-title--heading);
-            }
-
-            > %unstyled-heading,
-            > %unstyled-heading--where {
-                @if $includeStyles {
-                    padding-block-end: $control_heading_unstyled_paddingBlockEnd;
+                #{selector.nest('>', $selector_title_heading)} {
+                    @content (js--toggle-title--heading);
                 }
 
-                @content (js--toggle-title--heading--unstyled);
-            }
-        }
-
-        ///
-        /// CONTENT
-        ///
-        #{$selector_content} {
-            @extend %toggle-container-subgrid;
-
-            @include prop-grid-column('1 / -1');
-            grid-row: 2 / 2;
-
-            grid-template-rows: 0fr;
-
-            margin: 0;
-            padding: 0;
-
-            @if $includeStyles {
-                width: 100%;
-
-                border-width: 0;
-                border-style: dotted;
-                border-color: currentColor;
-
-                border-block-start-width: var-border-width('200');
-                border-block-start-style: solid;
+                > %unstyled-heading,
+                > %unstyled-heading--where {
+                    @content (js--toggle-title--heading--unstyled);
+                }
             }
 
-            overflow: hidden;
-
-            @content (js--toggle-content);
-
-            /// BLOCK ///
-
-            > .container {
-                @include prop-display(flex);
-                @include prop-grid-column('1 / -1');
-
-                padding-block: 0;
-                padding-inline: $content_container_paddingInline;
-
-                overflow: auto;
-                width: 100%;
-                max-height: 100%;
-
-                visibility: hidden;
-                opacity: 0;
-
-                @content (js--toggle-content--container);
-
+            ///
+            /// CONTENT
+            ///
+            #{$selector_content} {
                 @if $includeStyles {
-                    > * {
-                        flex-shrink: 0;
-                    }
+                    border-width: 0;
+                    border-style: solid;
+                    border-color: currentColor;
 
-                    > :first-child {
-                        margin-block-start: 0;
-                    }
-                    > :last-child {
-                        margin-block-end: 0;
-                    }
+                    border-block-start-width: var-border-width('200');
+                }
 
-                    > %ol,
-                    > %ul {
-                        width: 100%;
+                @content (js--toggle-content);
 
-                        &:only-child {
-                            margin-inline: 0;
+                /// BLOCK ///
+
+                > .container {
+                    padding-block: 0;
+                    padding-inline: $content_container_paddingInline;
+
+                    @content (js--toggle-content--container);
+
+                    @if $includeStyles {
+                        &,
+                        & > %ol,
+                        & > %ul {
+                            > :first-child {
+                                margin-block-start: 0;
+                            }
+                            > :last-child {
+                                margin-block-end: 0;
+                            }
+                        }
+
+                        > %ol,
+                        > %ul {
+                            width: 100%;
+
+                            &:only-child {
+                                margin-inline: 0;
+                            }
                         }
                     }
                 }
@@ -933,24 +921,6 @@ $_selector_any_modal_container: (
     }
 
     /* Opening & Closing ==================================== */
-
-    #{$selector_control} {
-        [data-toggle-container='open'] &,
-        & {
-            @include feature-check.js {
-                @include hover-focus-visible(
-                    $includeNoWhereSelectorFallback: false
-                ) {
-                    @if $includeStyles {
-                        text-decoration-color: transparent;
-                        color: var-sys-colour(link);
-                    }
-
-                    @content (js--toggle-container--default-or-open--control--hover-focus);
-                }
-            }
-        }
-    }
 
     @include feature-check.js {
         #{$selector_container} {
@@ -964,9 +934,6 @@ $_selector_any_modal_container: (
                     @content (js--toggle-container--closed--content);
 
                     > .container {
-                        opacity: 0;
-                        visibility: hidden;
-
                         @content (js--toggle-container--closed--content--container);
                     }
                 }
@@ -983,7 +950,6 @@ $_selector_any_modal_container: (
                     @content (js--toggle-container--open-or-closing--content);
 
                     > .container {
-                        visibility: visible;
                         @content (js--toggle-container--open-or-closing--content--container);
                     }
                 }
@@ -992,8 +958,6 @@ $_selector_any_modal_container: (
                     @content (js--toggle-container--open-or-closing--control);
 
                     @at-root #{selector.unify(&, $selector_control_backdrop)} {
-                        display: do-var(display, block);
-
                         @content (js--toggle-container--open-or-closing--control-backdrop);
                     }
                 }
@@ -1006,42 +970,26 @@ $_selector_any_modal_container: (
                 @content (js--toggle-container--open);
 
                 #{$selector_control} {
-                    @if $includeStyles {
-                        color: var-sys-colour(text-active);
-                    }
-
                     @content (js--toggle-container--open--control);
 
                     #{$selector_control_icon} {
                         @content (js--toggle-container--open--control--icon);
-
-                        > svg #{$svg_sel_moving} {
-                            transform: rotate(270deg);
-
-                            @content (js--toggle-container--open--control--icon--moving);
-                        }
                     }
 
                     @at-root #{selector.unify(&, $selector_control_backdrop)} {
-                        opacity: 1;
-
                         @content (js--toggle-container--open--control-background);
                     }
                 }
 
                 #{selector.nest('>', $selector_content)} {
                     @if $includeStyles {
-                        border-inline-width: var-border-width('200');
-                        border-block-end-width: var-border-width('200');
+                        border-width: var-border-width('200');
                     }
-
-                    grid-template-rows: 1fr;
 
                     @content (js--toggle-container--open--content);
 
                     > .container {
                         padding-block: $content_container_paddingBlock;
-                        opacity: 1;
 
                         @content (js--toggle-container--open--content--container);
                     }
@@ -1059,24 +1007,13 @@ $_selector_any_modal_container: (
 
                     #{$selector_control_icon} {
                         @content (js--toggle-container--closing--control--icon);
-
-                        > svg #{$svg_sel_moving} {
-                            transform: rotate(540deg);
-
-                            @content (js--toggle-container--closing--control--icon--moving);
-                        }
                     }
                 }
 
                 #{selector.nest('>', $selector_content)} {
-                    grid-template-rows: 0fr;
-
                     @content (js--toggle-container--closing--content);
 
                     > .container {
-                        opacity: 0;
-                        visibility: visible;
-
                         @content (js--toggle-container--closing--content--container);
                     }
                 }

@@ -5,6 +5,8 @@
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
+@use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
 
@@ -15,6 +17,7 @@
 @use '../02-mixins' as *;
 
 @use '03-02-layouts' as *;
+@use '03--toggle' as *;
 
 ///
 /// Supports the SettingsMenu astro component.
@@ -23,6 +26,8 @@
 /// @since 0.1.0-beta.0.draft — Added optional $includeAside params.
 ///
 @mixin snippet-support-site-settings-menu(
+    $container_alignment: (),
+    $content_alignment: (),
     $fieldset_flexContainer_alignment: (),
     $fieldset_flexContainer_direction: row,
     $fieldset_flexContainer_gap: var-mrg-firm('200')
@@ -30,189 +35,161 @@
     $zIndex: 100,
     $zIndex_open: 999999,
     //
-    $includeBaseStyles: true
+    $includeBase: false,
+    $includeStyles: true,
+    //
+    $selector_container: '.website-settings-menu',
+    $selector_content: selector.append($selector_container, '__content'),
+    $selector_control: selector.append($selector_container, '__control'),
+    $selector_disclaimer: selector.append($selector_container, '__disclaimer')
 ) {
-    .website-settings-menu {
+    @if $includeBase {
+        @include snippet-support-toggle-block-base using ($location) {
+            @content ($location);
+        }
+    }
+
+    #{$selector_container} {
         @include prop-grid-column(page-start / page-end);
 
         display: none;
-        margin: 0;
-        padding: 0;
 
         @content (settings-menu);
 
         &[data-toggle-container] {
-            @if $includeBaseStyles {
-                justify-content: start;
-                align-content: end;
-                align-items: end;
-            }
-
             overscroll-behavior: none;
             z-index: $zIndex;
 
             @content (settings-menu--container);
         }
-    }
 
-    .website-settings__content {
-        margin: 0;
-
-        @if $includeBaseStyles {
-            background: var-sys-colour(background);
-            width: 100%;
-            max-width: min(var-width(content), 90vw);
-        }
-
-        @content (content);
-
-        @if $includeBaseStyles {
-            > :first-child {
-                margin-block-start: 0;
-            }
-            > :last-child {
-                margin-block-end: 0;
-            }
-        }
-
-        fieldset {
-            @if $includeBaseStyles {
-                margin-block: var-mrg-firm('300') var-mrg-half('300');
-                margin-inline: 0;
-
-                padding-block: var-mrg-firm('100');
-                padding-inline: clamp(
-                    var-mrg-firm('200'),
-                    3vw,
-                    var-mrg-firm('300')
-                );
+        #{$selector_content} {
+            @if $includeStyles {
+                background: var-sys-colour(background);
+                width: 100%;
+                max-width: min(var-width(content), 90vw);
             }
 
-            @content (content--fieldset);
-
-            > legend {
-                &,
-                &:first-child {
-                    @content (content--fieldset--legend);
-                }
-            }
+            @content (content);
 
             > .container {
-                @include prop-display(flex);
-                @include snippet-body-grid--flex-container(
-                    $alignment: $fieldset_flexContainer_alignment,
-                    $gap: $fieldset_flexContainer_gap,
-                    $direction: $fieldset_flexContainer_direction,
-                    $wrap: wrap
-                );
-
-                margin: 0;
-                padding: 0;
-
-                @content (content--fieldset--container);
-
-                > label,
-                > input {
-                    margin: 0;
-
-                    @content (content--fieldset--container--label-or-input);
-                }
-            }
-        }
-    }
-
-    .website-settings__disclaimer {
-        @if $includeBaseStyles {
-            font-style: italic;
-            font-size: var-fs(smaller-1);
-        }
-
-        @content (disclaimer);
-    }
-
-    /* With Javascript ==================================== */
-
-    #{config.$selector_body} {
-        &:has(.website-settings-menu[data-toggle-container='open']) {
-            overflow: hidden;
-        }
-    }
-
-    @include feature-check.js {
-        .website-settings-menu {
-            @include prop-display(flex);
-
-            @content (js--settings-menu);
-
-            .toggle-block__title {
-                @content (js--settings-menu--title);
-            }
-
-            [data-toggle-control] {
-                @if $includeBaseStyles {
-                    @include utils.snippet-button(
-                            $gap: 0,
-                            $marginBlock: 0,
-                            $marginInline: 0,
-                            $paddingBlock: var-mrg-firm('100'),
-                            $paddingInline: var-mrg-firm('100')
-                        )
-                        using ($location) {
-                        @if $location == root {
-                            @include cx-prop(
-                                icon-size,
-                                do-var(icon-size-large)
-                            );
-                            align-self: end;
-                            justify-self: end;
+                @if $includeStyles {
+                    &,
+                    & > %ol,
+                    & > %ul {
+                        > :first-child {
+                            margin-block-start: 0;
+                        }
+                        > :last-child {
+                            margin-block-end: 0;
                         }
                     }
                 }
 
-                @content (js--settings-menu--control);
-
-                &[data-toggle-control-backdrop] {
-                    display: none;
-
-                    @if $includeBaseStyles {
-                        margin: 0;
-                        padding: 0;
-                        width: 100%;
-                        height: 100%;
-
-                        background: none;
-                        border: none;
-                        border-radius: 0;
-
-                        opacity: 1;
-                    }
-
-                    @content (js--settings-menu--control--backdrop);
-                }
+                @content (content--container);
             }
 
-            [data-toggle-content] {
-                justify-content: stretch;
-                justify-items: start;
-                align-content: start;
-                align-items: start;
+            fieldset {
+                @if $includeStyles {
+                    margin-block: var-mrg-firm('300') var-mrg-half('300');
+                    margin-inline: 0;
 
-                @if $includeBaseStyles {
-                    border: none;
+                    padding-block: var-mrg-firm('100');
+                    padding-inline: clamp(
+                        var-mrg-firm('200'),
+                        3vw,
+                        var-mrg-firm('300')
+                    );
+                }
+
+                @content (content--fieldset);
+
+                > legend {
+                    &,
+                    &:first-child {
+                        @content (content--fieldset--legend);
+                    }
+                }
+
+                > .container {
+                    @if $includeStyles {
+                        @include prop-display(flex);
+                        @include snippet-body-grid--flex-container(
+                            $alignment: $fieldset_flexContainer_alignment,
+                            $gap: $fieldset_flexContainer_gap,
+                            $direction: $fieldset_flexContainer_direction,
+                            $wrap: wrap
+                        );
+
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    @content (content--fieldset--container);
+
+                    > label,
+                    > input {
+                        @if $includeStyles {
+                            margin: 0;
+                        }
+
+                        @content (content--fieldset--container--label-or-input);
+                    }
+                }
+            }
+        }
+
+        #{$selector_disclaimer} {
+            @if $includeStyles {
+                font-style: italic;
+                font-size: var-fs(smaller-1);
+            }
+
+            @content (disclaimer);
+        }
+    }
+
+    /* With Javascript ==================================== */
+
+    @include feature-check.js {
+        #{$selector_container} {
+            @include prop-display(flex);
+            @include snippet-body-grid--flex-container(
+                $alignment: map.merge(
+                        (
+                            align-items: end,
+                        ),
+                        $container_alignment
+                    )
+            );
+
+            @content (js--settings-menu);
+
+            #{$selector_control} {
+                @content (js--settings-menu--control);
+            }
+
+            #{$selector_content} {
+                @if $includeStyles {
+                    border-width: 0;
+                    border-style: solid;
+                    border-color: currentColor;
                 }
 
                 @content (js--settings-menu--content);
+
+                > .container {
+                    @if $includeStyles {
+                        padding-inline: var-mrg-firm('400');
+                    }
+
+                    @content (js--settings-menu--content--container);
+                }
             }
 
             &[data-toggle-container='open'],
             &[data-toggle-container='closing'] {
                 @content (js--settings-menu--open-or-closing);
-
-                [data-toggle-control-backdrop] {
-                    display: do-var(display, block);
-
-                    @content (js--settings-menu--open-or-closing--control-backdrop);
-                }
             }
 
             &[data-toggle-container='open'] {
@@ -220,25 +197,15 @@
 
                 @content (js--settings-menu--open);
 
-                [data-toggle-control-backdrop] {
-                    opacity: 1;
-
-                    @content (js--settings-menu--open--control-backdrop);
-                }
-
-                > [data-toggle-content] {
-                    @content (js--settings-menu--open--content);
-
-                    > * {
-                        @if $includeBaseStyles {
-                            flex-shrink: 0;
-                        }
-
-                        @content (js--settings-menu--open--content--direct-child);
+                #{selector.nest('>', $selector_content)} {
+                    @if $includeStyles {
+                        border-width: var-border-width('200');
                     }
 
+                    @content (js--settings-menu--open--content);
+
                     > .container {
-                        @if $includeBaseStyles {
+                        @if $includeStyles {
                             padding-block: var-mrg-soft('400')
                                 var-mrg-firm('300');
 

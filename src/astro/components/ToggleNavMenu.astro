@@ -6,8 +6,9 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 import type { NavMenuProps } from './NavMenu.astro';
+import type { ToggleProps } from './Toggle.astro';
 
 /* import - functions */
 import { parseMenuItem } from './NavMenu.astro';
@@ -16,12 +17,17 @@ import { parseMenuItem } from './NavMenu.astro';
 
 /* import - components */
 import MenuList from './MenuList.astro';
-import Toggle_Control from '../support/Toggle_Control.astro';
-import Heading from './Heading.astro';
+import Toggle from './Toggle.astro';
 
 /* import - layouts */
 
 /* TYPES ===================================== */
+
+type CombinedProps = Pick<
+    NavMenuProps,
+    'convertHrefStringsToAbsolute' | 'menu' | 'urlMaker'
+> &
+    Omit<ToggleProps, 'children' | 'displayHeading' | 'heading'>;
 
 /**
  * Input props for the ToggleNavMenu component.
@@ -29,26 +35,21 @@ import Heading from './Heading.astro';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface ToggleNavMenuProps extends NavMenuProps {
-    /**
-     * @since ___PKG_VERSION___
-     */
-    iconSVG?: string;
-}
+export interface ToggleNavMenuProps extends CombinedProps {}
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<ToggleNavMenuProps, 'div'>;
+type Props = ElementProps<ToggleNavMenuProps, 'div'>;
 
 const {
     class: classList = [],
     convertHrefStringsToAbsolute,
     iconSVG,
-    id: menuID,
+    id,
     menu,
     urlMaker,
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -56,64 +57,25 @@ const parsedMenu = menu.map((_item) =>
     parseMenuItem(Astro.url, _item, convertHrefStringsToAbsolute, urlMaker),
 );
 
-const id = `${menuID}-toggle`;
-
-const buttonID = `${id}-button`;
-const contentID = `${id}-content`;
-const titleID = `${id}-title`;
-
-/**
- * Rendered icon HTML.
- */
-const buttonHTML = (await Astro.slots.render('button'))?.trim() || 'Menu';
+const buttonHTML = (await Astro.slots.render('button'))?.trim();
 ---
 
-<nav
+<Toggle
     {...attributes}
-    id={id}
-    data-toggle-container
-    data-toggle-container-type='modal,nav'
+    {...{ iconSVG, id }}
+    classBase='toggle-nav-menu'
     class:list={classList}
     role='navigation'
+    tag='nav'
+    type={['modal', 'nav']}
 >
-    <div
-        id={titleID}
-        class='toggle-block__title'
-    >
-        <Heading heading={0}>
-            <Toggle_Control
-                {...{ id, buttonID }}
-                class='toggle-nav-menu__button'
-                data-toggle-primary-control={id}
-                iconSVG={iconSVG}
-            >
-                <slot
-                    slot='icon'
-                    name='icon'
-                />
-                <Fragment set:html={buttonHTML} />
-            </Toggle_Control>
-        </Heading>
-    </div>
-
-    <div
-        aria-labelledby={titleID}
-        data-toggle-content={id}
-        id={contentID}
-    >
-        <div class='container'>
-            <MenuList
-                menu={parsedMenu}
-                urlMaker={urlMaker}
-            />
-        </div>
-    </div>
-
-    <div
-        data-toggle-control={id}
-        data-toggle-control-backdrop={id}
-        class='toggle-block__control--backdrop toggle-nav-menu__backdrop'
-        aria-hidden='true'
-    >
-    </div>
-</nav>
+    <Fragment
+        slot='button'
+        set:text={buttonHTML || 'Menu'}
+    />
+    <MenuList
+        id={id}
+        menu={parsedMenu}
+        urlMaker={urlMaker}
+    />
+</Toggle>

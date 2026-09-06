@@ -14,6 +14,7 @@ import { makeClassList } from '../functions.js';
 /* import - values */
 
 /* import - components */
+import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* import - layouts */
 
@@ -25,6 +26,11 @@ type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
     id: string;
     buttonID: string;
 
+    /**
+     * Add an additional base class to use.
+     */
+    classBase?: string | undefined;
+
     icon?: boolean;
     iconSVG?: undefined | string;
 };
@@ -32,6 +38,7 @@ type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
 const {
     buttonID,
     class: classList = [],
+    classBase,
     id,
 
     icon = true,
@@ -72,12 +79,17 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-bloc
         />
     </svg>
 </span>`;
+
+const classMaker = classBase
+    ? (append: string = '') =>
+          'toggle-block' + append + ' ' + classBase + append
+    : (append: string = '') => 'toggle-block' + append;
 ---
 
 <button
     {...attrs}
     aria-disabled='true'
-    class:list={makeClassList('toggle-block__control', classList)}
+    class:list={makeClassList(classMaker('__control'), classList)}
     data-toggle-control={id}
     id={buttonID}
     type='button'
@@ -85,10 +97,17 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-bloc
     {icon && <Fragment set:html={iconSVG ?? DEFAULT_TOGGLE_ICON} />}
     {
         (!attrs['aria-label'] || buttonHTML) && (
-            <span
-                class='toggle-block__control__inner'
-                set:html={buttonHTML || 'Toggle me'}
-            />
+            <span class={classMaker('__control__inner')}>
+                <RenderedSlotContent
+                    html={buttonHTML}
+                    name='button'
+                >
+                    <Fragment
+                        slot='empty-before'
+                        set:text={'Toggle me'}
+                    />
+                </RenderedSlotContent>
+            </span>
         )
     }
 </button>

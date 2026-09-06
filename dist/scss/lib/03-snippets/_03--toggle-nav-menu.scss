@@ -14,6 +14,7 @@
 @use '../02-mixins' as *;
 
 @use '03-02-layouts' as *;
+@use '03--toggle' as *;
 
 // prettier-ignore
 $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 minmax(auto, var-width(page)) 0 [sidebar-end] 0 [page-end] 0 [site-end] 0 [content-end] auto;
@@ -33,153 +34,116 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
     $title_borderWidth: var-border-width('200'),
     $title_borderWidth_half: var-border-width('100'),
     //
-    $includeBaseStyles: true
+    $includeBase: false,
+    $includeStyles: true,
+    //
+    $selector_container: '.toggle-nav-menu',
+    $selector_content: selector.append($selector_container, '__content'),
+    $selector_control: selector.append($selector_container, '__control'),
+    $selector_title: selector.append($selector_container, '__title'),
+    // $selector_title_heading: selector.append($selector_container, '__title__heading'),
+     //
 ) {
-    #{config.$selector_body} {
-        > nav {
-            &[data-toggle-container] {
-                @include prop-grid-column(page-start / page-end);
+    @if $includeBase {
+        @include snippet-support-toggle-block-base using ($location) {
+            @content ($location);
+        }
+    }
 
-                @content (nav-toggle-container);
-            }
+    $selector_container: selector.unify($selector_container, 'nav');
+    $selector_container__direct: selector.nest('>', $selector_container);
+
+    $selector_content__direct: selector.nest('>', $selector_content);
+
+    #{config.$selector_body} {
+        #{$selector_container__direct} {
+            @include prop-grid-column(page-start / page-end);
+
+            @content (nav-toggle-container);
         }
     }
 
     @include feature-check.js {
         #{config.$selector_body} {
-            &:has(> nav[data-toggle-container='open']) {
-                overflow: hidden;
+            #{$selector_container__direct} {
+                $_var_gridCols_page: do-var(
+                    grid-template-columns--page,
+                    $default_grid_page
+                );
 
-                @content (js--body-has-open-nav-toggle-container);
-            }
+                /* prettier-ignore */
+                @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
 
-            > nav {
-                &[data-toggle-container] {
-                    @include prop-display(grid);
-                    position: relative;
+                /* prettier-ignore */
+                grid-template-columns: $_var_gridCols_page;
+                grid-template-columns: subgrid;
 
-                    // @include cx-prop(grid-template-columns--page, $content_grid_columns);
-                    // grid-template-columns: do-var(grid-template-columns--page);
-                    // grid-template-columns: subgrid;
+                @include snippet-body-grid--grid-alignment(
+                    $container_alignment
+                );
 
-                    // @include snippet-body-grid--grid-alignment(
-                    //     (
-                    //         justify-content: stretch,
-                    //     )
-                    // );
+                grid-column: 1 / -1;
 
-                    $_var_gridCols_page: do-var(
-                        grid-template-columns--page,
-                        $default_grid_page
-                    );
+                @content (js--nav-toggle-container);
 
-                    /* prettier-ignore */
-                    @include cx-prop( grid-template-columns--toggle,  $_var_gridCols_page );
+                #{$selector_title},
+                #{$selector_content} {
+                    @content (js--nav-toggle-title-or-content);
+                }
 
-                    /* prettier-ignore */
-                    grid-template-columns: $_var_gridCols_page;
-                    grid-template-columns: subgrid;
+                #{$selector_content} {
+                    @include prop-grid-column(page-start / page-end);
 
-                    @include snippet-body-grid--grid-alignment(
-                        $container_alignment
-                    );
+                    @content (js--nav-toggle-content);
 
-                    grid-column: 1 / -1;
+                    > .container {
+                        @if $includeStyles {
+                            background: var-sys-colour(background);
+                            max-height: 80svh;
+                        }
 
-                    padding: 0;
+                        @content (js--nav-toggle-content--container);
+                    }
+                }
 
-                    @content (js--nav-toggle-container);
+                #{$selector_title} {
+                    @if $includeStyles {
+                        margin-block-end: calc($title_borderWidth * -1);
+                        border-block-end: $title_borderWidth solid currentColor;
 
-                    .toggle-block__title,
-                    [data-toggle-content] {
-                        gap: 0;
-
-                        @content (js--nav-toggle-title-or-content);
+                        font-size: var-fs(heading-6);
+                        background: var-sys-colour(background);
                     }
 
-                    [data-toggle-content] {
+                    @content (js--body-nav-toggle-title);
+
+                    #{$selector_control} {
                         @include prop-grid-column(page-start / page-end);
 
-                        position: $content_position;
-                        top: 0;
-
                         /* prettier-ignore */
-                        // grid-template-columns: $content_grid_columns;
+                        @include cx-prop( grid-template-columns--toggle, $gridCols_toggle );
+                        /* prettier-ignore */
+                        grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
 
-                        @if $includeBaseStyles {
-                            margin-block-end: $title_borderWidth_half;
-                            font-size: var-fs(smaller-1);
-                        }
-
-                        @content (js--nav-toggle-content);
-
-                        @if $includeBaseStyles {
-                            * {
-                                font-size: 1em !important;
-                            }
-                        }
-
-                        > .container {
-                            @include prop-grid-column('1 / -1');
-                            width: 100%;
-
-                            @if $includeBaseStyles {
-                                background: var-sys-colour(background);
-                                max-height: 80svh;
-                            }
-
-                            overflow: auto;
-
-                            @content (js--nav-toggle-content--container);
-                        }
-                    }
-
-                    .toggle-block__title {
-                        @if $includeBaseStyles {
-                            margin-block-end: calc($title_borderWidth * -1);
-                            border-block-end: $title_borderWidth
-                                solid
-                                currentColor;
-
-                            font-size: var-fs(heading-6);
-                            background: var-sys-colour(background);
-                        }
-
-                        @content (js--body-nav-toggle-title);
-
-                        [data-toggle-control] {
-                            @include prop-grid-column(page-start / page-end);
-
-                            /* prettier-ignore */
-                            @include cx-prop( grid-template-columns--toggle, $gridCols_toggle );
-                            /* prettier-ignore */
-                            grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
-
-                            justify-content: space-between;
-                            justify-items: start;
-                            align-content: stretch;
-                            align-items: center;
-
-                            @content (js--body-nav-toggle-title--control);
-                        }
+                        @content (js--body-nav-toggle-title--control);
                     }
                 }
 
                 /// CLOSED
-                [data-toggle-container='closed'] {
+                &[data-toggle-container='closed'] {
                     @content (js--nav-toggle-container--closed);
                 }
 
                 /// OPEN & CLOSING
-                [data-toggle-container='open'],
-                [data-toggle-container='closing'] {
+                &[data-toggle-container='open'],
+                &[data-toggle-container='closing'] {
                     @content (js--nav-toggle-container--open-or-closing);
 
-                    [data-toggle-control] {
+                    #{$selector_control} {
                         @content (js--nav-toggle-container--open-or-closing--control);
                     }
 
-                    > [data-toggle-content] {
+                    #{$selector_content__direct} {
                         @content (js--nav-toggle-container--open-or-closing--content);
 
                         > .container {
@@ -189,14 +153,14 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                 }
 
                 /// OPEN
-                [data-toggle-container='open'] {
+                &[data-toggle-container='open'] {
                     @content (js--nav-toggle-container--open);
 
-                    [data-toggle-control] {
+                    #{$selector_control} {
                         @content (js--nav-toggle-container--open--control);
                     }
 
-                    > [data-toggle-content] {
+                    #{$selector_content__direct} {
                         @content (js--nav-toggle-container--open--content);
 
                         > .container {
@@ -206,14 +170,14 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                 }
 
                 /// CLOSING
-                [data-toggle-container='closing'] {
+                &[data-toggle-container='closing'] {
                     @content (js--nav-toggle-container--closing);
 
-                    [data-toggle-control] {
+                    #{$selector_control} {
                         @content (js--nav-toggle-container--closing--control);
                     }
 
-                    > [data-toggle-content] {
+                    #{$selector_content__direct} {
                         @content (js--nav-toggle-container--closing--content);
 
                         > .container {

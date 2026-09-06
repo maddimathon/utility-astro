@@ -77,7 +77,7 @@ function makeClassList_listParser( list: undefined | ClassList ) {
  */
 export function makeClassList(
     defaultClasses: ClassList,
-    inputClasses: undefined | ClassList,
+    inputClasses?: undefined | ClassList,
 ): ClassList {
 
     const defaultList = makeClassList_listParser( defaultClasses );
