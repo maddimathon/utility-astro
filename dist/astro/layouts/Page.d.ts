@@ -8,16 +8,17 @@
  * @license MIT
  */
 
-import type { HTMLAttributes } from 'astro/types';
+import type { ComponentProps, HTMLAttributes } from 'astro/types';
 
 import type {
     PartialExcept,
 } from '@maddimathon/utility-typescript/types';
-
 import type { NavMenuProps } from '../components/NavMenu.astro';
 import type { Page_MetaProps } from '../components/Page_Meta.astro';
 import type { SettingsMenuProps } from '../components/SettingsMenu.astro';
 import type { SkipLinksProps } from '../components/SkipLinks.astro';
+
+import type NavMenu from '../components/NavMenu.astro';
 
 import type {
     ContentProps,
@@ -148,6 +149,10 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
      * wrapper does not appear.
      */
     footer?: {
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        attributes?: Omit<HTMLAttributes<'footer'>, 'class' | 'class:list'> | undefined;
 
         /**
          * Content for the copyright section of the footer.
@@ -194,7 +199,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu"> | undefined;
+    primaryMenu?: NavMenuProps[ 'menu' ] | Omit<PartialExcept<NavMenuProps, "menu">, "convertHrefStringsToAbsolute"> & HTMLAttributes<'div'> | undefined;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -204,7 +209,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | PartialExcept<NavMenuProps, "convertHrefStringsToAbsolute" | "menu"> | undefined;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | Omit<PartialExcept<NavMenuProps, "menu">, "convertHrefStringsToAbsolute"> & HTMLAttributes<'div'> | undefined;
 
     /**
      * Whether to inlcude the settings menu. Optionally this can be an object of

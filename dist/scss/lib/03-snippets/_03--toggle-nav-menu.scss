@@ -4,6 +4,7 @@
 ///
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
+@use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
@@ -15,6 +16,8 @@
 
 @use '03-02-layouts' as *;
 @use '03--toggle' as *;
+
+$_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
 // prettier-ignore
 $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [sidebar-start] 0 minmax(auto, var-width(page)) 0 [sidebar-end] 0 [page-end] 0 [site-end] 0 [content-end] auto;
@@ -42,10 +45,20 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
     $selector_control: selector.append($selector_container, '__control'),
     $selector_title: selector.append($selector_container, '__title'),
     // $selector_title_heading: selector.append($selector_container, '__title__heading'),
-     //
+    //
+    $mixin_support_base: null,
+    //
+    $args...
 ) {
     @if $includeBase {
-        @include snippet-support-toggle-block-base using ($location) {
+        $mixin_support_base: config.config-valid-mixin(
+            $mixin_support_base,
+            '$mixin_support_base',
+            $default: $_mixin_support_base,
+            $prefix: '[snippet-support-astro-toggle-nav-menu] '
+        );
+
+        @include meta.apply($mixin_support_base, $args...) using ($location) {
             @content ($location);
         }
     }

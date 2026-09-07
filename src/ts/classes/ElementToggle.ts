@@ -328,6 +328,11 @@ export class ElementToggle {
      */
     public readonly toggleListener: ( this: HTMLElement, ev: Event ) => any;
 
+    /**
+     * @since ___PKG_VERSION___
+     */
+    public readonly toggleBackdropListener: ( this: HTMLElement, ev: Event ) => any;
+
 
 
     /* CONSTRUCTOR
@@ -405,12 +410,22 @@ export class ElementToggle {
         this.toggle = this.toggle.bind( this );
         this.validateButton = this.validateButton.bind( this );
 
-        const _activateButton = this.activateButton;
-        const _toggle = this.toggle;
+        const _activateButton = this.activateButton.bind( this );
+        const _clearTimeout = this.clearTimeout.bind( this );
+        const _close = this.close.bind( this );
+        const _deactivateButton = this.deactivateButton.bind( this );
+
+        const _toggle = this.toggle.bind( this );
 
         this.toggleListener = function ( this: HTMLElement ) {
-            _activateButton( this );
             _toggle( this );
+        };
+
+        this.toggleBackdropListener = function ( this: HTMLElement ) {
+            _activateButton( this );
+            _clearTimeout();
+            _close();
+            _deactivateButton();
         };
 
         const isCurrentAnchorTarget = this.opts.openWhenTargetted
@@ -479,6 +494,11 @@ export class ElementToggle {
                 button.setAttribute( 'aria-haspopup', 'dialog' );
                 this.content.role = 'dialog';
             }
+        }
+
+        if ( button.hasAttribute( 'data-toggle-control-backdrop' ) ) {
+            button.removeEventListener( 'click', this.toggleListener );
+            button.addEventListener( 'click', this.toggleBackdropListener );
         }
     }
 

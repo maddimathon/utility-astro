@@ -131,6 +131,10 @@ export declare class ElementToggle {
      */
     readonly toggleListener: (this: HTMLElement, ev: Event) => any;
     /**
+     * @since 0.1.0-beta.0.draft
+     */
+    readonly toggleBackdropListener: (this: HTMLElement, ev: Event) => any;
+    /**
      * Class constructor.
      */
     protected constructor(elements: {

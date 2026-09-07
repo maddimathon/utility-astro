@@ -641,6 +641,7 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Style */
 html {
+    --backdrop-filter: blur(1rem);
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
     --focus-ring-outline-offset: var(--stroke-relative-400, 0.125em);
     --focus-ring-outline-width: clamp(
@@ -2612,7 +2613,7 @@ nav ul li {
     width: auto;
 }
 
-.website-settings-menu,
+.website-settings,
 .page-width {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
@@ -2620,7 +2621,7 @@ nav ul li {
     width: auto;
 }
 @media (width >= 40.875em) {
-    .website-settings-menu,
+    .website-settings,
     .page-width {
         --grid-column: page-start/page-end;
         grid-column: page-start/page-end;
@@ -3231,7 +3232,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -3240,7 +3240,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -3249,7 +3248,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -3258,7 +3256,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -3271,7 +3268,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -3281,6 +3277,7 @@ body > :where(main) > :where(aside) {
     padding: 0;
     width: auto;
     text-align: inherit;
+    opacity: 1;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -3302,6 +3299,45 @@ body > :where(main) > :where(aside) {
 [data-toggle-control-backdrop] {
     display: none !important;
     position: fixed;
+}
+[data-toggle-control-backdrop],
+[data-toggle-control-backdrop]:hover,
+[data-toggle-control-backdrop]:active,
+[data-toggle-control-backdrop][data-state-active="true"],
+[data-toggle-control-backdrop][data-state-focus="true"] {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+:where(.js__no-focusVisible) [data-toggle-control-backdrop]:focus {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:focus-visible {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:focus-within {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:has(
+    :is([data-state-focus="true"], :active, [data-state-active="true"])
+) {
+    background: none !important;
+    border: none !important;
+    color: inherit;
     opacity: 0;
 }
 
@@ -3334,6 +3370,10 @@ body > :where(main) > :where(aside) {
     justify-items: stretch;
     align-content: start;
     align-items: start;
+    grid-gap: 0 0.5rem;
+    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
+    gap: 0 0.5rem;
+    gap: 0 var(--mrg-firm-200, 0.5rem);
 }
 
 :where(.js) .toggle-block .toggle-block__title,
@@ -3364,54 +3404,11 @@ body > :where(main) > :where(aside) {
     border-radius: 0 !important;
     -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: var(--backdrop-filter, blur(1rem));
+    backdrop-filter: var(--backdrop-filter, blur(1rem));
     cursor: pointer;
     z-index: -2;
 }
-:where(.js) [data-toggle-control][data-toggle-control-backdrop],
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"],
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js):where(.js__no-focusVisible)
-    [data-toggle-control][data-toggle-control-backdrop]:focus {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop]:has(
-        :is([data-state-focus="true"], :active, [data-state-active="true"])
-    ) {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::before,
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
     content: "";
@@ -3449,6 +3446,10 @@ body > :where(main) > :where(aside) {
     grid-template-rows: 0fr;
     overflow: hidden;
 }
+:where(.js) [data-toggle-content] > *,
+:where(.js) [data-toggle-content] > .container > * {
+    flex-shrink: 0;
+}
 :where(.js) [data-toggle-content] > .container {
     --grid-column: 1 / -1;
     grid-column: 1 / -1;
@@ -3461,9 +3462,6 @@ body > :where(main) > :where(aside) {
     overflow: auto;
     visibility: hidden;
     opacity: 0;
-}
-:where(.js) [data-toggle-content] > .container > * {
-    flex-shrink: 0;
 }
 
 /* Opening & Closing ==================================== */
@@ -3481,8 +3479,14 @@ body > :where(main) > :where(aside) {
 
 :where(.js)
     [data-toggle-container="closed"]
+    [data-toggle-control][data-toggle-control-backdrop] {
+    opacity: 0;
+}
+:where(.js)
+    [data-toggle-container="closed"]
     > [data-toggle-content]
     > .container {
+    display: none;
     opacity: 0;
     visibility: hidden;
 }
@@ -3557,7 +3561,11 @@ body > :where(main) > :where(aside) {
     width: auto;
     font: inherit;
     font-size: 1em;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
     text-align: inherit;
+    text-wrap: inherit;
 }
 .toggle-block .toggle-block__control,
 .toggle-block .toggle-block__control:hover,
@@ -3569,28 +3577,24 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 :where(.js__no-focusVisible) .toggle-block .toggle-block__control:focus {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 .toggle-block .toggle-block__control:focus-visible {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 .toggle-block .toggle-block__control:focus-within {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 .toggle-block
@@ -3600,7 +3604,6 @@ body > :where(main) > :where(aside) {
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 .toggle-block .toggle-block__title {
@@ -3674,11 +3677,11 @@ body > :where(main) > :where(aside) {
     margin-bottom: 0;
 }
 :where(.js) .toggle-block .toggle-block__content {
-    border-width: 0;
+    border-width: 0.125rem;
+    border-width: var(--border-width-200, 0.125rem);
     border-style: solid;
     border-color: currentColor;
-    border-top-width: 0.125rem;
-    border-top-width: var(--border-width-200, 0.125rem);
+    border-bottom-width: 0;
 }
 :where(.js) .toggle-block .toggle-block__content > .container {
     padding-top: 0;
@@ -3809,56 +3812,34 @@ body > nav.toggle-nav-menu {
 }
 /* # ASTRO SUPPORT - SETTINGS MENU
  * ======================================================================== */
-.website-settings-menu {
+.website-settings {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     display: none;
 }
-.website-settings-menu[data-toggle-container] {
+.website-settings[data-toggle-container] {
     overscroll-behavior: none;
     z-index: 100;
 }
-.website-settings-menu .website-settings-menu__content {
+.website-settings .website-settings__content {
     background: Canvas;
     background: var(--sys-clr-background, Canvas);
     width: 100%;
     max-width: min(36rem, 90vw);
     max-width: min(var(--width-content, 36rem), 90vw);
 }
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > :first-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ol
-    > :first-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ul
-    > :first-child {
+.website-settings .website-settings__content > .container > :first-child,
+.website-settings .website-settings__content > .container > ol > :first-child,
+.website-settings .website-settings__content > .container > ul > :first-child {
     margin-top: 0;
 }
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > :last-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ol
-    > :last-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ul
-    > :last-child {
+.website-settings .website-settings__content > .container > :last-child,
+.website-settings .website-settings__content > .container > ol > :last-child,
+.website-settings .website-settings__content > .container > ul > :last-child {
     margin-bottom: 0;
 }
-.website-settings-menu .website-settings-menu__content fieldset {
+.website-settings .website-settings__content fieldset {
     margin-top: 0.8125rem;
     margin-bottom: 0.1875rem;
     margin-top: var(--mrg-firm-300, 0.8125rem);
@@ -3882,7 +3863,7 @@ body > nav.toggle-nav-menu {
         var(--mrg-firm-300, 0.8125rem)
     );
 }
-.website-settings-menu .website-settings-menu__content fieldset > .container {
+.website-settings .website-settings__content fieldset > .container {
     --display: flex;
     display: flex;
     display: var(--display, flex);
@@ -3898,26 +3879,18 @@ body > nav.toggle-nav-menu {
     margin: 0;
     padding: 0;
 }
-.website-settings-menu
-    .website-settings-menu__content
-    fieldset
-    > .container
-    > label,
-.website-settings-menu
-    .website-settings-menu__content
-    fieldset
-    > .container
-    > input {
+.website-settings .website-settings__content fieldset > .container > label,
+.website-settings .website-settings__content fieldset > .container > input {
     margin: 0;
 }
-.website-settings-menu .website-settings-menu__disclaimer {
+.website-settings .website-settings__disclaimer {
     font-style: italic;
     font-size: 0.9375rem;
     font-size: var(--fs-smaller-1, 0.9375rem);
 }
 
 /* With Javascript ==================================== */
-:where(.js) .website-settings-menu {
+:where(.js) .website-settings {
     --display: flex;
     display: flex;
     display: var(--display, flex);
@@ -3929,32 +3902,29 @@ body > nav.toggle-nav-menu {
     align-content: center;
     align-items: end;
 }
-:where(.js) .website-settings-menu .website-settings-menu__content {
+:where(.js) .website-settings .website-settings__content {
     border-width: 0;
     border-style: solid;
     border-color: currentColor;
 }
-:where(.js)
-    .website-settings-menu
-    .website-settings-menu__content
-    > .container {
+:where(.js) .website-settings .website-settings__content > .container {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     padding-left: var(--mrg-firm-400, 1.25rem);
     padding-right: var(--mrg-firm-400, 1.25rem);
 }
-:where(.js) .website-settings-menu[data-toggle-container="open"] {
+:where(.js) .website-settings[data-toggle-container="open"] {
     z-index: 999999;
 }
 :where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    > .website-settings-menu__content {
+    .website-settings[data-toggle-container="open"]
+    > .website-settings__content {
     border-width: 0.125rem;
     border-width: var(--border-width-200, 0.125rem);
 }
 :where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    > .website-settings-menu__content
+    .website-settings[data-toggle-container="open"]
+    > .website-settings__content
     > .container {
     padding-top: 0.9375rem;
     padding-bottom: 0.8125rem;

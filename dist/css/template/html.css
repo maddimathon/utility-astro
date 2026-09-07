@@ -641,6 +641,7 @@ html {
 /* #endregion Tokens - Stroke Relative */
 /* #region Tokens - Style */
 html {
+    --backdrop-filter: blur(1rem);
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
     --focus-ring-outline-offset: var(--stroke-relative-400, 0.125em);
     --focus-ring-outline-width: clamp(

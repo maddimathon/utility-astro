@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { HTMLTag } from 'astro/types';
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
 import type { ClassList, ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
@@ -126,6 +126,22 @@ export interface ToggleProps {
     headerTag?: 'div' | 'header' | undefined;
 
     /**
+     * @since ___PKG_VERSION___
+     */
+    titleAttributes?: Omit<
+        HTMLAttributes<'p'>,
+        'aria-label' | 'aria-labelledby' | 'class' | 'class:list' | 'id'
+    >;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    contentAttributes?: Omit<
+        HTMLAttributes<'div'>,
+        'aria-label' | 'aria-labelledby' | 'class' | 'class:list' | 'id'
+    >;
+
+    /**
      * Used to set the data-toggle-container-type attribute.
      *
      * @since ___PKG_VERSION___
@@ -158,6 +174,8 @@ const {
     minimumHeading = 2,
     tag: Container = 'section',
     contentTag: ContentContainer = 'section',
+    contentAttributes,
+    titleAttributes,
     type,
     ...attributes
 }: Props = Astro.props;
@@ -191,6 +209,7 @@ const includeBackdrop =
     data-toggle-container-type={containerTypes.join(' ')}
 >
     <HeaderContainer
+        {...titleAttributes}
         class={classMaker('__title')}
         data-toggle-title={id}
         id={titleID}
@@ -213,6 +232,7 @@ const includeBackdrop =
     </HeaderContainer>
 
     <ContentContainer
+        {...contentAttributes}
         aria-labelledby={titleID}
         class={classMaker('__content')}
         data-toggle-content={id}

@@ -5,115 +5,18 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # SETTINGS MENU ==================================== */
-.website-settings-menu {
+.website-settings {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
     display: none;
 }
-.website-settings-menu[data-toggle-container] {
+.website-settings[data-toggle-container] {
     overscroll-behavior: none;
     z-index: 100;
 }
-.website-settings-menu .website-settings-menu__content {
-    background: Canvas;
-    background: var(--sys-clr-background, Canvas);
-    width: 100%;
-    max-width: min(36rem, 90vw);
-    max-width: min(var(--width-content, 36rem), 90vw);
-}
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > :first-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ol
-    > :first-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ul
-    > :first-child {
-    margin-top: 0;
-}
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > :last-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ol
-    > :last-child,
-.website-settings-menu
-    .website-settings-menu__content
-    > .container
-    > ul
-    > :last-child {
-    margin-bottom: 0;
-}
-.website-settings-menu .website-settings-menu__content fieldset {
-    margin-top: 0.8125rem;
-    margin-bottom: 0.1875rem;
-    margin-top: var(--mrg-firm-300, 0.8125rem);
-    margin-bottom: var(--mrg-half-300, 0.1875rem);
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.3125rem;
-    padding-bottom: 0.3125rem;
-    padding-top: var(--mrg-firm-100, 0.3125rem);
-    padding-bottom: var(--mrg-firm-100, 0.3125rem);
-    padding-left: clamp(0.5rem, 3vw, 0.8125rem);
-    padding-right: clamp(0.5rem, 3vw, 0.8125rem);
-    padding-left: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        3vw,
-        var(--mrg-firm-300, 0.8125rem)
-    );
-    padding-right: clamp(
-        var(--mrg-firm-200, 0.5rem),
-        3vw,
-        var(--mrg-firm-300, 0.8125rem)
-    );
-}
-.website-settings-menu .website-settings-menu__content fieldset > .container {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    position: relative;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5rem clamp(1.25rem, 5vw, 2.25rem);
-    gap: var(--mrg-firm-200, 0.5rem)
-        clamp(var(--mrg-firm-400, 1.25rem), 5vw, var(--mrg-firm-600, 2.25rem));
-    justify-content: start;
-    align-content: center;
-    align-items: stretch;
-    margin: 0;
-    padding: 0;
-}
-.website-settings-menu
-    .website-settings-menu__content
-    fieldset
-    > .container
-    > label,
-.website-settings-menu
-    .website-settings-menu__content
-    fieldset
-    > .container
-    > input {
-    margin: 0;
-}
-.website-settings-menu .website-settings-menu__disclaimer {
-    font-style: italic;
-    font-size: 0.9375rem;
-    font-size: var(--fs-smaller-1, 0.9375rem);
-}
-
 /* With Javascript ==================================== */
-:where(.js) .website-settings-menu {
+:where(.js) .website-settings {
     --display: flex;
     display: flex;
     display: var(--display, flex);
@@ -125,41 +28,6 @@
     align-content: center;
     align-items: end;
 }
-:where(.js) .website-settings-menu .website-settings-menu__content {
-    border-width: 0;
-    border-style: solid;
-    border-color: currentColor;
-}
-:where(.js)
-    .website-settings-menu
-    .website-settings-menu__content
-    > .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    padding-left: var(--mrg-firm-400, 1.25rem);
-    padding-right: var(--mrg-firm-400, 1.25rem);
-}
-:where(.js) .website-settings-menu[data-toggle-container="open"] {
+:where(.js) .website-settings[data-toggle-container="open"] {
     z-index: 999999;
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    > .website-settings-menu__content {
-    border-width: 0.125rem;
-    border-width: var(--border-width-200, 0.125rem);
-}
-:where(.js)
-    .website-settings-menu[data-toggle-container="open"]
-    > .website-settings-menu__content
-    > .container {
-    padding-top: 0.9375rem;
-    padding-bottom: 0.8125rem;
-    padding-top: var(--mrg-soft-400, 0.9375rem);
-    padding-bottom: var(--mrg-firm-300, 0.8125rem);
-    max-height: 80svh;
-    max-height: calc(95svh - 0px - 5vw - 1.375em);
-    max-height: calc(
-        95svh - var(--scroll-padding-top, 0px) - var(--gap-block-layout, 5vw) -
-            var(--icon-size, 1.375em)
-    );
 }

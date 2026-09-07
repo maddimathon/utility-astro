@@ -26,7 +26,11 @@ $_selector_any_modal_container: (
     '[data-toggle-container-type~=modal]'
 );
 
-$_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
+$_toggle_gridCols: [icon] minmax(max-content, auto) [content] 1fr;
+$_toggle_gridGap: 0 var-mrg-firm('200');
+
+$_toggle_svg_sel_static: '#a';
+$_toggle_svg_sel_moving: '#b';
 
 @each $level in token-all-heading-levels() {
     @if $level > 3 {
@@ -41,13 +45,63 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin _toggle-apply-all-interactive-states($args...) {
+@mixin _toggle-interactive-states(
+    $hover: false,
+    $focus: false,
+    $focusWithin: $focus,
+    $active: false,
+    $activeWithin: $active,
+    $args...
+) {
     @include apply-interactive-mixin(
+        $active: $active,
+        $activeWithin: $activeWithin,
+        $focus: $focus,
+        $focusWithin: $focusWithin,
+        $hover: $hover,
+        $args...
+    ) {
+        @content;
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-interactive-states--js(
+    $includeNoWhereSelectorFallback: false,
+    $args...
+) {
+    @include _toggle-interactive-states(
+        $includeNoWhereSelectorFallback: $includeNoWhereSelectorFallback,
+        $args...
+    ) {
+        @content;
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-interactive-all-states($args...) {
+    @include _toggle-interactive-states(
         $hover: true,
         $focus: true,
-        $focusWithin: true,
         $active: true,
-        $activeWithin: true,
+        $args...
+    ) {
+        @content;
+    }
+}
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+@mixin _toggle-interactive-all-states--js($args...) {
+    @include _toggle-interactive-states--js(
+        $hover: true,
+        $focus: true,
+        $active: true,
         $args...
     ) {
         @content;
@@ -82,7 +136,7 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin _toggle-block--js-pseudo-classes($gridCols_toggle) {
+@mixin _toggle-block--js-pseudo-classes($gridCols_toggle, $gridGap) {
     @at-root %_toggle-container-grid-basics {
         @include prop-display(grid);
         position: relative;
@@ -102,6 +156,8 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
             )
         );
 
+        gap: $gridGap;
+
         @content (js--container-grid);
     }
 
@@ -117,89 +173,20 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 }
 
 ///
-/// @since 0.1.0-beta.0.draft
-///
-@mixin _toggle-block--backdrop-control($includeBackdropControlStyles) {
-    position: fixed !important;
-    align-self: auto;
-    justify-self: auto;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    margin: 0 !important;
-    padding: 0;
-    width: auto !important;
-    height: auto !important;
-
-    border-radius: 0 !important;
-
-    @if $includeBackdropControlStyles {
-        backdrop-filter: blur(1rem);
-    }
-
-    cursor: pointer;
-
-    z-index: -2;
-
-    @content;
-
-    @include _toggle-apply-all-interactive-states(
-        $self: true,
-        $includeNoWhereSelectorFallback: false,
-        $warnOnSelf: false
-    ) {
-        @if $includeBackdropControlStyles {
-            background: none !important;
-            border: none !important;
-            color: inherit;
-        }
-
-        opacity: 1;
-    }
-
-    @if $includeBackdropControlStyles {
-        &::before,
-        &::after {
-            content: '';
-            content: '' / '';
-            @include prop-display(block);
-            position: absolute;
-
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-
-        &::before {
-            background: var-sys-colour(background);
-            opacity: 0.625;
-        }
-
-        &::after {
-            background: var-sys-colour(link);
-            opacity: 0.1875;
-        }
-    }
-}
-
-///
 /// Adds only the most basic toggle block functionality using attribute
 /// selectors.
 ///
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-support-toggle-block-base(
-    $includeBackdropControlStyles: true,
-    $gridCols_toggle: $_gridCols_toggle,
-    $svg_sel_static: '#a',
-    $svg_sel_moving: '#b'
+    $includeBackdropStyles: true,
+    $gridCols_toggle: $_toggle_gridCols,
+    $gridGap: $_toggle_gridGap,
+    $svg_sel_moving: $_toggle_svg_sel_moving,
+    $svg_sel_static: $_toggle_svg_sel_static
 ) {
     @include _toggle-block--base-pseudo-classes using ($location) {
-        @content (base-$location);
+        @content (base--#{$location});
     }
 
     /* Universal Toggling ==================================== */
@@ -217,7 +204,7 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
     [data-toggle-control] {
         @content (toggle-base--control);
 
-        @include _toggle-apply-all-interactive-states(
+        @include _toggle-interactive-all-states(
             $self: true,
             $warnOnSelf: false
         ) {
@@ -225,7 +212,6 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
                 box-shadow: none;
                 border: none;
                 background: none;
-                opacity: 1;
                 color: inherit;
 
                 @content (toggle-base--control--disabled--active-hover-focus);
@@ -239,6 +225,8 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
             width: auto;
 
             text-align: inherit;
+
+            opacity: 1;
 
             appearance: none;
             cursor: text;
@@ -265,9 +253,21 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
     [data-toggle-control-backdrop] {
         display: none !important;
         position: fixed;
-        opacity: 0;
 
         @content (toggle-base--control-backdrop);
+
+        @include _toggle-interactive-all-states--js(
+            $self: true,
+            $warnOnSelf: false
+        ) {
+            background: none !important;
+            border: none !important;
+            color: inherit;
+
+            opacity: 0;
+
+            @content (toggle-base--control-backdrop--self-active-hover-focus);
+        }
     }
 
     ///
@@ -323,7 +323,8 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
     /* Javascript Enabled ==================================== */
 
     @include _toggle-block--js-pseudo-classes(
-            $gridCols_toggle: $gridCols_toggle
+            $gridCols_toggle: $gridCols_toggle,
+            $gridGap: $gridGap
         )
         using ($args...) {
         @content ($args...);
@@ -350,10 +351,83 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
             @content (js--toggle-base--control);
 
             &[data-toggle-control-backdrop] {
-                @include _toggle-block--backdrop-control(
-                    $includeBackdropControlStyles: $includeBackdropControlStyles
-                ) {
-                    @content (js--toggle-base--control-backdrop);
+                position: fixed !important;
+                align-self: auto;
+                justify-self: auto;
+
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+
+                margin: 0 !important;
+                padding: 0;
+                width: auto !important;
+                height: auto !important;
+
+                border-radius: 0 !important;
+
+                backdrop-filter: var-style(backdrop-filter);
+
+                cursor: pointer;
+
+                z-index: -2;
+
+                @content (js--toggle-base--control-backdrop);
+
+                &::before,
+                &::after {
+                    content: '';
+                    content: '' / '';
+                    @include prop-display(block);
+                    position: absolute;
+
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+
+                    @content (js--toggle-base--control-backdrop--before-or-after);
+                }
+
+                &::before {
+                    @if $includeBackdropStyles {
+                        background: var-sys-colour(background);
+                        opacity: 0.625;
+                    }
+
+                    @content (js--toggle-base--control-backdrop--before);
+
+                    @include _toggle-interactive-states--js(
+                        $hover: true,
+                        $focus: true
+                    ) {
+                        @content (js--toggle-base--control-backdrop--before--hover-focus-or-within);
+                    }
+
+                    @include _toggle-interactive-states--js($active: true) {
+                        @content (js--toggle-base--control-backdrop--before--active);
+                    }
+                }
+
+                &::after {
+                    @if $includeBackdropStyles {
+                        background: var-sys-colour(link);
+                        opacity: 0.1875;
+                    }
+
+                    @content (js--toggle-base--control-backdrop--after);
+
+                    @include _toggle-interactive-states--js(
+                        $hover: true,
+                        $focus: true
+                    ) {
+                        @content (js--toggle-base--control-backdrop--after--hover-focus-or-within);
+                    }
+
+                    @include _toggle-interactive-states--js($active: true) {
+                        @content (js--toggle-base--control-backdrop--after--active);
+                    }
                 }
             }
 
@@ -427,6 +501,11 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 
             /// BLOCK ///
 
+            > *,
+            > .container > * {
+                flex-shrink: 0;
+            }
+
             > .container {
                 @include prop-grid-column('1 / -1');
                 @include prop-display(flex);
@@ -440,10 +519,6 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
                 opacity: 0;
 
                 @content (js--toggle-base--content--container);
-
-                > * {
-                    flex-shrink: 0;
-                }
             }
         }
     }
@@ -475,10 +550,21 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
         [data-toggle-container='closed'] {
             @content (js--toggle-base--container--closed);
 
+            [data-toggle-control] {
+                @content (js--toggle-base--container--closed--control);
+
+                &[data-toggle-control-backdrop] {
+                    opacity: 0;
+
+                    @content (js--toggle-base--container--closed--control-background);
+                }
+            }
+
             > [data-toggle-content] {
                 @content (js--toggle-base--container--closed--content);
 
                 > .container {
+                    display: none;
                     opacity: 0;
                     visibility: hidden;
 
@@ -592,21 +678,20 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
     }
 }
 
+$_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
+
 @mixin snippet-support-toggle-block(
     $content_container_paddingBlock: var-mrg-soft('300'),
     $content_container_paddingInline: var-mrg-firm('300'),
     $control_paddingBlockEnd: var-mrg-soft('200'),
     //
-    $gridCols_toggle: $_gridCols_toggle,
+    $gridCols_toggle: $_toggle_gridCols,
     //
-    $svg_sel_moving: '#b',
-    $svg_sel_static: '#a',
-    //
-    $includeBackdropControlStyles: true,
     $includeBase: true,
     $includeMarginBlock: true,
     $includeStyles: true,
     //
+    $svg_sel_moving: $_toggle_svg_sel_moving,
     $selector_container: '.toggle-block',
     $selector_content: selector.append($selector_container, '__content'),
     $selector_control: selector.append($selector_container, '__control'),
@@ -617,14 +702,25 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
     $selector_title_heading: selector.append(
             $selector_container,
             '__title__heading'
-        )
+        ),
+    //
+    $mixin_support_base: null,
+    //
+    $args...
 ) {
     @if $includeBase {
-        @include snippet-support-toggle-block-base(
+        $mixin_support_base: config.config-valid-mixin(
+            $mixin_support_base,
+            '$mixin_support_base',
+            $default: $_mixin_support_base,
+            $prefix: '[snippet-support-toggle-block] '
+        );
+
+        @include meta.apply(
+                $mixin_support_base,
                 $gridCols_toggle: $gridCols_toggle,
-                $includeBackdropControlStyles: $includeBackdropControlStyles,
                 $svg_sel_moving: $svg_sel_moving,
-                $svg_sel_static: $svg_sel_static
+                $args...
             )
             using ($location) {
             @content ($location);
@@ -663,12 +759,17 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
                 font: inherit;
                 font-size: 1em;
 
+                letter-spacing: inherit;
+                line-height: inherit;
+                text-transform: inherit;
+
                 text-align: inherit;
+                text-wrap: inherit;
             }
 
             @content (toggle-control);
 
-            @include _toggle-apply-all-interactive-states(
+            @include _toggle-interactive-all-states(
                 $self: true,
                 $warnOnSelf: false
             ) {
@@ -676,11 +777,10 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
                     box-shadow: none;
                     border: none;
                     background: none;
-                    opacity: 1;
                     color: inherit;
                 }
 
-                @content (toggle-control--hover-focus-active);
+                @content (toggle-control--self-active-hover-focus);
 
                 @include config.selector-button-disabled {
                     @content (toggle-control--disabled);
@@ -799,13 +899,14 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
 
                 @content (js--toggle-control);
 
-                @include hover-focus-visible-or-within(
-                    $includeNoWhereSelectorFallback: false
+                @include _toggle-interactive-states--js(
+                    $hover: true,
+                    $focus: true
                 ) {
                     @content (js--toggle-control--hover-focus-or-within);
                 }
 
-                @include active {
+                @include _toggle-interactive-states--js($active: true) {
                     @content (js--toggle-control--active);
                 }
 
@@ -862,7 +963,7 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
                     @content (js--toggle-title--has-heading);
                 }
 
-                #{selector.nest('>', $selector_title_heading)} {
+                #{$selector_title_heading__direct} {
                     @content (js--toggle-title--heading);
                 }
 
@@ -877,11 +978,11 @@ $_gridCols_toggle: [icon] minmax(max-content, auto) [content] 1fr;
             ///
             #{$selector_content} {
                 @if $includeStyles {
-                    border-width: 0;
+                    border-width: var-border-width('200');
                     border-style: solid;
                     border-color: currentColor;
 
-                    border-block-start-width: var-border-width('200');
+                    border-block-end-width: 0;
                 }
 
                 @content (js--toggle-content);

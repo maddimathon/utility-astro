@@ -55,7 +55,6 @@
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -64,7 +63,6 @@
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -73,7 +71,6 @@
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -82,7 +79,6 @@
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -95,7 +91,6 @@
     box-shadow: none;
     border: none;
     background: none;
-    opacity: 1;
     color: inherit;
 }
 
@@ -105,6 +100,7 @@
     padding: 0;
     width: auto;
     text-align: inherit;
+    opacity: 1;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -126,6 +122,45 @@
 [data-toggle-control-backdrop] {
     display: none !important;
     position: fixed;
+}
+[data-toggle-control-backdrop],
+[data-toggle-control-backdrop]:hover,
+[data-toggle-control-backdrop]:active,
+[data-toggle-control-backdrop][data-state-active="true"],
+[data-toggle-control-backdrop][data-state-focus="true"] {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+:where(.js__no-focusVisible) [data-toggle-control-backdrop]:focus {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:focus-visible {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:focus-within {
+    background: none !important;
+    border: none !important;
+    color: inherit;
+    opacity: 0;
+}
+
+[data-toggle-control-backdrop]:has(
+    :is([data-state-focus="true"], :active, [data-state-active="true"])
+) {
+    background: none !important;
+    border: none !important;
+    color: inherit;
     opacity: 0;
 }
 
@@ -156,6 +191,10 @@
     justify-items: stretch;
     align-content: start;
     align-items: start;
+    grid-gap: 0 0.5rem;
+    grid-gap: 0 var(--mrg-firm-200, 0.5rem);
+    gap: 0 0.5rem;
+    gap: 0 var(--mrg-firm-200, 0.5rem);
 }
 
 :where(.js) [data-toggle-content],
@@ -184,54 +223,11 @@
     border-radius: 0 !important;
     -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: var(--backdrop-filter, blur(1rem));
+    backdrop-filter: var(--backdrop-filter, blur(1rem));
     cursor: pointer;
     z-index: -2;
 }
-:where(.js) [data-toggle-control][data-toggle-control-backdrop],
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:hover,
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:active,
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-active="true"],
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop][data-state-focus="true"] {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js):where(.js__no-focusVisible)
-    [data-toggle-control][data-toggle-control-backdrop]:focus {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-visible {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js) [data-toggle-control][data-toggle-control-backdrop]:focus-within {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
-:where(.js)
-    [data-toggle-control][data-toggle-control-backdrop]:has(
-        :is([data-state-focus="true"], :active, [data-state-active="true"])
-    ) {
-    background: none !important;
-    border: none !important;
-    color: inherit;
-    opacity: 1;
-}
-
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::before,
 :where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
     content: "";
@@ -269,6 +265,10 @@
     grid-template-rows: 0fr;
     overflow: hidden;
 }
+:where(.js) [data-toggle-content] > *,
+:where(.js) [data-toggle-content] > .container > * {
+    flex-shrink: 0;
+}
 :where(.js) [data-toggle-content] > .container {
     --grid-column: 1 / -1;
     grid-column: 1 / -1;
@@ -281,9 +281,6 @@
     overflow: auto;
     visibility: hidden;
     opacity: 0;
-}
-:where(.js) [data-toggle-content] > .container > * {
-    flex-shrink: 0;
 }
 
 /* Opening & Closing ==================================== */
@@ -301,8 +298,14 @@
 
 :where(.js)
     [data-toggle-container="closed"]
+    [data-toggle-control][data-toggle-control-backdrop] {
+    opacity: 0;
+}
+:where(.js)
+    [data-toggle-container="closed"]
     > [data-toggle-content]
     > .container {
+    display: none;
     opacity: 0;
     visibility: hidden;
 }
@@ -398,21 +401,6 @@ body > nav.toggle-nav-menu {
     --grid-column: page-start/page-end;
     grid-column: page-start/page-end;
     grid-column: var(--grid-column, page-start/page-end);
-}
-:where(.js) body > nav.toggle-nav-menu .toggle-nav-menu__content > .container {
-    background: Canvas;
-    background: var(--sys-clr-background, Canvas);
-    max-height: 80svh;
-}
-:where(.js) body > nav.toggle-nav-menu .toggle-nav-menu__title {
-    margin-bottom: calc(0.125rem * -1);
-    margin-bottom: calc(var(--border-width-200, 0.125rem) * -1);
-    border-bottom: 0.125rem solid currentColor;
-    border-bottom: var(--border-width-200, 0.125rem) solid currentColor;
-    font-size: 1.1875rem;
-    font-size: var(--fs-heading-6, 1.1875rem);
-    background: Canvas;
-    background: var(--sys-clr-background, Canvas);
 }
 :where(.js)
     body

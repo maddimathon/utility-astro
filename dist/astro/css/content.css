@@ -12,7 +12,7 @@
     width: auto;
 }
 
-.website-settings-menu,
+.website-settings,
 .page-width {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
@@ -20,7 +20,7 @@
     width: auto;
 }
 @media (width >= 40.875em) {
-    .website-settings-menu,
+    .website-settings,
     .page-width {
         --grid-column: page-start/page-end;
         grid-column: page-start/page-end;

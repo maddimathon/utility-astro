@@ -391,7 +391,7 @@ const settings = p.settings && {
 
         {
             p.footer && include.footer && (
-                <footer class='site-footer'>
+                <footer {...p.footer.attributes} class='site-footer'>
                     <RenderedSlotContent
                         name='footer'
                         html={slots_render.footer}

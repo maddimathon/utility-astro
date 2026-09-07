@@ -87,7 +87,7 @@
     @if map.get(config.$template_styles, siteSettingsMenu) {
         $additional: list.append(
             $additional,
-            ('.website-settings-menu', 'page-width'),
+            ('.website-settings', 'page-width'),
             $separator: comma
         );
     }

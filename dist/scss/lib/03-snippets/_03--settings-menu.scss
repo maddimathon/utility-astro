@@ -6,6 +6,7 @@
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
@@ -18,6 +19,8 @@
 
 @use '03-02-layouts' as *;
 @use '03--toggle' as *;
+
+$_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
 ///
 /// Supports the SettingsMenu astro component.
@@ -38,13 +41,24 @@
     $includeBase: false,
     $includeStyles: true,
     //
-    $selector_container: '.website-settings-menu',
+    $selector_container: '.website-settings',
     $selector_content: selector.append($selector_container, '__content'),
     $selector_control: selector.append($selector_container, '__control'),
-    $selector_disclaimer: selector.append($selector_container, '__disclaimer')
+    $selector_disclaimer: selector.append($selector_container, '__disclaimer'),
+    //
+    $mixin_support_base: null,
+    //
+    $args...
 ) {
     @if $includeBase {
-        @include snippet-support-toggle-block-base using ($location) {
+        $mixin_support_base: config.config-valid-mixin(
+            $mixin_support_base,
+            '$mixin_support_base',
+            $default: $_mixin_support_base,
+            $prefix: '[snippet-support-site-settings-menu] '
+        );
+
+        @include meta.apply($mixin_support_base, $args...) using ($location) {
             @content ($location);
         }
     }

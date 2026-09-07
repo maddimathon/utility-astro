@@ -120,7 +120,7 @@ type Props = GenericElementProps<SettingsMenuProps, 'div'>;
 const {
     accessibilityReportEmail,
 
-    class: classList = ['website-settings-menu'],
+    class: classList = ['website-settings'],
     iconSVG: iconSVG_input,
     id = 'website-settings',
 
@@ -218,7 +218,7 @@ const iconSVG =
     <Toggle_Control
         {...{ id, buttonID }}
         aria-label='Toggle settings menu'
-        class:list='website-settings__toggle'
+        classBase='website-settings'
         data-toggle-primary-control={id}
         iconSVG={iconSVG}
         title='Accessibility & Display Settings'
@@ -226,7 +226,7 @@ const iconSVG =
 
     <form
         aria-label='Settings menu'
-        class='website-settings-menu__content'
+        class='website-settings__content'
         data-toggle-content={id}
         id={contentID}
     >

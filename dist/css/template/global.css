@@ -75,6 +75,7 @@
 /* #endregion Tokens - @property */
 /* #region Tokens - Style */
 :root {
+    --backdrop-filter: blur(1rem);
     --focus-ring-outline-color: var(--sys-clr-link, LinkText);
     --focus-ring-outline-offset: 0.125em;
     --focus-ring-outline-width: clamp(0.125rem, 0.125em, 0.25rem);
