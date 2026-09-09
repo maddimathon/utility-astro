@@ -148,6 +148,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                 }
 
                 /// OPEN & CLOSING
+                &[data-toggle-container='opening'],
                 &[data-toggle-container='open'],
                 &[data-toggle-container='closing'] {
                     @content (js--nav-toggle-container--open-or-closing);

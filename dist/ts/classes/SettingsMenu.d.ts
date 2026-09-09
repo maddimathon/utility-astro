@@ -33,9 +33,8 @@ export declare class SettingsMenu {
     /**
      * The container containing all fieldsets in inputs for this menu.
      */
-    menu: HTMLElement, { scrollBehaviour, cookieNamer, ...opts }?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Constructor>> & {
+    menu: HTMLElement, { cookieNamer, ...opts }?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Constructor>> & {
         cookieNamer?: (attr: string) => string;
-        scrollBehaviour?: ScrollBehavior;
     }): Promise<undefined | SettingsMenu>;
     /**
      * @since 0.1.0-alpha
@@ -106,7 +105,7 @@ export declare namespace SettingsMenu {
      * @since 0.1.0-alpha
      * @since 0.1.0-beta.0.draft — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
-    function run(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, scrollBehaviour?: ScrollBehavior, { targetElement, ...opts }?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
+    function run(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, { targetElement, ...opts }?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
         cookieNamer?: (attr: string) => string;
         targetElement?: HTMLHtmlElement | HTMLBodyElement | null;
     }): Promise<SettingsMenu[]>;

@@ -5,7 +5,8 @@ var ElementToggle = class _ElementToggle {
   /** 
    * Class constructor.
    */
-  constructor(elements, partialOpts) {
+  constructor(elements, partialOpts = {}) {
+    this.openingTimeout = null;
     this.closingTimeout = null;
     /**
      * @since 0.1.0-beta.0.draft
@@ -18,6 +19,8 @@ var ElementToggle = class _ElementToggle {
       closingTimeProperty: "--toggle-closing-time",
       debug: false,
       openWhenTargetted: true,
+      scrollBehaviour: "auto",
+      scrollToOptions: null,
       ...partialOpts
     };
     this.closingTime = this.opts.closingTime;
@@ -62,7 +65,7 @@ var ElementToggle = class _ElementToggle {
     this.toggleBackdropListener = function() {
       _activateButton(this);
       _clearTimeout();
-      _close();
+      _close(this);
       _deactivateButton();
     };
     const isCurrentAnchorTarget = this.opts.openWhenTargetted && this.checkUrlTarget(new URL(window.location.href));
@@ -82,7 +85,7 @@ var ElementToggle = class _ElementToggle {
           if (isCurrentAnchorTarget) {
             this.openAsTargetAnchor();
           } else {
-            this.open();
+            this.open(this.primaryButton);
           }
         } else {
           this.container.setAttribute("data-toggle-container", "closed");
@@ -117,7 +120,7 @@ var ElementToggle = class _ElementToggle {
    */
   static async abortNew(container, allButtons) {
     if (container) {
-      container.setAttribute("data-toggle-container", "");
+      container.setAttribute("data-toggle-container", "open");
     }
     if (allButtons) {
       allButtons.forEach(
@@ -136,6 +139,9 @@ var ElementToggle = class _ElementToggle {
    * @since 0.1.0-beta.0.draft
    */
   static async run(opts = {}) {
+    if (!opts.scrollBehaviour) {
+      opts.scrollBehaviour = window.getComputedStyle(document.documentElement).scrollBehavior || "auto";
+    }
     document.querySelectorAll("[data-toggle-container]").forEach(
       async (con) => {
         if (opts.debug) {
@@ -273,7 +279,8 @@ var ElementToggle = class _ElementToggle {
    * @since 0.1.0-beta.0.draft
    */
   get isOpen() {
-    return this.container.getAttribute("data-toggle-container") === "open";
+    const attr = this.container.getAttribute("data-toggle-container");
+    return attr === "open" || attr === "opening";
   }
   /**
    * Validates the markup of a button used to toggle this element.
@@ -300,6 +307,7 @@ var ElementToggle = class _ElementToggle {
       button.removeEventListener("click", this.toggleListener);
       button.addEventListener("click", this.toggleBackdropListener);
     }
+    return button;
   }
   /**
    * {@inheritDoc ElementToggle.abortNew}
@@ -311,7 +319,10 @@ var ElementToggle = class _ElementToggle {
     window.removeEventListener("hashchange", this.handleHashChange);
     if (this.allButtons) {
       this.allButtons.forEach(
-        (button) => button.removeEventListener("click", this.toggleListener)
+        (button) => {
+          button.removeEventListener("click", this.toggleListener);
+          button.removeEventListener("click", this.toggleBackdropListener);
+        }
       );
     }
   }
@@ -330,7 +341,7 @@ var ElementToggle = class _ElementToggle {
   activateButton(button) {
     clearTimeout(this.#activeTimeout);
     this.#activeStateHold = true;
-    button.setAttribute(this.attr.active, "true");
+    this.attr.active && button.setAttribute(this.attr.active, "true");
     this.#activeTimeout = setTimeout(() => {
       this.#activeStateHold = false;
     }, this.activeTimeoutLength);
@@ -341,6 +352,9 @@ var ElementToggle = class _ElementToggle {
   clearTimeout() {
     if (this.closingTimeout !== null) {
       clearTimeout(this.closingTimeout);
+    }
+    if (this.openingTimeout !== null) {
+      clearTimeout(this.openingTimeout);
     }
     this.deactivateButton();
   }
@@ -392,8 +406,8 @@ var ElementToggle = class _ElementToggle {
     if (isNewTarget) {
       this.openAsTargetAnchor();
     }
-    if (!isNewTarget && this.opts.closeWhenUntargetted && this.checkUrlTarget(new URL(event.oldURL)) && this.container.getAttribute("data-toggle-container") === "open") {
-      this.close();
+    if (!isNewTarget && this.opts.closeWhenUntargetted && this.checkUrlTarget(new URL(event.oldURL)) && this.isOpen) {
+      this.close(void 0);
     }
   }
   /**
@@ -403,8 +417,8 @@ var ElementToggle = class _ElementToggle {
    * @since 0.1.0-alpha.7
    */
   openAsTargetAnchor() {
-    this.open();
-    this.primaryButton.setAttribute(this.attr.focus, "true");
+    this.open(this.primaryButton);
+    this.attr.focus && this.primaryButton.setAttribute(this.attr.focus, "true");
     this.primaryButton.addEventListener(
       "blur",
       () => this.primaryButton.removeAttribute(this.attr.focus),
@@ -458,7 +472,7 @@ var ElementToggle = class _ElementToggle {
     this.#focusTrappers = {
       keydown: function(event) {
         if (event.code === "Escape") {
-          toggleClose();
+          toggleClose(void 0);
         }
       },
       first: function(event) {
@@ -540,6 +554,21 @@ var ElementToggle = class _ElementToggle {
   /* TOGGLING
    * ====================================================================== */
   /**
+   * Scroll to the toggle (like when opening or closing a menu).
+   */
+  scrollTo(button) {
+    const scrollToOpts = this.opts.scrollToOptions && this.opts.scrollToOptions(button);
+    if (scrollToOpts) {
+      window.scrollTo(scrollToOpts);
+    } else {
+      this.container.scrollIntoView({
+        behavior: this.opts.scrollBehaviour ?? "auto",
+        block: "start",
+        inline: "nearest"
+      });
+    }
+  }
+  /**
    * Toggles the open/close state of the element.
    */
   toggle(button) {
@@ -548,11 +577,12 @@ var ElementToggle = class _ElementToggle {
     switch (this.container.getAttribute("data-toggle-container")) {
       case "closed":
       case "closing":
-        this.open();
+        this.open(button ?? this.primaryButton);
         break;
       case "open":
+      case "opening":
       default:
-        this.close();
+        this.close(button ?? this.primaryButton);
         break;
     }
     this.deactivateButton();
@@ -560,12 +590,19 @@ var ElementToggle = class _ElementToggle {
   /**
    * Toggles the element open.
    */
-  open() {
+  open(button) {
+    if (this.isMenu || this.isNav) {
+      this.scrollTo(button);
+    }
     this.setClosingTime();
-    this.container.setAttribute("data-toggle-container", "open");
-    this.allButtons.forEach((button) => {
-      if (button.getAttribute("aria-controls")) {
-        button.setAttribute("aria-expanded", "true");
+    this.container.setAttribute("data-toggle-container", "opening");
+    this.openingTimeout = setTimeout(
+      () => this.container.setAttribute("data-toggle-container", "open"),
+      5
+    );
+    this.allButtons.forEach((button2) => {
+      if (button2.getAttribute("aria-controls")) {
+        button2.setAttribute("aria-expanded", "true");
       }
     });
     if (this.asModal) {
@@ -579,16 +616,19 @@ var ElementToggle = class _ElementToggle {
   /**
    * Toggles the element closed.
    */
-  close() {
+  close(button) {
     if (this.asModal) {
       this.untrapFocus();
     }
-    this.allButtons.forEach((button) => {
-      if (button.getAttribute("aria-controls")) {
-        button.setAttribute("aria-expanded", "false");
+    this.allButtons.forEach((button2) => {
+      if (button2.getAttribute("aria-controls")) {
+        button2.setAttribute("aria-expanded", "false");
       }
     });
     this.container.setAttribute("data-toggle-container", "closing");
+    if (this.isMenu || this.isNav) {
+      this.scrollTo(button);
+    }
     this.closingTimeout = setTimeout(
       () => {
         this.container.setAttribute("data-toggle-container", "closed");

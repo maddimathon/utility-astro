@@ -33,12 +33,10 @@ export class SettingsMenu {
          */
         menu: HTMLElement,
         {
-            scrollBehaviour = 'auto',
             cookieNamer,
             ...opts
         }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Constructor>> & {
             cookieNamer?: ( attr: string ) => string;
-            scrollBehaviour?: ScrollBehavior;
         } = {},
     ): Promise<undefined | SettingsMenu> {
 
@@ -135,15 +133,6 @@ export class SettingsMenu {
                     'click',
                     instance.resetButtonClicked,
                 );
-
-                const scrollToMenu = () => menu.scrollIntoView( {
-                    behavior: scrollBehaviour ?? 'auto',
-                    block: 'start',
-                    inline: 'nearest',
-                } );
-
-                menu.addEventListener( 'toggle-open', scrollToMenu );
-                menu.addEventListener( 'toggle-close', scrollToMenu );
 
                 return instance;
             }
@@ -437,8 +426,8 @@ export class SettingsMenu {
         this.#attributeKeys.forEach( ( attr: string ) => {
             const startingCookie = document.cookie;
 
-            this.#cookies[ attr ]?.delete();
-            this.#cookies[ attr + '-default' ]?.delete();
+            this.#cookies[ attr ]?.remove();
+            this.#cookies[ attr + '-default' ]?.remove();
 
             if ( this.opts.debug ) {
                 console.debug( 'SettingsMenu.resetButtonClicked() - forEach', {
@@ -642,9 +631,7 @@ export namespace SettingsMenu {
         {
             selectors = {},
             ...opts
-        }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
-            scrollBehaviour: ScrollBehavior,
-        },
+        }: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>>,
     ): Promise<undefined | SettingsMenu> {
 
         const resetSelector = typeof selectors?.reset === 'function'
@@ -670,7 +657,6 @@ export namespace SettingsMenu {
      */
     export async function run(
         settingsMenus: HTMLElement | NodeListOf<HTMLElement>,
-        scrollBehaviour: ScrollBehavior = 'auto',
         {
             targetElement,
             ...opts
@@ -692,10 +678,7 @@ export namespace SettingsMenu {
             : [ settingsMenus ];
 
         return Promise.all( menuArray.map(
-            menu => run_mapper( targetElement, menu, {
-                ...opts,
-                scrollBehaviour,
-            } )
+            menu => run_mapper( targetElement, menu, opts )
         ) ).then(
             arr => arr.filter( i => !!i )
         );
@@ -719,15 +702,10 @@ export namespace SettingsMenu {
 
             const settingsMenus = document.querySelectorAll<HTMLElement>( '[data-settings-menu]' );
 
-            const scrollBehaviour =
-                ( window.getComputedStyle( document.documentElement ).scrollBehavior as
-                    | ScrollBehavior
-                    | undefined ) || undefined;
-
             /*
              * Setting up each found menu.
              */
-            await SettingsMenu.run( settingsMenus, scrollBehaviour, {
+            await SettingsMenu.run( settingsMenus, {
                 ...opts,
                 cookieNamer,
                 targetElement,

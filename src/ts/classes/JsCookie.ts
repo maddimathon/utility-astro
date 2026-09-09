@@ -101,8 +101,7 @@ export class JsCookie {
          */
         dep_copyToLocalStorage: boolean = false,
     ) {
-
-        const maxAge = 60 * 60 * 24 * 365 * 5;
+        const maxAge = 60 * 60 * 24 * 365 * 5; // = 5 years
 
         this.opts = typeof pathOrOpts !== 'object'
             ? {
@@ -125,13 +124,11 @@ export class JsCookie {
 
     /**
      * Empties the contents of this cookie.
+     * 
+     * @deprecated ___PKG_VERSION___
      */
     public delete(): void {
-        this.set( '', -1 );
-
-        if ( this.opts.copyToLocalStorage ) {
-            window.localStorage.removeItem( this.name );
-        }
+        this.remove();
     }
 
     /**
@@ -153,6 +150,19 @@ export class JsCookie {
         }
 
         return this.opts.fallbackValue;
+    }
+
+    /**
+     * Empties the contents of this cookie.
+     * 
+     * @since ___PKG_VERSION___ — Renamed from delete to remove.
+     */
+    public remove(): void {
+        this.set( '', -1 );
+
+        if ( this.opts.copyToLocalStorage ) {
+            window.localStorage.removeItem( this.name );
+        }
     }
 
     /**
@@ -182,7 +192,7 @@ export class JsCookie {
             domain: this.opts.domain ?? null,
             expires: expiry?.date?.length ? expiry.date : null,
             'max-age': expiry?.date?.length ? ( expiry.expireDays <= 0 ? 0 : null ) : String( this.opts.maxAge ),
-            path: this.opts.path,
+            path: this.opts.path === false ? null : this.opts.path,
         };
 
         const cookieString = [];
@@ -205,6 +215,49 @@ export class JsCookie {
  * @since ___PKG_VERSION___
  */
 export namespace JsCookie {
+
+    /**
+     * A utility to statically get the value of a cookie. For prettier code, not
+     * for performance.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    export function get(
+        name: string,
+        opts: JsCookie.Opts.Input = {},
+    ): string | null {
+        const cookie = new JsCookie( name, opts );
+        return cookie.get();
+    }
+
+    /**
+     * A utility to statically delete the value of a cookie. For prettier code, not
+     * for performance.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    export function remove(
+        name: string,
+        opts: JsCookie.Opts.Input = {},
+    ): void {
+        const cookie = new JsCookie( name, opts );
+        return cookie.remove();
+    }
+
+    /**
+     * A utility to statically set the value of a cookie. For prettier code, not
+     * for performance.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    export function set(
+        name: string,
+        value: string,
+        opts: JsCookie.Opts.Input = {},
+    ): void {
+        const cookie = new JsCookie( name, opts );
+        return cookie.set( value );
+    }
 
     /**
      * Additional configuration options.
@@ -250,7 +303,7 @@ export namespace JsCookie {
         /**
          * Cookie's path.
          */
-        path: string,
+        path: string | false,
     }
 
     /**

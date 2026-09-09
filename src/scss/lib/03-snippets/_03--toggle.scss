@@ -123,8 +123,27 @@ $_toggle_svg_sel_moving: '#b';
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin _toggle-block--js-pseudo-classes($gridCols_toggle, $gridGap) {
-    @at-root %_toggle-container-grid-basics {
+@mixin _toggle-block--js--media-query {
+    @if config.$featureCheck_jsScreenMediaQuery {
+        @media screen {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+///
+/// @since ___PKG_VERSION___
+///
+@mixin _toggle-block--js-pseudo-classes(
+    $extend_toggleContainerGridBasics: config.$selector_null,
+    $extend_toggleContainerSubgrid: config.$selector_null,
+    $gridCols_toggle: $_toggle_gridCols,
+    $gridGap: $_toggle_gridGap
+) {
+    #{$extend_toggleContainerGridBasics},
+    #{$extend_toggleContainerSubgrid} {
         @include prop-display(grid);
         position: relative;
 
@@ -145,8 +164,7 @@ $_toggle_svg_sel_moving: '#b';
         @content (js--container-grid);
     }
 
-    @at-root %toggle-container-subgrid {
-        @extend %_toggle-container-grid-basics;
+    #{$extend_toggleContainerSubgrid} {
         grid-template-columns: subgrid;
         grid-column: 1 / -1;
 
@@ -164,11 +182,31 @@ $_toggle_svg_sel_moving: '#b';
 ///
 @mixin snippet-support-toggle-block-base(
     $includeBackdropStyles: true,
+    $extend_toggleContainerGridBasics: (),
+    $extend_toggleContainerSubgrid: (),
     $gridCols_toggle: $_toggle_gridCols,
     $gridGap: $_toggle_gridGap,
     $svg_sel_moving: $_toggle_svg_sel_moving,
-    $svg_sel_static: $_toggle_svg_sel_static
+    $svg_sel_static: $_toggle_svg_sel_static,
+    $args...
 ) {
+    $extend_toggleContainerGridBasics: list.join(
+        ('[data-toggle-container]'),
+        $extend_toggleContainerGridBasics,
+        $separator: comma
+    );
+    $extend_toggleContainerSubgrid: list.join(
+        (
+            '[data-toggle-control]',
+            '[data-toggle-title]',
+            '[data-toggle-title-heading]',
+            '[data-toggle-content]',
+            '%toggle-container-subgrid'
+        ),
+        $extend_toggleContainerSubgrid,
+        $separator: comma
+    );
+
     @include _toggle-block--base-pseudo-classes using ($location) {
         @content (base--#{$location});
     }
@@ -300,21 +338,22 @@ $_toggle_svg_sel_moving: '#b';
 
     /* Javascript Enabled ==================================== */
 
-    @include _toggle-block--js-pseudo-classes(
-            $gridCols_toggle: $gridCols_toggle,
-            $gridGap: $gridGap
-        )
-        using ($args...) {
-        @content ($args...);
-    }
-
     @include feature-check.js {
+        @include _toggle-block--js-pseudo-classes(
+                $extend_toggleContainerGridBasics: $extend_toggleContainerGridBasics,
+                $extend_toggleContainerSubgrid: $extend_toggleContainerSubgrid,
+                $gridCols_toggle: $gridCols_toggle,
+                $gridGap: $gridGap,
+                $args...
+            )
+            using ($args...) {
+            @content ($args...);
+        }
+
         ///
         /// CONTAINER
         ///
         [data-toggle-container] {
-            @extend %_toggle-container-grid-basics;
-
             z-index: 1;
 
             @content (js--toggle-base--container);
@@ -324,11 +363,11 @@ $_toggle_svg_sel_moving: '#b';
         /// CONTROL
         ///
         [data-toggle-control] {
-            @extend %toggle-container-subgrid;
-
             @content (js--toggle-base--control);
 
             &[data-toggle-control-backdrop] {
+                display: do-var(display, block) !important;
+                @include prop-display(block);
                 position: fixed !important;
                 align-self: auto;
                 justify-self: auto;
@@ -336,11 +375,10 @@ $_toggle_svg_sel_moving: '#b';
                 top: 0;
                 left: 0;
                 right: 0;
-                bottom: 0;
 
                 margin: 0 !important;
                 padding: 0;
-                width: auto !important;
+                width: 100% !important;
                 height: auto !important;
 
                 border-radius: 0 !important;
@@ -357,7 +395,6 @@ $_toggle_svg_sel_moving: '#b';
                 &::after {
                     content: '';
                     content: '' / '';
-                    @include prop-display(block);
                     position: absolute;
 
                     top: 0;
@@ -430,8 +467,6 @@ $_toggle_svg_sel_moving: '#b';
         ///
         [data-toggle-title],
         [data-toggle-title-heading] {
-            @extend %toggle-container-subgrid;
-
             @content (js--toggle-base--title-and-headings);
         }
 
@@ -461,8 +496,6 @@ $_toggle_svg_sel_moving: '#b';
         /// CONTENT
         ///
         [data-toggle-content] {
-            @extend %toggle-container-subgrid;
-
             grid-row: 2;
 
             grid-template-rows: 0fr;
@@ -487,7 +520,6 @@ $_toggle_svg_sel_moving: '#b';
 
                 overflow: auto;
 
-                visibility: hidden;
                 opacity: 0;
 
                 @content (js--toggle-base--content--container);
@@ -526,7 +558,7 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--closed--control);
 
                 &[data-toggle-control-backdrop] {
-                    opacity: 0;
+                    display: none;
 
                     @content (js--toggle-base--container--closed--control-background);
                 }
@@ -538,9 +570,23 @@ $_toggle_svg_sel_moving: '#b';
                 > .container {
                     display: none;
                     opacity: 0;
-                    visibility: hidden;
 
                     @content (js--toggle-base--container--closed--content--container);
+                }
+            }
+        }
+
+        [data-toggle-container='opening'],
+        [data-toggle-container='closed'] {
+            @content (js--toggle-base--container--opening-or-closed);
+
+            [data-toggle-control] {
+                @content (js--toggle-base--container--opening-or-closed--control);
+
+                &[data-toggle-control-backdrop] {
+                    opacity: 0;
+
+                    @content (js--toggle-base--container--opening-or-closed--control-backdrop);
                 }
             }
         }
@@ -548,27 +594,29 @@ $_toggle_svg_sel_moving: '#b';
         ///
         /// OPEN & CLOSING
         ///
+        [data-toggle-container='opening'],
         [data-toggle-container='open'],
         [data-toggle-container='closing'] {
             @content (js--toggle-base--container--open-or-closing);
-
-            > [data-toggle-content] {
-                @content (js--toggle-base--container--open-or-closing--content);
-
-                > .container {
-                    visibility: visible;
-
-                    @content (js--toggle-base--container--open-or-closing--content--container);
-                }
-            }
 
             [data-toggle-control] {
                 @content (js--toggle-base--container--open-or-closing--control);
 
                 &[data-toggle-control-backdrop] {
-                    display: do-var(display, block) !important;
+                    display: do-var(display, block);
+                    bottom: 0;
 
                     @content (js--toggle-base--container--open-or-closing--control-backdrop);
+                }
+            }
+
+            > [data-toggle-content] {
+                @content (js--toggle-base--container--open-or-closing--content);
+
+                > .container {
+                    display: do-var(display, block);
+
+                    @content (js--toggle-base--container--open-or-closing--content--container);
                 }
             }
         }
@@ -632,6 +680,12 @@ $_toggle_svg_sel_moving: '#b';
                         @content (js--toggle-base--container--closing--control--icon--moving);
                     }
                 }
+
+                &[data-toggle-control-backdrop] {
+                    opacity: 0;
+
+                    @content (js--toggle-base--container--closing--control-background);
+                }
             }
 
             > [data-toggle-content] {
@@ -641,7 +695,6 @@ $_toggle_svg_sel_moving: '#b';
 
                 > .container {
                     opacity: 0;
-                    visibility: visible;
 
                     @content (js--toggle-base--container--closing--content--container);
                 }
@@ -677,6 +730,15 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
     //
     $args...
 ) {
+    $_extend_toggleContainerSubgrid: selector.nest(
+        $selector_container,
+        list.join(
+            $selector_title,
+            selector.nest($selector_title, '>', $selector_title_heading),
+            $separator: comma
+        )
+    );
+
     @if $includeBase {
         $mixin_support_base: config.config-valid-mixin(
             $mixin_support_base,
@@ -687,6 +749,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
         @include meta.apply(
                 $mixin_support_base,
+                $extend_toggleContainerSubgrid: $_extend_toggleContainerSubgrid,
                 $gridCols_toggle: $gridCols_toggle,
                 $svg_sel_moving: $svg_sel_moving,
                 $args...
@@ -801,14 +864,17 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
     /* Javascript Enabled ==================================== */
 
-    @if not $includeBase {
-        @include _toggle-block--js-pseudo-classes($gridCols_toggle: $gridCols_toggle) using
-            ($args...) {
-            @content ($args...);
-        }
-    }
-
     @include feature-check.js {
+        @if not $includeBase {
+            @include _toggle-block--js-pseudo-classes(
+                    $gridCols_toggle: $gridCols_toggle,
+                    $extend_toggleContainerSubgrid: $_extend_toggleContainerSubgrid
+                )
+                using ($args...) {
+                @content ($args...);
+            }
+        }
+
         ///
         /// CONTAINER
         ///
@@ -897,8 +963,6 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
             ///
             #{$selector_title},
             #{selector.nest($selector_title, '>', $selector_title_heading)} {
-                @extend %toggle-container-subgrid;
-
                 @include snippet-body-grid--grid-alignment(
                     (
                         align-content: stretch,
@@ -1001,6 +1065,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
             ///
             /// OPEN & CLOSING
             ///
+            &[data-toggle-container='opening'],
             &[data-toggle-container='open'],
             &[data-toggle-container='closing'] {
                 @content (js--toggle-container--open-or-closing);

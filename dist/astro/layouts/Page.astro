@@ -53,6 +53,7 @@ const {urlMaker, ...p} = Astro.props.frontmatter ?? Astro.props;
 
 const {
     PrimaryMenu = ToggleNavMenu,
+    SecondaryMenu = NavMenu,
     SettingsMenu: SettingsMenuComponent = SettingsMenu,
 } = p.components ?? {};
 
@@ -373,7 +374,7 @@ const settings = p.settings && {
                     name='before-secondary-nav'
                     html={slots_render.beforeSecondaryNav}
                 />
-                <NavMenu
+                <SecondaryMenu
                     {...menus.secondary}
                     class:list='nav-secondary'
                 />

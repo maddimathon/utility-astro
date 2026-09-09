@@ -196,7 +196,7 @@ const slots_render = mapToObject(
 
 const iconSVG =
     iconSVG_input ??
-    '<span class="icon icon--settings | settings-menu-icon settings-menu-icon--fallback">' +
+    '<span class="icon icon--settings | toggle-block__control__icon website-settings__control__icon website-settings__control__icon--fallback">' +
         SVG.settings.trim() +
         '</span>';
 ---
@@ -216,11 +216,11 @@ const iconSVG =
         html={slots_render.default}
     />
     <Toggle_Control
-        {...{ id, buttonID }}
+        {...{ id, buttonID, iconSVG }}
         aria-label='Toggle settings menu'
         classBase='website-settings'
         data-toggle-primary-control={id}
-        iconSVG={iconSVG}
+        includeDefaultBase={false}
         title='Accessibility & Display Settings'
     />
 
@@ -395,7 +395,7 @@ const iconSVG =
     <div
         data-toggle-control={id}
         data-toggle-control-backdrop={id}
-        class='toggle-block__control--backdrop website-settings__backdrop'
+        class='toggle-block__control--backdrop website-settings__control--backdrop'
         aria-hidden='true'
     >
     </div>

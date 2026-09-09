@@ -16,18 +16,21 @@
     z-index: 100;
 }
 /* With Javascript ==================================== */
-:where(.js) .website-settings {
-    --display: flex;
-    display: flex;
-    display: var(--display, flex);
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
-    justify-content: start;
-    align-content: center;
-    align-items: end;
-}
-:where(.js) .website-settings[data-toggle-container="open"] {
-    z-index: 999999;
+@media screen {
+    :where(.js) .website-settings {
+        --display: flex;
+        display: flex;
+        display: var(--display, flex);
+        position: relative;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
+        justify-content: start;
+        align-content: center;
+        align-items: end;
+    }
+    :where(.js) .website-settings[data-toggle-container="open"],
+    :where(.js) .website-settings[data-toggle-container="opening"] {
+        z-index: 999999;
+    }
 }

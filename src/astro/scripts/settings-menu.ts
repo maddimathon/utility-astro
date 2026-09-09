@@ -23,13 +23,8 @@ if ( SCRIPTS_SETTINGSMENU ) {
         '[data-settings-menu]',
     );
 
-    const scrollBehaviour =
-        ( window.getComputedStyle( document.documentElement ).scrollBehavior as
-            | ScrollBehavior
-            | undefined ) || undefined;
-
     /*
      * Setting up each found menu.
      */
-    await SettingsMenu.run( settingsMenus, scrollBehaviour );
+    await SettingsMenu.run( settingsMenus );
 }

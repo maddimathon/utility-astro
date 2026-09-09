@@ -202,13 +202,22 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
             }
 
             &[data-toggle-container='open'],
+            &[data-toggle-container='opening'],
             &[data-toggle-container='closing'] {
                 @content (js--settings-menu--open-or-closing);
             }
 
-            &[data-toggle-container='open'] {
+            &[data-toggle-container='open'],
+            &[data-toggle-container='opening'] {
                 z-index: $zIndex_open;
 
+                @content (js--settings-menu--opening-or-open);
+            }
+
+            &[data-toggle-container='opening'] {
+            }
+
+            &[data-toggle-container='open'] {
                 @content (js--settings-menu--open);
 
                 #{selector.nest('>', $selector_content)} {

@@ -86,6 +86,7 @@ export declare class ElementToggle {
     protected readonly content: HTMLElement;
     protected readonly primaryButton: HTMLElement;
     protected readonly allButtons: HTMLElement[];
+    protected openingTimeout: ReturnType<typeof setTimeout> | null;
     protected closingTimeout: ReturnType<typeof setTimeout> | null;
     /**
      * In milliseconds.
@@ -150,7 +151,7 @@ export declare class ElementToggle {
      *
      * @since 0.1.0-beta.0.draft
      */
-    protected validateButton(button: HTMLElement): Promise<void>;
+    protected validateButton(button: HTMLElement): Promise<HTMLElement>;
     /**
      * {@inheritDoc ElementToggle.abortNew}
      *
@@ -236,17 +237,21 @@ export declare class ElementToggle {
      */
     protected untrapFocus(): void;
     /**
+     * Scroll to the toggle (like when opening or closing a menu).
+     */
+    scrollTo(button: undefined | HTMLElement): void;
+    /**
      * Toggles the open/close state of the element.
      */
-    toggle(button?: HTMLElement): void;
+    toggle(button: undefined | HTMLElement): void;
     /**
      * Toggles the element open.
      */
-    protected open(): void;
+    protected open(button: undefined | HTMLElement): void;
     /**
      * Toggles the element closed.
      */
-    protected close(): void;
+    protected close(button: undefined | HTMLElement): void;
 }
 /**
  * Utilities for the {@link ElementToggle} class.
@@ -324,5 +329,13 @@ export declare namespace ElementToggle {
          * @default true
          */
         openWhenTargetted: boolean;
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        scrollBehaviour: ScrollBehavior;
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        scrollToOptions: null | ((button: undefined | HTMLElement) => null | ScrollToOptions);
     }
 }

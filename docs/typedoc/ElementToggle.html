@@ -19,7 +19,7 @@
 </div></div></section><aside class="tsd-sources">
 <ul>
 <li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L16" class="external" target="_blank">classes/ElementToggle.ts:16</a></li>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L947" class="external" target="_blank">classes/ElementToggle.ts:947</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L997" class="external" target="_blank">classes/ElementToggle.ts:997</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
@@ -47,6 +47,7 @@
 <a href="#defaultisopen" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Is<wbr/>Open</span></a>
 <a href="#ismenu" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Menu</span></a>
 <a href="#isnav" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Nav</span></a>
+<a href="#openingtimeout" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opening<wbr/>Timeout</span></a>
 <a href="#opts" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a>
 <a href="#primarybutton" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>primary<wbr/>Button</span></a>
 </div></section>
@@ -67,6 +68,7 @@
 <a href="#abortnew" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>New</span></a>
 <a href="#istoggle" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Toggle</span></a>
 <a href="#handlehashchange" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>handle<wbr/>Hash<wbr/>Change</span></a>
+<a href="#scrollto" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>scroll<wbr/>To</span></a>
 <a href="#toggle" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>toggle</span></a>
 <a href="#abortconstructor" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>Constructor</span></a>
 <a href="#activatebutton" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>activate<wbr/>Button</span></a>
@@ -96,12 +98,12 @@
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">elements</span>: <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">allButtons</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">]</span> <span class="tsd-signature-symbol">&amp;</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">container</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">content</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">primaryButton</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></span></li>
-<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">partialOpts</span>: <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="ElementToggle-1.html" class="tsd-signature-type tsd-kind-namespace">ElementToggle</a><span class="tsd-signature-symbol">.</span><a href="ElementToggle/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span></span>
+<li><span><span class="tsd-kind-parameter">partialOpts</span>: <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="ElementToggle-1.html" class="tsd-signature-type tsd-kind-namespace">ElementToggle</a><span class="tsd-signature-symbol">.</span><a href="ElementToggle/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></span>
 <div class="tsd-comment tsd-typography"><p>Optional configuration, if any.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ElementToggle</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L344" class="external" target="_blank">classes/ElementToggle.ts:344</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L353" class="external" target="_blank">classes/ElementToggle.ts:353</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -109,12 +111,12 @@
 <h3 class="tsd-anchor-link" id="closeevent"><code class="tsd-tag">Static</code><span>close<wbr/>Event</span><a href="#closeevent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">closeEvent</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Event</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L212" class="external" target="_blank">classes/ElementToggle.ts:212</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L219" class="external" target="_blank">classes/ElementToggle.ts:219</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="openevent"><code class="tsd-tag">Static</code><span>open<wbr/>Event</span><a href="#openevent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">openEvent</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Event</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L211" class="external" target="_blank">classes/ElementToggle.ts:211</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L218" class="external" target="_blank">classes/ElementToggle.ts:218</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="instances"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Static</code> <code class="tsd-tag">Readonly</code><span>instances</span><a href="#instances" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">instances</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <a href="" class="tsd-signature-type tsd-kind-class">ElementToggle</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -136,7 +138,7 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-2">Since<a href="#since-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L334" class="external" target="_blank">classes/ElementToggle.ts:334</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L343" class="external" target="_blank">classes/ElementToggle.ts:343</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="togglelistener"><code class="tsd-tag">Readonly</code><span>toggle<wbr/>Listener</span><a href="#togglelistener" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">toggleListener</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">this</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">ev</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">any</span></div>
@@ -145,7 +147,7 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-3">Since<a href="#since-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L329" class="external" target="_blank">classes/ElementToggle.ts:329</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L338" class="external" target="_blank">classes/ElementToggle.ts:338</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="activetimeoutlength"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>active<wbr/>Timeout<wbr/>Length</span><a href="#activetimeoutlength" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">activeTimeoutLength</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
@@ -156,12 +158,12 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-4">Since<a href="#since-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L259" class="external" target="_blank">classes/ElementToggle.ts:259</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L266" class="external" target="_blank">classes/ElementToggle.ts:266</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="allbuttons"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>all<wbr/>Buttons</span><a href="#allbuttons" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">allButtons</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L275" class="external" target="_blank">classes/ElementToggle.ts:275</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L282" class="external" target="_blank">classes/ElementToggle.ts:282</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="asmodal"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>as<wbr/>Modal</span><a href="#asmodal" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">asModal</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -172,7 +174,7 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-5">Since<a href="#since-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L266" class="external" target="_blank">classes/ElementToggle.ts:266</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L273" class="external" target="_blank">classes/ElementToggle.ts:273</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="attr"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>attr</span><a href="#attr" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">attr</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">active</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">focus</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></div>
@@ -183,31 +185,31 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-6">Since<a href="#since-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L296" class="external" target="_blank">classes/ElementToggle.ts:296</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L304" class="external" target="_blank">classes/ElementToggle.ts:304</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="closingtime"><code class="tsd-tag">Protected</code><span>closing<wbr/>Time</span><a href="#closingtime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">closingTime</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>In milliseconds.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L282" class="external" target="_blank">classes/ElementToggle.ts:282</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L290" class="external" target="_blank">classes/ElementToggle.ts:290</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="closingtimeout"><code class="tsd-tag">Protected</code><span>closing<wbr/>Timeout</span><a href="#closingtimeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">closingTimeout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L277" class="external" target="_blank">classes/ElementToggle.ts:277</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L285" class="external" target="_blank">classes/ElementToggle.ts:285</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="container"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>container</span><a href="#container" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">container</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 <div class="tsd-comment tsd-typography"><p>The unique ID for the toggle container to set up.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L271" class="external" target="_blank">classes/ElementToggle.ts:271</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L278" class="external" target="_blank">classes/ElementToggle.ts:278</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="content"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>content</span><a href="#content" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">content</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L273" class="external" target="_blank">classes/ElementToggle.ts:273</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L280" class="external" target="_blank">classes/ElementToggle.ts:280</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="defaultisopen"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>default<wbr/>Is<wbr/>Open</span><a href="#defaultisopen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">defaultIsOpen</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -218,7 +220,7 @@ value.</p>
 <h4 class="tsd-anchor-link" id="since-7">Since<a href="#since-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L289" class="external" target="_blank">classes/ElementToggle.ts:289</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L297" class="external" target="_blank">classes/ElementToggle.ts:297</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="ismenu"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>is<wbr/>Menu</span><a href="#ismenu" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">isMenu</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -230,7 +232,7 @@ some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-8">Since<a href="#since-8" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L316" class="external" target="_blank">classes/ElementToggle.ts:316</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L325" class="external" target="_blank">classes/ElementToggle.ts:325</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="isnav"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>is<wbr/>Nav</span><a href="#isnav" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">isNav</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -242,7 +244,12 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-9">Since<a href="#since-9" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L324" class="external" target="_blank">classes/ElementToggle.ts:324</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L333" class="external" target="_blank">classes/ElementToggle.ts:333</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="openingtimeout"><code class="tsd-tag">Protected</code><span>opening<wbr/>Timeout</span><a href="#openingtimeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">openingTimeout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> = null</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L284" class="external" target="_blank">classes/ElementToggle.ts:284</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="opts"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>opts</span><a href="#opts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">opts</span><span class="tsd-signature-symbol">:</span> <a href="ElementToggle-1.html" class="tsd-signature-type tsd-kind-namespace">ElementToggle</a><span class="tsd-signature-symbol">.</span><a href="ElementToggle/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a></div>
@@ -253,12 +260,12 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-10">Since<a href="#since-10" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha.7</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L252" class="external" target="_blank">classes/ElementToggle.ts:252</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L259" class="external" target="_blank">classes/ElementToggle.ts:259</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="primarybutton"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>primary<wbr/>Button</span><a href="#primarybutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">primaryButton</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L274" class="external" target="_blank">classes/ElementToggle.ts:274</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L281" class="external" target="_blank">classes/ElementToggle.ts:281</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="accessors-1">Accessors<a href="#accessors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -276,7 +283,7 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-11">Since<a href="#since-11" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L672" class="external" target="_blank">classes/ElementToggle.ts:672</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L691" class="external" target="_blank">classes/ElementToggle.ts:691</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="focusablecontentchildren"><span>focusable<wbr/>Content<wbr/>Children</span><a href="#focusablecontentchildren" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -291,7 +298,7 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-12">Since<a href="#since-12" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L689" class="external" target="_blank">classes/ElementToggle.ts:689</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L708" class="external" target="_blank">classes/ElementToggle.ts:708</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="focustrappers"><span>focus<wbr/>Trappers</span><a href="#focustrappers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -306,7 +313,7 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-13">Since<a href="#since-13" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L711" class="external" target="_blank">classes/ElementToggle.ts:711</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L730" class="external" target="_blank">classes/ElementToggle.ts:730</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="isopen"><span>is<wbr/>Open</span><a href="#isopen" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -321,7 +328,7 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-14">Since<a href="#since-14" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L306" class="external" target="_blank">classes/ElementToggle.ts:306</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L314" class="external" target="_blank">classes/ElementToggle.ts:314</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -333,7 +340,7 @@ changes some behaviour/aria).</p>
 <div class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L232" class="external" target="_blank">classes/ElementToggle.ts:232</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L239" class="external" target="_blank">classes/ElementToggle.ts:239</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="csstimetomilliseconds"><code class="tsd-tag">Static</code><span>css<wbr/>Time<wbr/>To<wbr/>Milliseconds</span><a href="#csstimetomilliseconds" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -348,7 +355,7 @@ changes some behaviour/aria).</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L218" class="external" target="_blank">classes/ElementToggle.ts:218</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L225" class="external" target="_blank">classes/ElementToggle.ts:225</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="new"><code class="tsd-tag">Static</code><span>new</span><a href="#new" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -368,7 +375,7 @@ changes some behaviour/aria).</p>
 <h4 class="tsd-anchor-link" id="since-15">Since<a href="#since-15" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha.7</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L128" class="external" target="_blank">classes/ElementToggle.ts:128</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L135" class="external" target="_blank">classes/ElementToggle.ts:135</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="run"><code class="tsd-tag">Static</code><span>run</span><a href="#run" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -412,7 +419,7 @@ class.</p>
 <h4 class="tsd-anchor-link" id="since-18">Since<a href="#since-18" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft — Renamed from init to runOnLoad.</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L119" class="external" target="_blank">classes/ElementToggle.ts:119</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L126" class="external" target="_blank">classes/ElementToggle.ts:126</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="abortnew"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Static</code><span>abort<wbr/>New</span><a href="#abortnew" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -474,22 +481,37 @@ this toggle and if so, opens it.</p>
 <h4 class="tsd-anchor-link" id="since-21">Since<a href="#since-21" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha.7</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L616" class="external" target="_blank">classes/ElementToggle.ts:616</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L635" class="external" target="_blank">classes/ElementToggle.ts:635</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="scrollto"><span>scroll<wbr/>To</span><a href="#scrollto" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="scrollto-1"><span class="tsd-kind-call-signature">scrollTo</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#scrollto-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Scroll to the toggle (like when opening or closing a menu).</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L874" class="external" target="_blank">classes/ElementToggle.ts:874</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="toggle"><span>toggle</span><a href="#toggle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="toggle-1"><span class="tsd-kind-call-signature">toggle</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#toggle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="toggle-1"><span class="tsd-kind-call-signature">toggle</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#toggle-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Toggles the open/close state of the element.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L855" class="external" target="_blank">classes/ElementToggle.ts:855</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L892" class="external" target="_blank">classes/ElementToggle.ts:892</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="abortconstructor"><code class="tsd-tag">Protected</code><span>abort<wbr/>Constructor</span><a href="#abortconstructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -505,7 +527,7 @@ is an invalidly configured toggle element.</p>
 <h4 class="tsd-anchor-link" id="since-22">Since<a href="#since-22" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L510" class="external" target="_blank">classes/ElementToggle.ts:510</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L523" class="external" target="_blank">classes/ElementToggle.ts:523</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="activatebutton"><code class="tsd-tag">Protected</code><span>activate<wbr/>Button</span><a href="#activatebutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -524,7 +546,7 @@ is an invalidly configured toggle element.</p>
 <h4 class="tsd-anchor-link" id="since-23">Since<a href="#since-23" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L543" class="external" target="_blank">classes/ElementToggle.ts:543</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L559" class="external" target="_blank">classes/ElementToggle.ts:559</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="checkurltarget"><code class="tsd-tag">Protected</code><span>check<wbr/>Url<wbr/>Target</span><a href="#checkurltarget" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -544,7 +566,7 @@ this toggle element.</p>
 <h4 class="tsd-anchor-link" id="since-24">Since<a href="#since-24" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha.7</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L575" class="external" target="_blank">classes/ElementToggle.ts:575</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L594" class="external" target="_blank">classes/ElementToggle.ts:594</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="cleartimeout"><code class="tsd-tag">Protected</code><span>clear<wbr/>Timeout</span><a href="#cleartimeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -555,18 +577,22 @@ this toggle element.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L557" class="external" target="_blank">classes/ElementToggle.ts:557</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L573" class="external" target="_blank">classes/ElementToggle.ts:573</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="close"><code class="tsd-tag">Protected</code><span>close</span><a href="#close" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="close-1"><span class="tsd-kind-call-signature">close</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#close-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="close-1"><span class="tsd-kind-call-signature">close</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#close-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Toggles the element closed.</p>
 </div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L907" class="external" target="_blank">classes/ElementToggle.ts:907</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L953" class="external" target="_blank">classes/ElementToggle.ts:953</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="deactivatebutton"><code class="tsd-tag">Protected</code><span>deactivate<wbr/>Button</span><a href="#deactivatebutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -581,18 +607,22 @@ this toggle element.</p>
 <h4 class="tsd-anchor-link" id="since-25">Since<a href="#since-25" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L596" class="external" target="_blank">classes/ElementToggle.ts:596</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L615" class="external" target="_blank">classes/ElementToggle.ts:615</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="open"><code class="tsd-tag">Protected</code><span>open</span><a href="#open" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="open-1"><span class="tsd-kind-call-signature">open</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#open-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="open-1"><span class="tsd-kind-call-signature">open</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#open-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Toggles the element open.</p>
 </div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L881" class="external" target="_blank">classes/ElementToggle.ts:881</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L919" class="external" target="_blank">classes/ElementToggle.ts:919</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="openastargetanchor"><code class="tsd-tag">Protected</code><span>open<wbr/>As<wbr/>Target<wbr/>Anchor</span><a href="#openastargetanchor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -608,7 +638,7 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <h4 class="tsd-anchor-link" id="since-26">Since<a href="#since-26" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-alpha.7</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L648" class="external" target="_blank">classes/ElementToggle.ts:648</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L667" class="external" target="_blank">classes/ElementToggle.ts:667</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="setclosingtime"><code class="tsd-tag">Protected</code><span>set<wbr/>Closing<wbr/>Time</span><a href="#setclosingtime" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -623,7 +653,7 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <h4 class="tsd-anchor-link" id="since-27">Since<a href="#since-27" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L775" class="external" target="_blank">classes/ElementToggle.ts:775</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L794" class="external" target="_blank">classes/ElementToggle.ts:794</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="trapfocus"><code class="tsd-tag">Protected</code><span>trap<wbr/>Focus</span><a href="#trapfocus" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -638,7 +668,7 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <h4 class="tsd-anchor-link" id="since-28">Since<a href="#since-28" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L788" class="external" target="_blank">classes/ElementToggle.ts:788</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L807" class="external" target="_blank">classes/ElementToggle.ts:807</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="untrapfocus"><code class="tsd-tag">Protected</code><span>untrap<wbr/>Focus</span><a href="#untrapfocus" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -653,12 +683,12 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <h4 class="tsd-anchor-link" id="since-29">Since<a href="#since-29" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L826" class="external" target="_blank">classes/ElementToggle.ts:826</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L845" class="external" target="_blank">classes/ElementToggle.ts:845</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="validatebutton"><code class="tsd-tag">Protected</code><span>validate<wbr/>Button</span><a href="#validatebutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="validatebutton-1"><span class="tsd-kind-call-signature">validateButton</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="tsd-signature-type external" target="_blank">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#validatebutton-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="validatebutton-1"><span class="tsd-kind-call-signature">validateButton</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="tsd-signature-type external" target="_blank">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><a href="#validatebutton-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Validates the markup of a button used to toggle this element.</p>
 </div>
@@ -666,13 +696,13 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLElement</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="tsd-signature-type external" target="_blank">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<h4 class="tsd-returns-title">Returns <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="tsd-signature-type external" target="_blank">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-since">
 <h4 class="tsd-anchor-link" id="since-30">Since<a href="#since-30" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0.draft</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L474" class="external" target="_blank">classes/ElementToggle.ts:474</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/ElementToggle.ts#L485" class="external" target="_blank">classes/ElementToggle.ts:485</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -694,11 +724,11 @@ Opens regardless of the current <code>this.opts.openWhenTargetted</code> value.<
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#closeevent"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>close<wbr/>Event</span></a><a href="#openevent"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>open<wbr/>Event</span></a><a href="#instances" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>instances</span></a><a href="#togglebackdroplistener"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>toggle<wbr/>Backdrop<wbr/>Listener</span></a><a href="#togglelistener"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>toggle<wbr/>Listener</span></a><a href="#activetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Timeout<wbr/>Length</span></a><a href="#allbuttons" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>all<wbr/>Buttons</span></a><a href="#asmodal" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>as<wbr/>Modal</span></a><a href="#attr" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>attr</span></a><a href="#closingtime" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>closing<wbr/>Time</span></a><a href="#closingtimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>closing<wbr/>Timeout</span></a><a href="#container" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>container</span></a><a href="#content" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>content</span></a><a href="#defaultisopen" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Is<wbr/>Open</span></a><a href="#ismenu" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Menu</span></a><a href="#isnav" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Nav</span></a><a href="#opts" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a><a href="#primarybutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>primary<wbr/>Button</span></a></div></details>
+<div><a href="#closeevent"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>close<wbr/>Event</span></a><a href="#openevent"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>open<wbr/>Event</span></a><a href="#instances" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>instances</span></a><a href="#togglebackdroplistener"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>toggle<wbr/>Backdrop<wbr/>Listener</span></a><a href="#togglelistener"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>toggle<wbr/>Listener</span></a><a href="#activetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Timeout<wbr/>Length</span></a><a href="#allbuttons" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>all<wbr/>Buttons</span></a><a href="#asmodal" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>as<wbr/>Modal</span></a><a href="#attr" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>attr</span></a><a href="#closingtime" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>closing<wbr/>Time</span></a><a href="#closingtimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>closing<wbr/>Timeout</span></a><a href="#container" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>container</span></a><a href="#content" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>content</span></a><a href="#defaultisopen" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Is<wbr/>Open</span></a><a href="#ismenu" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Menu</span></a><a href="#isnav" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Nav</span></a><a href="#openingtimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opening<wbr/>Timeout</span></a><a href="#opts" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a><a href="#primarybutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>primary<wbr/>Button</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Accessors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Accessors</summary>
 <div><a href="#focusablecontainerchildren"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="assets/icons.svg#icon-262144"></use></svg><span>focusable<wbr/>Container<wbr/>Children</span></a><a href="#focusablecontentchildren"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="assets/icons.svg#icon-262144"></use></svg><span>focusable<wbr/>Content<wbr/>Children</span></a><a href="#focustrappers"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="assets/icons.svg#icon-262144"></use></svg><span>focus<wbr/>Trappers</span></a><a href="#isopen"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor"><use href="assets/icons.svg#icon-262144"></use></svg><span>is<wbr/>Open</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#createcustomevents"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Custom<wbr/>Events</span></a><a href="#csstimetomilliseconds"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>css<wbr/>Time<wbr/>To<wbr/>Milliseconds</span></a><a href="#new"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>new</span></a><a href="#run"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>run</span></a><a href="#runonload"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>run<wbr/>On<wbr/>Load</span></a><a href="#abortnew" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>New</span></a><a href="#istoggle" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Toggle</span></a><a href="#handlehashchange"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>handle<wbr/>Hash<wbr/>Change</span></a><a href="#toggle"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>toggle</span></a><a href="#abortconstructor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>Constructor</span></a><a href="#activatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>activate<wbr/>Button</span></a><a href="#checkurltarget" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>check<wbr/>Url<wbr/>Target</span></a><a href="#cleartimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>clear<wbr/>Timeout</span></a><a href="#close" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>close</span></a><a href="#deactivatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>deactivate<wbr/>Button</span></a><a href="#open" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>open</span></a><a href="#openastargetanchor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>open<wbr/>As<wbr/>Target<wbr/>Anchor</span></a><a href="#setclosingtime" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Closing<wbr/>Time</span></a><a href="#trapfocus" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>trap<wbr/>Focus</span></a><a href="#untrapfocus" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>untrap<wbr/>Focus</span></a><a href="#validatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Button</span></a></div></details></div></details></div>
+<div><a href="#createcustomevents"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Custom<wbr/>Events</span></a><a href="#csstimetomilliseconds"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>css<wbr/>Time<wbr/>To<wbr/>Milliseconds</span></a><a href="#new"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>new</span></a><a href="#run"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>run</span></a><a href="#runonload"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>run<wbr/>On<wbr/>Load</span></a><a href="#abortnew" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>New</span></a><a href="#istoggle" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>is<wbr/>Toggle</span></a><a href="#handlehashchange"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>handle<wbr/>Hash<wbr/>Change</span></a><a href="#scrollto"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>scroll<wbr/>To</span></a><a href="#toggle"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>toggle</span></a><a href="#abortconstructor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>abort<wbr/>Constructor</span></a><a href="#activatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>activate<wbr/>Button</span></a><a href="#checkurltarget" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>check<wbr/>Url<wbr/>Target</span></a><a href="#cleartimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>clear<wbr/>Timeout</span></a><a href="#close" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>close</span></a><a href="#deactivatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>deactivate<wbr/>Button</span></a><a href="#open" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>open</span></a><a href="#openastargetanchor" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>open<wbr/>As<wbr/>Target<wbr/>Anchor</span></a><a href="#setclosingtime" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Closing<wbr/>Time</span></a><a href="#trapfocus" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>trap<wbr/>Focus</span></a><a href="#untrapfocus" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>untrap<wbr/>Focus</span></a><a href="#validatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>validate<wbr/>Button</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://github.com/maddimathon/utility-astro" class="tsd-nav-link">GitHub</a><a href="https://www.maddimathon.com/web" class="tsd-nav-link">by Maddi Mathon</a></nav>
 <nav class="tsd-navigation"><a href="index.html">Utility Astro @ 0.1.0-beta.0.draft</a>

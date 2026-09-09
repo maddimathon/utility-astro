@@ -21,12 +21,11 @@ var JsCookie = class {
   }
   /**
    * Empties the contents of this cookie.
+   * 
+   * @deprecated 0.1.0-beta.0.draft
    */
   delete() {
-    this.set("", -1);
-    if (this.opts.copyToLocalStorage) {
-      window.localStorage.removeItem(this.name);
-    }
+    this.remove();
   }
   /**
    * Gets the current value of this cookie.
@@ -40,6 +39,17 @@ var JsCookie = class {
       }
     }
     return this.opts.fallbackValue;
+  }
+  /**
+   * Empties the contents of this cookie.
+   * 
+   * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+   */
+  remove() {
+    this.set("", -1);
+    if (this.opts.copyToLocalStorage) {
+      window.localStorage.removeItem(this.name);
+    }
   }
   /**
    * Sets this browser cookie.
@@ -61,7 +71,7 @@ var JsCookie = class {
       domain: this.opts.domain ?? null,
       expires: expiry?.date?.length ? expiry.date : null,
       "max-age": expiry?.date?.length ? expiry.expireDays <= 0 ? 0 : null : String(this.opts.maxAge),
-      path: this.opts.path
+      path: this.opts.path === false ? null : this.opts.path
     };
     const cookieString = [];
     for (const key in cookie) {
@@ -73,6 +83,23 @@ var JsCookie = class {
     document.cookie = cookieString.join("; ");
   }
 };
+((JsCookie2) => {
+  function get(name, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.get();
+  }
+  JsCookie2.get = get;
+  function remove(name, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.remove();
+  }
+  JsCookie2.remove = remove;
+  function set(name, value, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.set(value);
+  }
+  JsCookie2.set = set;
+})(JsCookie || (JsCookie = {}));
 export {
   JsCookie
 };

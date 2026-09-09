@@ -18,6 +18,10 @@
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
 /* #region Tokens - @property */
+@property --backdrop-filter {
+    syntax: "*";
+    inherits: true;
+}
 @property --display {
     syntax: "*";
     inherits: false;

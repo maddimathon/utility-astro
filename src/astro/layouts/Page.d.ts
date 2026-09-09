@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import type { ComponentProps, HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from 'astro/types';
 
 import type {
     PartialExcept,
@@ -17,8 +17,6 @@ import type { NavMenuProps } from '../components/NavMenu.astro';
 import type { Page_MetaProps } from '../components/Page_Meta.astro';
 import type { SettingsMenuProps } from '../components/SettingsMenu.astro';
 import type { SkipLinksProps } from '../components/SkipLinks.astro';
-
-import type NavMenu from '../components/NavMenu.astro';
 
 import type {
     ContentProps,
@@ -128,6 +126,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
      */
     components?: {
         PrimaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
+        SecondaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
         SettingsMenu?: ( props: Partial<SettingsMenuProps> & { [ key: string ]: any; } ) => any;
     };
 

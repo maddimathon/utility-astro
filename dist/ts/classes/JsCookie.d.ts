@@ -66,12 +66,20 @@ export declare class JsCookie {
     copyToLocalStorage?: boolean);
     /**
      * Empties the contents of this cookie.
+     *
+     * @deprecated 0.1.0-beta.0.draft
      */
     delete(): void;
     /**
      * Gets the current value of this cookie.
      */
     get(): string | null;
+    /**
+     * Empties the contents of this cookie.
+     *
+     * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+     */
+    remove(): void;
     /**
      * Sets this browser cookie.
      */
@@ -83,6 +91,27 @@ export declare class JsCookie {
  * @since 0.1.0-beta.0.draft
  */
 export declare namespace JsCookie {
+    /**
+     * A utility to statically get the value of a cookie. For prettier code, not
+     * for performance.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    function get(name: string, opts?: JsCookie.Opts.Input): string | null;
+    /**
+     * A utility to statically delete the value of a cookie. For prettier code, not
+     * for performance.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    function remove(name: string, opts?: JsCookie.Opts.Input): void;
+    /**
+     * A utility to statically set the value of a cookie. For prettier code, not
+     * for performance.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    function set(name: string, value: string, opts?: JsCookie.Opts.Input): void;
     /**
      * Additional configuration options.
      *
@@ -121,7 +150,7 @@ export declare namespace JsCookie {
         /**
          * Cookie's path.
          */
-        path: string;
+        path: string | false;
     }
     /**
      * Additional types for {@link JsCookie.Opts}.

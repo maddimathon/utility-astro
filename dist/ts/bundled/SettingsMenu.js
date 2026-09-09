@@ -1602,12 +1602,11 @@ var JsCookie = class {
   }
   /**
    * Empties the contents of this cookie.
+   * 
+   * @deprecated 0.1.0-beta.0.draft
    */
   delete() {
-    this.set("", -1);
-    if (this.opts.copyToLocalStorage) {
-      window.localStorage.removeItem(this.name);
-    }
+    this.remove();
   }
   /**
    * Gets the current value of this cookie.
@@ -1621,6 +1620,17 @@ var JsCookie = class {
       }
     }
     return this.opts.fallbackValue;
+  }
+  /**
+   * Empties the contents of this cookie.
+   * 
+   * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+   */
+  remove() {
+    this.set("", -1);
+    if (this.opts.copyToLocalStorage) {
+      window.localStorage.removeItem(this.name);
+    }
   }
   /**
    * Sets this browser cookie.
@@ -1642,7 +1652,7 @@ var JsCookie = class {
       domain: this.opts.domain ?? null,
       expires: expiry?.date?.length ? expiry.date : null,
       "max-age": expiry?.date?.length ? expiry.expireDays <= 0 ? 0 : null : String(this.opts.maxAge),
-      path: this.opts.path
+      path: this.opts.path === false ? null : this.opts.path
     };
     const cookieString = [];
     for (const key in cookie) {
@@ -1654,6 +1664,23 @@ var JsCookie = class {
     document.cookie = cookieString.join("; ");
   }
 };
+((JsCookie2) => {
+  function get(name, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.get();
+  }
+  JsCookie2.get = get;
+  function remove(name, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.remove();
+  }
+  JsCookie2.remove = remove;
+  function set(name, value, opts = {}) {
+    const cookie = new JsCookie2(name, opts);
+    return cookie.set(value);
+  }
+  JsCookie2.set = set;
+})(JsCookie || (JsCookie = {}));
 
 // src/ts/classes/SettingsMenu.ts
 var SettingsMenu = class _SettingsMenu {
@@ -1676,7 +1703,6 @@ var SettingsMenu = class _SettingsMenu {
    * Sets up a new instance.
    */
   static async new(target, menu, {
-    scrollBehaviour = "auto",
     cookieNamer,
     ...opts
   } = {}) {
@@ -1751,13 +1777,6 @@ var SettingsMenu = class _SettingsMenu {
           "click",
           instance.resetButtonClicked
         );
-        const scrollToMenu = () => menu.scrollIntoView({
-          behavior: scrollBehaviour ?? "auto",
-          block: "start",
-          inline: "nearest"
-        });
-        menu.addEventListener("toggle-open", scrollToMenu);
-        menu.addEventListener("toggle-close", scrollToMenu);
         return instance;
       }
     );
@@ -1944,8 +1963,8 @@ var SettingsMenu = class _SettingsMenu {
   resetButtonClicked() {
     this.#attributeKeys.forEach((attr) => {
       const startingCookie = document.cookie;
-      this.#cookies[attr]?.delete();
-      this.#cookies[attr + "-default"]?.delete();
+      this.#cookies[attr]?.remove();
+      this.#cookies[attr + "-default"]?.remove();
       if (this.opts.debug) {
         console.debug("SettingsMenu.resetButtonClicked() - forEach", {
           attr,
@@ -2112,7 +2131,7 @@ var SettingsMenu = class _SettingsMenu {
       }
     });
   }
-  async function run(settingsMenus, scrollBehaviour = "auto", {
+  async function run(settingsMenus, {
     targetElement,
     ...opts
   } = {}) {
@@ -2122,10 +2141,7 @@ var SettingsMenu = class _SettingsMenu {
     }
     const menuArray = hasIterator(settingsMenus) ? Array.from(settingsMenus) : [settingsMenus];
     return Promise.all(menuArray.map(
-      (menu) => run_mapper(targetElement, menu, {
-        ...opts,
-        scrollBehaviour
-      })
+      (menu) => run_mapper(targetElement, menu, opts)
     )).then(
       (arr) => arr.filter((i) => !!i)
     );
@@ -2136,8 +2152,7 @@ var SettingsMenu = class _SettingsMenu {
     const targetElement = document.querySelector(opts.selectors?.target || ":root");
     window.addEventListener("load", async () => {
       const settingsMenus = document.querySelectorAll("[data-settings-menu]");
-      const scrollBehaviour = window.getComputedStyle(document.documentElement).scrollBehavior || void 0;
-      await SettingsMenu2.run(settingsMenus, scrollBehaviour, {
+      await SettingsMenu2.run(settingsMenus, {
         ...opts,
         cookieNamer,
         targetElement

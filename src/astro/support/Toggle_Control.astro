@@ -31,6 +31,8 @@ type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
      */
     classBase?: string | undefined;
 
+    includeDefaultBase?: boolean;
+
     icon?: boolean;
     iconSVG?: undefined | string;
 };
@@ -40,6 +42,7 @@ const {
     class: classList = [],
     classBase,
     id,
+    includeDefaultBase = true,
 
     icon = true,
 
@@ -81,8 +84,10 @@ export const DEFAULT_TOGGLE_ICON = `<span class='icon icon--toggle | toggle-bloc
 </span>`;
 
 const classMaker = classBase
-    ? (append: string = '') =>
-          'toggle-block' + append + ' ' + classBase + append
+    ? includeDefaultBase
+        ? (append: string = '') =>
+              'toggle-block' + append + ' ' + classBase + append
+        : (append: string = '') => classBase + append
     : (append: string = '') => 'toggle-block' + append;
 ---
 

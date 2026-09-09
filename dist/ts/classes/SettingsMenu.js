@@ -51,7 +51,7 @@ export class SettingsMenu {
      */
     menu, _a = {}) {
         var _b, _c, _d, _e, _f, _g, _h, _j, _k;
-        var { scrollBehaviour = 'auto', cookieNamer } = _a, opts = __rest(_a, ["scrollBehaviour", "cookieNamer"]);
+        var { cookieNamer } = _a, opts = __rest(_a, ["cookieNamer"]);
         const inputs = Array.from((_c = menu.querySelectorAll(((_b = opts.selectors) === null || _b === void 0 ? void 0 : _b.inputs) || 'input[data-settings-input]')) !== null && _c !== void 0 ? _c : []);
         // returns
         if (!inputs.length) {
@@ -95,13 +95,6 @@ export class SettingsMenu {
              * Add reset button listener.
              */
             (_b = __classPrivateFieldGet(instance, _SettingsMenu_resetButton, "f")) === null || _b === void 0 ? void 0 : _b.addEventListener('click', instance.resetButtonClicked);
-            const scrollToMenu = () => menu.scrollIntoView({
-                behavior: scrollBehaviour !== null && scrollBehaviour !== void 0 ? scrollBehaviour : 'auto',
-                block: 'start',
-                inline: 'nearest',
-            });
-            menu.addEventListener('toggle-open', scrollToMenu);
-            menu.addEventListener('toggle-close', scrollToMenu);
             return instance;
         });
     }
@@ -329,8 +322,8 @@ export class SettingsMenu {
         __classPrivateFieldGet(this, _SettingsMenu_attributeKeys, "f").forEach((attr) => {
             var _a, _b, _c, _d;
             const startingCookie = document.cookie;
-            (_a = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr]) === null || _a === void 0 ? void 0 : _a.delete();
-            (_b = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr + '-default']) === null || _b === void 0 ? void 0 : _b.delete();
+            (_a = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr]) === null || _a === void 0 ? void 0 : _a.remove();
+            (_b = __classPrivateFieldGet(this, _SettingsMenu_cookies, "f")[attr + '-default']) === null || _b === void 0 ? void 0 : _b.remove();
             if (this.opts.debug) {
                 console.debug('SettingsMenu.resetButtonClicked() - forEach', {
                     attr,
@@ -503,7 +496,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
      * @since 0.1.0-alpha
      * @since 0.1.0-beta.0.draft — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
-    async function run(settingsMenus, scrollBehaviour = 'auto', _a = {}) {
+    async function run(settingsMenus, _a = {}) {
         var _b, _c;
         var { targetElement } = _a, opts = __rest(_a, ["targetElement"]);
         targetElement = (_c = targetElement !== null && targetElement !== void 0 ? targetElement : document.querySelector(((_b = opts.selectors) === null || _b === void 0 ? void 0 : _b.target) || ':root')) !== null && _c !== void 0 ? _c : undefined;
@@ -514,7 +507,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
         const menuArray = hasIterator(settingsMenus)
             ? Array.from(settingsMenus)
             : [settingsMenus];
-        return Promise.all(menuArray.map(menu => run_mapper(targetElement, menu, Object.assign(Object.assign({}, opts), { scrollBehaviour })))).then(arr => arr.filter(i => !!i));
+        return Promise.all(menuArray.map(menu => run_mapper(targetElement, menu, opts))).then(arr => arr.filter(i => !!i));
     }
     SettingsMenu.run = run;
     /**
@@ -530,11 +523,10 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
         const targetElement = document.querySelector(((_a = opts.selectors) === null || _a === void 0 ? void 0 : _a.target) || ':root');
         window.addEventListener('load', async () => {
             const settingsMenus = document.querySelectorAll('[data-settings-menu]');
-            const scrollBehaviour = window.getComputedStyle(document.documentElement).scrollBehavior || undefined;
             /*
              * Setting up each found menu.
              */
-            await SettingsMenu.run(settingsMenus, scrollBehaviour, Object.assign(Object.assign({}, opts), { cookieNamer,
+            await SettingsMenu.run(settingsMenus, Object.assign(Object.assign({}, opts), { cookieNamer,
                 targetElement }));
         }, { once: true });
         if (opts.debug) {
