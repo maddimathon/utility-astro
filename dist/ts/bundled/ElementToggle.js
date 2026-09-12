@@ -50,8 +50,13 @@ var ElementToggle = class _ElementToggle {
       Number.isNaN(this.opts.activeTimeoutLength) ? this.closingTime / 4 : this.opts.activeTimeoutLength
     );
     this.activateButton = this.activateButton.bind(this);
+    this.close = this.close.bind(this);
+    this.closeQuietly = this.closeQuietly.bind(this);
     this.deactivateButton = this.deactivateButton.bind(this);
+    this.handleContainerAttributeChange = this.handleContainerAttributeChange.bind(this);
     this.handleHashChange = this.handleHashChange.bind(this);
+    this.open = this.open.bind(this);
+    this.openQuietly = this.openQuietly.bind(this);
     this.toggle = this.toggle.bind(this);
     this.validateButton = this.validateButton.bind(this);
     const _activateButton = this.activateButton.bind(this);
@@ -68,8 +73,21 @@ var ElementToggle = class _ElementToggle {
       _close(this);
       _deactivateButton();
     };
-    const isCurrentAnchorTarget = this.opts.openWhenTargetted && this.checkUrlTarget(new URL(window.location.href));
-    this.defaultIsOpen = this.isOpen || isCurrentAnchorTarget;
+    const _defaultState = this.container.getAttribute("data-toggle-container-default");
+    if (_defaultState) {
+      this.defaultIsOpen = _defaultState === "open";
+    }
+    const conatinerObserver = new MutationObserver(this.handleContainerAttributeChange);
+    conatinerObserver.observe(this.container, {
+      attributes: true,
+      attributeFilter: ["data-toggle-container-default"],
+      attributeOldValue: true,
+      characterData: true,
+      characterDataOldValue: true,
+      childList: false,
+      subtree: false
+    });
+    const isCurrentAnchorTarget = this.isCurrentAnchorTarget;
     if (!this.container || !this.primaryButton || !this.container.id || !this.content) {
       this.abortConstructor();
       return;
@@ -82,10 +100,10 @@ var ElementToggle = class _ElementToggle {
     Promise.all(this.allButtons.map(this.validateButton)).then(
       () => {
         if (this.defaultIsOpen) {
-          if (isCurrentAnchorTarget) {
+          if (isCurrentAnchorTarget && this.opts.openWhenTargetted) {
             this.openAsTargetAnchor();
           } else {
-            this.open(this.primaryButton);
+            this.openQuietly(this.primaryButton, { autoFired: true });
           }
         } else {
           this.container.setAttribute("data-toggle-container", "closed");
@@ -107,10 +125,20 @@ var ElementToggle = class _ElementToggle {
     this.instances = /* @__PURE__ */ new Map();
   }
   /**
+   * Gets the instance of this class for the given element (based on id value).
+   * 
    * @since 0.1.0-beta.0.draft
    */
-  static isToggle(element) {
-    return element.id ? _ElementToggle.instances.has(element.id) : false;
+  static get(element) {
+    return this.getByID(element.id);
+  }
+  /**
+   * Gets the instance of this class for the given element (based on id value).
+   * 
+   * @since 0.1.0-beta.0.draft
+   */
+  static getByID(id) {
+    return id ? _ElementToggle.instances.get(id) ?? null : null;
   }
   /**
    * Changes some properties and attributes on applicable elements since this
@@ -202,7 +230,7 @@ var ElementToggle = class _ElementToggle {
       return null;
     }
     if (_ElementToggle.instances.has(containerID)) {
-      return null;
+      return _ElementToggle.instances.get(containerID) ?? null;
     }
     const allButtons = document.querySelectorAll(
       `[data-toggle-primary-control=${containerID}], [data-toggle-control=${containerID}]`
@@ -272,6 +300,33 @@ var ElementToggle = class _ElementToggle {
     if (this.closeEvent === null) {
       _ElementToggle.closeEvent = new Event("toggle-close");
     }
+  }
+  /**
+   * Whether this toggle-able element defaults to the open state.
+   *
+   * @since 0.1.0-beta.0.draft
+   */
+  #defaultIsOpen;
+  /**
+   * @since 0.1.0-beta.0.draft
+   */
+  get defaultIsOpen() {
+    if (typeof this.#defaultIsOpen === "boolean") {
+      return this.#defaultIsOpen;
+    }
+    return this.#defaultIsOpen ?? this.isCurrentAnchorTarget;
+  }
+  /**
+   * @since 0.1.0-beta.0.draft
+   */
+  set defaultIsOpen(value) {
+    this.#defaultIsOpen = !!value;
+  }
+  /**
+   * @since 0.1.0-beta.0.draft
+   */
+  get isCurrentAnchorTarget() {
+    return this.opts.openWhenTargetted && this.checkUrlTarget(new URL(window.location.href));
   }
   /**
    * Whether this container is currently open.
@@ -400,14 +455,34 @@ var ElementToggle = class _ElementToggle {
       return;
     }
     const isNewTarget = this.checkUrlTarget(new URL(event.newURL));
-    if (!isNewTarget) {
-      this.primaryButton.removeAttribute(this.attr.focus);
-    }
     if (isNewTarget) {
       this.openAsTargetAnchor();
+    } else {
+      this.primaryButton.removeAttribute(this.attr.focus);
+      if (this.opts.closeWhenUntargetted && this.isOpen && this.checkUrlTarget(new URL(event.oldURL))) {
+        this.closeQuietly(void 0);
+      }
     }
-    if (!isNewTarget && this.opts.closeWhenUntargetted && this.checkUrlTarget(new URL(event.oldURL)) && this.isOpen) {
-      this.close(void 0);
+  }
+  /**
+   * Fired when this element's attributes change (and we might have to updated
+   * opts/config/etc.).
+   *
+   * @since 0.1.0-beta.0.draft
+   */
+  handleContainerAttributeChange([record]) {
+    const currentValue = record?.attributeName ? this.container.getAttribute(record.attributeName) : null;
+    switch (record?.attributeName) {
+      case "data-toggle-container-default":
+        this.defaultIsOpen = currentValue === "open";
+        if (this.defaultIsOpen) {
+          if (!this.asModal && !this.isOpen) {
+            this.openQuietly(void 0, { autoFired: true });
+          }
+        } else if (this.toggledByScript) {
+          this.closeQuietly(void 0, { autoFired: true });
+        }
+        break;
     }
   }
   /**
@@ -553,6 +628,10 @@ var ElementToggle = class _ElementToggle {
   }
   /* TOGGLING
    * ====================================================================== */
+  #toggledByScript;
+  get toggledByScript() {
+    return this.#toggledByScript ?? true;
+  }
   /**
    * Scroll to the toggle (like when opening or closing a menu).
    */
@@ -571,18 +650,46 @@ var ElementToggle = class _ElementToggle {
   /**
    * Toggles the open/close state of the element.
    */
-  toggle(button) {
+  toggle(button, opts = {}) {
     this.activateButton(button ?? this.primaryButton);
     this.clearTimeout();
+    this.#toggledByScript = !!opts.autoFired;
     switch (this.container.getAttribute("data-toggle-container")) {
       case "closed":
       case "closing":
-        this.open(button ?? this.primaryButton);
+        this.open(button ?? this.primaryButton, {
+          ...opts,
+          activateButton: false
+        });
         break;
       case "open":
       case "opening":
       default:
-        this.close(button ?? this.primaryButton);
+        this.close(button ?? this.primaryButton, {
+          ...opts,
+          activateButton: false
+        });
+        break;
+    }
+    this.deactivateButton();
+  }
+  /**
+   * Toggles the open/close state of the element.
+   * 
+   * @since 0.1.0-beta.0.draft
+   */
+  toggleQuietly(opts = {}) {
+    this.clearTimeout();
+    this.#toggledByScript = !!opts.autoFired;
+    switch (this.container.getAttribute("data-toggle-container")) {
+      case "closed":
+      case "closing":
+        this.openQuietly(void 0, opts);
+        break;
+      case "open":
+      case "opening":
+      default:
+        this.closeQuietly(void 0, opts);
         break;
     }
     this.deactivateButton();
@@ -590,15 +697,24 @@ var ElementToggle = class _ElementToggle {
   /**
    * Toggles the element open.
    */
-  open(button) {
-    if (this.isMenu || this.isNav) {
+  open(button, {
+    activateButton = true,
+    autoFired = false,
+    fireEvents = true,
+    scrollTo = true
+  } = {}) {
+    this.#toggledByScript = !!autoFired;
+    if (activateButton) {
+      this.activateButton(button ?? this.primaryButton);
+    }
+    if (scrollTo && (this.isMenu || this.isNav)) {
       this.scrollTo(button);
     }
     this.setClosingTime();
     this.container.setAttribute("data-toggle-container", "opening");
     this.openingTimeout = setTimeout(
       () => this.container.setAttribute("data-toggle-container", "open"),
-      5
+      3
     );
     this.allButtons.forEach((button2) => {
       if (button2.getAttribute("aria-controls")) {
@@ -609,14 +725,38 @@ var ElementToggle = class _ElementToggle {
       this.trapFocus();
       this.content.focus();
     }
-    _ElementToggle.createCustomEvents();
-    this.container.dispatchEvent(_ElementToggle.openEvent);
+    if (fireEvents) {
+      _ElementToggle.createCustomEvents();
+      this.container.dispatchEvent(_ElementToggle.openEvent);
+    }
     this.deactivateButton();
+  }
+  /**
+   * Opens without firing events or scrolling to the element.
+   * 
+   * @since 0.1.0-beta.0.draft
+   */
+  openQuietly(button, opts = {}) {
+    return this.open(button, {
+      ...opts,
+      activateButton: false,
+      fireEvents: false,
+      scrollTo: false
+    });
   }
   /**
    * Toggles the element closed.
    */
-  close(button) {
+  close(button, {
+    activateButton = true,
+    autoFired = false,
+    fireEvents = true,
+    scrollTo = true
+  } = {}) {
+    this.#toggledByScript = !!autoFired;
+    if (activateButton) {
+      this.activateButton(button ?? this.primaryButton);
+    }
     if (this.asModal) {
       this.untrapFocus();
     }
@@ -626,18 +766,33 @@ var ElementToggle = class _ElementToggle {
       }
     });
     this.container.setAttribute("data-toggle-container", "closing");
-    if (this.isMenu || this.isNav) {
+    if (scrollTo && (this.isMenu || this.isNav)) {
       this.scrollTo(button);
     }
     this.closingTimeout = setTimeout(
       () => {
         this.container.setAttribute("data-toggle-container", "closed");
-        _ElementToggle.createCustomEvents();
-        this.container.dispatchEvent(_ElementToggle.closeEvent);
+        if (fireEvents) {
+          _ElementToggle.createCustomEvents();
+          this.container.dispatchEvent(_ElementToggle.closeEvent);
+        }
       },
-      this.closingTime + 50
+      this.closingTime + 15
     );
     this.deactivateButton();
+  }
+  /**
+   * Closes without firing events or scrolling to the element.
+   * 
+   * @since 0.1.0-beta.0.draft
+   */
+  closeQuietly(button, opts = {}) {
+    return this.close(button, {
+      ...opts,
+      activateButton: false,
+      fireEvents: false,
+      scrollTo: false
+    });
   }
 };
 ((ElementToggle2) => {

@@ -23,9 +23,17 @@ export declare class ElementToggle {
      */
     protected static readonly instances: Map<string, ElementToggle>;
     /**
+     * Gets the instance of this class for the given element (based on id value).
+     *
      * @since 0.1.0-beta.0.draft
      */
-    protected static isToggle<T_Element extends HTMLElement>(element: T_Element): boolean;
+    static get(element: HTMLElement): null | ElementToggle;
+    /**
+     * Gets the instance of this class for the given element (based on id value).
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    static getByID(id: string): null | ElementToggle;
     /**
      * Changes some properties and attributes on applicable elements since this
      * is an invalidly configured toggle element.
@@ -93,11 +101,13 @@ export declare class ElementToggle {
      */
     protected closingTime: number;
     /**
-     * Whether this toggle-able element defaults to the open state.
-     *
      * @since 0.1.0-beta.0.draft
      */
-    protected readonly defaultIsOpen: boolean;
+    get defaultIsOpen(): boolean;
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    set defaultIsOpen(value: boolean);
     /**
      * Attribute strings for adding custom focus & active states.
      *
@@ -107,6 +117,10 @@ export declare class ElementToggle {
         active: string;
         focus: string;
     };
+    /**
+     * @since 0.1.0-beta.0.draft
+     */
+    get isCurrentAnchorTarget(): boolean;
     /**
      * Whether this container is currently open.
      *
@@ -189,6 +203,13 @@ export declare class ElementToggle {
      */
     handleHashChange(event: HashChangeEvent): void;
     /**
+     * Fired when this element's attributes change (and we might have to updated
+     * opts/config/etc.).
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    handleContainerAttributeChange([record]: MutationRecord[]): void;
+    /**
      * Opens the toggle element as if this is the current url anchor target.
      * Opens regardless of the current `this.opts.openWhenTargetted` value.
      *
@@ -236,6 +257,7 @@ export declare class ElementToggle {
      * @since 0.1.0-beta.0.draft
      */
     protected untrapFocus(): void;
+    protected get toggledByScript(): boolean;
     /**
      * Scroll to the toggle (like when opening or closing a menu).
      */
@@ -243,15 +265,33 @@ export declare class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    toggle(button: undefined | HTMLElement): void;
+    toggle(button: undefined | HTMLElement, opts?: Partial<ElementToggle.ToggleOpts>): void;
+    /**
+     * Toggles the open/close state of the element.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    toggleQuietly(opts?: Partial<ElementToggle.ToggleOpts>): void;
     /**
      * Toggles the element open.
      */
-    protected open(button: undefined | HTMLElement): void;
+    open(button: undefined | HTMLElement, { activateButton, autoFired, fireEvents, scrollTo, }?: Partial<ElementToggle.ToggleOpts>): void;
+    /**
+     * Opens without firing events or scrolling to the element.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    openQuietly(button: undefined | HTMLElement, opts?: Omit<Partial<ElementToggle.ToggleOpts>, 'activateButton' | 'fireEvents' | 'scrollTo'>): void;
     /**
      * Toggles the element closed.
      */
-    protected close(button: undefined | HTMLElement): void;
+    close(button: undefined | HTMLElement, { activateButton, autoFired, fireEvents, scrollTo, }?: Partial<ElementToggle.ToggleOpts>): void;
+    /**
+     * Closes without firing events or scrolling to the element.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    closeQuietly(button: undefined | HTMLElement, opts?: Omit<Parameters<typeof this.close>[1], 'activateButton' | 'fireEvents' | 'scrollTo'>): void;
 }
 /**
  * Utilities for the {@link ElementToggle} class.
@@ -337,5 +377,30 @@ export declare namespace ElementToggle {
          * @since 0.1.0-beta.0.draft
          */
         scrollToOptions: null | ((button: undefined | HTMLElement) => null | ScrollToOptions);
+    }
+    /**
+     * Opts for each toggle of the element.
+     *
+     * @since 0.1.0-beta.0.draft
+     */
+    interface ToggleOpts {
+        /**
+         * @default true
+         */
+        activateButton: boolean;
+        /**
+         * Set this to true if it should be treated like a user-triggered action.
+         *
+         * @default false
+         */
+        autoFired: boolean;
+        /**
+         * @default true
+         */
+        fireEvents: boolean;
+        /**
+         * @default true
+         */
+        scrollTo: boolean;
     }
 }

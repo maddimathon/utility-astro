@@ -25,12 +25,21 @@ export class ElementToggle {
     protected static readonly instances: Map<string, ElementToggle> = new Map();
 
     /**
+     * Gets the instance of this class for the given element (based on id value).
+     * 
      * @since ___PKG_VERSION___
      */
-    protected static isToggle<T_Element extends HTMLElement>(
-        element: T_Element,
-    ): boolean {
-        return element.id ? ElementToggle.instances.has( element.id ) : false;
+    public static get( element: HTMLElement ): null | ElementToggle {
+        return this.getByID( element.id );
+    }
+
+    /**
+     * Gets the instance of this class for the given element (based on id value).
+     * 
+     * @since ___PKG_VERSION___
+     */
+    public static getByID( id: string ): null | ElementToggle {
+        return id ? ( ElementToggle.instances.get( id ) ?? null ) : null;
     }
 
     /**
@@ -151,7 +160,7 @@ export class ElementToggle {
 
         // returns
         if ( ElementToggle.instances.has( containerID ) ) {
-            return null;
+            return ElementToggle.instances.get( containerID ) ?? null;
         }
 
         const allButtons = document.querySelectorAll(
@@ -294,7 +303,26 @@ export class ElementToggle {
      *
      * @since ___PKG_VERSION___
      */
-    protected readonly defaultIsOpen: boolean;
+    #defaultIsOpen: undefined | boolean;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    public get defaultIsOpen(): boolean {
+        // returns
+        if ( typeof this.#defaultIsOpen === 'boolean' ) {
+            return this.#defaultIsOpen;
+        }
+
+        return this.#defaultIsOpen ?? this.isCurrentAnchorTarget;
+    }
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    public set defaultIsOpen( value: boolean ) {
+        this.#defaultIsOpen = !!value;
+    }
 
     /**
      * Attribute strings for adding custom focus & active states.
@@ -305,6 +333,13 @@ export class ElementToggle {
         active: string;
         focus: string;
     };
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    get isCurrentAnchorTarget(): boolean {
+        return this.opts.openWhenTargetted && this.checkUrlTarget( new URL( window.location.href ) );
+    }
 
     /**
      * Whether this container is currently open.
@@ -416,8 +451,13 @@ export class ElementToggle {
         );
 
         this.activateButton = this.activateButton.bind( this );
+        this.close = this.close.bind( this );
+        this.closeQuietly = this.closeQuietly.bind( this );
         this.deactivateButton = this.deactivateButton.bind( this );
+        this.handleContainerAttributeChange = this.handleContainerAttributeChange.bind( this );
         this.handleHashChange = this.handleHashChange.bind( this );
+        this.open = this.open.bind( this );
+        this.openQuietly = this.openQuietly.bind( this );
         this.toggle = this.toggle.bind( this );
         this.validateButton = this.validateButton.bind( this );
 
@@ -439,10 +479,23 @@ export class ElementToggle {
             _deactivateButton();
         };
 
-        const isCurrentAnchorTarget = this.opts.openWhenTargetted
-            && this.checkUrlTarget( new URL( window.location.href ) );
+        const _defaultState = this.container.getAttribute( 'data-toggle-container-default' );
+        if ( _defaultState ) {
+            this.defaultIsOpen = _defaultState === 'open';
+        }
 
-        this.defaultIsOpen = this.isOpen || isCurrentAnchorTarget;
+        const conatinerObserver = new MutationObserver( this.handleContainerAttributeChange );
+        conatinerObserver.observe( this.container, {
+            attributes: true,
+            attributeFilter: [ 'data-toggle-container-default' ],
+            attributeOldValue: true,
+            characterData: true,
+            characterDataOldValue: true,
+            childList: false,
+            subtree: false,
+        } );
+
+        const isCurrentAnchorTarget = this.isCurrentAnchorTarget;
 
         // returns
         if ( !this.container || !this.primaryButton || !this.container.id || !this.content ) {
@@ -461,10 +514,10 @@ export class ElementToggle {
         Promise.all( this.allButtons.map( this.validateButton ) ).then(
             () => {
                 if ( this.defaultIsOpen ) {
-                    if ( isCurrentAnchorTarget ) {
+                    if ( isCurrentAnchorTarget && this.opts.openWhenTargetted ) {
                         this.openAsTargetAnchor();
                     } else {
-                        this.open( this.primaryButton );
+                        this.openQuietly( this.primaryButton, { autoFired: true } );
                     }
                 } else {
                     this.container.setAttribute( 'data-toggle-container', 'closed' );
@@ -640,21 +693,47 @@ export class ElementToggle {
 
         const isNewTarget = this.checkUrlTarget( new URL( event.newURL ) );
 
-        if ( !isNewTarget ) {
-            this.primaryButton.removeAttribute( this.attr.focus );
-        }
-
         if ( isNewTarget ) {
             this.openAsTargetAnchor();
-        }
+        } else {
+            this.primaryButton.removeAttribute( this.attr.focus );
 
-        if (
-            !isNewTarget
-            && this.opts.closeWhenUntargetted
-            && this.checkUrlTarget( new URL( event.oldURL ) )
-            && this.isOpen
-        ) {
-            this.close( undefined );
+            // was previously targetted, but no longer
+            if (
+                this.opts.closeWhenUntargetted
+                && this.isOpen
+                && this.checkUrlTarget( new URL( event.oldURL ) )
+            ) {
+                this.closeQuietly( undefined );
+            }
+        }
+    }
+
+    /**
+     * Fired when this element's attributes change (and we might have to updated
+     * opts/config/etc.).
+     *
+     * @since ___PKG_VERSION___
+     */
+    public handleContainerAttributeChange( [ record ]: MutationRecord[] ): void {
+
+        const currentValue = record?.attributeName
+            ? this.container.getAttribute( record.attributeName )
+            : null;
+
+        switch ( record?.attributeName ) {
+
+            case 'data-toggle-container-default':
+                this.defaultIsOpen = currentValue === 'open';
+
+                if ( this.defaultIsOpen ) {
+                    if ( !this.asModal && !this.isOpen ) {
+                        this.openQuietly( undefined, { autoFired: true } );
+                    }
+                } else if ( this.toggledByScript ) {
+                    this.closeQuietly( undefined, { autoFired: true } );
+                }
+                break;
         }
     }
 
@@ -868,6 +947,12 @@ export class ElementToggle {
     /* TOGGLING
      * ====================================================================== */
 
+    #toggledByScript: undefined | boolean;
+
+    protected get toggledByScript(): boolean {
+        return this.#toggledByScript ?? true;
+    }
+
     /**
      * Scroll to the toggle (like when opening or closing a menu).
      */
@@ -889,9 +974,13 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      */
-    public toggle( button: undefined | HTMLElement ): void {
+    public toggle(
+        button: undefined | HTMLElement,
+        opts: Partial<ElementToggle.ToggleOpts> = {},
+    ): void {
         this.activateButton( button ?? this.primaryButton );
         this.clearTimeout();
+        this.#toggledByScript = !!opts.autoFired;
 
         /*
          * Grab the current state and trigger an opening or closing function!
@@ -900,13 +989,50 @@ export class ElementToggle {
 
             case 'closed':
             case 'closing':
-                this.open( button ?? this.primaryButton );
+                this.open( button ?? this.primaryButton, {
+                    ...opts,
+                    activateButton: false,
+                } );
                 break;
 
             case 'open':
             case 'opening':
             default:
-                this.close( button ?? this.primaryButton );
+                this.close( button ?? this.primaryButton, {
+                    ...opts,
+                    activateButton: false,
+                } );
+                break;
+        }
+
+        this.deactivateButton();
+    }
+
+    /**
+     * Toggles the open/close state of the element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    public toggleQuietly(
+        opts: Partial<ElementToggle.ToggleOpts> = {},
+    ): void {
+        this.clearTimeout();
+        this.#toggledByScript = !!opts.autoFired;
+
+        /*
+         * Grab the current state and trigger an opening or closing function!
+         */
+        switch ( this.container.getAttribute( 'data-toggle-container' ) ) {
+
+            case 'closed':
+            case 'closing':
+                this.openQuietly( undefined, opts );
+                break;
+
+            case 'open':
+            case 'opening':
+            default:
+                this.closeQuietly( undefined, opts );
                 break;
         }
 
@@ -916,8 +1042,22 @@ export class ElementToggle {
     /**
      * Toggles the element open.
      */
-    protected open( button: undefined | HTMLElement ): void {
-        if ( this.isMenu || this.isNav ) {
+    public open(
+        button: undefined | HTMLElement,
+        {
+            activateButton = true,
+            autoFired = false,
+            fireEvents = true,
+            scrollTo = true,
+        }: Partial<ElementToggle.ToggleOpts> = {},
+    ): void {
+        this.#toggledByScript = !!autoFired;
+
+        if ( activateButton ) {
+            this.activateButton( button ?? this.primaryButton );
+        }
+
+        if ( scrollTo && ( this.isMenu || this.isNav ) ) {
             this.scrollTo( button );
         }
 
@@ -926,7 +1066,7 @@ export class ElementToggle {
         this.container.setAttribute( 'data-toggle-container', 'opening' );
         this.openingTimeout = setTimeout(
             () => this.container.setAttribute( 'data-toggle-container', 'open' ),
-            5,
+            3,
         );
 
         this.allButtons.forEach( ( button ) => {
@@ -941,16 +1081,49 @@ export class ElementToggle {
             this.content.focus();
         }
 
-        ElementToggle.createCustomEvents();
-        this.container.dispatchEvent( ElementToggle.openEvent as Event );
+        if ( fireEvents ) {
+            ElementToggle.createCustomEvents();
+            this.container.dispatchEvent( ElementToggle.openEvent as Event );
+        }
 
         this.deactivateButton();
     }
 
     /**
+     * Opens without firing events or scrolling to the element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    public openQuietly(
+        button: undefined | HTMLElement,
+        opts: Omit<Partial<ElementToggle.ToggleOpts>, 'activateButton' | 'fireEvents' | 'scrollTo'> = {},
+    ): void {
+        return this.open( button, {
+            ...opts,
+            activateButton: false,
+            fireEvents: false,
+            scrollTo: false,
+        } );
+    }
+
+    /**
      * Toggles the element closed.
      */
-    protected close( button: undefined | HTMLElement ): void {
+    public close(
+        button: undefined | HTMLElement,
+        {
+            activateButton = true,
+            autoFired = false,
+            fireEvents = true,
+            scrollTo = true,
+        }: Partial<ElementToggle.ToggleOpts> = {},
+    ): void {
+        this.#toggledByScript = !!autoFired;
+
+        if ( activateButton ) {
+            this.activateButton( button ?? this.primaryButton );
+        }
+
         // untrap focus
         if ( this.asModal ) {
             this.untrapFocus();
@@ -968,7 +1141,7 @@ export class ElementToggle {
 
         this.container.setAttribute( 'data-toggle-container', 'closing' );
 
-        if ( this.isMenu || this.isNav ) {
+        if ( scrollTo && ( this.isMenu || this.isNav ) ) {
             this.scrollTo( button );
         }
 
@@ -979,13 +1152,32 @@ export class ElementToggle {
             () => {
                 this.container.setAttribute( 'data-toggle-container', 'closed' );
 
-                ElementToggle.createCustomEvents();
-                this.container.dispatchEvent( ElementToggle.closeEvent as Event );
+                if ( fireEvents ) {
+                    ElementToggle.createCustomEvents();
+                    this.container.dispatchEvent( ElementToggle.closeEvent as Event );
+                }
             },
-            this.closingTime + 50,
+            this.closingTime + 15,
         );
 
         this.deactivateButton();
+    }
+
+    /**
+     * Closes without firing events or scrolling to the element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    public closeQuietly(
+        button: undefined | HTMLElement,
+        opts: Omit<Parameters<typeof this.close>[ 1 ], 'activateButton' | 'fireEvents' | 'scrollTo'> = {},
+    ): void {
+        return this.close( button, {
+            ...opts,
+            activateButton: false,
+            fireEvents: false,
+            scrollTo: false,
+        } );
     }
 }
 
@@ -1148,5 +1340,34 @@ export namespace ElementToggle {
          * @since ___PKG_VERSION___
          */
         scrollToOptions: null | ( ( button: undefined | HTMLElement ) => null | ScrollToOptions );
+    }
+
+    /**
+     * Opts for each toggle of the element.
+     * 
+     * @since ___PKG_VERSION___
+     */
+    export interface ToggleOpts {
+        /**
+         * @default true
+         */
+        activateButton: boolean;
+
+        /**
+         * Set this to true if it should be treated like a user-triggered action.
+         * 
+         * @default false
+         */
+        autoFired: boolean;
+
+        /**
+         * @default true
+         */
+        fireEvents: boolean;
+
+        /**
+         * @default true
+         */
+        scrollTo: boolean;
     }
 }

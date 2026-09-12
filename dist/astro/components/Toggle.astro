@@ -150,6 +150,11 @@ export interface ToggleProps {
     >;
 
     /**
+     * @since 0.1.0-beta.0.draft
+     */
+    dataToggleContainerDefault?: 'open' | '' | null;
+
+    /**
      * Used to set the data-toggle-container-type attribute.
      *
      * @since 0.1.0-beta.0.draft
@@ -170,6 +175,7 @@ const {
     backdrop,
     class: classList,
     classBase,
+    dataToggleContainerDefault,
     displayHeading,
     generateID = {
         button: (_id: string) => `${_id}-button`,
@@ -180,7 +186,7 @@ const {
     headerTag,
     iconSVG,
     minimumHeading = 2,
-    tag: Container = 'section',
+    tag: Container = 'div',
     contentTag: ContentContainer = 'section',
     contentAttributes,
     contentContainerAttributes,
@@ -215,6 +221,12 @@ const includeBackdrop =
     id={id}
     class:list={makeClassList(classMaker(), classList)}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
+    data-toggle-container-default={typeof dataToggleContainerDefault !==
+    'undefined'
+        ? dataToggleContainerDefault
+        : defaultOpen
+          ? 'open'
+          : undefined}
     data-toggle-container-type={containerTypes.join(' ')}
 >
     <HeaderContainer
