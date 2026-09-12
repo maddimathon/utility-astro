@@ -3303,6 +3303,7 @@ body > :where(main) > :where(aside) {
 [data-toggle-control-backdrop] {
     display: none !important;
     position: fixed;
+    opacity: 0;
 }
 [data-toggle-control-backdrop],
 [data-toggle-control-backdrop]:hover,
@@ -3312,28 +3313,24 @@ body > :where(main) > :where(aside) {
     background: none !important;
     border: none !important;
     color: inherit;
-    opacity: 0;
 }
 
 :where(.js__no-focusVisible) [data-toggle-control-backdrop]:focus {
     background: none !important;
     border: none !important;
     color: inherit;
-    opacity: 0;
 }
 
 [data-toggle-control-backdrop]:focus-visible {
     background: none !important;
     border: none !important;
     color: inherit;
-    opacity: 0;
 }
 
 [data-toggle-control-backdrop]:focus-within {
     background: none !important;
     border: none !important;
     color: inherit;
-    opacity: 0;
 }
 
 [data-toggle-control-backdrop]:has(
@@ -3342,7 +3339,6 @@ body > :where(main) > :where(aside) {
     background: none !important;
     border: none !important;
     color: inherit;
-    opacity: 0;
 }
 
 [data-toggle-content] > .container {
@@ -3399,10 +3395,8 @@ body > :where(main) > :where(aside) {
         z-index: 1;
     }
     :where(.js) [data-toggle-control][data-toggle-control-backdrop] {
-        display: block !important;
-        display: var(--display, block) !important;
         --display: block;
-        display: var(--display, block);
+        display: none !important;
         position: fixed !important;
         align-self: auto;
         justify-self: auto;
@@ -3433,12 +3427,18 @@ body > :where(main) > :where(aside) {
     }
     :where(.js) [data-toggle-control][data-toggle-control-backdrop]::before {
         background: Canvas;
-        background: var(--sys-clr-background, Canvas);
+        background: var(
+            --backdrop-background-before,
+            var(--sys-clr-background, Canvas)
+        );
         opacity: 0.625;
     }
     :where(.js) [data-toggle-control][data-toggle-control-backdrop]::after {
         background: LinkText;
-        background: var(--sys-clr-link, LinkText);
+        background: var(
+            --backdrop-background-after,
+            var(--sys-clr-link, LinkText)
+        );
         opacity: 0.1875;
     }
     :where(.js) [data-toggle-control] .icon svg #a,
@@ -3488,11 +3488,6 @@ body > :where(main) > :where(aside) {
     }
     :where(.js)
         [data-toggle-container="closed"]
-        [data-toggle-control][data-toggle-control-backdrop] {
-        display: none;
-    }
-    :where(.js)
-        [data-toggle-container="closed"]
         > [data-toggle-content]
         > .container {
         display: none;
@@ -3503,7 +3498,29 @@ body > :where(main) > :where(aside) {
         [data-toggle-control][data-toggle-control-backdrop],
     :where(.js)
         [data-toggle-container="closed"]
+        [data-toggle-control][data-toggle-control-backdrop],
+    :where(.js)
+        [data-toggle-container="closing"]
         [data-toggle-control][data-toggle-control-backdrop] {
+        opacity: 0;
+    }
+    :where(.js) [data-toggle-container="opening"] > [data-toggle-content],
+    :where(.js) [data-toggle-container="closed"] > [data-toggle-content],
+    :where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
+        grid-template-rows: 0fr;
+    }
+    :where(.js)
+        [data-toggle-container="opening"]
+        > [data-toggle-content]
+        > .container,
+    :where(.js)
+        [data-toggle-container="closed"]
+        > [data-toggle-content]
+        > .container,
+    :where(.js)
+        [data-toggle-container="closing"]
+        > [data-toggle-content]
+        > .container {
         opacity: 0;
     }
     :where(.js)
@@ -3515,8 +3532,8 @@ body > :where(main) > :where(aside) {
     :where(.js)
         [data-toggle-container="closing"]
         [data-toggle-control][data-toggle-control-backdrop] {
-        display: block;
-        display: var(--display, block);
+        display: block !important;
+        display: var(--display, block) !important;
         bottom: 0;
     }
     :where(.js)
@@ -3575,20 +3592,6 @@ body > :where(main) > :where(aside) {
         > svg
         #b {
         transform: rotate(540deg);
-    }
-    :where(.js)
-        [data-toggle-container="closing"]
-        [data-toggle-control][data-toggle-control-backdrop] {
-        opacity: 0;
-    }
-    :where(.js) [data-toggle-container="closing"] > [data-toggle-content] {
-        grid-template-rows: 0fr;
-    }
-    :where(.js)
-        [data-toggle-container="closing"]
-        > [data-toggle-content]
-        > .container {
-        opacity: 0;
     }
 }
 

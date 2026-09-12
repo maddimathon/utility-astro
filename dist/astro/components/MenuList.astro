@@ -14,6 +14,7 @@ import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
 import { absoluteInternalURL, makeClassList } from '../functions.js';
 
 /* import - values */
+import { SUBMENU_HAS_WRAPPER } from 'astro:env/client';
 
 /* import - components */
 
@@ -65,6 +66,11 @@ export type MenuItem = BaseMenuItem & {
     child?: MenuItem[] | undefined;
 
     /**
+     * Aria label for the submenu.
+     */
+    childLabel?: string | false | undefined;
+
+    /**
      * Whether this item should be marked as the current page.
      */
     current?: boolean | undefined;
@@ -81,6 +87,16 @@ export type MenuItem = BaseMenuItem & {
      */
     class?: ClassList | undefined;
 }
+
+/**
+ * @since 0.1.0-beta.0.draft
+ */
+export type SubmenuListOpts = {
+    /**
+     * Classes for the submenu(s).
+     */
+    classList: ClassList;
+};
 
 /**
  * Input props for the MenuList component.
@@ -103,12 +119,16 @@ export interface MenuListProps {
     separator?: string | null;
 
     /** 
-     * If the current menu is a submenu. Should probably only be used by the
-     * component itself.
+     * Options for submenus, if any.
      * 
      * @internal
      */
-    submenu?: boolean;
+    submenu?: Partial<SubmenuListOpts>;
+
+        /**
+         * @since 0.1.0-beta.0.draft
+         */
+        submenuWrapper?:boolean;
 
     /**
      * Used to check for current page when its value isn't set.
@@ -128,10 +148,16 @@ const {
     
     class: classList = [],
     separator = null,
-    submenu = false,
+    submenu: inputSubmenu = {},
+    submenuWrapper = SUBMENU_HAS_WRAPPER,
     urlMaker: inputUrlMaker = absoluteInternalURL,
     ...attributes
 }: Props = Astro.props.frontmatter ?? Astro.props;
+
+const submenu = {
+    ...inputSubmenu,
+    classList: inputSubmenu.classList ?? 'nav__submenu',
+};
 
 
 /* FUNCTIONS ===================================== */
@@ -144,7 +170,9 @@ export type MenuItemLabel = {
         text: string;
     };
 
-export type UnlabelledMenuItem = MenuItemLabel & Omit<Classify<MenuItem>, 'ariaLabel' | 'href' | 'label' | 'labelHTML'>;
+export type UnlabelledMenuItem = MenuItemLabel & Omit<Classify<MenuItem>, 'ariaLabel' | 'href' | 'label' | 'labelHTML'> & {
+    childLabel: HTMLAttributes<'ul'>['aria-label'];
+};
 
 export type ParsedMenuItem_NoHref = UnlabelledMenuItem & {
     href: false;
@@ -176,6 +204,21 @@ export function parseItemAttributes(
     if (href?.match(/^#/g) === null && typeof item.current === 'undefined') {
         item.current = urlMaker(currentURL, href) === urlMaker(currentURL, currentURL.pathname)
     }
+
+    let childLabel: UnlabelledMenuItem['childLabel'] = undefined;
+
+    if ( item.child?.length && item.childLabel !== false ) {
+        childLabel = item.childLabel;
+        
+        if (typeof childLabel === 'undefined') {
+
+            const __label = item.href
+                ? ( item.ariaLabel ? item.ariaLabel : ( labels.text ?? '' ) )
+                : '';
+
+            childLabel = __label + (__label ? ' ' : '') + 'sub-menu';
+        }
+    }
     
     // returns 
     if ( typeof href === 'undefined'  ) {
@@ -187,6 +230,7 @@ export function parseItemAttributes(
             external: item.external,
             child: item.child,
             class: item.class,
+            childLabel,
         } as const satisfies ParsedMenuItem_NoHref;
     }
     
@@ -198,6 +242,8 @@ export function parseItemAttributes(
         child: item.child,
         
         class: item.class,
+        childLabel,
+
         target: ( item.href && item.external ) ? '_blank' : undefined,
         'aria-current': ( item.href && item.current ) ? 'page' : undefined,
         'aria-label': item.ariaLabel,
@@ -214,7 +260,7 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
 { menu && (
     <ul 
         {...attributes} 
-        class:list={[ {submenu}, classList ]}
+        class:list={classList}
     >
         { parsedMenu.map( ( item, index ) =>  ( item.href || item.child ) && (
             <li>
@@ -229,9 +275,25 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
                 ) : item.child?.length && (
                     <span
                         class:list={makeClassList('nav__menu-item', item.class)}
+                        tabindex={item.child?.length ? -1 : undefined}
                     >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</span>
                 ) }
-                { item.child?.length && <Astro.self menu={ item.child } submenu={ true } /> }
+                { item.child?.length && ( submenuWrapper ? (
+                    <div class:list={ submenu.classList }>
+                        <Astro.self
+                            aria-label={ item.childLabel }
+                            menu={ item.child }
+                            submenu={ submenu }
+                        />
+                    </div>
+                ) : (
+                    <Astro.self
+                        aria-label={ item.childLabel }
+                        class:list={ submenu.classList }
+                        menu={ item.child }
+                        submenu={ submenu }
+                    />
+                ) ) }
             </li>
             <Fragment set:html={ separator && index < menu.length && separator } />
         ) )  }

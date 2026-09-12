@@ -94,6 +94,13 @@ export function astroConfig<
                 default: env.toggle?.logResults ?? false,
                 optional: true,
             } ),
+
+            SUBMENU_HAS_WRAPPER: envField.boolean( {
+                access: 'public',
+                context: 'client',
+                default: env.submenuWrapper ?? false,
+                optional: true,
+            } ),
         }
     };
 
@@ -132,6 +139,8 @@ export namespace astroConfig {
             /** @default import.meta.env.DEV */
             slotComments: boolean;
         };
+
+        submenuWrapper: boolean;
 
         toggle: {
             /** @default false */

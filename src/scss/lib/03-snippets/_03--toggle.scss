@@ -182,12 +182,28 @@ $_toggle_svg_sel_moving: '#b';
 ///
 @mixin snippet-support-toggle-block-base(
     $includeBackdropStyles: true,
+    $backdrop_background_before: if(
+            $includeBackdropStyles,
+            do-var(backdrop-background-before, var-sys-colour(background)),
+            false
+        ),
+    $backdrop_background_after: if(
+            $includeBackdropStyles,
+            do-var(backdrop-background-after, var-sys-colour(link)),
+            false
+        ),
+    $backdrop_opacity_before: if($includeBackdropStyles, 0.625, false),
+    $backdrop_opacity_after: if($includeBackdropStyles, 0.1875, false),
+    //
     $extend_toggleContainerGridBasics: (),
     $extend_toggleContainerSubgrid: (),
+    //
     $gridCols_toggle: $_toggle_gridCols,
     $gridGap: $_toggle_gridGap,
+    //
     $svg_sel_moving: $_toggle_svg_sel_moving,
     $svg_sel_static: $_toggle_svg_sel_static,
+    //
     $args...
 ) {
     $extend_toggleContainerGridBasics: list.join(
@@ -273,14 +289,14 @@ $_toggle_svg_sel_moving: '#b';
         display: none !important;
         position: fixed;
 
+        opacity: 0;
+
         @content (toggle-base--control-backdrop);
 
         @include _toggle-interactive-all-states--js($self: true, $warnOnSelf: false) {
             background: none !important;
             border: none !important;
             color: inherit;
-
-            opacity: 0;
 
             @content (toggle-base--control-backdrop--self-active-hover-focus);
         }
@@ -366,8 +382,8 @@ $_toggle_svg_sel_moving: '#b';
             @content (js--toggle-base--control);
 
             &[data-toggle-control-backdrop] {
-                display: do-var(display, block) !important;
-                @include prop-display(block);
+                @include prop-display(block, $setProp: false);
+                display: none !important;
                 position: fixed !important;
                 align-self: auto;
                 justify-self: auto;
@@ -406,35 +422,47 @@ $_toggle_svg_sel_moving: '#b';
                 }
 
                 &::before {
-                    @if $includeBackdropStyles {
-                        background: var-sys-colour(background);
-                        opacity: 0.625;
+                    @if $backdrop_background_before != false {
+                        background: $backdrop_background_before;
+                    }
+                    @if $backdrop_opacity_before != false {
+                        opacity: $backdrop_opacity_before;
                     }
 
                     @content (js--toggle-base--control-backdrop--before);
-
-                    @include _toggle-interactive-states--js($hover: true, $focus: true) {
-                        @content (js--toggle-base--control-backdrop--before--hover-focus-or-within);
-                    }
-
-                    @include _toggle-interactive-states--js($active: true) {
-                        @content (js--toggle-base--control-backdrop--before--active);
-                    }
                 }
 
                 &::after {
-                    @if $includeBackdropStyles {
-                        background: var-sys-colour(link);
-                        opacity: 0.1875;
+                    @if $backdrop_background_after != false {
+                        background: $backdrop_background_after;
+                    }
+                    @if $backdrop_opacity_after != false {
+                        opacity: $backdrop_opacity_after;
                     }
 
                     @content (js--toggle-base--control-backdrop--after);
+                }
 
-                    @include _toggle-interactive-states--js($hover: true, $focus: true) {
-                        @content (js--toggle-base--control-backdrop--after--hover-focus-or-within);
+                @include _toggle-interactive-states--js($hover: true, $focus: true) {
+                    @content (js--toggle-base--control-backdrop--hover-focus-or-within);
+
+                    &::before {
+                        @content (js--toggle-base--control-backdrop--before--hover-focus-or-within);
                     }
 
-                    @include _toggle-interactive-states--js($active: true) {
+                    &::after {
+                        @content (js--toggle-base--control-backdrop--after--hover-focus-or-within);
+                    }
+                }
+
+                @include _toggle-interactive-states--js($active: true) {
+                    @content (js--toggle-base--control-backdrop--active);
+
+                    &::before {
+                        @content (js--toggle-base--control-backdrop--before--active);
+                    }
+
+                    &::after {
                         @content (js--toggle-base--control-backdrop--after--active);
                     }
                 }
@@ -558,8 +586,6 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--closed--control);
 
                 &[data-toggle-control-backdrop] {
-                    display: none;
-
                     @content (js--toggle-base--container--closed--control-background);
                 }
             }
@@ -584,9 +610,38 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--opening-or-closed--control);
 
                 &[data-toggle-control-backdrop] {
+                    @content (js--toggle-base--container--opening-or-closed--control-backdrop);
+                }
+            }
+        }
+
+        ///
+        /// OPENING & CLOSING
+        ///
+        [data-toggle-container='opening'],
+        [data-toggle-container='closed'],
+        [data-toggle-container='closing'] {
+            @content (js--toggle-base--container--opening-or-closing);
+
+            [data-toggle-control] {
+                @content (js--toggle-base--container--opening-or-closing--control);
+
+                &[data-toggle-control-backdrop] {
                     opacity: 0;
 
-                    @content (js--toggle-base--container--opening-or-closed--control-backdrop);
+                    @content (js--toggle-base--container--opening-or-closing--control-backdrop);
+                }
+            }
+
+            > [data-toggle-content] {
+                grid-template-rows: 0fr;
+
+                @content (js--toggle-base--container--opening-or-closing--content);
+
+                > .container {
+                    opacity: 0;
+
+                    @content (js--toggle-base--container--opening-or-closing--content--container);
                 }
             }
         }
@@ -603,7 +658,7 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--open-or-closing--control);
 
                 &[data-toggle-control-backdrop] {
-                    display: do-var(display, block);
+                    display: do-var(display, block) !important;
                     bottom: 0;
 
                     @content (js--toggle-base--container--open-or-closing--control-backdrop);
@@ -682,20 +737,14 @@ $_toggle_svg_sel_moving: '#b';
                 }
 
                 &[data-toggle-control-backdrop] {
-                    opacity: 0;
-
                     @content (js--toggle-base--container--closing--control-background);
                 }
             }
 
             > [data-toggle-content] {
-                grid-template-rows: 0fr;
-
                 @content (js--toggle-base--container--closing--content);
 
                 > .container {
-                    opacity: 0;
-
                     @content (js--toggle-base--container--closing--content--container);
                 }
             }
@@ -715,6 +764,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
     $includeBase: true,
     $includeMarginBlock: true,
     $includeStyles: true,
+    $includeBackdropStyles: $includeStyles,
     //
     $svg_sel_moving: $_toggle_svg_sel_moving,
     $selector_container: '.toggle-block',
@@ -751,6 +801,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
                 $mixin_support_base,
                 $extend_toggleContainerSubgrid: $_extend_toggleContainerSubgrid,
                 $gridCols_toggle: $gridCols_toggle,
+                $includeBackdropStyles: $includeBackdropStyles,
                 $svg_sel_moving: $svg_sel_moving,
                 $args...
             )
