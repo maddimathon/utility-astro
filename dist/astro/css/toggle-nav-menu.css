@@ -175,23 +175,12 @@
         display: grid;
         display: var(--display, grid);
         position: relative;
-        --grid-template-columns--toggle: [icon] minmax(max-content, auto)
-            [content] 1fr;
-        grid-template-columns: [icon] minmax(max-content, auto) [content] 1fr;
-        grid-template-columns: var(
-            --grid-template-columns--toggle,
-            [icon] minmax(max-content, auto) [content] 1fr
-        );
         grid-auto-rows: auto;
         grid-auto-flow: column;
         justify-content: stretch;
         justify-items: stretch;
         align-content: start;
         align-items: start;
-        grid-gap: 0 0.5rem;
-        grid-gap: 0 var(--mrg-firm-200, 0.5rem);
-        gap: 0 0.5rem;
-        gap: 0 var(--mrg-firm-200, 0.5rem);
     }
     :where(.js) [data-toggle-control],
     :where(.js) [data-toggle-title],

@@ -6,11 +6,11 @@
  */
 
 /* import - types */
-import type { HTMLAttributes, HTMLTag } from 'astro/types';
+import type { HTMLTag } from 'astro/types';
 import type { ClassList, ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
-import { makeClassList } from '../functions.js';
+import { flattenClassList, makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -129,16 +129,24 @@ export interface ToggleProps {
      * @since ___PKG_VERSION___
      */
     titleAttributes?: Omit<
-        HTMLAttributes<'p'>,
-        'aria-label' | 'aria-labelledby' | 'class' | 'class:list' | 'id'
+        ElementProps<{}, 'p'>,
+        'aria-label' | 'aria-labelledby' | 'class:list' | 'id'
     >;
 
     /**
      * @since ___PKG_VERSION___
      */
     contentAttributes?: Omit<
-        HTMLAttributes<'div'>,
-        'aria-label' | 'aria-labelledby' | 'class' | 'class:list' | 'id'
+        ElementProps<{}, 'div'>,
+        'aria-label' | 'aria-labelledby' | 'class:list' | 'id'
+    >;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    contentContainerAttributes?: Omit<
+        ElementProps<{}, 'div'>,
+        'aria-label' | 'aria-labelledby' | 'class:list' | 'id'
     >;
 
     /**
@@ -175,6 +183,7 @@ const {
     tag: Container = 'section',
     contentTag: ContentContainer = 'section',
     contentAttributes,
+    contentContainerAttributes,
     titleAttributes,
     type,
     ...attributes
@@ -210,7 +219,9 @@ const includeBackdrop =
 >
     <HeaderContainer
         {...titleAttributes}
-        class={classMaker('__title')}
+        class={flattenClassList(
+            makeClassList(classMaker('__title'), titleAttributes?.class),
+        )}
         data-toggle-title={id}
         id={titleID}
     >
@@ -234,11 +245,20 @@ const includeBackdrop =
     <ContentContainer
         {...contentAttributes}
         aria-labelledby={titleID}
-        class={classMaker('__content')}
+        class={flattenClassList(
+            makeClassList(classMaker('__content'), contentAttributes?.class),
+        )}
         data-toggle-content={id}
         id={contentID}
     >
-        <div class='container'><slot /></div>
+        <div
+            {...contentContainerAttributes}
+            class={flattenClassList(
+                makeClassList('container', contentContainerAttributes?.class),
+            )}
+        >
+            <slot />
+        </div>
     </ContentContainer>
 
     {

@@ -26,7 +26,7 @@ function flattenClassList_single(
         return ' ' + classListItem;
     }
 
-    return Object.entries( classListItem ).map(
+    return ' ' + Object.entries( classListItem ).map(
         ( [ key, value ] ) => value ? key : ''
     ).filter( item => !!item ).join( ' ' );
 }

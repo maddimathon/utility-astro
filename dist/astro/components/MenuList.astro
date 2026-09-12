@@ -273,10 +273,10 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
                         aria-label={ item['aria-label'] }
                     >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a> 
                 ) : item.child?.length && (
-                    <span
+                    <a
                         class:list={makeClassList('nav__menu-item', item.class)}
                         tabindex={item.child?.length ? -1 : undefined}
-                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</span>
+                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a>
                 ) }
                 { item.child?.length && ( submenuWrapper ? (
                     <div class:list={ submenu.classList }>

@@ -5,8 +5,6 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # TOGGLE BLOCKS ==================================== */
-.toggle-block .toggle-block__title,
-.toggle-block,
 [data-toggle-content] > .container,
 [data-toggle-content] {
     --display: flex;
@@ -22,25 +20,16 @@
 }
 
 @supports (display: contents) {
-    .toggle-block .toggle-block__title,
-    .toggle-block,
     [data-toggle-content] > .container,
     [data-toggle-content] {
         --display: contents;
         display: contents;
         display: var(--display, contents);
     }
-    :where(
-            .toggle-block .toggle-block__title,
-            .toggle-block,
-            [data-toggle-content] > .container,
-            [data-toggle-content]
-        )
+    :where([data-toggle-content] > .container, [data-toggle-content])
         > :where(*) {
         width: auto;
     }
-    .toggle-block .toggle-block__title > :where(*),
-    .toggle-block > :where(*),
     [data-toggle-content] > .container > :where(*),
     [data-toggle-content] > :where(*) {
         grid-column: content-start/content-end;
@@ -181,43 +170,22 @@
     :where(.js) [data-toggle-control],
     :where(.js) [data-toggle-title],
     :where(.js) [data-toggle-title-heading],
-    :where(.js) [data-toggle-content],
-    :where(.js) .toggle-block .toggle-block__title,
-    :where(.js)
-        .toggle-block
-        .toggle-block__title
-        > .toggle-block__title__heading {
+    :where(.js) [data-toggle-content] {
         --display: grid;
         display: grid;
         display: var(--display, grid);
         position: relative;
-        --grid-template-columns--toggle: [icon] minmax(max-content, auto)
-            [content] 1fr;
-        grid-template-columns: [icon] minmax(max-content, auto) [content] 1fr;
-        grid-template-columns: var(
-            --grid-template-columns--toggle,
-            [icon] minmax(max-content, auto) [content] 1fr
-        );
         grid-auto-rows: auto;
         grid-auto-flow: column;
         justify-content: stretch;
         justify-items: stretch;
         align-content: start;
         align-items: start;
-        grid-gap: 0 0.5rem;
-        grid-gap: 0 var(--mrg-firm-200, 0.5rem);
-        gap: 0 0.5rem;
-        gap: 0 var(--mrg-firm-200, 0.5rem);
     }
     :where(.js) [data-toggle-control],
     :where(.js) [data-toggle-title],
     :where(.js) [data-toggle-title-heading],
-    :where(.js) [data-toggle-content],
-    :where(.js) .toggle-block .toggle-block__title,
-    :where(.js)
-        .toggle-block
-        .toggle-block__title
-        > .toggle-block__title__heading {
+    :where(.js) [data-toggle-content] {
         grid-template-columns: subgrid;
         grid-column: 1/-1;
     }
@@ -406,95 +374,5 @@
         > svg
         #b {
         transform: rotate(540deg);
-    }
-}
-
-/* Toggle Blocks ==================================== */
-/* Javascript Enabled ==================================== */
-@media screen {
-    :where(.js) .toggle-block {
-        margin-top: 1.25rem;
-        margin-bottom: 0.3125rem;
-        margin-top: var(--mrg-firm-400, 1.25rem);
-        margin-bottom: var(--mrg-half-400, 0.3125rem);
-        margin-left: 0;
-        margin-right: 0;
-    }
-    :where(.js) .toggle-block:has(.toggle-block__title > .page-title) {
-        margin-top: 0;
-    }
-    :where(.js)
-        .toggle-block:has(
-            .toggle-block__title > .h1,
-            .toggle-block__title > h1
-        ),
-    :where(.js)
-        .toggle-block:has(
-            .toggle-block__title > .h2,
-            .toggle-block__title > h2
-        ),
-    :where(.js)
-        .toggle-block:has(
-            .toggle-block__title > .h3,
-            .toggle-block__title > h3
-        ) {
-        margin-top: 3.5rem;
-        margin-top: var(--mrg-soft-800, 3.5rem);
-    }
-    :where(.js)
-        .toggle-block:has(
-            .toggle-block__title > .h4,
-            .toggle-block__title > h4,
-            .toggle-block__title > .h5,
-            .toggle-block__title > h5,
-            .toggle-block__title > .h6,
-            .toggle-block__title > h6,
-            .toggle-block__title > .h7,
-            .toggle-block__title > .h8
-        ) {
-        margin-top: 1.875rem;
-        margin-top: var(--mrg-soft-600, 1.875rem);
-    }
-    :where(.js)
-        .toggle-block
-        .toggle-block__control
-        .toggle-block__control__icon {
-        grid-column: icon;
-    }
-    :where(.js) .toggle-block .toggle-block__control__inner {
-        grid-column: content;
-    }
-    :where(.js) .toggle-block .toggle-block__title,
-    :where(.js)
-        .toggle-block
-        .toggle-block__title
-        > .toggle-block__title__heading {
-        justify-content: center;
-        justify-items: stretch;
-        align-content: stretch;
-        align-items: center;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    :where(.js) .toggle-block .toggle-block__content > .container {
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-left: 0.8125rem;
-        padding-right: 0.8125rem;
-        padding-left: var(--mrg-firm-300, 0.8125rem);
-        padding-right: var(--mrg-firm-300, 0.8125rem);
-    }
-}
-
-/* Opening & Closing ==================================== */
-@media screen {
-    :where(.js)
-        .toggle-block[data-toggle-container="open"]
-        > .toggle-block__content
-        > .container {
-        padding-top: 0.625rem;
-        padding-bottom: 0.625rem;
-        padding-top: var(--mrg-soft-300, 0.625rem);
-        padding-bottom: var(--mrg-soft-300, 0.625rem);
     }
 }

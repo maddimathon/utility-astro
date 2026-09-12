@@ -137,18 +137,25 @@ $_toggle_svg_sel_moving: '#b';
 /// @since ___PKG_VERSION___
 ///
 @mixin _toggle-block--js-pseudo-classes(
+    $includeStyles,
     $extend_toggleContainerGridBasics: config.$selector_null,
     $extend_toggleContainerSubgrid: config.$selector_null,
-    $gridCols_toggle: $_toggle_gridCols,
+    $gridCols_toggle: null,
     $gridGap: $_toggle_gridGap
 ) {
+    @if $gridCols_toggle == null {
+        $gridCols_toggle: if($includeStyles, $_toggle_gridCols, false);
+    }
+
     #{$extend_toggleContainerGridBasics},
     #{$extend_toggleContainerSubgrid} {
         @include prop-display(grid);
         position: relative;
 
-        @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
-        grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
+        @if $gridCols_toggle != false {
+            @include cx-prop(grid-template-columns--toggle, $gridCols_toggle);
+            grid-template-columns: do-var(grid-template-columns--toggle, $gridCols_toggle);
+        }
 
         grid-auto-rows: auto;
         grid-auto-flow: column;
@@ -159,7 +166,9 @@ $_toggle_svg_sel_moving: '#b';
             )
         );
 
-        gap: $gridGap;
+        @if $includeStyles {
+            gap: $gridGap;
+        }
 
         @content (js--container-grid);
     }
@@ -181,7 +190,8 @@ $_toggle_svg_sel_moving: '#b';
 /// @since ___PKG_VERSION___
 ///
 @mixin snippet-support-toggle-block-base(
-    $includeBackdropStyles: true,
+    $includeStyles: true,
+    $includeBackdropStyles: $includeStyles,
     $backdrop_background_before: if(
             $includeBackdropStyles,
             do-var(backdrop-background-before, var-sys-colour(background)),
@@ -198,7 +208,7 @@ $_toggle_svg_sel_moving: '#b';
     $extend_toggleContainerGridBasics: (),
     $extend_toggleContainerSubgrid: (),
     //
-    $gridCols_toggle: $_toggle_gridCols,
+    $gridCols_toggle: null,
     $gridGap: $_toggle_gridGap,
     //
     $svg_sel_moving: $_toggle_svg_sel_moving,
@@ -356,6 +366,7 @@ $_toggle_svg_sel_moving: '#b';
 
     @include feature-check.js {
         @include _toggle-block--js-pseudo-classes(
+                $includeStyles: $includeStyles,
                 $extend_toggleContainerGridBasics: $extend_toggleContainerGridBasics,
                 $extend_toggleContainerSubgrid: $extend_toggleContainerSubgrid,
                 $gridCols_toggle: $gridCols_toggle,
@@ -759,7 +770,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
     $content_container_paddingInline: var-mrg-firm('300'),
     $control_paddingBlockEnd: var-mrg-soft('200'),
     //
-    $gridCols_toggle: $_toggle_gridCols,
+    $gridCols_toggle: null,
     //
     $includeBase: true,
     $includeMarginBlock: true,
@@ -918,6 +929,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
     @include feature-check.js {
         @if not $includeBase {
             @include _toggle-block--js-pseudo-classes(
+                    $includeStyles: $includeStyles,
                     $gridCols_toggle: $gridCols_toggle,
                     $extend_toggleContainerSubgrid: $_extend_toggleContainerSubgrid
                 )
