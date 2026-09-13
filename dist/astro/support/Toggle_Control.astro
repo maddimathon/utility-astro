@@ -100,6 +100,7 @@ const classMaker = classBase
     type='button'
 >
     {icon && <Fragment set:html={iconSVG ?? DEFAULT_TOGGLE_ICON} />}
+    <slot name='before' />
     {
         (!attrs['aria-label'] || buttonHTML) && (
             <span class={classMaker('__control__inner')}>
@@ -115,6 +116,7 @@ const classMaker = classBase
             </span>
         )
     }
+    <slot name='after' />
 </button>
 
 <style lang='scss'>

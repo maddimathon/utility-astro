@@ -80,7 +80,7 @@ $_toggle_svg_sel_moving: '#b';
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin _toggle-interactive-all-states($args...) {
+@mixin snippet-toggle-block---interactive-all-states($args...) {
     @include _toggle-interactive-states($hover: true, $focus: true, $active: true, $args...) {
         @content;
     }
@@ -89,7 +89,7 @@ $_toggle_svg_sel_moving: '#b';
 ///
 /// @since ___PKG_VERSION___
 ///
-@mixin _toggle-interactive-all-states--js($args...) {
+@mixin snippet-toggle-block---interactive-all-states--js($args...) {
     @include _toggle-interactive-states--js($hover: true, $focus: true, $active: true, $args...) {
         @content;
     }
@@ -252,7 +252,7 @@ $_toggle_svg_sel_moving: '#b';
     [data-toggle-control] {
         @content (toggle-base--control);
 
-        @include _toggle-interactive-all-states($self: true, $warnOnSelf: false) {
+        @include snippet-toggle-block---interactive-all-states($self: true, $warnOnSelf: false) {
             @include config.selector-button-disabled {
                 box-shadow: none;
                 border: none;
@@ -303,7 +303,10 @@ $_toggle_svg_sel_moving: '#b';
 
         @content (toggle-base--control-backdrop);
 
-        @include _toggle-interactive-all-states--js($self: true, $warnOnSelf: false) {
+        @include snippet-toggle-block---interactive-all-states--js(
+            $self: true,
+            $warnOnSelf: false
+        ) {
             background: none !important;
             border: none !important;
             color: inherit;
@@ -700,10 +703,12 @@ $_toggle_svg_sel_moving: '#b';
                 .toggle-block__control__icon {
                     @content (js--toggle-base--container--open--control--icon);
 
-                    > svg #{$svg_sel_moving} {
-                        transform: rotate(270deg);
+                    > svg {
+                        #{$svg_sel_moving} {
+                            transform: rotate(270deg);
 
-                        @content (js--toggle-base--container--open--control--icon--moving);
+                            @content (js--toggle-base--container--open--control--icon--moving);
+                        }
                     }
                 }
 
@@ -740,10 +745,12 @@ $_toggle_svg_sel_moving: '#b';
                 .toggle-block__control__icon {
                     @content (js--toggle-base--container--closing--control--icon);
 
-                    > svg #{$svg_sel_moving} {
-                        transform: rotate(540deg);
+                    > svg {
+                        #{$svg_sel_moving} {
+                            transform: rotate(540deg);
 
-                        @content (js--toggle-base--container--closing--control--icon--moving);
+                            @content (js--toggle-base--container--closing--control--icon--moving);
+                        }
                     }
                 }
 
@@ -860,7 +867,10 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
             @content (toggle-control);
 
-            @include _toggle-interactive-all-states($self: true, $warnOnSelf: false) {
+            @include snippet-toggle-block---interactive-all-states(
+                $self: true,
+                $warnOnSelf: false
+            ) {
                 @if $includeStyles {
                     box-shadow: none;
                     border: none;
