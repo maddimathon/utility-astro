@@ -88,23 +88,14 @@ export class Document extends DocumentStage {
      * @protected
      */
     async scss() {
-
-        await this.runCustomScssDirSubStage(
+        await this.customScssSubstage.dir(
             '',
             'src/docs/css',
             {
                 postCSS: false,
+                prettier: true,
                 srcDir: 'src/docs/scss',
             }
-        );
-
-        await this.atry(
-            this.fs.prettier,
-            2,
-            [ [
-                'src/docs/css/*.css',
-                'src/docs/css/**/*.css',
-            ], 'css' ]
         );
     }
 

@@ -725,6 +725,9 @@ var ElementToggle = class _ElementToggle {
       this.trapFocus();
       this.content.focus();
     }
+    if (scrollTo && (this.isMenu || this.isNav)) {
+      this.scrollTo(button);
+    }
     if (fireEvents) {
       _ElementToggle.createCustomEvents();
       this.container.dispatchEvent(_ElementToggle.openEvent);

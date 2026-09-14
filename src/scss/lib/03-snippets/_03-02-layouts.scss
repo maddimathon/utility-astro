@@ -282,8 +282,7 @@ $_flex_container_alignment_row: (
 ///
 /// Set an element to full-width as a child.
 ///
-/// Generally you'll want to use
-/// snippet-body-grid--display-contents or extend
+/// Generally you'll want to use snippet-body-grid--display-contents or extend
 /// %display-contents instead.
 ///
 /// @since ___PKG_VERSION___
@@ -378,7 +377,7 @@ $_flex_container_alignment_row: (
                     '> :where( #{$selector_main} ) > :where( #{$selector_main_subgrid} )'
                 )
             ),
-            '> :is( #{$selector_subgrid_nester} )'
+            selector.nest('>', $selector_subgrid_nester)
         ),
         $separator: comma
     );
@@ -415,7 +414,8 @@ $_flex_container_alignment_row: (
     $selector_main: '%main-content',
     $selector_body_subgrid: '%main-content',
     $selector_main_subgrid: '%main-subgrid, %main-content__article',
-    $selector_subgrid_nester: ':is( %full-width-subgrid-block )',
+    $selector_subgrid_nester:
+        ':is( %full-width-subgrid-block, %_display-contents, %display-contents )',
     $args...
 ) {
     @include snippet-body-grid--selectors--body-subgrid(

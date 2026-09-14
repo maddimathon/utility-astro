@@ -1,0 +1,8 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@use '../lib' as *;
+
+@include template-docblock-utility-astro($path: false, $version: false, $resistMinimize: true);

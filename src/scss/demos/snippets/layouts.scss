@@ -1,0 +1,133 @@
+///
+/// @package @maddimathon/utility-astro@___CURRENT_VERSION___
+/// @since ___PKG_VERSION___
+///
+
+@forward '../config' with (
+    $template_name: 'Snippets - Layouts' !default
+);
+@forward '../../tokens';
+@forward '../header';
+
+@use '../config';
+
+@use 'pkg:@maddimathon/utility-sass/demo';
+@use 'pkg:@maddimathon/utility-sass/meta';
+
+@use '../../lib' as *;
+
+@mixin _demo-function($fnName, $arglist: meta.arglist(), $fn: null, $args...) {
+    @if $fn == null {
+        $fn: meta.get-function($fnName);
+    }
+
+    @include demo.function($fnName, $fn, $arglist, $args...);
+}
+
+@mixin _demo-selector-function($fnName, $arglist: meta.arglist(), $fn: null, $args...) {
+    @if $fn == null {
+        $fn: meta.get-function($fnName);
+    }
+
+    @include demo.selector-function($fnName, $fn, $arglist, $args...);
+}
+
+@mixin _demo-mixin($mixinName, $arglist: meta.arglist(), $mixin: null, $args...) {
+    @if $mixin == null {
+        $mixin: meta.get-mixin($mixinName);
+    }
+
+    @include demo.mixin($mixinName, $mixin, $arglist, $args...);
+}
+
+/// # OUTPUT
+/// ======================================================================== ///
+
+// $_mx_MIXIN_NAME: meta.get-mixin(MIXIN-NAME);
+// @mixin _demo--MIXIN-NAME($arglist...) {
+//     @include demo.mixin(
+//         'MIXIN-NAME',
+//         $getMixin: $_mx_MIXIN_NAME,
+//         $args: $arglist,
+//         $wrapCallSignature: false
+//     );
+// }
+
+// @include meta.at(demo-section, MIXIN-NAME) {
+//     @include _demo--MIXIN-NAME;
+// }
+
+@include _demo-function(snippet-body-grid--default-columns);
+
+$_mx_body_grid__set_template_columns: meta.get-mixin(snippet-body-grid--set-template-columns);
+@mixin _demo--snippet-body-grid--set-template-columns($arglist...) {
+    @include _demo-mixin(
+        snippet-body-grid--set-template-columns,
+        $arglist: $arglist,
+        $mixin: $_mx_body_grid__set_template_columns,
+        $wrapCallSignature: false
+    );
+}
+
+@include meta.at(demo-section, snippet-body-grid--set-template-columns) {
+    @include _demo--snippet-body-grid--set-template-columns;
+}
+
+$_mx_body_grid__selectors__main_content: meta.get-mixin(snippet-body-grid--selectors--main-content);
+@mixin _demo--snippet-body-grid--selectors--main-content($arglist...) {
+    @at-root %body {
+        @include demo.mixin(
+            'snippet-body-grid--selectors--main-content',
+            $getMixin: $_mx_body_grid__selectors__main_content,
+            $args: $arglist,
+            $parentSelector_dump: true,
+            $wrapCallSignature: false
+        );
+    }
+}
+
+@include meta.at(demo-section, snippet-body-grid--selectors--main-content) {
+    @include _demo--snippet-body-grid--selectors--main-content;
+}
+
+$_mx_body_grid__selectors__body_subgrid: meta.get-mixin(snippet-body-grid--selectors--body-subgrid);
+@mixin _demo--snippet-body-grid--selectors--body-subgrid($arglist...) {
+    @at-root %body {
+        @include demo.mixin(
+            'snippet-body-grid--selectors--body-subgrid',
+            $getMixin: $_mx_body_grid__selectors__body_subgrid,
+            $args: $arglist,
+            $parentSelector_dump: true,
+            $wrapCallSignature: false
+        );
+    }
+}
+
+@include meta.at(demo-section, snippet-body-grid--selectors--body-subgrid) {
+    @include _demo--snippet-body-grid--selectors--body-subgrid;
+    @include _demo--snippet-body-grid--selectors--body-subgrid($subgridNesting: 2);
+}
+
+$_mx_body_grid__selectors__main_subgrid: meta.get-mixin(snippet-body-grid--selectors--main-subgrid);
+@mixin _demo--snippet-body-grid--selectors--main-subgrid($arglist...) {
+    @at-root %body {
+        @include demo.mixin(
+            'snippet-body-grid--selectors--main-subgrid',
+            $getMixin: $_mx_body_grid__selectors__main_subgrid,
+            $args: $arglist,
+            $parentSelector_dump: true,
+            $wrapCallSignature: false
+        );
+    }
+}
+
+@include meta.at(demo-section, snippet-body-grid--selectors--main-subgrid) {
+    @include _demo--snippet-body-grid--selectors--main-subgrid;
+    @include _demo--snippet-body-grid--selectors--main-subgrid($subgridNesting: 2);
+}
+
+/// # EXTENDING
+/// ======================================================================== ///
+
+@include snippet-body-grid--extend-selectors;
+@include extend-selectors;

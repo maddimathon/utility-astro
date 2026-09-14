@@ -1,0 +1,12 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@use '../lib' as *;
+
+@include template-docblock-utility-astro(
+    $path: false,
+    $version: false,
+    $resistMinimize: true
+);

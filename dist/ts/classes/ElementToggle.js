@@ -742,6 +742,9 @@ export class ElementToggle {
             this.trapFocus();
             this.content.focus();
         }
+        if (scrollTo && (this.isMenu || this.isNav)) {
+            this.scrollTo(button);
+        }
         if (fireEvents) {
             _a.createCustomEvents();
             this.container.dispatchEvent(_a.openEvent);

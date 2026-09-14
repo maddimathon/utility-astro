@@ -4,6 +4,7 @@
 ///
 
 @use 'pkg:@maddimathon/utility-sass/feature-check';
+@use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 
@@ -45,7 +46,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
     $selector_content: selector.append($selector_container, '__content'),
     $selector_control: selector.append($selector_container, '__control'),
     $selector_title: selector.append($selector_container, '__title'),
-    // $selector_title_heading: selector.append($selector_container, '__title__heading'),
+    $selector_title_heading: selector.append($selector_container, '__title__heading'),
     //
     $mixin_support_base: null,
     //
@@ -74,6 +75,13 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
     $selector_container__direct: selector.nest('>', $selector_container);
 
     $selector_content__direct: selector.nest('>', $selector_content);
+    $selector_title__direct: selector.nest('>', $selector_title);
+    $selector_title_heading__direct: selector.nest(
+        '>',
+        $selector_title,
+        '>',
+        $selector_title_heading
+    );
 
     #{config.$selector_body} {
         #{$selector_container__direct} {
@@ -85,7 +93,23 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
 
     @include feature-check.js {
         #{config.$selector_body} {
-            #{$selector_container__direct} {
+            $_selectors_subgrid: list.join(
+                list.join(
+                    selector.nest($selector_container__direct, $selector_title),
+                    selector.nest(
+                        $selector_container__direct,
+                        $selector_title,
+                        '>',
+                        $selector_title_heading
+                    ),
+                    $separator: comma
+                ),
+                selector.nest($selector_container__direct, $selector_content),
+                $separator: comma
+            );
+
+            #{$selector_container__direct},
+            #{$_selectors_subgrid} {
                 $_var_gridCols_page: do-var(grid-template-columns--page, $default_grid_page);
 
                 /* prettier-ignore */
@@ -95,6 +119,16 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                 grid-template-columns: $_var_gridCols_page;
                 grid-template-columns: subgrid;
 
+                gap: 0;
+
+                @content (js--base-grid);
+            }
+
+            #{$_selectors_subgrid} {
+                @content (js--base-subgrid);
+            }
+
+            #{$selector_container__direct} {
                 @include snippet-body-grid--grid-alignment($container_alignment);
 
                 grid-column: 1 / -1;

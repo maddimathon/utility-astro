@@ -1,0 +1,28 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0.draft
+///
+
+@forward '../template/default/config' with (
+    // $demo_parentSelector_dump: true !default,
+    $demo_wrapOutput: true !default,
+    $demo_wrapOutput_function: true !default,
+    $demo_wrapOutput_function_withName: true !default,
+
+    $internal_supressCredit: true,
+
+    $include_html: true !default,
+    $isTemplate: false !default,
+
+    $template_globals: true !default,
+    $template_tokens: true !default,
+    $template_utils: true !default,
+
+    $template_description:
+        'This stylesheet demonstrates the output of functions and mixins included in this library.'
+        !default,
+    $template_title_base: 'Demo' !default,
+
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
+);

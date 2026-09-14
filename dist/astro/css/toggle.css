@@ -223,11 +223,15 @@
         left: 0;
         right: 0;
     }
-    :where(.js) [data-toggle-control] .icon svg #a,
-    :where(.js) [data-toggle-control] .icon svg #b,
-    :where(.js) [data-toggle-control] .toggle-block__control__icon svg #a,
-    :where(.js) [data-toggle-control] .toggle-block__control__icon svg #b {
+    :where(.js) [data-toggle-control] .icon > svg #a,
+    :where(.js) [data-toggle-control] .icon > svg #b,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #a,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #b {
         transform-origin: center;
+    }
+    :where(.js) [data-toggle-control] .icon > svg #b,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #b {
+        transform: rotate(0deg);
     }
     :where(.js) [data-toggle-title] {
         z-index: 2;

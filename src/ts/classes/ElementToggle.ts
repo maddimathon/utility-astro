@@ -1081,6 +1081,10 @@ export class ElementToggle {
             this.content.focus();
         }
 
+        if ( scrollTo && ( this.isMenu || this.isNav ) ) {
+            this.scrollTo( button );
+        }
+
         if ( fireEvents ) {
             ElementToggle.createCustomEvents();
             this.container.dispatchEvent( ElementToggle.openEvent as Event );

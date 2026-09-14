@@ -223,11 +223,15 @@
         left: 0;
         right: 0;
     }
-    :where(.js) [data-toggle-control] .icon svg #a,
-    :where(.js) [data-toggle-control] .icon svg #b,
-    :where(.js) [data-toggle-control] .toggle-block__control__icon svg #a,
-    :where(.js) [data-toggle-control] .toggle-block__control__icon svg #b {
+    :where(.js) [data-toggle-control] .icon > svg #a,
+    :where(.js) [data-toggle-control] .icon > svg #b,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #a,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #b {
         transform-origin: center;
+    }
+    :where(.js) [data-toggle-control] .icon > svg #b,
+    :where(.js) [data-toggle-control] .toggle-block__control__icon > svg #b {
+        transform: rotate(0deg);
     }
     :where(.js) [data-toggle-title] {
         z-index: 2;
@@ -384,7 +388,14 @@ body > nav.toggle-nav-menu {
 }
 
 @media screen {
-    :where(.js) body > nav.toggle-nav-menu {
+    :where(.js) body > nav.toggle-nav-menu,
+    :where(.js) body > nav.toggle-nav-menu .toggle-nav-menu__title,
+    :where(.js)
+        body
+        > nav.toggle-nav-menu
+        .toggle-nav-menu__title
+        > .toggle-nav-menu__title__heading,
+    :where(.js) body > nav.toggle-nav-menu .toggle-nav-menu__content {
         /* prettier-ignore */
         --grid-template-columns--toggle: var(--grid-template-columns--page, [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end]);
         /* prettier-ignore */
@@ -396,6 +407,9 @@ body > nav.toggle-nav-menu {
                 [sidebar-end] 1fr [page-end]
         );
         grid-template-columns: subgrid;
+        gap: 0;
+    }
+    :where(.js) body > nav.toggle-nav-menu {
         justify-content: center;
         justify-items: stretch;
         align-content: start;

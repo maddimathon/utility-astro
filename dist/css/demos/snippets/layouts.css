@@ -1,0 +1,206 @@
+/*!
+ * Utility Astro - Demo - Snippets - Layouts
+ * 
+ * This stylesheet demonstrates the output of functions and mixins included in
+ * this library.
+ * 
+ * https://maddimathon.github.io/utility-astro
+ * 
+ * Author: Maddi Mathon (https://www.maddimathon.com/web)
+ * License: MIT
+ */
+@demo ( function: snippet-body-grid--default-columns ) {
+    /*
+        snippet-body-grid--default-columns() is a space-separated list:
+
+        1: <()> ( [ <S> page-start ] )
+        2: <#> 1fr
+        3: <()> ( [ <S> sidebar-start ] )
+        4: <#> 0
+        5: <()> ( [ <S> content-start ] )
+        6: <S> minmax(auto, var(--width-content, 36rem))
+        7: <()> ( [ <S> content-end ] )
+        8: <#> 0
+        9: <()> ( [ <S> sidebar-end ] )
+        10: <#> 1fr
+        11: <()> ( [ <S> page-end ] )
+     */
+}
+@demo-section snippet-body-grid--set-template-columns {
+    /* @include snippet-body-grid--set-template-columns; */
+    @demo output {
+        /* prettier-ignore */
+        --grid-template-columns--page: 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0;
+        /* prettier-ignore */
+        grid-template-columns: 0 [site-start] 0 [page-start] 1fr [sidebar-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] 0 [sidebar-end] 1fr [page-end] 0 [site-end] 0;
+    }
+}
+@demo-section snippet-body-grid--selectors--main-content {
+    body {
+        /*
+            & is a comma-separated list:
+
+            1: <()> ( <S> %body ),
+         */
+        /* @include snippet-body-grid--selectors--main-content {} */
+    }
+    @demo output {
+        body > main,
+        body > main > .main-content__article {
+            /* @content; */
+            /*
+                & is a comma-separated list:
+
+                1: <()> ( <S> %body <S> > <S> %main-content ),
+                2: <()> ( <S> %body <S> > <S> %main-content <S> > <S> %main-content__article ),
+             */
+        }
+    }
+}
+@demo-section snippet-body-grid--selectors--body-subgrid {
+    body {
+        /*
+            & is a comma-separated list:
+
+            1: <()> ( <S> %body ),
+         */
+        /* @include snippet-body-grid--selectors--body-subgrid {} */
+    }
+    @demo output {
+        body > :is(.main-subgrid),
+        body > :where(main) > :is(.main-subgrid),
+        body > :where(main, nav, header, footer),
+        body > :where(main) > :where(.main-content__article, aside),
+        body
+            > :where(main)
+            > :where(.main-content__article, aside)
+            > :is(.main-subgrid) {
+            /* @content; */
+            /*
+                & is a comma-separated list:
+
+                1: <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
+                2: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) ),
+                3: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) ),
+                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) ),
+                5: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) ),
+             */
+        }
+    }
+    body {
+        /*
+            & is a comma-separated list:
+
+            1: <()> ( <S> %body ),
+         */
+        /* @include snippet-body-grid--selectors--body-subgrid( $subgridNesting: 2 ) {} */
+    }
+    @demo output {
+        body > :is(.main-subgrid),
+        body > :is(.main-subgrid) > :is(.main-subgrid),
+        body > :where(main) > :is(.main-subgrid) > :is(.main-subgrid),
+        body > :where(main, nav, header, footer),
+        body > :where(main, nav, header, footer) > :is(.main-subgrid),
+        body > :where(main) > :where(.main-content__article, aside),
+        body
+            > :where(main)
+            > :where(.main-content__article, aside)
+            > :is(.main-subgrid),
+        body
+            > :where(main)
+            > :where(.main-content__article, aside)
+            > :is(.main-subgrid)
+            > :is(.main-subgrid) {
+            /* @content; */
+            /*
+                & is a comma-separated list:
+
+                1: <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
+                2: <()> ( <S> %body <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
+                3: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) ),
+                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
+                5: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) ),
+                6: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) <S> > <S> :is(%main-subgrid) ),
+                7: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) ),
+                8: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) ),
+                9: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
+             */
+        }
+    }
+}
+@demo-section snippet-body-grid--selectors--main-subgrid {
+    body {
+        /*
+            & is a comma-separated list:
+
+            1: <()> ( <S> %body ),
+         */
+        /* @include snippet-body-grid--selectors--main-subgrid {} */
+    }
+    @demo output {
+        body > :is(form, dl, .display-contents),
+        body > :where(main) > :is(form, dl, .display-contents),
+        body > :where(main),
+        body > :where(main) > :where(.main-subgrid, .main-content__article),
+        body
+            > :where(main)
+            > :where(.main-subgrid, .main-content__article)
+            > :is(form, dl, .display-contents) {
+            /* @content; */
+            /*
+                & is a comma-separated list:
+
+                1: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                2: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                3: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
+                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) ),
+                5: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+             */
+        }
+    }
+    body {
+        /*
+            & is a comma-separated list:
+
+            1: <()> ( <S> %body ),
+         */
+        /* @include snippet-body-grid--selectors--main-subgrid( $subgridNesting: 2 ) {} */
+    }
+    @demo output {
+        body > :is(form, dl, .display-contents),
+        body
+            > :is(form, dl, .display-contents)
+            > :is(form, dl, .display-contents),
+        body > :where(main) > :is(form, dl, .display-contents),
+        body
+            > :where(main)
+            > :is(form, dl, .display-contents)
+            > :is(form, dl, .display-contents),
+        body > :where(main),
+        body > :where(main) > :where(.main-subgrid, .main-content__article),
+        body
+            > :where(main)
+            > :where(.main-subgrid, .main-content__article)
+            > :is(form, dl, .display-contents),
+        body
+            > :where(main)
+            > :where(.main-subgrid, .main-content__article)
+            > :is(form, dl, .display-contents)
+            > :is(form, dl, .display-contents) {
+            /* @content; */
+            /*
+                & is a comma-separated list:
+
+                1: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                2: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                3: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                5: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
+                6: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                7: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) ),
+                8: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                9: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+             */
+        }
+    }
+}

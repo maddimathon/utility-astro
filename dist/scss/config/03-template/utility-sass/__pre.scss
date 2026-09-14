@@ -100,14 +100,24 @@ $template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
 ///
 /// @since 0.1.0-beta.0.draft
 ///
+$template_title_base: null !default;
+$template_title_base: config-valid-string(
+    $template_title_base,
+    'template_title_base',
+    $default: 'Template'
+) !default;
+
+///
+/// @since 0.1.0-beta.0.draft
+///
 $template_title: null !default;
 $template_title: config-valid-string(
     $template_title,
     'template_title',
     $default: if(
             $template_isDefault,
-            'Template',
-            'Template - #{$template_name}'
+            $template_title_base,
+            '#{$template_title_base} - #{$template_name}'
         )
 ) !default;
 

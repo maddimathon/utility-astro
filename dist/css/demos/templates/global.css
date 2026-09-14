@@ -19,60 +19,60 @@
 /*! START of @maddimathon/utility-sass/template */
 /* #region Tokens - @property */
 @property --backdrop-filter {
-    syntax: "*";
+    syntax: '*';
     inherits: true;
 }
 @property --display {
-    syntax: "*";
+    syntax: '*';
     inherits: false;
 }
 @property --focus-ring-outline-color {
-    syntax: "<color>";
+    syntax: '<color>';
     inherits: true;
     initial-value: currentColor;
 }
 @property --focus-ring-outline-offset {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 0.125em;
 }
 @property --focus-ring-outline-width {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 0.125em;
 }
 @property --grid-column {
-    syntax: "*";
+    syntax: '*';
     inherits: true;
     initial-value: 1 / 1;
 }
 @property --height-nav-primary {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 0;
 }
 @property --icon-color {
-    syntax: "<color>";
+    syntax: '<color>';
     inherits: true;
     initial-value: currentColor;
 }
 @property --icon-size {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 1.375em;
 }
 @property --icon-size--font-multiplier {
-    syntax: "<number>";
+    syntax: '<number>';
     inherits: true;
     initial-value: 1;
 }
 @property --icon-size-large {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 2em;
 }
 @property --scroll-padding-top {
-    syntax: "<length-percentage> | <number>";
+    syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 0px;
 }
@@ -90,47 +90,38 @@
 /* # GLOBALS - ACCESSIBILITY
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
-[data-state-focus="true"],
+[data-state-focus='true'],
 .no-js :focus,
 .js__no-whereSelector :focus {
     /* %focus-ring--fallback */
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
-    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
-    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :where(.js__no-focusVisible) :focus {
     /* %focus-ring--where */
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
-    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
-    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
 :focus-visible {
     /* %focus-ring--visible */
-    outline-width: clamp(0.125rem, 0.125em, 0.25rem);
     outline-width: var(--focus-ring-outline-width, 0.125em);
     outline-style: dashed;
-    outline-color: LinkText;
     outline-color: var(
         --focus-ring-outline-color,
         var(--sys-clr-link, LinkText)
     );
-    outline-offset: 0.125em;
     outline-offset: var(--focus-ring-outline-offset, 0.125em);
 }
 
@@ -152,30 +143,20 @@ hr {
     display: block;
     align-self: center;
     justify-self: center;
-    margin-top: 2.25rem;
-    margin-bottom: 2.25rem;
-    margin-left: 9%;
-    margin-right: 9%;
+    margin-block: 2.25rem;
+    margin-inline: 9%;
     width: 72.92%;
     max-width: 26.25rem;
     border: none;
-    border-bottom: currentColor solid 0.125rem;
+    border-block-end: currentColor solid 0.125rem;
 }
 
 /*! END of @maddimathon/utility-sass/template */
 /* # GLOBALS - TYPOGRAPHY
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
-::-moz-selection {
-    background-color: Highlight;
-    background-color: var(--sys-clr-selection-bg, Highlight);
-    color: HighlightText;
-    color: var(--sys-clr-selection-text, HighlightText);
-}
 ::selection {
-    background-color: Highlight;
     background-color: var(--sys-clr-selection-bg, Highlight);
-    color: HighlightText;
     color: var(--sys-clr-selection-text, HighlightText);
 }
 
@@ -212,41 +193,34 @@ a[href] {
     --focus-ring-outline-offset: 0.0625em;
     display: inline;
     border: none;
-    -webkit-text-decoration: underline 0.0625em;
     text-decoration: underline 0.0625em;
     text-underline-offset: 0.25em;
-    color: LinkText;
     color: var(--sys-clr-link, LinkText);
 }
 a[href]:visited {
-    color: VisitedText;
     color: var(--sys-clr-link-visited, VisitedText);
 }
 
 a[href]:hover,
-a[data-state-focus="true"][href],
+a[data-state-focus='true'][href],
 .no-js a[href]:focus,
 .js__no-whereSelector a[href]:focus {
     text-decoration-color: transparent;
-    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 :where(.js__no-focusVisible) a[href]:focus {
     text-decoration-color: transparent;
-    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:focus-visible {
     text-decoration-color: transparent;
-    color: ActiveText;
     color: var(--sys-clr-link-hover, ActiveText);
 }
 
 a[href]:active,
-a[data-state-active="true"][href] {
-    color: ActiveText;
+a[data-state-active='true'][href] {
     color: var(--sys-clr-link-active, ActiveText);
 }
 
@@ -255,16 +229,14 @@ a.no-style[href] {
     font-weight: inherit;
     color: inherit;
 }
-a[aria-disabled="true"][href] {
+a[aria-disabled='true'][href] {
     text-decoration-line: line-through;
-    color: GrayText;
     color: var(--sys-clr-text-disabled, GrayText);
     opacity: 1;
     cursor: not-allowed;
 }
 
 abbr[title] {
-    -webkit-text-decoration: dotted underline 0.125em;
     text-decoration: dotted underline 0.125em;
     cursor: help;
 }
@@ -273,42 +245,36 @@ abbr[title] {
 /* ## Typography - Blocks ==================================== */
 /*! START of @maddimathon/utility-sass/template */
 p {
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
+    margin-block: 0.9375rem 0;
 }
 hr + p {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 
 /*! END of @maddimathon/utility-sass/template */
 /*! START of @maddimathon/utility-astro/template/global */
 blockquote {
     display: block;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
-    margin-top: 1.875rem;
-    margin-bottom: 0.9375rem;
-    padding-left: 0.8125rem;
-    border-left: 0.125rem solid currentColor;
+    margin-inline: 0;
+    margin-block: 0.9375rem 0;
+    margin-block: 1.875rem 0.9375rem;
+    padding-inline-start: 0.8125rem;
+    border-inline-start: 0.125rem solid currentColor;
     width: auto;
     max-width: 26.25rem;
 }
 blockquote > :first-child {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 blockquote > cite {
     display: block;
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
-    text-align: right;
+    margin-block: 0.9375rem 0;
+    text-align: end;
     align-self: end;
     justify-self: end;
 }
 blockquote > cite::before {
-    content: "— ";
-    content: "— "/"";
+    content: '— '/'';
 }
 @media (prefers-contrast: less) {
     blockquote > cite {
@@ -324,7 +290,7 @@ blockquote > cite {
         color: color-mix(in srgb, currentColor 87.5%, transparent);
     }
 }
-[data-contrast-mode="high"] blockquote > cite {
+[data-contrast-mode='high'] blockquote > cite {
     color: color-mix(in srgb, currentColor 87.5%, transparent);
 }
 
@@ -342,14 +308,10 @@ samp {
 pre {
     display: block;
     position: relative;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
+    margin-block: 1.25rem 0.3125rem;
+    margin-inline: 0;
+    padding-block: 0.625rem;
+    padding-inline: 0.8125rem;
     border: 0.0625rem solid currentColor;
     width: auto;
     max-width: 100%;
@@ -365,7 +327,6 @@ pre > samp {
     margin: 0;
     padding: 0;
     border: none;
-    width: -moz-fit-content;
     width: fit-content;
     max-width: none;
     overflow: visible;
@@ -421,8 +382,7 @@ pre:has(> :is(code, kbd, samp)):is(
 /* ## Typography - Headings ==================================== */
 /*! START of @maddimathon/utility-sass/template */
 h1 {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 900;
     font-size: 2.75rem;
     line-height: 1.3125;
@@ -433,19 +393,18 @@ h1 {
     font-style: normal;
 }
 h1 button,
-h1 [role="button"],
-h1 input[type="button"],
-h1 input[type="reset"],
-h1 input[type="submit"],
+h1 [role='button'],
+h1 input[type='button'],
+h1 input[type='reset'],
+h1 input[type='submit'],
 h1 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="1"]) {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='1']) {
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 900;
     font-size: 2.75rem;
     line-height: 1.3125;
@@ -455,13 +414,13 @@ h1 a[href].button {
     text-wrap: pretty;
     font-style: normal;
 }
-:where([role="heading"][aria-level="1"])
+:where([role='heading'][aria-level='1'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -471,8 +430,7 @@ h1 a[href].button {
 }
 
 h2 {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 800;
     font-size: 2.0625rem;
     line-height: 1.3125;
@@ -483,19 +441,18 @@ h2 {
     font-style: normal;
 }
 h2 button,
-h2 [role="button"],
-h2 input[type="button"],
-h2 input[type="reset"],
-h2 input[type="submit"],
+h2 [role='button'],
+h2 input[type='button'],
+h2 input[type='reset'],
+h2 input[type='submit'],
 h2 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="2"]) {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='2']) {
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 800;
     font-size: 2.0625rem;
     line-height: 1.3125;
@@ -505,13 +462,13 @@ h2 a[href].button {
     text-wrap: pretty;
     font-style: normal;
 }
-:where([role="heading"][aria-level="2"])
+:where([role='heading'][aria-level='2'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -521,8 +478,7 @@ h2 a[href].button {
 }
 
 h3 {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 700;
     font-size: 1.8125rem;
     line-height: 1.3125;
@@ -533,19 +489,18 @@ h3 {
     font-style: normal;
 }
 h3 button,
-h3 [role="button"],
-h3 input[type="button"],
-h3 input[type="reset"],
-h3 input[type="submit"],
+h3 [role='button'],
+h3 input[type='button'],
+h3 input[type='reset'],
+h3 input[type='submit'],
 h3 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="3"]) {
-    margin-top: 3.5rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='3']) {
+    margin-block: 3.5rem 0.3125rem;
     font-weight: 700;
     font-size: 1.8125rem;
     line-height: 1.3125;
@@ -555,13 +510,13 @@ h3 a[href].button {
     text-wrap: pretty;
     font-style: normal;
 }
-:where([role="heading"][aria-level="3"])
+:where([role='heading'][aria-level='3'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -571,8 +526,7 @@ h3 a[href].button {
 }
 
 h4 {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 700;
     font-size: 1.5625rem;
     line-height: 1.4375;
@@ -589,19 +543,18 @@ h4 em em {
     font-style: italic;
 }
 h4 button,
-h4 [role="button"],
-h4 input[type="button"],
-h4 input[type="reset"],
-h4 input[type="submit"],
+h4 [role='button'],
+h4 input[type='button'],
+h4 input[type='reset'],
+h4 input[type='submit'],
 h4 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="4"]) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='4']) {
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 700;
     font-size: 1.5625rem;
     line-height: 1.4375;
@@ -611,19 +564,19 @@ h4 a[href].button {
     text-wrap: pretty;
     font-style: italic;
 }
-:where([role="heading"][aria-level="4"]) em {
+:where([role='heading'][aria-level='4']) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="4"]) em em {
+:where([role='heading'][aria-level='4']) em em {
     font-style: italic;
 }
-:where([role="heading"][aria-level="4"])
+:where([role='heading'][aria-level='4'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -633,8 +586,7 @@ h4 a[href].button {
 }
 
 h5 {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 600;
     font-size: 1.3125rem;
     line-height: 1.4375;
@@ -651,19 +603,18 @@ h5 em em {
     font-style: italic;
 }
 h5 button,
-h5 [role="button"],
-h5 input[type="button"],
-h5 input[type="reset"],
-h5 input[type="submit"],
+h5 [role='button'],
+h5 input[type='button'],
+h5 input[type='reset'],
+h5 input[type='submit'],
 h5 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="5"]) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='5']) {
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 600;
     font-size: 1.3125rem;
     line-height: 1.4375;
@@ -673,19 +624,19 @@ h5 a[href].button {
     text-wrap: pretty;
     font-style: italic;
 }
-:where([role="heading"][aria-level="5"]) em {
+:where([role='heading'][aria-level='5']) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="5"]) em em {
+:where([role='heading'][aria-level='5']) em em {
     font-style: italic;
 }
-:where([role="heading"][aria-level="5"])
+:where([role='heading'][aria-level='5'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -695,8 +646,7 @@ h5 a[href].button {
 }
 
 h6 {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 500;
     font-size: 1.1875rem;
     line-height: 1.4375;
@@ -713,19 +663,18 @@ h6 em em {
     font-style: italic;
 }
 h6 button,
-h6 [role="button"],
-h6 input[type="button"],
-h6 input[type="reset"],
-h6 input[type="submit"],
+h6 [role='button'],
+h6 input[type='button'],
+h6 input[type='reset'],
+h6 input[type='submit'],
 h6 a[href].button {
     font: inherit;
     font-size: 1em;
     letter-spacing: inherit;
     text-transform: inherit;
 }
-:where([role="heading"][aria-level="6"]) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='6']) {
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 500;
     font-size: 1.1875rem;
     line-height: 1.4375;
@@ -735,19 +684,19 @@ h6 a[href].button {
     text-wrap: pretty;
     font-style: italic;
 }
-:where([role="heading"][aria-level="6"]) em {
+:where([role='heading'][aria-level='6']) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="6"]) em em {
+:where([role='heading'][aria-level='6']) em em {
     font-style: italic;
 }
-:where([role="heading"][aria-level="6"])
+:where([role='heading'][aria-level='6'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -756,9 +705,8 @@ h6 a[href].button {
     text-transform: inherit;
 }
 
-:where([role="heading"][aria-level="7"]) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='7']) {
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 500;
     font-size: 0.9375rem;
     line-height: 1.6875;
@@ -768,13 +716,13 @@ h6 a[href].button {
     text-wrap: pretty;
     font-style: normal;
 }
-:where([role="heading"][aria-level="7"])
+:where([role='heading'][aria-level='7'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -783,9 +731,8 @@ h6 a[href].button {
     text-transform: inherit;
 }
 
-:where([role="heading"][aria-level="8"]) {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+:where([role='heading'][aria-level='8']) {
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 500;
     font-size: 0.8125rem;
     line-height: 1.6875;
@@ -795,19 +742,19 @@ h6 a[href].button {
     text-wrap: pretty;
     font-style: italic;
 }
-:where([role="heading"][aria-level="8"]) em {
+:where([role='heading'][aria-level='8']) em {
     font-style: normal;
 }
-:where([role="heading"][aria-level="8"]) em em {
+:where([role='heading'][aria-level='8']) em em {
     font-style: italic;
 }
-:where([role="heading"][aria-level="8"])
+:where([role='heading'][aria-level='8'])
     :where(
         button,
-        [role="button"],
-        input[type="button"],
-        input[type="reset"],
-        input[type="submit"],
+        [role='button'],
+        input[type='button'],
+        input[type='reset'],
+        input[type='submit'],
         a[href].button
     ) {
     font: inherit;
@@ -823,17 +770,16 @@ h6 a[href].button {
 ol,
 ul {
     margin: 0;
-    margin-left: 20%;
+    margin-inline-start: 20%;
     padding: 0;
-    padding-left: 1em;
+    padding-inline-start: 1em;
     line-height: inherit;
 }
 ol ol,
 ol ul,
 ul ol,
 ul ul {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
 }
 
 ol {
@@ -854,11 +800,11 @@ ul ul {
 ol ol ol ol,
 ul ul ul {
     list-style-type: square; /* fallback */
-    list-style-type: "–  ";
+    list-style-type: '–  ';
 }
 li {
     margin: 0;
-    margin-top: 0.625rem;
+    margin-block-start: 0.625rem;
     padding: 0;
 }
 li::marker {
@@ -869,7 +815,7 @@ li > a:only-child {
     vertical-align: top;
 }
 li li li {
-    margin-top: 0.375rem;
+    margin-block-start: 0.375rem;
 }
 li li li li {
     font-style: italic;
@@ -887,37 +833,29 @@ li li li li em em {
 /*! START of @maddimathon/utility-sass/template */
 fieldset {
     display: block;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.625rem;
-    padding-bottom: 0.8125rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    margin-block: 1.25rem 0.3125rem;
+    margin-inline: 0;
+    padding-block: 0.625rem 0.8125rem;
+    padding-inline: 1.25rem;
     border: 0.0625rem solid currentColor;
     border-radius: 0;
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border, FieldText);
-    background-color: Canvas;
     background-color: var(--sys-clr-background, Canvas);
-    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
 fieldset legend {
     display: block;
 }
 fieldset > :first-child {
-    margin-top: 0;
-    margin-top: 0.5625rem;
+    margin-block-start: 0;
+    margin-block-start: 0.5625rem;
 }
 fieldset > legend + * {
-    margin-top: 0;
+    margin-block-start: 0;
 }
 
 fieldset legend {
-    margin-top: 1.875rem;
-    margin-bottom: 0.3125rem;
+    margin-block: 1.875rem 0.3125rem;
     font-weight: 500;
     font-size: 0.9375rem;
     line-height: 1.6875;
@@ -928,12 +866,9 @@ fieldset legend {
     font-style: normal;
 }
 fieldset legend {
-    margin-left: -0.625rem;
-    margin-right: -0.625rem;
-    margin-top: 0;
-    margin-bottom: 0.625rem;
-    padding-left: 0.625rem;
-    padding-right: 0.625rem;
+    margin-inline: -0.625rem;
+    margin-block: 0 0.625rem;
+    padding-inline: 0.625rem;
     font-style: italic;
 }
 
@@ -942,47 +877,35 @@ select,
 input {
     --focus-ring-outline-offset: 0.125rem;
     display: block;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    margin-block: 1.25rem 0.3125rem;
+    margin-inline: 0;
+    padding-block: 0.375rem;
+    padding-inline: 0.5rem;
     width: 100%;
     font: inherit;
     font-size: 1em;
     line-height: 1.3125;
     border-width: 0.0625rem;
     border-style: solid;
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border, FieldText);
     border-radius: 0;
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg, Field);
-    color: FieldText;
     color: var(--sys-clr-input-text, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 textarea:hover,
 select:hover,
 input:hover {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
-textarea[data-state-focus="true"],
-select[data-state-focus="true"],
-input[data-state-focus="true"],
+textarea[data-state-focus='true'],
+select[data-state-focus='true'],
+input[data-state-focus='true'],
 .no-js textarea:focus,
 .no-js select:focus,
 .no-js input:focus,
@@ -990,13 +913,9 @@ input[data-state-focus="true"],
 .js__no-whereSelector select:focus,
 .js__no-whereSelector input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1004,13 +923,9 @@ input[data-state-focus="true"],
 :where(.js__no-focusVisible) select:focus,
 :where(.js__no-focusVisible) input:focus {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1018,13 +933,9 @@ textarea:focus-visible,
 select:focus-visible,
 input:focus-visible {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
@@ -1032,44 +943,32 @@ textarea:focus-within,
 select:focus-within,
 input:focus-within {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
-textarea:has([data-state-focus="true"]),
-select:has([data-state-focus="true"]),
-input:has([data-state-focus="true"]) {
+textarea:has([data-state-focus='true']),
+select:has([data-state-focus='true']),
+input:has([data-state-focus='true']) {
     --focus-ring-outline-color: var(--sys-clr-input-text, FieldText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-hover, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-hover, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-hover, FieldText);
-    accent-color: FieldText;
     accent-color: var(--sys-clr-input-text, FieldText);
 }
 
 textarea:active,
 select:active,
 input:active,
-textarea[data-state-active="true"],
-select[data-state-active="true"],
-input[data-state-active="true"] {
+textarea[data-state-active='true'],
+select[data-state-active='true'],
+input[data-state-active='true'] {
     --focus-ring-outline-color: var(--sys-clr-text-active, ActiveText);
-    background-color: Field;
     background-color: var(--sys-clr-input-bg-active, Field);
-    border-color: FieldText;
     border-color: var(--sys-clr-input-border-active, FieldText);
-    color: FieldText;
     color: var(--sys-clr-input-text-active, FieldText);
-    accent-color: ActiveText;
     accent-color: var(--sys-clr-text-active, ActiveText);
 }
 
@@ -1079,13 +978,7 @@ label + input,
 label > textarea,
 label > select,
 label > input {
-    margin-top: 0.3125rem;
-}
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    opacity: 1;
-    color: currentColor;
+    margin-block-start: 0.3125rem;
 }
 textarea::placeholder,
 select::placeholder,
@@ -1094,21 +987,11 @@ input::placeholder {
     color: currentColor;
 }
 @media (prefers-contrast: less) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 75%, transparent);
-    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 75%, transparent);
     }
-}
-textarea::-moz-placeholder,
-select::-moz-placeholder,
-input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 75%, transparent);
 }
 textarea::placeholder,
 select::placeholder,
@@ -1117,149 +1000,139 @@ input::placeholder {
 }
 
 @media (prefers-contrast: more) {
-    textarea::-moz-placeholder,
-    select::-moz-placeholder,
-    input::-moz-placeholder {
-        color: color-mix(in srgb, currentColor 90%, transparent);
-    }
     textarea::placeholder,
     select::placeholder,
     input::placeholder {
         color: color-mix(in srgb, currentColor 90%, transparent);
     }
 }
-[data-contrast-mode="high"] textarea::-moz-placeholder,
-[data-contrast-mode="high"] select::-moz-placeholder,
-[data-contrast-mode="high"] input::-moz-placeholder {
-    color: color-mix(in srgb, currentColor 90%, transparent);
-}
-[data-contrast-mode="high"] textarea::placeholder,
-[data-contrast-mode="high"] select::placeholder,
-[data-contrast-mode="high"] input::placeholder {
+[data-contrast-mode='high'] textarea::placeholder,
+[data-contrast-mode='high'] select::placeholder,
+[data-contrast-mode='high'] input::placeholder {
     color: color-mix(in srgb, currentColor 90%, transparent);
 }
 
-textarea[aria-disabled="true"],
-select[aria-disabled="true"],
-input[aria-disabled="true"],
+textarea[aria-disabled='true'],
+select[aria-disabled='true'],
+input[aria-disabled='true'],
 textarea[disabled],
 select[disabled],
 input[disabled] {
     cursor: not-allowed;
 }
 
-input[type="button"],
-input[type="checkbox"],
-input[type="color"],
-input[type="date"],
-input[type="datetime-local"],
-input[type="file"],
-input[type="month"],
-input[type="radio"],
-input[type="range"],
-input[type="reset"],
-input[type="submit"],
-input[type="time"],
-input[type="week"] {
+input[type='button'],
+input[type='checkbox'],
+input[type='color'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='file'],
+input[type='month'],
+input[type='radio'],
+input[type='range'],
+input[type='reset'],
+input[type='submit'],
+input[type='time'],
+input[type='week'] {
     cursor: pointer;
 }
-input[type="button"][readonly],
-input[type="checkbox"][readonly],
-input[type="color"][readonly],
-input[type="date"][readonly],
-input[type="datetime-local"][readonly],
-input[type="file"][readonly],
-input[type="month"][readonly],
-input[type="radio"][readonly],
-input[type="range"][readonly],
-input[type="reset"][readonly],
-input[type="submit"][readonly],
-input[type="time"][readonly],
-input[type="week"][readonly] {
+input[type='button'][readonly],
+input[type='checkbox'][readonly],
+input[type='color'][readonly],
+input[type='date'][readonly],
+input[type='datetime-local'][readonly],
+input[type='file'][readonly],
+input[type='month'][readonly],
+input[type='radio'][readonly],
+input[type='range'][readonly],
+input[type='reset'][readonly],
+input[type='submit'][readonly],
+input[type='time'][readonly],
+input[type='week'][readonly] {
     cursor: auto;
 }
 
-input[type="button"][aria-disabled="true"],
-input[type="button"][disabled],
-input[type="checkbox"][aria-disabled="true"],
-input[type="checkbox"][disabled],
-input[type="color"][aria-disabled="true"],
-input[type="color"][disabled],
-input[type="date"][aria-disabled="true"],
-input[type="date"][disabled],
-input[type="datetime-local"][aria-disabled="true"],
-input[type="datetime-local"][disabled],
-input[type="file"][aria-disabled="true"],
-input[type="file"][disabled],
-input[type="month"][aria-disabled="true"],
-input[type="month"][disabled],
-input[type="radio"][aria-disabled="true"],
-input[type="radio"][disabled],
-input[type="range"][aria-disabled="true"],
-input[type="range"][disabled],
-input[type="reset"][aria-disabled="true"],
-input[type="reset"][disabled],
-input[type="submit"][aria-disabled="true"],
-input[type="submit"][disabled],
-input[type="time"][aria-disabled="true"],
-input[type="time"][disabled],
-input[type="week"][aria-disabled="true"],
-input[type="week"][disabled] {
+input[type='button'][aria-disabled='true'],
+input[type='button'][disabled],
+input[type='checkbox'][aria-disabled='true'],
+input[type='checkbox'][disabled],
+input[type='color'][aria-disabled='true'],
+input[type='color'][disabled],
+input[type='date'][aria-disabled='true'],
+input[type='date'][disabled],
+input[type='datetime-local'][aria-disabled='true'],
+input[type='datetime-local'][disabled],
+input[type='file'][aria-disabled='true'],
+input[type='file'][disabled],
+input[type='month'][aria-disabled='true'],
+input[type='month'][disabled],
+input[type='radio'][aria-disabled='true'],
+input[type='radio'][disabled],
+input[type='range'][aria-disabled='true'],
+input[type='range'][disabled],
+input[type='reset'][aria-disabled='true'],
+input[type='reset'][disabled],
+input[type='submit'][aria-disabled='true'],
+input[type='submit'][disabled],
+input[type='time'][aria-disabled='true'],
+input[type='time'][disabled],
+input[type='week'][aria-disabled='true'],
+input[type='week'][disabled] {
     cursor: not-allowed;
 }
 
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="url"],
-input[type="week"] {
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+input[type='week'] {
     cursor: text;
 }
-input[type="email"][aria-disabled="true"],
-input[type="email"][disabled],
-input[type="month"][aria-disabled="true"],
-input[type="month"][disabled],
-input[type="number"][aria-disabled="true"],
-input[type="number"][disabled],
-input[type="password"][aria-disabled="true"],
-input[type="password"][disabled],
-input[type="search"][aria-disabled="true"],
-input[type="search"][disabled],
-input[type="tel"][aria-disabled="true"],
-input[type="tel"][disabled],
-input[type="text"][aria-disabled="true"],
-input[type="text"][disabled],
-input[type="url"][aria-disabled="true"],
-input[type="url"][disabled],
-input[type="week"][aria-disabled="true"],
-input[type="week"][disabled] {
+input[type='email'][aria-disabled='true'],
+input[type='email'][disabled],
+input[type='month'][aria-disabled='true'],
+input[type='month'][disabled],
+input[type='number'][aria-disabled='true'],
+input[type='number'][disabled],
+input[type='password'][aria-disabled='true'],
+input[type='password'][disabled],
+input[type='search'][aria-disabled='true'],
+input[type='search'][disabled],
+input[type='tel'][aria-disabled='true'],
+input[type='tel'][disabled],
+input[type='text'][aria-disabled='true'],
+input[type='text'][disabled],
+input[type='url'][aria-disabled='true'],
+input[type='url'][disabled],
+input[type='week'][aria-disabled='true'],
+input[type='week'][disabled] {
     cursor: not-allowed;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
     display: inline-block;
     padding: 0;
     width: auto;
 }
-input[type="color"] {
+input[type='color'] {
     padding: 0;
     height: 2.25em;
     width: 2.25em;
 }
-input[type="date"],
-input[type="datetime-local"],
-input[type="month"],
-input[type="time"],
-input[type="week"] {
+input[type='date'],
+input[type='datetime-local'],
+input[type='month'],
+input[type='time'],
+input[type='week'] {
     width: auto;
 }
-input[type="range"] {
-    margin-bottom: 0;
+input[type='range'] {
+    margin-block-end: 0;
     padding: 0;
 }
 
@@ -1273,62 +1146,57 @@ textarea {
 
 label {
     display: block;
-    margin-top: 0.9375rem;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
+    margin-block: 0.9375rem 0;
+    margin-inline: 0;
     font-weight: 600;
     line-height: 1.3125;
     text-wrap: balance;
     text-wrap: pretty;
-    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
 }
-label:has(> input:where([type="checkbox"], [type="radio"])) {
+label:has(> input:where([type='checkbox'], [type='radio'])) {
     display: grid;
     grid-template-columns: fit-content(0) 1fr;
     justify-content: end;
     align-items: baseline;
-    grid-gap: 0.625rem;
     gap: 0.625rem;
     font-weight: 400;
     line-height: 1.6875;
-    color: CanvasText;
     color: var(--sys-clr-text, CanvasText);
     cursor: pointer;
 }
 
-label:has(> input[readonly]:where([type="checkbox"], [type="radio"])) {
+label:has(> input[readonly]:where([type='checkbox'], [type='radio'])) {
     cursor: auto;
 }
 
 label:has(
-    > input[aria-disabled="true"]:where([type="checkbox"], [type="radio"]),
-    > input[disabled]:where([type="checkbox"], [type="radio"])
+    > input[aria-disabled='true']:where([type='checkbox'], [type='radio']),
+    > input[disabled]:where([type='checkbox'], [type='radio'])
 ) {
     cursor: not-allowed;
 }
 
-label:has(> input:where([type="checkbox"], [type="radio"]))
-    + label:has(> input:where([type="checkbox"], [type="radio"])) {
-    margin-top: 0.5rem;
+label:has(> input:where([type='checkbox'], [type='radio']))
+    + label:has(> input:where([type='checkbox'], [type='radio'])) {
+    margin-block-start: 0.5rem;
 }
-label:has(> input:where([type="checkbox"], [type="radio"]))
+label:has(> input:where([type='checkbox'], [type='radio']))
     + :is(input, select, textarea) {
-    margin-top: 1.25rem;
+    margin-block-start: 1.25rem;
 }
 
-label > input[type="checkbox"],
-label > input[type="radio"] {
+label > input[type='checkbox'],
+label > input[type='radio'] {
     margin: 0;
 }
 
 /* ## Forms - Buttons ==================================== */
 button,
-[role="button"],
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
+[role='button'],
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
 a[href].button {
     --focus-ring-outline-offset: 0.125rem;
     display: flex;
@@ -1338,15 +1206,10 @@ a[href].button {
     align-content: start;
     align-items: start;
     gap: 0.625rem 0.3125rem;
-    margin-top: 1.25rem;
-    margin-bottom: 0.3125rem;
-    margin-left: 0;
-    margin-right: 0;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
-    width: -moz-fit-content;
+    margin-block: 1.25rem 0.3125rem;
+    margin-inline: 0;
+    padding-block: 0.375rem;
+    padding-inline: 0.8125rem;
     width: fit-content;
     font: inherit;
     font-size: 1em;
@@ -1354,218 +1217,178 @@ a[href].button {
     border-width: 0.125rem;
     border-style: solid;
     border-radius: 0;
-    text-align: left;
-    -webkit-appearance: button;
-    -moz-appearance: button;
+    text-align: start;
     appearance: button;
     text-decoration: none;
     cursor: pointer;
 }
 button,
-[role="button"],
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
+[role='button'],
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
 a[href].button,
-[role="button"]:visited,
+[role='button']:visited,
 a[href].button:visited {
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
-    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
-    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
-    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
-    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 
 button:hover,
-[role="button"]:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover,
+[role='button']:hover,
+input[type='button']:hover,
+input[type='reset']:hover,
+input[type='submit']:hover,
 a[href].button:hover,
-button[data-state-focus="true"],
-[data-state-focus="true"][role="button"],
-input[data-state-focus="true"][type="button"],
-input[data-state-focus="true"][type="reset"],
-input[data-state-focus="true"][type="submit"],
-a[data-state-focus="true"][href].button,
+button[data-state-focus='true'],
+[data-state-focus='true'][role='button'],
+input[data-state-focus='true'][type='button'],
+input[data-state-focus='true'][type='reset'],
+input[data-state-focus='true'][type='submit'],
+a[data-state-focus='true'][href].button,
 .no-js button:focus,
-.no-js [role="button"]:focus,
-.no-js input[type="button"]:focus,
-.no-js input[type="reset"]:focus,
-.no-js input[type="submit"]:focus,
+.no-js [role='button']:focus,
+.no-js input[type='button']:focus,
+.no-js input[type='reset']:focus,
+.no-js input[type='submit']:focus,
 .no-js a[href].button:focus,
 .js__no-whereSelector button:focus,
-.js__no-whereSelector [role="button"]:focus,
-.js__no-whereSelector input[type="button"]:focus,
-.js__no-whereSelector input[type="reset"]:focus,
-.js__no-whereSelector input[type="submit"]:focus,
+.js__no-whereSelector [role='button']:focus,
+.js__no-whereSelector input[type='button']:focus,
+.js__no-whereSelector input[type='reset']:focus,
+.js__no-whereSelector input[type='submit']:focus,
 .js__no-whereSelector a[href].button:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :where(.js__no-focusVisible) button:focus,
-:where(.js__no-focusVisible) [role="button"]:focus,
-:where(.js__no-focusVisible) input[type="button"]:focus,
-:where(.js__no-focusVisible) input[type="reset"]:focus,
-:where(.js__no-focusVisible) input[type="submit"]:focus,
+:where(.js__no-focusVisible) [role='button']:focus,
+:where(.js__no-focusVisible) input[type='button']:focus,
+:where(.js__no-focusVisible) input[type='reset']:focus,
+:where(.js__no-focusVisible) input[type='submit']:focus,
 :where(.js__no-focusVisible) a[href].button:focus {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 button:focus-visible,
-[role="button"]:focus-visible,
-input[type="button"]:focus-visible,
-input[type="reset"]:focus-visible,
-input[type="submit"]:focus-visible,
+[role='button']:focus-visible,
+input[type='button']:focus-visible,
+input[type='reset']:focus-visible,
+input[type='submit']:focus-visible,
 a[href].button:focus-visible {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 button:focus-within,
-[role="button"]:focus-within,
-input[type="button"]:focus-within,
-input[type="reset"]:focus-within,
-input[type="submit"]:focus-within,
+[role='button']:focus-within,
+input[type='button']:focus-within,
+input[type='reset']:focus-within,
+input[type='submit']:focus-within,
 a[href].button:focus-within {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-button:has([data-state-focus="true"]),
-[role="button"]:has([data-state-focus="true"]),
-input[type="button"]:has([data-state-focus="true"]),
-input[type="reset"]:has([data-state-focus="true"]),
-input[type="submit"]:has([data-state-focus="true"]),
-a[href].button:has([data-state-focus="true"]) {
+button:has([data-state-focus='true']),
+[role='button']:has([data-state-focus='true']),
+input[type='button']:has([data-state-focus='true']),
+input[type='reset']:has([data-state-focus='true']),
+input[type='submit']:has([data-state-focus='true']),
+a[href].button:has([data-state-focus='true']) {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 button:active,
-[role="button"]:active,
-input[type="button"]:active,
-input[type="reset"]:active,
-input[type="submit"]:active,
+[role='button']:active,
+input[type='button']:active,
+input[type='reset']:active,
+input[type='submit']:active,
 a[href].button:active,
-button[data-state-active="true"],
-[data-state-active="true"][role="button"],
-input[data-state-active="true"][type="button"],
-input[data-state-active="true"][type="reset"],
-input[data-state-active="true"][type="submit"],
-a[data-state-active="true"][href].button {
+button[data-state-active='true'],
+[data-state-active='true'][role='button'],
+input[data-state-active='true'][type='button'],
+input[data-state-active='true'][type='reset'],
+input[data-state-active='true'][type='submit'],
+a[data-state-active='true'][href].button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
-    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 
-button[aria-disabled="true"],
-[aria-disabled="true"][role="button"],
-input[aria-disabled="true"][type="button"],
-input[aria-disabled="true"][type="reset"],
-input[aria-disabled="true"][type="submit"],
-a[aria-disabled="true"][href].button,
+button[aria-disabled='true'],
+[aria-disabled='true'][role='button'],
+input[aria-disabled='true'][type='button'],
+input[aria-disabled='true'][type='reset'],
+input[aria-disabled='true'][type='submit'],
+a[aria-disabled='true'][href].button,
 button[disabled],
-[disabled][role="button"],
-input[disabled][type="button"],
-input[disabled][type="reset"],
-input[disabled][type="submit"],
+[disabled][role='button'],
+input[disabled][type='button'],
+input[disabled][type='reset'],
+input[disabled][type='submit'],
 a[disabled][href].button {
     cursor: not-allowed;
 }
 
 ::file-selector-button {
     --focus-ring-outline-offset: 0.125rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0.8125rem;
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
+    margin-block: 0;
+    margin-inline: 0 0.8125rem;
+    padding-block: 0.375rem;
+    padding-inline: 0.8125rem;
     font: inherit;
     font-size: 1em;
     line-height: 1.1875;
     border-width: 0.125rem;
     border-style: solid;
     border-radius: 0;
-    text-align: left;
-    -webkit-appearance: button;
-    -moz-appearance: button;
+    text-align: start;
     appearance: button;
     text-decoration: none;
     cursor: pointer;
     --focus-ring-outline-color: var(--sys-clr-button-border, ButtonFace);
-    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border, ButtonFace);
-    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg, ButtonFace);
-    color: ButtonText;
     color: var(--sys-clr-button-text, ButtonText);
-    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border, ButtonFace);
 }
 
@@ -1574,30 +1397,22 @@ a[disabled][href].button {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-[data-state-focus="true"]::file-selector-button,
+[data-state-focus='true']::file-selector-button,
 .no-js :focus::file-selector-button,
 .js__no-whereSelector :focus::file-selector-button {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1606,13 +1421,9 @@ a[disabled][href].button {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1621,13 +1432,9 @@ a[disabled][href].button {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
@@ -1636,45 +1443,33 @@ a[disabled][href].button {
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
-:has([data-state-focus="true"])::file-selector-button {
+:has([data-state-focus='true'])::file-selector-button {
     --focus-ring-outline-color: var(
         --sys-clr-button-border-hover,
         SelectedItem
     );
-    border-color: SelectedItem;
     border-color: var(--sys-clr-button-border-hover, SelectedItem);
-    background-color: SelectedItem;
     background-color: var(--sys-clr-button-bg-hover, SelectedItem);
-    color: SelectedItemText;
     color: var(--sys-clr-button-text-hover, SelectedItemText);
-    accent-color: SelectedItem;
     accent-color: var(--sys-clr-button-border-hover, SelectedItem);
 }
 
 :active::file-selector-button,
-[data-state-active="true"]::file-selector-button {
+[data-state-active='true']::file-selector-button {
     --focus-ring-outline-color: var(--sys-clr-button-border-active, ButtonFace);
-    border-color: ButtonFace;
     border-color: var(--sys-clr-button-border-active, ButtonFace);
-    background-color: ButtonFace;
     background-color: var(--sys-clr-button-bg-active, ButtonFace);
-    color: ButtonText;
     color: var(--sys-clr-button-text-active, ButtonText);
-    accent-color: ButtonFace;
     accent-color: var(--sys-clr-button-border-active, ButtonFace);
 }
 
-[aria-disabled="true"]::file-selector-button,
+[aria-disabled='true']::file-selector-button,
 [disabled]::file-selector-button {
     cursor: not-allowed;
 }
@@ -1687,11 +1482,8 @@ table {
     position: relative;
     align-self: center;
     justify-self: center;
-    margin-top: 1.25rem;
-    margin-bottom: 0;
-    margin-top: 2.25rem;
-    margin-bottom: 0.9375rem;
-    background: CanvasText;
+    margin-block: 1.25rem 0;
+    margin-block: 2.25rem 0.9375rem;
     background: var(--sys-clr-accent-bg, CanvasText);
     max-width: 100%;
 }
@@ -1706,51 +1498,40 @@ table {
     }
     table th,
     table td {
-        border-bottom: 0.125rem solid CanvasText;
-        border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
-        border-right: 0.125rem solid CanvasText;
-        border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-block-end: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-inline-end: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
     table th:first-child,
     table td:first-child {
-        border-left: 0.125rem solid CanvasText;
-        border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-inline-start: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
     table tr:first-child th,
     table tr:first-child td {
-        border-top: 0.125rem solid CanvasText;
-        border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
+        border-block-start: 0.125rem solid var(--sys-clr-text, CanvasText);
     }
 }
-[data-contrast-mode="forced-colors"] table {
+[data-contrast-mode='forced-colors'] table {
     border-spacing: 0;
 }
-[data-contrast-mode="forced-colors"] table th,
-[data-contrast-mode="forced-colors"] table td {
-    border-bottom: 0.125rem solid CanvasText;
-    border-bottom: 0.125rem solid var(--sys-clr-text, CanvasText);
-    border-right: 0.125rem solid CanvasText;
-    border-right: 0.125rem solid var(--sys-clr-text, CanvasText);
+[data-contrast-mode='forced-colors'] table th,
+[data-contrast-mode='forced-colors'] table td {
+    border-block-end: 0.125rem solid var(--sys-clr-text, CanvasText);
+    border-inline-end: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
-[data-contrast-mode="forced-colors"] table th:first-child,
-[data-contrast-mode="forced-colors"] table td:first-child {
-    border-left: 0.125rem solid CanvasText;
-    border-left: 0.125rem solid var(--sys-clr-text, CanvasText);
+[data-contrast-mode='forced-colors'] table th:first-child,
+[data-contrast-mode='forced-colors'] table td:first-child {
+    border-inline-start: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
-[data-contrast-mode="forced-colors"] table tr:first-child th,
-[data-contrast-mode="forced-colors"] table tr:first-child td {
-    border-top: 0.125rem solid CanvasText;
-    border-top: 0.125rem solid var(--sys-clr-text, CanvasText);
+[data-contrast-mode='forced-colors'] table tr:first-child th,
+[data-contrast-mode='forced-colors'] table tr:first-child td {
+    border-block-start: 0.125rem solid var(--sys-clr-text, CanvasText);
 }
 
 th,
 td {
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: 0.8125rem;
-    padding-right: 0.8125rem;
+    padding-block: 0.375rem;
+    padding-inline: 0.8125rem;
     min-width: 10em;
-    background: Canvas;
     background: var(--sys-clr-background, Canvas);
     vertical-align: top;
     text-align: left;
@@ -1769,9 +1550,7 @@ th {
     padding-bottom: 0.375rem;
     text-wrap: balance;
     text-wrap: pretty;
-    background: CanvasText;
     background: var(--sys-clr-accent-bg, CanvasText);
-    color: Canvas;
     color: var(--sys-clr-accent-text, Canvas);
 }
 

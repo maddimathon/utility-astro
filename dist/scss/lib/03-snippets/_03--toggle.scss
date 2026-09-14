@@ -45,7 +45,7 @@ $_toggle_svg_sel_moving: '#b';
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin _toggle-interactive-states(
+@mixin snippet-toggle-block---interactive-states(
     $hover: false,
     $focus: false,
     $focusWithin: $focus,
@@ -68,11 +68,11 @@ $_toggle_svg_sel_moving: '#b';
 ///
 /// @since 0.1.0-beta.0.draft
 ///
-@mixin _toggle-interactive-states--js(
+@mixin snippet-toggle-block---interactive-states--js(
     $includeNoWhereSelectorFallback: false,
     $args...
 ) {
-    @include _toggle-interactive-states(
+    @include snippet-toggle-block---interactive-states(
         $includeNoWhereSelectorFallback: $includeNoWhereSelectorFallback,
         $args...
     ) {
@@ -84,7 +84,7 @@ $_toggle_svg_sel_moving: '#b';
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-toggle-block---interactive-all-states($args...) {
-    @include _toggle-interactive-states(
+    @include snippet-toggle-block---interactive-states(
         $hover: true,
         $focus: true,
         $active: true,
@@ -98,7 +98,7 @@ $_toggle_svg_sel_moving: '#b';
 /// @since 0.1.0-beta.0.draft
 ///
 @mixin snippet-toggle-block---interactive-all-states--js($args...) {
-    @include _toggle-interactive-states--js(
+    @include snippet-toggle-block---interactive-states--js(
         $hover: true,
         $focus: true,
         $active: true,
@@ -229,6 +229,10 @@ $_toggle_svg_sel_moving: '#b';
     //
     $svg_sel_moving: $_toggle_svg_sel_moving,
     $svg_sel_static: $_toggle_svg_sel_static,
+    //
+    $svg_transform_closed: rotate(0deg),
+    $svg_transform_open: rotate(270deg),
+    $svg_transform_closing: rotate(540deg),
     //
     $args...
 ) {
@@ -477,7 +481,7 @@ $_toggle_svg_sel_moving: '#b';
                     @content (js--toggle-base--control-backdrop--after);
                 }
 
-                @include _toggle-interactive-states--js(
+                @include snippet-toggle-block---interactive-states--js(
                     $hover: true,
                     $focus: true
                 ) {
@@ -492,7 +496,9 @@ $_toggle_svg_sel_moving: '#b';
                     }
                 }
 
-                @include _toggle-interactive-states--js($active: true) {
+                @include snippet-toggle-block---interactive-states--js(
+                    $active: true
+                ) {
                     @content (js--toggle-base--control-backdrop--active);
 
                     &::before {
@@ -510,14 +516,24 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--icon);
 
                 &,
-                svg {
+                & > svg {
                     @content (js--toggle-base--icon-and-svg);
                 }
 
-                svg {
+                > svg {
+                    @content (js--toggle-base--icon--svg);
+
                     #{$svg_sel_static},
                     #{$svg_sel_moving} {
                         transform-origin: center;
+
+                        @content (js--toggle-base--icon--svg--paths);
+                    }
+
+                    #{$svg_sel_moving} {
+                        transform: $svg_transform_closed;
+
+                        @content (js--toggle-base--icon--svg--moving-path);
                     }
                 }
             }
@@ -728,7 +744,7 @@ $_toggle_svg_sel_moving: '#b';
 
                     > svg {
                         #{$svg_sel_moving} {
-                            transform: rotate(270deg);
+                            transform: $svg_transform_open;
 
                             @content (js--toggle-base--container--open--control--icon--moving);
                         }
@@ -770,7 +786,7 @@ $_toggle_svg_sel_moving: '#b';
 
                     > svg {
                         #{$svg_sel_moving} {
-                            transform: rotate(540deg);
+                            transform: $svg_transform_closing;
 
                             @content (js--toggle-base--container--closing--control--icon--moving);
                         }
@@ -1029,14 +1045,16 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                 @content (js--toggle-control);
 
-                @include _toggle-interactive-states--js(
+                @include snippet-toggle-block---interactive-states--js(
                     $hover: true,
                     $focus: true
                 ) {
                     @content (js--toggle-control--hover-focus-or-within);
                 }
 
-                @include _toggle-interactive-states--js($active: true) {
+                @include snippet-toggle-block---interactive-states--js(
+                    $active: true
+                ) {
                     @content (js--toggle-control--active);
                 }
 

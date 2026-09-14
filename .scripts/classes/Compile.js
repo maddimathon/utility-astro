@@ -31,8 +31,6 @@ export class Compile extends CompileStage {
         // @ts-expect-error
         'tsconfig',
         'ts',
-        // @ts-expect-error
-        'templates',
         'files',
         'scss',
         // @ts-expect-error
@@ -49,7 +47,7 @@ export class Compile extends CompileStage {
 
         const distDir = this.getDistDir( undefined, subDir ).trim().replace( /\/$/g, '' );
 
-        await this.runCustomDirCopySubStage( subDir );
+        await this.customCopySubstage( subDir );
 
         // TODO - remove this when unneeded
         this.fs.delete( [
@@ -63,29 +61,14 @@ export class Compile extends CompileStage {
      * @override
      */
     async scss() {
-        await this.runCustomDirCopySubStage( 'scss' );
+        await this.customCopySubstage( 'scss' );
 
-        await this.runCustomScssDirSubStage(
+        await this.customScssSubstage.dir(
             '',
             'src/astro/css',
             {
                 postCSS: true,
                 srcDir: 'src/scss/_astro',
-            },
-        );
-    }
-
-    /**
-     * @protected
-     */
-    async templates() {
-
-        await this.runCustomScssDirSubStage(
-            'template',
-            'dist/css',
-            {
-                postCSS: true,
-                srcDir: 'src/scss',
             },
         );
     }

@@ -96,11 +96,25 @@ $template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
 ///
 /// @since ___PKG_VERSION___
 ///
+$template_title_base: null !default;
+$template_title_base: config-valid-string(
+    $template_title_base,
+    'template_title_base',
+    $default: 'Template'
+) !default;
+
+///
+/// @since ___PKG_VERSION___
+///
 $template_title: null !default;
 $template_title: config-valid-string(
     $template_title,
     'template_title',
-    $default: if($template_isDefault, 'Template', 'Template - #{$template_name}')
+    $default: if(
+            $template_isDefault,
+            $template_title_base,
+            '#{$template_title_base} - #{$template_name}'
+        )
 ) !default;
 
 ///
