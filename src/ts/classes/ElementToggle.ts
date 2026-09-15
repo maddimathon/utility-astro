@@ -132,8 +132,12 @@ export class ElementToggle {
      * @since 0.1.0-alpha.7
      * @since ___PKG_VERSION___ — Renamed from init to runOnLoad.
      */
-    public static async runOnLoad( opts: Partial<ElementToggle.Opts> = {} ): Promise<void> {
-        window.addEventListener( 'load', () => ElementToggle.run( opts ), { once: true } );
+    public static runOnLoad( opts: Partial<ElementToggle.Opts> = {} ): void {
+        window.addEventListener(
+            'load',
+            () => ElementToggle.run( opts ),
+            { once: true },
+        );
     }
 
     /**

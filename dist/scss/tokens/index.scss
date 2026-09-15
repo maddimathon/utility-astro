@@ -8,6 +8,8 @@
 
 @use 'pkg:@maddimathon/utility-sass/map';
 
+@use '../config';
+
 ///
 /// @since 0.1.0-beta.0.draft
 ///
@@ -20,4 +22,15 @@ $contentGridAlignment: map.merge(
         align-items: start,
     ),
     map.flatten($contentGridAlignment)
+);
+
+///
+/// @since 0.1.0-beta.0.draft
+///
+$breakpoint_minHeight_fixedHeight: null !default;
+$breakpoint_minHeight_fixedHeight: config.config-valid-number(
+    $breakpoint_minHeight_fixedHeight,
+    'breakpoint_minHeight_fixedHeight',
+    $default: 15,
+    $unit: 1
 );

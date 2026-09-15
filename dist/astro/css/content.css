@@ -399,6 +399,25 @@ body > :where(main) > :where(aside) {
         );
 }
 
+.layout_sidebar-left > :where(main) > :is(.main-content__article),
+.layout_sidebar-right > :where(main) > :is(.main-content__article) {
+    --grid-column: content-start/content-end;
+    grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
+    width: auto;
+}
+.layout_sidebar-left > :is(aside),
+.layout_sidebar-left > :where(main) > :is(aside),
+.layout_sidebar-right > :is(aside),
+.layout_sidebar-right > :where(main) > :is(aside) {
+    --grid-column: sidebar-start/sidebar-end;
+    grid-column: sidebar-start/sidebar-end;
+    grid-column: var(--grid-column, sidebar-start/sidebar-end);
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 @media (width >= 55.625em) {
     .layout_sidebar-left {
         /* prettier-ignore */
@@ -443,23 +462,5 @@ body > :where(main) > :where(aside) {
                 --gap-inline-layout-half,
                 4vw
             );
-    }
-    .layout_sidebar-left > :where(main) > :is(.main-content__article),
-    .layout_sidebar-right > :where(main) > :is(.main-content__article) {
-        --grid-column: content-start/content-end;
-        grid-column: content-start/content-end;
-        grid-column: var(--grid-column, content-start/content-end);
-        width: auto;
-    }
-    .layout_sidebar-left > :is(aside),
-    .layout_sidebar-left > :where(main) > :is(aside),
-    .layout_sidebar-right > :is(aside),
-    .layout_sidebar-right > :where(main) > :is(aside) {
-        --grid-column: sidebar-start/sidebar-end;
-        grid-column: sidebar-start/sidebar-end;
-        grid-column: var(--grid-column, sidebar-start/sidebar-end);
-        width: auto;
-        margin-top: 0;
-        margin-bottom: 0;
     }
 }

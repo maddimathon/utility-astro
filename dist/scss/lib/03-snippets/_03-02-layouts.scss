@@ -726,6 +726,32 @@ $_flex_container_alignment_row: (
             @content (layout-extra-wide);
         }
 
+        %layout-sidebar-left,
+        %layout-sidebar-right {
+            > :where(%main-content) {
+                > :is(%main-content__article) {
+                    @include snippet-body-grid--content-width;
+
+                    @content (layout-sidebar-left-or-right--article);
+                }
+            }
+
+            &,
+            & > :where(%main-content) {
+                > :is(%_main-sidebar, %main-sidebar) {
+                    @include snippet-body-grid--sidebar-width;
+
+                    @if $includeMarginBlock {
+                        margin-block: 0;
+                    }
+
+                    @content (layout-sidebar-left-or-right--sidebar);
+                }
+            }
+
+            @content (layout-sidebar-left-or-right);
+        }
+
         @include min-width(sidebar) {
             %layout-sidebar-left {
                 // prettier-ignore
@@ -745,32 +771,6 @@ $_flex_container_alignment_row: (
                 );
 
                 @content (layout-sidebar-right);
-            }
-
-            %layout-sidebar-left,
-            %layout-sidebar-right {
-                > :where(%main-content) {
-                    > :is(%main-content__article) {
-                        @include snippet-body-grid--content-width;
-
-                        @content (layout-sidebar-left-or-right--article);
-                    }
-                }
-
-                &,
-                & > :where(%main-content) {
-                    > :is(%_main-sidebar, %main-sidebar) {
-                        @include snippet-body-grid--sidebar-width;
-
-                        @if $includeMarginBlock {
-                            margin-block: 0;
-                        }
-
-                        @content (layout-sidebar-left-or-right--sidebar);
-                    }
-                }
-
-                @content (layout-sidebar-left-or-right);
             }
         }
 

@@ -11,6 +11,7 @@
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
 
 @use '../../config';
+@use '../../tokens';
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -611,21 +612,23 @@ $_toggle_svg_sel_moving: '#b';
     /* Opening & Closing ==================================== */
 
     @include feature-check.js {
-        @include selector.add-body-selector(
-            selector.has-list(
-                selector.is-list(
-                    $_selector_any_modal_container,
-                    $parentSelector: '[data-toggle-container=open]',
+        @include min-height(tokens.$breakpoint_minHeight_fixedHeight) {
+            @include selector.add-body-selector(
+                selector.has-list(
+                    selector.is-list(
+                        $_selector_any_modal_container,
+                        $parentSelector: '[data-toggle-container=open]',
+                        $split: false,
+                        $unify: true
+                    ),
+                    $parentSelector: config.$selector_body,
                     $split: false,
                     $unify: true
-                ),
-                $parentSelector: config.$selector_body,
-                $split: false,
-                $unify: true
-            )
-        ) {
-            &:has([data-toggle-control-backdrop]) {
-                overflow: hidden !important;
+                )
+            ) {
+                &:has([data-toggle-control-backdrop]) {
+                    overflow: hidden !important;
+                }
             }
         }
 

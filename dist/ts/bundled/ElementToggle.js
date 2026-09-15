@@ -212,8 +212,12 @@ var ElementToggle = class _ElementToggle {
    * @since 0.1.0-alpha.7
    * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
    */
-  static async runOnLoad(opts = {}) {
-    window.addEventListener("load", () => _ElementToggle.run(opts), { once: true });
+  static runOnLoad(opts = {}) {
+    window.addEventListener(
+      "load",
+      () => _ElementToggle.run(opts),
+      { once: true }
+    );
   }
   /**
    * Initiates a single instance asynchronously.

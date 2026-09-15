@@ -279,7 +279,7 @@ small {
 @property --height-nav-primary {
     syntax: '<length-percentage> | <number>';
     inherits: true;
-    initial-value: 0;
+    initial-value: 0px;
 }
 @property --icon-color {
     syntax: '<color>';
@@ -300,6 +300,11 @@ small {
     syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 2em;
+}
+@property --page-top {
+    syntax: '<length-percentage> | <number>';
+    inherits: true;
+    initial-value: 0px;
 }
 @property --scroll-padding-top {
     syntax: '<length-percentage> | <number>';
@@ -2210,15 +2215,16 @@ th {
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
 html {
-    --scroll-padding-top: var(--gap-block-layout, 5vw);
+    --scroll-padding-top: var(--height-nav-primary, 0px);
     --scroll-padding-top: calc(
-        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
+        var(--page-top, 0px) + var(--height-nav-primary, 0px) +
+            var(--gap-block-layout, 5vw)
     );
 }
 
 html,
 body {
-    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
+    scroll-padding-top: var(--scroll-padding-top, 0px);
 }
 
 /*! END of @maddimathon/utility-sass/template */
@@ -2541,6 +2547,22 @@ body > :where(main) > :where(aside) {
     grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 0 [page-start] 0 [sidebar-start] 0 [content-start] 1fr minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) var(--gap-inline-layout-half, 4vw) minmax(auto, var(--width-content, 36rem)) var(--gap-inline-layout-half, 4vw) minmax(auto, calc(var(--width-sidebar, 18rem) / 2)) 1fr [content-end] 0 [sidebar-end] 0 [page-end] 0 [site-end] var(--gap-inline-layout-half, 4vw);
 }
 
+.layout_sidebar-left > :where(main) > :is(.main-content__article),
+.layout_sidebar-right > :where(main) > :is(.main-content__article) {
+    --grid-column: content-start/content-end;
+    grid-column: var(--grid-column, content-start/content-end);
+    width: auto;
+}
+.layout_sidebar-left > :is(aside),
+.layout_sidebar-left > :where(main) > :is(aside),
+.layout_sidebar-right > :is(aside),
+.layout_sidebar-right > :where(main) > :is(aside) {
+    --grid-column: sidebar-start/sidebar-end;
+    grid-column: var(--grid-column, sidebar-start/sidebar-end);
+    width: auto;
+    margin-block: 0;
+}
+
 @media (width >= 55.625em) {
     .layout_sidebar-left {
         /* prettier-ignore */
@@ -2553,21 +2575,6 @@ body > :where(main) > :where(aside) {
         --grid-template-columns--page: 0 [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 0;
         /* prettier-ignore */
         grid-template-columns: var(--gap-inline-layout-half, 4vw) [site-start] 1fr [page-start] 0 [content-start] minmax(auto, var(--width-content, 36rem)) [content-end] var(--gap-inline-layout, 8vw) [sidebar-start] minmax(auto, var(--width-sidebar, 18rem)) [sidebar-end] 0 [page-end] 1fr [site-end] var(--gap-inline-layout-half, 4vw);
-    }
-    .layout_sidebar-left > :where(main) > :is(.main-content__article),
-    .layout_sidebar-right > :where(main) > :is(.main-content__article) {
-        --grid-column: content-start/content-end;
-        grid-column: var(--grid-column, content-start/content-end);
-        width: auto;
-    }
-    .layout_sidebar-left > :is(aside),
-    .layout_sidebar-left > :where(main) > :is(aside),
-    .layout_sidebar-right > :is(aside),
-    .layout_sidebar-right > :where(main) > :is(aside) {
-        --grid-column: sidebar-start/sidebar-end;
-        grid-column: var(--grid-column, sidebar-start/sidebar-end);
-        width: auto;
-        margin-block: 0;
     }
 }
 /*! END of @maddimathon/utility-astro/template/astro */
@@ -2952,7 +2959,7 @@ body > :where(main) > :where(aside) {
 }
 
 /* Opening & Closing ==================================== */
-@media screen {
+@media screen and (height >= 15em) {
     :where(.js)
         body:has(
             [data-toggle-container='open']:is(
@@ -2964,6 +2971,8 @@ body > :where(main) > :where(aside) {
         ):has([data-toggle-control-backdrop]) {
         overflow: hidden !important;
     }
+}
+@media screen {
     :where(.js)
         [data-toggle-container='closed']
         > [data-toggle-content]

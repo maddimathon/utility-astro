@@ -260,7 +260,7 @@
 }
 
 /* Opening & Closing ==================================== */
-@media screen {
+@media screen and (height >= 15em) {
     :where(.js)
         body:has(
             [data-toggle-container="open"]:is(
@@ -272,6 +272,8 @@
         ):has([data-toggle-control-backdrop]) {
         overflow: hidden !important;
     }
+}
+@media screen {
     :where(.js)
         [data-toggle-container="closed"]
         > [data-toggle-content]

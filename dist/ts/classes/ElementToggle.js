@@ -107,7 +107,7 @@ export class ElementToggle {
      * @since 0.1.0-alpha.7
      * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
      */
-    static async runOnLoad(opts = {}) {
+    static runOnLoad(opts = {}) {
         window.addEventListener('load', () => _a.run(opts), { once: true });
     }
     /**

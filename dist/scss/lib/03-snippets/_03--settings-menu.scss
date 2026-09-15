@@ -234,8 +234,8 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                             max-height: 80svh;
                             max-height: calc(
-                                95svh - do-var(
-                                        scroll-padding-top
+                                95svh - var-scroll-padding-top(
+
                                     ) - var-gap-block(layout) - do-var(
                                         icon-size
                                     )

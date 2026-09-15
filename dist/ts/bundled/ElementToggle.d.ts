@@ -56,7 +56,7 @@ export declare class ElementToggle {
      * @since 0.1.0-alpha.7
      * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
      */
-    static runOnLoad(opts?: Partial<ElementToggle.Opts>): Promise<void>;
+    static runOnLoad(opts?: Partial<ElementToggle.Opts>): void;
     /**
      * Initiates a single instance asynchronously.
      *

@@ -9,6 +9,7 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { flattenClassList, makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -31,7 +32,12 @@ export interface ToggleBackdropProps {
 
 type Props = ElementProps<ToggleBackdropProps, 'div'>;
 
-const { classBase, toggleID }: Props = Astro.props;
+const {
+    class: classList = [],
+    classBase,
+    toggleID,
+    ...attributes
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -42,9 +48,12 @@ const classMaker = classBase
 ---
 
 <div
+    {...attributes}
     data-toggle-control={toggleID}
     data-toggle-control-backdrop={toggleID}
-    class={classMaker('__control--backdrop')}
+    class={flattenClassList(
+        makeClassList(classList, classMaker('__control--backdrop')),
+    )}
     aria-hidden='true'
 >
 </div>

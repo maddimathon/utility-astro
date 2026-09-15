@@ -279,7 +279,7 @@ small {
 @property --height-nav-primary {
     syntax: '<length-percentage> | <number>';
     inherits: true;
-    initial-value: 0;
+    initial-value: 0px;
 }
 @property --icon-color {
     syntax: '<color>';
@@ -300,6 +300,11 @@ small {
     syntax: '<length-percentage> | <number>';
     inherits: true;
     initial-value: 2em;
+}
+@property --page-top {
+    syntax: '<length-percentage> | <number>';
+    inherits: true;
+    initial-value: 0px;
 }
 @property --scroll-padding-top {
     syntax: '<length-percentage> | <number>';
@@ -2462,15 +2467,16 @@ th {
  * ======================================================================== */
 /*! START of @maddimathon/utility-sass/template */
 html {
-    --scroll-padding-top: var(--gap-block-layout, 5vw);
+    --scroll-padding-top: var(--height-nav-primary, 0px);
     --scroll-padding-top: calc(
-        var(--height-nav-primary, 0) + var(--gap-block-layout, 5vw)
+        var(--page-top, 0px) + var(--height-nav-primary, 0px) +
+            var(--gap-block-layout, 5vw)
     );
 }
 
 html,
 body {
-    scroll-padding-top: var(--scroll-padding-top, var(--gap-block-layout, 5vw));
+    scroll-padding-top: var(--scroll-padding-top, 0px);
 }
 
 body {
