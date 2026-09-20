@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @use 'pkg:@maddimathon/utility-sass/map';
@@ -17,7 +17,7 @@
 @use '../03-snippets' as *;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-content-layouts-body-grid($content_exists: null, $css_headings: null) {
     @if $css_headings == null {
@@ -52,7 +52,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-content-layouts-content-header(
     $print_contentHeader: map.get(config.$template_styles, astro, contentHeader),
@@ -128,7 +128,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-content-layouts(
     $print_bodyGrid: map.get(config.$template_styles, astro, bodyGrid),

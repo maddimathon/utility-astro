@@ -20,14 +20,14 @@ export class ElementToggle {
      * to avoid re-initializing the same element or a block with the same id
      * value.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected static readonly instances: Map<string, ElementToggle> = new Map();
 
     /**
      * Gets the instance of this class for the given element (based on id value).
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public static get( element: HTMLElement ): null | ElementToggle {
         return this.getByID( element.id );
@@ -36,7 +36,7 @@ export class ElementToggle {
     /**
      * Gets the instance of this class for the given element (based on id value).
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public static getByID( id: string ): null | ElementToggle {
         return id ? ( ElementToggle.instances.get( id ) ?? null ) : null;
@@ -72,7 +72,7 @@ export class ElementToggle {
      * Queries the document for toggle containers to set them up as instances of
      * this class.
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public static async run( opts: Partial<ElementToggle.Opts> = {} ): Promise<void> {
 
@@ -130,7 +130,7 @@ export class ElementToggle {
      * class.
      *
      * @since 0.1.0-alpha.7
-     * @since ___PKG_VERSION___ — Renamed from init to runOnLoad.
+     * @since 0.1.0-beta.0 — Renamed from init to runOnLoad.
      */
     public static runOnLoad( opts: Partial<ElementToggle.Opts> = {} ): void {
         window.addEventListener(
@@ -274,14 +274,14 @@ export class ElementToggle {
     /**
      * Timeout length to switch the button to active state, in milliseconds.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected readonly activeTimeoutLength: number;
 
     /**
      * Whether this toggle-able element should be treated as a modal (i.e., trap focus).
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected readonly asModal: boolean;
 
@@ -305,12 +305,12 @@ export class ElementToggle {
     /**
      * Whether this toggle-able element defaults to the open state.
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #defaultIsOpen: undefined | boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public get defaultIsOpen(): boolean {
         // returns
@@ -322,7 +322,7 @@ export class ElementToggle {
     }
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public set defaultIsOpen( value: boolean ) {
         this.#defaultIsOpen = !!value;
@@ -331,7 +331,7 @@ export class ElementToggle {
     /**
      * Attribute strings for adding custom focus & active states.
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected readonly attr: {
         active: string;
@@ -339,7 +339,7 @@ export class ElementToggle {
     };
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     get isCurrentAnchorTarget(): boolean {
         return this.opts.openWhenTargetted && this.checkUrlTarget( new URL( window.location.href ) );
@@ -348,7 +348,7 @@ export class ElementToggle {
     /**
      * Whether this container is currently open.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public get isOpen(): boolean {
         const attr = this.container.getAttribute( 'data-toggle-container' );
@@ -359,7 +359,7 @@ export class ElementToggle {
      * Whether this toggle-able element is a menu (which slightly changes
      * some behaviour/aria).
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected readonly isMenu: boolean;
 
@@ -367,17 +367,17 @@ export class ElementToggle {
      * Whether this toggle-able element is a nav element/region (which slightly
      * changes some behaviour/aria).
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected readonly isNav: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public readonly toggleListener: ( this: HTMLElement, ev: Event ) => any;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public readonly toggleBackdropListener: ( this: HTMLElement, ev: Event ) => any;
 
@@ -537,7 +537,7 @@ export class ElementToggle {
     /**
      * Validates the markup of a button used to toggle this element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected async validateButton( button: HTMLElement ): Promise<HTMLElement> {
         const contentID = this.content.id;
@@ -599,19 +599,19 @@ export class ElementToggle {
      * ====================================================================== */
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #activeTimeout: ReturnType<typeof setTimeout> | undefined;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #activeStateHold: boolean = false;
 
     /**
      * Adds the active attribute to the buttons.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected activateButton( button: HTMLElement ): void {
         clearTimeout( this.#activeTimeout );
@@ -660,14 +660,14 @@ export class ElementToggle {
     }
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #deactiveTimeout: ReturnType<typeof setTimeout> | undefined;
 
     /**
      * Removes the active attribute to the buttons.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected deactivateButton(): void {
         clearTimeout( this.#deactiveTimeout );
@@ -717,7 +717,7 @@ export class ElementToggle {
      * Fired when this element's attributes change (and we might have to updated
      * opts/config/etc.).
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public handleContainerAttributeChange( [ record ]: MutationRecord[] ): void {
 
@@ -769,7 +769,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     get focusableContainerChildren(): ReturnType<typeof ElementToggle.getFocusableChildren> {
         // returns
@@ -786,7 +786,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     get focusableContentChildren(): ReturnType<typeof ElementToggle.getFocusableChildren> {
         // returns
@@ -808,7 +808,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     get focusTrappers(): {
         keydown: ( this: Document, event: KeyboardEvent ) => void,
@@ -872,7 +872,7 @@ export class ElementToggle {
     /**
      * Sets the closing time property via computed style value.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected setClosingTime(): void {
         const computedClosingTime = getComputedStyle( this.container ).getPropertyValue( this.opts.closingTimeProperty );
@@ -885,7 +885,7 @@ export class ElementToggle {
     /**
      * Called when the element is toggled open.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected trapFocus(): void {
         // returns - untraps focus first
@@ -923,7 +923,7 @@ export class ElementToggle {
     /**
      * Called when the element is toggled closed.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected untrapFocus(): void {
         const focusableContainerChildren = this.focusableContainerChildren;
@@ -1015,7 +1015,7 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public toggleQuietly(
         opts: Partial<ElementToggle.ToggleOpts> = {},
@@ -1100,7 +1100,7 @@ export class ElementToggle {
     /**
      * Opens without firing events or scrolling to the element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public openQuietly(
         button: undefined | HTMLElement,
@@ -1174,7 +1174,7 @@ export class ElementToggle {
     /**
      * Closes without firing events or scrolling to the element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public closeQuietly(
         button: undefined | HTMLElement,
@@ -1203,7 +1203,7 @@ export namespace ElementToggle {
      * children and can avoid weird edge cases (like changing contenteditable or
      * weird tabindex behaviour).
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export function getFocusableChildren( container: HTMLElement ) {
 
@@ -1284,7 +1284,7 @@ export namespace ElementToggle {
          * @default 
          * closingTime / 4
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         // TODO - create test/demo
         activeTimeoutLength: number;
@@ -1310,14 +1310,14 @@ export namespace ElementToggle {
          * Name of the computed style property to use for the closing time of
          * each element.
          *
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         closingTimeProperty: string;
 
         /**
          * Outputs information to the console.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         // TODO - create test/demo
         debug: boolean;
@@ -1326,7 +1326,7 @@ export namespace ElementToggle {
          * Whether to output the results of constructing each toggle element as
          * it is made.
          *
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         logResults?: boolean;
 
@@ -1340,12 +1340,12 @@ export namespace ElementToggle {
         openWhenTargetted: boolean;
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         scrollBehaviour: ScrollBehavior;
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         scrollToOptions: null | ( ( button: undefined | HTMLElement ) => null | ScrollToOptions );
     }
@@ -1353,7 +1353,7 @@ export namespace ElementToggle {
     /**
      * Opts for each toggle of the element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export interface ToggleOpts {
         /**

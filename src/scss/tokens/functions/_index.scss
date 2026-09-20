@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide tokens-get-at-properties;
@@ -11,7 +11,7 @@
 @use 'pkg:@maddimathon/utility-sass/string';
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @function tokens-get-at-properties($inputs, $stroke_relative, $style_flat, $args...) {
     @return fns.tokens-get-at-properties(

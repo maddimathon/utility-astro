@@ -1,7 +1,7 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
 /// @since 0.1.0-alpha
 ///
 
 @forward '_pre';
-@forward 'lib';
+@forward 'lib' hide $selector_body_aliases;

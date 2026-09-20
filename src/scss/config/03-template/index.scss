@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @forward 'functions';
@@ -11,7 +11,7 @@
 @use '../02-lib' as lib;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $template_packagePath: if(
     utils.$template_isDefault,
@@ -20,12 +20,12 @@ $template_packagePath: if(
 ) !default;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $mx_prop_useCustom_gridColumn: lib.$include_html !default;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $mx_bodyGrid_displayContents: null !default;
 $mx_bodyGrid_displayContents: utils.config-valid-bool(
@@ -35,7 +35,7 @@ $mx_bodyGrid_displayContents: utils.config-valid-bool(
 );
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $mx_bodyGrid_dl_displayContents: null !default;
 $mx_bodyGrid_dl_displayContents: utils.config-valid-bool(
@@ -45,7 +45,7 @@ $mx_bodyGrid_dl_displayContents: utils.config-valid-bool(
 );
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $mx_bodyGrid_form_displayContents: null !default;
 $mx_bodyGrid_form_displayContents: utils.config-valid-bool(

@@ -25,7 +25,7 @@ export class JsCookie {
     /**
      * Now accepting an args object instead of params 3-5.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     public constructor (
         /**
@@ -42,7 +42,7 @@ export class JsCookie {
     /**
      * Please pass an opts object as the third param instead.
      * 
-     * @deprecated ___PKG_VERSION___
+     * @deprecated 0.1.0-beta.0
      */
     public constructor (
         /**
@@ -68,7 +68,7 @@ export class JsCookie {
         /**
          * Whether to also save the cookie value to LocalStorage.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         copyToLocalStorage?: boolean,
     );
@@ -97,7 +97,7 @@ export class JsCookie {
         /**
          * Whether to also save the cookie value to LocalStorage.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         dep_copyToLocalStorage: boolean = false,
     ) {
@@ -125,7 +125,7 @@ export class JsCookie {
     /**
      * Empties the contents of this cookie.
      * 
-     * @deprecated ___PKG_VERSION___
+     * @deprecated 0.1.0-beta.0
      */
     public delete(): void {
         this.remove();
@@ -155,7 +155,7 @@ export class JsCookie {
     /**
      * Empties the contents of this cookie.
      * 
-     * @since ___PKG_VERSION___ — Renamed from delete to remove.
+     * @since 0.1.0-beta.0 — Renamed from delete to remove.
      */
     public remove(): void {
         this.set( '', -1 );
@@ -212,7 +212,7 @@ export class JsCookie {
 /**
  * Utilities for use in the {@link JsCookie} class.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  */
 export namespace JsCookie {
 
@@ -220,7 +220,7 @@ export namespace JsCookie {
      * A utility to statically get the value of a cookie. For prettier code, not
      * for performance.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export function get(
         name: string,
@@ -234,7 +234,7 @@ export namespace JsCookie {
      * A utility to statically delete the value of a cookie. For prettier code, not
      * for performance.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export function remove(
         name: string,
@@ -248,7 +248,7 @@ export namespace JsCookie {
      * A utility to statically set the value of a cookie. For prettier code, not
      * for performance.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export function set(
         name: string,
@@ -262,14 +262,14 @@ export namespace JsCookie {
     /**
      * Additional configuration options.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export interface Opts {
 
         /**
          * Whether to also save the cookie value to LocalStorage.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         copyToLocalStorage?: undefined | boolean;
 
@@ -309,13 +309,13 @@ export namespace JsCookie {
     /**
      * Additional types for {@link JsCookie.Opts}.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export namespace Opts {
         /**
          * Additional configuration options.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         export type Input = Partial<JsCookie.Opts>;
     }

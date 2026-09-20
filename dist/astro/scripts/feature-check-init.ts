@@ -2,12 +2,12 @@
  * Script to initialize element toggles — to be imported by components, layouts,
  * etc.
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 

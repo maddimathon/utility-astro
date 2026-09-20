@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 
@@ -122,7 +122,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     } | undefined;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     components?: {
         PrimaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
@@ -149,7 +149,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
      */
     footer?: {
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         attributes?: Omit<HTMLAttributes<'footer'>, 'class' | 'class:list'> | undefined;
 
@@ -158,7 +158,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
          * 
          * An empty object can also be passed to enable the default output.
          * 
-         * @since 0.1.0-beta.0.draft — Changed `false` option to `undefined`.
+         * @since 0.1.0-beta.0 — Changed `false` option to `undefined`.
          */
         copyright?: Copyright_HTML | Copyright_PlainOwner | Copyright_PlainYear | undefined;
 
@@ -245,7 +245,7 @@ export interface PageProps<T_ContentType extends ContentType = ContentType> {
     /**
      * Used to check for current page when its value isn't set.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     urlMaker?: ( currentURL: URL, targetSubpath: string ) => string;
 }

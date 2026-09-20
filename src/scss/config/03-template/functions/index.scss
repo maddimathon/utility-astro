@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @forward '../../02-lib/functions';
@@ -11,7 +11,7 @@
 @use 'sass:map';
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @function config-get-template-styles(
     $inputs,

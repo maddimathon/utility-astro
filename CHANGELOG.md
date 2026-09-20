@@ -19,6 +19,74 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.0** — 2026-09-19
+
+### Removed
+- Removed $internal_supressCredit_sass config var (credit is now opt-in only, by calling the mixin)
+
+### Moved & Renamed
+- Mixins renamed:
+    - snippet-support-astro-content → snippet-support-body-grid
+    - snippet-support-astro-settings-menu → snippet-support-site-settings-menu
+    - snippet-support-astro-skip-links → snippet-support-skip-links
+    - snippet-support-astro-toggle → snippet-support-toggle-block
+- Moved from lib config to template config (and renamed):
+    - $print_astro → $template_astro
+    - $print_astro_content → $template_astro_bodyGrid
+    - $print_astro_settingsMenu → map.get( $template_styles, siteSettingsMenu )
+    - $print_astro_skipLinks → map.get( $template_styles, skipLinks )
+    - $print_astro_toggle → map.get( $template_styles, toggleBlock )
+    - $print_astro_toggleNav → $template_astro_toggleNav
+    - $template_astro_content → $template_astro_bodyGrid
+
+### Misc. Breaking
+- Upgraded to Astro 7.3
+- Updated to utility-sass@0.1.0-beta, which includes breaking changes
+- Scss templates no longer forward config or lib
+- Moved modules & template config directories to `src/config/` directory
+- Removed SettingsMenu_Scripts, Toggle_Scripts components in favour of new astro
+  scripts files (and config env variables)
+- Restructured HTML so that sidebar nests inside of main
+
+### Added
+- LoremIpsum display settings button prop, more code & table options
+- Added better scss icon support
+- Alert_Icon component
+- CopyToClipboardButton component
+- New scss config var:
+    - $mx_prop_useCustom_gridColumn 
+    - $mx_propGridColumn_onlyFallbackPrefix
+    - $mx_bodyGrid_displayContents
+    - $mx_bodyGrid_dl_displayContents
+    - $mx_bodyGrid_form_displayContents
+- New scss token var:
+    - $contentGridAlignment
+    - $breakpoint_minHeight_fixedHeight
+- New scss mixins: 
+    - prop-grid-column
+    - snippet-body-grid--flex-container
+    - snippet-body-grid--grid-alignment
+- Added to new utility-sass at-properties - grid-column
+- display-contents utility class
+- Added localStorage saving to the SettingsMenu script, quecking that first for
+  quicker loading than cookies
+- Added subheading support to Heading & LoremIpsum
+- Added %main-subgrid utility for better layouts
+- Updated ElementToggle to add more options for toggling behaviour -- can now trap focus
+- Added bundles for using utility classes in the browser without Astro or similar
+
+### Changed
+- Icon in alert block now has alert-block__icon class
+- Alert now accepts a custom icon via 'icon' slot
+- Added more params and content blocks to snippet-support-toggle-block
+
+### Fixed
+- Fixes to skip-link focus & active states
+- Updated with utility-sass
+- Prop fixes to Heading component
+- Style fixes to toggle buttons and icons
+
+
 ## **0.1.0-alpha.21** — 2026-03-01
 
 ### Added

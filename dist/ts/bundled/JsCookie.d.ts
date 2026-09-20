@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 import type { Classify } from '@maddimathon/utility-typescript/types';
@@ -25,7 +25,7 @@ export declare class JsCookie {
     /**
      * Now accepting an args object instead of params 3-5.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     constructor(
     /**
@@ -39,7 +39,7 @@ export declare class JsCookie {
     /**
      * Please pass an opts object as the third param instead.
      *
-     * @deprecated 0.1.0-beta.0.draft
+     * @deprecated 0.1.0-beta.0
      */
     constructor(
     /**
@@ -61,13 +61,13 @@ export declare class JsCookie {
     /**
      * Whether to also save the cookie value to LocalStorage.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     copyToLocalStorage?: boolean);
     /**
      * Empties the contents of this cookie.
      *
-     * @deprecated 0.1.0-beta.0.draft
+     * @deprecated 0.1.0-beta.0
      */
     delete(): void;
     /**
@@ -77,7 +77,7 @@ export declare class JsCookie {
     /**
      * Empties the contents of this cookie.
      *
-     * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+     * @since 0.1.0-beta.0 — Renamed from delete to remove.
      */
     remove(): void;
     /**
@@ -88,40 +88,40 @@ export declare class JsCookie {
 /**
  * Utilities for use in the {@link JsCookie} class.
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 export declare namespace JsCookie {
     /**
      * A utility to statically get the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function get(name: string, opts?: JsCookie.Opts.Input): string | null;
     /**
      * A utility to statically delete the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function remove(name: string, opts?: JsCookie.Opts.Input): void;
     /**
      * A utility to statically set the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function set(name: string, value: string, opts?: JsCookie.Opts.Input): void;
     /**
      * Additional configuration options.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     interface Opts {
         /**
          * Whether to also save the cookie value to LocalStorage.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         copyToLocalStorage?: undefined | boolean;
         /**
@@ -155,13 +155,13 @@ export declare namespace JsCookie {
     /**
      * Additional types for {@link JsCookie.Opts}.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     namespace Opts {
         /**
          * Additional configuration options.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         type Input = Partial<JsCookie.Opts>;
     }

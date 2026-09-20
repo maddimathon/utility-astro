@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @forward '../template/default/config' with (
@@ -14,6 +14,7 @@
     $include_html: true !default,
     $isTemplate: false !default,
 
+    $template_astro: true !default,
     $template_globals: true !default,
     $template_tokens: true !default,
     $template_utils: true !default,

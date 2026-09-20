@@ -1,16 +1,16 @@
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 /**
  * Creates and tracks unique identifier values.
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 export declare class UniqueIdentifiers {
     protected existing: Set<string>;

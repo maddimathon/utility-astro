@@ -1,8 +1,8 @@
 ///
 /// Variables before the utility-astro lib is loaded.
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @use '../../02-lib' as lib;
@@ -20,7 +20,7 @@ $_customProperty_allPrefixesSlugs: ('display', 'grid-column', 'icon-color');
 /// List of slugs that should default to $allPrefixes: true in the
 /// do-var function.
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $fn_doVar_allPrefixesSlugs: null !default;
 $fn_doVar_allPrefixesSlugs: config-valid-list-strings(
@@ -38,7 +38,7 @@ $fn_doVar_allPrefixesSlugs: list.join(
 ///
 /// List of slugs that should default to $allPrefixes: true in the custom-property mixin.
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $mx_customProperty_allPrefixesSlugs: null !default;
 $mx_customProperty_allPrefixesSlugs: config-valid-list-strings(
@@ -61,7 +61,7 @@ $mx_customProperty_allPrefixesSlugs: list.join(
 /// List of slugs that should be excluded from the default
 /// $mx_customProperty_allPrefixesSlugs list.
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $mx_customProperty_allPrefixesSlugs_except: null !default;
 $mx_customProperty_allPrefixesSlugs_except: config-valid-list-strings(
@@ -88,17 +88,17 @@ $template_name: 'Default' !default;
 $template_slug: string.to-lower-case($template_name) !default;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $template_isDefault: $template_slug == default !default;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $template_docBlock: not lib.$internal_supressCredit or lib.$isTemplate !default;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $template_title_base: null !default;
 $template_title_base: config-valid-string(
@@ -108,7 +108,7 @@ $template_title_base: config-valid-string(
 ) !default;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $template_title: null !default;
 $template_title: config-valid-string(
@@ -123,7 +123,7 @@ $template_title: config-valid-string(
 
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_astro to $template_astro and moved from lib to template config.
+/// @since 0.1.0-beta.0 — Renamed from $print_astro to $template_astro and moved from lib to template config.
 ///
 $template_astro: false !default;
 
@@ -132,7 +132,7 @@ $template_astro: false !default;
 /// selectors are pseudo selectors.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_globals to $template_globals and moved from lib to template config.
+/// @since 0.1.0-beta.0 — Renamed from $print_globals to $template_globals and moved from lib to template config.
 ///
 $template_globals: $template_astro !default;
 
@@ -140,7 +140,7 @@ $template_globals: $template_astro !default;
 /// Whether to include the utility class selectors in the output.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_utils to $template_utils and moved from lib to template config.
+/// @since 0.1.0-beta.0 — Renamed from $print_utils to $template_utils and moved from lib to template config.
 ///
 $template_utils: lib.$include_html and ($template_globals or $template_astro) !default;
 
@@ -148,13 +148,13 @@ $template_utils: lib.$include_html and ($template_globals or $template_astro) !d
 /// Whether to include the custom property definitions in the output.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_tokens to $template_tokens and moved from lib to template config.
+/// @since 0.1.0-beta.0 — Renamed from $print_tokens to $template_tokens and moved from lib to template config.
 ///
 $template_tokens: $template_globals or $template_utils !default;
 
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Renamed from $print_headings to $template_cssHeadings and moved from lib to template config.
+/// @since 0.1.0-beta.0 — Renamed from $print_headings to $template_cssHeadings and moved from lib to template config.
 ///
 $template_cssHeadings: lib.$isTemplate and
     (
@@ -165,14 +165,14 @@ $template_cssHeadings: lib.$isTemplate and
 ///
 /// Whether to include the extend selectors mixin after the template content.
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $template_extendSelectors: $template_globals or $template_utils !default;
 
 ///
 /// Whether to print certain styles.
 ///
-/// @since 0.1.0-beta.0.draft — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
+/// @since 0.1.0-beta.0 — Merged $print_astro_content, $print_astro_settingsMenu, $print_astro_skipLinks, $print_astro_toggle, $print_astro_toggleNav into this var (from utility-sass update).
 ///
 $template_styles: () !default;
 $template_styles: config-get-template-styles(

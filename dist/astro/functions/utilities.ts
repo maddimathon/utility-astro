@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  * 
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 
@@ -12,7 +12,7 @@ import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 import type { ClassList, ClassListItem } from '../../ts/types/index.js';
 
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 function flattenClassList_single(
     classListItem: undefined | Exclude<ClassListItem, any[]> | ArrayItem<Extract<ClassListItem, any[]>>,
@@ -32,7 +32,7 @@ function flattenClassList_single(
 }
 
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 export function flattenClassList( classList: ClassList ): string {
 
@@ -62,7 +62,7 @@ export function flattenClassList( classList: ClassList ): string {
 }
 
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 function makeClassList_listParser( list: undefined | ClassList ) {
     return (
@@ -73,7 +73,7 @@ function makeClassList_listParser( list: undefined | ClassList ) {
 }
 
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 export function makeClassList(
     defaultClasses: ClassList,

@@ -9,7 +9,7 @@ var ElementToggle = class _ElementToggle {
     this.openingTimeout = null;
     this.closingTimeout = null;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     this.#activeStateHold = false;
     this.opts = {
@@ -120,14 +120,14 @@ var ElementToggle = class _ElementToggle {
      * to avoid re-initializing the same element or a block with the same id
      * value.
      * 
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     this.instances = /* @__PURE__ */ new Map();
   }
   /**
    * Gets the instance of this class for the given element (based on id value).
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   static get(element) {
     return this.getByID(element.id);
@@ -135,7 +135,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Gets the instance of this class for the given element (based on id value).
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   static getByID(id) {
     return id ? _ElementToggle.instances.get(id) ?? null : null;
@@ -164,7 +164,7 @@ var ElementToggle = class _ElementToggle {
    * Queries the document for toggle containers to set them up as instances of
    * this class.
    *
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   static async run(opts = {}) {
     if (!opts.scrollBehaviour) {
@@ -210,7 +210,7 @@ var ElementToggle = class _ElementToggle {
    * class.
    *
    * @since 0.1.0-alpha.7
-   * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
+   * @since 0.1.0-beta.0 — Renamed from init to runOnLoad.
    */
   static runOnLoad(opts = {}) {
     window.addEventListener(
@@ -308,11 +308,11 @@ var ElementToggle = class _ElementToggle {
   /**
    * Whether this toggle-able element defaults to the open state.
    *
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #defaultIsOpen;
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get defaultIsOpen() {
     if (typeof this.#defaultIsOpen === "boolean") {
@@ -321,13 +321,13 @@ var ElementToggle = class _ElementToggle {
     return this.#defaultIsOpen ?? this.isCurrentAnchorTarget;
   }
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   set defaultIsOpen(value) {
     this.#defaultIsOpen = !!value;
   }
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get isCurrentAnchorTarget() {
     return this.opts.openWhenTargetted && this.checkUrlTarget(new URL(window.location.href));
@@ -335,7 +335,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Whether this container is currently open.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get isOpen() {
     const attr = this.container.getAttribute("data-toggle-container");
@@ -344,7 +344,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Validates the markup of a button used to toggle this element.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   async validateButton(button) {
     const contentID = this.content.id;
@@ -388,14 +388,14 @@ var ElementToggle = class _ElementToggle {
   /* UTILITIES
    * ====================================================================== */
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #activeTimeout;
   #activeStateHold;
   /**
    * Adds the active attribute to the buttons.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   activateButton(button) {
     clearTimeout(this.#activeTimeout);
@@ -431,13 +431,13 @@ var ElementToggle = class _ElementToggle {
     return hashAsId.toLowerCase() === this.container.id.toLowerCase();
   }
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #deactiveTimeout;
   /**
    * Removes the active attribute to the buttons.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   deactivateButton() {
     clearTimeout(this.#deactiveTimeout);
@@ -472,7 +472,7 @@ var ElementToggle = class _ElementToggle {
    * Fired when this element's attributes change (and we might have to updated
    * opts/config/etc.).
    *
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   handleContainerAttributeChange([record]) {
     const currentValue = record?.attributeName ? this.container.getAttribute(record.attributeName) : null;
@@ -512,7 +512,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * The methods used as event listeners for trapping focus.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get focusableContainerChildren() {
     if (this.#focusableContainerChildren) {
@@ -525,7 +525,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * The methods used as event listeners for trapping focus.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get focusableContentChildren() {
     if (this.#focusableContentChildren) {
@@ -538,7 +538,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * The methods used as event listeners for trapping focus.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   get focusTrappers() {
     if (this.#focusTrappers) {
@@ -575,7 +575,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Sets the closing time property via computed style value.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   setClosingTime() {
     const computedClosingTime = getComputedStyle(this.container).getPropertyValue(this.opts.closingTimeProperty);
@@ -586,7 +586,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Called when the element is toggled open.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   trapFocus() {
     if (!this.isOpen) {
@@ -613,7 +613,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Called when the element is toggled closed.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   untrapFocus() {
     const focusableContainerChildren = this.focusableContainerChildren;
@@ -680,7 +680,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Toggles the open/close state of the element.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   toggleQuietly(opts = {}) {
     this.clearTimeout();
@@ -741,7 +741,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Opens without firing events or scrolling to the element.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   openQuietly(button, opts = {}) {
     return this.open(button, {
@@ -791,7 +791,7 @@ var ElementToggle = class _ElementToggle {
   /**
    * Closes without firing events or scrolling to the element.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   closeQuietly(button, opts = {}) {
     return this.close(button, {
@@ -861,6 +861,6 @@ export {
   ElementToggle
 };
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */

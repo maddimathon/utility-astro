@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide
@@ -15,7 +15,7 @@
 @use '../functions' as fns;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $stroke_relative: () !default;
 
@@ -43,7 +43,7 @@ $stroke_relative_unparsed: $stroke_relative;
 }
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $style: () !default;
 
@@ -64,7 +64,7 @@ $style: map.ksort(
 );
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 $atProperties: () !default;
 $atProperties: fns.tokens-get-at-properties(

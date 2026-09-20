@@ -26,7 +26,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 /// Supports the SettingsMenu astro component.
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $includeAside params.
+/// @since 0.1.0-beta.0 — Added optional $includeAside params.
 ///
 @mixin snippet-support-site-settings-menu(
     $container_alignment: (),

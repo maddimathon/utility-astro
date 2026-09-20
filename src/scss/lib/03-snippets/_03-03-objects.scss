@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 // @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
@@ -13,7 +13,7 @@
 @use '../02-mixins' as *;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-icon-block(
     $display_svg: block,
@@ -65,7 +65,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-support-icons($multipleContentBlocks: false, $args...) {
     %icon {

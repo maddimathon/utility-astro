@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
@@ -104,11 +104,11 @@ export class SettingsMenu {
     constructor(
     /**
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Is now an object accepting many elements.
+     * @since 0.1.0-beta.0 — Is now an object accepting many elements.
      */
     elements, cookieNamer, 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     opts) {
         this.cookieNamer = cookieNamer;
@@ -144,17 +144,17 @@ export class SettingsMenu {
         /**
          * Caches attr keys that have been succesfully set up.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _SettingsMenu_set_default_listeners.set(this, {});
         /**
          * Caches attr keys that have been succesfully set up.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _SettingsMenu_setup_attr_keys.set(this, {});
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _SettingsMenu_update_allInputs_running.set(this, false);
         /**
@@ -171,7 +171,7 @@ export class SettingsMenu {
         this._update_input = this._update_input.bind(this);
     }
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     async _set_default(attr) {
         var _a;
@@ -282,7 +282,7 @@ export class SettingsMenu {
     }
     /**
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Made async.
+     * @since 0.1.0-beta.0 — Made async.
      */
     async _setup_attr_key(attr, alwaysSetDefault = false) {
         // returns
@@ -412,7 +412,7 @@ export class SettingsMenu {
     /**
      * Prepares single inputs and sets its current values.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     async _update_input(input) {
         const attr = input.getAttribute('name');
@@ -475,7 +475,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
  */
 (function (SettingsMenu) {
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     async function run_mapper(target, menu, _a) {
         var _b;
@@ -494,7 +494,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
      * Initializes the given settings menu(s).
      *
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
+     * @since 0.1.0-beta.0 — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
     async function run(settingsMenus, _a = {}) {
         var _b, _c;
@@ -515,7 +515,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
      * the document for settings menu containers to set them up as instances of
      * this class.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     async function runOnLoad(opts = {}, attrsToSet = []) {
         var _a;
@@ -556,7 +556,7 @@ _SettingsMenu_attributeKeys = new WeakMap(), _SettingsMenu_cookies = new WeakMap
     }
     SettingsMenu.runOnLoad = runOnLoad;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     let Selectors;
     (function (Selectors) {

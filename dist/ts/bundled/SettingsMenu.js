@@ -1603,7 +1603,7 @@ var JsCookie = class {
   /**
    * Empties the contents of this cookie.
    * 
-   * @deprecated 0.1.0-beta.0.draft
+   * @deprecated 0.1.0-beta.0
    */
   delete() {
     this.remove();
@@ -1624,7 +1624,7 @@ var JsCookie = class {
   /**
    * Empties the contents of this cookie.
    * 
-   * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+   * @since 0.1.0-beta.0 — Renamed from delete to remove.
    */
   remove() {
     this.set("", -1);
@@ -1812,11 +1812,11 @@ var SettingsMenu = class _SettingsMenu {
   /**
    * Caches attr keys that have been succesfully set up.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #set_default_listeners = {};
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   async _set_default(attr) {
     const _defaultCookie = this.#cookies[attr + "-default"];
@@ -1917,12 +1917,12 @@ var SettingsMenu = class _SettingsMenu {
   /**
    * Caches attr keys that have been succesfully set up.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #setup_attr_keys = {};
   /**
    * @since 0.1.0-alpha
-   * @since 0.1.0-beta.0.draft — Made async.
+   * @since 0.1.0-beta.0 — Made async.
    */
   async _setup_attr_key(attr, alwaysSetDefault = false) {
     if (this.#setup_attr_keys[attr] === true) {
@@ -2021,7 +2021,7 @@ var SettingsMenu = class _SettingsMenu {
     }
   }
   /**
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   #update_allInputs_running = false;
   /**
@@ -2062,7 +2062,7 @@ var SettingsMenu = class _SettingsMenu {
   /**
    * Prepares single inputs and sets its current values.
    * 
-   * @since 0.1.0-beta.0.draft
+   * @since 0.1.0-beta.0
    */
   async _update_input(input) {
     const attr = input.getAttribute("name");
@@ -2196,11 +2196,12 @@ export {
   SettingsMenu
 };
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 /*! Bundled license information:
 
+@maddimathon/utility-typescript/dist/functions/arrays/arrayCopy.js:
 @maddimathon/utility-typescript/dist/functions/objects/objectKeySort.js:
 @maddimathon/utility-typescript/dist/functions/arrays/arrayUnique.js:
 @maddimathon/utility-typescript/dist/functions/arrays/hasIterator.js:
@@ -2237,7 +2238,7 @@ export {
 @maddimathon/utility-typescript/dist/classes/VariableInspector.js:
 @maddimathon/utility-typescript/dist/index.js:
   (*!
-   * @maddimathon/utility-typescript@2.0.0-beta.5.draft
+   * @maddimathon/utility-typescript@2.0.0-beta.6
    * @license MIT
    *)
 */

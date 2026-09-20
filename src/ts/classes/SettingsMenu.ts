@@ -184,7 +184,7 @@ export class SettingsMenu {
     protected constructor (
         /**
          * @since 0.1.0-alpha
-         * @since ___PKG_VERSION___ — Is now an object accepting many elements.
+         * @since 0.1.0-beta.0 — Is now an object accepting many elements.
          */
         elements: {
             inputs: HTMLInputElement[];
@@ -196,7 +196,7 @@ export class SettingsMenu {
         public readonly cookieNamer: ( attr: string ) => string,
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         public readonly opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
             domain: undefined | string;
@@ -217,12 +217,12 @@ export class SettingsMenu {
     /**
      * Caches attr keys that have been succesfully set up.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #set_default_listeners: { [ key: string ]: boolean; } = {};
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     private async _set_default( attr: string ): Promise<string | null> {
 
@@ -371,13 +371,13 @@ export class SettingsMenu {
     /**
      * Caches attr keys that have been succesfully set up.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #setup_attr_keys: { [ key: string ]: boolean; } = {};
 
     /**
      * @since 0.1.0-alpha
-     * @since ___PKG_VERSION___ — Made async.
+     * @since 0.1.0-beta.0 — Made async.
      */
     private async _setup_attr_key( attr: string, alwaysSetDefault: boolean = false ): Promise<void> {
         // returns
@@ -496,7 +496,7 @@ export class SettingsMenu {
     }
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     #update_allInputs_running: boolean = false;
 
@@ -548,7 +548,7 @@ export class SettingsMenu {
     /**
      * Prepares single inputs and sets its current values.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     protected async _update_input( input: HTMLInputElement ): Promise<void> {
         const attr = input.getAttribute( 'name' );
@@ -623,7 +623,7 @@ export class SettingsMenu {
 export namespace SettingsMenu {
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     async function run_mapper(
         target: HTMLHtmlElement | HTMLBodyElement,
@@ -653,7 +653,7 @@ export namespace SettingsMenu {
      * Initializes the given settings menu(s).
      * 
      * @since 0.1.0-alpha
-     * @since ___PKG_VERSION___ — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
+     * @since 0.1.0-beta.0 — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
     export async function run(
         settingsMenus: HTMLElement | NodeListOf<HTMLElement>,
@@ -689,7 +689,7 @@ export namespace SettingsMenu {
      * the document for settings menu containers to set them up as instances of
      * this class.
      *
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export async function runOnLoad(
         opts: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> = {},
@@ -748,7 +748,7 @@ export namespace SettingsMenu {
     /**
      * Options for the configuration of {@link SettingsMenu} instances.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export interface Opts<T_Selectors extends SettingsMenu.Selectors.Constructor | SettingsMenu.Selectors.Mapper> {
 
@@ -757,28 +757,28 @@ export namespace SettingsMenu {
          * 
          * @default 7
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         cookieCacheExpireDays: number;
 
         /**
          * A prefix to use before cookie names when storing the settings values.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         cookiePrefix: string;
 
         /**
          * Outputs information to the console.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         debug?: undefined | boolean;
 
         /**
          * Whether to create a cookie that caches the detected default value.
          * 
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         defaultCookieCache: boolean;
 
@@ -786,7 +786,7 @@ export namespace SettingsMenu {
          * Whether to output the results of constructing each toggle element as
          * it is made.
          *
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         logResults?: undefined | boolean;
 
@@ -794,12 +794,12 @@ export namespace SettingsMenu {
     }
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     export namespace Selectors {
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         export interface Constructor {
             domainAttr?: undefined | string;
@@ -810,7 +810,7 @@ export namespace SettingsMenu {
 
         /**
          * @since 0.1.0-alpha
-         * @since ___PKG_VERSION___ — Moved out of constructor to separate definition.
+         * @since 0.1.0-beta.0 — Moved out of constructor to separate definition.
          */
         export interface Mapper extends Omit<Constructor, 'resetButton'> {
 
@@ -827,7 +827,7 @@ export namespace SettingsMenu {
              * 
              * @default ':root'
              * 
-             * @since ___PKG_VERSION___
+             * @since 0.1.0-beta.0
              */
             target?: undefined | string;
 

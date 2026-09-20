@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  * 
  * @packageDocumentation
  */
@@ -12,7 +12,7 @@
  * A class for adding copy-to-clipboard functionality to buttons (via data
  * attribute configutation).
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  */
 export class CopyToClipboard {
     /**

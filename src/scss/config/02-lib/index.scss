@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @forward 'functions';
@@ -10,7 +10,7 @@
 @use 'utility-sass' as utils;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $mx_propGridColumn_onlyFallbackPrefix: null !default;
 $mx_propGridColumn_onlyFallbackPrefix: utils.config-valid-bool(

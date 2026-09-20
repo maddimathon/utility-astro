@@ -41,12 +41,12 @@ export interface ToggleProps {
     /**
      * @default false
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     backdrop?: boolean;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     backdropAttributes?: Omit<
         ElementProps<{}, 'div'>,
@@ -69,14 +69,14 @@ export interface ToggleProps {
      * @default undefined
      *
      * @since 0.1.0-alpha.7 — Added false and undefined options.
-     * @since 0.1.0-beta.0.draft — Removed false as an option. Use 0 instead.
+     * @since 0.1.0-beta.0 — Removed false as an option. Use 0 instead.
      */
     displayHeading?: number | undefined;
 
     /**
      * To generate ID values for the component.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     generateID?: {
         button: (id: string) => string;
@@ -89,12 +89,12 @@ export interface ToggleProps {
      *
      * @default 0
      *
-     * @since 0.1.0-beta.0.draft — Removed false as an option. Use 0 instead.
+     * @since 0.1.0-beta.0 — Removed false as an option. Use 0 instead.
      */
     heading?: number | undefined;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     iconSVG?: string | undefined;
 
@@ -103,7 +103,7 @@ export interface ToggleProps {
      *
      * @default 2
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     minimumHeading?: number | undefined;
 
@@ -134,7 +134,7 @@ export interface ToggleProps {
     headerTag?: 'div' | 'header' | undefined;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     contentAttributes?: Omit<
         ElementProps<{}, 'div'>,
@@ -142,7 +142,7 @@ export interface ToggleProps {
     >;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     contentContainerAttributes?: Omit<
         ElementProps<{}, 'div'>,
@@ -150,12 +150,12 @@ export interface ToggleProps {
     >;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     dataToggleContainerDefault?: 'open' | '' | null;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     titleAttributes?: Omit<
         ElementProps<{}, 'p'>,
@@ -165,7 +165,7 @@ export interface ToggleProps {
     /**
      * Used to set the data-toggle-container-type attribute.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     type?: ToggleContainerType | ToggleContainerType[] | undefined;
 }

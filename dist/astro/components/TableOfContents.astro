@@ -39,7 +39,7 @@ type NavMenu_SemiProps = Omit<
  * Input props for the TableOfContents component.
  *
  * @since 0.1.0-alpha.7
- * @since 0.1.0-beta.0.draft — Renamed from TableOfContents_Props to TableOfContentsProps.
+ * @since 0.1.0-beta.0 — Renamed from TableOfContents_Props to TableOfContentsProps.
  */
 export interface TableOfContentsProps extends NavMenu_SemiProps {
     /**
@@ -66,12 +66,12 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
     displayHeading?: number | undefined;
 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     ToggleComponent?: ( props: PartialExcept<ToggleProps,  'children'|'id' > ) => any;
         
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     toggleProps?: {};
 }

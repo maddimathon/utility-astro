@@ -2,7 +2,7 @@
  * Script to initialize settings menus — to be imported by components, layouts,
  * etc.
  *
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  *
  * @packageDocumentation
  */

@@ -22,7 +22,7 @@ var JsCookie = class {
   /**
    * Empties the contents of this cookie.
    * 
-   * @deprecated 0.1.0-beta.0.draft
+   * @deprecated 0.1.0-beta.0
    */
   delete() {
     this.remove();
@@ -43,7 +43,7 @@ var JsCookie = class {
   /**
    * Empties the contents of this cookie.
    * 
-   * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+   * @since 0.1.0-beta.0 — Renamed from delete to remove.
    */
   remove() {
     this.set("", -1);
@@ -104,6 +104,6 @@ export {
   JsCookie
 };
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */

@@ -7,4 +7,6 @@
 
 @use '_pre' as pre;
 
-@forward 'pkg:@maddimathon/utility-sass/config/modules';
+@forward 'pkg:@maddimathon/utility-sass/config/modules' with (
+    $selector_body_aliases: pre.$selector_body_aliases
+);

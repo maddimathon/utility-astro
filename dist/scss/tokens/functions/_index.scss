@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @forward 'pkg:@maddimathon/utility-sass/tokens/functions' hide
@@ -12,7 +12,7 @@
 @use 'pkg:@maddimathon/utility-sass/string';
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @function tokens-get-at-properties(
     $inputs,

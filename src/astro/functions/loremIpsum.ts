@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  * 
  * @packageDocumentation
  */
@@ -27,12 +27,12 @@ export interface LoremIpsum_DisplaySettings {
     blockquote?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     blockquotePullQuote?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     buttons?: boolean;
 
@@ -62,7 +62,7 @@ export interface LoremIpsum_DisplaySettings {
     code?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     codeLong?: boolean;
 
@@ -96,7 +96,7 @@ export interface LoremIpsum_DisplaySettings {
     /**
      * Add subtitles to the heading snippets.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     headingSubtitlesList?: boolean;
 
@@ -116,7 +116,7 @@ export interface LoremIpsum_DisplaySettings {
     table?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     tableLong?: boolean;
 
@@ -152,12 +152,12 @@ export interface LoremIpsum_DisplaySettings {
     tocDefaultOpen?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     tocDisplayHeading?: undefined | number;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     tocExtraItems?: undefined | { label: string, id: string; }[] | {
         $?: { label: string, id: string; }[];
@@ -167,7 +167,7 @@ export interface LoremIpsum_DisplaySettings {
     };
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     tocSortByLabel?: boolean;
 
@@ -203,7 +203,7 @@ export interface LoremIpsumProps {
     /**
      * Whether to wrap in a section element.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     asSection?: boolean;
 
@@ -232,7 +232,7 @@ export interface LoremIpsumProps {
     mode?: "minimum" | "fancy" | "library";
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     previewComponents?: {
         Forms?: LoremIpsum_PreviewComponent<{
@@ -258,12 +258,12 @@ export interface LoremIpsumProps {
     superAbbreviated?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     ToggleComponent?: ( props: PartialExcept<ToggleProps, 'children' | 'id'> ) => any;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.0
      */
     toggleProps?: {};
 }
@@ -347,7 +347,7 @@ export function getLoremIpsumIds(
 }
 
 /**
- * @since ___PKG_VERSION___ — Renamed from getLoremIpsumMode() to getLoremIpsumDisplaySettings().
+ * @since 0.1.0-beta.0 — Renamed from getLoremIpsumMode() to getLoremIpsumDisplaySettings().
  */
 export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIpsum_DisplaySettings_Parsed {
 

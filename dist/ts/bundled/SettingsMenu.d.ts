@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 /**
@@ -16,7 +16,7 @@ export declare class SettingsMenu {
     #private;
     readonly cookieNamer: (attr: string) => string;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     readonly opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
         domain: undefined | string;
@@ -46,7 +46,7 @@ export declare class SettingsMenu {
     protected constructor(
     /**
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Is now an object accepting many elements.
+     * @since 0.1.0-beta.0 — Is now an object accepting many elements.
      */
     elements: {
         inputs: HTMLInputElement[];
@@ -55,19 +55,19 @@ export declare class SettingsMenu {
         target: HTMLHtmlElement | HTMLBodyElement;
     }, cookieNamer: (attr: string) => string, 
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     opts: SettingsMenu.Opts<SettingsMenu.Selectors.Constructor> & {
         domain: undefined | string;
         path: string;
     });
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     private _set_default;
     /**
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Made async.
+     * @since 0.1.0-beta.0 — Made async.
      */
     private _setup_attr_key;
     /**
@@ -89,7 +89,7 @@ export declare class SettingsMenu {
     /**
      * Prepares single inputs and sets its current values.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected _update_input(input: HTMLInputElement): Promise<void>;
 }
@@ -103,7 +103,7 @@ export declare namespace SettingsMenu {
      * Initializes the given settings menu(s).
      *
      * @since 0.1.0-alpha
-     * @since 0.1.0-beta.0.draft — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
+     * @since 0.1.0-beta.0 — Renamed from init to run. Changed third param from selector to opts (which contains selectors).
      */
     function run(settingsMenus: HTMLElement | NodeListOf<HTMLElement>, { targetElement, ...opts }?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>> & {
         cookieNamer?: (attr: string) => string;
@@ -114,13 +114,13 @@ export declare namespace SettingsMenu {
      * the document for settings menu containers to set them up as instances of
      * this class.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function runOnLoad(opts?: Partial<SettingsMenu.Opts<SettingsMenu.Selectors.Mapper>>, attrsToSet?: string[]): Promise<void>;
     /**
      * Options for the configuration of {@link SettingsMenu} instances.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     interface Opts<T_Selectors extends SettingsMenu.Selectors.Constructor | SettingsMenu.Selectors.Mapper> {
         /**
@@ -128,42 +128,42 @@ export declare namespace SettingsMenu {
          *
          * @default 7
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         cookieCacheExpireDays: number;
         /**
          * A prefix to use before cookie names when storing the settings values.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         cookiePrefix: string;
         /**
          * Outputs information to the console.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         debug?: undefined | boolean;
         /**
          * Whether to create a cookie that caches the detected default value.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         defaultCookieCache: boolean;
         /**
          * Whether to output the results of constructing each toggle element as
          * it is made.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         logResults?: undefined | boolean;
         selectors?: undefined | T_Selectors;
     }
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     namespace Selectors {
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         interface Constructor {
             domainAttr?: undefined | string;
@@ -173,7 +173,7 @@ export declare namespace SettingsMenu {
         }
         /**
          * @since 0.1.0-alpha
-         * @since 0.1.0-beta.0.draft — Moved out of constructor to separate definition.
+         * @since 0.1.0-beta.0 — Moved out of constructor to separate definition.
          */
         interface Mapper extends Omit<Constructor, 'resetButton'> {
             /**
@@ -188,7 +188,7 @@ export declare namespace SettingsMenu {
              *
              * @default ':root'
              *
-             * @since 0.1.0-beta.0.draft
+             * @since 0.1.0-beta.0
              */
             target?: undefined | string;
             /**

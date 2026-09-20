@@ -44,7 +44,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-toggle-block---interactive-states(
     $hover: false,
@@ -67,7 +67,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-toggle-block---interactive-states--js(
     $includeNoWhereSelectorFallback: false,
@@ -82,7 +82,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-toggle-block---interactive-all-states($args...) {
     @include snippet-toggle-block---interactive-states(
@@ -96,7 +96,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-toggle-block---interactive-all-states--js($args...) {
     @include snippet-toggle-block---interactive-states--js(
@@ -110,7 +110,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin _toggle-block--base-pseudo-classes {
     @at-root %_flex-contents-container {
@@ -135,7 +135,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin _toggle-block--js--media-query {
     @if config.$featureCheck_jsScreenMediaQuery {
@@ -148,7 +148,7 @@ $_toggle_svg_sel_moving: '#b';
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin _toggle-block--js-pseudo-classes(
     $includeStyles,
@@ -201,7 +201,7 @@ $_toggle_svg_sel_moving: '#b';
 /// Adds only the most basic toggle block functionality using attribute
 /// selectors.
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-support-toggle-block-base(
     $includeStyles: true,

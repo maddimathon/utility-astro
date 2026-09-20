@@ -1,10 +1,10 @@
 /**
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  *
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
@@ -23,7 +23,7 @@ var _CopyToClipboard_activeTimeout, _CopyToClipboard_activeStateHold, _CopyToCli
  * A class for adding copy-to-clipboard functionality to buttons (via data
  * attribute configutation).
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 export class CopyToClipboard {
     /**

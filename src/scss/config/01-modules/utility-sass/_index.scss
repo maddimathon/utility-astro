@@ -4,4 +4,4 @@
 ///
 
 @forward '_pre';
-@forward 'lib';
+@forward 'lib' hide $selector_body_aliases;

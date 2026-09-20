@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 /**
@@ -19,19 +19,19 @@ export declare class ElementToggle {
      * to avoid re-initializing the same element or a block with the same id
      * value.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected static readonly instances: Map<string, ElementToggle>;
     /**
      * Gets the instance of this class for the given element (based on id value).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static get(element: HTMLElement): null | ElementToggle;
     /**
      * Gets the instance of this class for the given element (based on id value).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static getByID(id: string): null | ElementToggle;
     /**
@@ -45,7 +45,7 @@ export declare class ElementToggle {
      * Queries the document for toggle containers to set them up as instances of
      * this class.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static run(opts?: Partial<ElementToggle.Opts>): Promise<void>;
     /**
@@ -54,7 +54,7 @@ export declare class ElementToggle {
      * class.
      *
      * @since 0.1.0-alpha.7
-     * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
+     * @since 0.1.0-beta.0 — Renamed from init to runOnLoad.
      */
     static runOnLoad(opts?: Partial<ElementToggle.Opts>): void;
     /**
@@ -78,13 +78,13 @@ export declare class ElementToggle {
     /**
      * Timeout length to switch the button to active state, in milliseconds.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected readonly activeTimeoutLength: number;
     /**
      * Whether this toggle-able element should be treated as a modal (i.e., trap focus).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected readonly asModal: boolean;
     /**
@@ -101,52 +101,52 @@ export declare class ElementToggle {
      */
     protected closingTime: number;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get defaultIsOpen(): boolean;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     set defaultIsOpen(value: boolean);
     /**
      * Attribute strings for adding custom focus & active states.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected readonly attr: {
         active: string;
         focus: string;
     };
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get isCurrentAnchorTarget(): boolean;
     /**
      * Whether this container is currently open.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get isOpen(): boolean;
     /**
      * Whether this toggle-able element is a menu (which slightly changes
      * some behaviour/aria).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected readonly isMenu: boolean;
     /**
      * Whether this toggle-able element is a nav element/region (which slightly
      * changes some behaviour/aria).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected readonly isNav: boolean;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     readonly toggleListener: (this: HTMLElement, ev: Event) => any;
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     readonly toggleBackdropListener: (this: HTMLElement, ev: Event) => any;
     /**
@@ -163,7 +163,7 @@ export declare class ElementToggle {
     /**
      * Validates the markup of a button used to toggle this element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected validateButton(button: HTMLElement): Promise<HTMLElement>;
     /**
@@ -175,7 +175,7 @@ export declare class ElementToggle {
     /**
      * Adds the active attribute to the buttons.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected activateButton(button: HTMLElement): void;
     /**
@@ -192,7 +192,7 @@ export declare class ElementToggle {
     /**
      * Removes the active attribute to the buttons.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected deactivateButton(): void;
     /**
@@ -206,7 +206,7 @@ export declare class ElementToggle {
      * Fired when this element's attributes change (and we might have to updated
      * opts/config/etc.).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     handleContainerAttributeChange([record]: MutationRecord[]): void;
     /**
@@ -219,19 +219,19 @@ export declare class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusableContainerChildren(): ReturnType<typeof ElementToggle.getFocusableChildren>;
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusableContentChildren(): ReturnType<typeof ElementToggle.getFocusableChildren>;
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusTrappers(): {
         keydown: (this: Document, event: KeyboardEvent) => void;
@@ -242,19 +242,19 @@ export declare class ElementToggle {
     /**
      * Sets the closing time property via computed style value.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected setClosingTime(): void;
     /**
      * Called when the element is toggled open.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected trapFocus(): void;
     /**
      * Called when the element is toggled closed.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     protected untrapFocus(): void;
     protected get toggledByScript(): boolean;
@@ -269,7 +269,7 @@ export declare class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     toggleQuietly(opts?: Partial<ElementToggle.ToggleOpts>): void;
     /**
@@ -279,7 +279,7 @@ export declare class ElementToggle {
     /**
      * Opens without firing events or scrolling to the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     openQuietly(button: undefined | HTMLElement, opts?: Omit<Partial<ElementToggle.ToggleOpts>, 'activateButton' | 'fireEvents' | 'scrollTo'>): void;
     /**
@@ -289,7 +289,7 @@ export declare class ElementToggle {
     /**
      * Closes without firing events or scrolling to the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     closeQuietly(button: undefined | HTMLElement, opts?: Omit<Parameters<typeof this.close>[1], 'activateButton' | 'fireEvents' | 'scrollTo'>): void;
 }
@@ -306,7 +306,7 @@ export declare namespace ElementToggle {
      * children and can avoid weird edge cases (like changing contenteditable or
      * weird tabindex behaviour).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function getFocusableChildren(container: HTMLElement): {
         readonly all: HTMLElement[];
@@ -326,7 +326,7 @@ export declare namespace ElementToggle {
          * @default
          * closingTime / 4
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         activeTimeoutLength: number;
         /**
@@ -346,20 +346,20 @@ export declare namespace ElementToggle {
          * Name of the computed style property to use for the closing time of
          * each element.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         closingTimeProperty: string;
         /**
          * Outputs information to the console.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         debug: boolean;
         /**
          * Whether to output the results of constructing each toggle element as
          * it is made.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         logResults?: boolean;
         /**
@@ -370,18 +370,18 @@ export declare namespace ElementToggle {
          */
         openWhenTargetted: boolean;
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         scrollBehaviour: ScrollBehavior;
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         scrollToOptions: null | ((button: undefined | HTMLElement) => null | ScrollToOptions);
     }
     /**
      * Opts for each toggle of the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     interface ToggleOpts {
         /**

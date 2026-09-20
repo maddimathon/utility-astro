@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @use '../../config';
@@ -20,7 +20,7 @@ $_path_template: if(
 );
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-docblock-utility-astro(
     $title: config.$template_title,
@@ -52,21 +52,21 @@ $_path_template: if(
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-start-utility-astro($args...) {
     @include utils.template-start($path: $_path_template, $args...);
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-end-utility-astro($args...) {
     @include utils.template-end($path: $_path_template, $args...);
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin template-utility-astro($region_at_root: true, $args...) {
     @include template-start-utility-astro($at_root: $region_at_root, $args...);

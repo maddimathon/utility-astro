@@ -11,7 +11,7 @@
 @use '../config';
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $contentGridAlignment: () !default;
 $contentGridAlignment: map.merge(
@@ -25,7 +25,7 @@ $contentGridAlignment: map.merge(
 );
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 $breakpoint_minHeight_fixedHeight: null !default;
 $breakpoint_minHeight_fixedHeight: config.config-valid-number(

@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @use 'pkg:@maddimathon/utility-sass/map';
@@ -16,7 +16,7 @@
 @use '../03-snippets' as *;
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @mixin template-content-blocks(
     $print_icons: map.get(config.$template_styles, icons),

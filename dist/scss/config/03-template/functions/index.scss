@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @forward '../../02-lib/functions';
@@ -12,7 +12,7 @@
 @use 'sass:map';
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @function config-get-template-styles(
     $inputs,

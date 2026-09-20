@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 /**
@@ -33,7 +33,7 @@ export class JsCookie {
     /**
      * Whether to also save the cookie value to LocalStorage.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     dep_copyToLocalStorage = false) {
         var _a, _b, _c, _d, _e;
@@ -60,7 +60,7 @@ export class JsCookie {
     /**
      * Empties the contents of this cookie.
      *
-     * @deprecated 0.1.0-beta.0.draft
+     * @deprecated 0.1.0-beta.0
      */
     delete() {
         this.remove();
@@ -83,7 +83,7 @@ export class JsCookie {
     /**
      * Empties the contents of this cookie.
      *
-     * @since 0.1.0-beta.0.draft — Renamed from delete to remove.
+     * @since 0.1.0-beta.0 — Renamed from delete to remove.
      */
     remove() {
         this.set('', -1);
@@ -129,14 +129,14 @@ export class JsCookie {
 /**
  * Utilities for use in the {@link JsCookie} class.
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 (function (JsCookie) {
     /**
      * A utility to statically get the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function get(name, opts = {}) {
         const cookie = new JsCookie(name, opts);
@@ -147,7 +147,7 @@ export class JsCookie {
      * A utility to statically delete the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function remove(name, opts = {}) {
         const cookie = new JsCookie(name, opts);
@@ -158,7 +158,7 @@ export class JsCookie {
      * A utility to statically set the value of a cookie. For prettier code, not
      * for performance.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function set(name, value, opts = {}) {
         const cookie = new JsCookie(name, opts);

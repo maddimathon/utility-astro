@@ -2,7 +2,7 @@
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Renamed from 03--content to 03-02-layouts.
+/// @since 0.1.0-beta.0 — Renamed from 03--content to 03-02-layouts.
 ///
 
 // @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
@@ -35,7 +35,7 @@ $_contentCol_default: minmax(auto, $_width_content);
 $_default_grid_page: snippet-body-grid--default-columns();
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--set-template-columns(
     $cols: null,
@@ -73,7 +73,7 @@ $_flex_container_alignment_row: (
 ///
 /// Does not set the display property for more flexibility.
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--flex-container(
     $alignment: (),
@@ -108,7 +108,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--grid-alignment($alignment: ()) {
     $alignment: map.merge(tokens.$contentGridAlignment, $alignment);
@@ -123,7 +123,7 @@ $_flex_container_alignment_row: (
 /// Includes the bascis properties for a page layout grid (but no columns).
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $alignment, $autoRows, $autoFlow, $gap, $position params.
+/// @since 0.1.0-beta.0 — Added optional $alignment, $autoRows, $autoFlow, $gap, $position params.
 ///
 @mixin snippet-body-grid--base(
     $alignment: (),
@@ -163,7 +163,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--display-contents(
     $cols: content-start/content-end,
@@ -205,7 +205,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin _body-grid--set-column-width(
     $cols,
@@ -241,7 +241,7 @@ $_flex_container_alignment_row: (
 
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $width param.
+/// @since 0.1.0-beta.0 — Added optional $width param.
 ///
 @mixin snippet-body-grid--content-width($args...) {
     @include _body-grid--set-column-width($cols: content-start / content-end, $args...);
@@ -249,7 +249,7 @@ $_flex_container_alignment_row: (
 
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $width param.
+/// @since 0.1.0-beta.0 — Added optional $width param.
 ///
 @mixin snippet-body-grid--page-width($args...) {
     @include snippet-body-grid--content-width($args...);
@@ -261,7 +261,7 @@ $_flex_container_alignment_row: (
 
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $width param.
+/// @since 0.1.0-beta.0 — Added optional $width param.
 ///
 @mixin snippet-body-grid--sidebar-width($args...) {
     @include _body-grid--set-column-width($cols: sidebar-start / sidebar-end, $args...);
@@ -269,7 +269,7 @@ $_flex_container_alignment_row: (
 
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional $width param.
+/// @since 0.1.0-beta.0 — Added optional $width param.
 ///
 @mixin snippet-body-grid--site-width($args...) {
     @include snippet-body-grid--page-width($args...);
@@ -285,14 +285,14 @@ $_flex_container_alignment_row: (
 /// Generally you'll want to use snippet-body-grid--display-contents or extend
 /// %display-contents instead.
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--full-width($args...) {
     @include _body-grid--set-column-width($cols: '1 / -1', $args...);
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--set-body-or-subgrid-children {
     @at-root :where(&) {
@@ -330,7 +330,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--selectors--main-content(
     $selector_main: '%main-content',
@@ -345,7 +345,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--selectors--body-subgrid(
     $additionalSelectors: (),
@@ -408,7 +408,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--selectors--main-subgrid(
     $selector_main: '%main-content',
@@ -430,7 +430,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--set-body-children(
     $flex_alignment: tokens.$contentGridAlignment,
@@ -477,7 +477,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--extend-selectors(
     $localOnly: false,
@@ -520,7 +520,7 @@ $_flex_container_alignment_row: (
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-body-grid--set-width-pseudo-selectors {
     %content-width {
@@ -556,7 +556,7 @@ $_flex_container_alignment_row: (
 /// Supports the Content astro layout.
 ///
 /// @since 0.1.0-alpha
-/// @since ___PKG_VERSION___ — Added optional params to configure output & change default values.
+/// @since 0.1.0-beta.0 — Added optional params to configure output & change default values.
 ///
 @mixin snippet-support-body-grid(
     $bodyMargin: var-gap-inline(layout-half),

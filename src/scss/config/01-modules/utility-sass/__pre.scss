@@ -2,7 +2,41 @@
 /// Variables before the utility-astro lib is loaded.
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
-// @use '../functions' as *;
+@use 'sass:list';
+@use 'sass:meta';
+
+@use '../functions' as *;
+
+///
+/// Additional selectors to be recognized as body selectors in utility functions.
+///
+/// @since 0.1.0-beta.0
+///
+$selector_body_aliases: null !default;
+$selector_body_aliases: config-selector-body-aliases(
+    $selector_body_aliases: config-valid-selector(
+            $selector_body_aliases,
+            'selector_body_aliases',
+            $default: null,
+            $allowEmpty: true
+        ),
+);
+
+@if meta.type-of($selector_body_aliases) != list {
+    $selector_body_aliases: ();
+}
+
+$selector_body_aliases: list.join(
+    $selector_body_aliases,
+    (
+        '%layout-content-only',
+        '%layout-full-width',
+        '%layout-extra-wide',
+        '%layout-sidebar-left',
+        '%layout-sidebar-right'
+    ),
+    $separator: comma
+);

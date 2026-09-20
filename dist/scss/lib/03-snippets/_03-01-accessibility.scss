@@ -1,8 +1,8 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
 ///
 /// @since 0.1.0-alpha.14
-/// @since 0.1.0-beta.0.draft — Renamed from 03--skip-links to 03-01-accessibility.
+/// @since 0.1.0-beta.0 — Renamed from 03--skip-links to 03-01-accessibility.
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
@@ -21,7 +21,7 @@
 /// Utility class support.
 ///
 /// @since 0.1.0-alpha
-/// @since 0.1.0-beta.0.draft — Moved from own file to 03-01-accessibility.
+/// @since 0.1.0-beta.0 — Moved from own file to 03-01-accessibility.
 ///
 @mixin snippet-forced-colors-mode-only {
     display: none !important;
@@ -33,7 +33,7 @@
 
 ///
 /// @since 0.1.0-alpha.14
-/// @since 0.1.0-beta.0.draft — Added optional $includeBaseStyles param.
+/// @since 0.1.0-beta.0 — Added optional $includeBaseStyles param.
 ///
 @mixin snippet-support-skip-links(
     $unfocus_top: -100%,

@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
@@ -16,7 +16,7 @@
 @use '03-02-layouts' as *;
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-blockquote(
     $display: block,
@@ -55,7 +55,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @function snippet-pre-plaintext-selectors() {
     @return (
@@ -74,7 +74,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 @mixin snippet-pre($marginInline: 0, $args...) {
     @include utils.snippet-pre($marginInline: $marginInline, $args...) using ($location) {

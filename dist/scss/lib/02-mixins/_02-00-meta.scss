@@ -1,6 +1,6 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0.draft
-/// @since 0.1.0-beta.0.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @since 0.1.0-beta.0
 ///
 
 @use '../../config';
@@ -24,7 +24,7 @@ $_path_template: if(
 );
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @mixin template-docblock-utility-astro(
     $title: config.$template_title,
@@ -55,27 +55,27 @@ $_path_template: if(
             ),
         $title: $title,
         $url: if($url, 'https://maddimathon.github.io/utility-astro', false),
-        $version: if($version, '0.1.0-beta.0.draft', false),
+        $version: if($version, '0.1.0-beta.0', false),
         $args...
     );
 }
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @mixin template-start-utility-astro($args...) {
     @include utils.template-start($path: $_path_template, $args...);
 }
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @mixin template-end-utility-astro($args...) {
     @include utils.template-end($path: $_path_template, $args...);
 }
 
 ///
-/// @since 0.1.0-beta.0.draft
+/// @since 0.1.0-beta.0
 ///
 @mixin template-utility-astro($region_at_root: true, $args...) {
     @include template-start-utility-astro($at_root: $region_at_root, $args...);

@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0.draft
+ * @maddimathon/utility-astro@0.1.0-beta.0
  * @license MIT
  */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
@@ -28,7 +28,7 @@ export class ElementToggle {
     /**
      * Gets the instance of this class for the given element (based on id value).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static get(element) {
         return this.getByID(element.id);
@@ -36,7 +36,7 @@ export class ElementToggle {
     /**
      * Gets the instance of this class for the given element (based on id value).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static getByID(id) {
         var _b;
@@ -64,7 +64,7 @@ export class ElementToggle {
      * Queries the document for toggle containers to set them up as instances of
      * this class.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     static async run(opts = {}) {
         if (!opts.scrollBehaviour) {
@@ -105,7 +105,7 @@ export class ElementToggle {
      * class.
      *
      * @since 0.1.0-alpha.7
-     * @since 0.1.0-beta.0.draft — Renamed from init to runOnLoad.
+     * @since 0.1.0-beta.0 — Renamed from init to runOnLoad.
      */
     static runOnLoad(opts = {}) {
         window.addEventListener('load', () => _a.run(opts), { once: true });
@@ -190,7 +190,7 @@ export class ElementToggle {
         }
     }
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get defaultIsOpen() {
         var _b;
@@ -201,13 +201,13 @@ export class ElementToggle {
         return (_b = __classPrivateFieldGet(this, _ElementToggle_defaultIsOpen, "f")) !== null && _b !== void 0 ? _b : this.isCurrentAnchorTarget;
     }
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     set defaultIsOpen(value) {
         __classPrivateFieldSet(this, _ElementToggle_defaultIsOpen, !!value, "f");
     }
     /**
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get isCurrentAnchorTarget() {
         return this.opts.openWhenTargetted && this.checkUrlTarget(new URL(window.location.href));
@@ -215,7 +215,7 @@ export class ElementToggle {
     /**
      * Whether this container is currently open.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get isOpen() {
         const attr = this.container.getAttribute('data-toggle-container');
@@ -235,21 +235,21 @@ export class ElementToggle {
         /**
          * Whether this toggle-able element defaults to the open state.
          *
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _ElementToggle_defaultIsOpen.set(this, void 0);
         /* UTILITIES
          * ====================================================================== */
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _ElementToggle_activeTimeout.set(this, void 0);
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _ElementToggle_activeStateHold.set(this, false);
         /**
-         * @since 0.1.0-beta.0.draft
+         * @since 0.1.0-beta.0
          */
         _ElementToggle_deactiveTimeout.set(this, void 0);
         _ElementToggle_focusableContainerChildren.set(this, void 0);
@@ -353,7 +353,7 @@ export class ElementToggle {
     /**
      * Validates the markup of a button used to toggle this element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     async validateButton(button) {
         const contentID = this.content.id;
@@ -398,7 +398,7 @@ export class ElementToggle {
     /**
      * Adds the active attribute to the buttons.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     activateButton(button) {
         clearTimeout(__classPrivateFieldGet(this, _ElementToggle_activeTimeout, "f"));
@@ -441,7 +441,7 @@ export class ElementToggle {
     /**
      * Removes the active attribute to the buttons.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     deactivateButton() {
         clearTimeout(__classPrivateFieldGet(this, _ElementToggle_deactiveTimeout, "f"));
@@ -482,7 +482,7 @@ export class ElementToggle {
      * Fired when this element's attributes change (and we might have to updated
      * opts/config/etc.).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     handleContainerAttributeChange([record]) {
         const currentValue = (record === null || record === void 0 ? void 0 : record.attributeName)
@@ -520,7 +520,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusableContainerChildren() {
         // returns
@@ -533,7 +533,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusableContentChildren() {
         // returns
@@ -546,7 +546,7 @@ export class ElementToggle {
     /**
      * The methods used as event listeners for trapping focus.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     get focusTrappers() {
         // returns
@@ -594,7 +594,7 @@ export class ElementToggle {
     /**
      * Sets the closing time property via computed style value.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     setClosingTime() {
         const computedClosingTime = getComputedStyle(this.container).getPropertyValue(this.opts.closingTimeProperty);
@@ -603,7 +603,7 @@ export class ElementToggle {
     /**
      * Called when the element is toggled open.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     trapFocus() {
         // returns - untraps focus first
@@ -633,7 +633,7 @@ export class ElementToggle {
     /**
      * Called when the element is toggled closed.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     untrapFocus() {
         const focusableContainerChildren = this.focusableContainerChildren;
@@ -697,7 +697,7 @@ export class ElementToggle {
     /**
      * Toggles the open/close state of the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     toggleQuietly(opts = {}) {
         this.clearTimeout();
@@ -754,7 +754,7 @@ export class ElementToggle {
     /**
      * Opens without firing events or scrolling to the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     openQuietly(button, opts = {}) {
         return this.open(button, Object.assign(Object.assign({}, opts), { activateButton: false, fireEvents: false, scrollTo: false }));
@@ -799,7 +799,7 @@ export class ElementToggle {
     /**
      * Closes without firing events or scrolling to the element.
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     closeQuietly(button, opts = {}) {
         return this.close(button, Object.assign(Object.assign({}, opts), { activateButton: false, fireEvents: false, scrollTo: false }));
@@ -811,7 +811,7 @@ _a = ElementToggle, _ElementToggle_defaultIsOpen = new WeakMap(), _ElementToggle
  * to avoid re-initializing the same element or a block with the same id
  * value.
  *
- * @since 0.1.0-beta.0.draft
+ * @since 0.1.0-beta.0
  */
 ElementToggle.instances = new Map();
 ElementToggle.openEvent = null;
@@ -829,7 +829,7 @@ ElementToggle.closeEvent = null;
      * children and can avoid weird edge cases (like changing contenteditable or
      * weird tabindex behaviour).
      *
-     * @since 0.1.0-beta.0.draft
+     * @since 0.1.0-beta.0
      */
     function getFocusableChildren(container) {
         const elements = Array.from(container.querySelectorAll(`a,

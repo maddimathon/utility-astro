@@ -1,5 +1,5 @@
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  * 
  * @packageDocumentation
  */
@@ -22,7 +22,7 @@ import { defineConfig, envField } from 'astro/config';
 /**
  * Includes defaults and env variables for use with this library
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  */
 export function astroConfig<
     T_Locales extends Locales = never,
@@ -110,7 +110,7 @@ export function astroConfig<
 /**
  * Utilities for the {@link astroConfig} function.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.0
  */
 export namespace astroConfig {
 
@@ -125,7 +125,7 @@ export namespace astroConfig {
         };
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         main: {
             /** @default true */
@@ -133,7 +133,7 @@ export namespace astroConfig {
         };
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.0
          */
         print: {
             /** @default import.meta.env.DEV */

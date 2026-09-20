@@ -1,6 +1,6 @@
 ///
 /// @package @maddimathon/utility-astro@___CURRENT_VERSION___
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.0
 ///
 
 @use 'pkg:@maddimathon/utility-sass/list';
@@ -18,7 +18,7 @@
 
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
-/// @since ___PKG_VERSION___ — Removed $additional_optional and $optional params (from utility-sass change).
+/// @since 0.1.0-beta.0 — Removed $additional_optional and $optional params (from utility-sass change).
 ///
 @mixin extend-selectors-globals($additional: (), $allHeadingLevels: token-all-heading-levels()) {
     //
@@ -32,7 +32,7 @@
 
 ///
 /// @since 0.1.0-alpha.16 — Added $additional_optional param for additional selectors that are always optional.
-/// @since ___PKG_VERSION___ — Removed $additional_optional and $optional params (from utility-sass change).
+/// @since 0.1.0-beta.0 — Removed $additional_optional and $optional params (from utility-sass change).
 ///
 @mixin extend-selectors-utils(
     $additional: (),
@@ -85,7 +85,7 @@
 }
 
 ///
-/// @since ___PKG_VERSION___ — Removed $add_globals_optional, $add_utils_optional, and $optional params (from utility-sass change).
+/// @since 0.1.0-beta.0 — Removed $add_globals_optional, $add_utils_optional, and $optional params (from utility-sass change).
 ///
 @mixin extend-selectors(
     $add_globals: (),
