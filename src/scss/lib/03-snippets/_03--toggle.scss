@@ -1134,7 +1134,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                         > %ol,
                         > %ul {
-                            width: 100%;
+                            align-self: stretch;
 
                             &:only-child {
                                 margin-inline: 0;

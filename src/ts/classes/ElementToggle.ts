@@ -439,6 +439,10 @@ export class ElementToggle {
                 )
             );
 
+        if ( this.asModal || this.isNav ) {
+            this.opts.closeWhenUntargetted = true;
+        }
+
         if ( this.opts.debug ) {
             console.debug( 'new ElementToggle()', {
                 id: this.container.id,

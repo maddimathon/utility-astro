@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0
+ * @maddimathon/utility-astro@0.1.0-beta.1
  * @license MIT
  */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
@@ -274,6 +274,9 @@ export class ElementToggle {
         this.isNav = _containerType.includes('nav')
             || (!this.isMenu && (this.container.role === 'navigation'
                 || this.container.tagName.toLowerCase() === 'nav'));
+        if (this.asModal || this.isNav) {
+            this.opts.closeWhenUntargetted = true;
+        }
         if (this.opts.debug) {
             console.debug('new ElementToggle()', {
                 id: this.container.id,

@@ -36,6 +36,9 @@ var ElementToggle = class _ElementToggle {
     this.isMenu = _containerType.includes("menu");
     this.asModal = this.isMenu || _containerType.includes("modal");
     this.isNav = _containerType.includes("nav") || !this.isMenu && (this.container.role === "navigation" || this.container.tagName.toLowerCase() === "nav");
+    if (this.asModal || this.isNav) {
+      this.opts.closeWhenUntargetted = true;
+    }
     if (this.opts.debug) {
       console.debug("new ElementToggle()", {
         id: this.container.id,
@@ -861,6 +864,6 @@ export {
   ElementToggle
 };
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.0
+ * @maddimathon/utility-astro@0.1.0-beta.1
  * @license MIT
  */

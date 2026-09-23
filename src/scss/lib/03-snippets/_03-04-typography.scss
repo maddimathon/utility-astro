@@ -45,8 +45,7 @@
                 align-self: center;
                 justify-self: center;
             }
-        }
-        @if $includeCite and $location == cite {
+        } @else if $location == cite and $includeCite {
             align-self: end;
             justify-self: end;
         }

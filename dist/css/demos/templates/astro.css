@@ -7,7 +7,7 @@
  */
 /**
  * Utility Astro - Template - Astro
- * @maddimathon/utility-astro/template/astro@0.1.0-beta.0
+ * @maddimathon/utility-astro/template/astro@0.1.0-beta.1
  * 
  * https://maddimathon.github.io/utility-astro
  * 
@@ -3253,7 +3253,7 @@ body > :where(main) > :where(aside) {
     }
     :where(.js) .toggle-block .toggle-block__content > .container > ol,
     :where(.js) .toggle-block .toggle-block__content > .container > ul {
-        width: 100%;
+        align-self: stretch;
     }
     :where(.js)
         .toggle-block

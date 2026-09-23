@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.0
+/// @package @maddimathon/utility-astro@0.1.0-beta.1
 /// @since 0.1.0-alpha
 ///
 
@@ -1158,7 +1158,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                         > %ol,
                         > %ul {
-                            width: 100%;
+                            align-self: stretch;
 
                             &:only-child {
                                 margin-inline: 0;
