@@ -1,18 +1,21 @@
 ---
 /**
- * @package boilerplate-astro-project@0.1.0-beta.1
+ * @package boilerplate-astro-project@0.1.0-beta.2.draft
  * @since 0.1.0-alpha
  */
 
 /* import - types */
-
 import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 
 import type { GenericProps } from '../../ts/index.ts';
 
-import type { NavMenuProps } from '../components/NavMenu.astro';
+import type { NavMenuProps } from '../components.ts';
 
-import type { ContentProps, ContentType } from './Content.astro';
+import type {
+    ContentProps,
+    ContentTypeInput,
+    DefaultContentType,
+} from './Content.astro';
 
 import type { PageProps } from './Page.d.ts';
 
@@ -33,11 +36,11 @@ import Content from './Content.astro';
 import {
     NavMenu,
     Page_Meta,
+    RenderedSlotContent,
     SettingsMenu,
     SkipLinks,
     ToggleNavMenu,
 } from '../components.ts';
-import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /** ## TYPES ==================================== **/
 
@@ -45,7 +48,7 @@ export type * from './Page.d.ts';
 
 /** ## PROPS ==================================== **/
 
-type Props<T_ContentType extends ContentType = ContentType> = GenericProps<
+type Props<T_ContentType extends ContentTypeInput = ContentTypeInput> = GenericProps<
     PageProps<T_ContentType>
 >;
 
@@ -72,10 +75,12 @@ const content = {
           ? [p.title]
           : [],
 
-    type: p.layout,
-} satisfies ContentProps<ContentType>;
+    type: p.layout ?? 'content-only' satisfies DefaultContentType,
+} satisfies ContentProps<ContentTypeInput>;
 
 /** ## CONSTANTS ==================================== **/
+
+const layoutSlug = Array.isArray(content.type) ? content.type[0] : content.type;
 
 const pageSlug: string =
     slugify(currentPagePath(Astro.url).replace(/\.(html|php)$/gi, '')) ||
@@ -247,7 +252,7 @@ const settings = p.settings && {
 >
     <!-- 
         This page includes html generated using
-        @maddimathon/utility-astro@0.1.0-beta.1
+        @maddimathon/utility-astro@0.1.0-beta.2.draft
 
         Author: Maddi Mathon (https://www.maddimathon.com/web)
         License: MIT
@@ -271,7 +276,7 @@ const settings = p.settings && {
         {...p.attrs?.body ?? {}}
         class:list={makeClassList([
             `page_${pageSlug}`,
-            content.type && `layout_${slugify(content.type)}`,
+            content.type && `layout_${slugify(layoutSlug)}`,
         ], p.attrs?.body?.class ?? [])}
     >
         {p.skipLinks && <SkipLinks links={p.skipLinks} />}

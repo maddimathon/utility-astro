@@ -7,7 +7,7 @@
 
 /* import - types */
 import type { GenericProps } from '../../../ts/types/index.js';
-import type { ContentProps_Full as ContentProps } from '../Content.astro';
+import type { ContentProps_Full } from '../Content.astro';
 
 /* import - functions */
 
@@ -23,9 +23,7 @@ import Sidebar from '../Sidebar.astro';
 
 /* PROPS ===================================== */
 
-export type Props =
-    | GenericProps<ContentProps<'sidebar-left'>>
-    | GenericProps<ContentProps<'sidebar-right'>>;
+export type Props = GenericProps<ContentProps_Full<string>>;
 
 const p: Props = Astro.props.frontmatter ?? Astro.props;
 

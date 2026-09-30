@@ -25,6 +25,15 @@ export type * from './layouts/Page.astro';
 import Sidebar from './layouts/Sidebar.astro';
 export type * from './layouts/Sidebar.astro';
 
+const layouts = {
+    Content,
+    Main,
+    Page,
+    Sidebar,
+} as const;
+
+export default layouts;
+
 export {
     Content,
     Main,

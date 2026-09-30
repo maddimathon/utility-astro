@@ -91,6 +91,38 @@ export type * from './components/ToggleNavMenu.astro';
 import VariableDump from './components/VariableDump.astro';
 export type * from './components/VariableDump.astro';
 
+const components = {
+    Alert_Icon,
+    Alert,
+    CodeBlock,
+    CopyToClipboardButton,
+    Heading,
+    Icon,
+    LoremIpsum,
+    Lorsum_Content_Abbreviated,
+    Lorsum_Content_Full,
+    Lorsum_Disclaimer,
+    Lorsum_Forms,
+    Lorsum_Heading,
+    Lorsum_Lists,
+    Lorsum_Table,
+    Lorsum_Toggle,
+    MenuList,
+    NavMenu,
+    NestedList,
+    Page_Meta,
+    RenderedSlotContent,
+    SettingsMenu,
+    SkipLinks,
+    Table,
+    TableOfContents,
+    Toggle,
+    ToggleNavMenu,
+    VariableDump,
+} as const;
+
+export default components;
+
 export {
     Alert_Icon,
     Alert,

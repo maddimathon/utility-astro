@@ -8,7 +8,5 @@
 @use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/config/lib' with (
-    $internal_supressCredit: false !default,
-    $selectorType_mode: 'attribute' !default,
-    $selectorType_motion: 'attribute' !default
+    $internal_supressCredit: false !default
 );

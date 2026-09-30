@@ -6,7 +6,7 @@ children:
 ---
 
 <!--README_HEADER-->
-# Utility Astro @ 0.1.0-beta.1
+# Utility Astro @ 0.1.0-beta.2.draft
 <!--/README_HEADER-->
 
 <!--README_DESC-->
@@ -27,8 +27,8 @@ or
 
 <!--README_INSTALL-->
 ```sh
-npm i -D @maddimathon/utility-astro@0.1.0-beta.1
-npm i -D github:maddimathon/utility-astro#0.1.0-beta.1
+npm i -D @maddimathon/utility-astro@0.1.0-beta.2
+npm i -D github:maddimathon/utility-astro#0.1.0-beta.2
 ```
 <!--/README_INSTALL-->
 

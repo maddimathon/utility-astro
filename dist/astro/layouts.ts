@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.1
+ * @maddimathon/utility-astro@0.1.0-beta.2.draft
  * @license MIT
  */
 
@@ -24,6 +24,15 @@ export type * from './layouts/Page.astro';
 
 import Sidebar from './layouts/Sidebar.astro';
 export type * from './layouts/Sidebar.astro';
+
+const layouts = {
+    Content,
+    Main,
+    Page,
+    Sidebar,
+} as const;
+
+export default layouts;
 
 export {
     Content,

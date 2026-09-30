@@ -10,6 +10,7 @@ import type { GenericProps } from '../../ts/types/index.js';
 
 import type {
     ContentType,
+    ContentTypeInput,
     DefaultContentType,
     ContentProps,
     ContentProps_Full,
@@ -37,11 +38,13 @@ export type * from './Content.d.ts';
 /* PROPS ===================================== */
 
 // prettier-ignore
-type Props<T_Type extends ContentType = DefaultContentType> = GenericProps<ContentProps<T_Type>>;
+type Props<T_Type extends ContentTypeInput = DefaultContentType> = GenericProps<ContentProps<T_Type>>;
 
-const _defProps: ContentProps_Full<ContentType> &
-    Pick<Required<Props>, 'type'> = {
-    type: 'content-only',
+type DefaultProps = ContentProps_Full<string> &
+    Pick<Required<Props<ContentTypeInput>>, 'type'>;
+
+const _defProps = {
+    type: 'content-only' as Extract<ContentTypeInput, string>,
 
     title: undefined,
     subtitle: undefined,
@@ -50,10 +53,10 @@ const _defProps: ContentProps_Full<ContentType> &
         main: {},
         sidebar: {},
     },
-};
+} as const satisfies DefaultProps;
 
 const { type = 'content-only', ...p } = mergeArgs(
-    _defProps,
+    _defProps as DefaultProps,
     Astro.props.frontmatter ?? Astro.props,
     true,
 );
@@ -80,17 +83,21 @@ const contentTypes = {
     'sidebar-left': Content_Sidebar,
     'sidebar-right': Content_Sidebar,
 } as const satisfies {
-    [K in ContentType]: (
-        result: any,
-        props: ContentProps_Full<K>,
-        slots?: any,
-    ) => any;
+    [K in ContentType]: (props: ContentProps_Full<K>) => any;
 };
 
-const ContentComponent = contentTypes[type];
+const [typeSlug, ContentComponent] = Array.isArray(type)
+    ? type
+    : type && type in contentTypes
+      ? [type, contentTypes[type as ContentType]]
+      : [_defProps.type, contentTypes[_defProps.type]];
+
+const completedProps = {
+    ...{ ...p, type: typeSlug },
+} satisfies ContentProps_Full<string>;
 ---
 
-<ContentComponent {...{ ...p, type }}>
+<ContentComponent {...completedProps}>
     {
         titleString ? (
             <Heading

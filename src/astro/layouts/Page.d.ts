@@ -13,14 +13,18 @@ import type { HTMLAttributes } from 'astro/types';
 import type {
     PartialExcept,
 } from '@maddimathon/utility-typescript/types';
-import type { NavMenuProps } from '../components/NavMenu.astro';
-import type { Page_MetaProps } from '../components/Page_Meta.astro';
-import type { SettingsMenuProps } from '../components/SettingsMenu.astro';
-import type { SkipLinksProps } from '../components/SkipLinks.astro';
+
+import type {
+    NavMenuProps,
+    Page_MetaProps,
+    SettingsMenuProps,
+    SkipLinksProps,
+} from '../components.ts';
 
 import type {
     ContentProps,
     ContentType,
+    ContentTypeInput,
 } from './Content.astro';
 
 /**
@@ -93,7 +97,7 @@ type Copyright_PlainYear = {
  * 
  * @interface
  */
-export interface PageProps<T_ContentType extends ContentType = ContentType> {
+export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeInput> {
 
     /**
      * Page title. Used for metadata default and passed to the Content component.

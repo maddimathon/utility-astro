@@ -26,7 +26,14 @@ export type ContentType =
 /**
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export type DefaultContentType = 'content-only' & ContentType;
+export type DefaultContentType = Extract<ContentType, 'content-only'>;
+
+/**
+ * @since ___PKG_VERSION___
+ */
+export type ContentTypeInput =
+    | ContentType
+    | [ string, ( ( props: ContentProps_Full<string> ) => any ) ];
 
 /**
  * Input props for the Content component.
@@ -34,7 +41,7 @@ export type DefaultContentType = 'content-only' & ContentType;
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface ContentProps<T_Type extends ContentType = DefaultContentType> {
+export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentType> {
 
     attrs?: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
@@ -61,8 +68,10 @@ export interface ContentProps<T_Type extends ContentType = DefaultContentType> {
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export type ContentProps_Full<T_Type extends ContentType> = {
-    [ K in keyof Omit<ContentProps, 'attrs'> ]-?: ContentProps[ K ];
+export type ContentProps_Full<T_Type extends ContentType | string> = {
+    [ K in keyof Omit<ContentProps, 'attrs' | 'type'> ]-?: ContentProps[ K ];
+} & {
+    type: string;
 } & {
     attrs: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
@@ -71,6 +80,7 @@ export type ContentProps_Full<T_Type extends ContentType> = {
     }
     : {
         main: MainProps;
+        sidebar?: SidebarProps | undefined;
     };
 
     // [ key: string ]: unknown;

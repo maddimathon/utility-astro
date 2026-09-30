@@ -8,5 +8,7 @@
 @use '_pre' as pre;
 
 @forward 'pkg:@maddimathon/utility-sass/config/modules' with (
-    $selector_body_aliases: pre.$selector_body_aliases
+    $selector_body_aliases: pre.$selector_body_aliases,
+    $selectorType_mode: 'attribute' !default,
+    $selectorType_motion: 'attribute' !default
 );
