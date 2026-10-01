@@ -6,7 +6,7 @@ children:
 ---
 
 <!--README_HEADER-->
-# Utility Astro @ 0.1.0-beta.2.draft
+# Utility Astro @ 0.1.0-beta.2
 <!--/README_HEADER-->
 
 <!--README_DESC-->

@@ -29,7 +29,7 @@ export type ContentType =
 export type DefaultContentType = Extract<ContentType, 'content-only'>;
 
 /**
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.2
  */
 export type ContentTypeInput =
     | ContentType

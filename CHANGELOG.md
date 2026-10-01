@@ -19,10 +19,16 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.2** — 2026-09-30
+
+Added option for custom Content components (for custom layouts). Updated with
+utility-sass.
+
+
 ## **0.1.0-beta.1** — 2026-09-23
 
-ElementToggle modals and navs now force close on untargetting
-(closeWhenUntargetted = true).
+ElementToggle modals and navs now auto-close on untargetting
+(as when `closeWhenUntargetted = true`).
 
 
 ## **0.1.0-beta.0** — 2026-09-19

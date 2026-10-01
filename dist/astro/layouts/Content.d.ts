@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.2.draft
+ * @maddimathon/utility-astro@0.1.0-beta.2
  * @license MIT
  */
 
@@ -29,7 +29,7 @@ export type ContentType =
 export type DefaultContentType = Extract<ContentType, 'content-only'>;
 
 /**
- * @since 0.1.0-beta.2.draft
+ * @since 0.1.0-beta.2
  */
 export type ContentTypeInput =
     | ContentType
