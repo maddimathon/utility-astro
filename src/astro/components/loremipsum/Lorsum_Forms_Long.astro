@@ -6,6 +6,7 @@
  */
 
 /* import - types */
+import type { LoremIpsumProps } from '../../functions/loremIpsum.js';
 
 /* import - functions */
 
@@ -24,9 +25,15 @@ export interface Props {
     disabledButtons:boolean;
     displayHeading: undefined | number;
     heading: number;
+    components: Required<Required<LoremIpsumProps>['components']>;
 }
 
-const { disabledButtons, displayHeading, heading }: Props = Astro.props;
+const {
+    components: { Button },
+    disabledButtons,
+    displayHeading,
+    heading,
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
@@ -386,27 +393,24 @@ const { disabledButtons, displayHeading, heading }: Props = Astro.props;
         value='Submit Button'
     />
 
-    <button
+    <Button
         type='button'
         id='button2'
         name='button2'
         onclick="alert('Hello!')"
-        set:text='Say Hello!'
-    />
+    >Say Hello!</Button>
 
-    <button
+    <Button
         type='reset'
         id='input22'
         name='input22'
-        set:text='Reset Button'
-    />
+    >Reset Button</Button>
 
-    <button
+    <Button
         type='submit'
         id='input23'
         name='input23'
-        set:text='Submit Button'
-    />
+    >Submit Button</Button>
 
     {disabledButtons && (
         <input
@@ -434,29 +438,26 @@ const { disabledButtons, displayHeading, heading }: Props = Astro.props;
             value='Submit Button'
         />
 
-        <button
+        <Button
             type='button'
             id='button2-d'
             name='button2-d'
             aria-disabled='true'
             onclick="alert('Hello!')"
-            set:text='Say Hello!'
-        />
+        >Say Hello!</Button>
 
-        <button
+        <Button
             type='reset'
             id='input22-d'
             name='input22-d'
             aria-disabled='true'
-            set:text='Reset Button'
-        />
+        >Reset Button</Button>
 
-        <button
+        <Button
             type='submit'
             id='input23-d'
             name='input23-d'
             aria-disabled='true'
-            set:text='Submit Button'
-        />
+        >Submit Button</Button>
     )}
 </form>

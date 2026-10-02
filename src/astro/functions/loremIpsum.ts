@@ -9,12 +9,13 @@
  */
 
 import type { ComponentProps } from 'astro/types';
-import type { ArrayItem, PartialExcept } from '@maddimathon/utility-typescript/types';
+import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 
 import { arrayUnique } from '@maddimathon/utility-typescript';
 
+import type { ButtonComponentType } from '../components/Button.astro';
 import type TableOfContents from '../components/TableOfContents.astro';
-import type { ToggleProps } from '../components/Toggle.astro';
+import type { ToggleComponentType } from '../components/Toggle.astro';
 
 /**
  * @since 0.1.0-alpha.20
@@ -208,6 +209,19 @@ export interface LoremIpsumProps {
     asSection?: boolean;
 
     /**
+     * @since ___PKG_VERSION___
+     */
+    components?: Partial<{
+        Button: ButtonComponentType,
+
+        /**
+         * @since 0.1.0-beta.0
+         * @since ___PKG_VERSION___ — Moved to components prop.
+         */
+        Toggle: ToggleComponentType;
+    }>;
+
+    /**
      * The starting visual heading level.
      * 
      * @default null
@@ -234,20 +248,21 @@ export interface LoremIpsumProps {
     /**
      * @since 0.1.0-beta.0
      */
-    previewComponents?: {
-        Forms?: LoremIpsum_PreviewComponent<{
+    previewComponents?: Partial<{
+        Forms: LoremIpsum_PreviewComponent<{
+            components: Required<Required<LoremIpsumProps>[ 'components' ]>;
             displayHeading: undefined | number;
             heading: number;
             tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
         }>,
-        Lists?: LoremIpsum_PreviewComponent,
-        Table?: LoremIpsum_PreviewComponent<{
+        Lists: LoremIpsum_PreviewComponent,
+        Table: LoremIpsum_PreviewComponent<{
             tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
         }>,
-        Toggle?: LoremIpsum_PreviewComponent<{
+        Toggle: LoremIpsum_PreviewComponent<{
             tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
         }>,
-    };
+    }>;
 
     /**
      * Whether to output a very abbreviated version (e.g., inside an alert or
@@ -256,11 +271,6 @@ export interface LoremIpsumProps {
      * @since 0.1.0-alpha.17
      */
     superAbbreviated?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    ToggleComponent?: ( props: PartialExcept<ToggleProps, 'children' | 'id'> ) => any;
 
     /**
      * @since 0.1.0-beta.0

@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.2
+ * @maddimathon/utility-astro@0.1.0-beta.2.draft
  * @license MIT
  */
 
@@ -18,6 +18,9 @@ export type * from './components/alert/Alert_Icon.astro';
 
 import Alert from './components/alert/Alert.astro';
 export type * from './components/alert/Alert.astro';
+
+import Button from './components/Button.astro';
+export type * from './components/Button.astro';
 
 import CodeBlock from './components/CodeBlock.astro';
 export type * from './components/CodeBlock.astro';
@@ -94,6 +97,7 @@ export type * from './components/VariableDump.astro';
 const components = {
     Alert_Icon,
     Alert,
+    Button,
     CodeBlock,
     CopyToClipboardButton,
     Heading,
@@ -126,6 +130,7 @@ export default components;
 export {
     Alert_Icon,
     Alert,
+    Button,
     CodeBlock,
     CopyToClipboardButton,
     Heading,

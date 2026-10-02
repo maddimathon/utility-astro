@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.2
+ * @maddimathon/utility-astro@0.1.0-beta.2.draft
  * @license MIT
  */
 
@@ -29,7 +29,7 @@ if ( SCRIPTS_TOGGLE ) {
 
     const scrollPaddingTop_num = scrollPaddingTop ? makeNumber( scrollPaddingTop.replace( /^\s*(\-?[\d\.]+)px\s*$/i, '' ) ) : null;
 
-    await ElementToggle.runOnLoad( {
+    ElementToggle.runOnLoad( {
         debug: SCRIPTS_TOGGLE_DEBUG,
         logResults: SCRIPTS_TOGGLE_OUTPUTRESULTS,
 

@@ -8,16 +8,16 @@
 /* import - types */
 import type { GenericElementProps } from '../../ts/types/index.js';
 import type { CodeBlockProps } from '../../astro/components/CodeBlock.astro';
+import type { ToggleComponentType } from '../../astro/components/Toggle.astro';
 
 /* import - functions */
+import { slugify } from '@maddimathon/utility-typescript';
 
 /* import - values */
 
 /* import - components */
 import CodeBlock from '../../astro/components/CodeBlock.astro';
-import Toggle, { type ToggleProps } from '../../astro/components/Toggle.astro';
-import { slugify } from '@maddimathon/utility-typescript';
-import type { PartialExcept } from '@maddimathon/utility-typescript/types';
+import Toggle from '../../astro/components/Toggle.astro';
 
 /* import - layouts */
 
@@ -36,9 +36,7 @@ export type Props_Inner = {
     /**
      * @since 0.1.0-beta.0
      */
-    ToggleComponent?: (
-        props: PartialExcept<ToggleProps, 'children' | 'id'>,
-    ) => any;
+    ToggleComponent?: ToggleComponentType;
 
     /**
      * @since 0.1.0-beta.0

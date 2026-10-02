@@ -8,6 +8,8 @@
 /* import - types */
 import type { GenericElementProps } from '../../ts/types/index.js';
 
+import type { CopyToClipboardButtonProps } from './CopyToClipboardButton.astro';
+
 /* import - functions */
 
 /* import - values */
@@ -34,7 +36,7 @@ export interface CodeBlockProps {
      */
     children?: any;
 
-    copyToClipboard?: boolean | undefined;
+    copyToClipboard?: boolean | CopyToClipboardButtonProps | undefined;
 
     /**
      * Code language, if any.
@@ -77,10 +79,11 @@ const codeHTML: string =
 {
     copyToClipboard && (
         <CopyToClipboardButton
-            class:list='button--inline button--copy-code'
             toClipboard={codeHTML}
             successMessage='copied!'
             set:text='copy'
+            {...(typeof copyToClipboard === 'object' ? copyToClipboard : {})}
+            class:list='button--inline button--copy-code'
         />
     )
 }

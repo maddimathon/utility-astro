@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.2
+/// @package @maddimathon/utility-astro@0.1.0-beta.2.draft
 /// @since 0.1.0-beta.0
 ///
 
@@ -55,7 +55,7 @@ $_path_template: if(
             ),
         $title: $title,
         $url: if($url, 'https://maddimathon.github.io/utility-astro', false),
-        $version: if($version, '0.1.0-beta.2', false),
+        $version: if($version, '0.1.0-beta.2.draft', false),
         $args...
     );
 }

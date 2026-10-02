@@ -32,7 +32,8 @@ import Lorsum_Heading from './Lorsum_Heading.astro';
 
 /* PROPS ===================================== */
 
- interface Props extends Pick<Required<LoremIpsumProps>, 'displayHeading'|'heading'|'ToggleComponent'|'toggleProps'> {
+ interface Props extends Pick<Required<LoremIpsumProps>, 'displayHeading'|'heading'|'toggleProps'> {
+    components: Required<Required<LoremIpsumProps>['components']>;
     ifDisplay: LoremIpsum_DisplaySettings_Parsed;
     previewComponents: Required<Required<LoremIpsumProps>['previewComponents']>;
     props: LoremIpsumProps;
@@ -40,15 +41,18 @@ import Lorsum_Heading from './Lorsum_Heading.astro';
 }
 
 const {
+    components,
     heading,
     displayHeading = heading,
     ifDisplay,
-    previewComponents: { Forms, Lists, Table },
+    previewComponents,
     props,
     tableOfContentsIds,
-    ToggleComponent,
     toggleProps,
 }: Props = Astro.props;
+
+const { Button, Toggle } = components;
+const { Forms, Lists, Table } = previewComponents;
 
 /* CONSTANTS ===================================== */
 
@@ -104,7 +108,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
         displayHeading={ifDisplay.tocDisplayHeading}
         heading={heading}
         menu={tocMenu}
-        ToggleComponent={ToggleComponent}
+        ToggleComponent={Toggle}
     />
 ) }
 
@@ -168,26 +172,26 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 { ifDisplay.toggleBlocks && tableOfContentsIds.toggles && (
     <hr />
     
-    <ToggleComponent
+    <Toggle
         {...toggleProps}
         id={tableOfContentsIds.toggles.id}
     >
         <p>Boo!</p>
         <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper.</p>
         <p>Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-    </ToggleComponent>
+    </Toggle>
     
-    <ToggleComponent
+    <Toggle
         {...toggleProps}
         id={`${tableOfContentsIds.toggles.id}-open-default`}
         defaultOpen={true}
     >
         <Fragment slot='button'>I am open by default</Fragment>
         <p>Boo!</p>
-    </ToggleComponent>
+    </Toggle>
 
     <Fragment>{ ifDisplay.headingLevels.map( (heading) => ( 
-        tableOfContentsIds.toggles ? <ToggleComponent
+        tableOfContentsIds.toggles ? <Toggle
             {...toggleProps}
             displayHeading={heading}
             heading={0}
@@ -200,7 +204,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
             <p>Boo!</p>
             <p>Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus condimentum. Vivamus vulputate nisl sit amet vehicula commodo. Suspendisse pharetra varius ipsum, sed scelerisque ipsum tempor eget. Curabitur mollis lacus eu augue vestibulum semper.</p>
             <p>Praesent rutrum velit sodales ante varius convallis. Proin ut gravida sem. Nulla ac sapien odio.</p>
-        </ToggleComponent> : ''
+        </Toggle> : ''
     ) ) }</Fragment>
 ) }
 
@@ -220,23 +224,22 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 <p>Mauris in arcu sagittis velit aliquam cursus dignissim at odio.</p>
 
 { ifDisplay.buttons && (
-    <button type="button" id={tableOfContentsIds.buttons?.id}>This is a button</button>
+    <Button type="button" id={tableOfContentsIds.buttons?.id}>This is a button</Button>
 
     <div class="button-span">
-        { ifDisplay.disabledButton && <button aria-disabled="true" type="button">This is a disabled button</button> }
+        { ifDisplay.disabledButton && <Button aria-disabled="true" type="button">This is a disabled button</Button> }
 
-        { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <button
-            class={`button-${variant}`}
-            set:text={`This is a ${variant} button`}
+        { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <Button
+            variant={variant}
             type="button"
-        /> ) : '' }
+        >{`This is a ${variant} button`}</Button> ) : '' }
     </div>
 ) }
 
 { ifDisplay.buttons && ifDisplay.buttonTypes && <div class="button-span">
-    <a class="button" href="#" target="_blank">This is a link with a <code>button</code> class</a>
-    <button type="submit" set:text="This is a submit button" />
-    <button type="reset" set:text="This is a reset button" />
+    <Button href="#" target="_blank">This is a link with a <code>button</code> class</Button>
+    <Button type="submit" >This is a submit button</Button>
+    <Button type="reset" >This is a reset button</Button>
 </div> }
 
 <slot name="three" />
@@ -310,7 +313,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
     <p>Nulla dui, auctor fringilla neque laoreet sit amet. Mauris fringilla nisi et purus pulvinar euismod. Sed quis magna urna. Phasellus aliquet varius nibh, ac faucibus eros pharetra vel. Maecenas neque arcu, efficitur id molestie sed, varius quis nibh. Cras ligula enim, dictum nec ullamcorper sed, rutrum in tellus.</p>
 ) }
 
-{ ifDisplay.forms && <Forms {...{ displayHeading, heading, ifDisplay, tableOfContentsIds }} /> }
+{ ifDisplay.forms && <Forms {...{ components, displayHeading, heading, ifDisplay, previewComponents, tableOfContentsIds }} /> }
 
 <style lang='scss'>
     @forward '../../css/lorem-ipsum';

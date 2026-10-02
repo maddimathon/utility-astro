@@ -6,11 +6,10 @@
  */
 
 /* import - types */
-import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 import type { GenericElementProps } from '../../ts/types/index.js';
 import type { MenuItem } from './MenuList.astro';
 import type { NavMenuProps } from './NavMenu.astro';
-import type { ToggleProps } from './Toggle.astro';
+import type { ToggleComponentType } from './Toggle.astro';
 
 /* import - functions */
 import MenuList from './MenuList.astro';
@@ -68,7 +67,7 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
     /**
      * @since 0.1.0-beta.0
      */
-    ToggleComponent?: ( props: PartialExcept<ToggleProps,  'children'|'id' > ) => any;
+    ToggleComponent?: ToggleComponentType;
         
     /**
      * @since 0.1.0-beta.0

@@ -6,7 +6,10 @@
  */
 
 /* import - types */
-import type { LoremIpsum_DisplaySettings_Parsed } from '../../functions/loremIpsum.js';
+import type {
+    LoremIpsum_DisplaySettings_Parsed,
+    LoremIpsumProps,
+} from '../../functions/loremIpsum.js';
 
 /* import - functions */
 
@@ -20,11 +23,15 @@ import type { LoremIpsum_DisplaySettings_Parsed } from '../../functions/loremIps
 
 /* PROPS ===================================== */
 
-export interface Props {
+interface Props {
+    components: Required<Required<LoremIpsumProps>['components']>;
     ifDisplay: LoremIpsum_DisplaySettings_Parsed;
 }
 
-const { ifDisplay }: Props = Astro.props;
+const {
+    components: { Button },
+    ifDisplay,
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
@@ -150,15 +157,15 @@ const { ifDisplay }: Props = Astro.props;
 {
     ifDisplay.buttons && (
         <div class='button-span'>
-            <button type='button'>This is a button</button>
+            <Button type='button'>This is a button</Button>
 
             {ifDisplay.disabledButton && (
-                <button
+                <Button
                     aria-disabled='true'
                     type='button'
                 >
                     This is a disabled button
-                </button>
+                </Button>
             )}
 
             {ifDisplay.buttonVariations
@@ -167,11 +174,10 @@ const { ifDisplay }: Props = Astro.props;
                           (ifDisplay.buttonVariationsAll ||
                               variant === 'secondary' ||
                               variant === 'tertiary') && (
-                              <button
+                              <Button
                                   class={`button-${variant}`}
-                                  set:text={`This is a ${variant} button`}
                                   type='button'
-                              />
+                              >{`This is a ${variant} button`}</Button>
                           ),
                   )
                 : ''}

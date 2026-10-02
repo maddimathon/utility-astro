@@ -74,6 +74,8 @@ export interface HeadingProps {
 
 type Props = GenericElementProps<HeadingProps, 'div'>;
 
+export type HeadingComponentType = (props: HeadingProps) => any;
+
 /* FUNCTIONS ===================================== */
 
 export function parseHeadingParams(

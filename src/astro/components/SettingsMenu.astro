@@ -7,6 +7,7 @@
 
 /* import - types */
 import type { GenericElementProps } from '../../ts/index.js';
+import type { ButtonComponentType } from './Button.astro';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions.js';
@@ -17,6 +18,7 @@ import { SVG } from '../../ts/svg.js';
 
 /* import - components */
 import Toggle_Control from '../support/Toggle_Control.astro';
+import ButtonComponent from './Button.astro';
 import RenderedSlotContent from './RenderedSlotContent.astro';
 
 /* import - layouts */
@@ -34,6 +36,15 @@ export interface SettingsMenuProps {
      * Email used for a focus link to report accessibility issues.
      */
     accessibilityReportEmail?: string | undefined;
+
+    /**
+     * @since ___PKG_VERSION___
+     */
+    components?:
+        | undefined
+        | Partial<{
+              Button: ButtonComponentType;
+          }>;
 
     /**
      * @since 0.1.0-beta.0
@@ -121,6 +132,7 @@ const {
     accessibilityReportEmail,
 
     class: classList = ['website-settings'],
+    components: { Button = ButtonComponent } = {},
     iconSVG: iconSVG_input,
     id = 'website-settings',
 
@@ -379,11 +391,11 @@ const iconSVG =
                     )
             }
 
-            <button
+            <Button
                 data-settings-reset
-                set:text='Reset Settings'
                 type='reset'
-            />
+                >Reset Settings</Button
+            >
 
             <RenderedSlotContent
                 name='settings-menu-close'

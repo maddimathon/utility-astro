@@ -7,6 +7,8 @@
 
 /* import - types */
 import type { HTMLTag } from 'astro/types';
+import type { PartialExcept } from '@maddimathon/utility-typescript/types';
+
 import type { ClassList, ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
@@ -169,6 +171,10 @@ export interface ToggleProps {
      */
     type?: ToggleContainerType | ToggleContainerType[] | undefined;
 }
+
+export type ToggleComponentType = (
+    props: PartialExcept<ToggleProps, 'children' | 'id'>,
+) => any;
 
 type Props = ElementProps<
     ToggleProps,

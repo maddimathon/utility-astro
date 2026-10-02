@@ -21,6 +21,7 @@ import {
 /* import - values */
 
 /* import - components */
+import ButtonComponent from './Button.astro';
 import Lorsum_Content_Abbreviated from './loremipsum/Lorsum_Content_Abbreviated.astro';
 import Lorsum_Content_Full from './loremipsum/Lorsum_Content_Full.astro';
 import Lorsum_Disclaimer from './loremipsum/Lorsum_Disclaimer.astro';
@@ -28,7 +29,7 @@ import Lorsum_Forms from './loremipsum/Lorsum_Forms.astro';
 import Lorsum_Lists from './loremipsum/Lorsum_Lists.astro';
 import Lorsum_Table from './loremipsum/Lorsum_Table.astro';
 import Lorsum_Toggle from './loremipsum/Lorsum_Toggle.astro';
-import Toggle from './Toggle.astro';
+import ToggleComponent from './Toggle.astro';
 
 /* import - layouts */
 
@@ -38,6 +39,8 @@ export * from '../functions/loremIpsum.js';
 
 /* TYPES ===================================== */
 
+export type LoremIpsumComponentType = (props: LoremIpsumProps) => any
+
 /* PROPS ===================================== */
 
 type Props = GenericProps<LoremIpsumProps>;
@@ -45,8 +48,8 @@ type Props = GenericProps<LoremIpsumProps>;
 const {
     // abbreviated = false,
     asSection = true,
+    components = {},
     superAbbreviated = false,
-    ToggleComponent = Toggle,
     toggleProps = {},
     previewComponents = {},
     ...props
@@ -67,18 +70,24 @@ const heading = props.heading ?? 2;
 const disclaimerHTML = (await Astro.slots.render('disclaimer'))?.trim();
 
 const fullProps = {
+    components: {
+        Button: components.Button ?? ButtonComponent,
+        Toggle: components.Toggle ?? ToggleComponent,
+    },
+
     displayHeading,
     heading,
     ifDisplay,
+
     previewComponents: {
         Forms: previewComponents.Forms ?? Lorsum_Forms,
         Lists: previewComponents.Lists ?? Lorsum_Lists,
         Table: previewComponents.Table ?? Lorsum_Table,
         Toggle: previewComponents.Toggle ?? Lorsum_Toggle,
     },
+    
     props,
     tableOfContentsIds,
-    ToggleComponent,
     toggleProps,
 } satisfies ComponentProps<typeof Lorsum_Content_Full>;
 

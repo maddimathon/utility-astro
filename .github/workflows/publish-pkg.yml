@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm publish --access restricted
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # publish-npm:
@@ -37,6 +37,6 @@ jobs:
   #         registry-url: 'https://registry.npmjs.org'
   #         scope: '@maddimathon'
   #     - run: npm ci
-  #     - run: npm publish --access restricted
+  #     - run: npm publish --access public
   #       env:
   #         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

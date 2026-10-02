@@ -8,6 +8,7 @@
 /* import - types */
 import type {
     getLoremIpsumIds,
+    LoremIpsumProps,
     LoremIpsum_DisplaySettings_Parsed,
 } from '../../functions/loremIpsum.js';
 
@@ -26,14 +27,20 @@ import Lorsum_Forms_Long from './Lorsum_Forms_Long.astro';
 /* PROPS ===================================== */
 
 export interface Props {
+    components: Required<Required<LoremIpsumProps>['components']>;
     displayHeading: undefined | number;
     heading: number;
     ifDisplay: LoremIpsum_DisplaySettings_Parsed;
     tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
 }
 
-const { displayHeading, heading, ifDisplay, tableOfContentsIds }: Props =
-    Astro.props;
+const {
+    components,
+    displayHeading,
+    heading,
+    ifDisplay,
+    tableOfContentsIds,
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
@@ -82,6 +89,7 @@ const { displayHeading, heading, ifDisplay, tableOfContentsIds }: Props =
     ifDisplay.formsLong && (
         <Lorsum_Forms_Long
             {...{
+                components,
                 disabledButtons: ifDisplay.disabledButton,
                 displayHeading,
                 heading,

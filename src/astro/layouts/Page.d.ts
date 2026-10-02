@@ -23,7 +23,6 @@ import type {
 
 import type {
     ContentProps,
-    ContentType,
     ContentTypeInput,
 } from './Content.astro';
 

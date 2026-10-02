@@ -6,13 +6,16 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { HTMLAttributes } from 'astro/types';
+import type { ClassList } from '../../ts/types/index.js';
+import type { ButtonComponentType, ButtonProps_Button } from './Button.astro';
 
 /* import - functions */
 
 /* import - values */
 
 /* import - components */
+import ButtonComponent from './Button.astro';
 
 /* import - layouts */
 
@@ -22,11 +25,20 @@ import type { GenericElementProps } from '../../ts/types/index.js';
 export type CopyToClipboardButtonProps = CopyToClipboardButtonProps.WithChildren | CopyToClipboardButtonProps.WithSetHtml | CopyToClipboardButtonProps.WithSetText;
 
 export namespace CopyToClipboardButtonProps {
-    type Base = {
+    type Base = Omit<ButtonProps_Button, 'children' | 'type'> & {
         /**
          * Timeout length to switch the button to active state, in milliseconds.
          */
         activeTimeout?: undefined | number;
+
+        /**
+         * @since ___PKG_VERSION___
+         */
+        components?:
+            | undefined
+            | Partial<{
+                  Button: ButtonComponentType;
+              }>;
 
         /**
          * Timeout length to display the success message, in milliseconds.
@@ -63,18 +75,21 @@ export namespace CopyToClipboardButtonProps {
 /* PROPS ===================================== */
 
 // prettier-ignore
-type Props = GenericElementProps<CopyToClipboardButtonProps.WithChildren, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetHtml, 'div'> | GenericElementProps<CopyToClipboardButtonProps.WithSetText, 'div'>;
+type Props = ( CopyToClipboardButtonProps.WithChildren | CopyToClipboardButtonProps.WithSetHtml | CopyToClipboardButtonProps.WithSetText ) & Omit<HTMLAttributes<'button'>, 'class'|'type'> & {
+    class?: undefined | ClassList;
+};
 
 const {
     activeTimeout,
     // copyAs,
+    components: { Button = ButtonComponent } = {},
     messageTimeout,
     successMessage,
     toClipboard,
 
     class: classListInput = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -83,20 +98,18 @@ const classList = [
     { '||': classListInput },
     classListInput,
 ];
-
-// data-copy-to-clipboard-as={copyAs}
 ---
 
-<button
+<Button
     {...attributes}
     class:list={classList}
     data-copy-to-clipboard={toClipboard}
     data-copy-to-clipboard-success={successMessage}
     data-copy-to-clipboard-active-timeout={activeTimeout}
     data-copy-to-clipboard-message-timeout={messageTimeout}
-    ><slot /></button
+    type='button'
+    ><slot /></Button
 ><script>
     import { CopyToClipboard } from '../../ts/classes/CopyToClipboard.js';
-
     CopyToClipboard.run();
 </script>
