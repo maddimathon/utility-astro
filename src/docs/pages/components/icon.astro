@@ -17,6 +17,7 @@ import IconComponent from '../../../astro/components/Icon.astro';
 
 /* import - layouts */
 import DocsPage from '../../layouts/DocsPage.astro';
+import {} from '../../../astro/components.js';
 
 /* TYPES ===================================== */
 
@@ -35,4 +36,16 @@ const allIcons = Object.keys(SVG) as (keyof typeof SVG)[];
             </p>
         ))
     }
+
+    <!-- <h2>Alerts</h2>
+    {
+        allIcons.map((type) => (
+            <Alert type={type}>
+                <Fragment
+                    slot='headline'
+                    set:text={type}
+                />
+            </Alert>
+        ))
+    } -->
 </DocsPage>

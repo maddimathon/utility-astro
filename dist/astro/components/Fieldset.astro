@@ -1,0 +1,51 @@
+---
+/**
+ * Exists just to allow easy override of fieldset markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.ts';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FieldsetProps = ElementProps<PropsRequireChildren, 'fieldset'>;
+
+type Props = FieldsetProps;
+
+export type FieldsetComponentType = (props: FieldsetProps) => any;
+
+const { class: classList, ...attrs } = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const legendHTML = (await Astro.slots.render('legend'))?.trim();
+---
+
+<fieldset
+    {...attrs}
+    class={classList ? flattenClassList(classList) : undefined}
+>
+    {legendHTML && <legend set:html={legendHTML} />}
+    <slot />
+</fieldset>

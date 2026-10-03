@@ -8,7 +8,6 @@
 /* import - types */
 import type {
     getLoremIpsumIds,
-    LoremIpsum_DisplaySettings_Parsed,
     LoremIpsumProps,
 } from '../../functions/loremIpsum.js';
 
@@ -20,8 +19,6 @@ import {
 /* import - values */
 
 /* import - components */
-import CodeBlock from '../CodeBlock.astro';
-import Heading from '../Heading.astro';
 import TableOfContents from '../TableOfContents.astro';
 
 import Lorsum_Heading from './Lorsum_Heading.astro';
@@ -33,9 +30,9 @@ import Lorsum_Heading from './Lorsum_Heading.astro';
 /* PROPS ===================================== */
 
  interface Props extends Pick<Required<LoremIpsumProps>, 'displayHeading'|'heading'|'toggleProps'> {
-    components: Required<Required<LoremIpsumProps>['components']>;
-    ifDisplay: LoremIpsum_DisplaySettings_Parsed;
-    previewComponents: Required<Required<LoremIpsumProps>['previewComponents']>;
+    components: LoremIpsumProps.Components;
+    ifDisplay: LoremIpsumProps.DisplaySettings.Parsed;
+    previewComponents: LoremIpsumProps.PreviewComponents;
     props: LoremIpsumProps;
     tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
 }
@@ -51,7 +48,7 @@ const {
     toggleProps,
 }: Props = Astro.props;
 
-const { Button, Toggle } = components;
+const { Button, CodeBlock, Heading, Toggle } = components;
 const { Forms, Lists, Table } = previewComponents;
 
 /* CONSTANTS ===================================== */
@@ -128,17 +125,19 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 { ifDisplay.headingsList && (
     <Lorsum_Heading
         class="page-title"
+        components={components}
         heading={1}
         id={tableOfContentsIds.headings?.id}
         prefix="Title (.page-title)"
     />
-    <Fragment>{ ifDisplay.headingLevels.map( num => <Lorsum_Heading heading={num} /> ) }</Fragment>
-    <Lorsum_Heading heading={0} />
+    <Fragment>{ ifDisplay.headingLevels.map( num => <Lorsum_Heading components={components} heading={num} /> ) }</Fragment>
+    <Lorsum_Heading components={components} heading={0} />
 ) }
 
 { ifDisplay.headingSubtitlesList && (
     <Lorsum_Heading
         class="page-title"
+        components={components}
         heading={1}
         id={tableOfContentsIds.headingSubtitles?.id}
         prefix="Title (.page-title)"
@@ -150,14 +149,14 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 
     <Fragment>{ ifDisplay.headingLevels.map(
         num => (
-            <Lorsum_Heading heading={num} subheading={true} />
+            <Lorsum_Heading components={components} heading={num} subheading={true} />
             <Fragment>{ ifDisplay.textPage && (
                 <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
             ) }</Fragment>
         )
     ) }</Fragment>
 
-    <Lorsum_Heading heading={0} subheading={true} />
+    <Lorsum_Heading components={components} heading={0} subheading={true} />
     <Fragment>{ ifDisplay.textPage && (
         <p>Praesent rutrum velit sodales ante varius convallis. Pellentesque bibendum fermentum lacus. Quisque venenatis ligula metus, quis finibus arcu interdum eget.</p>
     ) }</Fragment>
@@ -277,16 +276,16 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
     <Fragment>
         <p id={tableOfContentsIds.code?.id}>Look!  It’s <code>some code</code>!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique.</p>
         <p>Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.</p>
-        <CodeBlock lang="php" children={code.php} />
+        <CodeBlock lang="php" set:html={code.php} />
         { ifDisplay.codeLong && (
-            <CodeBlock lang="plaintext" children={'this block has plaintext language applied!\n\nLook!  It’s `some code`!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.'} />
-            <CodeBlock lang="php" class="content-width" children={'// this should be content-width\n\n' + code.php} />
-            <CodeBlock lang="php" class="page-width" children={'// this should be page-width\n\n' + code.php} />
+            <CodeBlock lang="plaintext" set:html={'this block has plaintext language applied!\n\nLook!  It’s `some code`!  Mauris a molestie dolor. Pellentesque eu metus enim. Maecenas dignissim mi a elementum fermentum. Nullam cursus finibus nulla ut tristique. Duis et faucibus augue, in tristique felis. Aenean pellentesque urna arcu, ac malesuada lacus scelerisque eget. In semper eu lectus non bibendum. Fusce non bibendum erat.'} />
+            <CodeBlock lang="php" class="content-width" set:html={'// this should be content-width\n\n' + code.php} />
+            <CodeBlock lang="php" class="page-width" set:html={'// this should be page-width\n\n' + code.php} />
         ) }
-        <CodeBlock lang="html" children={code.html} />
+        <CodeBlock lang="html" set:html={code.html} />
         { ifDisplay.codeLong && (
-            <CodeBlock lang="css" class="page-width" children={'/* this should be page-width */\n\n' + code.css} />
-            <CodeBlock lang="css" class="site-width" children={'/* this should be site-width */\n\n' + code.css} />
+            <CodeBlock lang="css" class="page-width" set:html={'/* this should be page-width */\n\n' + code.css} />
+            <CodeBlock lang="css" class="site-width" set:html={'/* this should be site-width */\n\n' + code.css} />
         ) }
     </Fragment>
 ) }

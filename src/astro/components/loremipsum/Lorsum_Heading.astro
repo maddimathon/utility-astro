@@ -6,14 +6,17 @@
  */
 
 /* import - types */
-import type { ComponentProps } from 'astro/types';
+import type { ElementProps } from '../../../ts/types/index.js';
+
+import type { HeadingProps } from '../Heading.astro';
+import type { LoremIpsumProps } from '../LoremIpsum.astro';
 
 /* import - functions */
 
 /* import - values */
 
 /* import - components */
-import Heading from '../Heading.astro';
+import HeadingComponent from '../Heading.astro';
 
 /* import - layouts */
 
@@ -22,21 +25,19 @@ import Heading from '../Heading.astro';
 /* PROPS ===================================== */
 
 // prettier-ignore
-export type LorsumHeadingProps<T_HeadingProps extends ComponentProps<typeof Heading> = ComponentProps<typeof Heading>> = Omit<ComponentProps<typeof Heading>, 'displayHeading'> & Omit<T_HeadingProps, 'heading' | keyof ComponentProps<typeof Heading>> & {
-    components?: {
-        Heading?: (props: T_HeadingProps) => any;
-    };
+export type LorsumHeadingProps = Omit<HeadingProps, 'displayHeading'> & Omit<HeadingProps, 'heading' | keyof HeadingProps> & {
+    components: LoremIpsumProps.Components;
 
     heading: number;
     prefix?: undefined | string;
     subheading?: boolean;
 };
 
-export type Props = LorsumHeadingProps;
+type Props = ElementProps<LorsumHeadingProps, 'div'>;
 
 const {
     class: classList,
-    components: { Heading: HeadingComponent = Heading } = {},
+    components: { Heading = HeadingComponent },
     heading,
     prefix,
     subheading = false,
@@ -46,7 +47,7 @@ const {
 /* CONSTANTS ===================================== */
 ---
 
-<HeadingComponent
+<Heading
     {...props}
     attrs={{
         hgroup: {
@@ -82,5 +83,5 @@ const {
         ) : (
             ''
         )
-    }</HeadingComponent
+    }</Heading
 >

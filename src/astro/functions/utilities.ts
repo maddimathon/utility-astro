@@ -8,14 +8,15 @@
  * @license MIT
  */
 
-import type { ArrayItem } from '@maddimathon/utility-typescript/types';
-import type { ClassList, ClassListItem } from '../../ts/types/index.js';
+import { hasIterator } from '@maddimathon/utility-typescript';
+
+import type { ClassList } from '../../ts/types/index.js';
 
 /**
  * @since 0.1.0-beta.0
  */
 function flattenClassList_single(
-    classListItem: undefined | Exclude<ClassListItem, any[]> | ArrayItem<Extract<ClassListItem, any[]>>,
+    classListItem: undefined | string | Record<string, boolean>,
 ): string {
     // returns
     if ( !classListItem ) {
@@ -34,11 +35,11 @@ function flattenClassList_single(
 /**
  * @since 0.1.0-beta.0
  */
-export function flattenClassList( classList: ClassList ): string {
+export function flattenClassList( classList: undefined | null | ClassList ): string {
 
     // returns
-    if ( !Array.isArray( classList ) ) {
-        return flattenClassList_single( classList );
+    if ( !hasIterator( classList ) ) {
+        return flattenClassList_single( classList ?? undefined );
     }
 
     let classes = '';
@@ -50,12 +51,12 @@ export function flattenClassList( classList: ClassList ): string {
         }
 
         // continues
-        if ( !Array.isArray( item ) ) {
+        if ( !hasIterator( item ) ) {
             classes += flattenClassList_single( item );
             continue;
         }
 
-        classes += item.map( flattenClassList_single ).join( '' );
+        classes += Array.from( item ).map( flattenClassList_single ).join( '' );
     }
 
     return classes.trim();
@@ -64,11 +65,11 @@ export function flattenClassList( classList: ClassList ): string {
 /**
  * @since 0.1.0-beta.0
  */
-function makeClassList_listParser( list: undefined | ClassList ) {
+function makeClassList_listParser( list: undefined | null | ClassList ): ( string | Record<string, boolean> )[] {
     return (
         Array.isArray( list ) ? list.flat() : [ list ]
     ).filter(
-        item => !!item
+        ( item ): item is Exclude<NonNullable<typeof item>, false | ''> => !!item?.length
     );
 }
 
@@ -76,16 +77,22 @@ function makeClassList_listParser( list: undefined | ClassList ) {
  * @since 0.1.0-beta.0
  */
 export function makeClassList(
-    defaultClasses: ClassList,
-    inputClasses?: undefined | ClassList,
-): ClassList {
+    defaultClasses: null | ClassList,
+    inputClasses?: undefined | null | ClassList,
+): ( string | Record<string, boolean> )[] {
 
     const defaultList = makeClassList_listParser( defaultClasses );
     const inputList = makeClassList_listParser( inputClasses );
 
-    return [
+    const classes = [
         ...defaultList,
-        { '||': !!defaultList?.length && !!inputList?.length },
-        ...inputList,
     ];
+
+    if ( !!defaultList?.length && !!inputList?.length ) {
+        classes.push( { '||': !!defaultList?.length && !!inputList?.length } );
+    }
+
+    classes.push( ...inputList );
+
+    return classes;
 }

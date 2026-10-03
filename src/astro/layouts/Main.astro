@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 import { mapToObject } from '../../ts/index.js';
@@ -34,13 +34,13 @@ export interface MainProps {
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<MainProps, 'main'>;
+type Props = ElementProps<MainProps, 'main'>;
 
 const {
     asArticle = MAIN_AS_ARTICLE,
     class: classList = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props =   Astro.props;
 
 /* CONSTANTS ===================================== */
 

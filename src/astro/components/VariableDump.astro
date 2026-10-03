@@ -7,8 +7,8 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
-import type { CodeBlockProps } from './CodeBlock.astro';
+import type { ElementProps } from '../../ts/types/index.js';
+import type { CodeBlockProps, CodeBlockComponentType } from './CodeBlock.astro';
 
 /* import - functions */
 import { VariableInspector } from '@maddimathon/utility-typescript';
@@ -16,7 +16,7 @@ import { VariableInspector } from '@maddimathon/utility-typescript';
 /* import - values */
 
 /* import - components */
-import CodeBlock from './CodeBlock.astro';
+import CodeBlockComponent from './CodeBlock.astro';
 
 /* import - layouts */
 
@@ -41,17 +41,22 @@ export interface VariableDumpProps extends Omit<
      * Optional name to prefix the output.
      */
     name?: string;
+
+    components?: Partial<{
+        CodeBlock: CodeBlockComponentType;
+    }>;
 }
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<VariableDumpProps, 'div'>;
+type Props = ElementProps<VariableDumpProps, 'div'>;
 
 const {
     var: variable,
     name,
+    components: { CodeBlock = CodeBlockComponent } = {},
     ...props
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -60,7 +65,7 @@ const stringified = VariableInspector.stringify(
     {
         includePrefix: !!name,
     },
-).trim();
+).replace(/^[\n\s]+|[\n\s]+$/gi, '');
 ---
 
 <CodeBlock

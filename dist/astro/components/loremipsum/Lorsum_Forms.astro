@@ -9,7 +9,6 @@
 import type {
     getLoremIpsumIds,
     LoremIpsumProps,
-    LoremIpsum_DisplaySettings_Parsed,
 } from '../../functions/loremIpsum.js';
 
 /* import - functions */
@@ -17,7 +16,6 @@ import type {
 /* import - values */
 
 /* import - components */
-import Heading from '../Heading.astro';
 import Lorsum_Forms_Long from './Lorsum_Forms_Long.astro';
 
 /* import - layouts */
@@ -27,10 +25,10 @@ import Lorsum_Forms_Long from './Lorsum_Forms_Long.astro';
 /* PROPS ===================================== */
 
 export interface Props {
-    components: Required<Required<LoremIpsumProps>['components']>;
+    components: LoremIpsumProps.Components;
     displayHeading: undefined | number;
     heading: number;
-    ifDisplay: LoremIpsum_DisplaySettings_Parsed;
+    ifDisplay: LoremIpsumProps.DisplaySettings.Parsed;
     tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
 }
 
@@ -41,6 +39,8 @@ const {
     ifDisplay,
     tableOfContentsIds,
 }: Props = Astro.props;
+
+const { FormField, Heading } = components;
 
 /* CONSTANTS ===================================== */
 ---
@@ -55,30 +55,35 @@ const {
 >
 
 <form>
-    <label>Your Name</label>
-    <input
+    <FormField
+        id='demo-form-text'
         type='text'
         name='your-name'
         placeholder='What should we call you?'
         autocomplete='off'
-    />
+        ><Fragment slot='label'>Your Name</Fragment></FormField
+    >
 
-    <label>Your Email</label>
-    <input
+    <FormField
+        id='demo-form-email'
         type='email'
         name='your-email'
         placeholder='How should we reply?'
         autocomplete='off'
-    />
+        ><Fragment slot='label'>Your Email</Fragment></FormField
+    >
 
-    <label>Your Message</label>
-    <textarea
+    <FormField
+        id='demo-form-textarea'
         name='your-message'
         placeholder='What would you like to tell us?'
         rows='4'
-    ></textarea>
+        type='textarea'
+        ><Fragment slot='label'>Your Message</Fragment></FormField
+    >
 
-    <input
+    <FormField
+        id='demo-form-submit'
         type='submit'
         value='Send Message'
         autocomplete='off'

@@ -19,6 +19,21 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.3** — 2026-10-03
+
+New basic components.
+
+- New component: DynamicWrapper
+- New components for markup overrides:
+    - Button
+    - Fieldset
+    - FormField
+    - Input
+    - Select
+    - Select_Option
+    - Textarea
+
+
 ## **0.1.0-beta.2** — 2026-09-30
 
 Added option for custom Content components (for custom layouts). Updated with

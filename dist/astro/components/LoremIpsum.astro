@@ -22,6 +22,17 @@ import {
 
 /* import - components */
 import ButtonComponent from './Button.astro';
+import CodeBlockComponent from './CodeBlock.astro';
+import FieldsetComponent from './Fieldset.astro';
+import FormFieldComponent from './FormField.astro';
+import HeadingComponent from './Heading.astro';
+import InputComponent from './Input.astro';
+import SelectComponent from './Select.astro';
+import Select_OptionComponent from './Select_Option.astro';
+import TableComponent from './Table.astro';
+import TextareaComponent from './Textarea.astro';
+import ToggleComponent from './Toggle.astro';
+
 import Lorsum_Content_Abbreviated from './loremipsum/Lorsum_Content_Abbreviated.astro';
 import Lorsum_Content_Full from './loremipsum/Lorsum_Content_Full.astro';
 import Lorsum_Disclaimer from './loremipsum/Lorsum_Disclaimer.astro';
@@ -29,7 +40,6 @@ import Lorsum_Forms from './loremipsum/Lorsum_Forms.astro';
 import Lorsum_Lists from './loremipsum/Lorsum_Lists.astro';
 import Lorsum_Table from './loremipsum/Lorsum_Table.astro';
 import Lorsum_Toggle from './loremipsum/Lorsum_Toggle.astro';
-import ToggleComponent from './Toggle.astro';
 
 /* import - layouts */
 
@@ -72,6 +82,15 @@ const disclaimerHTML = (await Astro.slots.render('disclaimer'))?.trim();
 const fullProps = {
     components: {
         Button: components.Button ?? ButtonComponent,
+        CodeBlock: components.CodeBlock ?? CodeBlockComponent,
+        Fieldset: components.Fieldset ?? FieldsetComponent,
+        FormField: components.FormField ?? FormFieldComponent,
+        Heading: components.Heading ?? HeadingComponent,
+        Input: components.Input ?? InputComponent,
+        Textarea: components.Textarea ?? TextareaComponent,
+        Select: components.Select ?? SelectComponent,
+        Select_Option: components.Select_Option ?? Select_OptionComponent,
+        Table: components.Table ?? TableComponent,
         Toggle: components.Toggle ?? ToggleComponent,
     },
 

@@ -22,7 +22,7 @@ import Main from '../Main.astro';
 
 /* PROPS ===================================== */
 
-export type Props = GenericProps<ContentProps_Full<string>>;
+type Props = GenericProps<ContentProps_Full<string>>;
 
 const p: Props = Astro.props.frontmatter ?? Astro.props;
 

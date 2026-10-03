@@ -1,0 +1,83 @@
+---
+/**
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsForbidChildren,
+} from '../../ts/types/index.js';
+
+import type { ButtonComponentType } from './Button.astro';
+import type { FieldsetComponentType } from './Fieldset.astro';
+import type { FormFieldProps } from './FormField.astro';
+import type { InputComponentType } from './Input.astro';
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+import FormField from './FormField.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * Input props for the SettingsMenu_Option component.
+ *
+ * @since 0.1.0-beta.3
+ */
+export type SettingsMenu_Option_Props = PropsForbidChildren<{
+    components: {
+        Button: ButtonComponentType;
+        Fieldset: FieldsetComponentType;
+        Input: InputComponentType;
+    } & Required<FormFieldProps['components']>;
+
+    name: string;
+    label: string;
+    value: string;
+}>;
+
+type Props = ElementProps<SettingsMenu_Option_Props, 'label'>;
+
+const {
+    class: classList = [],
+    components,
+    label,
+    name: inputName,
+    value,
+    ...attributes
+} = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+const id = `${inputName}-${value}`;
+---
+
+<FormField
+    components={components}
+    name={inputName}
+    labelAttrs={{ ...attributes, class: classList }}
+    id={id}
+    value={value}
+    type='radio'
+    data-settings-input
+>
+    <Fragment
+        slot='label'
+        set:html={label}
+    />
+    <slot
+        name='label'
+        slot='label'
+    />
+    <slot />
+</FormField>

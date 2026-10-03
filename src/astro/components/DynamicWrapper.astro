@@ -1,0 +1,74 @@
+---
+/**
+ * Dynamically wraps (or not) the slot content. A utility for components that
+ * might conditionally wrap their contents and want better DevX.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { HTMLTag } from 'astro/types';
+import type { ElementProps } from '../../ts/types/index.js';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * Input props for the DynamicWrapper component.
+ *
+ * @since 0.1.0-beta.3
+ */
+export type DynamicWrapperProps<T_Tag extends HTMLTag | null | false> =
+    ElementProps<
+        {
+            children: any;
+            tag?: T_Tag;
+        },
+        Extract<T_Tag, HTMLTag> | `${Exclude<T_Tag, HTMLTag>}`
+    >;
+
+/**
+ * Generates props for components that use this component.
+ *
+ * @since 0.1.0-beta.3
+ */
+export type GenericDynamicWrapperProps<
+    T_Props,
+    T_Tag extends HTMLTag | null | false,
+> = T_Props & Omit<DynamicWrapperProps<T_Tag>, keyof T_Props | 'children'>;
+
+type Props = DynamicWrapperProps<any>;
+
+export type DynamicWrapperComponentType = (
+    props: DynamicWrapperProps<any>,
+) => any;
+
+const { class: classList = [], tag: Tag = 'div', ...attributes } = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+{
+    Tag ? (
+        <Tag
+            {...attributes}
+            class={flattenClassList(classList)}
+        >
+            <slot />
+        </Tag>
+    ) : (
+        <slot />
+    )
+}

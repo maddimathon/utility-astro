@@ -1,0 +1,50 @@
+---
+/**
+ * Exists just to allow easy override of option markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.ts';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type Select_OptionProps = ElementProps<
+    PropsRequireChildren<{}>,
+    'option'
+>;
+
+type Props = Select_OptionProps;
+
+export type Select_OptionComponentType = (props: Select_OptionProps) => any;
+
+const { class: classList, ...attrs } = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<option
+    {...attrs}
+    class={classList ? flattenClassList(classList) : undefined}
+    ><slot /></option
+>

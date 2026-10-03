@@ -7,7 +7,7 @@
 
 /* import - types */
 import type { ArrayItem } from '@maddimathon/utility-typescript/types';
-import type { GenericElementProps } from '../../ts/types/index.ts';
+import type { ElementProps } from '../../ts/types/index.ts';
 import type { MenuItem } from './MenuList.astro';
 
 /* import - functions */
@@ -74,7 +74,7 @@ export interface NavMenuProps {
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<NavMenuProps, 'nav'>;
+type Props = ElementProps<NavMenuProps, 'nav'>;
 
 const {
     class: classList = [],
@@ -83,7 +83,7 @@ const {
     menu,
     urlMaker = absoluteInternalURL,
     ...attributes
-}: Props = Astro.props['frontmatter'] ?? Astro.props;
+} = Astro.props;
 
 /* FUNCTIONS ===================================== */
 

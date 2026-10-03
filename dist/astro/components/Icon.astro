@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
+import type { ClassList, ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -53,7 +53,7 @@ export type IconProps = IconProps_Slug | IconProps_Svg;
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<IconProps, 'span'>;
+type Props = ElementProps<IconProps, 'span'>;
 
 const {
     class: classList = [],

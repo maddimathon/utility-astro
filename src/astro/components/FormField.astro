@@ -1,0 +1,178 @@
+---
+/**
+ * Exists just to allow easy override of input markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { HTMLAttributes } from 'astro/types';
+import type { ElementProps, PropsOptionalChildren } from '../../ts/types/index.ts';
+
+import type { InputComponentType, InputProps } from './Input.astro';
+import type { SelectComponentType, SelectProps } from './Select.astro';
+import type { TextareaComponentType, TextareaProps } from './Textarea.astro';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+import InputComponent from './Input.astro';
+import SelectComponent from './Select.astro';
+import TextareaComponent from './Textarea.astro';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+type FormFieldProps_BaseID = {
+    id: string;
+    name?: string | null | undefined;
+    value?: number | string | string[] | null | undefined;
+} | {
+    id?: null | undefined;
+    name: string;
+    value: number | string | string[];
+};
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps_Base = PropsOptionalChildren & FormFieldProps_BaseID & {
+    components?: Partial<{ Input: InputComponentType; Select: SelectComponentType; Textarea: TextareaComponentType; }>;
+
+    /**
+     * Attributes for the label element.
+     */
+    labelAttrs?: ElementProps<{},'label'>;
+};
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps_Box = FormFieldProps_Base & Omit<InputProps, 'children' | keyof FormFieldProps_Base> & {
+    type: 'checkbox' | 'radio';
+}
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps_Input = FormFieldProps_Base & Omit<InputProps, 'children' | keyof FormFieldProps_Base> & {
+    type: Exclude<NonNullable<HTMLAttributes<'input'>['type']>, 'checkbox'|'radio'|'textarea'>;
+}
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps_Select = FormFieldProps_Base & Omit<SelectProps, 'type' | keyof FormFieldProps_Base> & {
+    type: 'select';
+};
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps_Textarea
+    = FormFieldProps_Base & Omit<TextareaProps, 'type' | keyof FormFieldProps_Base> & {
+    type: 'textarea';
+}
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type FormFieldProps = FormFieldProps_Box | FormFieldProps_Input | FormFieldProps_Select | FormFieldProps_Textarea;
+
+type Props = FormFieldProps;
+
+export type FormFieldComponentType = (props: FormFieldProps) => any;
+
+const {
+    class: classList,
+    components: { Input = InputComponent, Select = SelectComponent, Textarea = TextareaComponent } = {},
+    id: inputID,
+    labelAttrs: {class: labelClassList, ...labelAttrs} = {},
+    ...attrs
+} = Astro.props as Omit<Props, 'children'> & {
+    children?: never;
+    'set:html'?: never;
+    'set:text'?: never; 
+};
+
+/* CONSTANTS ===================================== */
+
+const labelHTML = (await Astro.slots.render('label'))?.trim();
+
+const id = inputID || [
+    attrs.name,
+    attrs.value,
+].filter((s) => !!s).join('--');
+
+const parsedAttrs = attrs.type === 'textarea' ? true : (attrs.type === 'checkbox' || attrs.type === 'radio') ? !!labelHTML : true;
+---
+
+{
+    parsedAttrs && (attrs.type === 'select' ? (
+        <Fragment>{ labelHTML && (
+            <label
+                {...labelAttrs}
+                class={labelClassList && flattenClassList(labelClassList)}
+                for={id}
+                set:html={labelHTML}
+            />
+        ) }</Fragment>
+        <Select
+            {...attrs}
+            class={classList}
+            id={id}
+        ><slot /></Select>
+    ) : attrs.type === 'textarea' ? (
+        <Fragment>{ labelHTML && (
+            <label
+                {...labelAttrs}
+                class={labelClassList && flattenClassList(labelClassList)}
+                for={id}
+                set:html={labelHTML}
+            />
+        ) }</Fragment>
+        <Textarea
+            {...attrs}
+            class={classList}
+            id={id}
+            type={undefined}
+        ><slot /></Textarea>
+    ) : (attrs.type === 'checkbox' || attrs.type === 'radio') ? (
+        <label
+            {...labelAttrs}
+            class={labelClassList && flattenClassList(labelClassList)}
+            for={id}
+        ><Input
+            {...attrs}
+            class={classList}
+            id={id}
+            type={attrs.type}
+        /><Fragment set:html={labelHTML} /></label>
+    ) : (
+        <Fragment>{ labelHTML && (
+            <label
+                {...labelAttrs}
+                class={labelClassList && flattenClassList(labelClassList)}
+                for={id}
+                set:html={labelHTML}
+            />
+        ) }</Fragment>
+        <Input
+            {...attrs}
+            class={classList}
+            id={id}
+            type={attrs.type}
+        />
+    ))
+}

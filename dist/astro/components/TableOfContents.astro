@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 import type { MenuItem } from './MenuList.astro';
 import type { NavMenuProps } from './NavMenu.astro';
 import type { ToggleComponentType } from './Toggle.astro';
@@ -75,7 +75,7 @@ export interface TableOfContentsProps extends NavMenu_SemiProps {
     toggleProps?: {};
 }
 
-type Props = GenericElementProps<TableOfContentsProps, 'div', 'aria-label' | 'aria-labelledby'>;
+type Props = ElementProps<TableOfContentsProps, 'div', 'aria-label' | 'aria-labelledby'>;
 
 const {
     asToggle = true,
@@ -90,7 +90,7 @@ const {
     toggleProps = {},
     urlMaker,
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props =  Astro.props;
 
 /* FUNCTIONS ===================================== */
 

@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 import { makeClassList } from '../functions.js';
@@ -29,10 +29,9 @@ export interface SidebarProps {}
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<SidebarProps, 'aside'>;
+type Props = ElementProps<SidebarProps, 'aside'>;
 
-const { class: classList = [], ...attributes }: Props =
-    Astro.props.frontmatter ?? Astro.props;
+const { class: classList = [], ...attributes }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 

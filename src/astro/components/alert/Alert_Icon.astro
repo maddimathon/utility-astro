@@ -6,7 +6,11 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../../ts/types/index.js';
+import type {
+    ElementProps,
+    PropsForbidChildren,
+    PropsRequireChildren,
+} from '../../../ts/types/index.js';
 import type { IconProps } from '../Icon.astro';
 
 /* import - functions */
@@ -20,42 +24,36 @@ import Icon from '../Icon.astro';
 
 /* TYPES ===================================== */
 
-export type AlertIconProps_Render = {
-    children: any;
-
+export type AlertIconProps_Render = PropsRequireChildren<{
     type?: undefined;
 
     slug?: undefined;
     svg?: undefined;
     svgLabel?: undefined;
-};
+}>;
 
-export type AlertIconProps_Slug = {
-    children?: undefined;
-
+export type AlertIconProps_Slug = PropsForbidChildren<{
     type: IconProps['type'];
 
     slug?: undefined;
     svg?: undefined;
     svgLabel?: undefined;
-};
+}>;
 
-export type AlertIconProps_Svg = {
-    children?: undefined;
-
+export type AlertIconProps_Svg = PropsForbidChildren<{
     type?: undefined;
 
     slug: string;
     svg: string;
     svgLabel: string;
-};
+}>;
 
-// prettier-ignore
-export type AlertIconProps = AlertIconProps_Render | AlertIconProps_Slug | AlertIconProps_Svg;
+export type AlertIconProps =
+    AlertIconProps_Render | AlertIconProps_Slug | AlertIconProps_Svg;
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<AlertIconProps, 'span'>;
+type Props = ElementProps<AlertIconProps, 'span'>;
 
 const {
     slug,

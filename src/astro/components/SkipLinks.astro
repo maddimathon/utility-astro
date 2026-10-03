@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -36,13 +36,9 @@ export interface SkipLinksProps {
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<SkipLinksProps, 'div'>;
+type Props = ElementProps<SkipLinksProps, 'div'>;
 
-const {
-    links,
-    class: classList = [],
-    ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+const { links, class: classList = [], ...attributes }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 

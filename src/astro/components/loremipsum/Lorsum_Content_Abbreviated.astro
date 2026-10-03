@@ -6,10 +6,7 @@
  */
 
 /* import - types */
-import type {
-    LoremIpsum_DisplaySettings_Parsed,
-    LoremIpsumProps,
-} from '../../functions/loremIpsum.js';
+import type { LoremIpsumProps } from '../../functions/loremIpsum.js';
 
 /* import - functions */
 
@@ -24,8 +21,8 @@ import type {
 /* PROPS ===================================== */
 
 interface Props {
-    components: Required<Required<LoremIpsumProps>['components']>;
-    ifDisplay: LoremIpsum_DisplaySettings_Parsed;
+    components: LoremIpsumProps.Components;
+    ifDisplay: LoremIpsumProps.DisplaySettings.Parsed;
 }
 
 const {

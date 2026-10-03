@@ -1,0 +1,47 @@
+---
+/**
+ * Exists just to allow easy override of select markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.ts';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type SelectProps = ElementProps<PropsRequireChildren, 'select'>;
+
+type Props = SelectProps;
+
+export type SelectComponentType = (props: SelectProps) => any;
+
+const { class: classList, ...attrs } = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<select
+    {...attrs}
+    class={classList ? flattenClassList(classList) : undefined}
+    ><slot /></select
+>

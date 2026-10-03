@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 
@@ -64,14 +64,14 @@ export interface NestedListProps<T_Item extends NestedListItem = NestedListItem>
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<NestedListProps, 'ul' | 'ol'>;
+type Props = ElementProps<NestedListProps, 'ul' | 'ol'>;
 
 const {
     list,
     class: classList = [],
     tag: ListTag = 'ul',
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---

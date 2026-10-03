@@ -1,15 +1,18 @@
 {
-	"pid": 25829,
-	"port": 8080,
-	"url": "http://localhost:8080",
+	"pid": 51218,
+	"port": 8081,
+	"url": "http://localhost:8081",
 	"urls": {
 		"local": [
-			"http://localhost:8080/"
+			"http://localhost:8081/"
 		],
 		"network": [
-			"http://192.168.16.218:8080/"
+			"http://192.168.16.218:8081/"
+		],
+		"networkInterfaceNames": [
+			"en0"
 		]
 	},
 	"background": false,
-	"startedAt": "2026-09-06T09:04:19.685Z"
+	"startedAt": "2026-10-02T20:12:52.498Z"
 }

@@ -6,8 +6,10 @@
  */
 
 /* import - types */
-import type { HTMLAttributes } from 'astro/types';
-import type { ClassList } from '../../ts/types/index.js';
+import type {
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.js';
 import type { ButtonComponentType, ButtonProps_Button } from './Button.astro';
 
 /* import - functions */
@@ -21,18 +23,15 @@ import ButtonComponent from './Button.astro';
 
 /* TYPES ===================================== */
 
-// prettier-ignore
-export type CopyToClipboardButtonProps = CopyToClipboardButtonProps.WithChildren | CopyToClipboardButtonProps.WithSetHtml | CopyToClipboardButtonProps.WithSetText;
-
-export namespace CopyToClipboardButtonProps {
-    type Base = Omit<ButtonProps_Button, 'children' | 'type'> & {
+export type CopyToClipboardButtonProps = PropsRequireChildren<
+    Omit<ButtonProps_Button, 'children' | 'type'> & {
         /**
          * Timeout length to switch the button to active state, in milliseconds.
          */
         activeTimeout?: undefined | number;
 
         /**
-         * @since 0.1.0-beta.2.draft
+         * @since 0.1.0-beta.3
          */
         components?:
             | undefined
@@ -54,30 +53,12 @@ export namespace CopyToClipboardButtonProps {
          * Success message to display when copied.
          */
         successMessage?: string;
-    };
-
-    export type WithChildren = Base & {
-        /**
-         * Must have content to label the button (or intentionally leave it blank).
-         */
-        children: any;
-    };
-
-    export type WithSetHtml = Base & {
-        'set:html': string;
-    };
-
-    export type WithSetText = Base & {
-        'set:text': string;
-    };
-}
+    }
+>;
 
 /* PROPS ===================================== */
 
-// prettier-ignore
-type Props = ( CopyToClipboardButtonProps.WithChildren | CopyToClipboardButtonProps.WithSetHtml | CopyToClipboardButtonProps.WithSetText ) & Omit<HTMLAttributes<'button'>, 'class'|'type'> & {
-    class?: undefined | ClassList;
-};
+type Props = ElementProps<CopyToClipboardButtonProps, 'button', 'type'>;
 
 const {
     activeTimeout,

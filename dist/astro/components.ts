@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.2.draft
+ * @maddimathon/utility-astro@0.1.0-beta.3
  * @license MIT
  */
 
@@ -28,12 +28,24 @@ export type * from './components/CodeBlock.astro';
 import CopyToClipboardButton from './components/CopyToClipboardButton.astro';
 export type * from './components/CopyToClipboardButton.astro';
 
+import DynamicWrapper from './components/DynamicWrapper.astro';
+export type * from './components/DynamicWrapper.astro';
+
+import Fieldset from './components/Fieldset.astro';
+export type * from './components/Fieldset.astro';
+
+import FormField from './components/FormField.astro';
+export type * from './components/FormField.astro';
+
 import Heading from './components/Heading.astro';
 export { parseHeadingParams } from './components/Heading.astro';
 export type * from './components/Heading.astro';
 
 import Icon from './components/Icon.astro';
 export type * from './components/Icon.astro';
+
+import Input from './components/Input.astro';
+export type * from './components/Input.astro';
 
 import LoremIpsum from './components/LoremIpsum.astro';
 export {
@@ -72,6 +84,12 @@ export type * from './components/Page_Meta.astro';
 import RenderedSlotContent from './components/RenderedSlotContent.astro';
 export type * from './components/RenderedSlotContent.astro';
 
+import Select from './components/Select.astro';
+export type * from './components/Select.astro';
+
+import Select_Option from './components/Select_Option.astro';
+export type * from './components/Select_Option.astro';
+
 import SettingsMenu from './components/SettingsMenu.astro';
 export type * from './components/SettingsMenu.astro';
 
@@ -84,6 +102,9 @@ export type * from './components/Table.astro';
 import TableOfContents from './components/TableOfContents.astro';
 export { parseTableOfContents } from './components/TableOfContents.astro';
 export type * from './components/TableOfContents.astro';
+
+import Textarea from './components/Textarea.astro';
+export type * from './components/Textarea.astro';
 
 import Toggle from './components/Toggle.astro';
 export type * from './components/Toggle.astro';
@@ -100,8 +121,12 @@ const components = {
     Button,
     CodeBlock,
     CopyToClipboardButton,
+    DynamicWrapper,
+    Fieldset,
+    FormField,
     Heading,
     Icon,
+    Input,
     LoremIpsum,
     Lorsum_Content_Abbreviated,
     Lorsum_Content_Full,
@@ -116,10 +141,13 @@ const components = {
     NestedList,
     Page_Meta,
     RenderedSlotContent,
+    Select,
+    Select_Option,
     SettingsMenu,
     SkipLinks,
     Table,
     TableOfContents,
+    Textarea,
     Toggle,
     ToggleNavMenu,
     VariableDump,
@@ -133,8 +161,12 @@ export {
     Button,
     CodeBlock,
     CopyToClipboardButton,
+    DynamicWrapper,
+    Fieldset,
+    FormField,
     Heading,
     Icon,
+    Input,
     LoremIpsum,
     Lorsum_Content_Abbreviated,
     Lorsum_Content_Full,
@@ -149,10 +181,13 @@ export {
     NestedList,
     Page_Meta,
     RenderedSlotContent,
+    Select,
+    Select_Option,
     SettingsMenu,
     SkipLinks,
     Table,
     TableOfContents,
+    Textarea,
     Toggle,
     ToggleNavMenu,
     VariableDump,

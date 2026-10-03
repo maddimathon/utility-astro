@@ -6,8 +6,8 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/index.js';
-import type { ButtonComponentType } from './Button.astro';
+import type { ComponentProps } from 'astro/types';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 import { absoluteInternalURL } from '../functions.js';
@@ -18,8 +18,14 @@ import { SVG } from '../../ts/svg.js';
 
 /* import - components */
 import Toggle_Control from '../support/Toggle_Control.astro';
+
 import ButtonComponent from './Button.astro';
+import FieldsetComponent from './Fieldset.astro';
+import InputComponent from './Input.astro';
 import RenderedSlotContent from './RenderedSlotContent.astro';
+import SelectComponent from './Select.astro';
+import SettingsMenu_Option from './SettingsMenu_Option.astro';
+import TextareaComponent from './Textarea.astro';
 
 /* import - layouts */
 
@@ -38,13 +44,11 @@ export interface SettingsMenuProps {
     accessibilityReportEmail?: string | undefined;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.3
      */
     components?:
         | undefined
-        | Partial<{
-              Button: ButtonComponentType;
-          }>;
+        | Partial<ComponentProps<typeof SettingsMenu_Option>['components']>;
 
     /**
      * @since 0.1.0-beta.0
@@ -126,13 +130,13 @@ export interface SettingsMenuProps {
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<SettingsMenuProps, 'div'>;
+type Props = ElementProps<SettingsMenuProps, 'div'>;
 
 const {
     accessibilityReportEmail,
 
     class: classList = ['website-settings'],
-    components: { Button = ButtonComponent } = {},
+    components: inputComponents = {},
     iconSVG: iconSVG_input,
     id = 'website-settings',
 
@@ -140,26 +144,19 @@ const {
     settings: inputSettings,
 
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
+
+const components = {
+    Button: inputComponents.Button ?? ButtonComponent,
+    Fieldset: inputComponents.Fieldset ?? FieldsetComponent,
+    Input: inputComponents.Input ?? InputComponent,
+    Select: inputComponents.Select ?? SelectComponent,
+    Textarea: inputComponents.Textarea ?? TextareaComponent,
+} satisfies ComponentProps<typeof SettingsMenu_Option>['components'];
+
+const { Button, Fieldset } = components;
 
 /* FUNCTIONS ===================================== */
-
-function optionHTML(
-    name: string,
-    label: string,
-    value: string,
-    labelClass: string = '',
-): string {
-    const id = `${name}-${value}`;
-
-    return `<label for="${id}" class="${labelClass}"><input
-        name="${name}"
-        id="${id}"
-        value="${value}"
-        type="radio"
-        data-settings-input
-    />${label}</label>`;
-}
 
 /* CONSTANTS ===================================== */
 
@@ -260,70 +257,63 @@ const iconSVG =
             }
             {
                 settings.brightness && (
-                    <fieldset tabindex='-1'>
-                        <legend>Brightness Mode</legend>
+                    <Fieldset tabindex='-1'>
+                        <Fragment slot='legend'>Brightness Mode</Fragment>
                         <div class='container'>
-                            <Fragment
-                                set:html={optionHTML(
-                                    'brightness-mode',
-                                    'Light',
-                                    'light',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='brightness-mode'
+                                label='Light'
+                                value='light'
                             />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'brightness-mode',
-                                    'Dark',
-                                    'dark',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='brightness-mode'
+                                label='Dark'
+                                value='dark'
                             />
                         </div>
-                    </fieldset>
+                    </Fieldset>
                 )
             }
             {
                 settings.contrast && (
-                    <fieldset tabindex='-1'>
-                        <legend>Contrast Mode</legend>
+                    <Fieldset tabindex='-1'>
+                        <Fragment slot='legend'>Contrast Mode</Fragment>
                         <div class='container'>
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'Low',
-                                    'low',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='contrast-mode'
+                                label='Low'
+                                value='low'
                             />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'Average',
-                                    'average',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='contrast-mode'
+                                label='Average'
+                                value='average'
                             />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'High',
-                                    'high',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='contrast-mode'
+                                label='High'
+                                value='high'
                             />
                             {typeof settings.contrast === 'object' &&
                                 settings.contrast.max && (
-                                    <Fragment
-                                        set:html={optionHTML(
-                                            'contrast-mode',
-                                            'Maximum',
-                                            'max',
-                                        )}
+                                    <SettingsMenu_Option
+                                        components={components}
+                                        name='contrast-mode'
+                                        label='Maximum'
+                                        value='max'
                                     />
                                 )}
-                            <Fragment
-                                set:html={optionHTML(
-                                    'contrast-mode',
-                                    'Custom',
-                                    'forced-colors',
-                                    'forced-colors-mode-only',
-                                )}
+                            <SettingsMenu_Option
+                                class='forced-colors-mode-only'
+                                components={components}
+                                name='contrast-mode'
+                                label='Custom'
+                                value='forced-colors'
                             />
                         </div>
 
@@ -332,30 +322,28 @@ const iconSVG =
                             custom contrast mode enabled, so changing the
                             contrast setting will have little impact (if any).
                         </p>
-                    </fieldset>
+                    </Fieldset>
                 )
             }
             {
                 settings.motion && (
-                    <fieldset tabindex='-1'>
-                        <legend>Motion/Animation</legend>
+                    <Fieldset tabindex='-1'>
+                        <Fragment slot='legend'>Motion/Animation</Fragment>
                         <div class='container'>
-                            <Fragment
-                                set:html={optionHTML(
-                                    'motion',
-                                    'Default',
-                                    'no-preference',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='motion'
+                                label='Default'
+                                value='no-preference'
                             />
-                            <Fragment
-                                set:html={optionHTML(
-                                    'motion',
-                                    'Reduce',
-                                    'reduce',
-                                )}
+                            <SettingsMenu_Option
+                                components={components}
+                                name='motion'
+                                label='Reduce'
+                                value='reduce'
                             />
                         </div>
-                    </fieldset>
+                    </Fieldset>
                 )
             }
             {
@@ -363,7 +351,7 @@ const iconSVG =
                     settings.custom.map(
                         (setting) =>
                             setting.options.length && (
-                                <fieldset
+                                <Fieldset
                                     data-settings-menu-custom-setting={
                                         setting.id
                                     }
@@ -372,21 +360,23 @@ const iconSVG =
                                     }
                                     tabindex='-1'
                                 >
-                                    <legend set:text={setting.label} />
+                                    <Fragment
+                                        slot='legend'
+                                        set:text={setting.label}
+                                    />
 
                                     <div class='container'>
                                         {setting.options.map((opt) => (
-                                            <Fragment
-                                                set:html={optionHTML(
-                                                    setting.id,
-                                                    opt.label,
-                                                    opt.value,
-                                                    opt.labelClass,
-                                                )}
+                                            <SettingsMenu_Option
+                                                class={opt.labelClass}
+                                                components={components}
+                                                name={setting.id}
+                                                label={opt.label}
+                                                value={opt.value}
                                             />
                                         ))}
                                     </div>
-                                </fieldset>
+                                </Fieldset>
                             ),
                     )
             }

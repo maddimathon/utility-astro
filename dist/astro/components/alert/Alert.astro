@@ -7,16 +7,25 @@
 
 /* import - types */
 import type { ComponentProps } from 'astro/types';
-import type { GenericElementProps } from '../../../ts/types/index.js';
+import type { ElementProps } from '../../../ts/types/index.js';
+
+import type {
+    GenericDynamicWrapperProps,
+    DynamicWrapperComponentType,
+} from '../DynamicWrapper.astro';
+import type { HeadingComponentType } from '../Heading.astro';
+
 import type { AlertIconProps } from './Alert_Icon.astro';
 
 /* import - functions */
+import { makeClassList } from '../../functions.js';
 
 /* import - values */
 
 /* import - components */
 import Alert_Icon from './Alert_Icon.astro';
-import Heading from '../Heading.astro';
+import DynamicWrapperComponent from '../DynamicWrapper.astro';
+import HeadingComponent from '../Heading.astro';
 
 /* import - layouts */
 
@@ -28,24 +37,40 @@ import Heading from '../Heading.astro';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file and renamed to AlertProps.
  */
-export type AlertProps<T_IconProps extends AlertIconProps> = T_IconProps & {
-    displayHeading?: number;
-    heading?: number;
-    minimumHeading?: number;
-};
+export type AlertProps<
+    T_IconProps extends AlertIconProps,
+    T_Tag extends 'article' | 'div' | 'section' | null | false = 'div',
+> = GenericDynamicWrapperProps<
+    T_IconProps & {
+        components?: Partial<{
+            DynamicWrapper: DynamicWrapperComponentType;
+            Heading: HeadingComponentType;
+        }>;
+        displayHeading?: number;
+        heading?: number;
+        minimumHeading?: number;
+    },
+    T_Tag
+>;
+
+export type AlertComponentType = (props: AlertProps<any>) => any;
 
 /* PROPS ===================================== */
 
-// prettier-ignore
-type Props<T_IconProps extends AlertIconProps = AlertIconProps> = GenericElementProps<AlertProps<T_IconProps>, 'section'>;
+type Props = ElementProps<AlertProps<any>, 'section'>;
 
 const {
+    components: {
+        DynamicWrapper = DynamicWrapperComponent,
+        Heading = HeadingComponent,
+    } = {},
     displayHeading,
     heading,
     minimumHeading = 2,
     slug,
     svg,
     svgLabel,
+    tag = 'section',
     type = 'star',
     class: classList = [],
     ...attributes
@@ -65,14 +90,13 @@ const headlineHTML =
     (await Astro.slots.render('headline'))?.trim();
 ---
 
-<section
+<DynamicWrapper
     {...attributes}
-    class:list={[
-        'alert-block',
-        `alert-block--${slug ?? type}`,
-        '||',
+    class:list={makeClassList(
+        ['alert-block', `alert-block--${slug ?? type}`],
         classList,
-    ]}
+    )}
+    tag={tag}
 >
     {
         !headlineHTML ? (
@@ -95,4 +119,4 @@ const headlineHTML =
         )
     }
     <slot />
-</section>
+</DynamicWrapper>

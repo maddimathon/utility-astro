@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
 import { makeClassList } from '../functions.js';
@@ -22,7 +22,7 @@ import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* PROPS ===================================== */
 
-type Props = Omit<GenericElementProps<{}, 'button'>, 'id'> & {
+type Props = Omit<ElementProps<{}, 'button'>, 'id'> & {
     id: string;
     buttonID: string;
 

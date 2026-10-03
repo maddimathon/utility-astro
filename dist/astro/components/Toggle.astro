@@ -7,9 +7,13 @@
 
 /* import - types */
 import type { HTMLTag } from 'astro/types';
-import type { PartialExcept } from '@maddimathon/utility-typescript/types';
+import type {} from '@maddimathon/utility-typescript/types';
 
-import type { ClassList, ElementProps } from '../../ts/types/index.js';
+import type {
+    ClassList,
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.js';
 
 /* import - functions */
 import { flattenClassList, makeClassList } from '../functions.js';
@@ -32,9 +36,7 @@ export type ToggleContainerType = 'modal' | 'menu' | 'nav';
  *
  * @since 0.1.0-alpha
  */
-export interface ToggleProps {
-    children: any; // these are the slots
-
+export type ToggleProps = PropsRequireChildren<{
     /**
      * Unique id attr.
      */
@@ -170,17 +172,11 @@ export interface ToggleProps {
      * @since 0.1.0-beta.0
      */
     type?: ToggleContainerType | ToggleContainerType[] | undefined;
-}
+}>;
 
-export type ToggleComponentType = (
-    props: PartialExcept<ToggleProps, 'children' | 'id'>,
-) => any;
+export type ToggleComponentType = (props: ToggleProps) => any;
 
-type Props = ElementProps<
-    ToggleProps,
-    'div',
-    'aria-label' | 'aria-labelledby' | 'class' | 'class:list'
->;
+type Props = ElementProps<ToggleProps, 'div', 'aria-label' | 'aria-labelledby'>;
 
 const {
     defaultOpen,

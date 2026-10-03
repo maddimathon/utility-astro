@@ -2,17 +2,20 @@
 /**
  * Exists just to allow easy override of button markup.
  *
- * @since 0.1.0-beta.2.draft
+ * @since 0.1.0-beta.3
  *
  * @packageDocumentation
  */
 
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
-import type { GenericElementProps } from '../../ts/index.ts';
-import { makeClassList } from '../functions';
+import type {
+    ElementProps,
+    PropsRequireChildren,
+} from '../../ts/types/index.ts';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -25,44 +28,37 @@ import { makeClassList } from '../functions';
 /* PROPS ===================================== */
 
 /**
- * @since 0.1.0-beta.2.draft
+ * @since 0.1.0-beta.3
  */
-export interface ButtonProps_Base {
-    children: any;
+export type ButtonProps_Base = PropsRequireChildren<{
     variant?: string;
-}
+}>;
 
 /**
- * @since 0.1.0-beta.2.draft
+ * @since 0.1.0-beta.3
  */
-export interface ButtonProps_Button extends ButtonProps_Base {
+export type ButtonProps_Button = ButtonProps_Base & {
     href?: undefined;
     type: NonNullable<HTMLAttributes<'button'>['type']>;
-}
+};
 
 /**
- * @since 0.1.0-beta.2.draft
+ * @since 0.1.0-beta.3
  */
-export interface ButtonProps_Link extends ButtonProps_Base {
+export type ButtonProps_Link = ButtonProps_Base & {
     href: string;
     type?: undefined;
-}
+};
 
 export type ButtonProps =
-    | GenericElementProps<ButtonProps_Button, 'button'>
-    | GenericElementProps<ButtonProps_Link, 'a'>;
+    | ElementProps<ButtonProps_Button, 'button'>
+    | ElementProps<ButtonProps_Link, 'a'>;
 
-export type Props = ButtonProps;
+type Props = ButtonProps;
 
 export type ButtonComponentType = (props: ButtonProps) => any;
 
-const {
-    class: classList,
-    href,
-    type,
-    variant,
-    ...props
-} = Astro.props.frontmatter ?? Astro.props;
+const { class: classList, href, type, variant, ...props } = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---

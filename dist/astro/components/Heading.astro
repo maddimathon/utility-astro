@@ -6,7 +6,7 @@
  */
 
 /* import - types */
-import type { ClassList, GenericElementProps } from '../../ts/types/index.js';
+import type { ClassList, ElementProps } from '../../ts/types/index.js';
 import type { HTMLAttributes, HTMLTag } from 'astro/types';
 
 /* import - functions */
@@ -72,9 +72,9 @@ export interface HeadingProps {
           };
 }
 
-type Props = GenericElementProps<HeadingProps, 'div'>;
+type Props = ElementProps<HeadingProps, 'div'>;
 
-export type HeadingComponentType = (props: HeadingProps) => any;
+export type HeadingComponentType = (props: Props) => any;
 
 /* FUNCTIONS ===================================== */
 
@@ -189,10 +189,7 @@ const html = {
     subheading: (await Astro.slots.render('subheading'))?.trim(),
 };
 
-const { attrs, HeadingWrapper } = parseHeadingParams(
-    html,
-    Astro.props.frontmatter ?? Astro.props,
-);
+const { attrs, HeadingWrapper } = parseHeadingParams(html, Astro.props);
 ---
 
 {

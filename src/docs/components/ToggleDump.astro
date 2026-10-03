@@ -6,8 +6,11 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
-import type { CodeBlockProps } from '../../astro/components/CodeBlock.astro';
+import type { ElementProps } from '../../ts/types/index.js';
+import type {
+    CodeBlockProps,
+    CodeBlockComponentType,
+} from '../../astro/components/CodeBlock.astro';
 import type { ToggleComponentType } from '../../astro/components/Toggle.astro';
 
 /* import - functions */
@@ -16,8 +19,8 @@ import { slugify } from '@maddimathon/utility-typescript';
 /* import - values */
 
 /* import - components */
-import CodeBlock from '../../astro/components/CodeBlock.astro';
-import Toggle from '../../astro/components/Toggle.astro';
+import CodeBlockComponent from '../../astro/components/CodeBlock.astro';
+import ToggleComponent from '../../astro/components/Toggle.astro';
 
 /* import - layouts */
 
@@ -30,13 +33,13 @@ export type Props_Inner = {
 
     code?: string;
 
+    components?: Partial<{
+        CodeBlock: CodeBlockComponentType;
+        Toggle: ToggleComponentType;
+    }>;
+
     heading?: number;
     lang?: Required<CodeBlockProps>['lang'];
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    ToggleComponent?: ToggleComponentType;
 
     /**
      * @since 0.1.0-beta.0
@@ -44,16 +47,19 @@ export type Props_Inner = {
     toggleProps?: {};
 };
 
-export interface Props extends GenericElementProps<Props_Inner, 'div'> {}
+export interface Props extends ElementProps<Props_Inner, 'div'> {}
 
 const {
     lang,
     code,
     heading = 2,
     title,
-    ToggleComponent = Toggle,
+    components: {
+        CodeBlock = CodeBlockComponent,
+        Toggle = ToggleComponent,
+    } = {},
     toggleProps = {},
-} = Astro.props.frontmatter ?? Astro.props;
+} = Astro.props;
 
 /* CONSTANTS ===================================== */
 
@@ -62,7 +68,7 @@ const html: string = (await Astro.slots.render('default'))?.trim();
 const id = slugify(`toggle-dump-${title}`);
 ---
 
-<ToggleComponent
+<Toggle
     {...toggleProps}
     heading={heading}
     id={id}
@@ -75,10 +81,10 @@ const id = slugify(`toggle-dump-${title}`);
         code ? (
             <CodeBlock
                 lang={lang}
-                children={code.trim()}
+                set:html={code.trim()}
             />
         ) : (
             <Fragment set:html={html.trim()} />
         )
     }
-</ToggleComponent>
+</Toggle>

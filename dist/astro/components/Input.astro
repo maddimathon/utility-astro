@@ -1,0 +1,47 @@
+---
+/**
+ * Exists just to allow easy override of input markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsForbidChildren,
+} from '../../ts/types/index.ts';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type InputProps = ElementProps<PropsForbidChildren, 'input'>;
+
+type Props = InputProps;
+
+export type InputComponentType = (props: InputProps) => any;
+
+const { class: classList, type = 'text', ...attrs } = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<input
+    {...attrs}
+    class={classList ? flattenClassList(classList) : undefined}
+    type={type}
+/>

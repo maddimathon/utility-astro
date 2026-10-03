@@ -1,0 +1,52 @@
+---
+/**
+ * Exists just to allow easy override of textarea markup.
+ *
+ * @since 0.1.0-beta.3
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type {
+    ElementProps,
+    PropsForbidChildren,
+} from '../../ts/types/index.ts';
+
+/* import - functions */
+import { flattenClassList } from '../functions.js';
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * @since 0.1.0-beta.3
+ */
+export type TextareaProps = ElementProps<
+    PropsForbidChildren<{
+        type?: null | undefined;
+    }>,
+    'textarea'
+>;
+
+type Props = TextareaProps;
+
+export type TextareaComponentType = (props: TextareaProps) => any;
+
+const { class: classList, ...attrs } = Astro.props;
+
+/* CONSTANTS ===================================== */
+---
+
+<textarea
+    {...attrs}
+    class={classList ? flattenClassList(classList) : undefined}
+    ><slot /></textarea
+>

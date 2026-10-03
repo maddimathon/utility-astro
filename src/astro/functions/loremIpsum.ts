@@ -14,182 +14,25 @@ import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 import { arrayUnique } from '@maddimathon/utility-typescript';
 
 import type { ButtonComponentType } from '../components/Button.astro';
-import type TableOfContents from '../components/TableOfContents.astro';
+import type { CodeBlockComponentType } from '../components/CodeBlock.astro';
+import type { FieldsetComponentType } from '../components/Fieldset.astro';
+import type { FormFieldComponentType } from '../components/FormField.astro';
+import type { HeadingComponentType } from '../components/Heading.astro';
+import type { InputComponentType } from '../components/Input.astro';
+import type { SelectComponentType } from '../components/Select.astro';
+import type { Select_OptionComponentType } from '../components/Select_Option.astro';
+import type { TableComponentType } from '../components/Table.astro';
+import type { TextareaComponentType } from '../components/Textarea.astro';
 import type { ToggleComponentType } from '../components/Toggle.astro';
 
-/**
- * @since 0.1.0-alpha.20
- */
-export interface LoremIpsum_DisplaySettings {
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    blockquote?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    blockquotePullQuote?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    buttons?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    buttonTypes?: boolean;
-
-    /**
-     * Additional button variations to include. 'primary' and 'disabled' are
-     * always included.
-     *
-     * @default ['secondary']
-     * 
-     * @since 0.1.0-alpha.20 — Moved to LoremIpsum_DisplaySettings and renamed.
-     */
-    buttonVariations?: false | string[];
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    buttonVariationsAll?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    code?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    codeLong?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    disabledButton?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    forms?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    formsLong?: boolean;
-
-    /**
-     * All heading levels to demo. Always includes 1-6.
-     * 
-     * @since 0.1.0-alpha.20 — Moved to LoremIpsum_DisplaySettings and renamed.
-     */
-    headingLevels?: number[];
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    headingsList?: boolean;
-
-    /**
-     * Add subtitles to the heading snippets.
-     * 
-     * @since 0.1.0-beta.0
-     */
-    headingSubtitlesList?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    listsLong?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    listsMedium?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    table?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    tableLong?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    textLong?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    textMedium?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    textPage?: boolean;
-
-    /**
-     * Whether to include a table of contents.
-     * 
-     * @default false
-     * 
-     * @since 0.1.0-alpha.7
-     */
-    toc?: boolean;
-
-    /**
-     * @default true
-     * 
-     * @since 0.1.0-alpha.7
-     */
-    tocDefaultOpen?: boolean;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    tocDisplayHeading?: undefined | number;
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    tocExtraItems?: undefined | { label: string, id: string; }[] | {
-        $?: { label: string, id: string; }[];
-        two?: { label: string, id: string; }[];
-        three?: { label: string, id: string; }[];
-        four?: { label: string, id: string; }[];
-    };
-
-    /**
-     * @since 0.1.0-beta.0
-     */
-    tocSortByLabel?: boolean;
-
-    /**
-     * @since 0.1.0-alpha.20
-     */
-    toggleBlocks?: boolean;
-}
-
-export interface LoremIpsum_DisplaySettings_Parsed extends Omit<Required<LoremIpsum_DisplaySettings>, 'buttonVariations'> {
-    buttonVariations: string[];
-}
-
-export type LoremIpsum_PreviewComponent<T_Props extends { [ key: string ]: any; } = {}> = ( ( props: { ifDisplay: LoremIpsum_DisplaySettings_Parsed; } & T_Props ) => any ) | 'Fragment';
+import type TableOfContents from '../components/TableOfContents.astro';
 
 /**
  * Input props for the LoremIpsum component.
  * 
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.7 — Moved to component file.
- * @since 0.1.0-alpha.20 — Moved allHeadingLevels, buttonVariations, toc, tocDefaultOpen to LoremIpsum_DisplaySettings and renamed.
+ * @since 0.1.0-alpha.20 — Moved allHeadingLevels, buttonVariations, toc, tocDefaultOpen to LoremIpsumProps.DisplaySettings and renamed.
  */
 export interface LoremIpsumProps {
 
@@ -209,17 +52,9 @@ export interface LoremIpsumProps {
     asSection?: boolean;
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.3
      */
-    components?: Partial<{
-        Button: ButtonComponentType,
-
-        /**
-         * @since 0.1.0-beta.0
-         * @since ___PKG_VERSION___ — Moved to components prop.
-         */
-        Toggle: ToggleComponentType;
-    }>;
+    components?: Partial<LoremIpsumProps.Components>;
 
     /**
      * The starting visual heading level.
@@ -231,7 +66,7 @@ export interface LoremIpsumProps {
     /**
      * @since 0.1.0-alpha.20
      */
-    displaySettings?: LoremIpsum_DisplaySettings;
+    displaySettings?: LoremIpsumProps.DisplaySettings;
 
     /**
      * The starting heading level.
@@ -248,21 +83,7 @@ export interface LoremIpsumProps {
     /**
      * @since 0.1.0-beta.0
      */
-    previewComponents?: Partial<{
-        Forms: LoremIpsum_PreviewComponent<{
-            components: Required<Required<LoremIpsumProps>[ 'components' ]>;
-            displayHeading: undefined | number;
-            heading: number;
-            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
-        }>,
-        Lists: LoremIpsum_PreviewComponent,
-        Table: LoremIpsum_PreviewComponent<{
-            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
-        }>,
-        Toggle: LoremIpsum_PreviewComponent<{
-            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
-        }>,
-    }>;
+    previewComponents?: Partial<LoremIpsumProps.PreviewComponents>;
 
     /**
      * Whether to output a very abbreviated version (e.g., inside an alert or
@@ -278,9 +99,241 @@ export interface LoremIpsumProps {
     toggleProps?: {};
 }
 
+/**
+ * @since 0.1.0-beta.3
+ */
+export namespace LoremIpsumProps {
+
+    /**
+     * @since 0.1.0-beta.3
+     */
+    export type Components = {
+        Button: ButtonComponentType;
+        CodeBlock: CodeBlockComponentType;
+        Fieldset: FieldsetComponentType;
+        FormField: FormFieldComponentType;
+        Heading: HeadingComponentType;
+        Input: InputComponentType;
+        Select: SelectComponentType;
+        Select_Option: Select_OptionComponentType;
+        Textarea: TextareaComponentType;
+        Table: TableComponentType;
+
+        /**
+         * @since 0.1.0-beta.0
+         * @since 0.1.0-beta.3 — Moved to components prop.
+         */
+        Toggle: ToggleComponentType;
+    };
+
+    /**
+     * @since 0.1.0-alpha.20
+     */
+    export interface DisplaySettings {
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        blockquote?: boolean;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        blockquotePullQuote?: boolean;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        buttons?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        buttonTypes?: boolean;
+
+        /**
+         * Additional button variations to include. 'primary' and 'disabled' are
+         * always included.
+         *
+         * @default ['secondary']
+         * 
+         * @since 0.1.0-alpha.20 — Moved to {@link LoremIpsumProps.DisplaySettings} and renamed.
+         */
+        buttonVariations?: false | string[];
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        buttonVariationsAll?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        code?: boolean;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        codeLong?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        disabledButton?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        forms?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        formsLong?: boolean;
+
+        /**
+         * All heading levels to demo. Always includes 1-6.
+         * 
+         * @since 0.1.0-alpha.20 — Moved to {@link LoremIpsumProps.DisplaySettings} and renamed.
+         */
+        headingLevels?: number[];
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        headingsList?: boolean;
+
+        /**
+         * Add subtitles to the heading snippets.
+         * 
+         * @since 0.1.0-beta.0
+         */
+        headingSubtitlesList?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        listsLong?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        listsMedium?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        table?: boolean;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        tableLong?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        textLong?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        textMedium?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        textPage?: boolean;
+
+        /**
+         * Whether to include a table of contents.
+         * 
+         * @default false
+         * 
+         * @since 0.1.0-alpha.7
+         */
+        toc?: boolean;
+
+        /**
+         * @default true
+         * 
+         * @since 0.1.0-alpha.7
+         */
+        tocDefaultOpen?: boolean;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        tocDisplayHeading?: undefined | number;
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        tocExtraItems?: undefined | { label: string, id: string; }[] | {
+            $?: { label: string, id: string; }[];
+            two?: { label: string, id: string; }[];
+            three?: { label: string, id: string; }[];
+            four?: { label: string, id: string; }[];
+        };
+
+        /**
+         * @since 0.1.0-beta.0
+         */
+        tocSortByLabel?: boolean;
+
+        /**
+         * @since 0.1.0-alpha.20
+         */
+        toggleBlocks?: boolean;
+    }
+
+    export namespace DisplaySettings {
+
+        export interface Parsed extends Omit<Required<DisplaySettings>, 'buttonVariations'> {
+            buttonVariations: string[];
+        }
+    }
+
+    /**
+     * @since 0.1.0-beta.3
+     */
+    export interface PreviewComponents {
+
+        Forms: PreviewComponents.Single<{
+            components: Required<Required<LoremIpsumProps>[ 'components' ]>;
+            displayHeading: undefined | number;
+            heading: number;
+            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
+        }>;
+
+        Lists: PreviewComponents.Single;
+
+        Table: PreviewComponents.Single<{
+            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
+        }>;
+
+        Toggle: PreviewComponents.Single<{
+            tableOfContentsIds: ReturnType<typeof getLoremIpsumIds>;
+        }>;
+    }
+
+    /**
+     * @since 0.1.0-beta.3
+     */
+    export namespace PreviewComponents {
+
+        /**
+         * @since 0.1.0-beta.3
+         */
+        export type Single<T_Props extends { [ key: string ]: any; } = {}> = (
+            ( props: { ifDisplay: DisplaySettings.Parsed; } & T_Props ) => any
+        ) | 'Fragment';
+    }
+}
+
 export function getLoremIpsumIds(
     _props: LoremIpsumProps,
-    _ifDisplay?: LoremIpsum_DisplaySettings_Parsed,
+    _ifDisplay?: LoremIpsumProps.DisplaySettings.Parsed,
 ) {
     const {
         blockquote,
@@ -359,7 +412,7 @@ export function getLoremIpsumIds(
 /**
  * @since 0.1.0-beta.0 — Renamed from getLoremIpsumMode() to getLoremIpsumDisplaySettings().
  */
-export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIpsum_DisplaySettings_Parsed {
+export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIpsumProps.DisplaySettings.Parsed {
 
     const {
         superAbbreviated = false,
@@ -454,7 +507,7 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
 
         buttonVariations,
         headingLevels,
-    } satisfies LoremIpsum_DisplaySettings_Parsed;
+    } satisfies LoremIpsumProps.DisplaySettings.Parsed;
 
     parsed.formsLong = parsed.formsLong && parsed.forms;
     parsed.textLong = parsed.textLong && parsed.textMedium;
@@ -465,7 +518,7 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
 export function getLoremIpsumToc(
     _props: LoremIpsumProps,
     _toc_ids?: ReturnType<typeof getLoremIpsumIds>,
-    _display?: LoremIpsum_DisplaySettings_Parsed,
+    _display?: LoremIpsumProps.DisplaySettings.Parsed,
 ) {
     const display = _display ?? getLoremIpsumDisplaySettings( _props );
 

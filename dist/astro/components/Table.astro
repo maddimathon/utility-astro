@@ -6,10 +6,10 @@
  */
 
 /* import - types */
-import type { HTMLAttributes } from 'astro/types';
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -25,37 +25,53 @@ import type { GenericElementProps } from '../../ts/types/index.js';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface TableProps {
-    wrapper?: HTMLAttributes<'div'>;
-}
+export type TableProps = ElementProps<
+    {
+        wrapper?: ElementProps<
+            {
+                tag?: 'div' | 'section';
+            },
+            'div'
+        >;
+    },
+    'div'
+>;
+
+export type TableComponentType = (props: TableProps) => any;
 
 /* PROPS ===================================== */
 
-type Props = GenericElementProps<TableProps, 'div'>;
+type Props = TableProps;
 
 const {
     class: classList = [],
-    wrapper = {},
+    wrapper: {
+        class: wrapperClassList = [],
+        tag: Wrapper = 'div',
+        ...wrapperAttrs
+    } = {},
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+}: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 ---
 
-<div
-    class:list={['table-wrapper', '||', [wrapper.class]]}
-    {...wrapper}
+<Wrapper
+    {...wrapperAttrs}
+    class:list={makeClassList('table-wrapper', wrapperClassList)}
 >
     <table
-        class:list={[classList]}
         {...attributes}
+        class:list={makeClassList('table-wrapper--table', classList)}
     >
         <slot />
     </table>
-</div>
-
+</Wrapper>
 <style>
     .table-wrapper {
+        position: relative;
+        max-width: 100%;
+
         > table {
             min-width: 100%;
         }

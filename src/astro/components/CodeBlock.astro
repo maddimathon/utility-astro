@@ -6,11 +6,15 @@
  */
 
 /* import - types */
-import type { GenericElementProps } from '../../ts/types/index.js';
+import type {
+    GenericElementProps,
+    PropsOptionalChildren,
+} from '../../ts/types/index.js';
 
 import type { CopyToClipboardButtonProps } from './CopyToClipboardButton.astro';
 
 /* import - functions */
+import { flattenClassList } from '../functions.js';
 
 /* import - values */
 
@@ -30,59 +34,64 @@ import CopyToClipboardButton from './CopyToClipboardButton.astro';
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
-export interface CodeBlockProps {
-    /**
-     * Can be <slot /> contents to render or a string.
-     */
-    children?: any;
+export type CodeBlockProps = GenericElementProps<
+    PropsOptionalChildren<{
+        copyToClipboard?: boolean | CopyToClipboardButtonProps | undefined;
 
-    copyToClipboard?: boolean | CopyToClipboardButtonProps | undefined;
+        /**
+         * Code language, if any.
+         */
+        lang?: string | undefined;
+    }>,
+    'div'
+>;
 
-    /**
-     * Code language, if any.
-     */
-    lang?: string | undefined;
-}
+type Props = CodeBlockProps;
 
-type Props = GenericElementProps<CodeBlockProps, 'div'>;
+/**
+ * @since 0.1.0-beta.3
+ */
+export type CodeBlockComponentType = (props: CodeBlockProps) => any;
 
 const {
-    children,
     copyToClipboard = false,
     lang,
     class: classList = [],
     ...attributes
-}: Props = Astro.props.frontmatter ?? Astro.props;
+} = Astro.props.frontmatter ?? Astro.props;
 
 /* CONSTANTS ===================================== */
 
-const codeHTML: string =
-    typeof children === 'string'
-        ? children
-        : ((await Astro.slots.render('default'))?.trim() ?? '');
+const codeHTML =
+    (await Astro.slots.render('default'))?.replace(/^[\n\s]+|[\n\s]+$/gi, '') ??
+    '';
 ---
 
 {
-    lang ? (
-        <Prism
-            code={codeHTML}
-            lang={lang}
-            class:list={classList}
-            {...attributes}
-        />
-    ) : (
-        // prettier-ignore
-        <pre class:list={classList} {...attributes}><code><Fragment set:text={codeHTML} /></code></pre>
-    )
+    codeHTML &&
+        (lang ? (
+            <Prism
+                {...attributes}
+                code={codeHTML}
+                lang={lang}
+                class:list={classList ?? []}
+            />
+        ) : (
+            <pre
+                {...attributes}
+                class={flattenClassList(classList)}
+            >
+                <code set:text={codeHTML} />
+            </pre>
+        ))
 }
-
 {
     copyToClipboard && (
         <CopyToClipboardButton
             toClipboard={codeHTML}
             successMessage='copied!'
-            set:text='copy'
             {...(typeof copyToClipboard === 'object' ? copyToClipboard : {})}
+            set:text='copy'
             class:list='button--inline button--copy-code'
         />
     )
