@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.3
+/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -155,7 +155,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
 
                     > .container {
                         @if $includeStyles {
-                            background: var-sys-colour(background);
+                            background: do-var(background);
                             max-height: 80svh;
                         }
 
@@ -169,7 +169,7 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                         border-block-end: $title_borderWidth solid currentColor;
 
                         font-size: var-fs(heading-6);
-                        background: var-sys-colour(background);
+                        background: do-var(background);
                     }
 
                     @content (js--body-nav-toggle-title);

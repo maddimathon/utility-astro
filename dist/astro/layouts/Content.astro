@@ -22,7 +22,7 @@ import { mergeArgs } from '@maddimathon/utility-typescript';
 /* import - values */
 
 /* import - components */
-import { Heading } from '../components.ts';
+import {} from '../components.ts';
 
 import Content_ExtraWide from './content/Content_ExtraWide.astro';
 import Content_FullWidth from './content/Content_FullWidth.astro';
@@ -53,13 +53,19 @@ const _defProps = {
         main: {},
         sidebar: {},
     },
-} as const satisfies DefaultProps;
+} as const satisfies Omit<DefaultProps, 'components'>;
 
-const { type = 'content-only', ...p } = mergeArgs(
+const {
+    components,
+    type = 'content-only',
+    ...p
+} = mergeArgs(
     _defProps as DefaultProps,
     Astro.props.frontmatter ?? Astro.props,
     true,
 );
+
+const { Heading } = components;
 
 /* CONSTANTS ===================================== */
 
@@ -94,35 +100,36 @@ const [typeSlug, ContentComponent] = Array.isArray(type)
 
 const completedProps = {
     ...{ ...p, type: typeSlug },
+    components,
 } satisfies ContentProps_Full<string>;
 ---
 
 <ContentComponent {...completedProps}>
-    {
-        titleString ? (
-            <Heading
-                slot='content-header'
-                attrs={{ subheading: { class: 'page-title__subheading' } }}
-                class='page-title'
-                heading={1}
-                minimum={1}
-            >
-                <Fragment set:text={titleString} />
-                <Fragment
-                    slot='subheading'
-                    set:text={p.subtitle}
-                />
-            </Heading>
-        ) : (
-            p.subtitle && (
-                <p
-                    slot='content-header'
-                    class='page-title__subheading'
-                    set:text={p.subtitle}
-                />
+    <Fragment slot='content-header'>
+        {
+            titleString ? (
+                <Heading
+                    attrs={{ subheading: { class: 'page-title__subheading' } }}
+                    class='page-title'
+                    heading={1}
+                    minimum={1}
+                >
+                    <Fragment set:text={titleString} />
+                    <Fragment
+                        slot='subheading'
+                        set:text={p.subtitle}
+                    />
+                </Heading>
+            ) : (
+                p.subtitle && (
+                    <p
+                        class='page-title__subheading'
+                        set:text={p.subtitle}
+                    />
+                )
             )
-        )
-    }
+        }
+    </Fragment>
 
     <slot
         slot='content-header'

@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.3
+ * @maddimathon/utility-astro@0.1.0-beta.4.draft
  * @license MIT
  */
 
@@ -15,6 +15,7 @@ import type {
 } from '@maddimathon/utility-typescript/types';
 
 import type {
+    NavMenuComponentType,
     NavMenuProps,
     Page_MetaProps,
     SettingsMenuProps,
@@ -127,16 +128,15 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
     /**
      * @since 0.1.0-beta.0
      */
-    components?: {
-        PrimaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
-        SecondaryMenu?: ( props: PartialExcept<NavMenuProps, 'aria-label' | 'id' | 'menu'> & { [ key: string ]: any; } ) => any;
-        SettingsMenu?: ( props: Partial<SettingsMenuProps> & { [ key: string ]: any; } ) => any;
+    components?: Partial<ContentProps<T_ContentType>[ 'components' ]> & {
+        PrimaryMenu?: NavMenuComponentType;
+        SecondaryMenu?: NavMenuComponentType;
     };
 
     /**
      * Configuration for the child Content component.
      */
-    content?: Omit<ContentProps<T_ContentType>, "subtitle" | "title" | "type"> | undefined;
+    content?: Omit<ContentProps<T_ContentType>, "components" | "subtitle" | "title" | "type"> | undefined;
 
     /**
      * Used for NavMenu, ToggleNavMenu, and TableOfContents components.

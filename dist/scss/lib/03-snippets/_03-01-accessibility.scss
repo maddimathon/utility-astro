@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.3
+/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
 ///
 /// @since 0.1.0-alpha.14
 /// @since 0.1.0-beta.0 — Renamed from 03--skip-links to 03-01-accessibility.
@@ -31,6 +31,54 @@
     }
 }
 
+$_sels_skipLinks: selector.unify(
+    list.join(
+        ('.skip-link'),
+        config.$selectors_skipLinks_extraModifiers,
+        $separator: comma
+    ),
+    config.$selector_a
+);
+
+///
+/// Adds styles for a link that is visually hidden until it gains focus.
+///
+/// @since 0.1.0-beta.4.draft
+///
+@mixin snippet-focus-link(
+    $hidden_display: inline-block,
+    $display: inline,
+    $position: relative,
+    $maxHeight: auto,
+    $maxWidth: auto,
+    $overflow: visible
+) {
+    display: $hidden_display !important;
+    position: absolute !important;
+
+    max-width: 1px;
+    max-height: 1px;
+    overflow: hidden !important;
+
+    @content;
+
+    @include apply-interactive-mixin(
+        $active: true,
+        $activeWithin: true,
+        $focus: true,
+        $focusWithin: true,
+        $fallbacksOnly: true
+    ) {
+        @include prop-display($display, $setCxProp: false, $important: true);
+        position: $position !important;
+
+        max-width: $maxWidth;
+        max-height: $maxHeight;
+
+        overflow: $overflow !important;
+    }
+}
+
 ///
 /// @since 0.1.0-alpha.14
 /// @since 0.1.0-beta.0 — Added optional $includeBaseStyles param.
@@ -43,15 +91,7 @@
     $zIndex: 999999,
     $includeBaseStyles: true
 ) {
-    $baseSelectors: list.join(
-        ('.skip-link'),
-        config.$selectors_skipLinks_extraModifiers,
-        $separator: comma
-    );
-
-    $skipSelectors: selector.unify($baseSelectors, config.$selector_a);
-
-    #{$skipSelectors} {
+    #{$_sels_skipLinks} {
         @if $includeBaseStyles {
             @include prop-display(block);
             width: fit-content;

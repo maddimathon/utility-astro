@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.1.0-beta.3",
+    "version": "0.1.0-beta.4",
 
     "author": "Maddi Mathon (https://www.maddimathon.com/web)",
     "description": "Astro utilities to use in a variety of projects.",

@@ -13,6 +13,7 @@ import type { NavMenuProps } from '../components.ts';
 
 import type {
     ContentProps,
+    ContentProps_Full,
     ContentTypeInput,
     DefaultContentType,
 } from './Content.astro';
@@ -34,10 +35,11 @@ import Content from './Content.astro';
 
 /* import - components */
 import {
+    Heading as HeadingComponent,
     NavMenu,
     Page_Meta,
     RenderedSlotContent,
-    SettingsMenu,
+    SettingsMenu as SettingsMenuComponent,
     SkipLinks,
     ToggleNavMenu,
 } from '../components.ts';
@@ -54,16 +56,24 @@ type Props<T_ContentType extends ContentTypeInput = ContentTypeInput> = GenericP
 
 const {urlMaker, ...p} = Astro.props.frontmatter ?? Astro.props;
 
+const components = {
+    ...p.components ?? {},
+    Heading : p.components?.Heading ?? HeadingComponent,
+    SettingsMenu : p.components?.SettingsMenu ?? SettingsMenuComponent,
+} satisfies ContentProps_Full<any>['components'];
+
 const {
     PrimaryMenu = ToggleNavMenu,
     SecondaryMenu = NavMenu,
-    SettingsMenu: SettingsMenuComponent = SettingsMenu,
-} = p.components ?? {};
+    SettingsMenu: SettingsMenu = SettingsMenuComponent,
+} = components;
 
 /* ### Content Props ------------------ */
 
 const content = {
     ...p.content,
+
+    components,
 
     subtitle: p.subtitle,
 
@@ -288,7 +298,7 @@ const settings = p.settings && {
 
         {
             settings && (
-                <SettingsMenuComponent {...settings}>
+                <SettingsMenu {...settings}>
                     <slot
                         name='settings-menu-open'
                         slot='settings-menu-open'
@@ -298,7 +308,7 @@ const settings = p.settings && {
                         name='settings-menu-close'
                         slot='settings-menu-close'
                     />
-                </SettingsMenuComponent>
+                </SettingsMenu>
             )
         }
 

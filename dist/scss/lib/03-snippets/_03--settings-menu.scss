@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.3
+/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -79,7 +79,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
         #{$selector_content} {
             @if $includeStyles {
-                background: var-sys-colour(background);
+                background: do-var(background);
                 width: 100%;
                 max-width: min(var-width(content), 90vw);
             }

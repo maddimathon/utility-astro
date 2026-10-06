@@ -72,6 +72,13 @@ export interface NavMenuProps {
     'urlMaker'?: (currentURL: URL, targetSubpath: string) => string;
 }
 
+/**
+ * @since 0.1.0-beta.4.draft
+ */
+export type NavMenuComponentType = (
+    props: ElementProps<NavMenuProps, 'nav'>,
+) => any;
+
 /* PROPS ===================================== */
 
 type Props = ElementProps<NavMenuProps, 'nav'>;

@@ -15,6 +15,8 @@ import type {
     PropsRequireChildren,
 } from '../../ts/types/index.js';
 
+import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+
 /* import - functions */
 import { flattenClassList, makeClassList } from '../functions.js';
 
@@ -23,6 +25,8 @@ import { flattenClassList, makeClassList } from '../functions.js';
 /* import - components */
 import Toggle_Backdrop from '../support/Toggle_Backdrop.astro';
 import Toggle_Control from '../support/Toggle_Control.astro';
+
+import DynamicWrapper from './DynamicWrapper.astro';
 import Heading from './Heading.astro';
 
 /* import - layouts */
@@ -63,6 +67,10 @@ export type ToggleProps = PropsRequireChildren<{
      * Add an additional base class to use.
      */
     classBase?: string | undefined;
+
+    components?: Partial<{
+        Wrapper: DynamicWrapperComponentType;
+    }>;
 
     defaultOpen?: boolean | undefined;
 
@@ -179,6 +187,7 @@ export type ToggleComponentType = (props: ToggleProps) => any;
 type Props = ElementProps<ToggleProps, 'div', 'aria-label' | 'aria-labelledby'>;
 
 const {
+    components: { Wrapper = DynamicWrapper } = {},
     defaultOpen,
     id,
     // optional
@@ -274,14 +283,15 @@ const includeBackdrop =
         data-toggle-content={id}
         id={contentID}
     >
-        <div
+        <Wrapper
             {...contentContainerAttributes}
-            class={flattenClassList(
-                makeClassList('container', contentContainerAttributes?.class),
+            class={makeClassList(
+                'container',
+                contentContainerAttributes?.class,
             )}
         >
             <slot />
-        </div>
+        </Wrapper>
     </ContentContainer>
 
     {

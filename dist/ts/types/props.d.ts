@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.3
+ * @maddimathon/utility-astro@0.1.0-beta.4.draft
  * @license MIT
  */
 import type { HTMLTag as HTMLTag_Astro, HTMLAttributes as HTMLAttributes_Astro } from 'astro/types';

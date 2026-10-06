@@ -128,6 +128,13 @@ export interface SettingsMenuProps {
     };
 }
 
+/**
+ * @since ___PKG_VERSION___
+ */
+export type SettingsMenuComponentType = (
+    props: ElementProps<SettingsMenuProps, 'div'>,
+) => any;
+
 /* PROPS ===================================== */
 
 type Props = ElementProps<SettingsMenuProps, 'div'>;

@@ -10,6 +10,11 @@
 
 import type { HTMLAttributes } from 'astro/types';
 
+import type {
+    HeadingComponentType,
+    SettingsMenuComponentType,
+} from '../components.ts';
+
 import type { MainProps } from './Main.astro';
 import type { SidebarProps } from './Sidebar.astro';
 
@@ -53,6 +58,14 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     };
 
     /**
+     * @since ___PKG_VERSION___
+     */
+    components: {
+        Heading: HeadingComponentType;
+        SettingsMenu: SettingsMenuComponentType;
+    };
+
+    /**
      * To display (in a h1).
      */
     title: string | string[] | undefined;
@@ -71,8 +84,6 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
 export type ContentProps_Full<T_Type extends ContentType | string> = {
     [ K in keyof Omit<ContentProps, 'attrs' | 'type'> ]-?: ContentProps[ K ];
 } & {
-    type: string;
-} & {
     attrs: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
         main: MainProps;
@@ -83,5 +94,5 @@ export type ContentProps_Full<T_Type extends ContentType | string> = {
         sidebar?: SidebarProps | undefined;
     };
 
-    // [ key: string ]: unknown;
+    type: string;
 };

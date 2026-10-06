@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.3
+/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -209,6 +209,7 @@ $_toggle_svg_sel_moving: '#b';
 @mixin snippet-support-toggle-block-base(
     $includeStyles: true,
     $includeBackdropStyles: $includeStyles,
+    //
     $backdrop_background_before: if(
             $includeBackdropStyles,
             do-var(backdrop-background-before, var-sys-colour(background)),
@@ -227,6 +228,8 @@ $_toggle_svg_sel_moving: '#b';
     //
     $gridCols_toggle: null,
     $gridGap: $_toggle_gridGap,
+    //
+    $fadeOutContents: true,
     //
     $svg_sel_moving: $_toggle_svg_sel_moving,
     $svg_sel_static: $_toggle_svg_sel_static,
@@ -462,7 +465,7 @@ $_toggle_svg_sel_moving: '#b';
 
                 &::before {
                     @if $backdrop_background_before != false {
-                        background: $backdrop_background_before;
+                        background: $backdrop_background_before !important;
                     }
                     @if $backdrop_opacity_before != false {
                         opacity: $backdrop_opacity_before;
@@ -473,7 +476,7 @@ $_toggle_svg_sel_moving: '#b';
 
                 &::after {
                     @if $backdrop_background_after != false {
-                        background: $backdrop_background_after;
+                        background: $backdrop_background_after !important;
                     }
                     @if $backdrop_opacity_after != false {
                         opacity: $backdrop_opacity_after;
@@ -602,7 +605,9 @@ $_toggle_svg_sel_moving: '#b';
 
                 overflow: auto;
 
-                opacity: 0;
+                @if $fadeOutContents {
+                    opacity: 0;
+                }
 
                 @content (js--toggle-base--content--container);
             }
@@ -651,7 +656,9 @@ $_toggle_svg_sel_moving: '#b';
 
                 > .container {
                     display: none;
-                    opacity: 0;
+                    @if $fadeOutContents {
+                        opacity: 0;
+                    }
 
                     @content (js--toggle-base--container--closed--content--container);
                 }
@@ -695,7 +702,9 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--opening-or-closing--content);
 
                 > .container {
-                    opacity: 0;
+                    @if $fadeOutContents {
+                        opacity: 0;
+                    }
 
                     @content (js--toggle-base--container--opening-or-closing--content--container);
                 }
@@ -767,7 +776,9 @@ $_toggle_svg_sel_moving: '#b';
                 @content (js--toggle-base--container--open--content);
 
                 > .container {
-                    opacity: 1;
+                    @if $fadeOutContents {
+                        opacity: 1;
+                    }
 
                     @content (js--toggle-base--container--open--content--container);
                 }
