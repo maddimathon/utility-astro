@@ -70,7 +70,7 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
      */
     title: string | string[] | undefined;
 
-    type?: T_Type | undefined;
+    layout?: T_Type | undefined;
 
     subtitle?: string | undefined;
 }
@@ -82,7 +82,7 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export type ContentProps_Full<T_Type extends ContentType | string> = {
-    [ K in keyof Omit<ContentProps, 'attrs' | 'type'> ]-?: ContentProps[ K ];
+    [ K in keyof Omit<ContentProps, 'attrs' | 'layout'> ]-?: ContentProps[ K ];
 } & {
     attrs: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
@@ -94,5 +94,5 @@ export type ContentProps_Full<T_Type extends ContentType | string> = {
         sidebar?: SidebarProps | undefined;
     };
 
-    type: string;
+    layout: string;
 };

@@ -2394,7 +2394,7 @@ body
             > :where(.main-content__article, aside)
             > :is(.main-subgrid)
     )
-    > :where(*) {
+    > * {
     --grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
@@ -2438,7 +2438,7 @@ body
                 > :is(.main-subgrid)
         )
         > :where(form, dl)
-        > :where(*),
+        > *,
     :where(
             body,
             body > :is(.main-subgrid),
@@ -2451,7 +2451,7 @@ body
                 > :is(.main-subgrid)
         )
         > .display-contents
-        > :where(*) {
+        > * {
         grid-column: var(--grid-column, content-start/content-end);
     }
 }
@@ -2550,7 +2550,7 @@ body {
     padding: 0;
     z-index: 1;
 }
-:where(body) > :where(*) + :where(*) {
+:where(body) > * + * {
     margin-block: var(--gap-block-layout, 5vw) 0;
 }
 :where(body) > :where(footer) {
@@ -2571,25 +2571,24 @@ body
     margin-inline: 0;
 }
 
-:where(body) > :where(nav, header, footer) > :where(*) {
+:where(body) > :where(nav, header, footer) > * {
     --grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
 @media (width >= 40.875em) {
-    :where(body) > :where(nav, header, footer) > :where(*) {
+    :where(body) > :where(nav, header, footer) > * {
         --grid-column: page-start/page-end;
         grid-column: var(--grid-column, page-start/page-end);
         width: auto;
     }
 }
-
 body > :where(aside),
 body > :where(main) > :where(aside) {
     margin-block: var(--gap-block-layout, 5vw) 0;
 }
 
-:where(.layout_content-only) > :where(header) > :where(*) {
+:where(.layout_content-only) > :where(header) > * {
     --grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
@@ -2690,7 +2689,7 @@ body > :where(main) > :where(aside) {
     ) {
     margin-block-start: 0;
 }
-.main-content__header + :where(*) {
+.main-content__header + * {
     margin-block-start: var(--mrg-soft-600, 1.875rem);
 }
 
@@ -2766,13 +2765,13 @@ body > :where(main) > :where(aside) {
             [data-toggle-content] > .container,
             [data-toggle-content]
         )
-        > :where(*) {
+        > * {
         width: auto;
     }
-    .toggle-block .toggle-block__title > :where(*),
-    .toggle-block > :where(*),
-    [data-toggle-content] > .container > :where(*),
-    [data-toggle-content] > :where(*) {
+    .toggle-block .toggle-block__title > *,
+    .toggle-block > *,
+    [data-toggle-content] > .container > *,
+    [data-toggle-content] > * {
         grid-column: var(--grid-column, content-start/content-end);
     }
 }

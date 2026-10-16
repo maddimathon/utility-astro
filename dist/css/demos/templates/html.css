@@ -2553,7 +2553,7 @@ body {
     margin-block: var(--gap-block-layout, 5vw);
     margin-inline: var(--gap-inline-layout, 8vw);
 }
-:where(body) > :where(*) {
+:where(body) > * {
     width: min(var(--width-page, 58.6875rem), 100%);
 }
 

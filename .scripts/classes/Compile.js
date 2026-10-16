@@ -123,6 +123,7 @@ export class Compile extends CompileStage {
                 ],
 
                 compilerOptions: {
+                    module: 'ES2022',
                     skipLibCheck: false,
 
                     plugins: [

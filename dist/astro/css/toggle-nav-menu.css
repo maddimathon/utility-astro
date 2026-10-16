@@ -26,12 +26,11 @@
         display: contents;
         display: var(--display, contents);
     }
-    :where([data-toggle-content] > .container, [data-toggle-content])
-        > :where(*) {
+    :where([data-toggle-content] > .container, [data-toggle-content]) > * {
         width: auto;
     }
-    [data-toggle-content] > .container > :where(*),
-    [data-toggle-content] > :where(*) {
+    [data-toggle-content] > .container > *,
+    [data-toggle-content] > * {
         grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
     }
@@ -206,9 +205,7 @@
         width: 100% !important;
         height: auto !important;
         border-radius: 0 !important;
-        -webkit-backdrop-filter: blur(1rem);
         backdrop-filter: blur(1rem);
-        -webkit-backdrop-filter: var(--backdrop-filter, blur(1rem));
         backdrop-filter: var(--backdrop-filter, blur(1rem));
         cursor: pointer;
         z-index: -2;

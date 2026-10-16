@@ -85,12 +85,12 @@ const content = {
           ? [p.title]
           : [],
 
-    type: p.layout ?? 'content-only' satisfies DefaultContentType,
+    layout: p.layout ?? ('content-only' satisfies DefaultContentType),
 } satisfies ContentProps<ContentTypeInput>;
 
 /** ## CONSTANTS ==================================== **/
 
-const layoutSlug = Array.isArray(content.type) ? content.type[0] : content.type;
+const layoutSlug = Array.isArray(content.layout) ? content.layout[0] : content.layout;
 
 const pageSlug: string =
     slugify(currentPagePath(Astro.url).replace(/\.(html|php)$/gi, '')) ||
@@ -286,7 +286,7 @@ const settings = p.settings && {
         {...p.attrs?.body ?? {}}
         class:list={makeClassList([
             `page_${pageSlug}`,
-            content.type && `layout_${slugify(layoutSlug)}`,
+            content.layout && `layout_${slugify(layoutSlug)}`,
         ], p.attrs?.body?.class ?? [])}
     >
         {p.skipLinks && <SkipLinks links={p.skipLinks} />}

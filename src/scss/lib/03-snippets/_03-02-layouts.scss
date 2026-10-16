@@ -10,6 +10,7 @@
 @use 'pkg:@maddimathon/utility-sass/feature-check';
 @use 'pkg:@maddimathon/utility-sass/list';
 @use 'pkg:@maddimathon/utility-sass/map';
+@use 'pkg:@maddimathon/utility-sass/meta';
 @use 'pkg:@maddimathon/utility-sass/selector';
 @use 'pkg:@maddimathon/utility-sass/string';
 
@@ -169,9 +170,9 @@ $_flex_container_alignment_row: (
     $cols: content-start/content-end,
     $width: auto,
     //
+    $selector_body: null,
     $multipleContentBlocks: false,
     $useFeatureCheckJS: true,
-    $useWhere: true,
     $args...
 ) {
     @include feature-check.supports(
@@ -184,17 +185,38 @@ $_flex_container_alignment_row: (
             @content;
         }
 
-        @at-root :where(&) #{selector.nest( '>', if($useWhere, ':where(*)', '*') )} {
-            @if $width {
-                width: $width;
-            }
+        $selector_body: if(
+            $selector_body == null,
+            if(
+                selector.parent-has-root(),
+                config.$selector_root,
+                if(selector.parent-has-body(), config.$selector_body, false)
+            ),
+            $selector_body
+        );
 
-            @if $multipleContentBlocks {
-                @content (where-direct-child);
+        $_whereParent: ':where( #{&} )';
+        @if $selector_body != false {
+            $_whereParent: selector.replace-simple-selector(
+                &,
+                $selector_body,
+                ':where( #{$selector_body} )'
+            );
+        }
+
+        @at-root #{$_whereParent} {
+            > * {
+                @if $width {
+                    width: $width;
+                }
+
+                @if $multipleContentBlocks {
+                    @content (where-direct-child);
+                }
             }
         }
 
-        @at-root #{selector.nest(&, '>', if($useWhere, ':where(*)', '*') )} {
+        > * {
             @include prop-grid-column($cols, $setCxProp: false, $args...);
 
             @if $multipleContentBlocks {
@@ -227,10 +249,13 @@ $_flex_container_alignment_row: (
     }
 
     @if $includeDisplayContentUtility and not $setCxProp {
+        // $_parent_sel: &;
+
         &:where(%_display-contents),
         &:is(%display-contents) {
             @include snippet-body-grid--display-contents(
                 $cols: $cols,
+                // $selector_body: $_parent_sel,
                 $width: $width,
                 $setCxProp: false,
                 $args...
@@ -296,7 +321,7 @@ $_flex_container_alignment_row: (
 ///
 @mixin snippet-body-grid--set-body-or-subgrid-children {
     @at-root :where(&) {
-        > :where(*) {
+        > * {
             @include snippet-body-grid--content-width;
         }
 
@@ -305,7 +330,7 @@ $_flex_container_alignment_row: (
             display: contents;
 
             @include feature-check.supports(displayContents) {
-                > :where(*) {
+                > * {
                     @include snippet-body-grid--content-width(
                         $setCxProp: false,
                         $includeDisplayContentUtility: false,
@@ -438,7 +463,7 @@ $_flex_container_alignment_row: (
 ) {
     @if $includeMarginBlock {
         @at-root :where(&) {
-            > :where(*) + :where(*) {
+            > * + * {
                 margin-block: var-gap-block(layout) 0;
             }
 
@@ -460,9 +485,7 @@ $_flex_container_alignment_row: (
         @content (body--subgrid-children);
     }
 
-    @at-root :where(&)
-            > :where(%primary-nav, %site-header, %site-footer, %_site-footer)
-            > :where(*) {
+    :where(&) > :where(%primary-nav, %site-header, %site-footer, %_site-footer) > * {
         @include snippet-body-grid--page-width;
     }
 
@@ -638,7 +661,7 @@ $_flex_container_alignment_row: (
         ///
 
         %layout-content-only {
-            @at-root :where(&) > :where(%site-header) > :where(*) {
+            :where(&) > :where(%site-header) > * {
                 @include snippet-body-grid--content-width;
             }
 

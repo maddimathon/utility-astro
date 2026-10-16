@@ -101,7 +101,7 @@
                         }
                     }
 
-                    + :where(*) {
+                    + * {
                         margin-block-start: var-mrg-soft('600');
                     }
                 }

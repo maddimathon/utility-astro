@@ -116,7 +116,7 @@ body
             > :where(.main-content__article, aside)
             > :is(.main-subgrid)
     )
-    > :where(*) {
+    > * {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
@@ -161,7 +161,7 @@ body
                 > :is(.main-subgrid)
         )
         > :where(form, dl)
-        > :where(*),
+        > *,
     :where(
             body,
             body > :is(.main-subgrid),
@@ -174,7 +174,7 @@ body
                 > :is(.main-subgrid)
         )
         > .display-contents
-        > :where(*) {
+        > * {
         grid-column: content-start/content-end;
         grid-column: var(--grid-column, content-start/content-end);
     }
@@ -295,7 +295,7 @@ body {
     padding: 0;
     z-index: 1;
 }
-:where(body) > :where(*) + :where(*) {
+:where(body) > * + * {
     margin-top: 5vw;
     margin-top: var(--gap-block-layout, 5vw);
     margin-bottom: 0;
@@ -322,21 +322,20 @@ body
     margin-right: 0;
 }
 
-:where(body) > :where(nav, header, footer) > :where(*) {
+:where(body) > :where(nav, header, footer) > * {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);
     width: auto;
 }
 @media (width >= 40.875em) {
-    :where(body) > :where(nav, header, footer) > :where(*) {
+    :where(body) > :where(nav, header, footer) > * {
         --grid-column: page-start/page-end;
         grid-column: page-start/page-end;
         grid-column: var(--grid-column, page-start/page-end);
         width: auto;
     }
 }
-
 body > :where(aside),
 body > :where(main) > :where(aside) {
     margin-top: 5vw;
@@ -344,7 +343,7 @@ body > :where(main) > :where(aside) {
     margin-bottom: 0;
 }
 
-:where(.layout_content-only) > :where(header) > :where(*) {
+:where(.layout_content-only) > :where(header) > * {
     --grid-column: content-start/content-end;
     grid-column: content-start/content-end;
     grid-column: var(--grid-column, content-start/content-end);

@@ -6,8 +6,12 @@
  */
 
 /* import - types */
-import type { ComponentProps } from 'astro/types';
-import type { ContentType } from '../../astro/layouts/Content.astro';
+import type { GenericProps } from '../../ts/types/index.ts';
+
+import type {
+    ContentType,
+    PageProps as LibPageProps,
+} from '../../astro/layouts.js';
 
 /* import - functions */
 import { arrayUnique, mergeArgs } from '@maddimathon/utility-typescript';
@@ -22,20 +26,14 @@ import { SITE_TITLE } from '../constants.js';
 /* import - layouts */
 import LibPage from '../../astro/layouts/Page.astro';
 
-/* TYPES ===================================== */
-
-type LibPageProps<T_ContentType extends ContentType = ContentType> =
-    ComponentProps<typeof LibPage<T_ContentType>>;
-
 /* PROPS ===================================== */
 
-type Partial_LibProps = Partial<LibPageProps<ContentType>> &
-    Pick<LibPageProps<ContentType>, 'title'>;
+type Partial_LibProps = Partial<LibPageProps<ContentType>>;
 
-interface Props extends Partial_LibProps {}
+type Props = GenericProps<Partial_LibProps>;
 
 const _defaultProps = {
-    title: [],
+    title: SITE_TITLE,
 
     dir: 'ltr',
     lang: 'en-CA',
@@ -69,7 +67,7 @@ const _defaultProps = {
     },
 } as const satisfies Props & LibPageProps<ContentType>;
 
-const props = mergeArgs<Props & LibPageProps<ContentType>, Props>(
+const props: LibPageProps<ContentType> = mergeArgs(
     _defaultProps,
     Astro.props.frontmatter ?? Astro.props,
     true,
