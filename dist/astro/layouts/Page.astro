@@ -21,11 +21,10 @@ import type {
 import type { PageProps } from './Page.d.ts';
 
 /* import - functions */
-import { DateTime } from 'luxon';
 import { mergeArgs, slugify } from '@maddimathon/utility-typescript';
 import { FeatureCheck } from '@maddimathon/utility-sass';
 
-import { mapToObject } from '../../ts/functions/mapToObject.js';
+import { mapToObject } from '../../ts/index.js';
 import { currentPagePath, makeClassList } from '../functions.js';
 
 /* import - values */
@@ -40,6 +39,7 @@ import {
     Page_Meta,
     RenderedSlotContent,
     SettingsMenu as SettingsMenuComponent,
+    SiteFooter as SiteFooterComponent,
     SkipLinks,
     ToggleNavMenu,
 } from '../components.ts';
@@ -60,12 +60,14 @@ const components = {
     ...p.components ?? {},
     Heading : p.components?.Heading ?? HeadingComponent,
     SettingsMenu : p.components?.SettingsMenu ?? SettingsMenuComponent,
+    SiteFooter : p.components?.SiteFooter ?? SiteFooterComponent,
 } satisfies ContentProps_Full<any>['components'];
 
 const {
     PrimaryMenu = ToggleNavMenu,
     SecondaryMenu = NavMenu,
-    SettingsMenu: SettingsMenu = SettingsMenuComponent,
+    SettingsMenu = SettingsMenuComponent,
+    SiteFooter = SiteFooterComponent,
 } = components;
 
 /* ### Content Props ------------------ */
@@ -183,6 +185,7 @@ const slots_render = mapToObject(
                 'bodyClose',
                 'bodyOpen',
                 'footer',
+                'footerLast',
                 'footerScripts',
                 'headClose',
                 'header',
@@ -209,34 +212,9 @@ const slots_render = mapToObject(
  * Sections/components to include or not.
  */
 const include = {
-    footer:
-        p.footer &&
-        (p.footer.copyright || p.footer.designedBy || slots_render.footer),
 
     header:
         p.header && (p.header.title || p.header.tagline || slots_render.header),
-};
-
-/* ### Preformatted ------------------ */
-
-const today = DateTime.now();
-
-const _footerCopyrightYear = p.footer?.copyright
-    ? (p.footer.copyright.year ?? today.year)
-    : null;
-
-/**
- * Some formatted text strings to use below.
- */
-const formatted = {
-    footer: {
-        year:
-        _footerCopyrightYear === false
-            ? _footerCopyrightYear
-            : _footerCopyrightYear && today.year > _footerCopyrightYear
-                ? `${_footerCopyrightYear}–${today.year}`
-                : _footerCopyrightYear,
-    },
 };
 
 /* ### FeatureCheck ------------------ */
@@ -406,34 +384,19 @@ const settings = p.settings && {
         />
 
         {
-            p.footer && include.footer && (
-                <footer {...p.footer.attributes} class='site-footer'>
+            p.footer && (
+                <SiteFooter {...p.footer.attributes} content={p.footer} components={components}>
                     <RenderedSlotContent
                         name='footer'
                         html={slots_render.footer}
                     />
-
-                    {(p.footer.designedBy || p.footer.copyright) && (
-                        <div class='site-footer__disclaimer'>
-                            {p.footer.copyright && (
-                                <p class='copyright'>
-                                    {formatted.footer.year && (
-                                        <span class='copyright__copy'>&copy;</span>
-                                        <Fragment
-                                            set:text={' ' + formatted.footer.year + ' '}
-                                        />
-                                    )}
-                                    {p.footer.copyright.owner ? <Fragment
-                                        set:text={p.footer.copyright.owner}
-                                    /> : <Fragment
-                                        set:html={p.footer.copyright.html}
-                                    />}
-                                </p>
-                            )}
-                            {p.footer.designedBy && <Fragment set:html={p.footer.designedBy} />}
-                        </div>
-                    )}
-                </footer>
+                    <Fragment
+                        slot='footer-last'
+                    ><RenderedSlotContent
+                        name='footer-last'
+                        html={slots_render.footerLast}
+                    /></Fragment>
+                </SiteFooter>
             )
         }
 

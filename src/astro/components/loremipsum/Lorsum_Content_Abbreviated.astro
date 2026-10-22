@@ -59,92 +59,94 @@ const {
     }
 </p>
 
-<ul>
-    <li>Etiam ullamcorper commodo risus.</li>
-    {
-        ifDisplay.listsMedium && (
-            <li>
-                Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
-                <ol>
-                    <li>
-                        Tellus arcu convallis erat, vel blandit nulla sem nec
-                        enim. Sed ultricies lorem.
-                        <ul>
-                            <li>
-                                Proin gravida aliquam purus, at feugiat odio
-                                mollis ut.
-                                <ol>
-                                    <li>
-                                        Convallis nisl vel, ultricies lorem.
-                                        <ul>
-                                            <li>
-                                                Duis hendrerit eu lacus at
-                                                egestas.
-                                                {ifDisplay.listsLong && (
-                                                    <ol>
-                                                        <li>
-                                                            Cras consequat id
-                                                            tortor nec dapibus.
-                                                            <ol>
-                                                                <li>
-                                                                    Suspendisse
-                                                                    dapibus
-                                                                    maximus leo,
-                                                                    quis.
-                                                                    <ol>
-                                                                        <li>
-                                                                            Proin
-                                                                            vel
-                                                                            risus
-                                                                            finibus.
-                                                                            <ol>
-                                                                                <li>
-                                                                                    Feugiat
-                                                                                    odio
-                                                                                    mollis
-                                                                                    ut.
-                                                                                </li>
-                                                                                <li>
-                                                                                    Sed
-                                                                                    ultricies
-                                                                                    lorem.
-                                                                                </li>
-                                                                            </ol>
-                                                                        </li>
-                                                                        <li>
-                                                                            Convallis
-                                                                            nisl
-                                                                            vel.
-                                                                        </li>
-                                                                    </ol>
-                                                                </li>
-                                                                <li>
-                                                                    Nam vitae
-                                                                    dolor mi.
-                                                                </li>
-                                                            </ol>
-                                                        </li>
-                                                        <li>
-                                                            Ut maximus arcu
-                                                            hendrerit in.
-                                                        </li>
-                                                    </ol>
-                                                )}
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>Proin vel risus finibus.</li>
-                                </ol>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>Proin gravida aliquam purus.</li>
-                </ol>
-            </li>
-        )
-    }
-    <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
-</ul>
+{ ifDisplay.lists && (
+    <ul>
+        <li>Etiam ullamcorper commodo risus.</li>
+        {
+            ifDisplay.listsMedium && (
+                <li>
+                    Fusce mattis, odio at varius pharetra. Feugiat odio mollis ut.
+                    <ol>
+                        <li>
+                            Tellus arcu convallis erat, vel blandit nulla sem nec
+                            enim. Sed ultricies lorem.
+                            <ul>
+                                <li>
+                                    Proin gravida aliquam purus, at feugiat odio
+                                    mollis ut.
+                                    <ol>
+                                        <li>
+                                            Convallis nisl vel, ultricies lorem.
+                                            <ul>
+                                                <li>
+                                                    Duis hendrerit eu lacus at
+                                                    egestas.
+                                                    {ifDisplay.listsLong && (
+                                                        <ol>
+                                                            <li>
+                                                                Cras consequat id
+                                                                tortor nec dapibus.
+                                                                <ol>
+                                                                    <li>
+                                                                        Suspendisse
+                                                                        dapibus
+                                                                        maximus leo,
+                                                                        quis.
+                                                                        <ol>
+                                                                            <li>
+                                                                                Proin
+                                                                                vel
+                                                                                risus
+                                                                                finibus.
+                                                                                <ol>
+                                                                                    <li>
+                                                                                        Feugiat
+                                                                                        odio
+                                                                                        mollis
+                                                                                        ut.
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        Sed
+                                                                                        ultricies
+                                                                                        lorem.
+                                                                                    </li>
+                                                                                </ol>
+                                                                            </li>
+                                                                            <li>
+                                                                                Convallis
+                                                                                nisl
+                                                                                vel.
+                                                                            </li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>
+                                                                        Nam vitae
+                                                                        dolor mi.
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li>
+                                                                Ut maximus arcu
+                                                                hendrerit in.
+                                                            </li>
+                                                        </ol>
+                                                    )}
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Proin vel risus finibus.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Proin gravida aliquam purus.</li>
+                    </ol>
+                </li>
+            )
+        }
+        <li>Phasellus eu nibh at ligula elementum hendrerit ac vitae quam.</li>
+    </ul>
+) }
 
 <p>
     Etiam ornare ligula eu ipsum eleifend laoreet blandit et diam. Duis cursus
@@ -158,7 +160,7 @@ const {
 
             {ifDisplay.disabledButton && (
                 <Button
-                    aria-disabled='true'
+                    disabled
                     type='button'
                 >
                     This is a disabled button
@@ -179,13 +181,12 @@ const {
                   )
                 : ''}
         </div>
+        <p>
+            Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus
+            condimentum. Vivamus vulputate nisl sit amet vehicula commodo.
+        </p>
     )
 }
-
-<p>
-    Maecenas facilisis sollicitudin nisi, eget pellentesque dui rhoncus
-    condimentum. Vivamus vulputate nisl sit amet vehicula commodo.
-</p>
 
 <slot name='two' />
 <slot name='three' />

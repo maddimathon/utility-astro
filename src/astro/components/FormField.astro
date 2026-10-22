@@ -50,6 +50,8 @@ type FormFieldProps_BaseID = {
 export type FormFieldProps_Base = PropsOptionalChildren & FormFieldProps_BaseID & {
     components?: Partial<{ Input: InputComponentType; Select: SelectComponentType; Textarea: TextareaComponentType; }>;
 
+    disabled?: boolean;
+
     /**
      * Attributes for the label element.
      */

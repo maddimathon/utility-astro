@@ -211,6 +211,11 @@ export namespace LoremIpsumProps {
         headingSubtitlesList?: boolean;
 
         /**
+         * @since 0.1.0-beta.4.draft
+         */
+        lists?: boolean;
+
+        /**
          * @since 0.1.0-alpha.20
          */
         listsLong?: boolean;
@@ -416,7 +421,7 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
 
     const {
         superAbbreviated = false,
-        displaySettings: settings = {},
+        displaySettings: { lists = true, ...settings } = {},
         mode,
     } = _props;
 
@@ -488,8 +493,9 @@ export function getLoremIpsumDisplaySettings( _props: LoremIpsumProps ): LoremIp
         formsLong: isFancy && !abbreviated,
         headingsList: isFancy && !abbreviated,
         headingSubtitlesList: false,
-        listsMedium: isLibrary,
-        listsLong: isFancy && !abbreviated,
+        lists,
+        listsMedium: lists && isLibrary,
+        listsLong: lists && isFancy && !abbreviated,
         table: isFancy && !abbreviated,
         tableLong: isFancy && !abbreviated,
         textMedium: isLibrary && ( isFancy || !abbreviated ),

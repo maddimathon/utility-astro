@@ -260,10 +260,14 @@
         "@maddimathon/utility-sass": "~0.1.0-beta.2",
         "@maddimathon/utility-typescript": "~2.0.0-beta.6",
         "astro": "^7.3.3",
+        "luxon": "~3.7.2",
         "sass-embedded": "^1.97.0"
     },
     "peerDependenciesMeta": {
         "@astrojs/prism": {
+            "optional": true
+        },
+        "luxon": {
             "optional": true
         },
         "sass-embedded": {

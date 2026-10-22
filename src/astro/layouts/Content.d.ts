@@ -13,6 +13,7 @@ import type { HTMLAttributes } from 'astro/types';
 import type {
     HeadingComponentType,
     SettingsMenuComponentType,
+    SiteFooterComponentType,
 } from '../components.ts';
 
 import type { MainProps } from './Main.astro';
@@ -63,6 +64,7 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     components: {
         Heading: HeadingComponentType;
         SettingsMenu: SettingsMenuComponentType;
+        SiteFooter: SiteFooterComponentType;
     };
 
     /**

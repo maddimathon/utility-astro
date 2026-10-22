@@ -31,6 +31,7 @@ import { makeClassList } from '../functions.js';
  * @since 0.1.0-beta.3
  */
 export type ButtonProps_Base = PropsRequireChildren<{
+    disabled?: boolean;
     variant?: string;
 }>;
 
@@ -51,8 +52,24 @@ export type ButtonProps_Link = ButtonProps_Base & {
 };
 
 export type ButtonProps =
-    | ElementProps<ButtonProps_Button, 'button'>
-    | ElementProps<ButtonProps_Link, 'a'>;
+    | ElementProps<
+          ButtonProps_Button,
+          'button',
+          | 'aria-disabled'
+          | 'aria-readonly'
+          | 'disabled'
+          | 'readonly'
+          | keyof ButtonProps_Button
+      >
+    | ElementProps<
+          ButtonProps_Link,
+          'a',
+          | 'aria-disabled'
+          | 'aria-readonly'
+          | 'disabled'
+          | 'readonly'
+          | keyof ButtonProps_Link
+      >;
 
 type Props = ButtonProps;
 
@@ -60,6 +77,7 @@ export type ButtonComponentType = (attrs: ButtonProps) => any;
 
 const {
     class: classList,
+    disabled = false,
     href,
     type = 'button',
     variant,
@@ -67,16 +85,19 @@ const {
 } = Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const fullClassList = makeClassList(
+    variant && !disabled ? `button-${variant}` : [],
+    classList,
+);
 ---
 
 {
     href ? (
         <a
             {...attrs}
-            class:list={makeClassList(
-                variant ? `button-${variant}` : 'button',
-                classList,
-            )}
+            aria-disabled={disabled ? 'true' : undefined}
+            class:list={fullClassList}
             href={href}
         >
             <slot />
@@ -84,10 +105,8 @@ const {
     ) : (
         <button
             {...attrs}
-            class:list={makeClassList(
-                variant ? `button-${variant}` : [],
-                classList,
-            )}
+            class:list={fullClassList}
+            disabled={disabled ? true : undefined}
             type={type}
         >
             <slot />

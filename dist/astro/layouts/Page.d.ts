@@ -26,6 +26,7 @@ import type {
     ContentProps,
     ContentTypeInput,
 } from './Content.astro';
+import type { SiteFooterProps } from '../components/SiteFooter.astro';
 
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
@@ -150,26 +151,11 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
      * any default content.  If the slot is not passed or empty, the footer
      * wrapper does not appear.
      */
-    footer?: {
+    footer?: SiteFooterProps[ 'content' ] & {
         /**
          * @since 0.1.0-beta.0
          */
-        attributes?: Omit<HTMLAttributes<'footer'>, 'class' | 'class:list'> | undefined;
-
-        /**
-         * Content for the copyright section of the footer.
-         * 
-         * An empty object can also be passed to enable the default output.
-         * 
-         * @since 0.1.0-beta.0 — Changed `false` option to `undefined`.
-         */
-        copyright?: Copyright_HTML | Copyright_PlainOwner | Copyright_PlainYear | undefined;
-
-        /**
-         * Escaped HTML to include.
-         */
-        designedBy?: string | undefined;
-
+        attributes?: Omit<SiteFooterProps, 'content' | 'components'> | undefined;
     } | undefined;
 
     /**

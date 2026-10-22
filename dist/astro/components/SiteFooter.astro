@@ -1,0 +1,241 @@
+---
+/**
+ * @since 0.1.0-beta.4.draft
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+import type { ElementProps } from '../../ts/types/index.js';
+import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+import type { HeadingComponentType } from './Heading.astro';
+
+/* import - functions */
+import { DateTime } from 'luxon';
+import { mapToObject } from '../../ts/index.js';
+
+/* import - values */
+
+/* import - components */
+import DynamicWrapperComponent from './DynamicWrapper.astro';
+import { makeClassList } from '../functions';
+
+/* import - layouts */
+
+/* TYPES ===================================== */
+
+/* PROPS ===================================== */
+
+/**
+ * Input props for the SiteFooter component.
+ *
+ * @since 0.1.0-beta.4.draft
+ */
+export type SiteFooterProps = ElementProps<
+    {
+        components?: Partial<{
+            DynamicWrapper: DynamicWrapperComponentType;
+            Heading: HeadingComponentType;
+        }>;
+
+        /**
+         * The content to include in the page footer, if any.
+         *
+         * An empty object can also be passed to enable the wrapper and slot without
+         * any default content.  If the slot is not passed or empty, the footer
+         * wrapper does not appear.
+         *
+         * @since 0.1.0-alpha
+         * @since 0.1.0-beta.4.draft — Moved the type from layout Page types to the new SiteFooter component.
+         */
+        content?: {
+            /**
+             * Content for the copyright section of the footer.
+             *
+             * An empty object can also be passed to enable the default output.
+             *
+             * @since 0.1.0-beta.0 — Changed `false` option to `undefined`.
+             */
+            copyright?:
+                | SiteFooterProps.Copyright_HTML
+                | SiteFooterProps.Copyright_PlainOwner
+                | SiteFooterProps.Copyright_PlainYear
+                | undefined;
+
+            /**
+             * Escaped HTML to include.
+             */
+            designedBy?: string | undefined;
+        };
+    },
+    'footer'
+>;
+
+/**
+ * @since 0.1.0-beta.4.draft
+ */
+export namespace SiteFooterProps {
+    /**
+     * @since 0.1.0-alpha
+     * @since 0.1.0-beta.4.draft — Moved the type from layout Page types to the new SiteFooter component.
+     */
+    export type Copyright_HTML = {
+        /**
+         * Escaped HTML to include after the copyright symbol.
+         */
+        html: string;
+
+        owner?: undefined;
+
+        /**
+         * If undefined, this defaults to the current year. If it is greater
+         * than the current year, this is displayed as a range.
+         *
+         * *Text to be escaped, NOT html.*
+         */
+        year?: number | false | undefined;
+    };
+
+    /**
+     * @since 0.1.0-alpha
+     * @since 0.1.0-beta.4.draft — Moved the type from layout Page types to the new SiteFooter component.
+     */
+    export type Copyright_PlainOwner = {
+        html?: undefined;
+
+        /**
+         * Text to follow the copyright symbol and date.
+         *
+         * *Text to be escaped, NOT html.*
+         */
+        owner: string;
+
+        /**
+         * If undefined, this defaults to the current year. If it is greater
+         * than the current year, this is displayed as a range.
+         *
+         * *Text to be escaped, NOT html.*
+         */
+        year?: number | false | undefined;
+    };
+
+    /**
+     * @since 0.1.0-alpha
+     * @since 0.1.0-beta.4.draft — Moved the type from layout Page types to the new SiteFooter component.
+     */
+    export type Copyright_PlainYear = {
+        html?: undefined;
+
+        /**
+         * Text to follow the copyright symbol and date.
+         *
+         * *Text to be escaped, NOT html.*
+         */
+        owner?: string | undefined;
+
+        /**
+         * If undefined, this defaults to the current year. If it is greater
+         * than the current year, this is displayed as a range.
+         *
+         * *Text to be escaped, NOT html.*
+         */
+        year: number | false;
+    };
+}
+
+type Props = SiteFooterProps;
+
+/**
+ * @since 0.1.0-beta.4.draft
+ */
+export type SiteFooterComponentType = (attrs: SiteFooterProps) => any;
+
+const {
+    class: classList = [],
+    components: {
+        DynamicWrapper = DynamicWrapperComponent,
+        // Heading = HeadingComponent,
+    } = {},
+    content = {},
+    ...attributes
+}: Props = Astro.props;
+
+/* CONSTANTS ===================================== */
+
+/* ### Preformatted ------------------ */
+
+const today = DateTime.now();
+
+const _footerCopyrightYear = content.copyright
+    ? (content.copyright.year ?? today.year)
+    : null;
+
+/**
+ * Some formatted text strings to use below.
+ */
+const formatted = {
+    footer: {
+        year:
+            _footerCopyrightYear === false
+                ? _footerCopyrightYear
+                : _footerCopyrightYear && today.year > _footerCopyrightYear
+                  ? `${_footerCopyrightYear}–${today.year}`
+                  : _footerCopyrightYear,
+    },
+};
+
+/* ### Slots ------------------ */
+
+/**
+ * Rendered slot HTML.
+ */
+const slots_render = mapToObject(
+    await Promise.all(
+        (['default', 'footerLast'] as const).map(async (_key) => {
+            const _kebab = _key.replace(
+                /([a-z0-9])([A-Z])/g,
+                (_, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
+            );
+
+            return [
+                _key,
+                Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))?.trim(),
+            ] as const;
+        }),
+    ),
+);
+---
+
+{(content.copyright || content.designedBy || slots_render.default || slots_render.footerLast) && (
+    <DynamicWrapper
+        {...attributes}
+        class:list={makeClassList('site-footer', classList)}
+        tag='footer'
+    >
+        <Fragment set:html={slots_render.default} />
+
+        {
+            (content.designedBy || content.copyright) && (
+                <div class='site-footer__disclaimer'>
+                    {content.copyright && (
+                        <p class='copyright'>
+                            { formatted.footer.year && (
+                                <span class='copyright__copy'>&copy;</span>
+                                <Fragment set:text={' ' + formatted.footer.year + ' '} />
+                            ) }
+                            { content.copyright.owner ? (
+                                <Fragment set:text={content.copyright.owner} />
+                            ) : (
+                                <Fragment set:html={content.copyright.html} />
+                            ) }
+                        </p>
+                    )}
+                    { content.designedBy && <Fragment set:html={content.designedBy} /> }
+                </div>
+            )
+        }
+
+        <Fragment set:html={slots_render.footerLast} />
+    </DynamicWrapper>
+)}

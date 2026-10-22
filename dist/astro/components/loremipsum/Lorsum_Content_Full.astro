@@ -209,9 +209,9 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
 
 <p>Ut vel leo in ligula facilisis sodales. Nulla facilisi. Nullam non nibh laoreet, cursus ex ut, blandit velit. Ut sit amet tempus velit.{ ifDisplay.textPage && ' Nunc lacus erat, fermentum eget efficitur id, porttitor ultricies mi.' }<a id={tableOfContentsIds.lists.id}></a></p>
 
-<Lists ifDisplay={ifDisplay} />
+{ifDisplay.lists && <Lists ifDisplay={ifDisplay} />}
 
-<p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>
+{(ifDisplay.lists || ifDisplay.textPage) && <p>Donec quam erat, sagittis id diam a, hendrerit viverra ligula. Praesent condimentum erat et egestas venenatis.{ ifDisplay.lists && ifDisplay.textPage && ' Donec commodo porta nibh, ac tempus turpis pulvinar id.' }</p>}
 
 <slot name="two" />
 
@@ -226,7 +226,7 @@ const tocMenu = ifDisplay.toc && getLoremIpsumToc( props, tableOfContentsIds, if
     <Button type="button" id={tableOfContentsIds.buttons?.id}>This is a button</Button>
 
     <div class="button-span">
-        { ifDisplay.disabledButton && <Button aria-disabled="true" type="button">This is a disabled button</Button> }
+        { ifDisplay.disabledButton && <Button disabled type="button">This is a disabled button</Button> }
 
         { ifDisplay.buttonVariationsAll ? ifDisplay.buttonVariations.map( variant => <Button
             variant={variant}
