@@ -1,0 +1,32 @@
+///
+/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
+/// @since 0.1.0-alpha
+///
+
+@use 'lib' as *;
+@use 'lib/config';
+
+/* # LOREM IPSUM - HEADING ==================================== */
+
+$_lineClamp: do-var(loremipsum-heading-sample-line-clamp, 3);
+
+:global(.loremipsum-heading-sample),
+:global(.loremipsum-heading-sample__subheading) {
+    @include prop-display(-webkit-inline-box);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $_lineClamp;
+    line-clamp: $_lineClamp;
+    overflow: hidden;
+}
+
+:global(.loremipsum-heading-sample__hgroup) {
+    :global(.loremipsum-heading-sample--hgroup),
+    :global(.loremipsum-heading-sample__subheading) {
+        @include prop-display(block);
+        -webkit-line-clamp: none;
+        line-clamp: none;
+        overflow: initial;
+    }
+}
+
+@include extend-selectors;

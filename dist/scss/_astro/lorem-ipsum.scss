@@ -3,23 +3,10 @@
 /// @since 0.1.0-alpha
 ///
 
-@use 'lib';
+@use 'lib' as *;
 @use 'lib/config';
 
 /* # LOREM IPSUM ==================================== */
-
-$_lineClamp: lib.do-var(loremipsum-heading-sample-line-clamp, 3);
-
-:global(.loremipsum-heading-sample),
-:global(.loremipsum-heading-sample__subheading) {
-    display: -webkit-inline-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $_lineClamp;
-    line-clamp: $_lineClamp;
-    overflow: hidden;
-
-    padding-block-end: lib.var-stroke-relative('400');
-}
 
 :where(.button-span) {
     display: flex;
@@ -31,4 +18,4 @@ $_lineClamp: lib.do-var(loremipsum-heading-sample-line-clamp, 3);
     align-items: first baseline;
 }
 
-@include lib.extend-selectors;
+@include extend-selectors;

@@ -5,19 +5,6 @@
  * https://maddimathon.github.io/utility-sass
  */
 /* # LOREM IPSUM ==================================== */
-:global(.loremipsum-heading-sample),
-:global(.loremipsum-heading-sample__subheading) {
-    display: -webkit-inline-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    -webkit-line-clamp: var(--loremipsum-heading-sample-line-clamp, 3);
-    line-clamp: 3;
-    line-clamp: var(--loremipsum-heading-sample-line-clamp, 3);
-    overflow: hidden;
-    padding-bottom: 0.125em;
-    padding-bottom: var(--stroke-relative-400, 0.125em);
-}
-
 :where(.button-span) {
     display: flex;
     flex-direction: row;

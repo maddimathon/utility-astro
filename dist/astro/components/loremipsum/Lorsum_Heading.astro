@@ -12,6 +12,7 @@ import type { HeadingProps } from '../Heading.astro';
 import type { LoremIpsumProps } from '../LoremIpsum.astro';
 
 /* import - functions */
+import { makeClassList } from '../../functions.js';
 
 /* import - values */
 
@@ -45,6 +46,8 @@ const {
 }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
+
+const headingAsNum = heading <= 0 ? 100 : heading;
 ---
 
 <Heading
@@ -57,14 +60,13 @@ const {
             class: ['loremipsum-heading-sample__subheading'],
         },
     }}
-    class:list={[
-        'loremipsum-heading-sample',
-        {
-            'loremipsum-heading-sample--hgroup': subheading,
-            '||': classList,
-        },
+    class={makeClassList(
+        [
+            'loremipsum-heading-sample',
+            subheading ? 'loremipsum-heading-sample--hgroup' : '',
+        ],
         classList,
-    ]}
+    )}
     displayHeading={heading > 0 ? heading : -1}
     heading={0}
     >{prefix ?? (heading > 0 ? `Heading ${heading}` : 'Unstyled Heading')} Maecenas
@@ -74,9 +76,17 @@ const {
             target='_blank'
             >Sollicitudin Nisi,</a
         ></strong
-    > Eget Pellentesque Dui Rhoncus Condimentum; Aenean Lacinia Urna Sed Lacus Interdum
-    Faucibus; Donec Quam Erat, Sagittis id Diam a, Hendrerit Viverra Ligula; Proin
-    Efficitur Rhoncus ex Auctor Faucibus{
+    > Eget Pellentesque qui Rhongus Condy Mongum{
+        !subheading || headingAsNum > 2 ? '; Aynean Lacinya Urpa sey Lacus' : ''
+    }{
+        !subheading || headingAsNum > 6
+            ? ' Interqum Faucibus; Donec quam Erat, Sagittis id Diam a'
+            : ''
+    }{
+        !subheading
+            ? ', Henquerit Viyerra Ligula; Proing Efficipur Rhonqus ex Augtor Faquibus; Torquent Per Conubia Nostra, Per Inceptos Himenaeos. Fusce In Arcu Ornare, Varius Ligula Eget, Myttis Sem'
+            : ''
+    }{
         subheading ? (
             // prettier-ignore
             <Fragment slot='subheading'>Morbi pulvinar ut <strong>arcu nec fermentum.</strong> Pellentesque at <a href='#' target='_blank'>ipsum malesuada,</a> egestas odio molestie, sollicitudin eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu ornare, varius ligula eget, mattis sem.</Fragment>
@@ -85,3 +95,7 @@ const {
         )
     }</Heading
 >
+
+<style lang='scss'>
+    @forward '../../css/lorem-ipsum-heading';
+</style>

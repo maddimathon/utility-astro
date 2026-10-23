@@ -15,6 +15,8 @@ import { absoluteInternalURL, makeClassList } from '../functions.js';
 
 /* import - values */
 import { SUBMENU_HAS_WRAPPER } from 'astro:env/client';
+import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+import DynamicWrapper from './DynamicWrapper.astro';
 
 /* import - components */
 
@@ -125,10 +127,10 @@ export interface MenuListProps {
      */
     submenu?: Partial<SubmenuListOpts>;
 
-        /**
-         * @since 0.1.0-beta.0
-         */
-        submenuWrapper?:boolean;
+    /**
+     * @since 0.1.0-beta.0
+     */
+    submenuWrapper?: boolean | DynamicWrapperComponentType;
 
     /**
      * Used to check for current page when its value isn't set.
@@ -158,6 +160,8 @@ const submenu = {
     ...inputSubmenu,
     classList: inputSubmenu.classList ?? 'nav__submenu',
 };
+
+const SubMenuWrapperComponent = typeof submenuWrapper === 'function' ? submenuWrapper : submenuWrapper && DynamicWrapper ;
 
 
 /* FUNCTIONS ===================================== */
@@ -262,6 +266,7 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
         {...attributes} 
         class:list={classList}
     >
+        <slot name="start" />
         { parsedMenu.map( ( item, index ) =>  ( item.href || item.child ) && (
             <li>
                 { item.href ? (
@@ -278,14 +283,14 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
                         tabindex={item.child?.length ? -1 : undefined}
                     >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a>
                 ) }
-                { item.child?.length && ( submenuWrapper ? (
-                    <div class:list={ submenu.classList }>
+                { item.child?.length && ( SubMenuWrapperComponent ? (
+                    <SubMenuWrapperComponent class:list={ submenu.classList }>
                         <Astro.self
                             aria-label={ item.childLabel }
                             menu={ item.child }
                             submenu={ submenu }
                         />
-                    </div>
+                    </SubMenuWrapperComponent>
                 ) : (
                     <Astro.self
                         aria-label={ item.childLabel }
@@ -297,5 +302,7 @@ const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUr
             </li>
             <Fragment set:html={ separator && index < menu.length && separator } />
         ) )  }
+        <slot  />
+        <slot name="end" />
     </ul>
 ) }
