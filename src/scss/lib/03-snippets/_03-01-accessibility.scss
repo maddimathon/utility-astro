@@ -39,7 +39,7 @@ $_sels_skipLinks: selector.unify(
 ///
 /// Adds styles for a link that is visually hidden until it gains focus.
 ///
-/// @since ___PKG_VERSION___
+/// @since 0.1.0-beta.4
 ///
 @mixin snippet-focus-link(
     $hidden_display: inline-block,

@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.4.draft
+ * @maddimathon/utility-astro@0.1.0-beta.4
  * @license MIT
  */
 
@@ -211,7 +211,7 @@ export namespace LoremIpsumProps {
         headingSubtitlesList?: boolean;
 
         /**
-         * @since 0.1.0-beta.4.draft
+         * @since 0.1.0-beta.4
          */
         lists?: boolean;
 

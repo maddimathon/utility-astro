@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.4.draft
+/// @package @maddimathon/utility-astro@0.1.0-beta.4
 ///
 /// @since 0.1.0-alpha.14
 /// @since 0.1.0-beta.0 — Renamed from 03--skip-links to 03-01-accessibility.
@@ -43,7 +43,7 @@ $_sels_skipLinks: selector.unify(
 ///
 /// Adds styles for a link that is visually hidden until it gains focus.
 ///
-/// @since 0.1.0-beta.4.draft
+/// @since 0.1.0-beta.4
 ///
 @mixin snippet-focus-link(
     $hidden_display: inline-block,

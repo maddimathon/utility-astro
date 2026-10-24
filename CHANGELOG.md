@@ -19,6 +19,21 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.4** — 2026-10-23
+
+### Added
+- Added wrapper component param for NavMenu
+- Added disabled param to Button component
+
+### Changed
+- Updates to LoremIpsum heading utils
+- Updated publish actions
+
+### Fixed
+- Fixed potential bug in astro vite bundling from the functions barrel file
+- Updated with utility-sass
+
+
 ## **0.1.0-beta.3** — 2026-10-03
 
 New basic components.

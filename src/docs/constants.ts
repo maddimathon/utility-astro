@@ -18,7 +18,7 @@ export const SITE_TITLE = 'Utility Astro @ ___CURRENT_VERSION___';
 /**
  * A copy of the site's main menu.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.4
  */
 export const PRIMARY_MENU = () => [
     { label: 'Home', href: '' },

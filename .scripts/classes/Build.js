@@ -188,12 +188,18 @@ export class Build extends BuildStage {
 
         if ( this.params.releasing ) {
 
+            const versionStr_fullOnly = this.version.prerelease ? '' : `@^${ this.pkg.version }`;
+
             readmeContent = readmeContent.replace(
                 /(<!--README_INSTALL-->).*?(<!--\/README_INSTALL-->)/gs,
                 '$1\n' + escRegExpReplace( [
                     '```sh',
-                    'npm i -D @maddimathon/utility-astro@' + this.pkg.version,
-                    'npm i -D github:maddimathon/utility-astro#' + this.pkg.version,
+                    '# for full releases only, add',
+                    '# `@maddimathon:registry=https://registry.npmjs.org` to your `.npmrc` file',
+                    'npm i -D @maddimathon/utility-astro' + versionStr_fullOnly,
+                    '',
+                    '# for pre-releases',
+                    'npm i -D github:maddimathon/utility-astro#semver:^' + this.pkg.version,
                     '```',
                 ].join( '\n' ) ) + '\n$2'
             );

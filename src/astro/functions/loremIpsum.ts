@@ -211,7 +211,7 @@ export namespace LoremIpsumProps {
         headingSubtitlesList?: boolean;
 
         /**
-         * @since ___PKG_VERSION___
+         * @since 0.1.0-beta.4
          */
         lists?: boolean;
 

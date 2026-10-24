@@ -6,7 +6,7 @@ children:
 ---
 
 <!--README_HEADER-->
-# Utility Astro @ 0.1.0-beta.4.draft
+# Utility Astro @ 0.1.0-beta.4
 <!--/README_HEADER-->
 
 <!--README_DESC-->
@@ -27,8 +27,12 @@ or
 
 <!--README_INSTALL-->
 ```sh
-npm i -D @maddimathon/utility-astro@0.1.0-beta.3
-npm i -D github:maddimathon/utility-astro#0.1.0-beta.3
+# for full releases only, add
+# `@maddimathon:registry=https://registry.npmjs.org` to your `.npmrc` file
+npm i -D @maddimathon/utility-astro
+
+# for pre-releases
+npm i -D github:maddimathon/utility-astro#semver:^0.1.0-beta.4
 ```
 <!--/README_INSTALL-->
 
