@@ -18,7 +18,7 @@ jobs:
           node-version: '^22.23.4'
           registry-url: 'https://registry.npmjs.org'
           scope: '@maddimathon'
-      - run: npm login --scope=@mycorp --registry=https://npm.pkg.github.com --otp=${NODE_AUTH_TOKEN}
+      - run: npm login --scope=@mycorp --registry=https://npm.pkg.github.com --otp=${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
