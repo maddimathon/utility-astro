@@ -19,6 +19,14 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.5** — 2026-10-23
+
+An npm publish action test.
+
+### Fixed
+- Fix to package.json engine (for Astro support)
+
+
 ## **0.1.0-beta.4** — 2026-10-23
 
 ### Added
