@@ -1,66 +1,68 @@
 ---
 /**
  * @since 0.1.0-alpha
- * 
+ *
  * @packageDocumentation
  */
 
 /* import - types */
 import type { HTMLAttributes } from 'astro/types';
 import type { Classify } from '@maddimathon/utility-typescript/types';
+
 import type { ClassList, ElementProps } from '../../ts/types/index.js';
+
+import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
 
 /* import - functions */
 import { absoluteInternalURL, makeClassList } from '../functions.js';
 
 /* import - values */
 import { SUBMENU_HAS_WRAPPER } from 'astro:env/client';
-import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+
 import DynamicWrapper from './DynamicWrapper.astro';
 
 /* import - components */
 
 /* import - layouts */
 
-
 /* TYPES ===================================== */
 
-export type BaseMenuItem = {
-    /** 
-     * Display text for this link item.
-     */
-    label: string;
-    labelHTML?:undefined;
-} | {
-    label?:undefined;
-    /** 
-     * Display HTML for this link item.
-     */
-    labelHTML: string;
-};
+export type BaseMenuItem =
+    | {
+          /**
+           * Display text for this link item.
+           */
+          label: string;
+          labelHTML?: undefined;
+      }
+    | {
+          label?: undefined;
+          /**
+           * Display HTML for this link item.
+           */
+          labelHTML: string;
+      };
 
 /**
  * A single menu item for the MenuList component.
- * 
+ *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export type MenuItem = BaseMenuItem & {
-
     /**
-     * Optional aria label for this link.
-     * 
-     * @since 0.1.0-beta.0
+     * @since ___PKG_VERSION___
      */
-    ariaLabel?: string |  undefined;
+    attrs?:
+        ElementProps<{}, 'a', 'aria-current' | 'class' | 'href'> | undefined;
 
     /**
      * If false, the link prints without href and with aria-disabled.  If null
      * or undefined, the list item is not printed at all.
-     * 
+     *
      * @since 0.1.0-beta.0 — Removed `false` in favour of `undefined`.
      */
-    href?: string |  undefined;
+    href?: string | undefined;
 
     /**
      * Child menu items, if any.
@@ -73,22 +75,29 @@ export type MenuItem = BaseMenuItem & {
     childLabel?: string | false | undefined;
 
     /**
+     * @since 0.1.0-beta.0
+     */
+    class?: ClassList | undefined;
+
+    /**
      * Whether this item should be marked as the current page.
      */
     current?: boolean | undefined;
 
     /**
      * Whether this item should be opened in a new window.
-     * 
+     *
      * @since 0.1.0-beta.0 — Removed `false` in favour of `undefined`.
      */
     external?: true | undefined;
 
     /**
-     * @since 0.1.0-beta.0
+     * Attributes to apply to the list element for this item.
+     *
+     * @since ___PKG_VERSION___
      */
-    class?: ClassList | undefined;
-}
+    itemAttrs?: ElementProps<{}, 'li'>;
+};
 
 /**
  * @since 0.1.0-beta.0
@@ -102,27 +111,29 @@ export type SubmenuListOpts = {
 
 /**
  * Input props for the MenuList component.
- * 
+ *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
+ * @since ___PKG_VERSION___ — Separator prop was removed. Replaced by a slot with the same name.
  */
 export interface MenuListProps {
+    /**
+     * Attributes to apply to all list items.
+     *
+     * @since ___PKG_VERSION___
+     */
+    listItemAttrs?: ElementProps<{}, 'li'>;
 
     /**
      * An array of menu items to be displayed.
-     * 
+     *
      * Must have at least one item.
      */
     menu: MenuItem[];
 
-    /** 
-     * Escaped HTML to insert between list items.
-     */
-    separator?: string | null;
-
-    /** 
+    /**
      * Options for submenus, if any.
-     * 
+     *
      * @internal
      */
     submenu?: Partial<SubmenuListOpts>;
@@ -134,175 +145,276 @@ export interface MenuListProps {
 
     /**
      * Used to check for current page when its value isn't set.
-     * 
+     *
      * @since 0.1.0-beta.0
      */
     urlMaker?: undefined | ((currentURL: URL, targetSubpath: string) => string);
 }
 
-
 /* PROPS ===================================== */
-    
-type Props = Omit<ElementProps<MenuListProps, "div">, 'role'>;
+
+type Props = ElementProps<MenuListProps, 'div', 'role'>;
 
 const {
     menu,
-    
+
     class: classList = [],
+    listItemAttrs: { class: listItemClassList, ...listItemAttrs } = {},
+    // @ts-expect-error - previous param that was removed in ___PKG_VERSION___
     separator = null,
     submenu: inputSubmenu = {},
     submenuWrapper = SUBMENU_HAS_WRAPPER,
     urlMaker: inputUrlMaker = absoluteInternalURL,
     ...attributes
-}: Props =   Astro.props;
+}: Props = Astro.props;
 
 const submenu = {
     ...inputSubmenu,
     classList: inputSubmenu.classList ?? 'nav__submenu',
 };
 
-const SubMenuWrapperComponent = typeof submenuWrapper === 'function' ? submenuWrapper : submenuWrapper && DynamicWrapper ;
-
+const SubMenuWrapperComponent =
+    typeof submenuWrapper === 'function'
+        ? submenuWrapper
+        : submenuWrapper && DynamicWrapper;
 
 /* FUNCTIONS ===================================== */
 
-export type MenuItemLabel = {
-        html: string;
-        text: undefined;
-    } | {
-        html: undefined;
-        text: string;
+export type MenuItemLabel =
+    | {
+          html: string;
+          text: undefined;
+      }
+    | {
+          html: undefined;
+          text: string;
+      };
+
+export type UnlabelledMenuItem = MenuItemLabel &
+    Omit<Classify<MenuItem>, 'href' | 'label' | 'labelHTML'> & {
+        class: ClassList | undefined;
+        childLabel: HTMLAttributes<'ul'>['aria-label'];
     };
 
-export type UnlabelledMenuItem = MenuItemLabel & Omit<Classify<MenuItem>, 'ariaLabel' | 'href' | 'label' | 'labelHTML'> & {
-    childLabel: HTMLAttributes<'ul'>['aria-label'];
-};
-
 export type ParsedMenuItem_NoHref = UnlabelledMenuItem & {
+    attrs: ElementProps<{}, 'a', 'class' | 'href'>;
     href: false;
 };
 
 export type ParsedMenuItem_WithHref = UnlabelledMenuItem & {
-    href: string;
+    attrs: ElementProps<
+        {
+            'aria-current': HTMLAttributes<'a'>['aria-current'];
+            'aria-label': HTMLAttributes<'a'>['aria-label'];
+            'target': HTMLAttributes<'a'>['target'];
+        },
+        'a',
+        'class' | 'href'
+    >;
 
-    'aria-current': HTMLAttributes<'a'>['aria-current'];
-    'aria-label': HTMLAttributes<'a'>['aria-label'];
-    target: HTMLAttributes<'a'>['target'];
+    href: string;
 };
 
 export type ParsedMenuItem = ParsedMenuItem_NoHref | ParsedMenuItem_WithHref;
 
 export function parseItemAttributes(
     currentURL: URL,
-    item: MenuItem,
-    urlMaker: (currentURL: URL, targetSubpath: string) => string = absoluteInternalURL,
+    {
+        attrs: { 'aria-label': ariaLabel, ...attrs } = {},
+        child,
+        childLabel: _childLabel,
+        class: classList,
+        current,
+        external,
+        href,
+        itemAttrs,
+        label,
+        labelHTML,
+    }: MenuItem,
+    urlMaker: (
+        currentURL: URL,
+        targetSubpath: string,
+    ) => string = absoluteInternalURL,
 ): ParsedMenuItem {
+    const labels = {
+        html: labelHTML || undefined,
+        text: label || (labelHTML ? undefined : ''),
+    } as MenuItemLabel;
 
-    const labels =  {
-        html: item.labelHTML || undefined,
-        text: item.label || (item.labelHTML ? undefined : ''),
-    } as MenuItemLabel ;
-    
-    const {href} = item;
-
-    if (href?.match(/^#/g) === null && typeof item.current === 'undefined') {
-        item.current = urlMaker(currentURL, href) === urlMaker(currentURL, currentURL.pathname)
+    if (typeof current === 'undefined' && href?.match(/^#/g) === null) {
+        current =
+            urlMaker(currentURL, href) ===
+            urlMaker(currentURL, currentURL.pathname);
     }
 
     let childLabel: UnlabelledMenuItem['childLabel'] = undefined;
 
-    if ( item.child?.length && item.childLabel !== false ) {
-        childLabel = item.childLabel;
-        
-        if (typeof childLabel === 'undefined') {
+    if (child?.length && _childLabel !== false) {
+        childLabel = _childLabel;
 
-            const __label = item.href
-                ? ( item.ariaLabel ? item.ariaLabel : ( labels.text ?? '' ) )
+        if (typeof childLabel === 'undefined') {
+            const __label = href
+                ? ariaLabel
+                    ? ariaLabel
+                    : (labels.text ?? '')
                 : '';
 
             childLabel = __label + (__label ? ' ' : '') + 'sub-menu';
         }
     }
-    
-    // returns 
-    if ( typeof href === 'undefined'  ) {
 
+    // returns
+    if (typeof href === 'undefined') {
         return {
-           ...labels,
+            ...labels,
             href: false,
-            current: item.current,
-            external: item.external,
-            child: item.child,
-            class: item.class,
+
+            child,
             childLabel,
+
+            current,
+            external,
+
+            attrs,
+            class: classList,
+
+            itemAttrs,
         } as const satisfies ParsedMenuItem_NoHref;
     }
-    
+
     return {
-           ...labels,
+        ...labels,
+
         href,
-        current: item.current,
-        external: item.external,
-        child: item.child,
-        
-        class: item.class,
+
+        child,
         childLabel,
 
-        target: ( item.href && item.external ) ? '_blank' : undefined,
-        'aria-current': ( item.href && item.current ) ? 'page' : undefined,
-        'aria-label': item.ariaLabel,
+        current,
+        external,
+
+        attrs: {
+            'target': href && external ? '_blank' : undefined,
+
+            ...attrs,
+
+            'aria-current': href && current ? 'page' : undefined,
+            'aria-label': ariaLabel,
+        },
+        class: classList,
+
+        itemAttrs,
     } as const satisfies ParsedMenuItem_WithHref;
 }
 
-
 /* CONSTANTS ===================================== */
 
-const parsedMenu = menu.map(item => parseItemAttributes(Astro.url, item, inputUrlMaker));
+const parsedMenu = menu.map((item) =>
+    parseItemAttributes(Astro.url, item, inputUrlMaker),
+);
 
+const separatorHTML = (await Astro.slots.render('separator'))?.trim();
 ---
 
-{ menu && (
-    <ul 
-        {...attributes} 
-        class:list={classList}
-    >
-        <slot name="start" />
-        { parsedMenu.map( ( item, index ) =>  ( item.href || item.child ) && (
-            <li>
-                { item.href ? (
-                    <a
-                        class:list={item.class ?? ''}
-                        href={ item.href }
-                        target={ item.target }
-                        aria-current={ item['aria-current'] }
-                        aria-label={ item['aria-label'] }
-                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a> 
-                ) : item.child?.length && (
-                    <a
-                        class:list={makeClassList('nav__menu-item', item.class)}
-                        tabindex={item.child?.length ? -1 : undefined}
-                    >{ item.html ? <Fragment set:html={ item.html } /> : <Fragment set:text={ item.text } /> }</a>
-                ) }
-                { item.child?.length && ( SubMenuWrapperComponent ? (
-                    <SubMenuWrapperComponent class:list={ submenu.classList }>
-                        <Astro.self
-                            aria-label={ item.childLabel }
-                            menu={ item.child }
-                            submenu={ submenu }
-                        />
-                    </SubMenuWrapperComponent>
-                ) : (
-                    <Astro.self
-                        aria-label={ item.childLabel }
-                        class:list={ submenu.classList }
-                        menu={ item.child }
-                        submenu={ submenu }
-                    />
-                ) ) }
-            </li>
-            <Fragment set:html={ separator && index < menu.length && separator } />
-        ) )  }
-        <slot  />
-        <slot name="end" />
-    </ul>
-) }
+{
+    menu && (
+        <ul
+            {...attributes}
+            class={makeClassList.flat(classList)}
+        >
+            <slot name='start' />
+            {parsedMenu.map(
+                (
+                    {
+                        itemAttrs: { class: _itemClassList, ...itemAttrs } = {},
+                        ...item
+                    },
+                    index,
+                ) =>
+                    (item.href || item.child) && (
+                        <Fragment>
+                            <li
+                                {...listItemAttrs}
+                                {...itemAttrs}
+                                class={makeClassList.flat(
+                                    listItemClassList ?? [],
+                                    _itemClassList,
+                                    { separator: false },
+                                )}
+                            >
+                                {item.href ? (
+                                    <a
+                                        {...item.attrs}
+                                        class={makeClassList.flat(
+                                            item.class ?? [],
+                                        )}
+                                        href={item.href}
+                                    >
+                                        {item.html ? (
+                                            <Fragment set:html={item.html} />
+                                        ) : (
+                                            <Fragment set:text={item.text} />
+                                        )}
+                                    </a>
+                                ) : (
+                                    item.child?.length && (
+                                        <a
+                                            {...item.attrs}
+                                            class={makeClassList.flat(
+                                                'nav__menu-item',
+                                                item.class,
+                                                { separator: '|' },
+                                            )}
+                                            tabindex={
+                                                item.child?.length
+                                                    ? -1
+                                                    : undefined
+                                            }
+                                        >
+                                            {item.html ? (
+                                                <Fragment
+                                                    set:html={item.html}
+                                                />
+                                            ) : (
+                                                <Fragment
+                                                    set:text={item.text}
+                                                />
+                                            )}
+                                        </a>
+                                    )
+                                )}
+                                {item.child?.length &&
+                                    (SubMenuWrapperComponent ? (
+                                        <SubMenuWrapperComponent
+                                            class={submenu.classList}
+                                        >
+                                            <Astro.self
+                                                aria-label={item.childLabel}
+                                                menu={item.child}
+                                                submenu={submenu}
+                                            />
+                                        </SubMenuWrapperComponent>
+                                    ) : (
+                                        <Astro.self
+                                            aria-label={item.childLabel}
+                                            class={submenu.classList}
+                                            menu={item.child}
+                                            submenu={submenu}
+                                        />
+                                    ))}
+                            </li>
+                            <Fragment
+                                set:html={
+                                    separatorHTML &&
+                                    index < menu.length &&
+                                    separatorHTML
+                                }
+                            />
+                        </Fragment>
+                    ),
+            )}
+            <slot />
+            <slot name='end' />
+        </ul>
+    )
+}

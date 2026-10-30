@@ -6,9 +6,10 @@
  */
 
 /* import - types */
-import type { ClassList, ElementProps } from '../../ts/types/index.js';
+import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -21,8 +22,6 @@ import { SVG, SVG_Label } from '../../ts/svg.js';
 /* TYPES ===================================== */
 
 type IconProps_Base = {
-    class?: ClassList | undefined;
-
     /**
      * Whether to add an aria label to the output SVG.
      */
@@ -71,7 +70,7 @@ const label = `${svgLabel ?? SVG_Label[type]} icon`;
 
 <span
     {...attributes}
-    class:list={['icon', `icon--${slug ?? type}`, '||', classList]}
+    class={makeClassList.flat(['icon', `icon--${slug ?? type}`], classList)}
     aria-label={label}
     set:html={svg ? svg.trim() : SVG[type].trim()}
     title={label}

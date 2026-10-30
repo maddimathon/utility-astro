@@ -9,7 +9,7 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
-import { flattenClassList, makeClassList } from '../functions.js';
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -51,9 +51,7 @@ const classMaker = classBase
     {...attributes}
     data-toggle-control={toggleID}
     data-toggle-control-backdrop={toggleID}
-    class={flattenClassList(
-        makeClassList(classList, classMaker('__control--backdrop')),
-    )}
+    class={makeClassList.flat(classList, classMaker('__control--backdrop'))}
     aria-hidden='true'
 >
 </div>

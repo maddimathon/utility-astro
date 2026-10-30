@@ -223,12 +223,24 @@ const parsedMenu = [...menu].map((_item) =>
 <Wrapper
     {...attributes}
     id={id}
-    class:list={classList}
+    class={classList}
     role='navigation'
     tag='nav'
 >
+    <slot name='nav-start' />
     <MenuList
         menu={parsedMenu}
         urlMaker={urlMaker}
-    />
+    >
+        <slot
+            name='menu-start'
+            slot='start'
+        />
+        <slot />
+        <slot
+            name='menu-end'
+            slot='end'
+        />
+    </MenuList>
+    <slot name='nav-end' />
 </Wrapper>

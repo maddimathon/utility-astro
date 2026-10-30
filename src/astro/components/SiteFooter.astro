@@ -210,7 +210,7 @@ const slots_render = mapToObject(
 {(content.copyright || content.designedBy || slots_render.default || slots_render.footerLast) && (
     <DynamicWrapper
         {...attributes}
-        class:list={makeClassList('site-footer', classList)}
+        class={makeClassList('site-footer', classList)}
         tag='footer'
     >
         <Fragment set:html={slots_render.default} />

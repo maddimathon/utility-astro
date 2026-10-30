@@ -6,7 +6,7 @@ children:
 ---
 
 <!--README_HEADER-->
-# Utility Astro @ 0.1.0-beta.5
+# Utility Astro @ 0.1.0-beta.6.draft
 <!--/README_HEADER-->
 
 <!--README_DESC-->
@@ -27,8 +27,6 @@ or
 
 <!--README_INSTALL-->
 ```sh
-# for full releases only, add
-# `@maddimathon:registry=https://registry.npmjs.org` to your `.npmrc` file
 npm i -D @maddimathon/utility-astro
 
 # for pre-releases

@@ -1,6 +1,6 @@
 ---
 /**
- * @package boilerplate-astro-project@0.1.0-beta.5
+ * @package boilerplate-astro-project@0.1.0-beta.6.draft
  * @since 0.1.0-alpha
  */
 
@@ -9,7 +9,7 @@ import type { PartialExcept } from '@maddimathon/utility-typescript/types';
 
 import type { GenericProps } from '../../ts/index.ts';
 
-import type { NavMenuProps } from '../components.ts';
+import type { NavMenuProps, SettingsMenuProps } from '../components.ts';
 
 import type {
     ContentProps,
@@ -54,7 +54,10 @@ type Props<T_ContentType extends ContentTypeInput = ContentTypeInput> = GenericP
     PageProps<T_ContentType>
 >;
 
-const {urlMaker, ...p} = Astro.props.frontmatter ?? Astro.props;
+const {
+    urlMaker,
+    ...p
+} = Astro.props.frontmatter ?? Astro.props;
 
 const components = {
     ...p.components ?? {},
@@ -151,9 +154,9 @@ if (p.secondaryMenu) {
         'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
     };
 
-if (urlMaker) {
-    menus.secondary.urlMaker = urlMaker;
-}
+    if (urlMaker) {
+        menus.secondary.urlMaker = urlMaker;
+    }
 }
 
 /* ### Support ------------------ */
@@ -212,9 +215,7 @@ const slots_render = mapToObject(
  * Sections/components to include or not.
  */
 const include = {
-
-    header:
-        p.header && (p.header.title || p.header.tagline || slots_render.header),
+    header: p.header && (p.header.title || p.header.tagline || slots_render.header),
 };
 
 /* ### FeatureCheck ------------------ */
@@ -227,20 +228,43 @@ const featureClasses = scripts.featureCheck
 
 const settings = p.settings && {
     ...(p.settings === true ? {} : p.settings),
+
     accessibilityReportEmail: p.accessibilityReportEmail,
     privacyPolicy: p.privacyPolicy,
+
+    components: components as SettingsMenuProps['components'],
+} satisfies SettingsMenuProps;
+
+/* ### Attributes ------------------ */
+
+const attributes = {
+
+    html: {
+        ...p.attrs?.html,
+
+        class: makeClassList.flat( p.attrs?.html?.class ?? [], featureClasses ),
+        dir: p.dir ?? 'auto',
+        lang: p.lang,
+    },
+
+    body: {
+        ...p.attrs?.body,
+
+        class: makeClassList.flat(
+                [
+                    `page_${pageSlug}`,
+                    content.layout && `layout_${slugify(layoutSlug)}`,
+                ],
+                p.attrs?.body?.class,
+            ),
+    },
 };
 ---
 
-<html
-    {...p.attrs?.html ?? {}}
-    lang={p.lang}
-    dir={p.dir ?? 'auto'}
-    class:list={[featureClasses, p.attrs?.html?.class]}
->
+<html {...attributes.html}>
     <!-- 
         This page includes html generated using
-        @maddimathon/utility-astro@0.1.0-beta.5
+        @maddimathon/utility-astro@0.1.0-beta.6.draft
 
         Author: Maddi Mathon (https://www.maddimathon.com/web)
         License: MIT
@@ -260,13 +284,7 @@ const settings = p.settings && {
         />
     </head>
 
-    <body
-        {...p.attrs?.body ?? {}}
-        class:list={makeClassList([
-            `page_${pageSlug}`,
-            content.layout && `layout_${slugify(layoutSlug)}`,
-        ], p.attrs?.body?.class ?? [])}
-    >
+    <body {...attributes.body}>
         {p.skipLinks && <SkipLinks links={p.skipLinks} />}
 
         <RenderedSlotContent
@@ -327,7 +345,7 @@ const settings = p.settings && {
                 />
                 <PrimaryMenu
                     {...menus.primary}
-                    class:list='nav-primary'
+                    class='nav-primary'
                 />
                 <RenderedSlotContent
                     name='after-primary-nav'
@@ -369,7 +387,7 @@ const settings = p.settings && {
                 />
                 <SecondaryMenu
                     {...menus.secondary}
-                    class:list='nav-secondary'
+                    class='nav-secondary'
                 />
                 <RenderedSlotContent
                     name='after-secondary-nav'

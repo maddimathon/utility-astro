@@ -10,7 +10,7 @@ import type { ComponentProps } from 'astro/types';
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
-import { absoluteInternalURL } from '../functions.js';
+import { absoluteInternalURL, makeClassList } from '../functions.js';
 import { mapToObject } from '../../ts/index.js';
 
 /* import - values */
@@ -218,10 +218,10 @@ const iconSVG =
 ---
 
 <section
-    id={id}
-    class:list={classList}
-    aria-label='Accessibility & Display Settings'
     {...attributes}
+    id={id}
+    class={makeClassList.flat(classList)}
+    aria-label='Accessibility & Display Settings'
     data-settings-menu
     data-settings-path={absoluteInternalURL(Astro.url, '')}
     data-toggle-container

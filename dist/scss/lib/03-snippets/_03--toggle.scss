@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0-beta.5
+/// @package @maddimathon/utility-astro@0.1.0-beta.6.draft
 /// @since 0.1.0-alpha
 ///
 
@@ -959,10 +959,18 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
             @extend %_flex-contents-container--display-contents;
 
             @if $includeStyles {
-                font-weight: 600;
+                font-weight: tokens.$fontWeight_semibold;
             }
 
             @content (toggle-title);
+
+            @include feature-check.supports(variableFonts) {
+                @if tokens.$fontWeight_semibold_variable {
+                    font-weight: tokens.$fontWeight_semibold_variable;
+                }
+
+                @content (toggle-title--supports-variableFonts);
+            }
 
             #{$selector_title_heading__direct} {
                 @content (toggle-title--heading);

@@ -36,12 +36,13 @@ export type HTMLAttributes<T_Tag extends HTMLTag> = HTMLAttributes_Map[ T_Tag ];
 /**
  * @since 0.1.0-alpha
  */
-export type ClassListItem = Exclude<ClassList, Iterable<any>>;
+export type ClassListItem = string | Record<string, boolean>;
 
 /**
  * @since 0.1.0-alpha
  */
-export type ClassList = string | Record<string, boolean> | Iterable<string> | Iterable<string | Record<string, boolean>>;
+// UPGRADE - when flattenIterator in utilty-typescript is tested, change this to Iterable
+export type ClassList<T_Item extends ClassListItem = ClassListItem> = null | T_Item | T_Item[];
 
 /**
  * @since 0.1.0-beta.3
@@ -104,14 +105,14 @@ export type ElementProps<
     T_OmitAttributes extends number | string | symbol = keyof T_Props,
 > = T_Props & Omit<
     HTMLAttributes<T_HtmlTag>,
-    T_OmitAttributes | "class" | "class:list" | "style"
-> & {
+    T_OmitAttributes | "class" | "class:list" | "children" | "style"
+> & Omit<{
     'aria-ignore'?: undefined | null | boolean;
     'aria-description'?: undefined | null | string;
-    class?: undefined | ClassList;
-    id?: undefined | string;
+    class?: undefined | null | ClassList;
+    id?: undefined | null | string;
     style?: undefined | null | string;
-} & {
+}, T_OmitAttributes> & {
         [ K in `data-${ string }` ]?: undefined | null | string;
     };
 

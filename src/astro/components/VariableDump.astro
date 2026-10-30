@@ -30,7 +30,7 @@ import CodeBlockComponent from './CodeBlock.astro';
  */
 export interface VariableDumpProps extends Omit<
     CodeBlockProps,
-    'children' | 'lang'
+    'children' | 'lang' | 'set:html' | 'set:text'
 > {
     /**
      * The variable to dump.

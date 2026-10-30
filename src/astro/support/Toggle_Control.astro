@@ -94,7 +94,7 @@ const classMaker = classBase
 <button
     {...attrs}
     aria-disabled='true'
-    class:list={makeClassList(classMaker('__control'), classList)}
+    class={makeClassList.flat(classMaker('__control'), classList)}
     data-toggle-control={id}
     id={buttonID}
     type='button'

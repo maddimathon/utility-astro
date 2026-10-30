@@ -44,7 +44,7 @@ const legendHTML = (await Astro.slots.render('legend'))?.trim();
 
 <fieldset
     {...attrs}
-    class={classList ? flattenClassList(classList) : undefined}
+    class={flattenClassList(classList)}
 >
     {legendHTML && <legend set:html={legendHTML} />}
     <slot />

@@ -9,6 +9,7 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -77,8 +78,8 @@ const {
 ---
 
 <ListTag
-    class:list={classList}
     {...attributes}
+    class={makeClassList.flat(classList)}
 >
     {
         list.map((item) => (

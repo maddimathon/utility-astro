@@ -52,7 +52,7 @@ if (
 <aside
     role='complementary'
     id='sidebar'
-    class:list={makeClassList('main-sidebar', classList)}
+    class={makeClassList.flat('main-sidebar', classList)}
     {...attributes}
 >
     <RenderedSlotContent

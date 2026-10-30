@@ -6,11 +6,11 @@
  */
 
 /* import - types */
-import type { ClassList, ElementProps } from '../../ts/types/index.js';
-import type { HTMLAttributes, HTMLTag } from 'astro/types';
+import type { ElementProps } from '../../ts/types/index.js';
+import type { HTMLTag } from 'astro/types';
 
 /* import - functions */
-import { makeNumber } from '@maddimathon/utility-typescript';
+import { makeNumber, objectOmit } from '@maddimathon/utility-typescript';
 import { makeClassList } from '../functions.js';
 
 /* import - values */
@@ -28,67 +28,63 @@ import { makeClassList } from '../functions.js';
  *
  * @since 0.1.0-alpha
  */
-export interface HeadingProps {
-    /**
-     * If any, the heading display level override for this heading (otherwise
-     * the `heading` value is used).  If false, a 'unstyled-heading' utility
-     * class is adding to the heading.
-     *
-     * @since 0.1.0-alpha.7 — Added false and undefined options.
-     */
-    displayHeading?: number | undefined;
+export type HeadingProps<T_FallbackTag extends HTMLTag = HTMLTag> =
+    ElementProps<
+        {
+            /**
+             * If any, the heading display level override for this heading (otherwise
+             * the `heading` value is used).  If false, a 'unstyled-heading' utility
+             * class is adding to the heading.
+             *
+             * @since 0.1.0-alpha.7 — Added false and undefined options.
+             */
+            displayHeading?: number | undefined;
 
-    /**
-     * @since 0.1.0-beta.0
-     */
-    fallbackTag?: HTMLTag | undefined;
+            /**
+             * @since 0.1.0-beta.0
+             */
+            fallbackTag?: T_FallbackTag | undefined;
 
-    /**
-     * Logical heading order value for this heading.
-     */
-    heading?: number | undefined;
+            /**
+             * Logical heading order value for this heading.
+             */
+            heading?: number | undefined;
 
-    /**
-     * The minimum allowed value for this heading.
-     */
-    minimum?: number | undefined;
+            /**
+             * The minimum allowed value for this heading.
+             */
+            minimum?: number | undefined;
 
-    /**
-     * Additional attributes for other elements.
-     */
-    attrs?:
-        | undefined
-        | {
-              hgroup?:
-                  | undefined
-                  | (Omit<HTMLAttributes<'hgroup'>, 'class' | 'class:list'> & {
-                        class?: ClassList;
-                    });
-              subheading?:
-                  | undefined
-                  | (Omit<HTMLAttributes<'p'>, 'class' | 'class:list'> & {
-                        class?: ClassList;
-                    });
-          };
-}
+            /**
+             * Additional attributes for other elements.
+             */
+            attrs?:
+                | undefined
+                | {
+                      hgroup?: undefined | ElementProps<{}, 'hgroup'>;
+                      subheading?: undefined | ElementProps<{}, 'p'>;
+                  };
+        },
+        'div'
+    >;
 
-type Props = ElementProps<HeadingProps, 'div'>;
+type Props = HeadingProps;
 
 export type HeadingComponentType = (props: Props) => any;
 
 /* FUNCTIONS ===================================== */
 
-export function parseHeadingParams(
+export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
     html: { content: string; subheading: string },
     {
         attrs: { hgroup: attrs_hgroup, subheading: attrs_subheading } = {},
         class: classList = [],
         displayHeading: displayHeadingRaw,
-        fallbackTag = 'p',
+        fallbackTag = 'p' as T_FallbackTag,
         heading: headingRaw = 0,
         minimum = 2,
         ...attributes
-    }: Props,
+    }: HeadingProps<T_FallbackTag>,
 ) {
     const heading = Math.round(Number(headingRaw));
 
@@ -101,6 +97,8 @@ export function parseHeadingParams(
             : typeof numDisplayHeadingRaw === 'undefined'
               ? numDisplayHeadingRaw
               : -1;
+
+    const HgroupTag = heading ? 'hgroup' : 'div';
 
     const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
 
@@ -117,14 +115,14 @@ export function parseHeadingParams(
               ? ('unstyled-heading' as const)
               : (`h${displayHeading}` as const);
 
-    const HeadingWrapper =
+    const headingTag =
         headingIsMoreThanMinimum && heading < 7
             ? (`h${heading as 1 | 2 | 3 | 4 | 5 | 6}` as const)
             : fallbackTag;
 
     const guaranteedHeadingClass = headingClass
         ? headingClass
-        : HeadingWrapper === 'p'
+        : headingTag === 'p'
           ? 'unstyled-heading'
           : `h${heading}`;
 
@@ -133,7 +131,8 @@ export function parseHeadingParams(
             heading: {
                 ...attributes,
                 'aria-level': heading > 6 ? heading : undefined,
-                'class:list': makeClassList(
+
+                'class': makeClassList.flat(
                     [
                         headingClass,
                         html.subheading
@@ -141,35 +140,44 @@ export function parseHeadingParams(
                             : '',
                     ],
                     classList,
+                    { separator: '|' },
                 ),
+
                 'role': heading > 6 ? 'heading' : undefined,
-            } satisfies HTMLAttributes<'p'>,
+            } satisfies ElementProps<{}, 'div'>,
 
             hgroup: {
-                'aria-roledescription': 'heading group',
+                'aria-roledescription':
+                    HgroupTag === 'hgroup' ? 'heading group' : null,
 
-                ...attrs_hgroup,
+                ...objectOmit(attrs_hgroup ?? {}, [
+                    'class',
+                    'class:list' as 'class',
+                ]),
 
-                'class': undefined,
-                'class:list': makeClassList(
+                'class': makeClassList.flat(
                     `${guaranteedHeadingClass}__hgroup`,
                     attrs_hgroup?.class,
+                    { separator: '|' },
                 ),
 
-                'role': 'group',
-            } satisfies HTMLAttributes<'hgroup'>,
+                'role': HgroupTag === 'hgroup' ? 'group' : null,
+            } satisfies ElementProps<{}, 'hgroup'>,
 
             subheading: {
                 'aria-roledescription': 'subheading',
 
-                ...attrs_subheading,
+                ...objectOmit(attrs_subheading ?? {}, [
+                    'class',
+                    'class:list' as 'class',
+                ]),
 
-                'class': undefined,
-                'class:list': makeClassList(
+                'class': makeClassList.flat(
                     `hgroup__subheading ${guaranteedHeadingClass}__subheading`,
                     attrs_subheading?.class,
+                    { separator: '|' },
                 ),
-            } satisfies HTMLAttributes<'p'>,
+            } satisfies ElementProps<{}, 'p'>,
         },
 
         displayHeading,
@@ -178,7 +186,10 @@ export function parseHeadingParams(
         headingClass,
         guaranteedHeadingClass,
 
-        HeadingWrapper,
+        headingTag,
+        HeadingWrapper: headingTag,
+
+        HgroupTag: heading ? 'hgroup' : 'div',
     } as const;
 }
 
@@ -189,13 +200,16 @@ const html = {
     subheading: (await Astro.slots.render('subheading'))?.trim(),
 };
 
-const { attrs, HeadingWrapper } = parseHeadingParams(html, Astro.props);
+const { attrs, HeadingWrapper, HgroupTag } = parseHeadingParams(
+    html,
+    Astro.props,
+);
 ---
 
 {
     html.content &&
         (html.subheading ? (
-            <hgroup {...attrs.hgroup}>
+            <HgroupTag {...attrs.hgroup}>
                 <HeadingWrapper
                     {...attrs.heading}
                     set:html={html.content}
@@ -204,7 +218,7 @@ const { attrs, HeadingWrapper } = parseHeadingParams(html, Astro.props);
                     {...attrs.subheading}
                     set:html={html.subheading}
                 />
-            </hgroup>
+            </HgroupTag>
         ) : (
             <HeadingWrapper
                 {...attrs.heading}

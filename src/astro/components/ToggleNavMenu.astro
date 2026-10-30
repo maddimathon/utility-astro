@@ -64,7 +64,7 @@ const buttonHTML = (await Astro.slots.render('button'))?.trim();
     {...attributes}
     {...{ iconSVG, id }}
     classBase='toggle-nav-menu'
-    class:list={classList}
+    class={classList}
     role='navigation'
     tag='nav'
     type={['modal', 'nav']}

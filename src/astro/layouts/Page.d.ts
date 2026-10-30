@@ -27,6 +27,7 @@ import type {
     ContentTypeInput,
 } from './Content.astro';
 import type { SiteFooterProps } from '../components/SiteFooter.astro';
+import type { ElementProps } from '../../ts/index.ts';
 
 /**
  * Attribute keys that are included elsewhere in the props (and not in attrs).
@@ -122,8 +123,8 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
      * Attributes for elements on the page.
      */
     attrs?: {
-        html?: Omit<HTMLAttributes<"html">, HTML_excludeAttributes> | undefined;
-        body?: HTMLAttributes<"body"> | undefined;
+        html?: ElementProps<{}, "html", HTML_excludeAttributes> | undefined;
+        body?: ElementProps<{}, "body"> | undefined;
     } | undefined;
 
     /**
@@ -187,7 +188,7 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
     /**
      * Params for the primary (header) menu.
      */
-    primaryMenu?: NavMenuProps[ 'menu' ] | Omit<PartialExcept<NavMenuProps, "menu">, "convertHrefStringsToAbsolute"> & HTMLAttributes<'div'> | undefined;
+    primaryMenu?: NavMenuProps[ 'menu' ] | ElementProps<PartialExcept<NavMenuProps, "menu">, "div", "convertHrefStringsToAbsolute"> | undefined;
 
     /**
      * A complete URL to the privacy policy page for this site.
@@ -197,7 +198,7 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
     /**
      * Params for the secondary (footer) menu.
      */
-    secondaryMenu?: NavMenuProps[ 'menu' ] | Omit<PartialExcept<NavMenuProps, "menu">, "convertHrefStringsToAbsolute"> & HTMLAttributes<'div'> | undefined;
+    secondaryMenu?: NavMenuProps[ 'menu' ] | ElementProps<PartialExcept<NavMenuProps, "menu">, "div", "convertHrefStringsToAbsolute"> | undefined;
 
     /**
      * Whether to inlcude the settings menu. Optionally this can be an object of

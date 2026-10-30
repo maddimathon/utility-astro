@@ -73,10 +73,10 @@ const slots_render = mapToObject(
 ---
 
 <main
-    role='main'
-    id='main'
-    class:list={makeClassList('main-content', classList)}
     {...attributes}
+    class={makeClassList.flat('main-content', classList)}
+    id='main'
+    role='main'
 >
     {
         asArticle && (

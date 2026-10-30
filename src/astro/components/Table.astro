@@ -58,11 +58,11 @@ const {
 
 <Wrapper
     {...wrapperAttrs}
-    class:list={makeClassList('table-wrapper', wrapperClassList)}
+    class={makeClassList.flat('table-wrapper', wrapperClassList)}
 >
     <table
         {...attributes}
-        class:list={makeClassList('table-wrapper--table', classList)}
+        class={makeClassList.flat('table-wrapper--table', classList)}
     >
         <slot />
     </table>

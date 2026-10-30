@@ -18,7 +18,7 @@ import type {
 import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
 
 /* import - functions */
-import { flattenClassList, makeClassList } from '../functions.js';
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -239,7 +239,7 @@ const includeBackdrop =
 <Container
     {...attributes}
     id={id}
-    class:list={makeClassList(classMaker(), classList)}
+    class={makeClassList.flat(classMaker(), classList)}
     data-toggle-container={defaultOpen ? 'open' : 'closed'}
     data-toggle-container-default={typeof dataToggleContainerDefault !==
     'undefined'
@@ -251,8 +251,9 @@ const includeBackdrop =
 >
     <HeaderContainer
         {...titleAttributes}
-        class={flattenClassList(
-            makeClassList(classMaker('__title'), titleAttributes?.class),
+        class={makeClassList.flat(
+            classMaker('__title'),
+            titleAttributes?.class,
         )}
         data-toggle-title={id}
         id={titleID}
@@ -277,8 +278,9 @@ const includeBackdrop =
     <ContentContainer
         {...contentAttributes}
         aria-labelledby={titleID}
-        class={flattenClassList(
-            makeClassList(classMaker('__content'), contentAttributes?.class),
+        class={makeClassList.flat(
+            classMaker('__content'),
+            contentAttributes?.class,
         )}
         data-toggle-content={id}
         id={contentID}
@@ -298,7 +300,7 @@ const includeBackdrop =
         includeBackdrop && (
             <Toggle_Backdrop
                 {...backdropAttributes}
-                class:list={backdropAttributes?.class ?? []}
+                class={backdropAttributes?.class ?? []}
                 classBase={classBase}
                 toggleID={id}
             />

@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-import type { HTMLAttributes } from 'astro/types';
+import type { ElementProps } from '../../ts/index.ts';
 
 import type {
     HeadingComponentType,
@@ -52,7 +52,7 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     attrs?: T_Type extends 'sidebar-left' | 'sidebar-right'
     ? {
         main?: MainProps | undefined;
-        sidebar?: HTMLAttributes<'aside'> | undefined;
+        sidebar?: ElementProps<{}, 'aside'> | undefined;
     }
     : {
         main?: MainProps | undefined;

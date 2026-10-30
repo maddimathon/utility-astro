@@ -12,6 +12,8 @@ import type { NavMenuProps } from './NavMenu.astro';
 import type { ToggleComponentType } from './Toggle.astro';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
+
 import MenuList from './MenuList.astro';
 import { parseMenuItem } from './NavMenu.astro';
 
@@ -111,11 +113,10 @@ const nestedLists = menu.map(item =>parseTableOfContents(Astro.url, item, conver
 
 const headingHTML = (await Astro.slots.render('button'))?.trim() || 'Table of Contents';
 
-const fullClassList = [
+const fullClassList = makeClassList.flat(
     'table-of-contents',
-    '||',
     classList,
-];
+);
 ---
 
 {asToggle ? (
@@ -123,7 +124,7 @@ const fullClassList = [
         {...toggleProps}
         id={id}
         heading={heading}
-        class:list={fullClassList}
+        class={fullClassList}
         displayHeading={displayHeading}
         defaultOpen={defaultOpen}
         tag="section"
@@ -142,7 +143,7 @@ const fullClassList = [
         {...attributes}
         aria-labelledby={headingID}
         id={id}
-        class:list={fullClassList}
+        class={fullClassList}
     >
         <slot name="before" />
         <MenuList menu={nestedLists} urlMaker={urlMaker} />

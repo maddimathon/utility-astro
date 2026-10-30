@@ -39,7 +39,7 @@ import HeadingComponent from '../Heading.astro';
  */
 export type AlertProps<
     T_IconProps extends AlertIconProps,
-    T_Tag extends 'article' | 'div' | 'section' | null | false = 'div',
+    T_Tag extends 'article' | 'div' | 'section' = 'div',
 > = GenericDynamicWrapperProps<
     T_IconProps & {
         components?: Partial<{
@@ -92,7 +92,7 @@ const headlineHTML =
 
 <DynamicWrapper
     {...attributes}
-    class:list={makeClassList(
+    class={makeClassList(
         ['alert-block', `alert-block--${slug ?? type}`],
         classList,
     )}

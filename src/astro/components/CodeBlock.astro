@@ -65,6 +65,9 @@ const {
 const codeHTML =
     (await Astro.slots.render('default'))?.replace(/^[\n\s]+|[\n\s]+$/gi, '') ??
     '';
+
+const copyToClipboardProps =
+    typeof copyToClipboard === 'object' ? copyToClipboard : {};
 ---
 
 {
@@ -90,9 +93,9 @@ const codeHTML =
         <CopyToClipboardButton
             toClipboard={codeHTML}
             successMessage='copied!'
-            {...(typeof copyToClipboard === 'object' ? copyToClipboard : {})}
+            {...copyToClipboardProps}
             set:text='copy'
-            class:list='button--inline button--copy-code'
+            class='button--inline button--copy-code'
         />
     )
 }

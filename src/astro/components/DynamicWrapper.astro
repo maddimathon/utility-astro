@@ -30,14 +30,13 @@ import { flattenClassList } from '../functions.js';
  *
  * @since 0.1.0-beta.3
  */
-export type DynamicWrapperProps<T_Tag extends HTMLTag | null | false> =
-    ElementProps<
-        {
-            children: any;
-            tag?: T_Tag;
-        },
-        Extract<T_Tag, HTMLTag> | `${Exclude<T_Tag, HTMLTag>}`
-    >;
+export type DynamicWrapperProps<T_Tag extends HTMLTag> = ElementProps<
+    {
+        children: any;
+        tag?: T_Tag | null | false;
+    },
+    T_Tag
+>;
 
 /**
  * Generates props for components that use this component.
@@ -46,7 +45,7 @@ export type DynamicWrapperProps<T_Tag extends HTMLTag | null | false> =
  */
 export type GenericDynamicWrapperProps<
     T_Props,
-    T_Tag extends HTMLTag | null | false,
+    T_Tag extends HTMLTag,
 > = T_Props & Omit<DynamicWrapperProps<T_Tag>, keyof T_Props | 'children'>;
 
 type Props = DynamicWrapperProps<any>;

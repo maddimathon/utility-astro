@@ -194,8 +194,8 @@ export class Build extends BuildStage {
                 /(<!--README_INSTALL-->).*?(<!--\/README_INSTALL-->)/gs,
                 '$1\n' + escRegExpReplace( [
                     '```sh',
-                    '# for full releases only, add',
-                    '# `@maddimathon:registry=https://registry.npmjs.org` to your `.npmrc` file',
+                    // '# for full releases only, add',
+                    // '# `@maddimathon:registry=https://registry.npmjs.org` to your `.npmrc` file',
                     'npm i -D @maddimathon/utility-astro' + versionStr_fullOnly,
                     '',
                     '# for pre-releases',

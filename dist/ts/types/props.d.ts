@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.5
+ * @maddimathon/utility-astro@0.1.0-beta.6.draft
  * @license MIT
  */
 import type { HTMLTag as HTMLTag_Astro, HTMLAttributes as HTMLAttributes_Astro } from 'astro/types';
@@ -28,11 +28,11 @@ export type HTMLAttributes<T_Tag extends HTMLTag> = HTMLAttributes_Map[T_Tag];
 /**
  * @since 0.1.0-alpha
  */
-export type ClassListItem = Exclude<ClassList, Iterable<any>>;
+export type ClassListItem = string | Record<string, boolean>;
 /**
  * @since 0.1.0-alpha
  */
-export type ClassList = string | Record<string, boolean> | Iterable<string> | Iterable<string | Record<string, boolean>>;
+export type ClassList<T_Item extends ClassListItem = ClassListItem> = null | T_Item | T_Item[];
 /**
  * @since 0.1.0-beta.3
  */
@@ -80,13 +80,13 @@ export type PropsRequireChildren<T_Props = {}> = Omit<T_Props, 'children'> & Pro
  *
  * @since 0.1.0-alpha
  */
-export type ElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitAttributes extends number | string | symbol = keyof T_Props> = T_Props & Omit<HTMLAttributes<T_HtmlTag>, T_OmitAttributes | "class" | "class:list" | "style"> & {
+export type ElementProps<T_Props, T_HtmlTag extends HTMLTag, T_OmitAttributes extends number | string | symbol = keyof T_Props> = T_Props & Omit<HTMLAttributes<T_HtmlTag>, T_OmitAttributes | "class" | "class:list" | "children" | "style"> & Omit<{
     'aria-ignore'?: undefined | null | boolean;
     'aria-description'?: undefined | null | string;
-    class?: undefined | ClassList;
-    id?: undefined | string;
+    class?: undefined | null | ClassList;
+    id?: undefined | null | string;
     style?: undefined | null | string;
-} & {
+}, T_OmitAttributes> & {
     [K in `data-${string}`]?: undefined | null | string;
 };
 /**

@@ -86,7 +86,7 @@ const {
 
 /* CONSTANTS ===================================== */
 
-const fullClassList = makeClassList(
+const fullClassList = makeClassList.flat(
     variant && !disabled ? `button-${variant}` : [],
     classList,
 );
@@ -97,7 +97,7 @@ const fullClassList = makeClassList(
         <a
             {...attrs}
             aria-disabled={disabled ? 'true' : undefined}
-            class:list={fullClassList}
+            class={fullClassList}
             href={href}
         >
             <slot />
@@ -105,7 +105,7 @@ const fullClassList = makeClassList(
     ) : (
         <button
             {...attrs}
-            class:list={fullClassList}
+            class={fullClassList}
             disabled={disabled ? true : undefined}
             type={type}
         >

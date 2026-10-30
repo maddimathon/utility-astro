@@ -9,6 +9,7 @@
 import type { ElementProps } from '../../ts/types/index.js';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -57,7 +58,7 @@ if (
     links.length && (
         <ul
             {...attributes}
-            class:list={['skip-link-list', '||', classList]}
+            class={makeClassList.flat('skip-link-list', classList)}
         >
             {links.map((link) => (
                 <li>
