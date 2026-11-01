@@ -15,7 +15,14 @@ import type {
     PropsRequireChildren,
 } from '../../ts/types/index.js';
 
+import type { ToggleBackdropComponentType } from '../support/Toggle_Backdrop.astro';
+import type {
+    ToggleControlProps,
+    ToggleControlComponentType,
+} from '../support/Toggle_Control.astro';
+
 import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+import type { HeadingComponentType } from './Heading.astro';
 
 /* import - functions */
 import { makeClassList } from '../functions.js';
@@ -23,11 +30,12 @@ import { makeClassList } from '../functions.js';
 /* import - values */
 
 /* import - components */
-import Toggle_Backdrop from '../support/Toggle_Backdrop.astro';
-import Toggle_Control from '../support/Toggle_Control.astro';
+import ToggleBackdropComponent from '../support/Toggle_Backdrop.astro';
+import ToggleControlComponent from '../support/Toggle_Control.astro';
 
 import DynamicWrapper from './DynamicWrapper.astro';
-import Heading from './Heading.astro';
+import ButtonComponent from './Button.astro';
+import HeadingComponent from './Heading.astro';
 
 /* import - layouts */
 
@@ -68,9 +76,14 @@ export type ToggleProps = PropsRequireChildren<{
      */
     classBase?: string | undefined;
 
-    components?: Partial<{
-        Wrapper: DynamicWrapperComponentType;
-    }>;
+    components?: Partial<
+        {
+            Backdrop: ToggleBackdropComponentType;
+            Control: ToggleControlComponentType;
+            Heading: HeadingComponentType;
+            Wrapper: DynamicWrapperComponentType;
+        } & ToggleControlProps['components']
+    >;
 
     defaultOpen?: boolean | undefined;
 
@@ -187,7 +200,13 @@ export type ToggleComponentType = (props: ToggleProps) => any;
 type Props = ElementProps<ToggleProps, 'div', 'aria-label' | 'aria-labelledby'>;
 
 const {
-    components: { Wrapper = DynamicWrapper } = {},
+    components: {
+        Backdrop = ToggleBackdropComponent,
+        Button = ButtonComponent,
+        Control = ToggleControlComponent,
+        Heading = HeadingComponent,
+        Wrapper = DynamicWrapper,
+    } = {},
     defaultOpen,
     id,
     // optional
@@ -214,6 +233,10 @@ const {
     type,
     ...attributes
 }: Props = Astro.props;
+
+const components = {
+    Button,
+} satisfies ToggleControlProps['components'];
 
 const HeaderContainer = headerTag ?? 'div';
 
@@ -265,13 +288,13 @@ const includeBackdrop =
             heading={heading}
             minimum={minimumHeading}
         >
-            <Toggle_Control
-                {...{ classBase, id, buttonID }}
+            <Control
+                {...{ classBase, components, id, buttonID }}
                 data-toggle-primary-control={id}
                 iconSVG={iconSVG}
             >
                 <slot name='button' />
-            </Toggle_Control>
+            </Control>
         </Heading>
     </HeaderContainer>
 
@@ -298,7 +321,7 @@ const includeBackdrop =
 
     {
         includeBackdrop && (
-            <Toggle_Backdrop
+            <Backdrop
                 {...backdropAttributes}
                 class={backdropAttributes?.class ?? []}
                 classBase={classBase}

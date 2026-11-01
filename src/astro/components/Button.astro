@@ -51,25 +51,27 @@ export type ButtonProps_Link = ButtonProps_Base & {
     type?: undefined;
 };
 
+/**
+ * @since ___PKG_VERSION___
+ */
+export type GenericButtonElementProps<
+    T_Props extends {},
+    T_Tag extends 'a' | 'button',
+> = ElementProps<
+    T_Props,
+    T_Tag,
+    | 'aria-disabled'
+    | 'aria-readonly'
+    | 'disabled'
+    | 'href'
+    | 'readonly'
+    | 'type'
+    | keyof T_Props
+>;
+
 export type ButtonProps =
-    | ElementProps<
-          ButtonProps_Button,
-          'button',
-          | 'aria-disabled'
-          | 'aria-readonly'
-          | 'disabled'
-          | 'readonly'
-          | keyof ButtonProps_Button
-      >
-    | ElementProps<
-          ButtonProps_Link,
-          'a',
-          | 'aria-disabled'
-          | 'aria-readonly'
-          | 'disabled'
-          | 'readonly'
-          | keyof ButtonProps_Link
-      >;
+    | GenericButtonElementProps<ButtonProps_Button, 'button'>
+    | GenericButtonElementProps<ButtonProps_Link, 'a'>;
 
 type Props = ButtonProps;
 

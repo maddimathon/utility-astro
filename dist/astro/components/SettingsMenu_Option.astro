@@ -13,7 +13,7 @@ import type {
 
 import type { ButtonComponentType } from './Button.astro';
 import type { FieldsetComponentType } from './Fieldset.astro';
-import type { FormFieldProps } from './FormField.astro';
+import type { FormFieldProps, FormFieldComponentType } from './FormField.astro';
 import type { InputComponentType } from './Input.astro';
 
 /* import - functions */
@@ -21,7 +21,6 @@ import type { InputComponentType } from './Input.astro';
 /* import - values */
 
 /* import - components */
-import FormField from './FormField.astro';
 
 /* import - layouts */
 
@@ -38,6 +37,7 @@ export type SettingsMenu_Option_Props = PropsForbidChildren<{
     components: {
         Button: ButtonComponentType;
         Fieldset: FieldsetComponentType;
+        FormField: FormFieldComponentType;
         Input: InputComponentType;
     } & Required<FormFieldProps['components']>;
 
@@ -60,6 +60,8 @@ const {
 /* CONSTANTS ===================================== */
 
 const id = `${inputName}-${value}`;
+
+const { FormField } = components;
 ---
 
 <FormField

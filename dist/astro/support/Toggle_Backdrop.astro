@@ -32,6 +32,10 @@ export interface ToggleBackdropProps {
 
 type Props = ElementProps<ToggleBackdropProps, 'div'>;
 
+export type ToggleBackdropComponentType = (
+    props: ElementProps<ToggleBackdropProps, 'div'>,
+) => any;
+
 const {
     class: classList = [],
     classBase,

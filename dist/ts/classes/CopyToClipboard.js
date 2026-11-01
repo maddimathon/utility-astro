@@ -67,10 +67,10 @@ export class CopyToClipboard {
             debug: (_a = opts.debug) !== null && _a !== void 0 ? _a : false,
         };
         this.messageContainer = (_b = this.button.querySelector('[data-copy-to-clipboard-message-container]')) !== null && _b !== void 0 ? _b : this.button;
-        const _msgLength = Number(this.button.dataset['copyToClipboardMessageTimeout']);
-        this.messageTimeoutLength = Number.isNaN(_msgLength)
+        const _msgTimeoutLength = Number(this.button.dataset['copyToClipboardMessageTimeout']);
+        this.messageTimeoutLength = Number.isNaN(_msgTimeoutLength)
             ? 1500
-            : _msgLength;
+            : _msgTimeoutLength;
         const _activeLength = Number(this.button.dataset['copyToClipboardActiveTimeout']);
         this.activeTimeoutLength = Math.min(this.messageTimeoutLength, Number.isNaN(_activeLength) ? 100 : _activeLength);
         this.ogInnerHTML = this.messageContainer.innerHTML;

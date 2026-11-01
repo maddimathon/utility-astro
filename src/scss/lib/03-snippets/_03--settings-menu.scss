@@ -31,10 +31,16 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 @mixin snippet-support-site-settings-menu(
     $container_alignment: (),
     $content_alignment: (),
+    $content_container_paddingBlock: var-mrg-soft('400') var-mrg-firm('300'),
+    $content_container_paddingInline: var-mrg-firm('400'),
     $fieldset_flexContainer_alignment: (),
     $fieldset_flexContainer_direction: row,
     $fieldset_flexContainer_gap: var-mrg-firm('200')
         clamp(var-mrg-firm('400'), 5vw, var-mrg-firm('600')),
+    $fieldset_marginBlock: var-mrg-firm('300') var-mrg-half('300'),
+    $fieldset_marginInline: 0,
+    $fieldset_paddingBlock: var-mrg-firm('100'),
+    $fieldset_paddingInline: clamp(var-mrg-firm('200'), 3vw, var-mrg-firm('300')),
     $zIndex: 100,
     $zIndex_open: 999999,
     //
@@ -105,11 +111,11 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
             fieldset {
                 @if $includeStyles {
-                    margin-block: var-mrg-firm('300') var-mrg-half('300');
-                    margin-inline: 0;
+                    margin-block: $fieldset_marginBlock;
+                    margin-inline: $fieldset_marginInline;
 
-                    padding-block: var-mrg-firm('100');
-                    padding-inline: clamp(var-mrg-firm('200'), 3vw, var-mrg-firm('300'));
+                    padding-block: $fieldset_paddingBlock;
+                    padding-inline: $fieldset_paddingInline;
                 }
 
                 @content (content--fieldset);
@@ -119,6 +125,10 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
                     &:first-child {
                         @content (content--fieldset--legend);
                     }
+                }
+
+                > legend:first-child {
+                    @content (content--fieldset--legend-first-child);
                 }
 
                 > .container {
@@ -190,7 +200,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                 > .container {
                     @if $includeStyles {
-                        padding-inline: var-mrg-firm('400');
+                        padding-inline: $content_container_paddingInline;
                     }
 
                     @content (js--settings-menu--content--container);
@@ -211,6 +221,15 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
             }
 
             &[data-toggle-container='opening'] {
+                @content (js--settings-menu--opening);
+
+                #{selector.nest('>', $selector_content)} {
+                    @content (js--settings-menu--opening--content);
+
+                    > .container {
+                        @content (js--settings-menu--opening--content--container);
+                    }
+                }
             }
 
             &[data-toggle-container='open'] {
@@ -225,7 +244,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                     > .container {
                         @if $includeStyles {
-                            padding-block: var-mrg-soft('400') var-mrg-firm('300');
+                            padding-block: $content_container_paddingBlock;
 
                             max-height: 80svh;
                             max-height: calc(

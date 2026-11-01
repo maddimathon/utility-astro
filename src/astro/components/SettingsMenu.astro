@@ -9,6 +9,9 @@
 import type { ComponentProps } from 'astro/types';
 import type { ElementProps } from '../../ts/types/index.js';
 
+import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
+import type { ToggleControlComponentType } from '../support/Toggle_Control.astro';
+
 /* import - functions */
 import { absoluteInternalURL, makeClassList } from '../functions.js';
 import { mapToObject } from '../../ts/index.js';
@@ -17,10 +20,12 @@ import { mapToObject } from '../../ts/index.js';
 import { SVG } from '../../ts/svg.js';
 
 /* import - components */
-import Toggle_Control from '../support/Toggle_Control.astro';
+import ToggleControlComponent from '../support/Toggle_Control.astro';
 
 import ButtonComponent from './Button.astro';
+import DynamicWrapperComponent from './DynamicWrapper.astro';
 import FieldsetComponent from './Fieldset.astro';
+import FormFieldComponent from './FormField.astro';
 import InputComponent from './Input.astro';
 import RenderedSlotContent from './RenderedSlotContent.astro';
 import SelectComponent from './Select.astro';
@@ -48,7 +53,12 @@ export interface SettingsMenuProps {
      */
     components?:
         | undefined
-        | Partial<ComponentProps<typeof SettingsMenu_Option>['components']>;
+        | Partial<
+              ComponentProps<typeof SettingsMenu_Option>['components'] & {
+                  DynamicWrapper: DynamicWrapperComponentType;
+                  ToggleControl: ToggleControlComponentType;
+              }
+          >;
 
     /**
      * @since 0.1.0-beta.0
@@ -143,7 +153,11 @@ const {
     accessibilityReportEmail,
 
     class: classList = ['website-settings'],
-    components: inputComponents = {},
+    components: {
+        DynamicWrapper = DynamicWrapperComponent,
+        ToggleControl = ToggleControlComponent,
+        ...inputComponents
+    } = {},
     iconSVG: iconSVG_input,
     id = 'website-settings',
 
@@ -154,8 +168,10 @@ const {
 }: Props = Astro.props;
 
 const components = {
+    ...inputComponents,
     Button: inputComponents.Button ?? ButtonComponent,
     Fieldset: inputComponents.Fieldset ?? FieldsetComponent,
+    FormField: inputComponents.FormField ?? FormFieldComponent,
     Input: inputComponents.Input ?? InputComponent,
     Select: inputComponents.Select ?? SelectComponent,
     Textarea: inputComponents.Textarea ?? TextareaComponent,
@@ -231,8 +247,8 @@ const iconSVG =
         name='settings-menu'
         html={slots_render.default}
     />
-    <Toggle_Control
-        {...{ id, buttonID, iconSVG }}
+    <ToggleControl
+        {...{ id, buttonID, components, iconSVG }}
         aria-label='Toggle settings menu'
         classBase='website-settings'
         data-toggle-primary-control={id}

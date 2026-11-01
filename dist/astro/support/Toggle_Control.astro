@@ -6,7 +6,10 @@
  */
 
 /* import - types */
-import type { ElementProps } from '../../ts/types/index.js';
+import type {
+    ButtonComponentType,
+    GenericButtonElementProps,
+} from '../components/Button.astro';
 
 /* import - functions */
 import { makeClassList } from '../functions.js';
@@ -14,6 +17,7 @@ import { makeClassList } from '../functions.js';
 /* import - values */
 
 /* import - components */
+import ButtonComponent from '../components/Button.astro';
 import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* import - layouts */
@@ -22,25 +26,37 @@ import RenderedSlotContent from '../components/RenderedSlotContent.astro';
 
 /* PROPS ===================================== */
 
-type Props = Omit<ElementProps<{}, 'button'>, 'id'> & {
-    id: string;
-    buttonID: string;
+export type ToggleControlProps = GenericButtonElementProps<
+    {
+        id: string;
+        buttonID: string;
 
-    /**
-     * Add an additional base class to use.
-     */
-    classBase?: string | undefined;
+        /**
+         * Add an additional base class to use.
+         */
+        classBase?: string | undefined;
 
-    includeDefaultBase?: boolean;
+        components: {
+            Button: ButtonComponentType;
+        };
 
-    icon?: boolean;
-    iconSVG?: undefined | string;
-};
+        includeDefaultBase?: boolean;
+
+        icon?: boolean;
+        iconSVG?: undefined | string;
+    },
+    'button'
+>;
+
+type Props = ToggleControlProps;
+
+export type ToggleControlComponentType = (props: ToggleControlProps) => any;
 
 const {
     buttonID,
     class: classList = [],
     classBase,
+    components: { Button = ButtonComponent },
     id,
     includeDefaultBase = true,
 
@@ -91,10 +107,12 @@ const classMaker = classBase
     : (append: string = '') => 'toggle-block' + append;
 ---
 
-<button
+<Button
     {...attrs}
     aria-disabled='true'
-    class={makeClassList.flat(classMaker('__control'), classList)}
+    class={makeClassList.flat(classMaker('__control'), classList, {
+        separator: '|',
+    })}
     data-toggle-control={id}
     id={buttonID}
     type='button'
@@ -117,7 +135,7 @@ const classMaker = classBase
         )
     }
     <slot name='after' />
-</button>
+</Button>
 
 <style lang='scss'>
     @forward '../css/icon';
