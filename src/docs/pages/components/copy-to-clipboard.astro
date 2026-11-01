@@ -1,0 +1,36 @@
+---
+/**
+ * @since ___PKG_VERSION___
+ *
+ * @packageDocumentation
+ */
+
+/* import - types */
+
+/* import - functions */
+
+/* import - values */
+
+/* import - components */
+
+/* import - layouts */
+import DocsPage from '../../layouts/DocsPage.astro';
+
+import { CopyToClipboardButton } from '../../../astro/components.js';
+
+/* TYPES ===================================== */
+
+/* CONSTANTS ===================================== */
+---
+
+<DocsPage title={['Copy to Clipboard', 'Components']}>
+    <p>
+        Click to copy things to your clipboard. Made useful by a CopyToClipboard
+        class.
+    </p>
+
+    <div class='button-span'>
+        <CopyToClipboardButton toClipboard='test message'
+            >Click me to test</CopyToClipboardButton>
+    </div>
+</DocsPage>

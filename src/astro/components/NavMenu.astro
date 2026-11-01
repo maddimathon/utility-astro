@@ -10,7 +10,7 @@ import type { ArrayItem } from '@maddimathon/utility-typescript/types';
 import type { ElementProps } from '../../ts/types/index.ts';
 
 import type { DynamicWrapperComponentType } from './DynamicWrapper.astro';
-import type { MenuItem } from './MenuList.astro';
+import type { MenuItem, MenuListProps } from './MenuList.astro';
 
 /* import - functions */
 import { escRegExp } from '@maddimathon/utility-typescript';
@@ -75,6 +75,15 @@ export interface NavMenuProps {
     })[];
 
     /**
+     * @since ___PKG_VERSION___
+     */
+    'menuAttrs'?: ElementProps<
+        Partial<MenuListProps>,
+        'div',
+        'menu' | 'role' | 'submenuWrapper' | 'urlMaker'
+    >;
+
+    /**
      * Used to check for current page when its value isn't set.
      *
      * @since 0.1.0-beta.0
@@ -99,6 +108,7 @@ const {
     convertHrefStringsToAbsolute,
     id,
     menu,
+    menuAttrs = {},
     urlMaker = absoluteInternalURL,
     ...attributes
 } = Astro.props;
@@ -229,6 +239,7 @@ const parsedMenu = [...menu].map((_item) =>
 >
     <slot name='nav-start' />
     <MenuList
+        {...menuAttrs}
         menu={parsedMenu}
         urlMaker={urlMaker}
     >

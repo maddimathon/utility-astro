@@ -76,16 +76,19 @@ export type HeadingComponentType = (props: Props) => any;
 
 export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
     html: { content: string; subheading: string },
-    {
+    _props: HeadingProps<T_FallbackTag> & { debug?: boolean },
+) {
+    const {
         attrs: { hgroup: attrs_hgroup, subheading: attrs_subheading } = {},
         class: classList = [],
         displayHeading: displayHeadingRaw,
         fallbackTag = 'p' as T_FallbackTag,
         heading: headingRaw = 0,
         minimum = 2,
+        debug = false,
         ...attributes
-    }: HeadingProps<T_FallbackTag>,
-) {
+    } = _props;
+
     const heading = Math.round(Number(headingRaw));
 
     const numDisplayHeadingRaw =
@@ -97,8 +100,6 @@ export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
             : typeof numDisplayHeadingRaw === 'undefined'
               ? numDisplayHeadingRaw
               : -1;
-
-    const HgroupTag = heading ? 'hgroup' : 'div';
 
     const headingIsMoreThanMinimum = heading >= Math.max(1, minimum);
 
@@ -123,8 +124,10 @@ export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
     const guaranteedHeadingClass = headingClass
         ? headingClass
         : headingTag === 'p'
-          ? 'unstyled-heading'
-          : `h${heading}`;
+          ? ('unstyled-heading' as const)
+          : (`h${heading}` as const);
+
+    const HgroupTag = headingIsMoreThanMinimum ? 'hgroup' : 'div';
 
     return {
         attrs: {
@@ -189,7 +192,7 @@ export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
         headingTag,
         HeadingWrapper: headingTag,
 
-        HgroupTag: heading ? 'hgroup' : 'div',
+        HgroupTag,
     } as const;
 }
 

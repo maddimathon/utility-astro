@@ -13,6 +13,7 @@ import type {
 import type { ButtonComponentType, ButtonProps_Button } from './Button.astro';
 
 /* import - functions */
+import { makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -24,11 +25,11 @@ import ButtonComponent from './Button.astro';
 /* TYPES ===================================== */
 
 export type CopyToClipboardButtonProps = PropsRequireChildren<
-    Omit<ButtonProps_Button, 'children' | 'type'> & {
+    Omit<ButtonProps_Button, 'type'> & {
         /**
          * Timeout length to switch the button to active state, in milliseconds.
          */
-        activeTimeout?: undefined | number;
+        activeTimeout?: number | undefined;
 
         /**
          * @since 0.1.0-beta.3
@@ -40,9 +41,14 @@ export type CopyToClipboardButtonProps = PropsRequireChildren<
               }>;
 
         /**
+         * @since ___PKG_VERSION___
+         */
+        includeScript?: boolean | undefined;
+
+        /**
          * Timeout length to display the success message, in milliseconds.
          */
-        messageTimeout?: undefined | number;
+        messageTimeout?: number | undefined;
 
         /**
          * Content to copy to clipboard.
@@ -52,45 +58,92 @@ export type CopyToClipboardButtonProps = PropsRequireChildren<
         /**
          * Success message to display when copied.
          */
-        successMessage?: string;
+        successMessage?: string | undefined;
     }
 >;
 
-/* PROPS ===================================== */
+export type CopyToClipboardComponentType = (
+    props: ElementProps<CopyToClipboardButtonProps, 'button', 'type'>,
+) => any;
 
-type Props = ElementProps<CopyToClipboardButtonProps, 'button', 'type'>;
+/* FUNCTIONS ===================================== */
 
-const {
+/**
+ * Generates the attributes/props for the button element.
+ *
+ * @since ___PKG_VERSION___
+ */
+export function copyToClipboardButtonAttributes({
     activeTimeout,
-    // copyAs,
-    components: { Button = ButtonComponent } = {},
     messageTimeout,
     successMessage,
     toClipboard,
 
     class: classListInput = [],
     ...attributes
+}: Omit<
+    ElementProps<CopyToClipboardButtonProps, 'button'>,
+    'components' | 'includeScript' | 'type'
+>): ElementProps<
+    ButtonProps_Button,
+    'button',
+    | 'aria-disabled'
+    | 'aria-readonly'
+    | 'disabled'
+    | 'readonly'
+    | keyof ButtonProps_Button
+> {
+    return {
+        ...attributes,
+
+        'class': makeClassList('button--copy-to-clipboard', classListInput),
+        'data-copy-to-clipboard': toClipboard,
+        'data-copy-to-clipboard-success': successMessage,
+        'data-copy-to-clipboard-active-timeout': activeTimeout?.toString(),
+        'data-copy-to-clipboard-message-timeout': messageTimeout?.toString(),
+
+        'type': 'button',
+    } satisfies ElementProps<
+        Omit<ButtonProps_Button, 'set:html' | 'set:text'>,
+        'button',
+        | 'aria-disabled'
+        | 'aria-readonly'
+        | 'disabled'
+        | 'readonly'
+        | keyof ButtonProps_Button
+    > as ElementProps<
+        ButtonProps_Button,
+        'button',
+        | 'aria-disabled'
+        | 'aria-readonly'
+        | 'disabled'
+        | 'readonly'
+        | keyof ButtonProps_Button
+    >;
+}
+
+/* PROPS ===================================== */
+
+type Props = ElementProps<CopyToClipboardButtonProps, 'button', 'type'>;
+
+const {
+    components: { Button = ButtonComponent } = {},
+    includeScript = true,
+    ...props
 }: Props = Astro.props;
 
 /* CONSTANTS ===================================== */
 
-const classList = [
-    'button--copy-to-clipboard',
-    { '||': classListInput },
-    classListInput,
-];
+const fullAttributes = copyToClipboardButtonAttributes(props);
 ---
 
-<Button
-    {...attributes}
-    class:list={classList}
-    data-copy-to-clipboard={toClipboard}
-    data-copy-to-clipboard-success={successMessage}
-    data-copy-to-clipboard-active-timeout={activeTimeout}
-    data-copy-to-clipboard-message-timeout={messageTimeout}
-    type='button'
-    ><slot /></Button
-><script>
-    import { CopyToClipboard } from '../../ts/classes/CopyToClipboard.js';
-    CopyToClipboard.run();
-</script>
+<Button {...fullAttributes}><slot /></Button>
+
+{
+    includeScript && (
+        <script>
+            import {CopyToClipboard} from '../../ts/classes/CopyToClipboard.js';
+            CopyToClipboard.run();
+        </script>
+    )
+}

@@ -11,9 +11,11 @@ import type {
     PropsForbidChildren,
     PropsRequireChildren,
 } from '../../../ts/types/index.js';
+
 import type { IconProps } from '../Icon.astro';
 
 /* import - functions */
+import { flattenClassList, makeClassList } from '../../functions.js';
 
 /* import - values */
 
@@ -68,24 +70,20 @@ const {
 
 const svgRender = (await Astro.slots.render('default'))?.trim() || undefined;
 
-const classList = [
-    'alert-block__icon',
-    { '||': classListInput },
-    classListInput,
-];
+const classList = makeClassList('alert-block__icon', classListInput);
 ---
 
 {
     svgRender ? (
         <span
             {...attributes}
-            class:list={classList}
+            class={flattenClassList(classList)}
             set:html={svgRender}
         />
     ) : svg ? (
         <Icon
             {...attributes}
-            class:list={classList}
+            class={classList}
             slug={slug}
             svg={svg}
             svgLabel={svgLabel}
@@ -93,7 +91,7 @@ const classList = [
     ) : (
         <Icon
             {...attributes}
-            class:list={classList}
+            class={classList}
             type={type}
         />
     )

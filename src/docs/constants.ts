@@ -29,6 +29,7 @@ export const PRIMARY_MENU = () => [
                 label: 'Components',
                 child: [
                     // { label: 'Alert', href: 'components/alert' },
+                    { label: 'Copy to Clipboard', href: 'components/copy-to-clipboard' },
                     { label: 'Icon', href: 'components/icon' },
                     { label: 'LoremIpsum', href: 'components/lorem-ipsum' },
                     { label: 'Toggle', href: 'components/toggle' },

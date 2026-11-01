@@ -23,7 +23,7 @@ export declare class CopyToClipboard {
      * Queries for buttons with a data-copy-to-clipboard attribute and
      * constructs an instance of each.
      */
-    static run(): void;
+    static run({ debug, ...opts }?: Partial<CopyToClipboard.Opts>): void;
     /**
      * Original HTML to restore after displaying the success message.
      */
@@ -41,9 +41,19 @@ export declare class CopyToClipboard {
      */
     protected readonly activeTimeoutLength: number;
     /**
+     * Element whose contents should be changed when the button is clicked.
+     *
+     * @since 0.1.0-beta.6.draft
+     */
+    readonly messageContainer: HTMLElement;
+    /**
      * Timeout length to display the success message, in milliseconds.
      */
     protected readonly messageTimeoutLength: number;
+    /**
+     * Additional options.
+     */
+    protected readonly opts: CopyToClipboard.Opts;
     /**
      * Content to copy to clipboard.
      */
@@ -52,7 +62,7 @@ export declare class CopyToClipboard {
     /**
      * Element to listen to to copy to clipboard.
      */
-    button: HTMLButtonElement);
+    button: HTMLButtonElement, opts?: Partial<CopyToClipboard.Opts>);
     /**
      * Adds the active attribute to the button.
      */
@@ -63,4 +73,14 @@ export declare class CopyToClipboard {
     protected deactivateButton(): void;
     protected changeText(msg: string | null, timeoutMS: number): void;
     clicked(event: Event): void;
+}
+/**
+ * Utilities for the {@link CopyToClipboard}.
+ *
+ * @since 0.1.0-beta.6.draft
+ */
+export declare namespace CopyToClipboard {
+    interface Opts {
+        debug: boolean;
+    }
 }

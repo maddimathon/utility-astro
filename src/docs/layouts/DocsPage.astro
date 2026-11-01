@@ -19,7 +19,7 @@ import { arrayUnique, mergeArgs } from '@maddimathon/utility-typescript';
 import { absoluteInternalURL } from '../../astro/functions.js';
 
 /* import - values */
-import { SITE_TITLE } from '../constants.js';
+import { PRIMARY_MENU, SITE_TITLE } from '../constants.js';
 
 /* import - components */
 
@@ -83,34 +83,7 @@ if (!props.meta.title) {
     ).join(' — ');
 }
 
-props.primaryMenu = [
-    { label: 'Home', href: '' },
-    {
-        label: 'Astro',
-        child: [
-            {
-                label: 'Components',
-                child: [
-                    // { label: 'Alert', href: 'components/alert' },
-                    { label: 'Icon', href: 'components/icon' },
-                    { label: 'LoremIpsum', href: 'components/lorem-ipsum' },
-                    { label: 'Toggle', href: 'components/toggle' },
-                ],
-            },
-            {
-                label: 'Layouts',
-                child: [
-                    { label: 'Content Only', href: 'layouts/content-only' },
-                    { label: 'Extra-Wide', href: 'layouts/extra-wide' },
-                    { label: 'Full Width', href: 'layouts/full-width' },
-                    { label: 'Sidebar Left', href: 'layouts/sidebar-left' },
-                    { label: 'Sidebar Right', href: 'layouts/sidebar-right' },
-                ],
-            },
-        ],
-    },
-    { label: 'SCSS', child: [{ label: 'Astro', href: 'scss/astro' }] },
-];
+props.primaryMenu = PRIMARY_MENU();
 ---
 
 <LibPage

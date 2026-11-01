@@ -19,7 +19,8 @@ attribute configutation).</p>
 <h4 class="tsd-anchor-link" id="since">Since<a href="#since" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.0</p>
 </div></div></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L17" class="external" target="_blank">classes/CopyToClipboard.ts:17</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L17" class="external" target="_blank">classes/CopyToClipboard.ts:17</a></li>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L253" class="external" target="_blank">classes/CopyToClipboard.ts:253</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
@@ -32,9 +33,11 @@ attribute configutation).</p>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#button" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>button</span></a>
+<a href="#messagecontainer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>message<wbr/>Container</span></a>
 <a href="#activetimeoutlength" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Timeout<wbr/>Length</span></a>
 <a href="#messagetimeoutlength" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>message<wbr/>Timeout<wbr/>Length</span></a>
 <a href="#oginnerhtml" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>og<wbr/>Inner<wbr/>HTML</span></a>
+<a href="#opts" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a>
 <a href="#successmessage" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>success<wbr/>Message</span></a>
 <a href="#tocopycontent" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>to<wbr/>Copy<wbr/>Content</span></a>
 <a href="#textchangetimeout" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>text<wbr/>Change<wbr/>Timeout?</span></a>
@@ -54,17 +57,18 @@ attribute configutation).</p>
 <h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="constructorcopytoclipboard"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">CopyToClipboard</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">CopyToClipboard</a><a href="#constructorcopytoclipboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="constructorcopytoclipboard"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">CopyToClipboard</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">opts</span><span class="tsd-signature-symbol">?:</span> <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="CopyToClipboard-1.html" class="tsd-signature-type tsd-kind-namespace">CopyToClipboard</a><span class="tsd-signature-symbol">.</span><a href="CopyToClipboard/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">CopyToClipboard</a><a href="#constructorcopytoclipboard" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li><span><span class="tsd-kind-parameter">button</span>: <span class="tsd-signature-type">HTMLButtonElement</span></span>
 <div class="tsd-comment tsd-typography"><p>Element to listen to to copy to clipboard.</p>
-</div></li></ul></div>
+</div></li>
+<li><span><span class="tsd-kind-parameter">opts</span>: <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="CopyToClipboard-1.html" class="tsd-signature-type tsd-kind-namespace">CopyToClipboard</a><span class="tsd-signature-symbol">.</span><a href="CopyToClipboard/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">CopyToClipboard</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L61" class="external" target="_blank">classes/CopyToClipboard.ts:61</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L82" class="external" target="_blank">classes/CopyToClipboard.ts:82</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -74,6 +78,17 @@ attribute configutation).</p>
 <div class="tsd-comment tsd-typography"><p>Element to listen to to copy to clipboard.</p>
 </div><aside class="tsd-sources">
 <ul>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L86" class="external" target="_blank">classes/CopyToClipboard.ts:86</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="messagecontainer"><code class="tsd-tag">Readonly</code><span>message<wbr/>Container</span><a href="#messagecontainer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">messageContainer</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
+<div class="tsd-comment tsd-typography"><p>Element whose contents should be changed when the button is clicked.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-since">
+<h4 class="tsd-anchor-link" id="since-1">Since<a href="#since-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4><p>0.1.0-beta.6.draft</p>
+</div></div><aside class="tsd-sources">
+<ul>
 <li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L65" class="external" target="_blank">classes/CopyToClipboard.ts:65</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="activetimeoutlength"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>active<wbr/>Timeout<wbr/>Length</span><a href="#activetimeoutlength" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
@@ -81,42 +96,49 @@ attribute configutation).</p>
 <div class="tsd-comment tsd-typography"><p>Timeout length to switch the button to active state, in milliseconds.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L49" class="external" target="_blank">classes/CopyToClipboard.ts:49</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L58" class="external" target="_blank">classes/CopyToClipboard.ts:58</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="messagetimeoutlength"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>message<wbr/>Timeout<wbr/>Length</span><a href="#messagetimeoutlength" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">messageTimeoutLength</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Timeout length to display the success message, in milliseconds.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L54" class="external" target="_blank">classes/CopyToClipboard.ts:54</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L70" class="external" target="_blank">classes/CopyToClipboard.ts:70</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="oginnerhtml"><code class="tsd-tag">Protected</code><span>og<wbr/>Inner<wbr/>HTML</span><a href="#oginnerhtml" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">ogInnerHTML</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Original HTML to restore after displaying the success message.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L34" class="external" target="_blank">classes/CopyToClipboard.ts:34</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L43" class="external" target="_blank">classes/CopyToClipboard.ts:43</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="opts"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>opts</span><a href="#opts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">opts</span><span class="tsd-signature-symbol">:</span> <a href="CopyToClipboard-1.html" class="tsd-signature-type tsd-kind-namespace">CopyToClipboard</a><span class="tsd-signature-symbol">.</span><a href="CopyToClipboard/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a></div>
+<div class="tsd-comment tsd-typography"><p>Additional options.</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L75" class="external" target="_blank">classes/CopyToClipboard.ts:75</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="successmessage"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>success<wbr/>Message</span><a href="#successmessage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">successMessage</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></div>
 <div class="tsd-comment tsd-typography"><p>Success message to display when the message is copied.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L39" class="external" target="_blank">classes/CopyToClipboard.ts:39</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L48" class="external" target="_blank">classes/CopyToClipboard.ts:48</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="tocopycontent"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Readonly</code><span>to<wbr/>Copy<wbr/>Content</span><a href="#tocopycontent" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">toCopyContent</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></div>
 <div class="tsd-comment tsd-typography"><p>Content to copy to clipboard.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L59" class="external" target="_blank">classes/CopyToClipboard.ts:59</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L80" class="external" target="_blank">classes/CopyToClipboard.ts:80</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="textchangetimeout"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Optional</code><span>text<wbr/>Change<wbr/>Timeout</span><a href="#textchangetimeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">textChangeTimeout</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>The timeout ID for changing changed text back to its original content.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L44" class="external" target="_blank">classes/CopyToClipboard.ts:44</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L53" class="external" target="_blank">classes/CopyToClipboard.ts:53</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -124,11 +146,15 @@ attribute configutation).</p>
 <h3 class="tsd-anchor-link" id="run"><code class="tsd-tag">Static</code><span>run</span><a href="#run" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="run-1"><span class="tsd-kind-call-signature">run</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#run-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="run-1"><span class="tsd-kind-call-signature">run</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">?:</span> <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="CopyToClipboard-1.html" class="tsd-signature-type tsd-kind-namespace">CopyToClipboard</a><span class="tsd-signature-symbol">.</span><a href="CopyToClipboard/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#run-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Queries for buttons with a data-copy-to-clipboard attribute and
 constructs an instance of each.</p>
 </div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">__namedParameters</span>: <a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype" class="tsd-signature-type external" target="_blank">Partial</a><span class="tsd-signature-symbol">&lt;</span><a href="CopyToClipboard-1.html" class="tsd-signature-type tsd-kind-namespace">CopyToClipboard</a><span class="tsd-signature-symbol">.</span><a href="CopyToClipboard/Opts.html" class="tsd-signature-type tsd-kind-interface">Opts</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
 <li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L22" class="external" target="_blank">classes/CopyToClipboard.ts:22</a></li></ul></aside></div></li></ul></section>
@@ -144,7 +170,7 @@ constructs an instance of each.</p>
 <li><span><span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type">Event</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L157" class="external" target="_blank">classes/CopyToClipboard.ts:157</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L216" class="external" target="_blank">classes/CopyToClipboard.ts:216</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="activatebutton"><code class="tsd-tag">Protected</code><span>activate<wbr/>Button</span><a href="#activatebutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -155,7 +181,7 @@ constructs an instance of each.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L109" class="external" target="_blank">classes/CopyToClipboard.ts:109</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L150" class="external" target="_blank">classes/CopyToClipboard.ts:150</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="changetext"><code class="tsd-tag">Protected</code><span>change<wbr/>Text</span><a href="#changetext" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -169,7 +195,7 @@ constructs an instance of each.</p>
 <li><span><span class="tsd-kind-parameter">timeoutMS</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L137" class="external" target="_blank">classes/CopyToClipboard.ts:137</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L186" class="external" target="_blank">classes/CopyToClipboard.ts:186</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="deactivatebutton"><code class="tsd-tag">Protected</code><span>deactivate<wbr/>Button</span><a href="#deactivatebutton" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -180,7 +206,7 @@ constructs an instance of each.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L125" class="external" target="_blank">classes/CopyToClipboard.ts:125</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/maddimathon/utility-astro/blob/main/src/ts/classes/CopyToClipboard.ts#L170" class="external" target="_blank">classes/CopyToClipboard.ts:170</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -202,7 +228,7 @@ constructs an instance of each.</p>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#button"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>button</span></a><a href="#activetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Timeout<wbr/>Length</span></a><a href="#messagetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>message<wbr/>Timeout<wbr/>Length</span></a><a href="#oginnerhtml" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>og<wbr/>Inner<wbr/>HTML</span></a><a href="#successmessage" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>success<wbr/>Message</span></a><a href="#tocopycontent" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>to<wbr/>Copy<wbr/>Content</span></a><a href="#textchangetimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>text<wbr/>Change<wbr/>Timeout</span></a></div></details>
+<div><a href="#button"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>button</span></a><a href="#messagecontainer"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>message<wbr/>Container</span></a><a href="#activetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>active<wbr/>Timeout<wbr/>Length</span></a><a href="#messagetimeoutlength" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>message<wbr/>Timeout<wbr/>Length</span></a><a href="#oginnerhtml" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>og<wbr/>Inner<wbr/>HTML</span></a><a href="#opts" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>opts</span></a><a href="#successmessage" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>success<wbr/>Message</span></a><a href="#tocopycontent" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>to<wbr/>Copy<wbr/>Content</span></a><a href="#textchangetimeout" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="assets/icons.svg#icon-1024"></use></svg><span>text<wbr/>Change<wbr/>Timeout</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
 <div><a href="#run"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>run</span></a><a href="#clicked"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>clicked</span></a><a href="#activatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>activate<wbr/>Button</span></a><a href="#changetext" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>change<wbr/>Text</span></a><a href="#deactivatebutton" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="assets/icons.svg#icon-2048"></use></svg><span>deactivate<wbr/>Button</span></a></div></details></div></details></div>
 <div class="site-menu">
