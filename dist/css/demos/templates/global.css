@@ -1202,7 +1202,7 @@ label:has(> input:where([type='checkbox'], [type='radio']))
 
 label > input[type='checkbox'],
 label > input[type='radio'] {
-    margin: 0;
+    margin-block: 0;
 }
 
 /* ## Forms - Buttons ==================================== */

@@ -25,7 +25,7 @@ import { mergeArgs, slugify } from '@maddimathon/utility-typescript';
 import { FeatureCheck } from '@maddimathon/utility-sass';
 
 import { mapToObject } from '../../ts/index.js';
-import { currentPagePath, makeClassList } from '../functions.js';
+import { absoluteInternalURL, currentPagePath, makeClassList } from '../functions.js';
 
 /* import - values */
 
@@ -48,6 +48,155 @@ import {
 
 export type * from './Page.d.ts';
 
+/** ## FUNCTIONS ==================================== **/
+
+/**
+ * Parses Page layout input props into a more consistent output.
+ * 
+ * @since ___PKG_VERSION___
+ */
+export function parsePageProps<T_ContentType extends ContentTypeInput = DefaultContentType>(
+    currentURL: URL,
+    {
+        attrs,
+        components: inputComponents,
+        content: inputContent,
+        dir = 'auto',
+        lang,
+        primaryMenu,
+        secondaryMenu,
+        settings: inputSettings,
+        scripts: inputScripts,
+        subtitle,
+        urlMaker = absoluteInternalURL,
+        ...p
+    }: PageProps<T_ContentType>
+) {
+
+    const components = {
+        ...inputComponents ?? {},
+        Heading : inputComponents?.Heading ?? HeadingComponent,
+        SettingsMenu : inputComponents?.SettingsMenu ?? SettingsMenuComponent,
+        SiteFooter : inputComponents?.SiteFooter ?? SiteFooterComponent,
+    } satisfies ContentProps_Full<any>['components'];
+
+    const content = {
+        ...inputContent,
+
+        components,
+
+        subtitle,
+
+        title: Array.isArray(p.title)
+            ? p.title.length
+                ? p.title
+                : []
+            : p.title.length
+            ? [p.title]
+            : [],
+
+        layout: p.layout ?? ('content-only' satisfies DefaultContentType as T_ContentType),
+    } satisfies ContentProps<T_ContentType>;
+
+    /**
+     * The menu params constructed from input props.
+     */
+    const menus: {
+        primary?: NavMenuProps;
+        secondary?: NavMenuProps;
+    } = {};
+
+    for (const [menuInput, ariaLabel, id] of [
+        [primaryMenu, 'Primary Menu', 'primary-menu'],
+        [secondaryMenu, 'Secondary Menu', 'secondary-menu'],
+    ] as const) {
+        if (menuInput) {
+            let _menu: PartialExcept<NavMenuProps, 'menu'>;
+
+            if (Array.isArray(menuInput)) {
+                _menu = {
+                    menu: menuInput,
+                };
+            } else {
+                _menu = menuInput;
+            }
+
+            menus.primary = {
+                'aria-label': ariaLabel,
+                id,
+                ..._menu,
+                convertHrefStringsToAbsolute: p.convertHrefStringsToAbsolute,
+            };
+
+            if (urlMaker) {
+                menus.primary.urlMaker = urlMaker;
+            }
+        }
+    }
+
+    const settings = inputSettings && {
+        ...(inputSettings === true ? {} : inputSettings),
+
+        accessibilityReportEmail: p.accessibilityReportEmail,
+        privacyPolicy: p.privacyPolicy,
+
+        components: components as SettingsMenuProps['components'],
+    } as const satisfies SettingsMenuProps;
+
+    const scripts = mergeArgs(
+        {
+            featureCheck: true,
+        },
+        inputScripts,
+    );
+
+    const layoutSlug = Array.isArray(content.layout) ? content.layout[0] : content.layout as Exclude<T_ContentType, any[]>;
+
+    const pageSlug: string =
+        slugify(currentPagePath(currentURL).replace(/\.(html|php)$/gi, '')) ||
+        'home';
+
+    const featureClasses = scripts.featureCheck ? FeatureCheck.DEFAULT_CLASSLIST() : [];
+
+    const attributes = {
+
+        html: {
+            ...attrs?.html,
+
+            class: makeClassList.flat( attrs?.html?.class ?? [], featureClasses ),
+            dir,
+            lang,
+        },
+
+        body: {
+            ...attrs?.body,
+
+            class: makeClassList.flat(
+                    [
+                        `page_${pageSlug}`,
+                        content.layout && `layout_${slugify(layoutSlug)}`,
+                    ],
+                    attrs?.body?.class,
+                ),
+        },
+    } as const;
+
+    return {
+        ...p,
+        attributes,
+        components,
+        content,
+        dir,
+        lang,
+        layoutSlug,
+        menus,
+        pageSlug,
+        scripts,
+        settings,
+        urlMaker,
+    } as const;
+}
+
 /** ## PROPS ==================================== **/
 
 type Props<T_ContentType extends ContentTypeInput = ContentTypeInput> = GenericProps<
@@ -55,16 +204,17 @@ type Props<T_ContentType extends ContentTypeInput = ContentTypeInput> = GenericP
 >;
 
 const {
-    urlMaker,
-    ...p
-} = Astro.props.frontmatter ?? Astro.props;
-
-const components = {
-    ...p.components ?? {},
-    Heading : p.components?.Heading ?? HeadingComponent,
-    SettingsMenu : p.components?.SettingsMenu ?? SettingsMenuComponent,
-    SiteFooter : p.components?.SiteFooter ?? SiteFooterComponent,
-} satisfies ContentProps_Full<any>['components'];
+    attributes,
+    components,
+    content,
+    footer,
+    header,
+    lang,
+    menus,
+    meta,
+    settings,
+    skipLinks,
+} = parsePageProps(Astro.url, Astro.props.frontmatter ?? Astro.props);
 
 const {
     PrimaryMenu = ToggleNavMenu,
@@ -73,100 +223,10 @@ const {
     SiteFooter = SiteFooterComponent,
 } = components;
 
-/* ### Content Props ------------------ */
-
-const content = {
-    ...p.content,
-
-    components,
-
-    subtitle: p.subtitle,
-
-    title: Array.isArray(p.title)
-        ? p.title.length
-            ? p.title
-            : []
-        : p.title.length
-          ? [p.title]
-          : [],
-
-    layout: p.layout ?? ('content-only' satisfies DefaultContentType),
-} satisfies ContentProps<ContentTypeInput>;
 
 /** ## CONSTANTS ==================================== **/
 
-const layoutSlug = Array.isArray(content.layout) ? content.layout[0] : content.layout;
-
-const pageSlug: string =
-    slugify(currentPagePath(Astro.url).replace(/\.(html|php)$/gi, '')) ||
-    'home';
-
 const SiteTitleTag = content.title && content.title.length ? 'p' : 'h1';
-
-/* ### Nav Menus ------------------ */
-
-/**
- * The menu params constructed from input props.
- */
-const menus: {
-    primary?: NavMenuProps;
-    secondary?: NavMenuProps;
-} = {};
-
-if (p.primaryMenu) {
-    let _menu: PartialExcept<NavMenuProps, 'menu'>;
-
-    if (Array.isArray(p.primaryMenu)) {
-        _menu = {
-            menu: p.primaryMenu,
-        };
-    } else {
-        _menu = p.primaryMenu;
-    }
-
-    menus.primary = {
-        'aria-label': 'Primary Menu',
-        'id': 'primary-menu',
-        ..._menu,
-        'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
-    };
-
-    if (urlMaker) {
-        menus.primary.urlMaker = urlMaker;
-    }
-}
-
-if (p.secondaryMenu) {
-    let _menu: PartialExcept<NavMenuProps, 'menu'>;
-
-    if (Array.isArray(p.secondaryMenu)) {
-        _menu = {
-            menu: p.secondaryMenu,
-        };
-    } else {
-        _menu = p.secondaryMenu;
-    }
-
-    menus.secondary = {
-        'aria-label': 'Secondary Menu',
-        'id': 'secondary-menu',
-        ..._menu,
-        'convertHrefStringsToAbsolute': p.convertHrefStringsToAbsolute,
-    };
-
-    if (urlMaker) {
-        menus.secondary.urlMaker = urlMaker;
-    }
-}
-
-/* ### Support ------------------ */
-
-const scripts = mergeArgs(
-    {
-        featureCheck: true,
-    },
-    p.scripts,
-);
 
 /* ### Slots ------------------ */
 
@@ -215,49 +275,7 @@ const slots_render = mapToObject(
  * Sections/components to include or not.
  */
 const include = {
-    header: p.header && (p.header.title || p.header.tagline || slots_render.header),
-};
-
-/* ### FeatureCheck ------------------ */
-
-const featureClasses = scripts.featureCheck
-    ? FeatureCheck.DEFAULT_CLASSLIST()
-    : [];
-
-/* ### Settings ------------------ */
-
-const settings = p.settings && {
-    ...(p.settings === true ? {} : p.settings),
-
-    accessibilityReportEmail: p.accessibilityReportEmail,
-    privacyPolicy: p.privacyPolicy,
-
-    components: components as SettingsMenuProps['components'],
-} satisfies SettingsMenuProps;
-
-/* ### Attributes ------------------ */
-
-const attributes = {
-
-    html: {
-        ...p.attrs?.html,
-
-        class: makeClassList.flat( p.attrs?.html?.class ?? [], featureClasses ),
-        dir: p.dir ?? 'auto',
-        lang: p.lang,
-    },
-
-    body: {
-        ...p.attrs?.body,
-
-        class: makeClassList.flat(
-                [
-                    `page_${pageSlug}`,
-                    content.layout && `layout_${slugify(layoutSlug)}`,
-                ],
-                p.attrs?.body?.class,
-            ),
-    },
+    header: header && (header.title || header.tagline || slots_render.header),
 };
 ---
 
@@ -272,12 +290,12 @@ const attributes = {
     <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1' />
-        { p.lang && <meta property='og:locale' content={p.lang} /> }
+        { lang && <meta property='og:locale' content={lang} /> }
         <RenderedSlotContent
             name='head-open'
             html={slots_render.headOpen}
         />
-        <Page_Meta {...p.meta} />
+        <Page_Meta {...meta} />
         <RenderedSlotContent
             name='head-close'
             html={slots_render.headClose}
@@ -285,7 +303,7 @@ const attributes = {
     </head>
 
     <body {...attributes.body}>
-        {p.skipLinks && <SkipLinks links={p.skipLinks} />}
+        {skipLinks && <SkipLinks links={skipLinks} />}
 
         <RenderedSlotContent
             name='body-open'
@@ -316,16 +334,16 @@ const attributes = {
         {
             include.header && (
                 <header class='site-header'>
-                    {p.header?.title && (
+                    {header?.title && (
                         <SiteTitleTag
                             class='site-title'
-                            set:text={p.header.title}
+                            set:text={header.title}
                         />
                     )}
-                    {p.header?.tagline && (
+                    {header?.tagline && (
                         <p
                             class='site-tagline'
-                            set:text={p.header.tagline}
+                            set:text={header.tagline}
                         />
                     )}
 
@@ -402,8 +420,8 @@ const attributes = {
         />
 
         {
-            p.footer && (
-                <SiteFooter {...p.footer.attributes} content={p.footer} components={components}>
+            footer && (
+                <SiteFooter {...footer.attributes} content={footer} components={components}>
                     <RenderedSlotContent
                         name='footer'
                         html={slots_render.footer}

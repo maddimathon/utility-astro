@@ -159,6 +159,14 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
                         @content (content--fieldset--container--label-or-input);
                     }
+
+                    > label {
+                        @content (content--fieldset--container--label);
+                    }
+
+                    > input {
+                        @content (content--fieldset--container--input);
+                    }
                 }
             }
         }
