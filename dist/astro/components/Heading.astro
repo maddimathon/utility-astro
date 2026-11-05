@@ -196,6 +196,24 @@ export function parseHeadingParams<T_FallbackTag extends HTMLTag>(
     } as const;
 }
 
+export function incrementHeadingLevel(
+    heading: number,
+    increment?: number,
+): number;
+export function incrementHeadingLevel(
+    heading: number | undefined,
+    increment?: number,
+): number | undefined;
+/**
+ * @since 0.1.0-beta.6.draft
+ */
+export function incrementHeadingLevel(
+    heading: number | undefined,
+    increment: number = 1,
+): number | undefined {
+    return heading ? heading + increment : heading;
+}
+
 /* CONSTANTS ===================================== */
 
 const html = {

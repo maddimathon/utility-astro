@@ -31,9 +31,11 @@ import { flattenClassList } from '../functions.js';
  */
 export type TextareaProps = ElementProps<
     PropsForbidChildren<{
+        disabled?: boolean | undefined;
         type?: null | undefined;
     }>,
-    'textarea'
+    'textarea',
+    'aria-disabled' | 'disabled'
 >;
 
 type Props = TextareaProps;

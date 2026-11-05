@@ -26,8 +26,14 @@ export function absoluteInternalURL(
     targetSubpath: string,
     relativeToUrlRoot: boolean = true,
 ): string {
+    // returns
+    if ( targetSubpath.match( /^#[^\/|#]+$/i ) ) {
+        return targetSubpath;
+    }
 
-    targetSubpath = targetSubpath.replace( /(^\.?\/?|\/*$)/gi, '' );
+    const anchorMatches = targetSubpath.match( /#[^\/|#]+$/i );
+
+    targetSubpath = targetSubpath.replace( /(^\.?\/?|\/*(#[^\/|#]+)?$)/gi, '' );
 
     const pathPrefix = config_base.replace( /(^\.?\/|\/*$)/gi, '' );
 
@@ -49,6 +55,10 @@ export function absoluteInternalURL(
 
     if ( relativeToUrlRoot ) {
         retString = fullURL.pathname;
+    }
+
+    if ( anchorMatches && anchorMatches[ 0 ] ) {
+        retString += anchorMatches[ 0 ];
     }
 
     if ( retString.length < 1 ) {

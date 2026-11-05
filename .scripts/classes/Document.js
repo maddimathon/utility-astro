@@ -90,12 +90,15 @@ export class Document extends DocumentStage {
     async scss() {
         await this.customScssSubstage.dir(
             '',
-            'src/docs/css',
+            'src/docs/_public/assets/css',
             {
                 postCSS: false,
                 prettier: true,
+                sass: {
+                    sourceMap: false,
+                },
                 srcDir: 'src/docs/scss',
-            }
+            },
         );
     }
 

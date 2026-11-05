@@ -8,8 +8,6 @@
  * @license MIT
  */
 
-import type { HTMLAttributes } from 'astro/types';
-
 import type {
     PartialExcept,
 } from '@maddimathon/utility-typescript/types';
@@ -138,7 +136,7 @@ export interface PageProps<T_ContentType extends ContentTypeInput = ContentTypeI
     /**
      * Configuration for the child Content component.
      */
-    content?: Omit<ContentProps<T_ContentType>, "components" | "layout" | "subtitle" | "title"> | undefined;
+    content?: Omit<ContentProps<T_ContentType>, "components" | "layout" | "subtitle"> | undefined;
 
     /**
      * Used for NavMenu, ToggleNavMenu, and TableOfContents components.

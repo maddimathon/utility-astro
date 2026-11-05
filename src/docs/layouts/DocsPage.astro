@@ -8,10 +8,7 @@
 /* import - types */
 import type { GenericProps } from '../../ts/types/index.ts';
 
-import type {
-    ContentType,
-    PageProps as LibPageProps,
-} from '../../astro/layouts.js';
+import type { ContentType, PageProps } from '../../astro/layouts.js';
 
 /* import - functions */
 import { arrayUnique, mergeArgs } from '@maddimathon/utility-typescript';
@@ -28,7 +25,7 @@ import LibPage from '../../astro/layouts/Page.astro';
 
 /* PROPS ===================================== */
 
-type Partial_LibProps = Partial<LibPageProps<ContentType>>;
+type Partial_LibProps = Partial<PageProps<ContentType>>;
 
 type Props = GenericProps<Partial_LibProps>;
 
@@ -65,9 +62,9 @@ const _defaultProps = {
             motion: true,
         },
     },
-} as const satisfies Props & LibPageProps<ContentType>;
+} as const satisfies Props & PageProps<ContentType>;
 
-const props: LibPageProps<ContentType> = mergeArgs(
+const props: PageProps = mergeArgs(
     _defaultProps,
     Astro.props.frontmatter ?? Astro.props,
     true,
@@ -84,14 +81,30 @@ if (!props.meta.title) {
 }
 
 props.primaryMenu = PRIMARY_MENU();
+
+const fullProps = {
+    ...props,
+    accessibilityReportEmail: undefined,
+    layout: props.layout || 'content-only',
+    title,
+} satisfies PageProps;
+
+const stylesheetHref = absoluteInternalURL(Astro.url, 'assets/css/main.css');
 ---
 
-<LibPage
-    {...props}
-    layout={props.layout || 'content-only'}
-    title={title}
-    accessibilityReportEmail={undefined}
->
+<LibPage {...fullProps}>
+    <link
+        slot='head-open'
+        rel='preload'
+        href={stylesheetHref}
+        as='style'
+    />
+    <link
+        slot='head-open'
+        rel='stylesheet'
+        href={stylesheetHref}
+    />
+
     <slot
         slot='head-open'
         name='head-open'
@@ -212,7 +225,3 @@ props.primaryMenu = PRIMARY_MENU();
         name='footer-scripts'
     />
 </LibPage>
-
-<style lang='scss' is:global>
-    @forward '../css/main.css';
-</style>

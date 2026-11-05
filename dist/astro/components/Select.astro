@@ -29,7 +29,13 @@ import { flattenClassList } from '../functions.js';
 /**
  * @since 0.1.0-beta.3
  */
-export type SelectProps = ElementProps<PropsRequireChildren, 'select'>;
+export type SelectProps = ElementProps<
+    PropsRequireChildren<{
+        disabled?: boolean | undefined;
+    }>,
+    'select',
+    'aria-disabled' | 'disabled'
+>;
 
 type Props = SelectProps;
 

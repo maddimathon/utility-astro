@@ -30,10 +30,9 @@ import { flattenClassList } from '../functions.js';
  * @since 0.1.0-beta.3
  */
 export type InputProps = ElementProps<
-    PropsForbidChildren &
-        Partial<{
-            disabled: boolean;
-        }>,
+    PropsForbidChildren<{
+        disabled?: boolean | undefined;
+    }>,
     'input',
     'aria-disabled' | 'disabled'
 >;

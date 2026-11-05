@@ -38,7 +38,7 @@ import FormField from './components/FormField.astro';
 export type * from './components/FormField.astro';
 
 import Heading from './components/Heading.astro';
-export { parseHeadingParams } from './components/Heading.astro';
+export { incrementHeadingLevel, parseHeadingParams } from './components/Heading.astro';
 export type * from './components/Heading.astro';
 
 import Icon from './components/Icon.astro';

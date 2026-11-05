@@ -39,8 +39,8 @@ import {
     Page_Meta,
     RenderedSlotContent,
     SettingsMenu as SettingsMenuComponent,
-    SiteFooter as SiteFooterComponent,
     SkipLinks,
+    SiteFooter as SiteFooterComponent,
     ToggleNavMenu,
 } from '../components.ts';
 
@@ -85,17 +85,15 @@ export function parsePageProps<T_ContentType extends ContentTypeInput = DefaultC
 
         components,
 
+        layout: p.layout ?? ('content-only' satisfies DefaultContentType as T_ContentType),
+
         subtitle,
 
-        title: Array.isArray(p.title)
-            ? p.title.length
-                ? p.title
+        title: inputContent?.title ?? (
+            p.title.length
+                ? ( Array.isArray(p.title) ? p.title : [p.title] )
                 : []
-            : p.title.length
-            ? [p.title]
-            : [],
-
-        layout: p.layout ?? ('content-only' satisfies DefaultContentType as T_ContentType),
+        ),
     } satisfies ContentProps<T_ContentType>;
 
     /**

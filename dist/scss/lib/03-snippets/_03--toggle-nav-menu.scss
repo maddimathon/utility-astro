@@ -11,6 +11,7 @@
 @use 'pkg:@maddimathon/utility-sass/lib/snippets' as utils;
 
 @use '../../config';
+@use '../../tokens';
 
 @use '../01-functions' as *;
 @use '../02-mixins' as *;
@@ -155,7 +156,9 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
 
                     > .container {
                         @if $includeStyles {
-                            background: do-var(background);
+                            background: var-prop-background(
+                                tokens.$backgroundColor
+                            );
                             max-height: 80svh;
                         }
 
@@ -169,7 +172,9 @@ $_content_grid_columns: auto [content-start] 0 [site-start] 0 [page-start] 0 [si
                         border-block-end: $title_borderWidth solid currentColor;
 
                         font-size: var-fs(heading-6);
-                        background: do-var(background);
+                        background: var-prop-background(
+                            tokens.$backgroundColor
+                        );
                     }
 
                     @content (js--body-nav-toggle-title);

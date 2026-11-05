@@ -89,7 +89,7 @@ $_mixin_support_base: meta.get-mixin('snippet-support-toggle-block-base');
 
         #{$selector_content} {
             @if $includeStyles {
-                background: do-var(background);
+                background: var-prop-background(tokens.$backgroundColor);
                 width: 100%;
                 max-width: min(var-width(content), 90vw);
             }

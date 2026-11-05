@@ -132,6 +132,8 @@ export interface SettingsMenuProps {
                       value: string;
 
                       labelClass?: string | undefined;
+                      labelAttrs?:
+                          ElementProps<{}, 'label', 'class'> | undefined;
                   }[];
               }[]
             | undefined;
@@ -272,9 +274,8 @@ const iconSVG =
                     <p class='website-settings__report'>
                         <a
                             href={`mailto:${accessibilityReportEmail}?subject=${encodeURIComponent(accessEmailSubject)}`}
-                        >
-                            Report Accessibility Issue
-                        </a>
+                            set:text='Report Accessibility Issue'
+                        />
                     </p>
                 )
             }
@@ -391,6 +392,7 @@ const iconSVG =
                                     <div class='container'>
                                         {setting.options.map((opt) => (
                                             <SettingsMenu_Option
+                                                {...(opt.labelAttrs ?? {})}
                                                 class={opt.labelClass}
                                                 components={components}
                                                 name={setting.id}
