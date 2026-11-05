@@ -93,6 +93,9 @@ export type * from './components/Select_Option.astro';
 import SettingsMenu from './components/SettingsMenu.astro';
 export type * from './components/SettingsMenu.astro';
 
+import SettingsMenu_Option from './components/SettingsMenu_Option.astro';
+export type * from './components/SettingsMenu_Option.astro';
+
 import SiteFooter from './components/SiteFooter.astro';
 export type * from './components/SiteFooter.astro';
 
@@ -187,6 +190,7 @@ export {
     Select,
     Select_Option,
     SettingsMenu,
+    SettingsMenu_Option,
     SiteFooter,
     SkipLinks,
     Table,

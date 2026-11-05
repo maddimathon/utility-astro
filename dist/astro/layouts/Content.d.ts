@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.6
+ * @maddimathon/utility-astro@0.1.0-beta.7.draft
  * @license MIT
  */
 
@@ -68,13 +68,18 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     };
 
     /**
-     * To display (in a h1).
+     * @since 0.1.0-beta.7.draft
      */
-    title: string | string[] | undefined;
+    includeHeader?: boolean | undefined;
 
     layout?: T_Type | undefined;
 
     subtitle?: string | undefined;
+
+    /**
+     * To display (in a h1).
+     */
+    title: string | string[] | undefined;
 }
 
 /**

@@ -68,13 +68,18 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     };
 
     /**
-     * To display (in a h1).
+     * @since ___PKG_VERSION___
      */
-    title: string | string[] | undefined;
+    includeHeader?: boolean | undefined;
 
     layout?: T_Type | undefined;
 
     subtitle?: string | undefined;
+
+    /**
+     * To display (in a h1).
+     */
+    title: string | string[] | undefined;
 }
 
 /**

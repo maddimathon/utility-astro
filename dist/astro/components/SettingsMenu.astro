@@ -211,20 +211,25 @@ const settings: Required<Required<SettingsMenuProps>['settings']> = {
  */
 const slots_render = mapToObject(
     await Promise.all(
-        (['default', 'settingsMenuOpen', 'settingsMenuClose'] as const).map(
-            async (_key) => {
-                const _kebab = _key.replace(
-                    /([a-z0-9])([A-Z])/g,
-                    (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
-                );
+        (
+            [
+                'default',
+                'settingsMenuOpen',
+                'settingsMenuClose',
+                'settingsMenuOptions',
+            ] as const
+        ).map(async (_key) => {
+            const _kebab = _key.replace(
+                /([a-z0-9])([A-Z])/g,
+                (_v, _cap1, _cap2) => _cap1 + '-' + _cap2.toLowerCase(),
+            );
 
-                return [
-                    _key,
-                    Astro.slots.has(_kebab) &&
-                        (await Astro.slots.render(_kebab))?.trim(),
-                ] as const;
-            },
-        ),
+            return [
+                _key,
+                Astro.slots.has(_kebab) &&
+                    (await Astro.slots.render(_kebab))?.trim(),
+            ] as const;
+        }),
     ),
 );
 
@@ -405,6 +410,10 @@ const iconSVG =
                             ),
                     )
             }
+            <RenderedSlotContent
+                name='settings-menu-options'
+                html={slots_render.settingsMenuOptions}
+            />
 
             <Button
                 data-settings-reset

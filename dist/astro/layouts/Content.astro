@@ -53,6 +53,8 @@ const _defProps = {
         main: {},
         sidebar: {},
     },
+
+    includeHeader: true,
 } as const satisfies Omit<DefaultProps, 'components'>;
 
 const {
@@ -106,31 +108,35 @@ const completedProps = {
 ---
 
 <ContentComponent {...completedProps}>
-    <Fragment slot='content-header'>
-        {
-            titleString ? (
-                <Heading
-                    attrs={{ subheading: { class: 'page-title__subheading' } }}
-                    class='page-title'
-                    heading={1}
-                    minimum={1}
-                >
-                    <Fragment set:text={titleString} />
-                    <Fragment
-                        slot='subheading'
-                        set:text={p.subtitle}
-                    />
-                </Heading>
-            ) : (
-                p.subtitle && (
-                    <p
-                        class='page-title__subheading'
-                        set:text={p.subtitle}
-                    />
-                )
-            )
-        }
-    </Fragment>
+    {
+        completedProps.includeHeader && (
+            <Fragment slot='content-header'>
+                {titleString ? (
+                    <Heading
+                        attrs={{
+                            subheading: { class: 'page-title__subheading' },
+                        }}
+                        class='page-title'
+                        heading={1}
+                        minimum={1}
+                    >
+                        <Fragment set:text={titleString} />
+                        <Fragment
+                            slot='subheading'
+                            set:text={p.subtitle}
+                        />
+                    </Heading>
+                ) : (
+                    p.subtitle && (
+                        <p
+                            class='page-title__subheading'
+                            set:text={p.subtitle}
+                        />
+                    )
+                )}
+            </Fragment>
+        )
+    }
 
     <slot
         slot='content-header'
