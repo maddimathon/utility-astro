@@ -233,14 +233,14 @@
     },
     
     "dependencies": {
-        "@astrojs/prism": "^4.1.1",
-        "@maddimathon/utility-sass": "~0.1.0-beta.9",
+        "@astrojs/prism": "^4.1.2",
+        "@maddimathon/utility-sass": "github:maddimathon/utility-sass#semver:~0.1.0-beta.10",
         "@maddimathon/utility-typescript": "~2.0.0-beta.6",
-        "astro": "^7.4.2",
+        "astro": "~7.4.5",
         "luxon": "~3.7.2"
     },
     "devDependencies": {
-        "@astrojs/check": "^0.9.10",
+        "@astrojs/check": "^0.9.12",
         "@astrojs/ts-plugin": "^1.10.12",
         "@maddimathon/build-utilities": "~0.3.0-beta.4",
         "@types/jest": "~30.0.0",
@@ -256,10 +256,10 @@
     },
     
     "peerDependencies": {
-        "@astrojs/prism": "^4.0.2",
-        "@maddimathon/utility-sass": "~0.1.0-beta.9",
+        "@astrojs/prism": "^4.1.2",
+        "@maddimathon/utility-sass": "~0.1.0-beta.10",
         "@maddimathon/utility-typescript": "~2.0.0-beta.6",
-        "astro": "^7.3.3",
+        "astro": "^7.4.0",
         "luxon": "~3.7.2",
         "sass-embedded": "^1.97.0"
     },

@@ -84,7 +84,7 @@ export function makeClassList(
 /**
  * Utilities for the {@link makeClassList} function.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.6
  */
 export namespace makeClassList {
 
@@ -110,7 +110,7 @@ export namespace makeClassList {
     }
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.6
      */
     export function flat(
         defaultClasses: null | ClassList | ClassList[],

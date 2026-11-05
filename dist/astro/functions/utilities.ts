@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.6.draft
+ * @maddimathon/utility-astro@0.1.0-beta.6
  * @license MIT
  */
 
@@ -84,7 +84,7 @@ export function makeClassList(
 /**
  * Utilities for the {@link makeClassList} function.
  * 
- * @since 0.1.0-beta.6.draft
+ * @since 0.1.0-beta.6
  */
 export namespace makeClassList {
 
@@ -110,7 +110,7 @@ export namespace makeClassList {
     }
 
     /**
-     * @since 0.1.0-beta.6.draft
+     * @since 0.1.0-beta.6
      */
     export function flat(
         defaultClasses: null | ClassList | ClassList[],

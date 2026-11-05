@@ -51,7 +51,7 @@ export type BaseMenuItem =
  */
 export type MenuItem = BaseMenuItem & {
     /**
-     * @since 0.1.0-beta.6.draft
+     * @since 0.1.0-beta.6
      */
     attrs?:
         ElementProps<{}, 'a', 'aria-current' | 'class' | 'href'> | undefined;
@@ -94,7 +94,7 @@ export type MenuItem = BaseMenuItem & {
     /**
      * Attributes to apply to the list element for this item.
      *
-     * @since 0.1.0-beta.6.draft
+     * @since 0.1.0-beta.6
      */
     itemAttrs?: ElementProps<{}, 'li'>;
 };
@@ -114,13 +114,13 @@ export type SubmenuListOpts = {
  *
  * @since 0.1.0-alpha
  * @since 0.1.0-alpha.17 — Moved to component file.
- * @since 0.1.0-beta.6.draft — Separator prop was removed. Replaced by a slot with the same name.
+ * @since 0.1.0-beta.6 — Separator prop was removed. Replaced by a slot with the same name.
  */
 export interface MenuListProps {
     /**
      * Attributes to apply to all list items.
      *
-     * @since 0.1.0-beta.6.draft
+     * @since 0.1.0-beta.6
      */
     listItemAttrs?: ElementProps<{}, 'li'>;
 
@@ -160,7 +160,7 @@ const {
 
     class: classList = [],
     listItemAttrs: { class: listItemClassList, ...listItemAttrs } = {},
-    // @ts-expect-error - previous param that was removed in 0.1.0-beta.6.draft
+    // @ts-expect-error - previous param that was removed in 0.1.0-beta.6
     separator = null,
     submenu: inputSubmenu = {},
     submenuWrapper = SUBMENU_HAS_WRAPPER,

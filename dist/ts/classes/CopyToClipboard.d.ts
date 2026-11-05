@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.6.draft
+ * @maddimathon/utility-astro@0.1.0-beta.6
  * @license MIT
  */
 /**
@@ -43,7 +43,7 @@ export declare class CopyToClipboard {
     /**
      * Element whose contents should be changed when the button is clicked.
      *
-     * @since 0.1.0-beta.6.draft
+     * @since 0.1.0-beta.6
      */
     readonly messageContainer: HTMLElement;
     /**
@@ -77,7 +77,7 @@ export declare class CopyToClipboard {
 /**
  * Utilities for the {@link CopyToClipboard}.
  *
- * @since 0.1.0-beta.6.draft
+ * @since 0.1.0-beta.6
  */
 export declare namespace CopyToClipboard {
     interface Opts {

@@ -60,7 +60,7 @@ export class CopyToClipboard {
     /**
      * Element whose contents should be changed when the button is clicked.
      * 
-     * @since ___PKG_VERSION___
+     * @since 0.1.0-beta.6
      */
     public readonly messageContainer: HTMLElement;
 
@@ -248,7 +248,7 @@ export class CopyToClipboard {
 /**
  * Utilities for the {@link CopyToClipboard}.
  * 
- * @since ___PKG_VERSION___
+ * @since 0.1.0-beta.6
  */
 export namespace CopyToClipboard {
 

@@ -19,6 +19,20 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0-beta.6** — 2026-11-05
+
+### Added
+- Added more options to settings-menu styles
+
+### Changed
+- MenuList separator prop was changed to a slot
+
+### Fixed
+- Updated with utility-sass
+- Fixes to various components
+- Fixed bug in CopyToClipboard class that broke with nested elements in the button
+
+
 ## **0.1.0-beta.5** — 2026-10-23
 
 An npm publish action test.
