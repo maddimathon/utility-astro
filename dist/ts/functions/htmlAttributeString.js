@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.7.draft
+ * @maddimathon/utility-astro@0.1.0
  * @license MIT
  */
 import { escapeHTML } from 'astro/runtime/server/escape.js';

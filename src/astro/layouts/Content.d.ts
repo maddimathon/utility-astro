@@ -68,7 +68,7 @@ export interface ContentProps<T_Type extends ContentTypeInput = DefaultContentTy
     };
 
     /**
-     * @since ___PKG_VERSION___
+     * @since 0.1.0
      */
     includeHeader?: boolean | undefined;
 

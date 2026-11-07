@@ -19,6 +19,15 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.1.0** — 2026-11-07
+
+New minor component options. Updated dependencies and upgraded to release.
+
+Added:
+- New options slot to SettingsMenu
+- Prop for conditional display of Content header
+
+
 ## **0.1.0-beta.6** — 2026-11-05
 
 ### Added

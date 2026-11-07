@@ -89,7 +89,7 @@ const {
 /* CONSTANTS ===================================== */
 
 const fullClassList = makeClassList.flat(
-    variant && !disabled ? `button-${variant}` : [],
+    variant && !disabled ? `button-${variant}` : href ? 'button' : [],
     classList,
 );
 ---

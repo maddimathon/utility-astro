@@ -2196,7 +2196,7 @@ export {
   SettingsMenu
 };
 /*!
- * @maddimathon/utility-astro@0.1.0-beta.7.draft
+ * @maddimathon/utility-astro@0.1.0
  * @license MIT
  */
 /*! Bundled license information:
@@ -2238,7 +2238,7 @@ export {
 @maddimathon/utility-typescript/dist/classes/VariableInspector.js:
 @maddimathon/utility-typescript/dist/index.js:
   (*!
-   * @maddimathon/utility-typescript@2.0.0-beta.6
+   * @maddimathon/utility-typescript@2.0.0
    * @license MIT
    *)
 */
