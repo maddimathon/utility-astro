@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.1.0
+/// @package @maddimathon/utility-astro@0.2.0-draft
 /// @since 0.1.0-beta.0
 ///
 
@@ -25,23 +25,26 @@
     $padding_svg: 0,
     $verticalAlign: middle,
     //
+    $sizeAsImportant: true,
     $multipleContentBlocks: false
 ) {
     @include prop-display($display);
 
-    $_calc_iconSize: calc($iconSize * do-var(icon-size--font-multiplier));
+    $_sizeImportantSuffix: if($sizeAsImportant, ' !important', '');
 
-    height: $iconSize;
-    height: $_calc_iconSize;
+    height: 1em #{$_sizeImportantSuffix};
 
     @if $includeMinWidth {
-        min-width: $iconSize;
-        min-width: $_calc_iconSize;
+        min-width: 1em #{$_sizeImportantSuffix};
     }
 
     @if $includeMaxWidth {
         max-width: 100%;
     }
+
+    font-size: $iconSize #{$_sizeImportantSuffix};
+    font-size: calc($iconSize * do-var(icon-size--font-multiplier))
+        #{$_sizeImportantSuffix};
 
     vertical-align: $verticalAlign;
 

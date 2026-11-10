@@ -2755,14 +2755,12 @@ body > :where(main) > :where(aside) {
 .icon {
     --display: inline-block;
     display: var(--display, inline-block);
-    height: var(--icon-size, 1.375em);
-    height: calc(
+    height: 1em !important;
+    min-width: 1em !important;
+    font-size: var(--icon-size, 1.375em) !important;
+    font-size: calc(
         var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
-    );
-    min-width: var(--icon-size, 1.375em);
-    min-width: calc(
-        var(--icon-size, 1.375em) * var(--icon-size--font-multiplier, 1)
-    );
+    ) !important;
     vertical-align: middle;
 }
 .icon > svg {

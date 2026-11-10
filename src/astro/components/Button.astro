@@ -92,6 +92,8 @@ const fullClassList = makeClassList.flat(
     variant && !disabled ? `button-${variant}` : href ? 'button' : [],
     classList,
 );
+
+const renderedContent = (await Astro.slots.render('default'))?.trim();
 ---
 
 {
@@ -101,17 +103,15 @@ const fullClassList = makeClassList.flat(
             aria-disabled={disabled ? 'true' : undefined}
             class={fullClassList}
             href={href}
-        >
-            <slot />
-        </a>
+            set:html={renderedContent}
+        />
     ) : (
         <button
             {...attrs}
             class={fullClassList}
-            disabled={disabled ? true : undefined}
+            disabled={disabled ? 'true' : undefined}
+            set:html={renderedContent}
             type={type}
-        >
-            <slot />
-        </button>
+        />
     )
 }

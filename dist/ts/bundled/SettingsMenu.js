@@ -2196,7 +2196,7 @@ export {
   SettingsMenu
 };
 /*!
- * @maddimathon/utility-astro@0.1.0
+ * @maddimathon/utility-astro@0.2.0-draft
  * @license MIT
  */
 /*! Bundled license information:
