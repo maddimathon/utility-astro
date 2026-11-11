@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.2.0-draft
+ * @maddimathon/utility-astro@0.2.0
  * @license MIT
  */
 export * from './CopyToClipboard.js';

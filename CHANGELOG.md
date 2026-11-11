@@ -19,6 +19,17 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.2.0** — 2026-11-10
+
+### Misc. Breaking
+- Changed icon styles to define size by font-size instead (so that height is
+  always 1em, allows better interchangeability between embedded svg icons and
+  icon fonts)
+
+### Fixed
+- Fixed LoremIpsum heading display levels
+
+
 ## **0.1.0** — 2026-11-07
 
 New minor component options. Updated dependencies and upgraded to release.

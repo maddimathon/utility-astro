@@ -241,7 +241,7 @@
         "@astrojs/check": "^0.9.12",
         "@astrojs/ts-plugin": "^1.10.12",
         "@maddimathon/build-utilities": "~0.3.0",
-        "@maddimathon/utility-sass": "~0.1.0",
+        "@maddimathon/utility-sass": "~0.2.0",
         "@maddimathon/utility-typescript": "~2.0.0",
         "@types/jest": "~30.0.0",
         "@types/luxon": "~3.7.6",
@@ -257,7 +257,7 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^4.1.2",
-        "@maddimathon/utility-sass": "~0.1.0",
+        "@maddimathon/utility-sass": "~0.1.0 || ~0.2.0",
         "@maddimathon/utility-typescript": "~2.0.0",
         "astro": "^7.4.0",
         "luxon": "~3.7.2",
