@@ -19,6 +19,12 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.2.1** — 2026-11-11
+
+### Added
+- SettingsMenu data-settings-path can get an override value
+
+
 ## **0.2.0** — 2026-11-10
 
 ### Misc. Breaking

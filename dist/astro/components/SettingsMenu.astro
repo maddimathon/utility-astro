@@ -154,17 +154,20 @@ type Props = ElementProps<SettingsMenuProps, 'div'>;
 const {
     accessibilityReportEmail,
 
-    class: classList = ['website-settings'],
-    components: {
+    'class': classList = ['website-settings'],
+    'components': {
         DynamicWrapper = DynamicWrapperComponent,
         ToggleControl = ToggleControlComponent,
         ...inputComponents
     } = {},
-    iconSVG: iconSVG_input,
+
+    'data-settings-path': settingsPath,
+
+    'iconSVG': iconSVG_input,
     id = 'website-settings',
 
-    privacyPolicy: privacyPolicyURL,
-    settings: inputSettings,
+    'privacyPolicy': privacyPolicyURL,
+    'settings': inputSettings,
 
     ...attributes
 }: Props = Astro.props;
@@ -246,7 +249,8 @@ const iconSVG =
     class={makeClassList.flat(classList)}
     aria-label='Accessibility & Display Settings'
     data-settings-menu
-    data-settings-path={absoluteInternalURL(Astro.url, '')}
+    data-settings-path={settingsPath ??
+        (absoluteInternalURL(Astro.url, '').replace(/\/$/, '') || '/')}
     data-toggle-container
     data-toggle-container-type='menu'
 >
