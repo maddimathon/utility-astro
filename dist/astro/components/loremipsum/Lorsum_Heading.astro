@@ -17,7 +17,6 @@ import { makeClassList } from '../../functions.js';
 /* import - values */
 
 /* import - components */
-import HeadingComponent from '../Heading.astro';
 
 /* import - layouts */
 
@@ -30,6 +29,12 @@ export type LorsumHeadingProps = Omit<HeadingProps, 'displayHeading'> & Omit<Hea
     components: LoremIpsumProps.Components;
 
     heading: number;
+
+    /**
+     * @since 0.2.2
+     */
+    isLineClamped?: boolean;
+    
     prefix?: undefined | string;
     subheading?: boolean;
 };
@@ -38,10 +43,11 @@ type Props = ElementProps<LorsumHeadingProps, 'div'>;
 
 const {
     class: classList,
-    components: { Heading = HeadingComponent },
+    components: { Heading },
     heading,
     prefix,
     subheading = false,
+    isLineClamped = !subheading,
     ...props
 }: Props = Astro.props;
 
@@ -63,7 +69,8 @@ const headingAsNum = heading <= 0 ? 100 : heading;
     class={makeClassList(
         [
             'loremipsum-heading-sample',
-            subheading ? 'loremipsum-heading-sample--hgroup' : '',
+            subheading ? 'loremipsum-heading-sample--hgroup' : [],
+            isLineClamped ? 'loremipsum-heading-sample--clamped' : [],
         ],
         classList,
     )}
@@ -74,16 +81,18 @@ const headingAsNum = heading <= 0 ? 100 : heading;
         >Facilisis <a
             href='#'
             target='_blank'
-            >Sollicitudin Nisi,</a
-        ></strong
-    > Eget Pellentesque qui Rhongus Condy Mongum{
-        !subheading || headingAsNum > 2 ? '; Aynean Lacinya Urpa sey Lacus' : ''
+            set:text='Sollicitudin Nisi'
+        />,
+    </strong>Eget Pellentesque qui Rhongus Condy Mongum{
+        isLineClamped || headingAsNum > 2
+            ? '; Aynean Lacinya Urpa sey Lacus'
+            : ''
     }{
-        !subheading || headingAsNum > 6
+        isLineClamped || headingAsNum > 6
             ? ' Interqum Faucibus; Donec quam Erat, Sagittis id Diam a'
             : ''
     }{
-        !subheading
+        isLineClamped
             ? ', Henquerit Viyerra Ligula; Proing Efficipur Rhonqus ex Augtor Faquibus; Torquent Per Conubia Nostra, Per Inceptos Himenaeos. Fusce In Arcu Ornare, Varius Ligula Eget, Myttis Sem'
             : ''
     }{

@@ -11,6 +11,7 @@
 import type { HTMLAttributes } from 'astro/types';
 import type {
     ElementProps,
+    PropsOptionalChildren,
     PropsRequireChildren,
 } from '../../ts/types/index.ts';
 
@@ -30,10 +31,10 @@ import { makeClassList } from '../functions.js';
 /**
  * @since 0.1.0-beta.3
  */
-export type ButtonProps_Base = PropsRequireChildren<{
+export type ButtonProps_Base = {
     disabled?: boolean;
     variant?: string;
-}>;
+};
 
 /**
  * @since 0.1.0-beta.3
@@ -73,9 +74,24 @@ export type ButtonProps =
     | GenericButtonElementProps<ButtonProps_Button, 'button'>
     | GenericButtonElementProps<ButtonProps_Link, 'a'>;
 
-type Props = ButtonProps;
+type Props =
+    | GenericButtonElementProps<
+          PropsRequireChildren<ButtonProps_Button>,
+          'button'
+      >
+    | GenericButtonElementProps<PropsRequireChildren<ButtonProps_Link>, 'a'>;
 
-export type ButtonComponentType = (attrs: ButtonProps) => any;
+export type ButtonComponentType = (
+    attrs:
+        | GenericButtonElementProps<
+              PropsOptionalChildren<ButtonProps_Button>,
+              'button'
+          >
+        | GenericButtonElementProps<
+              PropsOptionalChildren<ButtonProps_Link>,
+              'a'
+          >,
+) => any;
 
 const {
     class: classList,

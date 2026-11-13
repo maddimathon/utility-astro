@@ -12,6 +12,7 @@ import type {} from '@maddimathon/utility-typescript/types';
 import type {
     ClassList,
     ElementProps,
+    PropsOptionalChildren,
     PropsRequireChildren,
 } from '../../ts/types/index.js';
 
@@ -48,7 +49,7 @@ export type ToggleContainerType = 'modal' | 'menu' | 'nav';
  *
  * @since 0.1.0-alpha
  */
-export type ToggleProps = PropsRequireChildren<{
+export type ToggleProps = {
     /**
      * Unique id attr.
      */
@@ -193,11 +194,21 @@ export type ToggleProps = PropsRequireChildren<{
      * @since 0.1.0-beta.0
      */
     type?: ToggleContainerType | ToggleContainerType[] | undefined;
-}>;
+};
 
-export type ToggleComponentType = (props: ToggleProps) => any;
+export type ToggleComponentType = (
+    props: ElementProps<
+        PropsOptionalChildren<ToggleProps>,
+        'div',
+        'aria-label' | 'aria-labelledby'
+    >,
+) => any;
 
-type Props = ElementProps<ToggleProps, 'div', 'aria-label' | 'aria-labelledby'>;
+type Props = ElementProps<
+    PropsRequireChildren<ToggleProps>,
+    'div',
+    'aria-label' | 'aria-labelledby'
+>;
 
 const {
     components: {

@@ -1,5 +1,5 @@
 ///
-/// @package @maddimathon/utility-astro@0.2.1
+/// @package @maddimathon/utility-astro@0.2.2
 ///
 /// @since 0.1.0-alpha
 /// @since 0.1.0-beta.0 — Renamed from 03--content to 03-02-layouts.
@@ -73,6 +73,32 @@ $_flex_container_alignment_row: (
 );
 
 ///
+/// Sets alignment for flex containers, falling back to token defaults.
+///
+/// @since 0.2.2
+///
+@mixin snippet-body-grid--flex-alignment($alignment: (), $direction: column) {
+    $alignment: map.merge(
+        if(
+            $direction == column,
+            $_flex_container_alignment_col,
+            $_flex_container_alignment_row
+        ),
+        $alignment
+    );
+
+    justify-content: map.get($alignment, justify-content);
+
+    $justifyContent: map.get($alignment, justify-items);
+    @if $justifyContent {
+        justify-items: $justifyContent;
+    }
+
+    align-content: map.get($alignment, align-content);
+    align-items: map.get($alignment, align-items);
+}
+
+///
 /// Does not set the display property for more flexibility.
 ///
 /// @since 0.1.0-beta.0
@@ -84,15 +110,6 @@ $_flex_container_alignment_row: (
     $wrap: nowrap,
     $position: relative
 ) {
-    $alignment: map.merge(
-        if(
-            $direction == column,
-            $_flex_container_alignment_col,
-            $_flex_container_alignment_row
-        ),
-        $alignment
-    );
-
     position: $position;
 
     flex-direction: $direction;
@@ -102,15 +119,10 @@ $_flex_container_alignment_row: (
         gap: $gap;
     }
 
-    justify-content: map.get($alignment, justify-content);
-
-    $justifyContent: map.get($alignment, justify-items);
-    @if $justifyContent {
-        justify-items: $justifyContent;
-    }
-
-    align-content: map.get($alignment, align-content);
-    align-items: map.get($alignment, align-items);
+    @include snippet-body-grid--flex-alignment(
+        $alignment: $alignment,
+        $direction: $direction
+    );
 }
 
 ///

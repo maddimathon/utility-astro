@@ -10,6 +10,7 @@
 /* import - types */
 import type {
     ElementProps,
+    PropsOptionalChildren,
     PropsRequireChildren,
 } from '../../ts/types/index.ts';
 
@@ -30,16 +31,18 @@ import { flattenClassList } from '../functions.js';
  * @since 0.1.0-beta.3
  */
 export type SelectProps = ElementProps<
-    PropsRequireChildren<{
+    {
         disabled?: boolean | undefined;
-    }>,
+    },
     'select',
     'aria-disabled' | 'disabled'
 >;
 
-type Props = SelectProps;
+type Props = PropsRequireChildren<SelectProps>;
 
-export type SelectComponentType = (props: SelectProps) => any;
+export type SelectComponentType = (
+    props: PropsOptionalChildren<SelectProps>,
+) => any;
 
 const { class: classList, ...attrs } = Astro.props;
 

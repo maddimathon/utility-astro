@@ -10,7 +10,11 @@
 
 /* import - types */
 import type { HTMLTag } from 'astro/types';
-import type { ElementProps } from '../../ts/types/index.js';
+import type {
+    ElementProps,
+    PropsOptionalChildren,
+    PropsRequireChildren,
+} from '../../ts/types/index.js';
 
 /* import - functions */
 import { flattenClassList } from '../functions.js';
@@ -32,7 +36,6 @@ import { flattenClassList } from '../functions.js';
  */
 export type DynamicWrapperProps<T_Tag extends HTMLTag> = ElementProps<
     {
-        children: any;
         tag?: T_Tag | null | false;
     },
     T_Tag
@@ -48,10 +51,10 @@ export type GenericDynamicWrapperProps<
     T_Tag extends HTMLTag,
 > = T_Props & Omit<DynamicWrapperProps<T_Tag>, keyof T_Props | 'children'>;
 
-type Props = DynamicWrapperProps<any>;
+type Props = PropsRequireChildren<DynamicWrapperProps<any>>;
 
 export type DynamicWrapperComponentType = (
-    props: DynamicWrapperProps<any>,
+    props: PropsOptionalChildren<DynamicWrapperProps<any>>,
 ) => any;
 
 const { class: classList = [], tag: Tag = 'div', ...attributes } = Astro.props;

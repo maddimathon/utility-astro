@@ -35,23 +35,25 @@ import CopyToClipboardButton from './CopyToClipboardButton.astro';
  * @since 0.1.0-alpha.17 — Moved to component file.
  */
 export type CodeBlockProps = GenericElementProps<
-    PropsOptionalChildren<{
+    {
         copyToClipboard?: boolean | CopyToClipboardButtonProps | undefined;
 
         /**
          * Code language, if any.
          */
         lang?: string | undefined;
-    }>,
+    },
     'div'
 >;
 
-type Props = CodeBlockProps;
+type Props = PropsOptionalChildren<CodeBlockProps>;
 
 /**
  * @since 0.1.0-beta.3
  */
-export type CodeBlockComponentType = (props: CodeBlockProps) => any;
+export type CodeBlockComponentType = (
+    props: PropsOptionalChildren<CodeBlockProps>,
+) => any;
 
 const {
     copyToClipboard = false,

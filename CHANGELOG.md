@@ -19,6 +19,16 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.2.2** — 2026-11-13
+
+### Added
+- New mixins:
+    - snippet-body-grid--flex-alignment
+
+### Fixed
+- Fixed some prop types that require children
+
+
 ## **0.2.1** — 2026-11-11
 
 ### Added

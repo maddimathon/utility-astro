@@ -8,6 +8,7 @@
 /* import - types */
 import type {
     ElementProps,
+    PropsOptionalChildren,
     PropsRequireChildren,
 } from '../../ts/types/index.js';
 import type { ButtonComponentType, ButtonProps_Button } from './Button.astro';
@@ -24,46 +25,48 @@ import ButtonComponent from './Button.astro';
 
 /* TYPES ===================================== */
 
-export type CopyToClipboardButtonProps = PropsRequireChildren<
-    Omit<ButtonProps_Button, 'type'> & {
-        /**
-         * Timeout length to switch the button to active state, in milliseconds.
-         */
-        activeTimeout?: number | undefined;
+export type CopyToClipboardButtonProps = Omit<ButtonProps_Button, 'type'> & {
+    /**
+     * Timeout length to switch the button to active state, in milliseconds.
+     */
+    activeTimeout?: number | undefined;
 
-        /**
-         * @since 0.1.0-beta.3
-         */
-        components?:
-            | undefined
-            | Partial<{
-                  Button: ButtonComponentType;
-              }>;
+    /**
+     * @since 0.1.0-beta.3
+     */
+    components?:
+        | undefined
+        | Partial<{
+              Button: ButtonComponentType;
+          }>;
 
-        /**
-         * @since 0.1.0-beta.6
-         */
-        includeScript?: boolean | undefined;
+    /**
+     * @since 0.1.0-beta.6
+     */
+    includeScript?: boolean | undefined;
 
-        /**
-         * Timeout length to display the success message, in milliseconds.
-         */
-        messageTimeout?: number | undefined;
+    /**
+     * Timeout length to display the success message, in milliseconds.
+     */
+    messageTimeout?: number | undefined;
 
-        /**
-         * Content to copy to clipboard.
-         */
-        toClipboard: string;
+    /**
+     * Content to copy to clipboard.
+     */
+    toClipboard: string;
 
-        /**
-         * Success message to display when copied.
-         */
-        successMessage?: string | undefined;
-    }
->;
+    /**
+     * Success message to display when copied.
+     */
+    successMessage?: string | undefined;
+};
 
 export type CopyToClipboardComponentType = (
-    props: ElementProps<CopyToClipboardButtonProps, 'button', 'type'>,
+    props: ElementProps<
+        PropsOptionalChildren<CopyToClipboardButtonProps>,
+        'button',
+        'type'
+    >,
 ) => any;
 
 /* FUNCTIONS ===================================== */
@@ -124,7 +127,11 @@ export function copyToClipboardButtonAttributes({
 
 /* PROPS ===================================== */
 
-type Props = ElementProps<CopyToClipboardButtonProps, 'button', 'type'>;
+type Props = ElementProps<
+    PropsRequireChildren<CopyToClipboardButtonProps>,
+    'button',
+    'type'
+>;
 
 const {
     components: { Button = ButtonComponent } = {},

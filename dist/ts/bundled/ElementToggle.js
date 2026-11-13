@@ -864,6 +864,6 @@ export {
   ElementToggle
 };
 /*!
- * @maddimathon/utility-astro@0.2.1
+ * @maddimathon/utility-astro@0.2.2
  * @license MIT
  */

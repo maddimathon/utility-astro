@@ -10,6 +10,7 @@
 /* import - types */
 import type {
     ElementProps,
+    PropsOptionalChildren,
     PropsRequireChildren,
 } from '../../ts/types/index.ts';
 
@@ -29,14 +30,13 @@ import { flattenClassList } from '../functions.js';
 /**
  * @since 0.1.0-beta.3
  */
-export type Select_OptionProps = ElementProps<
-    PropsRequireChildren<{}>,
-    'option'
->;
+export type Select_OptionProps = ElementProps<{}, 'option'>;
 
-type Props = Select_OptionProps;
+type Props = PropsRequireChildren<Select_OptionProps>;
 
-export type Select_OptionComponentType = (props: Select_OptionProps) => any;
+export type Select_OptionComponentType = (
+    props: PropsOptionalChildren<Select_OptionProps>,
+) => any;
 
 const { class: classList, ...attrs } = Astro.props;
 
