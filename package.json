@@ -1,6 +1,6 @@
 {
     "name": "@maddimathon/utility-astro",
-    "version": "0.2.2",
+    "version": "0.3.0",
 
     "author": "Maddi Mathon (https://www.maddimathon.com/web)",
     "description": "Astro utilities to use in a variety of projects.",
@@ -179,13 +179,13 @@
 
     "scripts": {
         "unlink": "run-p unlink:*",
-            "unlink-ts":    "rm -rf node_modules/@maddimathon/utility-typescript || echo ''",
-            "unlink-build": "rm -rf node_modules/@maddimathon/build-utilities || echo ''",
+            "unlink:ts":    "rm -rf node_modules/@maddimathon/utility-typescript || echo ''",
+            "unlink:build": "rm -rf node_modules/@maddimathon/build-utilities || echo ''",
             "unlink:sass":  "rm -rf node_modules/@maddimathon/utility-sass || echo ''",
 
         "link": "run-p link:*",
-            "link-ts":    "npm run --silent unlink-ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
-            "link-build": "npm run --silent unlink-build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.browser.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
+            "link-ts":    "npm run --silent unlink:ts    && mkdir -p node_modules/@maddimathon/utility-typescript  && cp -R -H -f -p ../utility-typescript/package.json ../utility-typescript/dist node_modules/@maddimathon/utility-typescript", 
+            "link-build": "npm run --silent unlink:build && mkdir -p node_modules/@maddimathon/build-utilities     && cp -R -H -f -p ../npm-build-utilities/package.json ../npm-build-utilities/tsconfig.base.json ../npm-build-utilities/tsconfig.browser.json ../npm-build-utilities/tsconfig.scripts.json ../npm-build-utilities/dist node_modules/@maddimathon/build-utilities",
             "link-sass":  "npm run --silent unlink:sass  && mkdir -p node_modules/@maddimathon/utility-sass        && cp -R -H -f -p ../utility-sass/package.json ../utility-sass/dist node_modules/@maddimathon/utility-sass",
 
         "commit": "sh .scripts/commit.sh",
@@ -234,14 +234,14 @@
     
     "dependencies": {
         "@astrojs/prism": "^4.1.2",
-        "astro": "~7.4.7",
+        "astro": "~7.4.13",
         "luxon": "~3.7.2"
     },
     "devDependencies": {
         "@astrojs/check": "^0.9.12",
-        "@astrojs/ts-plugin": "^1.10.12",
+        "@astrojs/ts-plugin": "^1.11.0",
         "@maddimathon/build-utilities": "~0.3.0",
-        "@maddimathon/utility-sass": "~0.2.0",
+        "@maddimathon/utility-sass": "~0.3.1",
         "@maddimathon/utility-typescript": "~2.0.0",
         "@types/jest": "~30.0.0",
         "@types/luxon": "~3.7.6",
@@ -257,7 +257,7 @@
     
     "peerDependencies": {
         "@astrojs/prism": "^4.1.2",
-        "@maddimathon/utility-sass": "~0.1.0 || ~0.2.0",
+        "@maddimathon/utility-sass": "~0.3.0",
         "@maddimathon/utility-typescript": "~2.0.0",
         "astro": "^7.4.0",
         "luxon": "~3.7.2",

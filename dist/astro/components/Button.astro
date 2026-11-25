@@ -33,6 +33,7 @@ import { makeClassList } from '../functions.js';
  */
 export type ButtonProps_Base = {
     disabled?: boolean;
+    inline?: boolean;
     variant?: string;
 };
 
@@ -97,6 +98,7 @@ const {
     class: classList,
     disabled = false,
     href,
+    inline = false,
     type = 'button',
     variant,
     ...attrs
@@ -105,7 +107,10 @@ const {
 /* CONSTANTS ===================================== */
 
 const fullClassList = makeClassList.flat(
-    variant && !disabled ? `button-${variant}` : href ? 'button' : [],
+    [
+        variant ? `button-${variant}` : href ? 'button' : [],
+        inline ? 'display-inline' : [],
+    ],
     classList,
 );
 

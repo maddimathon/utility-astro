@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.2.2
+ * @maddimathon/utility-astro@0.3.0
  * @license MIT
  */
 export type * from './props.ts';

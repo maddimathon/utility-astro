@@ -19,6 +19,12 @@ and this project adheres to
 <!--CHANGELOG_NEW-->
 
 
+## **0.3.0** — 2026-11-24
+
+### Misc. Breaking
+- Updated to utility-sass@0.3.1
+
+
 ## **0.2.2** — 2026-11-13
 
 ### Added

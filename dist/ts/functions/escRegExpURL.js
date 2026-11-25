@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /*!
- * @maddimathon/utility-astro@0.2.2
+ * @maddimathon/utility-astro@0.3.0
  * @license MIT
  */
 import { escRegExp } from '@maddimathon/utility-typescript';

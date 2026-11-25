@@ -31,6 +31,11 @@ export type LorsumHeadingProps = Omit<HeadingProps, 'displayHeading'> & Omit<Hea
     heading: number;
 
     /**
+     * @since 0.3.0
+     */
+    inlineButton?: boolean;
+
+    /**
      * @since 0.2.2
      */
     isLineClamped?: boolean;
@@ -43,8 +48,9 @@ type Props = ElementProps<LorsumHeadingProps, 'div'>;
 
 const {
     class: classList,
-    components: { Heading },
+    components: { Button, Heading },
     heading,
+    inlineButton = false,
     prefix,
     subheading = false,
     isLineClamped = !subheading,
@@ -88,6 +94,17 @@ const headingAsNum = heading <= 0 ? 100 : heading;
             ? '; Aynean Lacinya Urpa sey Lacus'
             : ''
     }{
+        inlineButton ? (
+            <Fragment set:text=' ' />
+            <Button
+                href='#'
+                inline
+                set:text='button'
+            />
+        ) : (
+            ''
+        )
+    }{
         isLineClamped || headingAsNum > 6
             ? ' Interqum Faucibus; Donec quam Erat, Sagittis id Diam a'
             : ''
@@ -98,7 +115,7 @@ const headingAsNum = heading <= 0 ? 100 : heading;
     }{
         subheading ? (
             // prettier-ignore
-            <Fragment slot='subheading'>Morbi pulvinar ut <strong>arcu nec fermentum.</strong> Pellentesque at <a href='#' target='_blank'>ipsum malesuada,</a> egestas odio molestie, sollicitudin eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu ornare, varius ligula eget, mattis sem.</Fragment>
+            <Fragment slot='subheading'>Morbi pulvinar ut <strong>arcu nec fermentum.</strong> Pellentesque at <a href='#' target='_blank'>ipsum malesuada,</a> egestas {inlineButton ? <Button href="#" inline>button</Button> : ''} odio molestie, sollicitudin eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu ornare, varius ligula eget, mattis sem.</Fragment>
         ) : (
             ''
         )

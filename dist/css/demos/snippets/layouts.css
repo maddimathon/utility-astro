@@ -12,18 +12,19 @@
 @demo ( function: snippet-body-grid--default-columns ) {
     /*
         snippet-body-grid--default-columns() is a space-separated list:
-
-        1: <()> ( [ <S> page-start ] )
-        2: <#> 1fr
-        3: <()> ( [ <S> sidebar-start ] )
-        4: <#> 0
-        5: <()> ( [ <S> content-start ] )
-        6: <S> minmax(auto, var(--width-content, 36rem))
-        7: <()> ( [ <S> content-end ] )
-        8: <#> 0
-        9: <()> ( [ <S> sidebar-end ] )
-        10: <#> 1fr
-        11: <()> ( [ <S> page-end ] )
+        <()> (
+            <()> ( [ <S> page-start ] )
+            <#> 1fr
+            <()> ( [ <S> sidebar-start ] )
+            <#> 0
+            <()> ( [ <S> content-start ] )
+            <S> minmax(auto, var(--width-content, 36rem))
+            <()> ( [ <S> content-end ] )
+            <#> 0
+            <()> ( [ <S> sidebar-end ] )
+            <#> 1fr
+            <()> ( [ <S> page-end ] )
+        )
      */
 }
 @demo-section snippet-body-grid--set-template-columns {
@@ -40,7 +41,7 @@
         /*
             & is a comma-separated list:
 
-            1: <()> ( <S> %body ),
+            <()> ( <()> ( <S> %body ), )
          */
         /* @include snippet-body-grid--selectors--main-content {} */
     }
@@ -50,9 +51,16 @@
             /* @content; */
             /*
                 & is a comma-separated list:
-
-                1: <()> ( <S> %body <S> > <S> %main-content ),
-                2: <()> ( <S> %body <S> > <S> %main-content <S> > <S> %main-content__article ),
+                <()> (
+                    <()> ( <S> %body <S> > <S> %main-content ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> %main-content
+                        <S> >
+                        <S> %main-content__article
+                    ),
+                )
              */
         }
     }
@@ -62,7 +70,7 @@
         /*
             & is a comma-separated list:
 
-            1: <()> ( <S> %body ),
+            <()> ( <()> ( <S> %body ), )
          */
         /* @include snippet-body-grid--selectors--body-subgrid {} */
     }
@@ -78,12 +86,37 @@
             /* @content; */
             /*
                 & is a comma-separated list:
-
-                1: <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
-                2: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) ),
-                3: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) ),
-                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) ),
-                5: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) ),
+                <()> (
+                    <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-content__article, %_main-sidebar, %main-sidebar)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-content__article, %_main-sidebar, %main-sidebar)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                )
              */
         }
     }
@@ -91,7 +124,7 @@
         /*
             & is a comma-separated list:
 
-            1: <()> ( <S> %body ),
+            <()> ( <()> ( <S> %body ), )
          */
         /* @include snippet-body-grid--selectors--body-subgrid( $subgridNesting: 2 ) {} */
     }
@@ -114,16 +147,71 @@
             /* @content; */
             /*
                 & is a comma-separated list:
-
-                1: <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
-                2: <()> ( <S> %body <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
-                3: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) ),
-                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
-                5: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) ),
-                6: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer) <S> > <S> :is(%main-subgrid) ),
-                7: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) ),
-                8: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) ),
-                9: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-content__article, %_main-sidebar, %main-sidebar) <S> > <S> :is(%main-subgrid) <S> > <S> :is(%main-subgrid) ),
+                <()> (
+                    <()> ( <S> %body <S> > <S> :is(%main-subgrid) ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :is(%main-subgrid)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content, %main-content, %body-subgrid, %primary-nav, %site-header, %site-footer, %_site-footer)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-content__article, %_main-sidebar, %main-sidebar)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-content__article, %_main-sidebar, %main-sidebar)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-content__article, %_main-sidebar, %main-sidebar)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                        <S> >
+                        <S> :is(%main-subgrid)
+                    ),
+                )
              */
         }
     }
@@ -133,7 +221,7 @@
         /*
             & is a comma-separated list:
 
-            1: <()> ( <S> %body ),
+            <()> ( <()> ( <S> %body ), )
          */
         /* @include snippet-body-grid--selectors--main-subgrid {} */
     }
@@ -149,12 +237,37 @@
             /* @content; */
             /*
                 & is a comma-separated list:
-
-                1: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                2: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                3: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
-                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) ),
-                5: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                <()> (
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-subgrid, %main-content__article)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-subgrid, %main-content__article)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                )
              */
         }
     }
@@ -162,7 +275,7 @@
         /*
             & is a comma-separated list:
 
-            1: <()> ( <S> %body ),
+            <()> ( <()> ( <S> %body ), )
          */
         /* @include snippet-body-grid--selectors--main-subgrid( $subgridNesting: 2 ) {} */
     }
@@ -190,16 +303,71 @@
             /* @content; */
             /*
                 & is a comma-separated list:
-
-                1: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                2: <()> ( <S> %body <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                3: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                4: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                5: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
-                6: <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                7: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) ),
-                8: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
-                9: <()> ( <S> %body <S> > <S> :where(%main-content) <S> > <S> :where(%main-subgrid, %main-content__article) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) <S> > <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents) ),
+                <()> (
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> ( <S> %body <S> > <S> :where(%main-content, %main-content) ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content, %main-content)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-subgrid, %main-content__article)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-subgrid, %main-content__article)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                    <()> (
+                        <S> %body
+                        <S> >
+                        <S> :where(%main-content)
+                        <S> >
+                        <S> :where(%main-subgrid, %main-content__article)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                        <S> >
+                        <S> :is(%full-width-subgrid-block, %_display-contents, %display-contents)
+                    ),
+                )
              */
         }
     }
