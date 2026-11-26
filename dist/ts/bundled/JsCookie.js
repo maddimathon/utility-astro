@@ -104,6 +104,6 @@ export {
   JsCookie
 };
 /*!
- * @maddimathon/utility-astro@0.3.0
+ * @maddimathon/utility-astro@0.3.1-draft
  * @license MIT
  */
